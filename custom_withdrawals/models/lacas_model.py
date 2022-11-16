@@ -30,11 +30,11 @@ class academics_tab(models.Model):
                 rec.notice_fee_withdrawal = total_custom
             else:
                 rec.notice_fee_withdrawal = 0
-                
-#             if rec.payment_status == 'paid':
-#                 rec.x_studio_withdrawn_status = 'Y'
-#             else:
-#                 rec.x_studio_withdrawn_status = 'N'                                                                                                                                                
+            
+            if rec.payment_status == 'paid':
+                rec.x_studio_withdrawn_status = 'Y'
+            else:
+                rec.x_studio_withdrawn_status = 'N'                                                                                                                                                
 
 
     def _compute_total_amount(self):
