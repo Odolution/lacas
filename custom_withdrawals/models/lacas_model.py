@@ -28,13 +28,13 @@ class academics_tab(models.Model):
                 for inv_line in rec.x_studio_charges.invoice_line_ids:
                     total_custom = inv_line.price_subtotal+total_custom
                 rec.notice_fee_withdrawal = total_custom
-             else:
+            else:
                 rec.notice_fee_withdrawal = 0
                 
-            if rec.payment_status == 'paid':
-                rec.x_studio_withdrawn_status = 'Y'
-            else:
-                rec.x_studio_withdrawn_status = 'N'                                                                                                                                                
+#             if rec.payment_status == 'paid':
+#                 rec.x_studio_withdrawn_status = 'Y'
+#             else:
+#                 rec.x_studio_withdrawn_status = 'N'                                                                                                                                                
 
 
     def _compute_total_amount(self):
