@@ -31,7 +31,7 @@ class academics_tab(models.Model):
             else:
                 rec.notice_fee_withdrawal = 0
             
-            if rec.payment_status == 'paid':
+            if rec.payment_state == 'paid':
                 rec.x_studio_withdrawn_status = 'Y'
             else:
                 rec.x_studio_withdrawn_status = 'N'                                                                                                                                                
