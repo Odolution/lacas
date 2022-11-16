@@ -43,25 +43,25 @@ class academics_tab(models.Model):
 
 
     def _compute_refund_receive(self):
+        for rec in self:
+            if rec.x_studio_charges:
 
-        if self.x_studio_charges:
+                if rec.x_studio_charges.invoice_line_ids:
 
-            if self.x_studio_charges.invoice_line_ids:
+                    for i in rec.x_studio_charges.invoice_line_ids:
+                        #refund = i.price_subtotal
+                        receive += i.price_subtotal
+                if self.invoice_line_ids:
+                    for j in rec.invoice_line_ids:
+                        #receive = j.price_subtotal
+                        refund += j.price_subtotal
 
-                for i in self.x_studio_charges.invoice_line_ids:
-                    #refund = i.price_subtotal
-                    receive = i.price_subtotal
-            if self.invoice_line_ids:
-                for j in self.invoice_line_ids:
-                    #receive = j.price_subtotal
-                    refund = j.price_subtotal
-
-            if receive > refund:
-                self.refund_receive = 'Receivable'
+                if receive > refund:
+                    rec.refund_receive = 'Receivable'
+                else:
+                    rec.refund_receive = 'Refundable'
             else:
-                self.refund_receive = 'Refundable'
-        else:
-            self.refund_receive = 'Refundable'
+                rec.refund_receive = 'Refundable'
 
         # if self.x_studio_charges:
 
