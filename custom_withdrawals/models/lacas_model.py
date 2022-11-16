@@ -44,6 +44,8 @@ class academics_tab(models.Model):
 
     def _compute_refund_receive(self):
         for rec in self:
+            receive = 0
+            refund = 0
             if rec.x_studio_charges:
 
                 if rec.x_studio_charges.invoice_line_ids:
