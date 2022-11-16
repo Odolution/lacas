@@ -22,42 +22,48 @@ class academics_tab(models.Model):
     
     def _compute_notice_fee(self):
         # if self.move_type == "out_refund":
-        if self.x_studio_charges:
-            for inv_line in self.x_studio_charges.invoice_line_ids:
-                self.notice_fee_withdrawal = inv_line.price_subtotal
-        else:
-            self.notice_fee_withdrawal = 0
+        for rec in self:
+            if rec.x_studio_charges:
+                total_custom = 0
+                for inv_line in rec.x_studio_charges.invoice_line_ids:
+                    total_custom = inv_line.price_subtotal+total_custom
+                rec.notice_fee_withdrawal = total_custom   
+            else:
+                rec.notice_fee_withdrawal = 0
 
     def _compute_total_amount(self):
-        if self.invoice_line_ids:
-            for cred in self.invoice_line_ids:
-                self.amount_total_withdrawal = abs(
-                    self.notice_fee_withdrawal-cred.price_subtotal)
-        else:
-            self.amount_total_withdrawal = 0
+        for rec in self:
+            if rec.invoice_line_ids:
+                for cred in rec.invoice_line_ids:
+                    rec.amount_total_withdrawal = abs(
+                        rec.notice_fee_withdrawal-cred.price_subtotal)
+            else:
+                rec.amount_total_withdrawal = 0
 
 
 
     def _compute_refund_receive(self):
+        for rec in self:
+            receive = 0
+            refund = 0
+            if rec.x_studio_charges:
 
-        if self.x_studio_charges:
+                if rec.x_studio_charges.invoice_line_ids:
 
-            if self.x_studio_charges.invoice_line_ids:
+                    for i in rec.x_studio_charges.invoice_line_ids:
+                        #refund = i.price_subtotal
+                        receive += i.price_subtotal
+                if self.invoice_line_ids:
+                    for j in rec.invoice_line_ids:
+                        #receive = j.price_subtotal
+                        refund += j.price_subtotal
 
-                for i in self.x_studio_charges.invoice_line_ids:
-                    #refund = i.price_subtotal
-                    receive = i.price_subtotal
-            if self.invoice_line_ids:
-                for j in self.invoice_line_ids:
-                    #receive = j.price_subtotal
-                    refund = j.price_subtotal
-
-            if receive > refund:
-                self.refund_receive = 'Receivable'
+                if receive > refund:
+                    rec.refund_receive = 'Receivable'
+                else:
+                    rec.refund_receive = 'Refundable'
             else:
-                self.refund_receive = 'Refundable'
-        else:
-            self.refund_receive = 'Refundable'
+                rec.refund_receive = 'Refundable'
 
         # if self.x_studio_charges:
 
