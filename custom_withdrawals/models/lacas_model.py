@@ -34,7 +34,7 @@ class academics_tab(models.Model):
             if rec.payment_status == 'paid':
                 rec.x_studio_withdrawn_status = 'Y'
             else:
-                rec.x_studio_withdrawn_status = 'N'                                                                                                                                                   
+                rec.x_studio_withdrawn_status = 'N'                                                                                                                                                
 
 
     def _compute_total_amount(self):
