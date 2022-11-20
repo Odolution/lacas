@@ -19,7 +19,7 @@ class credit_notes_fields(models.Model):
 
         if self.withdrawl_submission_date:
             self.notice_completion_date = self.withdrawl_submission_date + \
-                relativedelta(days=29)
+                relativedelta(months=1)
 
 
 # class report_sale_preview(models.Model):
