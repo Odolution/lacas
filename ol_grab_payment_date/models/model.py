@@ -13,7 +13,7 @@ class ext_invoice(models.Model):
     def onchange_invoice_payments_widget(self):
         print("onchange")
         for rec in self:
-            if rec.invoice_payments_widget:
+            if rec.payment_state == "paid":
                 date=""
                 try:
                     date=str(json.loads(rec.invoice_payments_widget)["content"][-1]["date"])
