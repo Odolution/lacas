@@ -143,7 +143,7 @@ class ext_invoice(models.Model):
                     "name":latefee_product.name,
                     "price_unit":late_fee_charges
                 }
-                invoice.invoice_line_ids=[0,0,(data)]
+                invoice.invoice_line_ids=[(0,0,data)]
             invoice.action_post()
 
 
