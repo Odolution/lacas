@@ -120,6 +120,8 @@ class ext_invoice(models.Model):
         
         for invoice in self:
             late_fee_charges=invoice.get_late_fee_charges()
+            if late_fee_charges<=0:
+                return
             ##late fee calculations are complete. now to put these charges in to the invoice lines.
             ##reset invoice to draft to be able to insert the new line
             invoice.button_draft()
