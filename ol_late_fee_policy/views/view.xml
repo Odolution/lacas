@@ -80,5 +80,16 @@
             </xpath>
         </field>
     </record>
+    <record id="account_journal_ext" model="ir.ui.view">
+        <field name="name">account_journal_form_ext</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+           
+            <xpath expr="//field[@name='type']" position="before">
+                    <field name="apply_late_fee_policy"/>
+            </xpath>
+        </field>
+    </record>
     <menuitem id="late_fee_slab" name="Late Fee Slab" action="action_add_slabs" parent="account.menu_finance_receivables" sequence="15" />
 </odoo>

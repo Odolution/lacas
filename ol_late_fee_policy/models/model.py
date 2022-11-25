@@ -40,6 +40,10 @@ class extwiz(models.TransientModel):
         return super(extwiz,self).action_create_payments()
 
 
+class ext_journal(models.Model):
+    _inherit = "account.journal"
+    apply_late_fee_policy = fields.Boolean(string='Apply Late Fee Policy',default=True)
+    
 class ext_invoice(models.Model):
     _inherit = "account.move"
     late_fee_compute = fields.Float(compute='_compute_late_fee_compute', string='late_fee_compute')
@@ -54,7 +58,7 @@ class ext_invoice(models.Model):
         invoice=self
         if invoice.journal_id==False:
             return 0    ## if no journal_id found, can't be sure if we should apply late fee or not. 
-        if invoice.journal_id.name=="Admission Challan":
+        if invoice.journal_id.apply_late_fee_policy:
             return 0    ## if invoice is for admission challan, no late fee will be charged
         ##get todays date
         nowdate=datetime.datetime.now().date()
