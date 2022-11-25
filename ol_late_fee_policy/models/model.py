@@ -52,6 +52,10 @@ class ext_invoice(models.Model):
             self.late_fee_compute=self.get_late_fee_charges()
     def get_late_fee_charges(self):
         invoice=self
+        if invoice.journal_id==False:
+            return 0    ## if no journal_id found, can't be sure if we should apply late fee or not. 
+        if invoice.journal_id.name=="Admission Challan":
+            return 0    ## if invoice is for admission challan, no late fee will be charged
         ##get todays date
         nowdate=datetime.datetime.now().date()
         if nowdate<invoice.invoice_date_due:
