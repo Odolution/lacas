@@ -58,7 +58,7 @@ class ext_invoice(models.Model):
         invoice=self
         if invoice.journal_id==False:
             return 0    ## if no journal_id found, can't be sure if we should apply late fee or not. 
-        if invoice.journal_id.apply_late_fee_policy:
+        if not invoice.journal_id.apply_late_fee_policy:
             return 0    ## if invoice is for admission challan, no late fee will be charged
         ##get todays date
         nowdate=datetime.datetime.now().date()
