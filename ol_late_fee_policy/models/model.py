@@ -42,7 +42,7 @@ class extwiz(models.TransientModel):
 
 class ext_journal(models.Model):
     _inherit = "account.journal"
-    apply_late_fee_policy = fields.Boolean(string='Apply Late Fee Policy',default=True)
+    apply_late_fee_policy = fields.Boolean(string='Apply Late Fee Policy',default=False)
     
 class ext_invoice(models.Model):
     _inherit = "account.move"
