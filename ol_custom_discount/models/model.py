@@ -36,6 +36,7 @@ class invoice_ext(models.Model):
             
             for line in rec.invoice_line_ids:
                 if line.product_id.is_discount_type:
+                    # calculate total discount for this custom discount item
                     total_amount_discount=0
                     for discount in line.product_id.discount_ids:
                         discount_amount=0
@@ -46,7 +47,26 @@ class invoice_ext(models.Model):
                                 else:
                                     discount_amount+=discount.discount_value*line1.quantity
                         total_amount_discount+=discount_amount
-                    line.tax_ids=False
-                    line.quantity=1
-                    line.price_unit=(-1)*total_amount_discount
-                                
+                    
+                    ## add the discount to the invouce 
+
+                    if total_amount_discount>0:
+                        ##changing invoice line ids 
+                        data={
+                            "tax_ids":False,
+                            "quantity":1,
+                            "price_unit":(-1)*total_amount_discount
+                        }
+                        line.with_context(check_move_validity=False).write(data)
+
+                        ## changing the journal lines
+                        discount_line=False
+                        recievable_line=False
+                        for jl in rec.line_ids:
+                            if jl.account_id.name=="Receivable from Customers":
+                                recievable_line=jl
+                            if jl.account_id.name=="Discount":
+                                discount_line=jl
+                        discount_line.with_context(check_move_validity=False).write({"debit":total_amount_discount,"credit":0})
+                        recievable_line.with_context(check_move_validity=False).write({"debit":recievable_line.debit-total_amount_discount,"credit":0})
+
