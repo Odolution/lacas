@@ -26,7 +26,7 @@ class product_ext(models.Model):
 class template_ext(models.Model):
     _inherit = "product.template"
     is_discount_type = fields.Boolean('is_discount_type')
-    discount_ids = fields.Many2many('product.cdiscount', string='Discount')
+    discount_ids = fields.One2many('product.cdiscount', string='Discount')
 class invoice_ext(models.Model):
 
     _inherit = "account.move"
@@ -67,6 +67,6 @@ class invoice_ext(models.Model):
                                 recievable_line=jl
                             if jl.account_id.name=="Discount":
                                 discount_line=jl
-                        discount_line.with_context(check_move_validity=False).write({"debit":total_amount_discount,"credit":0})
+                        discount_line.with_context(check_move_validity=False).write({"debit":discount_line.debit + total_amount_discount,"credit":0})
                         recievable_line.with_context(check_move_validity=False).write({"debit":recievable_line.debit-total_amount_discount,"credit":0})
 
