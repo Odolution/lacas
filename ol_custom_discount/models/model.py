@@ -12,6 +12,8 @@ class custom_discount_model(models.Model):
         ('fixed', 'fixed'),
     ], string='type')
     discount_value = fields.Float('Value')
+    parent_product_id=fields.Many2one(comodel_name='product.product', string='parent product')
+    parent_template_id=fields.Many2one(comodel_name='product.template', string='parent template')
     @api.onchange('discount_value',"discount_type")
     def _onchange_value(self):
         if self.discount_type=="percentage" and self.discount_value>100:
@@ -21,12 +23,12 @@ class custom_discount_model(models.Model):
 class product_ext(models.Model):
     _inherit = "product.product"
     is_discount_type = fields.Boolean('is_discount_type')
-    discount_ids = fields.Many2many('product.cdiscount', string='Discount')
+    discount_ids = fields.One2many('product.cdiscount',"parent_product_id", string='Discount')
 
 class template_ext(models.Model):
     _inherit = "product.template"
     is_discount_type = fields.Boolean('is_discount_type')
-    discount_ids = fields.One2many('product.cdiscount', string='Discount')
+    discount_ids = fields.One2many('product.cdiscount', "parent_template_id",string='Discount')
 class invoice_ext(models.Model):
 
     _inherit = "account.move"
