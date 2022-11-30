@@ -55,7 +55,7 @@ class invoice_ext(models.Model):
                         data={
                             "tax_ids":False,
                             "quantity":1,
-                            "price_unit":(-1)*total_amount_discount
+                            "price_unit":(-1)*line_total_amount_discount
                         }
                         line.with_context(check_move_validity=False).write(data)
                         invoice_total_discount+=line_total_amount_discount
