@@ -1,3 +1,4 @@
+
 from odoo import models, api, fields, _
 from odoo.exceptions import UserError
 import json
@@ -35,6 +36,7 @@ class invoice_ext(models.Model):
         
         for rec in self:
             invoice_total_discount=0
+            lineDiscounts={}
             for line in rec.invoice_line_ids:
                 if line.product_id.is_discount_type:
                     # calculate total discount for this custom discount item
@@ -52,23 +54,33 @@ class invoice_ext(models.Model):
                     if line_total_amount_discount>0:
                         ##changing invoice line ids 
                         data={
-                            "tax_ids":False,
                             "quantity":1,
                             "price_unit":(-1)*line_total_amount_discount
                         }
                         line.with_context(check_move_validity=False).write(data)
                         invoice_total_discount+=line_total_amount_discount
-#             ## add the discount to journal lines
-#             if invoice_total_discount>0:
-#                 ## changing the journal lines
-#                 discount_line=False
-#                 recievable_line=False
-#                 total_credit=0
-#                 for jl in rec.line_ids:
-#                     total_credit+=jl.credit
-#                     if jl.account_id.name=="Receivable from Customers":
-#                         recievable_line=jl
-#                     if jl.account_id.name=="Discount":
-#                         discount_line=jl
-#                 discount_line.with_context(check_move_validity=False).write({"debit":invoice_total_discount,"credit":0})
-#                 recievable_line.with_context(check_move_validity=False).write({"debit":total_credit-invoice_total_discount,"credit":0})
+                    lineDiscounts[line.name]=line_total_amount_discount
+
+            ## add the discount to journal lines
+            if invoice_total_discount>0:
+                ## changing the journal lines
+                discount_line=False
+                recievable_line=False
+                total_credit=0
+                for jl in rec.line_ids:
+                    total_credit+=jl.credit
+                    if jl.account_id.name=="Receivable from Customers":
+                        recievable_line=jl
+                    if jl.product_id.is_discount_type:
+                        amount=lineDiscounts.get(jl.name,None)
+                        if amount is None:
+                            raise UserError("invalid discount name in journal lines : \""+jl.name+"\". Discount invoice line and discount journal line should have save name."+str(lineDiscounts))
+                        # raise UserError("test : "+str(lineDiscounts)+" "+str(invoice_total_discount))
+                        jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
+
+                customer_recievable_amount = total_credit-invoice_total_discount
+                # raise UserError(customer_recievable_amount)
+
+                recievable_line.with_context(check_move_validity=False).write({"debit":customer_recievable_amount,"credit":0})
+
+
