@@ -13,36 +13,47 @@
                     <tbody>
                   <tr style="height: 65.5px;">
                   <td style="align-items: center; ">
-                              <img style="padding-left:2%; " t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="70" width="100" class="float-left" alt="Logo"/>
+                              <img style="padding-left:2%; " t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="80" width="120" class="float-left" alt="Logo"/>
                   </td>
                   <td style="align-items: center;font-size: 10px;">
-                  <p style="text-align: center; "><strong style="font-size: 25px;">LACAS School Network</strong><br/><strong style="font-size: 20px;">Dues Assessment Sheet </strong><br/></p>
+                  <p style="text-align: center; "><strong style="font-size: 22px;">LACAS School Network</strong><br/><strong style="font-size: 18px;color:grey;">Dues Assessment Sheet </strong><br/></p>
                   </td>
                   <td style=" align-items: left; ">
-                              <img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="70" width="100" class="float-left" alt="Logo"/>
+                              <img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="70" width="120" class="float-left" alt="Logo"/>
                   
                   </td>
                   </tr> 
                   </tbody>
                   </table>
+                  
                     <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
+                     <table style="width: 100%; font-size: 10px;">
+                    <tbody>
+                    <tr>
+                    <td style="width: 100%;border-bottom: 1px solid black;border-right: 1px solid black; border-left: 1px solid black;  border-top: 1px solid black; text-align: center; font-size: 15px;"><strong style='color:#BD3B2F;' >Withdrawal No:</strong><span t-field="o.name"/></td>
+                  
+                  
+                    </tr>
+                    </tbody>
+                    </table>
                     
                     <div class="page">
                     <div class="row" style=" width:90%; margin: auto;  padding-top:5px;">
                     
                     <div class="col-3"/>
                     
-                    <div class="col-6" style=" padding-left:10px; font:15px lucida-console,sans-serif !important;  background-color:#B2BABB;">
-                    <h2>
-                        <span t-if="o.move_type == 'out_invoice' and (o.state == 'draft' or o.state == 'posted')"><font color="#fff">Invoice</font></span>
-                        <span t-if="o.move_type == 'out_invoice' and o.state == 'proforma2'"><font>PRO-FORMA</font></span>
-                        <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'"><font color="#fff">Draft Invoice</font></span>
-                        <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'"><font color="#fff">Cancelled Invoice</font></span>
-                        <span t-if="o.move_type == 'out_refund'"><font>Refund Receipt :</font></span>
-                        <span t-if="o.move_type == 'in_refund'"><font color="#fff">Vendor Refund</font></span>
-                        <span t-if="o.move_type == 'in_invoice'"><font color="#fff">Vendor Bill</font></span>
-                        <font><span t-field="o.name"/></font>
-                    </h2>
+                <!--    <div class="col-6" style=" padding:0.5px; font:15px lucida-console,sans-serif !important;">-->
+                <!--    <h3>-->
+                <!--        <span t-if="o.move_type == 'out_invoice' and (o.state == 'draft' or o.state == 'posted')"><font color="#fff">Invoice</font></span>-->
+                <!--        <span t-if="o.move_type == 'out_invoice' and o.state == 'proforma2'"><font>PRO-FORMA</font></span>-->
+                <!--        <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'"><font color="#fff">Draft Invoice</font></span>-->
+                <!--        <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'"><font color="#fff">Cancelled Invoice</font></span>-->
+                <!--        <span t-if="o.move_type == 'out_refund'"><font>Refund Receipt :</font></span>-->
+                <!--        <span t-if="o.move_type == 'in_refund'"><font color="#fff">Vendor Refund</font></span>-->
+                <!--        <span t-if="o.move_type == 'in_invoice'"><font color="#fff">Vendor Bill</font></span>-->
+                       
+                        
+                <!--    </h3>-->
                     <!--<div t-if="o.invoice_date">-->
                       
                     <!--  <font color="#fff">-->
@@ -57,7 +68,7 @@
                     
                     
                     
-                </div>
+                <!--</div>-->
                
               
                   
@@ -66,69 +77,195 @@
                      
                 </div>
                 </div>
+              <table style=" width: 100%; font-size: 15px;">
+<tbody>
+<tr>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Branch:</strong>
+  <span style=" padding-left:10px;" t-field="o.x_school_id_cred"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Application Submit Date :</strong>
+  <t t-if="o.withdrawl_submission_date">
+    <span style=" padding-left:10px;" t-esc="o.withdrawl_submission_date.strftime('%d-%m-%Y')"/></t> 
+  <t t-else="">-</t>
+ 
+  </td>
+</tr>
+<tr>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Class:</strong>
+   <t t-foreach="o.x_student_id_cred" t-as="i">
+      <t t-foreach="i.enrollment_state_ids" t-as="d">
+                     
+         <t t-if="d.enrollment_status_id.name == 'Admission'">
+            
+         <span style=" padding-left:10px;" ><t t-esc="d.next_grade_level_id.name"/></span>
+          </t>
+         <t t-else="">
+          <span style=" padding-left:10px;" ><t t-esc="o.grade_level_ids.name"/></span>
+           </t>
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+           </t>
+           </t>
+  <!--<span style="  padding-left:10px;" t-field="o.x_student_id_cred.grade_level_ids.name"/>-->
+  </td>
+  
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px;font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Actual Leaving Date:</strong>
+  <!--<span style=" padding-left:10px;" t-field="o.actual_leaving_date"/>-->
+  <t t-if="o.actual_leaving_date">
+    <span style=" padding-left:10px;" t-esc="o.actual_leaving_date.strftime('%d-%m-%Y')"/></t> 
+  <t t-else="">-</t>
+  </td>
+</tr>
+<tr>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Roll No:</strong>
+  <span style="   padding-left:10px;" t-field="o.x_student_id_cred.facts_udid"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Notice Completion Date :</strong>
+  <!--<span style="  padding-left:10px;" t-field="o.notice_completion_date"/>-->
+  <t t-if="o.notice_completion_date">
+    <span style=" padding-left:10px;" t-esc="o.notice_completion_date.strftime('%d-%m-%Y')"/></t> 
+  <t t-else="">-</t>
+  </td>
+</tr>
+<tr>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Student:</strong>
+  <span style="  padding-left:10px;" t-field="o.x_student_id_cred"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Notice Fee  :</strong>
+  <span style="  padding-left:10px;" t-esc="int(o.notice_fee_withdrawal)"/>
+  </td>
+</tr>
+
+<tr>
+  <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Father:</strong>
+   <span style="padding-left:10px;" t-field="o.partner_id"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Admission Date:</strong>
+  <t t-if="env['account.move'].search([('student_ids.id','=',o.x_student_id_cred.id),('journal_id','=',119)])">
+   <span style="  padding-left:10px;" t-esc="env['account.move'].search([('student_ids.id','=',o.x_student_id_cred.id),('journal_id','=',119)]).invoice_date.strftime('%d-%m-%Y')"/>
+    </t>
+    <t t-else="o.invoice_date"><span style="padding-left:10px;" t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>  </t>
+  </td>
+
+</tr>
+
+<tr>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style='color:#BD3B2F;'>Cheque in Favor of:</strong>
+  <t t-if="env['account.payment'].search([('ref','=',o.name)])">
+   <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/>
+   </t>
+   <t t-else=""> </t>
+  </td>
+
+</tr>
+
+</tbody>
+</table>
                   
                    
                      
                 
              <!--fields middle body -->
                 
-                 <div class="column" style=" width: 60%;  height: 25%; margin-right: 1%; margin-top:7%;">
+                <!-- <div class="column" style=" width: 80%;  height: 25%; margin-right: 1%; margin-top:7%;">-->
                    
-                    <div class="col-3" style=" width:100%; padding-left:15%;  font:15px ; ">
-                  <!--<strong style="font-size:20px; " >Student Acadamics Details</strong><br/>-->
+                <!--    <div class="col-3" style=" width:100%; padding-left:15%;  font:15px ; ">-->
+                <!--already commented  <strong style="font-size:20px; " >Student Acadamics Details</strong><br/>-->
                   
-                       <span style=" color:#1565C0; font-size:20px;"><strong>Branch:</strong> </span><span style=" font-size:20px; padding-left:10px;" t-field="o.school_branch"/><br/>
+                <!--       <span style=" color:#1565C0; "><strong>Branch:</strong> </span><span style=" padding-left:10px;" t-field="o.x_school_id_cred"/><br/>-->
                       
-                       <span style=" color:#1565C0; font-size:20px;"><strong>Class : </strong></span><span style=" ffont-size:20px; padding-left:10px;" t-field="o.class_grade"/><br/>
-                       <span style=" color:#1565C0; font-size:20px; "><strong>Roll No: </strong></span><span style=" font-size:20px;  padding-left:10px;" t-field="o.Roll_no"/><br/>
-                      <span style=" color:#1565C0; font-size:20px;"><strong>Student Name :</strong> </span><span style=" font-size:20px; padding-left:10px;" t-field="o.Student_id"/><br/>
-                      <span style=" color:#1565C0; font-size:20px;"><strong>Notice Fee : </strong></span><span style=" font-size:20px; padding-left:10px;" t-field="o.school_branch"/><br/>
+                <!--       <span style=" color:#1565C0; "><strong>Class : </strong></span><span style="  padding-left:10px;" t-field="o.x_student_id_cred.grade_level_ids.name"/><br/>-->
+                <!--       <span style=" color:#1565C0;  "><strong>Roll No: </strong></span><span style="   padding-left:10px;" t-field="o.x_student_id_cred.x_roll_number"/><br/>-->
+                <!--      <span style=" color:#1565C0; "><strong>Student:</strong> </span><span style="  padding-left:10px;" t-field="o.x_student_id_cred"/><br/>-->
+                <!--      <span style=" color:#1565C0; "><strong>Notice Fee : </strong></span><span style="  padding-left:10px;">0.0</span><br/>-->
                     
                       
                      
                       
                       
-                      <span style=" color:#1565C0; font-size:20px;"><strong>Application Submit Date :</strong> </span><span style=" font-size:20px; padding-left:10px;" t-field="o.withdrawl_submission_date"/><br/>
-                      <span style=" color:#1565C0; font-size:20px;"><strong>Actual Leaving Date:</strong> </span><span style=" font-size:20px; padding-left:10px;" t-field="o.actual_leaving_date"/><br/>
-                      <span style=" color:#1565C0; font-size:20px;"><strong>Notice Completion Date : </strong></span><span style=" font-size:20px; padding-left:10px;" t-field="o.notice_completion_date"/><br/>
-                      <span style=" color:#1565C0; font-size:20px; width:100%; "><strong>Cheque of Security Deposit made in Favour of : </strong></span><span style=" font-size:20px; padding-left:10px; width:100%;" t-field="o.partner_id.name"/><br/>
+                <!--      <span style=" color:#1565C0; "><strong>Application Submit Date :</strong> </span><span style=" padding-left:10px;" t-field="o.withdrawl_submission_date"/><br/>-->
+                <!--      <span style=" color:#1565C0; "><strong>Actual Leaving Date:</strong> </span><span style=" padding-left:10px;" t-field="o.actual_leaving_date"/><br/>-->
+                <!--      <span style=" color:#1565C0; "><strong>Notice Completion Date : </strong></span><span style="  padding-left:10px;" t-field="o.notice_completion_date"/><br/>-->
+                <!--      <span style=" color:#1565C0;  width:100%; "><strong>Cheque of Security Deposit made in Favour of : </strong></span><span style="  padding-left:10px; width:100%;" t-field="o.partner_id.name"/><br/>-->
                       
                       
 
-                    </div>
-                  </div>
+                <!--    </div>-->
+                <!--  </div>-->
+                  <br/><br/>
                   
-                  
-                     
-                 <table class="table table-dark" style="border-collapse:collapse;   margin: auto; width:90%;">
+                    <t t-set="refund_values" t-value="0"/> 
+                    <t t-set="receive_values" t-value="0"/>
+                 <table class="table table-dark" style="border-collapse:collapse;   margin: auto; width:100%;">
                   <thead>
                   <tr style="background-color: #B2BABB; width: 100px;">
-                    <th style="padding-left:30px; width: 132.138px; font-size:20px;"><strong>Account</strong></th>
+                    <th style="padding-left:30px; width: 132.138px; "><strong>Account</strong></th>
                     <!--<th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>-->
-                    <th style="padding-Right:30px; width: 132.138px; font-size:20px;"><strong>Subtotal</strong></th>
+                    <th style="padding-Right:30px; width: 132.138px; "><strong>Subtotal</strong></th>
                   </tr>
                   </thead>
                 <tbody>
+                      
                       <t t-foreach="o.invoice_line_ids" t-as="d">
                       <tr style="">
-                        <td style="text-align: left; border: 1px solid black; font-size:20px;"><t t-esc="d.product_id.name"/></td>
+                        <td style="text-align: left; border: 1px solid black; "><t t-esc="d.product_id.name"/></td>
                         <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
-                        <td style="text-align: right; border: 1px solid black; font-size:20px;"><t t-esc="int(d.price_subtotal)"/></td>
-
+                        <td style="text-align: right; border: 1px solid black; "><t t-esc="int(d.price_subtotal)"/></td>
                       </tr>
-                     
-                    </t>
+                      <!--<t t-set="receive_values" t-value="receive_values + int(d.price_subtotal)"/>-->
+                      <t t-set="refund_values" t-value="refund_values + int(d.price_subtotal)"/>
+                      </t>
+                      
+                      
+                      <t t-foreach="o.x_studio_charges.invoice_line_ids" t-as="charge">
+                      <tr style="">
+                        <td style="text-align: left; border: 1px solid black; "><t t-esc="charge.product_id.name"/></td>
+                        <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
+                        <td style="text-align: right; border: 1px solid black; "><t t-esc="int(charge.price_subtotal)"/></td>
+                      </tr>
+                      <t t-set="receive_values" t-value="receive_values + int(charge.price_subtotal)"/>
+                      <!--<t t-esc="receive_values-refund_values"/>-->
+                      </t>
                     </tbody>
                   </table>
                   
+                 
+                  
                   <!--amount refundable-->
-                   <table class="table table-dark" style="border-collapse:collapse;   margin: auto; width:90%;">
+    
+                 
+                
+                
+                   <table class="table table-dark" style="border-collapse:collapse;   margin: auto; width:100%;">
                      
                       <thead>
                   <tr style="background-color: #B2BABB; width: 100px;">
-                    <th style="text-align: left; width: 132.138px; font-size:20px;"><strong>Total</strong></th>
-                    <!--<th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>-->
-                    <th style=" text-align: right;  font-size:20px;"><strong><t t-esc="o.amount_residual" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/></strong></th>
+                    <th style="text-align: left; ">
+                      
+                      <t t-if="receive_values &gt; refund_values">
+                        <strong>Total Receivables</strong>
+                        <!--<t t-set="receive_values" t-value="0"/>-->
+                        
+                      </t>
+                      <t t-else="">
+                        <strong>Total Refundable</strong>
+                        <!--<t t-set="refund_values" t-value="0"/>-->
+                        
+                      </t>
+                    </th>
+                    <th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>
+                    <!--<th style=" text-align: right;  "><strong>Rs. <t t-esc="abs(receive_values-refund_values)"/> </strong></th>-->
+                    <th style=" text-align: right;  "><strong>Rs. <t t-esc="abs(receive_values-refund_values)"/> </strong></th>
                   </tr>
                   </thead>
                   
@@ -149,12 +286,12 @@
                   <!--  </tr>-->
                   <!--  </thead>-->
                   <!--  </table>-->
-                  
+                  <br/><br/><br/>
                   <table class="table " style="width:100%; padding-top: 25%;">
                       <tbody>
                        <td style="width:20%"> 
                        <hr style="height: 1px; border-width: 0; padding-right:10px; color: black; background-color: black;"/>
-                       <span style=" padding-left:20%; font-size:20px;"><strong>Prepared By </strong></span>  
+                       <span style=" padding-left:20%; "><strong>Prepared By </strong></span>  
                       <!--<SPAN STYLE="text-decoration:overline;  text-align: left;  font-size: 14px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>-->
                     </td>
                     
@@ -163,7 +300,7 @@
                     
                     <td style="width:20%"> 
                        <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
-                       <span style="padding-left:30%; font-size:20px;"><strong>Checked By </strong></span>  
+                       <span style="padding-left:30%; "><strong>Checked By </strong></span>  
                       <!--<SPAN STYLE="text-decoration:overline;  text-align: left;  font-size: 14px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>-->
                     </td>
                     
@@ -173,7 +310,7 @@
                     
                     <td style="width:20%">
                          <hr style=" padding-right:10px; height: 1px; border-width: 0; color: black; background-color: black;"/>
-                       <span style=" padding-left:25%; font-size:18px; "><strong>Approved by</strong></span>  
+                       <span style=" padding-left:25%;  "><strong>Approved by</strong></span>  
                       <!--<SPAN STYLE="text-decoration:overline; text-align: right;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
                     </td>
                     <td style="width:3%">
@@ -187,12 +324,16 @@
                      
                      <h3 style="text-align:center; font-size:18px; ">Receiving</h3>
                      
-                     <p style="font-size:18px; padding-left:40px; padding-right:40px;">
-                       I, <strong> <t t-esc="o.Student_id"/></strong>, do hereby confirm that I have received my entire dues from LACAS vide
-Cheque # Dated<strong> <t t-esc="o.invoice_date"/></strong> Rs.150000 and I have no claim against School.
+                     <p style=" padding-left:40px; padding-right:40px;">
+                       I, <strong> <t t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/></strong>, do hereby confirm that I have received my entire dues from LACAS with
+Cheque # Dated :<strong> 
+<t t-if="o.invoice_date">
+<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/></t>
+<t t-else="">----</t>
+</strong> Rs. <t t-esc="abs(receive_values-refund_values)"/> and I have no claim against School.
                      </p><br/>
                      
-                     <table class="table " style="width:100%; padding-top: 20%;">
+                     <table class="table " style="width:100%; padding-top: 17%;">
                       <tbody>
                        <td style="width:20%"> 
                        
@@ -204,11 +345,11 @@ Cheque # Dated<strong> <t t-esc="o.invoice_date"/></strong> Rs.150000 and I have
                   
                    
                    
-                    
-                    <td style="width:7% ;" >
+                    <br/><br/><br/>
+                    <td style="width:9% ;">
                          <hr style="height: 1px; border-width: 0; color: black; margin-right:30px; background-color: black;"/>
-                       <span style="padding-left:40%; font-size:18px;"><strong>Student</strong></span>  
-                      <!--<SPAN STYLE="text-decoration:overline; text-align: right;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
+                       <span align="center" style=""><t t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/></span>  
+                      <!--<SPAN STYLE="text-decoration:overline; text-align: center;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
                     </td>
                      
                     <!-- <td style="width:2%">-->
