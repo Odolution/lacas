@@ -75,6 +75,17 @@ class invoice_ext(models.Model):
                         if amount is None:
                             raise UserError("invalid discount name in journal lines : \""+jl.name+"\". Discount invoice line and discount journal line should have save name."+str(lineDiscounts))
                         # raise UserError("test : "+str(lineDiscounts)+" "+str(invoice_total_discount))
-                        jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
-                recievable_line.with_context(check_move_validity=False).write({"debit":rec.amount_total-invoice_total_discount,"credit":0})
+                        if amount>0:
+                            jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
+                        elif amount<0:
+                            jl.with_context(check_move_validity=False).write({"debit":0,"credit":amount})
+                        else:
+                            jl.with_context(check_move_validity=False).write({"debit":0,"credit":0})
+                customer_recievable_amount = rec.amount_total-invoice_total_discount
+                if customer_recievable_amount>0:
+                    recievable_line.with_context(check_move_validity=False).write({"debit":customer_recievable_amount,"credit":0})
+                elif customer_recievable_amount<0:
+                    recievable_line.with_context(check_move_validity=False).write({"debit":0,"credit":customer_recievable_amount})
+                else:
+                    recievable_line.with_context(check_move_validity=False).write({"debit":0,"credit":0})
 
