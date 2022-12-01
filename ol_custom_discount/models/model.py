@@ -72,7 +72,7 @@ class invoice_ext(models.Model):
                     if jl.account_id.name=="Discount":
                         amount=lineDiscounts.get(jl.name,None)
                         if amount is None:
-                            raise UserError("invalid discount name in journal lines. Please verfify that dicount invoice line and discount journal line should have save name.")
+                            raise UserError("invalid discount name in journal lines : "+jl.name+". Discount invoice line and discount journal line should have save name."+str(lineDiscounts))
                         jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
                 recievable_line.with_context(check_move_validity=False).write({"debit":recievable_line.debit-invoice_total_discount,"credit":0})
 
