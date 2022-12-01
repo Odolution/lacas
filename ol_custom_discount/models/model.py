@@ -36,6 +36,7 @@ class invoice_ext(models.Model):
         
         for rec in self:
             invoice_total_discount=0
+            lineDiscounts={}
             for line in rec.invoice_line_ids:
                 if line.product_id.is_discount_type:
                     # calculate total discount for this custom discount item
@@ -57,6 +58,7 @@ class invoice_ext(models.Model):
                             "quantity":1,
                             "price_unit":(-1)*line_total_amount_discount
                         }
+                        lineDiscounts[line.name]=line_total_amount_discount
                         line.with_context(check_move_validity=False).write(data)
                         invoice_total_discount+=line_total_amount_discount
             ## add the discount to journal lines
@@ -68,7 +70,9 @@ class invoice_ext(models.Model):
                     if jl.account_id.name=="Receivable from Customers":
                         recievable_line=jl
                     if jl.account_id.name=="Discount":
-                        discount_line=jl
-                discount_line.with_context(check_move_validity=False).write({"debit":invoice_total_discount,"credit":0})
+                        amount=lineDiscounts.get(jl.name,None)
+                        if amount is None:
+                            raise UserError("invalid discount name in journal lines. Please verfify that dicount invoice line and discount journal line should have save name.")
+                        jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
                 recievable_line.with_context(check_move_validity=False).write({"debit":recievable_line.debit-invoice_total_discount,"credit":0})
 
