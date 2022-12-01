@@ -58,9 +58,10 @@ class invoice_ext(models.Model):
                             "quantity":1,
                             "price_unit":(-1)*line_total_amount_discount
                         }
-                        lineDiscounts[line.name]=line_total_amount_discount
                         line.with_context(check_move_validity=False).write(data)
                         invoice_total_discount+=line_total_amount_discount
+                    lineDiscounts[line.name]=line_total_amount_discount
+                        
             ## add the discount to journal lines
             if invoice_total_discount>0:
                 ## changing the journal lines
@@ -72,7 +73,8 @@ class invoice_ext(models.Model):
                     if jl.account_id.name=="Discount":
                         amount=lineDiscounts.get(jl.name,None)
                         if amount is None:
-                            raise UserError("invalid discount name in journal lines : "+jl.name+". Discount invoice line and discount journal line should have save name."+str(lineDiscounts))
+                            raise UserError("invalid discount name in journal lines : \""+jl.name+"\". Discount invoice line and discount journal line should have save name."+str(lineDiscounts))
+                        raise UserError("test : "+str(lineDiscounts)+" "+str(invoice_total_discount))
                         jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
                 recievable_line.with_context(check_move_validity=False).write({"debit":recievable_line.debit-invoice_total_discount,"credit":0})
 
