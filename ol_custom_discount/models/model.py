@@ -63,10 +63,12 @@ class invoice_ext(models.Model):
                 ## changing the journal lines
                 discount_line=False
                 recievable_line=False
+                total_credit=0
                 for jl in rec.line_ids:
+                    total_credit+=jl.credit
                     if jl.account_id.name=="Receivable from Customers":
                         recievable_line=jl
                     if jl.account_id.name=="Discount":
                         discount_line=jl
                 discount_line.with_context(check_move_validity=False).write({"debit":invoice_total_discount,"credit":0})
-                recievable_line.with_context(check_move_validity=False).write({"debit":recievable_line.debit-invoice_total_discount,"credit":0})
+                recievable_line.with_context(check_move_validity=False).write({"debit":total_credit-invoice_total_discount,"credit":0})
