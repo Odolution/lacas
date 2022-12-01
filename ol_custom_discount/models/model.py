@@ -54,7 +54,6 @@ class invoice_ext(models.Model):
                     if line_total_amount_discount>0:
                         ##changing invoice line ids 
                         data={
-                            "tax_ids":False,
                             "quantity":1,
                             "price_unit":(-1)*line_total_amount_discount
                         }
