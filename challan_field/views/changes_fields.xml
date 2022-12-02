@@ -41,9 +41,13 @@
                  <!-- <xpath expr="//label[@for='partner_shipping_id']" position="attributes">
                       <attribute name="string">Address</attribute>
                  </xpath> -->
-                 <xpath expr="//label[@for='invoice_date']" position="attributes">
+                 <xpath expr="//label[@string='Invoice Date']" position="attributes">
                       <attribute name="string">Challan Date</attribute>
                  </xpath>
+                 <xpath expr="//label[@string='Bill Date']" position="attributes">
+                      <attribute name="string">Withdrawn Date</attribute>
+                 </xpath>
+
 
                  <xpath expr="//field[@name='payment_reference']" position="attributes">
                        <attribute name="invisible">True</attribute>
