@@ -1,5 +1,6 @@
 <odoo>
 	<data>
+		
 
 		<record model="ir.ui.view" id="ms_query_search_view">
 		    <field name="name">ms.query.search</field>
