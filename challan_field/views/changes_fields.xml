@@ -75,16 +75,16 @@
                     <group  class="oe_invoice_lines_tab">
 
                         <p>Select or type discount reason</p>
-                        <group colspan="10" attrs="{'invisible': [('move_type', 'not in', ('out_refund'))]}">
+                        <group colspan="10" attrs="{'invisible': [('move_type', 'in', ('out_refund'))]}">
                           <field name="discount_note" />
                         </group>
                         
-                        <group colspan="10" attrs="{'invisible': [('move_type', 'not in', ('out_refund'))]}">
+                        <group colspan="10" attrs="{'invisible': [('move_type', 'in', ('out_refund'))]}">
                            <field name="reject_reason" /> 
                         </group>
                         
                        
-                        <group colspan="10"  attrs="{'invisible': [('move_type', 'not in', ('out_invoice','out_receipt', 'in_refund', 'in_receipt'))]}">
+                        <group colspan="10"  attrs="{'invisible': [('move_type', 'not in', ('out_refund'))]}">
                             <field name="leaving_reason" /> 
                         </group>
                         <group colspan="10">
