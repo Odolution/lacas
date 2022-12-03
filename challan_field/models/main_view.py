@@ -2,6 +2,14 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 
 
+
+class reason_for_discount(models.Model):
+    _name="discount.reason"
+    name = fields.Char('name')
+class reason_for_leave(models.Model):
+    _name="leaving.reason"
+    name = fields.Char('name')
+
 class account_fields(models.Model):
     _inherit = "account.move"
     room = fields.Char("Class")
@@ -14,10 +22,10 @@ class account_fields(models.Model):
     end_session = fields.Date("End Session")
     Registration_id = fields.Char("Registration ID")
     discount_note = fields.Char("Add Discount note")
+    reject_reason = fields.Many2one('discount.reason', string='Reason For Discount')
+    leaving_reason = fields.Many2one("leave.reason", string = "Leaving Reason")
+    remarks = fields.Char('remarks')
 
-    reject_reason = fields.Selection(
-        [('siblings', 'Siblings Discount'), ('Scholarship', 'Scholarship Discount'), ], 'Reason For Discount')
-    
     @api.onchange('state')
     def _onchange_appy_seq(self):
         record = self

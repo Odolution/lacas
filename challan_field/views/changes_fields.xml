@@ -41,7 +41,8 @@
                  <!-- <xpath expr="//label[@for='partner_shipping_id']" position="attributes">
                       <attribute name="string">Address</attribute>
                  </xpath> -->
-                 <xpath expr="//group[@id='header_right_group']/div[@class='o_td_label']" position="replace">
+                 
+                <xpath expr="//group[@id='header_right_group']/div[@class='o_td_label']" position="replace">
                       <div class="o_td_label">
                             <label for="invoice_date" string="Challan Date" style="font-weight:bold;" attrs="{'invisible': [('move_type', 'not in', ('out_invoice','out_receipt', 'in_refund', 'in_receipt'))]}"/>
                             <label for="invoice_date" string="Withdrawn Date" style="font-weight:bold;" attrs="{'invisible': [('move_type', 'not in', ('out_refund'))]}"/>
@@ -74,12 +75,20 @@
                     <group  class="oe_invoice_lines_tab">
 
                         <p>Select or type discount reason</p>
-                        <group colspan="10">
-                        <field name="discount_note" />
+                        <group colspan="10" attrs="{'invisible': [('move_type', 'not in', ('out_refund'))]}">
+                          <field name="discount_note" />
                         </group>
                         
+                        <group colspan="10" attrs="{'invisible': [('move_type', 'not in', ('out_refund'))]}">
+                           <field name="reject_reason" /> 
+                        </group>
+                        
+                       
+                        <group colspan="10"  attrs="{'invisible': [('move_type', 'not in', ('out_invoice','out_receipt', 'in_refund', 'in_receipt'))]}">
+                            <field name="leaving_reason" /> 
+                        </group>
                         <group colspan="10">
-                        <field name="reject_reason" /> 
+                            <field name="remarks" /> 
                         </group>
                         
                        
