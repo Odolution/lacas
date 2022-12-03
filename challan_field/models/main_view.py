@@ -23,7 +23,7 @@ class account_fields(models.Model):
     Registration_id = fields.Char("Registration ID")
     discount_note = fields.Char("Add Discount note")
     reject_reason = fields.Many2one('discount.reason', string='Reason For Discount')
-    leaving_reason = fields.Many2one("leave.reason", string = "Leaving Reason")
+    leaving_reason = fields.Many2one("leaving.reason", string = "Leaving Reason")
     remarks = fields.Char('remarks')
 
     @api.onchange('state')
