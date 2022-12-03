@@ -41,11 +41,10 @@
                  <!-- <xpath expr="//label[@for='partner_shipping_id']" position="attributes">
                       <attribute name="string">Address</attribute>
                  </xpath> -->
-                 <xpath expr="//label[@for='invoice_date'][0]" position="attributes">
-                      <attribute name="string">Challan Date</attribute>
-                 </xpath>
-                 <xpath expr="//label[@for='invoice_date'][1]" position="attributes">
-                      <attribute name="string">Withdrawn Date</attribute>
+                 <xpath expr="//group[@id='header_right_group']/div[@class='o_td_label']" position="replace">
+                    <label for="invoice_date" string="Challan Date" style="font-weight:bold;" attrs="{'invisible': [('move_type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                    <label for="invoice_date" string="Withdrawn Date" style="font-weight:bold;" attrs="{'invisible': [('move_type', 'not in', ('in_invoice', 'in_refund', 'in_receipt'))]}"/>
+                           
                  </xpath>
 
 
