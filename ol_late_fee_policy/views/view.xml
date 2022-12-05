@@ -1,0 +1,95 @@
+<odoo>
+
+    <record id="view_late_fee_slabs_form" model="ir.ui.view">
+        <field name="name">account.latefeeslab.form</field>
+        <field name="model">account.latefeeslab</field>
+        <field name="arch" type="xml">
+            <form string="Late Fee Slab">
+
+                <sheet string="Late Fee Slab">
+                    <group>
+                        <field name="days" />
+                        <field name="charge" />
+                    </group>
+                    
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+        <record id="view_late_fee_slabs_tree" model="ir.ui.view">
+        <field name="name">account.latefeeslab.tree</field>
+        <field name="model">account.latefeeslab</field>
+        <field name="arch" type="xml">
+            <tree>
+                        <field name="days" />
+                        <field name="charge" />
+            </tree>
+        </field>
+        </record>
+        <record id="view_late_fee_slabs_kanban" model="ir.ui.view">
+        <field name="name">account.latefeeslab.kanban</field>
+        <field name="model">account.latefeeslab</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box" action="view_late_fee_slabs_form">
+
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb16">
+                                <strong class="o_kanban_record_title">
+                                    <field name="days" />
+                                </strong>
+                            </div>
+                            <div class="oe_kanban_bottom_left text-muted">
+                                <span>
+                                    <field name="charge"/>
+                                </span>
+                            </div>
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+        </record>
+      <record id="action_add_slabs" model="ir.actions.act_window">
+        <field name="name">Late Fee Slabs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.latefeeslab</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                    No Instance Found
+            </p>
+        </field>
+    </record>
+    <record id="account_payment_register_form_ext" model="ir.ui.view">
+        <field name="name">account_payment_register</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+           
+            <xpath expr="//label[@for='amount']" position="before">
+                <label for="late_fee" attrs="{'invisible': ['|', ('can_edit_wizard', '=', False), '&amp;', ('can_group_payments', '=', True), ('group_payment', '=', False)]}"/>
+                <div name="latefee_div" class="o_row" attrs="{'invisible': ['|', ('can_edit_wizard', '=', False), '&amp;', ('can_group_payments', '=', True), ('group_payment', '=', False)]}">
+                    <field name="late_fee"/>
+                    <field name="currency_id" required="1" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="account_journal_ext" model="ir.ui.view">
+        <field name="name">account_journal_form_ext</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+           
+            <xpath expr="//field[@name='type']" position="before">
+                    <field name="apply_late_fee_policy"/>
+            </xpath>
+        </field>
+    </record>
+    <menuitem id="late_fee_slab" name="Late Fee Slab" action="action_add_slabs" parent="account.menu_finance_receivables" sequence="15" />
+</odoo>
