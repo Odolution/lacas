@@ -37,7 +37,6 @@ class account_fields(models.Model):
         for grade in self.x_student_id_cred.grade_level_ids:
           wholename=grade.name
           splitted_name=wholename.split('-')
-          raise UserError(str(splitted_name))
           if splitted_name:
             self.class_name=splitted_name[0]
             if len(splitted_name)>1:
