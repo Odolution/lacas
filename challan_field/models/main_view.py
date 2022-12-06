@@ -34,7 +34,7 @@ class account_fields(models.Model):
       self.section_name=""
       if self.x_student_id_cred:
         wholename=""
-        for grade in self.x_Student_id_cred.grade_level_ids:
+        for grade in self.x_student_id_cred.grade_level_ids:
           wholename=grade.name
           splitted_name=wholename.split('-')
           if splitted_name:
