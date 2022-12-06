@@ -26,6 +26,23 @@ class account_fields(models.Model):
     leaving_reason = fields.Many2one("leaving.reason", string = "Leaving Reason")
     remarks = fields.Char('remarks')
 
+    class_name = fields.Char(string='Class')
+    section_name = fields.Char(string='Section')
+    @api.onchange('x_student_id_cred')
+    def _student_onchange(self):
+      self.class_name=""
+      self.section_name=""
+      if self.x_student_id_cred:
+        wholename=""
+        for grade in self.x_Student_id_cred.grade_level_ids:
+          wholename=grade.name
+          splitted_name=wholename.split('-')
+          if splitted_name:
+            self.class_name=splitted_name[0]
+            if len(splitted_name)>1:
+              self.section_name=splitted_name[1]
+          break
+        
     @api.onchange('state')
     def _onchange_appy_seq(self):
         record = self
