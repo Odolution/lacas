@@ -45,7 +45,6 @@ class account_fields(models.Model):
             self.section_name=splitted_name[1]
           elif len(splitted_name)>0:
             self.class_name=splitted_name[0]
-          break
         
     @api.onchange('state')
     def _onchange_appy_seq(self):
