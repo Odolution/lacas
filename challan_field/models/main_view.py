@@ -37,10 +37,14 @@ class account_fields(models.Model):
         for grade in self.x_student_id_cred.grade_level_ids:
           wholename=grade.name
           splitted_name=wholename.split('-')
-          if splitted_name:
+          if len(splitted_name)>2:
+            self.class_name=splitted_name[0]+"-"+splitted_name[1]
+            self.section_name=splitted_name[2]
+          elif len(splitted_name)>1:
             self.class_name=splitted_name[0]
-            if len(splitted_name)>1:
-              self.section_name=splitted_name[1]
+            self.section_name=splitted_name[1]
+          elif len(splitted_name)>0:
+            self.class_name=splitted_name[0]
           break
         
     @api.onchange('state')
