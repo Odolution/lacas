@@ -32,6 +32,8 @@ class account_fields(models.Model):
     def _student_onchange(self):
       self.class_name=""
       self.section_name=""
+      self.father_name=""
+      ##work for class and section picking
       if self.x_student_id_cred:
         wholename=""
         if self.x_student_id_cred.homeroom:
@@ -45,6 +47,12 @@ class account_fields(models.Model):
             self.section_name=splitted_name[1]
           elif len(splitted_name)>0:
             self.class_name=splitted_name[0]
+
+        ##work for father name picking
+        for relation in self.x_student_id_cred.relationship_ids:
+          if relation.relationship_type_id.name == "Father":
+            self.father_name = relation.individual_id.name
+            break
         
     @api.onchange('state')
     def _onchange_appy_seq(self):
