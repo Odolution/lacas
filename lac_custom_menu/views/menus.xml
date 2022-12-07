@@ -59,4 +59,15 @@
     sequence="3" action="action_monthly_menu_cus" 
     name="Monthly Bills "
     groups="lac_access_rights_custom.group_monthly_menu"/>
+
+    <record id="custom_fields_changes" model="ir.ui.view">
+            <field name="name">custom.view.changes</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <field name="end_session" position="after">
+                    <field name="udid_new_lv" />
+                </field>
+            </field>
+        </record>
 </odoo>
