@@ -28,7 +28,7 @@ class account_fields(models.Model):
 
     class_name = fields.Char(string='Class')
     section_name = fields.Char(string='Section')
-    @api.onchange('x_student_id_cred')
+    @api.onchange('x_student_id_cred',"student_ids")
     def _student_onchange(self):
       self.class_name=""
       self.section_name=""
@@ -53,12 +53,25 @@ class account_fields(models.Model):
           if relation.relationship_type_id.name == "Father":
             self.father_name = relation.individual_id.name
             break
-        for student in self['student_ids']:
-          for relation in student['relationship_ids']:
+      
+      for student in self['student_ids']:
+         wholename=""
+         wholename=student.homeroom
+         splitted_name=wholename.split('-')
+         if len(splitted_name)>2:
+            self.class_name=splitted_name[0]+"-"+splitted_name[1]
+            self.section_name=splitted_name[2]
+         elif len(splitted_name)>1:
+            self.class_name=splitted_name[0]
+            self.section_name=splitted_name[1]
+         elif len(splitted_name)>0:
+            self.class_name=splitted_name[0]
+         ##work for father name picking
+         for relation in student['relationship_ids']:
             if relation['relationship_type_id']['name'] == "Father":
               self['father_name'] = relation['individual_id']['name']
               break
-          break
+         break
             
         
     @api.onchange('state')
