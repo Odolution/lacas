@@ -17,7 +17,7 @@
     </record> -->
 
 
-    <record id="action_charges_menu_cus" model="ir.actions.act_window">
+    <!-- <record id="action_charges_menu_cus" model="ir.actions.act_window">
             <field name="name">Charges menu</field>
             <field name="res_model">account.move</field>
             <field name="view_mode">tree,form</field>
@@ -27,12 +27,12 @@
                 Create a new department
               </p>
             </field>
-        </record>
+        </record> -->
 
     <!-- <menuitem id="charges_menu_custom" parent="account.menu_finance_receivables" name="Charges_menu" action="action_charges_menu_cus"
     sequence="20"/> -->
 
-    <menuitem id="charges_menu_custom" 
+    <!-- <menuitem id="charges_menu_custom" 
     parent="account.menu_finance_receivables" 
     sequence="3" action="action_charges_menu_cus" 
     name="Charges"
@@ -49,14 +49,40 @@
                 Create a new department
               </p>
             </field>
-        </record>
+        </record> -->
 
     <!-- <menuitem id="charges_menu_custom" parent="account.menu_finance_receivables" name="Charges_menu" action="action_charges_menu_cus"
     sequence="20"/> -->
 
-    <menuitem id="monthly_bills_menu_custom" 
+    <!-- <menuitem id="monthly_bills_menu_custom" 
     parent="account.menu_finance_receivables" 
     sequence="3" action="action_monthly_menu_cus" 
     name="Monthly Bills "
-    groups="lac_access_rights_custom.group_monthly_menu"/>
+    groups="lac_access_rights_custom.group_monthly_menu"/> -->
+
+    <record id="custom_fields_changes" model="ir.ui.view">
+            <field name="name">custom.view.changes</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <field name="end_session" position="after">
+                    <field name="udid_new_lv" />
+                </field>
+            </field>
+        </record>
+
+    <record id="custom_fields_changes_lv" model="ir.ui.view">
+            <field name="name">custom.view.changes.lv</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_invoice_tree" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="udid_new_lv" />
+                    <field name="facts_id_new_lv" />
+
+                </field>
+                
+            </field>
+        </record>
+
 </odoo>
