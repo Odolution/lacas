@@ -53,11 +53,12 @@ class account_fields(models.Model):
           if relation.relationship_type_id.name == "Father":
             self.father_name = relation.individual_id.name
             break
-        for student in self.student_ids:
-            for relation in student.relationship_ids:
-              if relation.relationship_type_id.name == "Father":
-                self.father_name = relation.individual_id.name
-                break
+        for student in self['student_ids']:
+          for relation in student['relationship_ids']:
+            if relation['relationship_type_id']['name'] == "Father":
+              self['father_name'] = relation['individual_id']['name']
+              break
+          break
             
         
     @api.onchange('state')
