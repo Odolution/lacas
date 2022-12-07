@@ -9,8 +9,15 @@ class field_changes_custom_update(models.Model):
     def _compute_udid_student(self):
         # if self.move_type == "out_refund":
         for rec in self:
-            if rec.tuition_plan_ids:
-                for stu_rec in rec.tuition_plan_ids:
-                    rec.udid_new_lv=stu_rec.student_id.facts_udid
+            if rec.student_ids:
+                for stu_rec in rec.student_ids:
+                    rec.udid_new_lv=stu_rec.facts_udid
             else:
                 rec.udid_new_lv=""
+
+            # for rec in self:
+            # if rec.tuition_plan_ids:
+            #     for stu_rec in rec.tuition_plan_ids:
+            #         rec.udid_new_lv=stu_rec.student_id.facts_udid
+            # else:
+            #     rec.udid_new_lv=""
