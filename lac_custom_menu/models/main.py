@@ -3,8 +3,8 @@ from odoo.exceptions import UserError
 
 class field_changes_custom_update(models.Model):
     _inherit = 'account.move'
-    udid_new_lv = fields.Char(compute='_compute_udid_student',string="UDID NEW")
-    facts_id_new_lv = fields.Char(compute='_compute_facts_id_student',string="Facts Id NEW")
+    udid_new_lv = fields.Char(compute='_compute_udid_student',string="UDID")
+    facts_id_new_lv = fields.Char(compute='_compute_facts_id_student',string="Facts Id")
 
     
     def _compute_udid_student(self):
