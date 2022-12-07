@@ -56,16 +56,17 @@ class account_fields(models.Model):
       
       for student in self['student_ids']:
          wholename=""
-         wholename=student.homeroom
-         splitted_name=wholename.split('-')
-         if len(splitted_name)>2:
-            self.class_name=splitted_name[0]+"-"+splitted_name[1]
-            self.section_name=splitted_name[2]
-         elif len(splitted_name)>1:
-            self.class_name=splitted_name[0]
-            self.section_name=splitted_name[1]
-         elif len(splitted_name)>0:
-            self.class_name=splitted_name[0]
+         if student.homeroom:
+             wholename=student.homeroom
+             splitted_name=wholename.split('-')
+             if len(splitted_name)>2:
+                self.class_name=splitted_name[0]+"-"+splitted_name[1]
+                self.section_name=splitted_name[2]
+             elif len(splitted_name)>1:
+                self.class_name=splitted_name[0]
+                self.section_name=splitted_name[1]
+             elif len(splitted_name)>0:
+                self.class_name=splitted_name[0]
          ##work for father name picking
          for relation in student['relationship_ids']:
             if relation['relationship_type_id']['name'] == "Father":
