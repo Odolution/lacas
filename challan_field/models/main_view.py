@@ -75,11 +75,12 @@ class account_fields(models.Model):
          break
             
         
-    @api.onchange('state')
+#     @api.onchange('state')
     def action_post(self):
 #         record = self
         res = super(account_fields, self).action_post()
         for record in self:
+            raise UserError("IN")
             if record.state == 'posted':
               if record.move_type == 'out_invoice':
 #                 record['name'] = 'Draft'
