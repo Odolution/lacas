@@ -93,7 +93,7 @@ class account_fields(models.Model):
                   if record.x_school_id_cred:
                     for school in record.x_school_id_cred:
                       school_code = school.description
-                  new_no = school_code + env['ir.sequence'].next_by_code('adm_challan')
+                  new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
                   record.name = new_no
                     
                   for rec in record.invoice_line_ids:
@@ -104,7 +104,7 @@ class account_fields(models.Model):
                 if 'Draft' in record.name:
                   # raise UserError(record)
                   if record.x_school_id_cred:
-                    new_no = record.x_school_id_cred.description + env['ir.sequence'].next_by_code('security')
+                    new_no = record.x_school_id_cred.description + record.env['ir.sequence'].next_by_code('security')
                     record.name = new_no
                     
                     for rec in record.invoice_line_ids:
