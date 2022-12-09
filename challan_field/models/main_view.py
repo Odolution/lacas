@@ -78,13 +78,17 @@ class account_fields(models.Model):
 #     @api.onchange('state')
     def action_post(self):
 #         record = self
+        for rec in self:
+            seq = 1
+            if '/' in rec.name:
+                seq = 0
         res = super(account_fields, self).action_post()
         for record in self:
-            raise UserError(record.name)
+#             raise UserError(record.name)
             if record.state == 'posted':
               if record.move_type == 'out_invoice':
 #                 record['name'] = 'Draft'
-                if 'Draft' in record.name:
+                if seq == 0:
                   # raise UserError(record)
                   school_code=""
                   if record.school_ids:
@@ -101,7 +105,7 @@ class account_fields(models.Model):
                     
               if record.move_type == 'out_refund':
 #                 record['name'] = 'Draft'
-                if 'Draft' in record.name:
+                if seq == 0:
                   # raise UserError(record)
                   if record.x_school_id_cred:
                     new_no = record.x_school_id_cred.description + record.env['ir.sequence'].next_by_code('security')
