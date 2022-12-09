@@ -76,39 +76,40 @@ class account_fields(models.Model):
             
         
     @api.onchange('state')
-    def _onchange_appy_seq(self):
-        record = self
-
-        if record.state == 'posted':
-          if record.move_type == 'out_invoice':
-            record['name'] = 'Draft'
-            if 'Draft' in record.name:
-              # raise UserError(record)
-              school_code=""
-              if record.school_ids:
-                for school in record.school_ids:
-                  school_code = school.description
-              if record.x_school_id_cred:
-                for school in record.x_school_id_cred:
-                  school_code = school.description
-              new_no = school_code + env['ir.sequence'].next_by_code('adm_challan')
-              record.sudo().write({
-                'name': new_no,
-              })
-              for rec in record.invoice_line_ids:
-                rec['name'] = new_no
-          if record.move_type == 'out_refund':
-            record['name'] = 'Draft'
-            if 'Draft' in record.name:
-              # raise UserError(record)
-              if record.x_school_id_cred:
-                new_no = record.x_school_id_cred.description + env['ir.sequence'].next_by_code('security')
-                record.sudo().write({
-                  'name': new_no,
-                })
-                for rec in record.invoice_line_ids:
-                  rec['name'] = new_no
-              # raise UserError(new_no)
+    def action_post(self):
+#         record = self
+        res = super(account_fields, self).action_post()
+        for record in self:
+            if record.state == 'posted':
+              if record.move_type == 'out_invoice':
+#                 record['name'] = 'Draft'
+                if 'Draft' in record.name:
+                  # raise UserError(record)
+                  school_code=""
+                  if record.school_ids:
+                    for school in record.school_ids:
+                      school_code = school.description
+                  if record.x_school_id_cred:
+                    for school in record.x_school_id_cred:
+                      school_code = school.description
+                  new_no = school_code + env['ir.sequence'].next_by_code('adm_challan')
+                  record.name = new_no
+                    
+                  for rec in record.invoice_line_ids:
+                    rec['name'] = new_no
+                    
+              if record.move_type == 'out_refund':
+#                 record['name'] = 'Draft'
+                if 'Draft' in record.name:
+                  # raise UserError(record)
+                  if record.x_school_id_cred:
+                    new_no = record.x_school_id_cred.description + env['ir.sequence'].next_by_code('security')
+                    record.name = new_no
+                    
+                    for rec in record.invoice_line_ids:
+                      rec['name'] = new_no
+        return res
+                  # raise UserError(new_no)
 
 
 # class school_panel_field(models.Model):
