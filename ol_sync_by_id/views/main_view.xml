@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ol_school_student_inherit_sync" model="ir.ui.view">
+            <field name="name">school.student.view.form.inherit</field>
+            <field name="model">school.student</field>
+            <field name="inherit_id" ref="edoob.school_student_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[hasclass('oe_stat_button')]" position="before">
+                    <button name="sync_wd_facts" string="Sync Current Record" type="action" class="oe_stat_button" icon="fa-refresh"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
