@@ -80,7 +80,7 @@ class account_fields(models.Model):
 #         record = self
         res = super(account_fields, self).action_post()
         for record in self:
-            raise UserError("IN")
+            raise UserError(record.state)
             if record.state == 'posted':
               if record.move_type == 'out_invoice':
 #                 record['name'] = 'Draft'
