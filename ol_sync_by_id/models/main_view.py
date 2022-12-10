@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 
 
 class RespartnerInherit(models.Model):
-    _inherit = 'school.student'
+    _inherit = 'res.partner'
     
     def sync_wd_facts(self):
         for rec in self:
