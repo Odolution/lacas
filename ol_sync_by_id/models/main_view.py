@@ -17,6 +17,7 @@ class RespartnerInherit(models.Model):
             x = requests.get('http://97.74.85.51:5631/facts/'+str(rec.facts_id))
             data=x.json()
             data = eval(data)
+            raise UserError(data)
             if data:
                 add_data={
                     'name':data["Name"],
