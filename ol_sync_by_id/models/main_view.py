@@ -15,10 +15,9 @@ class RespartnerInherit(models.Model):
     def sync_wd_facts(self,std):
         for rec in std:
             x = requests.get('http://97.74.85.51:5631/facts/'+str(rec.facts_id))
-            raise UserError(str(x.text))
+            
             data=x.json()
             
             data = eval(data)
-            raise UserError(str(data))
             if data:
                 rec['name']=data["Name"]
