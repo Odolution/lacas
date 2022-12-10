@@ -12,12 +12,11 @@ from datetime import datetime, timedelta
 class RespartnerInherit(models.Model):
     _inherit = 'res.partner'
     
-    def sync_wd_facts(self):
-        for rec in self:
+    def sync_wd_facts(self,std):
+        for rec in std:
             x = requests.get('http://97.74.85.51:5631/facts/'+str(rec.facts_id))
             data=x.json()
             data = eval(data)
-            raise UserError(str(data))
             if data:
                 add_data={
                     'name':data["Name"],
