@@ -18,11 +18,4 @@ class RespartnerInherit(models.Model):
             data=x.json()
             data = eval(data)
             if data:
-                add_data={
-                    'name':data["Name"],
-                    'street':data["Address"],
-                    'email':data["Email"],
-                    'phone':data["Phone"],
-                    'homeroom':data["Current_Enrolled"]
-                }
-                rec.write(add_data)
+                rec['name']=data["Name"]
