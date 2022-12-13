@@ -38,7 +38,7 @@ class RespartnerInherit(models.Model):
             if data:
                 rec['name']=data["Name"]
                 rec['street']=data['Address']
-                rec['date_of_birth'] = data['Date Of Birth']
+                rec['date_of_birth'] = datetime.datetime.strptime(data['Date Of Birth'], '%Y-%m-%d').strftime('%m/%d/%y')
                 rec['facts_udid']=data['udid']
                 rec['email'] = data['Email']
                 rec['phone'] = data['Phone']
