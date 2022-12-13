@@ -40,7 +40,7 @@ class extwiz(models.TransientModel):
         payments=super(extwiz,self)._create_payments()
         for payment in payments:
             payment.late_fee=late_fee
-            payment.amount_late_fee_exclusive=amount_late_fee_exclusive
+            payment.amount_late_fee_exclusive=payment.amount - payment.late_fee
         return payments
     
     def action_create_payments(self):
