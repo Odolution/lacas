@@ -37,8 +37,13 @@ class extwiz(models.TransientModel):
     def _create_payments(self):
         payments=super(extwiz,self)._create_payments()
         for payment in payments:
-            payment.late_fee=self.late_fee
-            payment.amount_late_fee_exclusive=self.amount_late_fee_exclusive
+            invoice=""
+            for line in self.line_ids:
+                invoice=line.move_id
+                break
+            if invoice!="":
+                payment.late_fee=self.late_fee
+                payment.amount_late_fee_exclusive=payment.amount-payment.late_fee
         return payments
     
     def action_create_payments(self):
