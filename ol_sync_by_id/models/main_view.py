@@ -19,9 +19,9 @@ class RespartnerInherit(models.Model):
             data=x.json()
             
             data = eval(data)
-            raise UserError(data['Name'])
-            sch_id = 0
-            grd_id = 0
+            
+            sch_id = False
+            grd_id = False
             if 'Current School' in data:
                 school = self.env['school.school'].search(['name','=',data['Current School']])
 
