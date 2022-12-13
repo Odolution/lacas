@@ -19,7 +19,7 @@ class RespartnerInherit(models.Model):
             data=x.json()
             
             data = eval(data)
-            raise UserError(data)
+            raise UserError(data['Name'])
             sch_id = 0
             grd_id = 0
             if 'Current School' in data:
