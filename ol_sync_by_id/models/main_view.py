@@ -19,9 +19,21 @@ class RespartnerInherit(models.Model):
             data=x.json()
             
             data = eval(data)
-            school = self.env['school.school'].search(['name','=',data['Current School']])
-            grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled']])
             raise UserError(data)
+            sch_id = 0
+            grd_id = 0
+            if 'Current School' in data:
+                school = self.env['school.school'].search(['name','=',data['Current School']])
+
+                rec['school_ids'] = school.id
+                
+            if  'Current_Enrolled' in data:
+                grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled']])
+                rec['grade_level_ids'] = grade.id
+               
+               
+            
+            
             if data:
                 rec['name']=data["Name"]
                 rec['street']=data['Address']
@@ -29,8 +41,6 @@ class RespartnerInherit(models.Model):
                 rec['facts_udid']=data['udid']
                 rec['email'] = data['Email']
                 rec['phone'] = data['Phone']
-                rec['school_ids'] = school.id
-                rec['grade_level_ids'] = grade.id
                 rec['homeroom'] = data['Homeroom']
                                                            
                                                     
