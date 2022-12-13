@@ -23,13 +23,14 @@ class RespartnerInherit(models.Model):
             sch_id = False
             grd_id = False
             if 'Current School' in data:
-                school = self.env['school.school'].search(['name','=',data['Current School']])
-
-                rec['school_ids'] = school.id
+                if data['Current School']:
+                    school = self.env['school.school'].search(['name','=',data['Current School']])
+                    rec['school_ids'] = school.id
                 
             if  'Current_Enrolled' in data:
-                grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled']])
-                rec['grade_level_ids'] = grade.id
+                if data['Current_Enrolled']:
+                    grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled']])
+                    rec['grade_level_ids'] = grade.id
                
                
             
