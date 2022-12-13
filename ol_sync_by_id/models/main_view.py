@@ -19,8 +19,8 @@ class RespartnerInherit(models.Model):
             data=x.json()
             
             data = eval(data)
-            school = self.env['school.school'].search(['name','=',data['Current School'])
-            grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled'])
+            school = self.env['school.school'].search(['name','=',data['Current School']])
+            grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled']])
             
             if data:
                 rec['name']=data["Name"]
