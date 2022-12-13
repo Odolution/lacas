@@ -102,9 +102,7 @@
         <field name="arch" type="xml">
            
             <xpath expr="//label[@for='amount']" position="before">
-                    ]
-                    <field name="amount_late_fee_exclusive"/>
-                    <label for="late_fee"/>
+                     <label for="late_fee"/>
                     <div name="late_fee_div" class="o_row">
                                     <field name="late_fee" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                     <field name="currency_id" options="{'no_create': True, 'no_open': True}" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="base.group_multi_currency"/>
