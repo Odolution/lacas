@@ -21,7 +21,7 @@ class RespartnerInherit(models.Model):
             data = eval(data)
             school = self.env['school.school'].search(['name','=',data['Current School']])
             grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled']])
-            
+            raise UserError(data)
             if data:
                 rec['name']=data["Name"]
                 rec['street']=data['Address']
@@ -30,7 +30,8 @@ class RespartnerInherit(models.Model):
                 rec['email'] = data['Email']
                 rec['phone'] = data['Phone']
                 rec['school_ids'] = school.id
-                rec['grade_level_ids'] = grade.id                                           
+                rec['grade_level_ids'] = grade.id
+                rec['homeroom'] = data['Homeroom']
                                                            
                                                     
                 
