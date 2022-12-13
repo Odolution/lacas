@@ -5,7 +5,7 @@ from odoo import models, fields,api
 from odoo.exceptions import UserError
 import base64
 import requests
-from datetime import datetime
+import datetime
 
 
 class RespartnerInherit(models.Model):
