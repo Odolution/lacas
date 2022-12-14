@@ -11,6 +11,13 @@ class ext(models.Model):
     computer=fields.Integer(string="computer Charges", compute="_onchange_computer")
     library=fields.Integer(string="library Charges", compute="_onchange_library")
     utility=fields.Integer(string="utility Charges", compute="_onchange_utility")
+    student_code=fields.Integer(string="UDID")
+    student_name=fields.Char(string="Name")
+    class_sec=fields.Char(string="Class Section")
+    campus=fields.Char(string="Campus")
+    bill_date=fields.Date(string="Bill Date")
+    due_date=fields.Date(string="Due Date")
+    due_amount=fields.Integer(string="Due Amount")
 
     def get_charges_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_charges').read()[0]
@@ -59,6 +66,21 @@ class ext(models.Model):
     @api.onchange('invoice_line_ids')
     def _onchange_utility(self):
         self._get_utility_field()
+
+    @api.onchange('student_ids')
+    def _onchange_student_data(self):
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        for rec in monthly_bill:
+            if rec.student_ids:
+                full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
+                rec['student_name']=full_name
+                rec['student_code']=rec.student_ids.facts_udid
+                rec['class_sec']=rec.student_ids.homeroom
+                rec['campus']=rec.student_ids.school_ids.name
+                rec['bill_date']=rec.invoice_date
+                rec['due_date']=rec.invoice_payment_term_id 
+   
 
 
     def _get_price_field(self):

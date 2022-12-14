@@ -105,6 +105,13 @@
                 </header>
                 <field name="name" decoration-bf="1"/>
                 <field name="partner_id" invisible="1"/>
+                <field name="student_code"/>
+                <field name="student_name"/>
+                <field name="class_sec"/>
+                <field name="campus"/>
+                <field name="bill_date"/>
+                <field name="due_date"/>
+                <field name="due_amount"/>
                 <field name="club"/>
                 <field name="computer"/>
                 <field name="library"/>
