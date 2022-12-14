@@ -20,21 +20,21 @@ class ext(models.Model):
         return action    
     def get_admission_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_admission').read()[0]
-        journals=self.env["account.journal"].search([("name","=","Admission")])
+        journals=self.env["account.journal"].search([("name","=","Admission Challan")])
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action  
 
     def get_monthlyBill_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_monthlyBill').read()[0]
-        journals=self.env["account.journal"].search([("name","=","Monthly bills")])
+        journals=self.env["account.journal"].search([("name","=","Monthly Bills")])
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action  
     
     def get_securityDeposit_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_securityDeposit').read()[0]
-        journals=self.env["account.journal"].search([("name","=","Security")])
+        journals=self.env["account.journal"].search([("name","=","Security Deposit")])
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action  
