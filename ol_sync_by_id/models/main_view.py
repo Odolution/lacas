@@ -26,25 +26,25 @@ class RespartnerInherit(models.Model):
                     schoo_name = data['Current School']
                     school = self.env['school.school'].search(['name','=',schoo_name])
                     raise UserError(str(school))
-                    rec['school_ids'] = school.id
+#                     rec['school_ids'] = school.id
                 
-            if  'Current_Enrolled' in data:
-                if data['Current_Enrolled']:
-                    grade_name = data['Current_Enrolled']
-                    grade = self.env['school.grade.level'].search(['name','=',grade_name])
-                    rec['grade_level_ids'] = grade.id
+#             if  'Current_Enrolled' in data:
+#                 if data['Current_Enrolled']:
+#                     grade_name = data['Current_Enrolled']
+#                     grade = self.env['school.grade.level'].search(['name','=',grade_name])
+#                     rec['grade_level_ids'] = grade.id
                
-            if  'Homeroom' in data:
-                rec['homeroom'] = data['Homeroom']
+#             if  'Homeroom' in data:
+#                 rec['homeroom'] = data['Homeroom']
             
             
-            if data:
-                rec['name']=data["Name"]
-                rec['street']=data['Address']
-                rec['date_of_birth'] = data['Date Of Birth']
-                rec['facts_udid']=data['udid']
-                rec['email'] = data['Email']
-                rec['phone'] = data['Phone']
+#             if data:
+#                 rec['name']=data["Name"]
+#                 rec['street']=data['Address']
+#                 rec['date_of_birth'] = data['Date Of Birth']
+#                 rec['facts_udid']=data['udid']
+#                 rec['email'] = data['Email']
+#                 rec['phone'] = data['Phone']
                  
                                                            
                                                     
