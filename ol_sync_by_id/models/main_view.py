@@ -27,8 +27,8 @@ class RespartnerInherit(models.Model):
                     school = self.env['school.school'].search([])
                     for i in school:
                         if i.name == schoo_name:
-                            raise UserError(str(i.id))
-                            rec['school_ids'] = i.id
+                            pass
+#                             rec['school_ids'] = i.id
                 
             if  'Current_Enrolled' in data:
                 if data['Current_Enrolled']:
@@ -36,7 +36,6 @@ class RespartnerInherit(models.Model):
                     grade = self.env['school.grade.level'].search([])
                     for j in grade:
                         if j == grade.name:
-                            
                             rec['grade_level_ids'] = j.id
                
             if  'Homeroom' in data:
