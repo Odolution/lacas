@@ -19,6 +19,7 @@ class RespartnerInherit(models.Model):
             
             data = eval(data)
             
+            raise UserError(str(data))
             sch_id = False
             grd_id = False
             if 'Current School' in data:
@@ -28,7 +29,7 @@ class RespartnerInherit(models.Model):
                     for i in school:
                         if i.name == schoo_name:
                             rec['school_ids'] = i
-            raise UserError(str(data))    
+                
             if 'Enrolled' in data:
                 enrol = data['Enrolled']
                 enroled = self.env['school.enrollment.status'].search([])
