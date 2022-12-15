@@ -11,12 +11,12 @@ class ext(models.Model):
     computer=fields.Integer(string="computer Charges", compute="_onchange_computer")
     library=fields.Integer(string="library Charges", compute="_onchange_library")
     utility=fields.Integer(string="utility Charges", compute="_onchange_utility")
-    student_code=fields.Integer(string="UDID")
-    student_name=fields.Char(string="Name")
-    class_sec=fields.Char(string="Class Section")
-    campus=fields.Char(string="Campus")
-    bill_date=fields.Date(string="Bill Date")
-    due_date=fields.Date(string="Due Date")
+    student_code=fields.Integer(string="Student Code",compute="_onchange_student_code_data")
+    student_name=fields.Char(string="Name",compute="_onchange_student_name_data")
+    class_sec=fields.Char(string="Class Section",compute="_onchange_class_sec_data")
+    campus=fields.Char(string="Campus",compute="_onchange_campus_data")
+    bill_date=fields.Date(string="Bill Date",compute="_onchange_bill_date_data")
+    due_date=fields.Date(string="Due Date",compute="_onchange_due_date_data")
     due_amount=fields.Integer(string="Due Amount")
 
     def get_charges_action(self):
@@ -68,19 +68,81 @@ class ext(models.Model):
         self._get_utility_field()
 
     @api.onchange('student_ids')
-    def _onchange_student_data(self):
+    def _onchange_student_name_data(self):
+        self._get_student_name_field()
+    
+    @api.onchange('student_ids')
+    def _onchange_student_code_data(self):
+        self._get_student_code_field()
+    
+    @api.onchange('student_ids')
+    def _onchange_class_sec_data(self):
+        self._get_class_sec_field()
+
+    @api.onchange('student_ids')
+    def _onchange_campus_data(self):
+        self._get_campus_field()
+    
+    
+    @api.onchange('student_ids')
+    def _onchange_bill_date_data(self):
+        self._get_bill_date_field()
+
+    @api.onchange('student_ids')
+    def _onchange_due_date_data(self):
+        self._get_due_date_field()
+    
+    
+
+    
+        
+       
+
+    def _get_student_name_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
         for rec in monthly_bill:
             if rec.student_ids:
                 full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
                 rec['student_name']=full_name
+
+
+    def _get_student_code_field(self):
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        for rec in monthly_bill:
+            if rec.student_ids:
                 rec['student_code']=rec.student_ids.facts_udid
+    
+    def _get_class_sec_field(self):
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        for rec in monthly_bill:
+            if rec.student_ids:
                 rec['class_sec']=rec.student_ids.homeroom
+
+    def _get_campus_field(self):
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        for rec in monthly_bill:
+            if rec.student_ids:
                 rec['campus']=rec.student_ids.school_ids.name
+                
+
+    def _get_bill_date_field(self):
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        for rec in monthly_bill:
+            if rec.student_ids:
                 rec['bill_date']=rec.invoice_date
+                
+    
+    def _get_due_date_field(self):
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        for rec in monthly_bill:
+            if rec.student_ids:
                 rec['due_date']=rec.invoice_payment_term_id.name
-   
 
 
     def _get_price_field(self):
