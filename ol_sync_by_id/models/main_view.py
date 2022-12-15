@@ -32,7 +32,7 @@ class RespartnerInherit(models.Model):
                 
                
             if 'Current_Enrolled' in data:
-                enrol = data['Current_Enrolled']
+                enrol = data['Current_Enrolled'] 
                 enroled = self.env['school.enrollment.status'].search([])
                 for k in enroled:
                     if enrol == k.name:
