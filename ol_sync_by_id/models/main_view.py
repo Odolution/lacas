@@ -30,13 +30,6 @@ class RespartnerInherit(models.Model):
                         if i.name == schoo_name:
                             rec['school_ids'] = i
                 
-            if  'grade_level' in data:
-                if data['grade_level']:
-                    grade_name = data['grade_level']
-                    grade = self.env['school.grade.level'].search([])
-                    for j in grade:
-                        if j.name == grade_name:
-                            rec['grade_level_ids'] = j
                
             if 'Current_Enrolled' in data:
                 enrol = data['Current_Enrolled']
@@ -49,6 +42,14 @@ class RespartnerInherit(models.Model):
                             
                         else:
                             rec['enrollment_status_ids'] = k
+                            if  'grade_level' in data:
+                                if data['grade_level']:
+                                    grade_name = data['grade_level']
+                                    grade = self.env['school.grade.level'].search([])
+                                    for j in grade:
+                                        if j.name == grade_name:
+                                            rec['grade_level_ids'] = j
+            
             
             if  'Homeroom' in data:
                 rec['homeroom'] = data['Homeroom']
