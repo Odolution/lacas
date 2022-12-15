@@ -24,9 +24,11 @@ class RespartnerInherit(models.Model):
             if 'Current School' in data:
                 if data['Current School']:
                     schoo_name = data['Current School']
-                    school = self.env['school.school'].search(['name','=',schoo_name])
-                    raise UserError(str(school))
-#                     rec['school_ids'] = school.id
+                    school = self.env['school.school'].search([])
+                    for i in school:
+                        if i.name == schoo_name:
+                            raise UserError(str(school))
+                            rec['school_ids'] = school.id
                 
 #             if  'Current_Enrolled' in data:
 #                 if data['Current_Enrolled']:
