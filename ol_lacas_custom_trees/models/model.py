@@ -1,11 +1,9 @@
-
 from odoo import models, fields, api, exceptions
 from odoo.exceptions import UserError
 
 class ext(models.Model):
     _inherit="account.move"
     # security_price=fields.Integer(string='Security Price')
-    
    
     tuition=fields.Integer(string="Tuition Fee", compute='_onchange_tuition')
     club=fields.Integer(string="Club Charges", compute="_onchange_club")
@@ -17,8 +15,9 @@ class ext(models.Model):
     class_sec=fields.Char(string="Class Section",compute="_onchange_class_sec_data")
     campus=fields.Char(string="Campus",compute="_onchange_campus_data")
     bill_date=fields.Date(string="Bill Date",compute="_onchange_bill_date_data")
-    due_date=fields.Date(string="Due Date",compute="_onchange_due_date_data")
+    due_date=fields.Char(string="Due Date",compute="_onchange_due_date_data")
     due_amount=fields.Integer(string="Due Amount")
+
     def get_charges_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_charges').read()[0]
         journals=self.env["account.journal"].search([("name","=","Charges")])
@@ -67,7 +66,7 @@ class ext(models.Model):
     def _onchange_utility(self):
         self._get_utility_field()
 
-        @api.onchange('student_ids')
+    @api.onchange('student_ids')
     def _onchange_student_name_data(self):
         self._get_student_name_field()
     
@@ -143,7 +142,6 @@ class ext(models.Model):
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['due_date']=rec.invoice_payment_term_id.name
-   
 
 
     def _get_price_field(self):
@@ -219,4 +217,3 @@ class ext(models.Model):
 
                  
             
-
