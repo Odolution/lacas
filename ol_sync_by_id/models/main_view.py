@@ -21,10 +21,10 @@ class RespartnerInherit(models.Model):
             
             sch_id = False
             grd_id = False
-            raise UserError(str(data))
             if 'Current School' in data:
                 if data['Current School']:
                     school = self.env['school.school'].search(['name','=',data['Current School']])
+                    raise UserError(school.id)
                     rec['school_ids'] = school.id
                 
             if  'Current_Enrolled' in data:
@@ -32,7 +32,8 @@ class RespartnerInherit(models.Model):
                     grade = self.env['school.grade.level'].search(['name','=',data['Current_Enrolled']])
                     rec['grade_level_ids'] = grade.id
                
-               
+            if  'Homeroom' in data:
+                rec['homeroom'] = data['Homeroom']
             
             
             if data:
@@ -42,7 +43,7 @@ class RespartnerInherit(models.Model):
                 rec['facts_udid']=data['udid']
                 rec['email'] = data['Email']
                 rec['phone'] = data['Phone']
-                rec['homeroom'] = data['Homeroom'] 
+                 
                                                            
                                                     
                 
