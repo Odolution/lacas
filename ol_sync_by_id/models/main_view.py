@@ -28,11 +28,11 @@ class RespartnerInherit(models.Model):
                     for i in school:
                         if i.name == schoo_name:
                             rec['school_ids'] = i
-                
+            raise UserError(str(data))    
             if 'Enrolled' in data:
                 enrol = data['Enrolled']
                 enroled = self.env['school.enrollment.status'].search([])
-                raise UserError(str(enroled))
+                
                 for k in enroled:
                     if enroled == k.name:
                         rec['enrollment_status_ids'] = k
