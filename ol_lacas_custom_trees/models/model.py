@@ -149,8 +149,8 @@ class ext(models.Model):
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
         for rec in monthly_bill:
             if rec.student_ids:
-                rec['due_date']=rec.invoice_payment_term_id.name
-                
+                rec['due_date']=rec.invoice_date_due
+               
     def _get_due_amount_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
