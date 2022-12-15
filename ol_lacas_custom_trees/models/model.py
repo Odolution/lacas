@@ -16,7 +16,7 @@ class ext(models.Model):
     class_sec=fields.Char(string="Class Section",compute="_onchange_class_sec_data")
     campus=fields.Char(string="Campus",compute="_onchange_campus_data")
     bill_date=fields.Date(string="Bill Date",compute="_onchange_bill_date_data")
-    due_date=fields.Date(string="Due Date",compute="_onchange_due_date_data")
+    due_date=fields.Char(string="Due Date",compute="_onchange_due_date_data")
     due_amount=fields.Integer(string="Due Amount")
 
     def get_charges_action(self):
