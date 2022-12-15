@@ -17,7 +17,7 @@ class ext(models.Model):
     campus=fields.Char(string="Campus",compute="_onchange_campus_data")
     bill_date=fields.Date(string="Bill Date",compute="_onchange_bill_date_data")
     due_date=fields.Char(string="Due Date",compute="_onchange_due_date_data")
-    due_amount=fields.Integer(string="Due Amount")
+    due_amount=fields.Integer(string="Due Amount",compute="_onchange_due_amount_data")
 
     def get_charges_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_charges').read()[0]
@@ -91,6 +91,13 @@ class ext(models.Model):
     @api.onchange('student_ids')
     def _onchange_due_date_data(self):
         self._get_due_date_field()
+        
+    @api.onchange('student_ids')
+    def _onchange_due_amount_data(self):
+        self._get_due_amount_field()
+        
+
+       
     
     
 
@@ -143,6 +150,13 @@ class ext(models.Model):
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['due_date']=rec.invoice_payment_term_id.name
+                
+    def _get_due_amount_field(self):
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        for rec in monthly_bill:
+            if rec.student_ids:
+                rec['due_date']=rec.due_amount
 
 
     def _get_price_field(self):
