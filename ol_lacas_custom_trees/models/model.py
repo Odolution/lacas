@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 class ext(models.Model):
     _inherit="account.move"
     # security_price=fields.Integer(string='Security Price')
+    #..
    
     tuition=fields.Integer(string="Tuition Fee", compute='_onchange_tuition')
     club=fields.Integer(string="Club Charges", compute="_onchange_club")
