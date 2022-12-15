@@ -1,3 +1,4 @@
+
 from odoo import models, fields, api, exceptions
 from odoo.exceptions import UserError
 
@@ -14,7 +15,7 @@ class ext(models.Model):
     student_name=fields.Char(string="Name",compute="_onchange_student_name_data")
     class_sec=fields.Char(string="Class Section",compute="_onchange_class_sec_data")
     campus=fields.Char(string="Campus",compute="_onchange_campus_data")
-    bill_date=fields.Date(string="Bill Date",compute="_onchange_bill_date_data")
+    bill_date=fields.Char(string="Bill Date",compute="_onchange_bill_date_data")
     due_date=fields.Char(string="Due Date",compute="_onchange_due_date_data")
     due_amount=fields.Integer(string="Due Amount",compute="_onchange_due_amount_data")
 
@@ -107,6 +108,7 @@ class ext(models.Model):
     def _get_student_name_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.student_name=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
@@ -116,6 +118,7 @@ class ext(models.Model):
     def _get_student_code_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.student_code=0
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['student_code']=rec.student_ids.facts_udid
@@ -123,13 +126,16 @@ class ext(models.Model):
     def _get_class_sec_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.class_sec=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['class_sec']=rec.student_ids.homeroom
 
     def _get_campus_field(self):
+        
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.campus=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['campus']=rec.student_ids.school_ids.name
@@ -138,6 +144,7 @@ class ext(models.Model):
     def _get_bill_date_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.bill_date=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['bill_date']=rec.invoice_date
@@ -146,6 +153,7 @@ class ext(models.Model):
     def _get_due_date_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.due_date=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['due_date']=rec.invoice_date_due
@@ -153,9 +161,10 @@ class ext(models.Model):
     def _get_due_amount_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.due_amount=0
         for rec in monthly_bill:
             if rec.student_ids:
-                rec['due_date']=rec.due_amount
+                rec['due_amount']=rec.due_amount
 
 
     def _get_price_field(self):
@@ -211,8 +220,24 @@ class ext(models.Model):
             
             
             
+                
+
+
+
+
+   
+
+
+                    
+   
+                    
+
+                    
+
+
                     
                 
 
                  
             
+
