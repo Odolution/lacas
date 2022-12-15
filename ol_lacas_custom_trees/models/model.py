@@ -108,6 +108,7 @@ class ext(models.Model):
     def _get_student_name_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.student_name=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
@@ -117,6 +118,7 @@ class ext(models.Model):
     def _get_student_code_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.student_code=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['student_code']=rec.student_ids.facts_udid
@@ -124,13 +126,16 @@ class ext(models.Model):
     def _get_class_sec_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.class_sec=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['class_sec']=rec.student_ids.homeroom
 
     def _get_campus_field(self):
+        
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.campus=' '
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['campus']=rec.student_ids.school_ids.name
@@ -154,9 +159,10 @@ class ext(models.Model):
     def _get_due_amount_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.due_amount=0
         for rec in monthly_bill:
             if rec.student_ids:
-                rec['due_date']=rec.due_amount
+                rec['due_amount']=rec.due_amount
 
 
     def _get_price_field(self):
