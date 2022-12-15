@@ -62,7 +62,7 @@ class RespartnerInherit(models.Model):
                 rec['facts_udid']=data['udid']
                 rec['email'] = data['Email'] 
                 rec['phone'] = data['Phone']
-                 
+                  
                                                            
                                                     
                 
