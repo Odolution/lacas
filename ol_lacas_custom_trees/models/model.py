@@ -118,7 +118,7 @@ class ext(models.Model):
     def _get_student_code_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
-        self.student_code=' '
+        self.student_code=0
         for rec in monthly_bill:
             if rec.student_ids:
                 rec['student_code']=rec.student_ids.facts_udid
