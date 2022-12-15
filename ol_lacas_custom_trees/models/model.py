@@ -79,7 +79,7 @@ class ext(models.Model):
                 rec['class_sec']=rec.student_ids.homeroom
                 rec['campus']=rec.student_ids.school_ids.name
                 rec['bill_date']=rec.invoice_date
-                rec['due_date']=rec.invoice_payment_term_id 
+                rec['due_date']=rec.invoice_payment_term_id.name
    
 
 
