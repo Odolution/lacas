@@ -23,8 +23,8 @@ class RespartnerInherit(models.Model):
             grd_id = False
             if 'Current School' in data:
                 if data['Current School']:
+                    raise UserError(data['Current School'])
                     school = self.env['school.school'].search(['name','=',data['Current School']])
-                    raise UserError(school.id)
                     rec['school_ids'] = school.id
                 
             if  'Current_Enrolled' in data:
