@@ -475,7 +475,7 @@ class ext(models.Model):
         adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
         self.bill_amount=''
         for rec in adm_journals:
-            rec['bill_amount']=rec.tax_totals_json[16:24]
+            rec['bill_amount']=rec.amount_total
    
 
             
