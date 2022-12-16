@@ -215,6 +215,226 @@ class ext(models.Model):
                     for line in rec.invoice_line_ids:
                         if 'Utility' in line.product_id.name:
                             rec['utility']=line.price_subtotal
+                            
+  #admission
+
+
+    
+    @api.onchange('student_ids')
+    def _onchange_std_name_data(self):
+        self._get_std_name_field()
+
+    def _get_std_name_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_name=''
+        
+        for rec in adm_journals:
+            
+            if rec.student_ids:
+                full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
+                rec['std_name']=full_name
+
+    
+    @api.onchange('student_ids')
+    def _onchange_dob_data(self):
+        self._get_dob_field()
+    
+                
+    def _get_dob_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_dob=' '
+        for rec in adm_journals:
+
+            rec.std_dob=' '
+            if rec.student_ids:
+                rec['std_dob']=rec.student_ids.date_of_birth
+    
+
+
+    
+    @api.onchange('student_ids')
+    def _onchange_udid_data(self):
+        self._get_udid_field()
+    
+                
+    def _get_udid_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_udid=0
+        for rec in adm_journals:
+
+           
+            if rec.student_ids:
+                rec['std_udid']=rec.student_ids.facts_udid
+
+    @api.onchange('student_ids')
+    def _onchange_adm_amount_data(self):
+        self._get_adm_amt_field()
+    
+                
+    def _get_adm_amt_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.adm_amount=0
+        for rec in adm_journals:
+
+           
+            if rec.student_ids:
+                rec['adm_amount']=rec.tax_totals_json
+
+
+
+    @api.onchange('student_ids')
+    def _onchange_std_discount_data(self):
+        self._get_std_discount_field()
+    
+                
+    def _get_std_discount_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_discount=''
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_discount']=rec.discount_note
+    
+    @api.onchange('student_ids')
+    def _onchange_std_reason_data(self):
+        self._get_std_reason_field()
+    
+                
+    def _get_std_reason_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_reason=''
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_reason']=rec.reject_reason
+    
+    
+
+    @api.onchange('student_ids')
+    def _onchange_batch_data(self):
+        self._get_batch_field()
+    
+                
+    def _get_batch_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_batch=''
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_batch']=rec.x_studio_batch
+    
+    
+    @api.onchange('student_ids')
+    def _onchange_class_data(self):
+        self._get_class_field()
+
+    
+    def _get_class_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_class=' '
+        for rec in adm_journals:
+            if rec.student_ids:
+
+                rec['std_class']=rec.student_ids.homeroom
+   
+    @api.onchange('student_ids')
+    def _onchange_std_fathername_data(self):
+        self._get_father_field()
+
+    
+    def _get_father_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_fathername=' '
+        for rec in adm_journals:
+            if rec.student_ids:
+
+                rec['std_fathername']=rec.partner_id.name
+
+    @api.onchange('student_ids')
+    def _onchange_std_contactno_data(self):
+        self._get_contactno_field()
+
+    
+    def _get_contactno_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_contactno=' '
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_contactno']=rec.partner_id.mobile
+
+
+    
+    
+    @api.onchange('student_ids')
+    def _onchange_branch_data(self):
+        self._get_branch_field()
+
+    def _get_branch_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_branch=' '
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_branch']=rec.student_ids.school_ids.name
+                
+    
+    
+    @api.onchange('student_ids')
+    def _onchange_std_bill_date_data(self):
+        self._get_std_bill_date_field()
+
+    def _get_std_bill_date_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_bill_date=' '
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_bill_date']=rec.invoice_date
+
+    @api.onchange('student_ids')
+    def _onchange_std_due_date_data(self):
+        self._get_std_due_date_field()
+
+    def _get_std_due_date_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_due_date=' '
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_due_date']=rec.invoice_date_due  
+   
+            
+            
+            
+                
+
+
+
+
+   
+
+
+                    
+   
+                    
+
+                    
+
+
+                    
+                
+
+                 
+            
+
+
                         
                     
             
