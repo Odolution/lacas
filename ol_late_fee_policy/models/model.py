@@ -9,10 +9,14 @@ class late_fee_slab(models.Model):
     days = fields.Integer('Days')
     charge = fields.Float('Charge')
 
-
+class payment_ext(models.Model):
+    _inherit = "account.payment"
+    late_fee=fields.Float(string="Late Fee")   
+    amount_late_fee_exclusive=fields.Float(string="Total without Late Fee")
 class extwiz(models.TransientModel):
     _inherit = "account.payment.register"
-    late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')    
+    late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')
+    amount_late_fee_exclusive=fields.Float(string="Total without Late Fee",compute='_compute_late_fee')
     def _compute_late_fee(self):
         for wizard in self:
             invoice=""
@@ -21,6 +25,7 @@ class extwiz(models.TransientModel):
                 invoice=line.move_id
                 break
             if invoice!="":
+                wizard.amount_late_fee_exclusive=wizard.amount
                 wizard.late_fee=invoice.late_fee_compute
 
     def _compute_amount(self):
@@ -28,7 +33,16 @@ class extwiz(models.TransientModel):
         self._compute_late_fee()
         for wizard in self:
             wizard.amount=wizard.amount+wizard.late_fee
-
+            
+    def _create_payments(self):
+        late_fee=self.late_fee
+        amount_late_fee_exclusive=self.amount_late_fee_exclusive
+        payments=super(extwiz,self)._create_payments()
+        for payment in payments:
+            payment.late_fee=late_fee
+            payment.amount_late_fee_exclusive=payment.amount - payment.late_fee
+        return payments
+    
     def action_create_payments(self):
         for wizard in self:
             invoice=""
