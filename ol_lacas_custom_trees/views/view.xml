@@ -76,6 +76,7 @@
                 <field name="std_batch"/>
                 <field name="std_branch"/>
                 <field name="std_class"/>
+                <field name="std_payment_date"/>
              
 
                 <field name="std_reason"/>
