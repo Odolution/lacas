@@ -32,7 +32,11 @@ class ext(models.Model):
     std_reason=fields.Char(string="Concession Name",compute="_onchange_std_reason_data")
     std_fathername=fields.Char(string="Father Name",compute="_onchange_std_fathername_data")
     std_contactno=fields.Char(string="Contact No.",compute="_onchange_std_contactno_data")
+    
     adm_amount=fields.Char(string="Admission Amount",compute="_onchange_adm_amount_data")
+    security_amount=fields.Char(string="Security Amount",compute="_onchange_security_amount_data")
+    bill_amount=fields.Char(string="Bill Amount",compute="_onchange_bill_amount_data")
+    std_factsid=fields.Integer(string="Facts ID",compute="_onchange_facts_id_data")
 
     
 
@@ -290,16 +294,7 @@ class ext(models.Model):
     def _onchange_adm_amount_data(self):
         self._get_adm_amt_field()
     
-                
-    def _get_adm_amt_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.adm_amount=0
-        for rec in adm_journals:
 
-           
-            if rec.student_ids:
-                rec['adm_amount']=rec.tax_totals_json[16:24]
 
 
 
@@ -426,7 +421,63 @@ class ext(models.Model):
         for rec in adm_journals:
             if rec.student_ids:
                 rec['std_due_date']=rec.invoice_date_due  
+                
+    @api.onchange('student_ids')
+    def _onchange_facts_id_data(self):
+        self._get_facts_id_field()
+    
+                
+    def _get_facts_id_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_factsid=''
+        for rec in adm_journals:
+            if rec.student_ids:
+                rec['std_factsid']=rec.student_ids.facts_id
+
+    @api.onchange('invoice_line_ids')
+    def _onchange_adm_amount_data(self):
+        self._get_adm_amt_field()
+    
+                
+    def _get_adm_amt_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.adm_amount=0
+        for rec in adm_journals:
+            if rec.invoice_line_ids: 
+                    for line in rec.invoice_line_ids:
+                        if 'Admission' in line.product_id.name:
+                            rec['adm_amount']=line.price_subtotal
+
+    @api.onchange('invoice_line_ids')
+    def _onchange_security_amount_data(self):
+        self._get_sec_amt_field()
+    
+                
+    def _get_sec_amt_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.security_amount=''
+        for rec in adm_journals:
+             if rec.invoice_line_ids: 
+                    for line in rec.invoice_line_ids:
+                        if 'Security' in line.product_id.name:
+                            rec['security_amount']=line.price_subtotal
+
+    @api.onchange('invoice_line_ids')
+    def _onchange_bill_amount_data(self):
+        self._get_sec_bill_field()
+    
+                
+    def _get_sec_bill_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.bill_amount=''
+        for rec in adm_journals:
+            rec['bill_amount']=rec.tax_totals_json[16:24]
    
+
             
             
             
