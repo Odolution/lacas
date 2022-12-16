@@ -342,7 +342,7 @@ class ext(models.Model):
         self.std_batch=''
         for rec in adm_journals:
             if rec.student_ids:
-                rec['std_batch']=rec.x_studio_batch
+                rec['std_batch']=rec.x_studio_batch.x_name
     
     
     @api.onchange('student_ids')
@@ -357,7 +357,7 @@ class ext(models.Model):
         for rec in adm_journals:
             if rec.student_ids:
 
-                rec['std_class']=rec.student_ids.homeroom
+                rec['std_class']=rec.grade_level_ids.name
    
     @api.onchange('student_ids')
     def _onchange_std_fathername_data(self):
