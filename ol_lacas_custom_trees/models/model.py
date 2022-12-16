@@ -482,7 +482,7 @@ class ext(models.Model):
 
     @api.onchange('payment_state')
     def _onchange_payment_date_data(self):
-        self._get_payment_date_field
+        self._get_payment_date_field()
         
     def _get_payment_date_field(self):
         adm_journal=self.env['account.journal'].search([('code','=','ADM')])
