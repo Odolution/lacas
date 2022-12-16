@@ -32,7 +32,7 @@ class ext(models.Model):
     std_reason=fields.Char(string="Concession Name",compute="_onchange_std_reason_data")
     std_fathername=fields.Char(string="Father Name",compute="_onchange_std_fathername_data")
     std_contactno=fields.Char(string="Contact No.",compute="_onchange_std_contactno_data")
-    adm_amount=fields.Integer(string="Admission Amount",compute="_onchange_adm_amount_data")
+    adm_amount=fields.Char(string="Admission Amount",compute="_onchange_adm_amount_data")
 
     
 
@@ -299,7 +299,7 @@ class ext(models.Model):
 
            
             if rec.student_ids:
-                rec['adm_amount']=rec.tax_totals_json
+                rec['adm_amount']=rec.tax_totals_json[16:24]
 
 
 
