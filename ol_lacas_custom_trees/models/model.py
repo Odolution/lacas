@@ -327,7 +327,7 @@ class ext(models.Model):
         self.std_reason=''
         for rec in adm_journals:
             if rec.student_ids:
-                rec['std_reason']=rec.reject_reason
+                rec['std_reason']=rec.reject_reason.name
     
     
 
