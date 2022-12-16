@@ -49,6 +49,7 @@ class invoice_ext(models.Model):
                                     discount_amount+=(discount.discount_value/100)*line1.quantity*line1.price_unit
                                 else:
                                     discount_amount+=discount.discount_value*line1.quantity
+                            discount_amount=int(discount_amount)
                         line_total_amount_discount+=discount_amount
                     ##add discount to invoice lines
                     if line_total_amount_discount>0:
