@@ -56,12 +56,12 @@ class ext(models.Model):
         action['domain'] = domain
         return action  
     
-    def get_securityDeposit_action(self):
-        action = self.env.ref('ol_lacas_custom_trees.act_account_move_securityDeposit').read()[0]
-        journals=self.env["account.journal"].search([("name","=","Security Deposit")])
-        domain = [('journal_id','in',[i.id for i in journals])]
-        action['domain'] = domain
-        return action  
+#     def get_securityDeposit_action(self):
+#         action = self.env.ref('ol_lacas_custom_trees.act_account_move_securityDeposit').read()[0]
+#         journals=self.env["account.journal"].search([("name","=","Security Deposit")])
+#         domain = [('journal_id','in',[i.id for i in journals])]
+#         action['domain'] = domain
+#         return action  
 
     
     @api.onchange('invoice_line_ids')
