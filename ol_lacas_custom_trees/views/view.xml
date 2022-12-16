@@ -170,7 +170,7 @@
 
 
 
-   <record id="account_move_tree_securityDeposit" model="ir.ui.view">
+<!--    <record id="account_move_tree_securityDeposit" model="ir.ui.view">
         <field name="name">account.move.tree.securityDeposit</field>
         <field name="model">account.move</field>
         <field name="type">tree</field>
@@ -215,5 +215,5 @@
         <field name="code">action = model.get_securityDeposit_action()</field>
     </record>
     <menuitem action="server_action_account_move_securityDeposit" id="account_move_securityDeposit_menu" name="Security Deposit" parent="account.menu_finance_receivables" sequence="2"/>
-
+ -->
 </odoo>
