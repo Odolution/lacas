@@ -22,8 +22,8 @@ class ext(models.Model):
     
     std_udid=fields.Integer(string="UDID",compute="_onchange_udid_data")
     std_class=fields.Char(string="Class",compute="_onchange_class_data")
-    std_bill_date=fields.Date(string="Issue Date",compute="_onchange_std_bill_date_data")
-    std_due_date=fields.Date(string="Due Date",compute="_onchange_std_due_date_data")
+    std_bill_date=fields.Char(string="Issue Date",compute="_onchange_std_bill_date_data")
+    std_due_date=fields.Char(string="Due Date",compute="_onchange_std_due_date_data")
     std_branch=fields.Char(string="Branch",compute="_onchange_branch_data")
     std_dob=fields.Char(string="Date of Birth",compute="_onchange_dob_data")
     std_name=fields.Char(string="Student",compute="_onchange_std_name_data")
