@@ -37,7 +37,7 @@ class ext(models.Model):
     security_amount=fields.Char(string="Security Amount",compute="_onchange_security_amount_data")
     bill_amount=fields.Char(string="Bill Amount",compute="_onchange_bill_amount_data")
     std_factsid=fields.Integer(string="Facts ID",compute="_onchange_facts_id_data")
-    std_payment_date=fields.Date(string='Payment Date',compute="_onchange_payment_date_data")
+    std_payment_date=fields.Char(string='Payment Date',compute="_onchange_payment_date_data")
 
 
     
@@ -487,19 +487,12 @@ class ext(models.Model):
     def _get_payment_date_field(self):
         adm_journal=self.env['account.journal'].search([('code','=','ADM')])
         adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
- 
+        self.std_payment_date=''
         for rec in adm_journals:
             if rec.payment_state == "paid":
-                date=""
-                try:
-                    date=str(json.loads(rec.invoice_payments_widget)["content"][-1]["date"])
-                except:
-                    pass
-                if date!="":
-                    rec.std_payment_date=datetime.datetime.strptime(date,"%Y-%m-%d").date()
-                else:
-                    rec.std_payment_date=False
-   
+                date=str(json.loads(rec.invoice_payments_widget)["content"][-1]["date"])
+                rec['std_payment_date']=date
+               
 
             
             
