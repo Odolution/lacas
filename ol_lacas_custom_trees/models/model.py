@@ -486,14 +486,14 @@ class ext(models.Model):
         self._get_payment_date_field()
         
     def _get_payment_date_field(self):
-        pass
-#         adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-#         adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-#         self.std_payment_date=''
-#         for rec in adm_journals:
-#             if rec.payment_state == "paid":
-#                 date=str(json.loads(rec.invoice_payments_widget)["content"][-1]["date"])
-#                 rec['std_payment_date']=date
+        
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_payment_date=' '
+        for rec in adm_journals:
+            if rec.payment_state=="paid":
+                var=str(json.loads(rec.invoice_payments_widget)["content"][-1]["date"])
+                rec['std_payment_date']=var
                
 
             
