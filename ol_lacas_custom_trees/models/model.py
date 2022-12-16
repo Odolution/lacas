@@ -18,6 +18,23 @@ class ext(models.Model):
     bill_date=fields.Char(string="Bill Date",compute="_onchange_bill_date_data")
     due_date=fields.Char(string="Due Date",compute="_onchange_due_date_data")
     due_amount=fields.Integer(string="Due Amount",compute="_onchange_due_amount_data")
+    
+    
+    std_udid=fields.Integer(string="UDID",compute="_onchange_udid_data")
+    std_class=fields.Char(string="Class",compute="_onchange_class_data")
+    std_bill_date=fields.Date(string="Issue Date",compute="_onchange_std_bill_date_data")
+    std_due_date=fields.Date(string="Due Date",compute="_onchange_std_due_date_data")
+    std_branch=fields.Char(string="Branch",compute="_onchange_branch_data")
+    std_dob=fields.Char(string="Date of Birth",compute="_onchange_dob_data")
+    std_name=fields.Char(string="Student",compute="_onchange_std_name_data")
+    std_batch=fields.Char(string="Batch",compute="_onchange_batch_data")
+    std_discount=fields.Char(string="Discount note",compute="_onchange_std_discount_data")
+    std_reason=fields.Char(string="Concession Name",compute="_onchange_std_reason_data")
+    std_fathername=fields.Char(string="Father Name",compute="_onchange_std_fathername_data")
+    std_contactno=fields.Char(string="Contact No.",compute="_onchange_std_contactno_data")
+    adm_amount=fields.Integer(string="Admission Amount",compute="_onchange_adm_amount_data")
+
+    
 
     def get_charges_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_charges').read()[0]
