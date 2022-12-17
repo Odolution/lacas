@@ -49,9 +49,10 @@ class account_fields(models.Model):
           elif len(splitted_name)>0:
             self.class_name=splitted_name[0]
 
-        ##work for father name picking
+        ##work for father name and facts id picking
         for relation in self.x_student_id_cred.relationship_ids:
           if relation.relationship_type_id.name == "Father":
+            self.father_facts_id=relation.individual_id.facts_id
             self.father_name = relation.individual_id.name
             break
       
