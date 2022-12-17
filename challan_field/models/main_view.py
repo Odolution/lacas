@@ -25,6 +25,7 @@ class account_fields(models.Model):
     reject_reason = fields.Many2one('discount.reason', string='Reason For Discount')
     leaving_reason = fields.Many2one("leaving.reason", string = "Leaving Reason")
     remarks = fields.Char('remarks')
+    father_facts_id=fields.Char('Father Facts ID')
 
     class_name = fields.Char(string='Class')
     section_name = fields.Char(string='Section')
