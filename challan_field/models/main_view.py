@@ -25,6 +25,8 @@ class account_fields(models.Model):
     reject_reason = fields.Many2one('discount.reason', string='Reason For Discount')
     leaving_reason = fields.Many2one("leaving.reason", string = "Leaving Reason")
     remarks = fields.Char('remarks')
+    father_facts_id=fields.Char('Father Facts ID')
+    
 
     class_name = fields.Char(string='Class')
     section_name = fields.Char(string='Section')
@@ -51,6 +53,7 @@ class account_fields(models.Model):
         ##work for father name picking
         for relation in self.x_student_id_cred.relationship_ids:
           if relation.relationship_type_id.name == "Father":
+            self.father_facts_id=relation.individual_id.facts_id
             self.father_name = relation.individual_id.name
             break
       
