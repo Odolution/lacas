@@ -132,6 +132,7 @@
                 <field name="student_name"/>
                 <field name="class_mnt"/>
                 <field name="sec_mnt"/>
+                    
                 <field name="campus"/>
                 <field name="bill_date"/>
                 <field name="due_date"/>
