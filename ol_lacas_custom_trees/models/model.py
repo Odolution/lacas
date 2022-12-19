@@ -170,6 +170,9 @@ class ext(models.Model):
                   
                 elif len(splitted_name)>0:
                     rec.class_mnt=splitted_name[0]
+                else:
+                    rec.class_mnt=''
+                    
 
     def _get_sec_field(self):
         
@@ -188,6 +191,8 @@ class ext(models.Model):
                 elif len(splitted_name)>1:
 
                     rec.sec_mnt=splitted_name[1]
+                else:
+                    rec.sec_mnt=''
 
     def _get_campus_field(self):
         
