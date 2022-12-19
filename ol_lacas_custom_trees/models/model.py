@@ -163,15 +163,15 @@ class ext(models.Model):
                 splitted_name=classnsec.split('-')
                 if len(splitted_name)>2:
                     
-                    rec.class_mnt=splitted_name[0]+"-"+splitted_name[1]
+                    rec['class_mnt']=splitted_name[0]+"-"+splitted_name[1]
                   
                 elif len(splitted_name)>1:
-                    rec.class_mnt=splitted_name[0]
+                    rec['class_mnt']=splitted_name[0]
                   
                 elif len(splitted_name)>0:
-                    rec.class_mnt=splitted_name[0]
+                    rec['class_mnt']=splitted_name[0]
             else:
-                rec.class_mnt=''
+                rec['class_mnt']=''
                     
 
     def _get_sec_field(self):
@@ -187,12 +187,12 @@ class ext(models.Model):
                 splitted_name=classnsec.split('-')
                 if len(splitted_name)>2:
 
-                    rec.sec_mnt=splitted_name[2]
+                    rec['sec_mnt']=splitted_name[2]
                 elif len(splitted_name)>1:
 
-                    rec.sec_mnt=splitted_name[1]
+                    rec['sec_mnt']=splitted_name[1]
             else:
-                rec.sec_mnt=''
+                 rec['sec_mnt']=''
 
     def _get_campus_field(self):
         
