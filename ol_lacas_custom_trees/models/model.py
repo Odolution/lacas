@@ -14,7 +14,8 @@ class ext(models.Model):
     utility=fields.Integer(string="utility Charges", compute="_onchange_utility")
     student_code=fields.Integer(string="Student Code",compute="_onchange_student_code_data")
     student_name=fields.Char(string="Name",compute="_onchange_student_name_data")
-    class_sec=fields.Char(string="Class Section",compute="_onchange_class_sec_data")
+    class_mnt=fields.Char(string="Class",compute="_onchange_class_data")
+    sec_mnt=fields.Char(string="Section",compute="_onchange_sec_data")
     campus=fields.Char(string="Campus",compute="_onchange_campus_data")
     bill_date=fields.Char(string="Bill Date",compute="_onchange_bill_date_data")
     due_date=fields.Char(string="Due Date",compute="_onchange_due_date_data")
@@ -100,8 +101,13 @@ class ext(models.Model):
         self._get_student_code_field()
     
     @api.onchange('student_ids')
-    def _onchange_class_sec_data(self):
-        self._get_class_sec_field()
+    def _onchange_sec_data(self):
+        self._get_sec_field()
+    
+    @api.onchange('student_ids')
+    def _onchange_class_data(self):
+        self._get_class_field()
+
 
     @api.onchange('student_ids')
     def _onchange_campus_data(self):
@@ -147,13 +153,37 @@ class ext(models.Model):
             if rec.student_ids:
                 rec['student_code']=rec.student_ids.facts_udid
     
-    def _get_class_sec_field(self):
+    def _get_class_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
-        self.class_sec=' '
+        self.class_mnt=' '
         for rec in monthly_bill:
-            if rec.student_ids:
-                rec['class_sec']=rec.student_ids.homeroom
+            if rec.student_ids.homeroom:
+                classnsec=rec.student_ids.homeroom
+                splitted_name=classnsec.split('-')
+                if len(splitted_name)>2:
+                    rec.class_mnt=splitted_name[0]+"-"+splitted_name[1]
+                  
+                elif len(splitted_name)>1:
+                    rec.class_mnt=splitted_name[0]
+                  
+                elif len(splitted_name)>0:
+                    rec.class_mnt=splitted_name[0]
+
+    def _get_sec_field(self):
+            monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+            monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+            self.sec_mnt=' '
+            for rec in monthly_bill:
+                if rec.student_ids.homeroom:
+                    classnsec=rec.student_ids.homeroom
+                    splitted_name=classnsec.split('-')
+                    if len(splitted_name)>2:
+                        
+                        rec.sec_mnt=splitted_name[2]
+                    elif len(splitted_name)>1:
+                       
+                        rec.sec_mnt=splitted_name[1]
 
     def _get_campus_field(self):
         
