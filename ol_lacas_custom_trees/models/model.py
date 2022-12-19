@@ -158,7 +158,7 @@ class ext(models.Model):
         monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
         self.class_mnt=' '
         for rec in monthly_bill:
-            if rec.student_ids.homeroom:
+            if rec.student_ids:
                 classnsec=rec.student_ids.homeroom
                 splitted_name=classnsec.split('-')
                 if len(splitted_name)>2:
@@ -181,7 +181,7 @@ class ext(models.Model):
         self.sec_mnt=' '
         for rec in monthly_bill:
             
-            if rec.student_ids.homeroom:
+            if rec.student_ids:
                 
                 classnsec=rec.student_ids.homeroom
                 splitted_name=classnsec.split('-')
