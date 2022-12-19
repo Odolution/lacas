@@ -162,6 +162,7 @@ class ext(models.Model):
                 classnsec=rec.student_ids.homeroom
                 splitted_name=classnsec.split('-')
                 if len(splitted_name)>2:
+                    
                     rec.class_mnt=splitted_name[0]+"-"+splitted_name[1]
                   
                 elif len(splitted_name)>1:
@@ -171,19 +172,22 @@ class ext(models.Model):
                     rec.class_mnt=splitted_name[0]
 
     def _get_sec_field(self):
-            monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
-            monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
-            self.sec_mnt=' '
-            for rec in monthly_bill:
-                if rec.student_ids.homeroom:
-                    classnsec=rec.student_ids.homeroom
-                    splitted_name=classnsec.split('-')
-                    if len(splitted_name)>2:
-                        
-                        rec.sec_mnt=splitted_name[2]
-                    elif len(splitted_name)>1:
-                       
-                        rec.sec_mnt=splitted_name[1]
+        
+        monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
+        monthly_bill=self.env['account.move'].search([('journal_id','=',monthly_journal.id)])
+        self.sec_mnt=' '
+        for rec in monthly_bill:
+            
+            if rec.student_ids.homeroom:
+                
+                classnsec=rec.student_ids.homeroom
+                splitted_name=classnsec.split('-')
+                if len(splitted_name)>2:
+
+                    rec.sec_mnt=splitted_name[2]
+                elif len(splitted_name)>1:
+
+                    rec.sec_mnt=splitted_name[1]
 
     def _get_campus_field(self):
         
