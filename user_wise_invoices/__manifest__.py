@@ -13,10 +13,7 @@
     'depends': ['account'],    
     'data': [
         # the order matters here
-        "security/ir.model.access.csv",
-        "views/menu.xml",
         "views/account_view.xml",
-        "views/user_view.xml",
     ],
     'demo': [],
     "application":True,
@@ -27,15 +24,3 @@
     },
 }
 
-
-# <record id="view_account_move_form" model="ir.ui.view">
-#         <field name="name">account.move.form</field>
-#         <field name="model">account.move</field>
-#         <field name="inherit_id" ref="account.view_move_form"/>
-#         <field name="arch" type="xml">
-#             <xpath expr="//div[@name='journal_div']" position="after">
-#                 <field name="student_name"/>
-#                 <field name="student_id"/>
-#             </xpath>
-#         </field>
-#     </record>
