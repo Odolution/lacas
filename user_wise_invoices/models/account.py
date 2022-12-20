@@ -9,7 +9,7 @@ class UserWiseInvoiceAccount(models.Model):
     def get_invoices_action(self):
         action = self.env.ref('account.action_move_out_invoice_type').read()[0]
         user=self.env["res.users"].search([("id",'=',self.env.uid)])
-        domain = [(user.user_program_id,'in','program_ids')]
+        domain = [('program_ids','in',[user.user_program_id)]]
         action['domain'] = domain
         return action
             
