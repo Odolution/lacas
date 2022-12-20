@@ -224,7 +224,7 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_out_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="amount_total_signed" position="before">
+            <field name="name" position="after">
                 <field name="adm_amount"/>
                 <field name="security_amount"/>
 
