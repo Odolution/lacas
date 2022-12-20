@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record model="ir.actions.server" id="server_action_account_move_invoices">
+        <field name="name">get invoices</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">action = model.get_invoices_action()</field>
+    </record>
+
+
+    <menuitem id="account.menu_action_move_out_invoice_type" name="Invoices" action="server_action_account_move_invoices" parent="account.menu_finance_receivables" sequence="0" />
+
+</odoo>
