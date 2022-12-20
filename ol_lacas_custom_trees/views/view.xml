@@ -218,5 +218,16 @@
         <field name="code">action = model.get_securityDeposit_action()</field>
     </record>
     <menuitem action="server_action_account_move_securityDeposit" id="account_move_securityDeposit_menu" name="Security Deposit" parent="account.menu_finance_receivables" sequence="2"/> -->
-
+ 
+    <record id="account_move_list_fields" model="ir.ui.view">
+        <field name="name">account.move.list.fields</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree" />
+        <field name="arch" type="xml">
+            <xpath position="after" expr="//field[@name='discount_note']">
+              <field name="adm_amount"/>
+              <field name="security_amount"/>
+            </xpath>   
+        </field>
+    </record>
 </odoo>
