@@ -1,6 +1,6 @@
 from odoo import models ,fields , api
 import json
-from odoo.exception import UserError
+from odoo.exceptions import UserError
 
 class UserWiseInvoiceAccount(models.Model):
     _inherit = "account.move"
