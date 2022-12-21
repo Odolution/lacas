@@ -10,7 +10,7 @@
     'description': """
         This is a custom module , User Wise Invoices, Lacas custom requirements to filterout domains of a school.
     """,
-    'depends': ['account'],    
+    'depends': ['account','share','base'],    
     'data': [
         # the order matters here
         "views/account_view.xml",
