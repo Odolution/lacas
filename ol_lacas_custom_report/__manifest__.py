@@ -24,8 +24,7 @@
         
         "security/ir.model.access.csv"
 
-        
-
+       
     ],
     'demo': [
     ],
