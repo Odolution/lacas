@@ -18,6 +18,7 @@ class UserWiseInvoiceAccount(models.Model):
         action = self.env.ref('account.action_move_out_invoice_type').read()[0]
         user=self.env["res.users"].search([("id",'=',self.env.uid)])
         group = self.env.ref('account.group_account_manager').read()[0]
+        raise UserError(str(group))
         if user not in group.users:
             domain = [('program_id','in',[user.user_program_id])]
         else:
