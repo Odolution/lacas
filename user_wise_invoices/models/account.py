@@ -1,5 +1,6 @@
 from odoo import models ,fields , api
 import json
+from odoo.exception import UserError
 
 class UserWiseInvoiceAccount(models.Model):
     _inherit = "account.move"
@@ -16,6 +17,7 @@ class UserWiseInvoiceAccount(models.Model):
     def get_invoices_action(self):
         action = self.env.ref('account.action_move_out_invoice_type').read()[0]
         user=self.env["res.users"].search([("id",'=',self.env.uid)])
+        raise UserError(str(user))
         domain = [('program_id','in',user.user_program_ids)]
 #         domain = []
         action['domain'] = domain
