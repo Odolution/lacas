@@ -1,0 +1,38 @@
+<odoo>
+
+
+
+<record model="ir.ui.view" id="view_report_receivables">
+        <field name="name">receivable.report.wizard.form</field>
+        <field name="model" >receivable.report.wizard</field>
+      
+        <field name="arch" type="xml">
+        
+            <form string="Print Receivable of withdrawl students">
+            <group>
+             <field name="date_from"/>
+             <field name="date_to"/>
+             </group>
+             
+             <footer>
+                <button name="action_print_report" type="object" string="Print" class="btn-primary" />
+                 <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+            </form>
+            </field>      
+    </record>
+
+     <record id="action_account_print_report" model="ir.actions.act_window">
+            <field name="name">Receivables</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">receivable.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_receivables"/>
+            <field name="target">new</field>
+        </record>
+ <menuitem id="menu_withdrawl_student" name="WithDrawl Students" parent="account.menu_finance_reports" sequence="5"/>
+ <menuitem id="menu_action_receivable_report" name="Receivable Report" action="action_account_print_report" parent="menu_withdrawl_student"/>
+
+ 
+
+</odoo> 
