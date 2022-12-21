@@ -19,7 +19,7 @@ class UserWiseInvoiceAccount(models.Model):
         user=self.env["res.users"].search([("id",'=',self.env.uid)])
         group = self.env.ref('account.group_account_manager').read()[0]
 #         raise UserError(str(group))
-        if user.id not in group.users:
+        if user.id not in group['users']:
             domain = [('program_id','in',[user.user_program_id])]
         else:
             domain = []
