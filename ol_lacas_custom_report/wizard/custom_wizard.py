@@ -41,7 +41,7 @@ class ReceivablesReportWizard(models.TransientModel):
                 'student_branch':rec.student_ids.school_ids.name if rec.student_ids.school_ids.name else " " ,
                 'student_class':rec.student_ids.homeroom if rec.student_ids.homeroom else " " ,
                 'withdrawn_status':rec.x_studio_withdrawn_status if rec.x_studio_withdrawn_status else " ",
-                'leaving_reason':rec.leaving_reason if rec.leaving_reason else " ",
+                'leaving_reason':rec.leaving_reason.name if rec.leaving_reason.name else " ",
                 'remarks':rec.remarks if rec.remarks else " ",
                 'withdrawn_date':rec.invoice_date if rec.invoice_date else " ",
                 
@@ -62,7 +62,7 @@ class ReceivablesReportWizard(models.TransientModel):
        
 
         for record in self.account_report_line:
-            datalines.append([record.record_id,record.student_name,record.student_batch,record.student_branch,record.student_class,record.withdrawn_status,record.leaving_reason,record.remarks,record.withdrawn_date])
+            datalines.append([record.record_id,record.student_name,record.student_batch,record.student_branch,record.student_class.record.withdrawn_status,record.leaving_reason,record.remarks,record.withdrawn_date])
           
             
 
