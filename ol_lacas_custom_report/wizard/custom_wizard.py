@@ -67,14 +67,14 @@ class ReceivablesReportWizard(models.TransientModel):
        
 
         for record in self.account_report_line:
-            datalines.append([record.record_id])
-            datalines.append([record.student_name])
-            datalines.append([record.student_batch])
-            datalines.append([record.student_branch])
-            datalines.append([record.withdrawn_status])
-            # datalines.append([record.leaving_reason])
-            datalines.append([record.remarks])
-            datalines.append([record.withdrawn_date])
+            datalines.append([record.record_id,record.student_name,record.student_batch,record.student_branch,record.withdrawn_status,record.remarks,record.withdrawn_date])
+            # datalines.append([record.student_name])
+            # datalines.append([record.student_batch])
+            # datalines.append([record.student_branch])
+            # datalines.append([record.withdrawn_status])
+            # # datalines.append([record.leaving_reason])
+            # datalines.append([record.remarks])
+            # datalines.append([record.withdrawn_date])
             
 
         
