@@ -11,8 +11,10 @@ class ext(models.Model):
         journals = self.env['account.journal'].search([('name','=',"Monthly Bills")])
         journal_ids=[i.id for i  in journals]
         tuition_plans=self.env["tuition.plan"].search([('student_id','in',students.ids),('journal_id','in',journal_ids)])
-        installments=self.env["tuition.installment"].search([("tuition_plan_id","in",tuition_plans.ids),("x_inv_date",'=',todaydate)])
-        for installment in installments:
-            tuition_plan = installment.tuition_plan_id
-            tuition_plan.button_create_charge()
+        
+        # installments=env["tuition.installment"].search([("tuition_plan_id","in",tuition_plans.ids),("x_inv_date",'=',todaydate)])
+
+        for plan in tuition_plans:
+            while plan.next_installment_id.x_inv_date==todaydate:
+              plan.button_create_charge()
         return
