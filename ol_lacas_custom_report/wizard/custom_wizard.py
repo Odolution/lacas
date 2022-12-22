@@ -9,18 +9,13 @@ class AccountMoveReport(models.TransientModel):
     student_name=fields.Char('Name')
     student_batch=fields.Char('Batch')
     student_branch=fields.Char('Branch')
+    student_class=fields.Char('Class')
     withdrawn_status=fields.Char('Withdrawn Status')
-    # leaving_reason=fields.Char('Leaving Reason')
+    leaving_reason=fields.Char('Leaving Reason')
     remarks=fields.Char('Remarks')
     withdrawn_date=fields.Char('Withdrawn Date')
     
-    
-    
-    
-    
- 
-
-
+   
 
 class ReceivablesReportWizard(models.TransientModel):
     _name="receivable.report.wizard"
@@ -33,7 +28,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
 
     def action_print_report(self):
-        bills = self.env['account.move'].search([('state','=','posted'),('refund_receive','=','Receivable')])
+        bills = self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('refund_receive','=','Receivable'),('payment_state','=','not_paid')])
         # raise UserError(str(bills))
         lines=[]
         for rec in bills:
@@ -44,8 +39,9 @@ class ReceivablesReportWizard(models.TransientModel):
                 'student_name':rec.partner_id.name if rec.partner_id.name else " ",
                 'student_batch':rec.x_studio_batch.x_name if rec.x_studio_batch.x_name else " ",
                 'student_branch':rec.student_ids.school_ids.name if rec.student_ids.school_ids.name else " " ,
+                'student_class':rec.student_ids.homeroom if rec.student_ids.homeroom else " " ,
                 'withdrawn_status':rec.x_studio_withdrawn_status if rec.x_studio_withdrawn_status else " ",
-                # 'leaving_reason':rec.leaving_reason if rec.leaving_reason else " ",
+                'leaving_reason':rec.leaving_reason if rec.leaving_reason else " ",
                 'remarks':rec.remarks if rec.remarks else " ",
                 'withdrawn_date':rec.invoice_date if rec.invoice_date else " ",
                 
@@ -61,20 +57,13 @@ class ReceivablesReportWizard(models.TransientModel):
         }
 
         )
-        # raise UserError(str(self.account_report_line[0].part_name))
-
+       
         datalines = []
        
 
         for record in self.account_report_line:
-            datalines.append([record.record_id,record.student_name,record.student_batch,record.student_branch,record.withdrawn_status,record.remarks,record.withdrawn_date])
-            # datalines.append([record.student_name])
-            # datalines.append([record.student_batch])
-            # datalines.append([record.student_branch])
-            # datalines.append([record.withdrawn_status])
-            # # datalines.append([record.leaving_reason])
-            # datalines.append([record.remarks])
-            # datalines.append([record.withdrawn_date])
+            datalines.append([record.record_id,record.student_name,record.student_batch,record.student_branch,record.student_class,record.withdrawn_status,record.leaving_reason,record.remarks,record.withdrawn_date])
+          
             
 
         
@@ -82,8 +71,7 @@ class ReceivablesReportWizard(models.TransientModel):
             "datalines" : datalines
         }
 
-            
-        # raise UserError(str(bills))
+    
 
         return self.env.ref('ol_lacas_custom_report.action_report_receivables').report_action(self,data)
       
