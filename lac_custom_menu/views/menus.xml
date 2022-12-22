@@ -79,6 +79,8 @@
                 <field name="name" position="before">
                     <field name="udid_new_lv" />
                     <field name="facts_id_new_lv" />
+                    <field name="adm_amount"/>
+                    <field name="security_amount"/>
 
                 </field>
                 
