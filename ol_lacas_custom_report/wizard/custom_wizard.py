@@ -41,7 +41,7 @@ class ReceivablesReportWizard(models.TransientModel):
             data={
                 'student_name':rec.partner_id.name,
                 'record_id':rec.name,
-                'student_batch':rec.inv.x_studio_batch.x_name,
+                'student_batch':rec.x_studio_batch.x_name,
                 'student_branch':rec.student_ids.school_ids.name,
                 'withdrawn_status':rec.x_studio_withdrawn_status,
                 'leaving_reason':rec.leaving_reason,
