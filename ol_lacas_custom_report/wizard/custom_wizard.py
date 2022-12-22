@@ -4,8 +4,20 @@ from odoo.exceptions import UserError
 
 class AccountMoveReport(models.TransientModel):
     _name = 'account.report.move.line'
-
-    part_name=fields.Char('Name')
+    
+    record_id=fields.Char('ID')
+    student_name=fields.Char('Name')
+    student_batch=fields.Char('Batch')
+    student_branch=fields.Char('Branch')
+    withdrawn_status=fields.Char('Withdrawn Status')
+    leaving_reason=fields.Char('Leaving Reason')
+    remarks=fields.Char('Remarks')
+    withdrawn_date=fields.Char('Withdrawn Date')
+    
+    
+    
+    
+    
  
 
 
@@ -27,9 +39,18 @@ class ReceivablesReportWizard(models.TransientModel):
         for rec in bills:
 
             data={
-                'part_name':rec.partner_id.name,
+                'student_name':rec.partner_id.name,
+                'record_id':rec.name,
+                'student_batch':rec.inv.x_studio_batch.x_name,
+                'student_branch':rec.student_ids.school_ids.name,
+                'withdrawn_status':rec.x_studio_withdrawn_status,
+                'leaving_reason':rec.leaving_reason,
+                'remarks':rec.remarks,
+                'withdrawn_date':rec.invoice_date,
                 
-
+ 
+                
+      
             }
 
             mvl=self.env['account.report.move.line'].create(data)
@@ -45,7 +66,15 @@ class ReceivablesReportWizard(models.TransientModel):
        
 
         for record in self.account_report_line:
-            datalines.append([record.part_name])
+            datalines.append([record.record_id])
+            datalines.append([record.student_name])
+            datalines.append([record.student_batch])
+            datalines.append([record.student_branch])
+            datalines.append([record.withdrawn_status])
+            datalines.append([record.leaving_reason])
+            datalines.append([record.remarks])
+            datalines.append([record.withdrawn_date])
+            
 
         
         data = {
