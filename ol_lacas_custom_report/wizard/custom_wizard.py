@@ -33,7 +33,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
 
     def action_print_report(self):
-        bills = self.env['account.move'].search([('move_type','=','out_refund')])
+        bills = self.env['account.move'].search([('state','=','posted'),('refund_receive','=','Receivable')])
         # raise UserError(str(bills))
         lines=[]
         for rec in bills:
