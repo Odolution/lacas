@@ -10,7 +10,7 @@ class AccountMoveReport(models.TransientModel):
     student_batch=fields.Char('Batch')
     student_branch=fields.Char('Branch')
     withdrawn_status=fields.Char('Withdrawn Status')
-#     leaving_reason=fields.Char('Leaving Reason')
+    # leaving_reason=fields.Char('Leaving Reason')
     remarks=fields.Char('Remarks')
     withdrawn_date=fields.Char('Withdrawn Date')
     
@@ -39,14 +39,15 @@ class ReceivablesReportWizard(models.TransientModel):
         for rec in bills:
 
             data={
-                'student_name':rec.partner_id.name if rec.partner_id.name else "-",
-                'record_id':rec.name if rec.name else "-",
-                'student_batch':rec.x_studio_batch.x_name if rec.x_studio_batch.x_name else "-",
-                'student_branch':rec.student_ids.school_ids.name if rec.student_ids.school_ids.name else "-" ,
-                'withdrawn_status':rec.x_studio_withdrawn_status if rec.x_studio_withdrawn_status else "-",
-#                 'leaving_reason':rec.leaving_reason if rec.leaving_reason else "-",
-                'remarks':rec.remarks if rec.remarks else "-",
-                'withdrawn_date':rec.invoice_date if rec.invoice_date else "-",
+    
+                'record_id':rec.name if rec.name else " ",
+                'student_name':rec.partner_id.name if rec.partner_id.name else " ",
+                'student_batch':rec.x_studio_batch.x_name if rec.x_studio_batch.x_name else " ",
+                'student_branch':rec.student_ids.school_ids.name if rec.student_ids.school_ids.name else " " ,
+                'withdrawn_status':rec.x_studio_withdrawn_status if rec.x_studio_withdrawn_status else " ",
+                # 'leaving_reason':rec.leaving_reason if rec.leaving_reason else " ",
+                'remarks':rec.remarks if rec.remarks else " ",
+                'withdrawn_date':rec.invoice_date if rec.invoice_date else " ",
                 
  
                 
@@ -71,7 +72,7 @@ class ReceivablesReportWizard(models.TransientModel):
             datalines.append([record.student_batch])
             datalines.append([record.student_branch])
             datalines.append([record.withdrawn_status])
-#             datalines.append([record.leaving_reason])
+            # datalines.append([record.leaving_reason])
             datalines.append([record.remarks])
             datalines.append([record.withdrawn_date])
             
