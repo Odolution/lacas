@@ -62,7 +62,7 @@ class ReceivablesReportWizard(models.TransientModel):
        
 
         for record in self.account_report_line:
-            datalines.append([record.record_id,record.student_name,record.student_batch,record.student_branch,record.student_class.record.withdrawn_status,record.leaving_reason,record.remarks,record.withdrawn_date])
+            datalines.append([record.record_id,record.student_name,record.student_batch,record.student_branch,record.student_class,record.withdrawn_status,record.leaving_reason,record.remarks,record.withdrawn_date])
           
             
 
@@ -75,3 +75,5 @@ class ReceivablesReportWizard(models.TransientModel):
 
         return self.env.ref('ol_lacas_custom_report.action_report_receivables').report_action(self,data)
       
+
+        
