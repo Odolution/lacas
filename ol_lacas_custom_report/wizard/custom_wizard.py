@@ -38,8 +38,8 @@ class ReceivablesReportWizard(models.TransientModel):
                 'record_id':rec.name if rec.name else " ",
                 'student_name':rec.partner_id.name if rec.partner_id.name else " ",
                 'student_batch':rec.x_studio_batch.x_name if rec.x_studio_batch.x_name else " ",
-                'student_branch':rec.student_ids.school_ids.name if rec.student_ids.school_ids.name else " " ,
-                'student_class':rec.student_ids.homeroom if rec.student_ids.homeroom else " " ,
+                'student_branch':rec.x_student_id_cred.school_ids.name if rec.x_student_id_cred.school_ids.name else " " ,
+                'student_class':rec.x_student_id_cred.homeroom if rec.x_student_id_cred.homeroom else " " ,
                 'withdrawn_status':rec.x_studio_withdrawn_status if rec.x_studio_withdrawn_status else " ",
                 'leaving_reason':rec.leaving_reason.name if rec.leaving_reason.name else " ",
                 'remarks':rec.remarks if rec.remarks else " ",
@@ -75,5 +75,3 @@ class ReceivablesReportWizard(models.TransientModel):
 
         return self.env.ref('ol_lacas_custom_report.action_report_receivables').report_action(self,data)
       
-
-        
