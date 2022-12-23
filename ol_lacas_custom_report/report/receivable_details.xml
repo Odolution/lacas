@@ -2,42 +2,105 @@
 <odoo>
     <data>
         <template id="report_receivable_details">
+      
             <t t-call="web.html_container">
                     <t t-call="web.basic_layout">
                       <table class="table table-bordered mt32">
                       <thead>
                         <tr>
                           
-                        <!--<th name='th_id' class='text-left'>-->
-                        <!--<span> ID </span>-->
-                        <!--</th>-->
+                         <th name='th_id' class='text-left'>
+                        <span> SR.NO </span>
+                        </th>
+                          
+                        <th name='th_id' class='text-left'>
+                        <span> ID </span>
+                        </th>
                         
                        
-                        <!-- <th name='th_state' class='text-left'>-->
-                        <!--<span> STATE </span>-->
-                        <!--</th>-->
+                         <th name='th_state' class='text-left'>
+                        <span> Name </span>
+                        </th>
                         
-                        <th name='th_name' class='text-left'>
-                        <span> NAME </span>
+                          <th name='th_id' class='text-left'>
+                        <span> Batch </span>
+                        </th>
+                        
+                       
+                         <th name='th_state' class='text-left'>
+                        <span> Branch </span>
+                        </th>
+                        
+                         
+                         <th name='th_state' class='text-left'>
+                        <span> Class </span>
+                        </th>
+                        
+                        <th name="th_name" class="text-left">
+                        <span> Withdrawn Status </span>
+                        </th>
+                        
+                        <th name="th_name" class="text-left">
+                        <span> Leaving Reason </span>
+                        </th>
+                        
+                        <th name="th_name" class="text-left">
+                        <span> Remarks </span>
+                        </th>
+                        
+                        <th name="th_name" class="text-left">
+                        <span> Withdrawn Date </span>
                         </th>
 
                         </tr>
                         
                       </thead>
+                      <t t-set="srn" t-value="1"/>
                    
                             <t t-foreach="datalines" t-as="line">
                                      
                           <tr>
+                             <td class="border-right border-bottom border-dark">
+                              <t t-raw="srn"/>
+                            <t t-set="srn" t-value="srn + 1"/>
+                            
+                            </td>
+                            
                             <td>
                               <span t-esc="line[0]"/>
                             </td>
-                            <!--<td>-->
-                            <!--  <span t-esc="line['state']"/>-->
-                            <!--</td>-->
                             
-                            <!-- <td>-->
-                            <!--  <span t-esc="line.get('name')"/>-->
-                            <!--</td>-->
+                             <td>
+                              <span t-esc="line[1]"/>
+                            </td>
+                            
+                             <td>
+                              <span t-esc="line[2]"/>
+                            </td>
+                            
+                             <td>
+                              <span t-esc="line[3]"/>
+                            </td>
+                            
+                             <td>
+                              <span t-esc="line[4]"/>
+                            </td>
+                            
+                             <td>
+                              <span t-esc="line[5]"/>
+                            </td>
+                            
+                             <td>
+                              <span t-esc="line[6]"/>
+                            </td>
+                            
+                             <td>
+                              <span t-esc="line[7]"/>
+                            </td>
+                           
+                                <td>
+                              <span t-esc="line[8]"/>
+                            </td>
                            
                           </tr>
                        
@@ -51,6 +114,11 @@
       
         
      
+    
+        </t>
+    
+            
+    
     
         </template>
     </data>
