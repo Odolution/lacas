@@ -131,6 +131,7 @@
                 <field name="student_code"/>
                 <field name="student_name"/>
                 <field name="class_sec"/>
+                <field name="sec_class"/>
                 <field name="campus"/>
                 <field name="bill_date"/>
                 <field name="due_date"/>
