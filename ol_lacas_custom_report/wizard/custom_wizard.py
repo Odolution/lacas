@@ -28,16 +28,8 @@ class ReceivablesReportWizard(models.TransientModel):
 
 
     def action_print_report(self):
-        domain=[]
-        date_from=self.date_from
-        if date_from:
-            domain+=[('invoice_date','>=',date_from)]
-
-        date_to=self.date_to
-        if date_to:
-            domain+=[('invoice_date','<=',date_to)]
-            
-        bills = self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('refund_receive','=','Receivable'),('payment_state','=','not_paid'),(domain])
+       
+        bills = self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('refund_receive','=','Receivable'),('payment_state','=','not_paid')])
         # raise UserError(str(bills))
         lines=[]
         for rec in bills:
