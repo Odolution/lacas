@@ -51,7 +51,7 @@ class RespartnerInherit(models.Model):
                                             rec['grade_level_ids'] = j
                                         if data['nxt_grade']:
                                             nxt_grade = data['nxt_grade']
-                                            for ngrade_rec in self.enrollment_state_ids:
+                                            for ngrade_rec in rec.enrollment_state_ids:
                                                 if j.name == nxt_grade:
                                                     ngrade_rec.next_grade_level_id = j.id
 
