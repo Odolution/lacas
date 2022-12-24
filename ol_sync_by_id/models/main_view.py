@@ -39,6 +39,8 @@ class RespartnerInherit(models.Model):
                         if enrol == "Graduate" or enrol == "Admissions" or enrol == "Pre-Enrolled":
                             rec['grade_level_ids'] = False
                             rec['enrollment_status_ids'] = k
+                            for ngrade_rec in rec.enrollment_state_ids:
+                                ngrade_rec.next_grade_level_id = False
                             
                         else:
                             rec['enrollment_status_ids'] = k
