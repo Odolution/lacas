@@ -39,6 +39,7 @@ class RespartnerInherit(models.Model):
                         if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
                             rec['grade_level_ids'] = False
                             rec['enrollment_status_ids'] = k
+                            raise UserError(k.name)
                             for ngrade_rec in rec.enrollment_state_ids:
                                 ngrade_rec.grade_level_id = False
                                 ngrade_rec.next_grade_level_id = False
