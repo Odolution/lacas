@@ -36,8 +36,8 @@ class RespartnerInherit(models.Model):
                 enrol = data['Current_Enrolled']  
                 enroled = self.env['school.enrollment.status'].search([])
                 for k in enroled:
-                    if str(enrol) == str(k.name):
-                        if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
+                    if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
+                        if str(enrol) == str(k.name):
                             rec['enrollment_status_ids'] = k
                             rec['grade_level_ids'] = False
                             for next_line in rec.enrollment_state_ids:
@@ -46,7 +46,8 @@ class RespartnerInherit(models.Model):
                                 next_line.next_grade_level_id = False
                                 next_line.next_enrollment_status_id = False
                        
-                        if str(enrol) == "Admissions":
+                    if str(enrol) == "Admissions":
+                        if str(enrol) == str(k.name):
                             rec['enrollment_status_ids'] = k
                             rec['grade_level_ids'] = False
                             for next_line in rec.enrollment_state_ids:
@@ -60,12 +61,12 @@ class RespartnerInherit(models.Model):
                                                 ngrade_rec.grade_level_id = False
                                                 ngrade_rec.next_grade_level_id = nxtgrd.id
                                                 ngrade_rec.next_enrollment_status_id = f.id
-                                                
+
 
                                                 
-                        if str(enrol) == "Enrolled":
+                    if str(enrol) == "Enrolled":
+                        if str(enrol) == str(k.name):
                             rec['enrollment_status_ids'] = k
-                            raise UserError(str(rec['enrollment_status_ids']))
                             if  'grade_level' in data:
                                 if data['grade_level']:
                                     grade_name = data['grade_level']
