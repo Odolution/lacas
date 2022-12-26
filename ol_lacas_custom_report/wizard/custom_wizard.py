@@ -12,20 +12,22 @@ class AccountMoveReport(models.TransientModel):
     _name = 'account.report.move.line'
     
     record_id=fields.Char('ID')
-    # student_name=fields.Char('Name')
-    # student_batch=fields.Char('Batch')
-    # student_branch=fields.Char('Branch')
-    # student_class=fields.Char('Class')
-    # withdrawn_status=fields.Char('Withdrawn Status')
-    # leaving_reason=fields.Char('Leaving Reason')
-    # remarks=fields.Char('Remarks')
-    # withdrawn_date=fields.Char('Withdrawn Date')
+    roll_no=fields.Integer('Roll No')
+#     student_name=fields.Char('Name')
+    student_batch=fields.Char('Batch')
+    student_branch=fields.Char('Branch')
+    student_class=fields.Char('Class')
+    withdrawn_status=fields.Char('Withdrawn Status')
+    leaving_reason=fields.Char('Leaving Reason')
+    remarks=fields.Char('Remarks')
+    withdrawn_date=fields.Char('Withdrawn Date')
     receivable_amount=fields.Float('Amount Totals')
     footer=fields.Char("Footer")
     total_amount=fields.Float("Total")
     heading=fields.Char('Heading')
     Student=fields.Char('Student')
     Month=fields.Char('Month')
+
     
    
 
@@ -64,6 +66,11 @@ class ReceivablesReportWizard(models.TransientModel):
             # if count == 0:
             tpl={
                         "heading":"Student: "+str(key[0]),
+                        "batch":str(key[0]),
+                        "branch":str(key[0]),
+                        "class":str(key[0]),
+                
+                        
                         
                         }
             tpl[key[1]]=key[0]
@@ -87,14 +94,14 @@ class ReceivablesReportWizard(models.TransientModel):
                     appendablelist.append({
                             
                     'record_id':value.name if value.name else " ",
-                    # 'student_name':value.partner_id.name if value.partner_id.name else " ",
-                    # 'student_batch':value.x_studio_batch.x_name if value.x_studio_batch.x_name else " ",
-                    # 'student_branch':value.x_student_id_cred.school_ids.name if value.x_student_id_cred.school_ids.name else " " ,
-                    # 'student_class':value.x_student_id_cred.homeroom if value.x_student_id_cred.homeroom else " " ,
-                    # 'withdrawn_status':value.x_studio_withdrawn_status if value.x_studio_withdrawn_status else " ",
-                    # 'leaving_reason':value.leaving_reason.name if value.leaving_reason.name else " ",
-                    # 'remarks':value.remarks if value.remarks else " ",
-                    # 'withdrawn_date':value.invoice_date if value.invoice_date else " ",
+                    'roll_no':value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else 0,
+                    'student_batch':value.x_studio_batch.x_name if value.x_studio_batch.x_name else " ",
+                    'student_branch':value.x_student_id_cred.school_ids.name if value.x_student_id_cred.school_ids.name else " " ,
+                    'student_class':value.x_student_id_cred.homeroom if value.x_student_id_cred.homeroom else " " ,
+                    'withdrawn_status':value.x_studio_withdrawn_status if value.x_studio_withdrawn_status else " ",
+                    'leaving_reason':value.leaving_reason.name if value.leaving_reason.name else " ",
+                    'remarks':value.remarks if value.remarks else " ",
+                    'withdrawn_date':value.invoice_date if value.invoice_date else " ",
                     'receivable_amount': value.amount_residual if value.amount_residual else 0,
                                 })
                 
@@ -184,7 +191,9 @@ class ReceivablesReportWizard(models.TransientModel):
             
                 
             # datalines.append([record.get('heading'," "),record.get('record_id'," "),record.get('receivable_amount',''),record.get('footer'," "),record.get('total_amount','')])
-            datalines.append([rec.heading,rec.Month,rec.Student,rec.record_id,rec.receivable_amount,rec.footer,rec.total_amount])
+            datalines.append([rec.heading,rec.Month,rec.Student,rec.record_id,rec.receivable_amount,rec.footer,rec.total_amount,rec.roll_no,rec.student_batch,rec.student_branch,rec.student_class,rec.withdrawn_status,rec.leaving_reason,rec.remarks,rec.withdrawn_date])
+
+                                                                                  
             
         # 
 
