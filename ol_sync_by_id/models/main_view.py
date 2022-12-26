@@ -47,12 +47,14 @@ class RespartnerInherit(models.Model):
                             rec['grade_level_ids'] = False
                             nxt_status = self.env['school.enrollment.status'].search([])
                             for next_line in rec.enrollment_state_ids:
+                                next_line.enrollment_status_id = k.id
                                 Next_Enrolled = data['Next_Enrolled']
                                 for f in nxt_status:
                                     if str(Next_Enrolled) == str(f.name):
                                         nxt = data['nxt_grade']
                                         for nxtgrd in gradelvl:
                                             if str(nxt) == str(nxtgrd.name):
+                                                next_line.enrollment_status_id = k.id
                                                 next_line.grade_level_id = False
                                                 next_line.next_grade_level_id = nxtgrd.id
                                                 next_line.next_enrollment_status_id = f.id
@@ -64,10 +66,11 @@ class RespartnerInherit(models.Model):
                     if str(enrol) == str(k.name):
                         for j in gradelvl:
                             grade_name = data['grade_level']
-                            if j.name == grade_name:
-                                for ngrade_rec in rec.enrollment_state_ids:
+                            for ngrade_rec in rec.enrollment_state_ids:
+                                ngrade_rec.next_enrollment_status_id = k.id
+                                if j.name == grade_name:
                                     ngrade_rec.grade_level_id = j.id
-                                    ngrade_rec.next_enrollment_status_id = k.id
+                                    
                             if data['nxt_grade']:
                                 nxt_grade = data['nxt_grade']
                                 for ngrade_rec in rec.enrollment_state_ids:
