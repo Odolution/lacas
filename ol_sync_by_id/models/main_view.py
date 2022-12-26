@@ -38,14 +38,14 @@ class RespartnerInherit(models.Model):
                     if str(enrol) == str(k.name):
                         if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
                             rec['grade_level_ids'] = False
-                            rec['enrollment_status_ids'] = k.id
+                            rec['enrollment_status_ids'] = k
                             
                             for ngrade_rec in rec.enrollment_state_ids:
                                 ngrade_rec.grade_level_id = False
                                 ngrade_rec.next_grade_level_id = False
                                 ngrade_rec.next_enrollment_status_id = False
                             
-                        if  enrol == "Admissions" or enrol == "Pre-Enrolled":
+                        elif  enrol == "Admissions" or enrol == "Pre-Enrolled":
                             rec['grade_level_ids'] = False
                             rec['enrollment_status_ids'] = k
                             for ngrade_rec in rec.enrollment_state_ids:
