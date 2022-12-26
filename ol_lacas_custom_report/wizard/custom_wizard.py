@@ -66,9 +66,6 @@ class ReceivablesReportWizard(models.TransientModel):
             # if count == 0:
             tpl={
                         "heading":"Student: "+str(key[0]),
-                        "batch":str(key[0]),
-                        "branch":str(key[0]),
-                        "class":str(key[0]),
                 
                         
                         
