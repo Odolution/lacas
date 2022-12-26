@@ -65,6 +65,7 @@ class RespartnerInherit(models.Model):
                                                 
                         if str(enrol) == "Enrolled":
                             rec['enrollment_status_ids'] = k
+                            raise UserError(str(rec['enrollment_status_ids']))
                             if  'grade_level' in data:
                                 if data['grade_level']:
                                     grade_name = data['grade_level']
