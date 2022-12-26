@@ -18,8 +18,8 @@ class academics_tab(models.Model):
     
     notice_fee_withdrawal = fields.Monetary(compute='_compute_notice_fee', string="Notice Fee")
     amount_total_withdrawal = fields.Monetary(compute='_compute_total_amount', string="Total Withdrawal")
-    refund_receive = fields.Char(
-        compute='_compute_refund_receive', string="Receivable/Refundable")
+    # refund_receive = fields.Char(
+    #     compute='_compute_refund_receive', string="Receivable/Refundable")
     
     
     def _compute_notice_fee(self):
@@ -50,29 +50,29 @@ class academics_tab(models.Model):
 
 
 
-    def _compute_refund_receive(self):
-        for rec in self:
-            receive = 0
-            refund = 0
-            if rec.x_studio_charges:
+    # def _compute_refund_receive(self):
+    #     for rec in self:
+    #         receive = 0
+    #         refund = 0
+    #         if rec.x_studio_charges:
 
-                if rec.x_studio_charges.invoice_line_ids:
+    #             if rec.x_studio_charges.invoice_line_ids:
 
-                    for i in rec.x_studio_charges.invoice_line_ids:
-                        #refund = i.price_subtotal
-                        receive += i.price_subtotal
-                if self.invoice_line_ids:
-                    for j in rec.invoice_line_ids:
-                        #receive = j.price_subtotal
-                        refund += j.price_subtotal
+    #                 for i in rec.x_studio_charges.invoice_line_ids:
+    #                     #refund = i.price_subtotal
+    #                     receive += i.price_subtotal
+    #             if self.invoice_line_ids:
+    #                 for j in rec.invoice_line_ids:
+    #                     #receive = j.price_subtotal
+    #                     refund += j.price_subtotal
 
-                if receive > refund:
-                    rec.refund_receive = 'Receivable'
-                else:
-                    rec.refund_receive = 'Refundable'
-            else:
-                rec.refund_receive = 'Refundable'
-
+    #             if receive > refund:
+    #                 rec.refund_receive = 'Receivable'
+    #             else:
+    #                 rec.refund_receive = 'Refundable'
+    #         else:
+    #             rec.refund_receive = 'Refundable'
+#==================================================
         # if self.x_studio_charges:
 
         #     if self.x_studio_charges.invoice_line_ids:
