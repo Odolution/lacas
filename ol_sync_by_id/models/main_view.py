@@ -80,7 +80,7 @@ class RespartnerInherit(models.Model):
                                             ngrade_rec.next_grade_level_id = gv.id
                                     for n_e in enroled:
                                         if data['Next_Enrolled'] == n_e.name:
-                                        ngrade_rec.next_enrollment_status_id = n_e.id
+                                            ngrade_rec.next_enrollment_status_id = n_e.id
 
                                     
                         
