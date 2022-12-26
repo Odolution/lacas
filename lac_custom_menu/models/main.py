@@ -7,6 +7,7 @@ class field_changes_custom_update(models.Model):
     facts_id_new_lv = fields.Char(compute='_compute_facts_id_student',string="Facts Id")
     adm_amount=fields.Char(string="Admission Amount")
     security_amount=fields.Char(string="Security Amount")
+    std_dob=fields.Char(string="Date of Birth",compute="_onchange_dob_data")
     
    # adm_amount=fields.Monetary(string="Admission Amount",compute="_onchange_adm_amount_data")
     #security_amount=fields.Monetary(string="Security Amount",compute="_onchange_security_amount_data")
@@ -46,7 +47,21 @@ class field_changes_custom_update(models.Model):
     #                     if 'Security' in line.product_id.name:
     #                         rec['security_amount']=line.price_subtotal
 
+    @api.onchange('student_ids')
+    def _onchange_dob_data(self):
+        self._get_dob_field()
     
+                
+    def _get_dob_field(self):
+        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
+        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+        self.std_dob=' '
+        for rec in adm_journals:
+
+            rec.std_dob=' '
+            if rec.student_ids:
+                rec['std_dob']=rec.student_ids.date_of_birth
+
     def _compute_udid_student(self):
         # if self.move_type == "out_refund":
         for rec in self:
