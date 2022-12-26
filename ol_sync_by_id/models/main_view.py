@@ -40,48 +40,60 @@ class RespartnerInherit(models.Model):
                         if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
                             rec['enrollment_status_ids'] = k
                             rec['grade_level_ids'] = False
-                            for ngrade_rec in rec.enrollment_state_ids:
-                                ngrade_rec.enrollment_status_id = k.id
-                                ngrade_rec.grade_level_id = False
-                                ngrade_rec.next_grade_level_id = False
-                                ngrade_rec.next_enrollment_status_id = False
-                            
-                        elif  enrol == "Admissions":
-                              rec['grade_level_ids'] = False
-                              rec['enrollment_status_ids'] = k  
-                              for ngrade_rec in rec.enrollment_state_ids:
-                                    
-                                    Next_Enrolled = data['Next_Enrolled']
-                                    nxt_status = self.env['school.enrollment.status'].search([])
-                                    for f in nxt_status:
-                                        if Next_Enrolled == f.name:
-                                            nxt = data['nxt_grade']
-                                            for nxtgrd in gradelvl:
-                                                if nxt == nxtgrd.name:
-                                                    ngrade_rec.grade_level_id = False
-                                                    ngrade_rec.next_grade_level_id = nxtgrd.id
-                                                    ngrade_rec.next_enrollment_status_id = f.id
+                            for next_line in rec.enrollment_state_ids:
+                                next_line.enrollment_status_id = k.id
+                                next_line.grade_level_id = False
+                                next_line.next_grade_level_id = False
+                                next_line.next_enrollment_status_id = False
+                       
+                        if str(enrol) == "Admissions":
+                            rec['enrollment_status_ids'] = k
+                            rec['grade_level_ids'] = False
+                            for next_line in rec.enrollment_state_ids:
+                                Next_Enrolled = data['Next_Enrolled']
+                                nxt_status = self.env['school.enrollment.status'].search([])
+                                for f in nxt_status:
+                                    if str(Next_Enrolled) == str(f.name):
+                                        nxt = data['nxt_grade']
+                                        for nxtgrd in gradelvl:
+                                            if str(nxt) == str(nxtgrd.name):
+                                                ngrade_rec.grade_level_id = False
+                                                ngrade_rec.next_grade_level_id = nxtgrd.id
+                                                ngrade_rec.next_enrollment_status_id = f.id
+                                                
 
-                        else:
+                                                
+                        if str(enrol) == "Enrolled":
                             rec['enrollment_status_ids'] = k
                             if  'grade_level' in data:
                                 if data['grade_level']:
                                     grade_name = data['grade_level']
-                                    grade = self.env['school.grade.level'].search([])
-                                    for j in grade:
+                                    for j in gradelvl:
                                         if j.name == grade_name:
                                             rec['grade_level_ids'] = j
                                             for ngrade_rec in rec.enrollment_state_ids:
-                                                ngrade_rec.grade_level_id = j.id 
-
+                                                ngrade_rec.grade_level_id = j.id
+                                                ngrade_rec.next_enrollment_status_id = k.id
                                         if data['nxt_grade']:
                                             nxt_grade = data['nxt_grade']
                                             for ngrade_rec in rec.enrollment_state_ids:
                                                 if j.name == nxt_grade:
                                                     ngrade_rec.next_grade_level_id = j.id
-                                                    ngrade_rec.grade_level_id = j.id
+                                                if data['Next_Enrolled'] == k.name:
                                                     ngrade_rec.next_enrollment_status_id = k.id
 
+                                        
+                                                
+                                                
+
+                                        
+                                        
+                                    
+                              
+                              
+                            
+            
+           
                                     
                                         
             
