@@ -67,8 +67,7 @@ class ReceivablesReportWizard(models.TransientModel):
             tpl={
                         "heading":"Student: "+str(key[0]),
                 
-                        
-                        
+                  
                         }
             tpl[key[1]]=key[0]
             appendablelist.append(tpl)
