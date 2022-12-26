@@ -27,10 +27,10 @@ class RespartnerInherit(models.Model):
                         if i.name == schoo_name:
                             rec['school_ids'] = i
                 
-               
+            enroled = self.env['school.enrollment.status'].search([])   
             if 'Current_Enrolled' in data:
                 enrol = data['Current_Enrolled']  
-                enroled = self.env['school.enrollment.status'].search([])
+                
                 for k in enroled:
                     if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
                         if str(enrol) == str(k.name):
