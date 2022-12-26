@@ -18,10 +18,6 @@ class RespartnerInherit(models.Model):
             data=x.json()
             
             data = eval(data)
-            
-            
-            sch_id = False
-            grd_id = False
             gradelvl = self.env['school.grade.level'].search([])
             if 'Current School' in data:
                 if data['Current School']:
@@ -38,7 +34,6 @@ class RespartnerInherit(models.Model):
                 for k in enroled:
                     if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
                         if str(enrol) == str(k.name):
-                            raise UserError(k.name)
                             rec['enrollment_status_ids'] = k
                             rec['grade_level_ids'] = False
                             for next_line in rec.enrollment_state_ids:
@@ -49,7 +44,7 @@ class RespartnerInherit(models.Model):
                        
                     if str(enrol) == "Admissions":
                         if str(enrol) == str(k.name):
-                            raise UserError(k.name)
+                            
                             rec['enrollment_status_ids'] = k
                             rec['grade_level_ids'] = False
                             for next_line in rec.enrollment_state_ids:
@@ -68,7 +63,6 @@ class RespartnerInherit(models.Model):
                                                 
                     if str(enrol) == "Enrolled":
                         if str(enrol) == str(k.name):
-                            raise UserError(k.name)
                             rec['enrollment_status_ids'] = k
                             if  'grade_level' in data:
                                 if data['grade_level']:
