@@ -36,8 +36,7 @@ class RespartnerInherit(models.Model):
                 enroled = self.env['school.enrollment.status'].search([])
                 for k in enroled:
                     if enrol == k.name:
-                        raise UserError(k.name)
-                        if enrol == "Withdrawn" or enrol == "Graduate":
+                        if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
                             rec['grade_level_ids'] = False
                             rec['enrollment_status_ids'] = k
                             for ngrade_rec in rec.enrollment_state_ids:
