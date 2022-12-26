@@ -63,6 +63,7 @@ class RespartnerInherit(models.Model):
                 for k in enroled:
                     if str(enrol) == str(k.name):
                         for j in gradelvl:
+                            grade_name = data['grade_level']
                             if j.name == grade_name:
                                 for ngrade_rec in rec.enrollment_state_ids:
                                     ngrade_rec.grade_level_id = j.id
