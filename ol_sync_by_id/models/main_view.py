@@ -38,6 +38,7 @@ class RespartnerInherit(models.Model):
                 for k in enroled:
                     if str(enrol) == "Withdrawn" or str(enrol) == "Graduate":
                         if str(enrol) == str(k.name):
+                            raise UserError(k.name)
                             rec['enrollment_status_ids'] = k
                             rec['grade_level_ids'] = False
                             for next_line in rec.enrollment_state_ids:
@@ -48,6 +49,7 @@ class RespartnerInherit(models.Model):
                        
                     if str(enrol) == "Admissions":
                         if str(enrol) == str(k.name):
+                            raise UserError(k.name)
                             rec['enrollment_status_ids'] = k
                             rec['grade_level_ids'] = False
                             for next_line in rec.enrollment_state_ids:
@@ -66,6 +68,7 @@ class RespartnerInherit(models.Model):
                                                 
                     if str(enrol) == "Enrolled":
                         if str(enrol) == str(k.name):
+                            raise UserError(k.name)
                             rec['enrollment_status_ids'] = k
                             if  'grade_level' in data:
                                 if data['grade_level']:
