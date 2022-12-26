@@ -46,22 +46,21 @@ class RespartnerInherit(models.Model):
                     if str(enrol) == "Admissions":
                         if str(enrol) == str(k.name):
                             rec['enrollment_status_ids'] = k
-                            rec['grade_level_ids'] = False
-                            nxt_status = self.env['school.enrollment.status'].search([])
-                            for next_line in rec.enrollment_state_ids:
-                                Next_Enrolled = data['Next_Enrolled']
-                                for f in nxt_status:
-                                    if str(Next_Enrolled) == str(f.name):
-                                        nxt = data['nxt_grade']
-                                        for nxtgrd in gradelvl:
-                                            if str(nxt) == str(nxtgrd.name):
-                                                next_line.grade_level_id = False
-                                                next_line.next_grade_level_id = nxtgrd.id
-                                                next_line.next_enrollment_status_id = f.id
+#                             rec['grade_level_ids'] = False
+#                             nxt_status = self.env['school.enrollment.status'].search([])
+#                             for next_line in rec.enrollment_state_ids:
+#                                 Next_Enrolled = data['Next_Enrolled']
+#                                 for f in nxt_status:
+#                                     if str(Next_Enrolled) == str(f.name):
+#                                         nxt = data['nxt_grade']
+#                                         for nxtgrd in gradelvl:
+#                                             if str(nxt) == str(nxtgrd.name):
+#                                                 next_line.grade_level_id = False
+#                                                 next_line.next_grade_level_id = nxtgrd.id
+#                                                 next_line.next_enrollment_status_id = f.id
 
 
                                                 
-                   
                                         
                                                 
                                                 
