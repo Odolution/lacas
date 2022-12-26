@@ -58,9 +58,9 @@ class RespartnerInherit(models.Model):
                                         nxt = data['nxt_grade']
                                         for nxtgrd in gradelvl:
                                             if str(nxt) == str(nxtgrd.name):
-                                                ngrade_rec.grade_level_id = False
-                                                ngrade_rec.next_grade_level_id = nxtgrd.id
-                                                ngrade_rec.next_enrollment_status_id = f.id
+                                                next_line.grade_level_id = False
+                                                next_line.next_grade_level_id = nxtgrd.id
+                                                next_line.next_enrollment_status_id = f.id
 
 
                                                 
