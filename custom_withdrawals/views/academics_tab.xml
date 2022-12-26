@@ -16,7 +16,7 @@
              <field name="remarks_cred_custom" attrs="{'invisible':[('move_type','!=','out_refund')]}"></field>
              <field name="relationship_cred_custom" attrs="{'invisible':[('move_type','!=','out_refund')]}"></field>
              <field name="financial_responsibilty_cred_custom" attrs="{'invisible':[('move_type','!=','out_refund')]}"></field>
-             <!-- <field name="refund_receive"/> -->
+             <field name="refund_receive"/>
               </group>
               </group>
              </page>
@@ -47,7 +47,7 @@
        <xpath expr="//field[@name='invoice_partner_display_name']" position="after"> 
            <field name="rollno_cred_custom" />  
            <field name="remarks_cred_custom" /> 
-           <!-- <field name="refund_receive" />    -->
+           <field name="refund_receive" />   
            </xpath>
 
            <field name="name" position="attributes">
