@@ -128,7 +128,7 @@ class ReceivablesReportWizard(models.TransientModel):
         #creating dynamic filters
  
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','=','not_paid'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','=','not_paid'),('refund_receive','=','Receivable'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         # for rec in move_ids:
         #     raise UserError(rec.name)
         if self.groups_ids:
