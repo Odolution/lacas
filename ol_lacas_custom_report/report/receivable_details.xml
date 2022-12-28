@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
+  
         <template id="report_receivable_details">
-     
 
         <t t-call="web.basic_layout">
         <t t-call="web.html_container">
@@ -14,14 +13,19 @@
                   
                     <div class="col-4 border-right border-dark" style="text-align: left;"> LACAS Report</div>
                     <div class="col-4 border-right border-dark" style="text-align: center;">RECEIVABLE OF WITHDRAWL STUDENTS</div>
-                    <div class="col-4" style="text-align: center;"> Reversals <t  t-raw="o[1]"/></div>
-
-                    
-
-                  </div>
+                    <div class="col-4 border-right border-dark" style="text-align: right;"> Reversals</div>
+                     </div>
                   
                   
+
+
               </div>  
+
+
+
+
+
+
               <!--</t>-->
               <div class="row">
               
@@ -309,6 +313,4 @@
    
 
         </template>
-    </data>
 </odoo>
-
