@@ -160,8 +160,8 @@ class ext(models.Model):
 
 
         self.class_sec=""
-        if self.x_student_id_cred:
-            if self.x_student_id_cred.homeroom:
+        if self.student_ids:
+            if self.student_ids.homeroom:
                 self.class_sec=self.x_student_id_cred.homeroom
                 
             
