@@ -182,7 +182,7 @@ class ext(models.Model):
    
                
     def _get_due_amount_field(self):
-        self.due_amount=" "
+        self.due_amount=0
         for rec in self:
             if rec.journal_id==125:
                 rec['due_amount']=rec.due_amount
