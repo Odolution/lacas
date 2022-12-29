@@ -140,11 +140,14 @@ class ext(models.Model):
 
 
     def _get_student_code_field(self):
+        
+        
 #         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
-        monthly_bill=self.env['account.move'].search([('journal_id','=',125)])
+#         monthly_bill=self.env['account.move'].search([('journal_id','=',125)])
         self.student_code=0
-        for rec in monthly_bill:
-            rec['student_code']=rec.student_ids.facts_udid
+        for rec in self:
+            if rec.journal_id==125:
+                rec['student_code']=rec.student_ids.facts_udid
     
     def _get_class_sec_field(self):
         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
