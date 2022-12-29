@@ -89,18 +89,7 @@
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Class :</td>
                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.homeroom"/></strong></td>
                     
-<!--                     <t t-foreach="o.student_ids" t-as="i">
-                    <t t-foreach="i.enrollment_state_ids" t-as="d">
-                     <t t-if="d.enrollment_status_id.name == 'Admission'">
-                       
-                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
-                    </t>
-                    <t t-else="">
-                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
-                    </t>
-                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
-                    </t>
-                    </t> -->
+ 
                     </tr>
                     <!--next grade level-->
                     <tr style="height: 18px;">
@@ -326,18 +315,7 @@
                   <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Class :</td>
                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.homeroom"/></strong></td>
                     
-<!--                     <t t-foreach="o.student_ids" t-as="i">
-                    <t t-foreach="i.enrollment_state_ids" t-as="d">
-                     <t t-if="d.enrollment_status_id.name == 'Admission'">
-                       
-                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
-                    </t>
-                    <t t-else="">
-                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
-                    </t>
-                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
-                    </t>
-                    </t> -->
+ 
                     </tr>
                     <!--next grade level-->
                     <tr style="height: 18px;">
@@ -560,18 +538,7 @@
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Class :</td>
                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.homeroom"/></strong></td>
                     
-<!--                     <t t-foreach="o.student_ids" t-as="i">
-                    <t t-foreach="i.enrollment_state_ids" t-as="d">
-                     <t t-if="d.enrollment_status_id.name == 'Admission'">
-                       
-                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
-                    </t>
-                    <t t-else="">
-                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
-                    </t>
-                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
-                    </t>
-                    </t> -->
+ 
                     </tr>
                     <!--next grade level-->
                     <tr style="height: 18px;">
