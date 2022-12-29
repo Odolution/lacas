@@ -133,7 +133,7 @@ class ext(models.Model):
 
         self.student_name=" "
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
                 rec['student_name']=full_name
 
@@ -145,14 +145,14 @@ class ext(models.Model):
 #         monthly_bill=self.env['account.move'].search([('journal_id','=',125)])
         self.student_code=0
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 rec['student_code']=rec.student_ids.facts_udid
     
     def _get_class_sec_field(self):
 
         self.class_sec=" "
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 rec['class_sec']=rec.student_ids.homeroom
                 
         
@@ -160,7 +160,7 @@ class ext(models.Model):
     def _get_campus_field(self):
         self.campus=" "
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 rec['campus']=rec.student_ids.school_ids.name
 
         
@@ -169,7 +169,7 @@ class ext(models.Model):
     def _get_bill_date_field(self):
         self.bill_date=" "
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 rec['bill_date']=rec.invoice_date
        
                 
@@ -177,14 +177,14 @@ class ext(models.Model):
     def _get_due_date_field(self):
         self.due_date=" "
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 rec['due_date']=rec.invoice_date_due
    
                
     def _get_due_amount_field(self):
         self.due_amount=0
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 rec['due_amount']=rec.due_amount
       
 
@@ -192,7 +192,7 @@ class ext(models.Model):
     def _get_price_field(self):
         self.tuition=0
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 if rec.invoice_line_ids: 
                     for line in rec.invoice_line_ids:
                         if 'Tuition Fee' in line.product_id.name:
@@ -204,7 +204,7 @@ class ext(models.Model):
         self.club=0
         for rec in self:
 
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
 
                 if rec.invoice_line_ids: 
                     for line in rec.invoice_line_ids:
@@ -216,7 +216,7 @@ class ext(models.Model):
         
         self.computer=0
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 if rec.invoice_line_ids: 
                     for line in rec.invoice_line_ids:
                         if 'Computer' in line.product_id.name:
@@ -228,7 +228,7 @@ class ext(models.Model):
 
         self.library=0
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 if rec.invoice_line_ids: 
                     for line in rec.invoice_line_ids:
                         if 'Library' in line.product_id.name:
@@ -238,7 +238,7 @@ class ext(models.Model):
    
         self.utility=0
         for rec in self:
-            if rec.journal_id==125:
+            if rec.journal_id.id==125:
                 if rec.invoice_line_ids: 
                     for line in rec.invoice_line_ids:
                         if 'Utility' in line.product_id.name:
