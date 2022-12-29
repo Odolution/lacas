@@ -366,6 +366,9 @@
                   </tr>
                   </thead>
                     <tbody>
+                      
+                      <t t-set="Fee" t-value="0"/>
+                      <t t-set="Charges" t-value="0"/>
                       <t t-foreach="o.invoice_line_ids" t-as="d">
                           <t t-if="d.product_id.x_studio_adhoc">
                               <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
@@ -597,6 +600,9 @@
                   </tr>
                   </thead>
                     <tbody>
+                      
+                      <t t-set="Fee" t-value="0"/>
+                      <t t-set="Charges" t-value="0"/>
                       <t t-foreach="o.invoice_line_ids" t-as="d">
                           <t t-if="d.product_id.x_studio_adhoc">
                               <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
