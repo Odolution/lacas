@@ -156,7 +156,7 @@ class ext(models.Model):
     #             rec['class_sec']=rec.student_ids.homeroom
 
     @api.onchange('x_student_id_cred',"student_ids")
-    def _student_onchange(self):
+    def _students_onchange(self):
 
 
         self.class_sec=""
