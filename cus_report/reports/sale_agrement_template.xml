@@ -129,14 +129,28 @@
                   </tr>
                   </thead>
                     <tbody>
+                      <t t-set="Fee" t-value="0"/>
+                      <t t-set="Charges" t-value="0"/>
+                
                       <t t-foreach="o.invoice_line_ids" t-as="d">
+                          <t t-if="d.product_id.x_studio_adhoc">
+                              <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
+                          </t>
+                          <t t-else="">
+                            <t t-set="Fee" t-value="Fee+int(d.price_subtotal)"/>
+                          </t>
+                      </t>
                       <tr style="border: 1px solid black;">
-                        <td style="text-align: left; border: 1px solid black; font-size:11px;"><t t-esc="d.product_id.name"/></td>
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;">Fee</td>
                         <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
-                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="int(d.price_subtotal)"/></td>
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Fee"/></td>
+                      </tr>
+                     <tr style="border: 1px solid black;">
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;">Adhoc Charges</td>
+                        <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Charges"/></td>
                       </tr>
                      
-                    </t>
                     </tbody>
                   </table>
 
@@ -353,13 +367,23 @@
                   </thead>
                     <tbody>
                       <t t-foreach="o.invoice_line_ids" t-as="d">
+                          <t t-if="d.product_id.x_studio_adhoc">
+                              <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
+                          </t>
+                          <t t-else="">
+                            <t t-set="Fee" t-value="Fee+int(d.price_subtotal)"/>
+                          </t>
+                      </t>
                       <tr style="border: 1px solid black;">
-                        <td style="text-align: left; border: 1px solid black; font-size:11px;"><t t-esc="d.product_id.name"/></td>
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;">Fee</td>
                         <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
-                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="int(d.price_subtotal)"/></td>
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Fee"/></td>
                       </tr>
-                     
-                    </t>
+                     <tr style="border: 1px solid black;">
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;">Adhoc Charges</td>
+                        <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Charges"/></td>
+                      </tr>
                     </tbody>
                   </table>
 
@@ -574,13 +598,23 @@
                   </thead>
                     <tbody>
                       <t t-foreach="o.invoice_line_ids" t-as="d">
+                          <t t-if="d.product_id.x_studio_adhoc">
+                              <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
+                          </t>
+                          <t t-else="">
+                            <t t-set="Fee" t-value="Fee+int(d.price_subtotal)"/>
+                          </t>
+                      </t>
                       <tr style="border: 1px solid black;">
-                        <td style="text-align: left; border: 1px solid black; font-size:11px;"><t t-esc="d.product_id.name"/></td>
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;">Fee</td>
                         <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
-                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="int(d.price_subtotal)"/></td>
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Fee"/></td>
                       </tr>
-                     
-                    </t>
+                     <tr style="border: 1px solid black;">
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;">Adhoc Charges</td>
+                        <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Charges"/></td>
+                      </tr>
                     </tbody>
                   </table>
 
