@@ -2,6 +2,7 @@
 
 <record id="account_move_tree_charges" model="ir.ui.view">
         <field name="name">account.move.tree.charges</field>
+        
         <field name="model">account.move</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
