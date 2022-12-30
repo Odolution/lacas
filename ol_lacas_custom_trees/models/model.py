@@ -7,38 +7,37 @@ class ext(models.Model):
     _inherit="account.move"
     # security_price=fields.Integer(string='Security Price')
    
-    tuition=fields.Integer(string="Tuition Fee", compute='_onchange_tuition')
-    club=fields.Integer(string="Club Charges", compute="_onchange_club")
-    computer=fields.Integer(string="computer Charges", compute="_onchange_computer")
-    library=fields.Integer(string="library Charges", compute="_onchange_library")
-    utility=fields.Integer(string="utility Charges", compute="_onchange_utility")
-    student_code=fields.Integer(string="Student Code",compute="_onchange_student_code_data")
-    student_name=fields.Char(string="Name",compute="_onchange_student_name_data")
-    class_sec=fields.Char(string="Class Section",compute="_onchange_class_sec_data")
-    campus=fields.Char(string="Campus",compute="_onchange_campus_data")
-    bill_date=fields.Char(string="Bill Date",compute="_onchange_bill_date_data")
-    due_date=fields.Char(string="Due Date",compute="_onchange_due_date_data")
-    due_amount=fields.Integer(string="Due Amount",compute="_onchange_due_amount_data")
+    tuition=fields.Integer(string="Tuition Fee")
+    club=fields.Integer(string="Club Charges")
+    computer=fields.Integer(string="computer Charges")
+    library=fields.Integer(string="library Charges")
+    utility=fields.Integer(string="utility Charges")
+    student_code=fields.Char(string="UDID")
+    student_name=fields.Char(string="Name")
+    class_sec=fields.Char(string="Class Section")
+    campus=fields.Char(string="Campus")
+    bill_date=fields.Char(string="Bill Date")
+    due_date=fields.Char(string="Due Date")
+    due_amount=fields.Integer(string="Due Amount")
     
     
-    std_udid=fields.Integer(string="UDID",compute="_onchange_udid_data")
-    std_class=fields.Char(string="Class",compute="_onchange_class_data")
-    std_bill_date=fields.Char(string="Issue Date",compute="_onchange_std_bill_date_data")
-    std_due_date=fields.Char(string="Due Date",compute="_onchange_std_due_date_data")
-    std_branch=fields.Char(string="Branch",compute="_onchange_branch_data")
-    std_dob=fields.Char(string="Date of Birth",compute="_onchange_dob_data")
-    std_name=fields.Char(string="Student",compute="_onchange_std_name_data")
-    std_batch=fields.Char(string="Batch",compute="_onchange_batch_data")
-    std_discount=fields.Char(string="Discount note",compute="_onchange_std_discount_data")
-    std_reason=fields.Char(string="Concession Name",compute="_onchange_std_reason_data")
-    std_fathername=fields.Char(string="Father Name",compute="_onchange_std_fathername_data")
-    std_contactno=fields.Char(string="Contact No.",compute="_onchange_std_contactno_data")
-    
-    adm_amount=fields.Char(string="Admission Amount",compute="_onchange_adm_amount_data")
-    security_amount=fields.Char(string="Security Amount",compute="_onchange_security_amount_data")
-    bill_amount=fields.Char(string="Bill Amount",compute="_onchange_bill_amount_data")
-    std_factsid=fields.Integer(string="Facts ID",compute="_onchange_facts_id_data")
-    std_payment_date=fields.Char(string='Payment Date',compute="_onchange_payment_date_data")
+    std_udid=fields.Char(string="UDID")
+    std_class=fields.Char(string="Class")
+    std_bill_date=fields.Char(string="Issue Date")
+    std_due_date=fields.Char(string="Due Date")
+    std_branch=fields.Char(string="Branch")
+    std_dob=fields.Char(string="Date of Birth")
+    std_name=fields.Char(string="Student")
+    std_batch=fields.Char(string="Batch")
+    std_discount=fields.Char(string="Discount note")
+    std_reason=fields.Char(string="Concession Name")
+    std_fathername=fields.Char(string="Father Name")
+    std_contactno=fields.Char(string="Contact No.")
+    adm_amount=fields.Char(string="Admission Amount")
+    security_amount=fields.Char(string="Security Amount")
+    bill_amount=fields.Char(string="Bill Amount")
+    std_factsid=fields.Char(string="Facts ID")
+    std_payment_date=fields.Char(string='Payment Date')
 
 
     
@@ -62,443 +61,100 @@ class ext(models.Model):
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action  
-    
-#     def get_securityDeposit_action(self):
-#         action = self.env.ref('ol_lacas_custom_trees.act_account_move_securityDeposit').read()[0]
-#         journals=self.env["account.journal"].search([("name","=","Security Deposit")])
-#         domain = [('journal_id','in',[i.id for i in journals])]
-#         action['domain'] = domain
-#         return action  
-
-    
-    @api.onchange('invoice_line_ids')
-    def _onchange_tuition(self):
-        self._get_price_field()
-
-    @api.onchange('invoice_line_ids')
-    def _onchange_club(self):
-        self._get_club_field()
-
-    @api.onchange('invoice_line_ids')
-    def _onchange_computer(self):
-        self._get_computer_field()
-
-    @api.onchange('invoice_line_ids')
-    def _onchange_library(self):
-        self._get_library_field()
-
-    @api.onchange('invoice_line_ids')
-    def _onchange_utility(self):
-        self._get_utility_field()
-
-    @api.onchange('student_ids')
-    def _onchange_student_name_data(self):
-        self._get_student_name_field()
-    
-    @api.onchange('student_ids')
-    def _onchange_student_code_data(self):
-        self._get_student_code_field()
-    
-    @api.onchange('student_ids')
-    def _onchange_class_sec_data(self):
-        self._get_class_sec_field()
-
-    @api.onchange('student_ids')
-    def _onchange_campus_data(self):
-        self._get_campus_field()
-    
-    
-    @api.onchange('student_ids')
-    def _onchange_bill_date_data(self):
-        self._get_bill_date_field()
-
-    @api.onchange('student_ids')
-    def _onchange_due_date_data(self):
-        self._get_due_date_field()
-        
-    @api.onchange('student_ids')
-    def _onchange_due_amount_data(self):
-        self._get_due_amount_field()
-        
-
-       
-    
-    
-
-    
-        
-       
-
-    def _get_student_name_field(self):
-
-        self.student_name=" "
-        for rec in self:
-            if rec.journal_id.id==125:
-                full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
-                rec['student_name']=full_name
 
 
-    def _get_student_code_field(self):
-        
-        
-#         monthly_journal=self.env['account.journal'].search([('code','=','MNT')])
-#         monthly_bill=self.env['account.move'].search([('journal_id','=',125)])
-        self.student_code=0
-        for rec in self:
-            if rec.journal_id.id==125:
-                rec['student_code']=rec.student_ids.facts_udid
-    
-    def _get_class_sec_field(self):
 
-        self.class_sec=" "
-        for rec in self:
-            if rec.journal_id.id==125:
-                rec['class_sec']=rec.student_ids.homeroom
-                
-        
 
-    def _get_campus_field(self):
-        self.campus=" "
-        for rec in self:
-            if rec.journal_id.id==125:
-                rec['campus']=rec.student_ids.school_ids.name
-
-        
-                
-
-    def _get_bill_date_field(self):
-        self.bill_date=" "
-        for rec in self:
-            if rec.journal_id.id==125:
-                rec['bill_date']=rec.invoice_date
-       
-                
-    
-    def _get_due_date_field(self):
-        self.due_date=" "
-        for rec in self:
-            if rec.journal_id.id==125:
-                rec['due_date']=rec.invoice_date_due
-   
-               
-    def _get_due_amount_field(self):
+    @api.onchange('x_student_id_cred',"student_ids")
+    def _students_onchange(self):
+        self.student_name=''
+        self.student_code=" "
+        self.class_sec=""
+        self.campus=""
+        self.bill_date=' '
+        self.due_date=' '
         self.due_amount=0
-        for rec in self:
-            if rec.journal_id.id==125:
-                rec['due_amount']=rec.due_amount
-      
-
-
-    def _get_price_field(self):
         self.tuition=0
-        for rec in self:
-            if rec.journal_id.id==125:
-                if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Tuition Fee' in line.product_id.name:
-                            rec['tuition']=line.price_subtotal
-              
-
-    def _get_club_field(self):
-       
         self.club=0
-        for rec in self:
-
-            if rec.journal_id.id==125:
-
-                if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Club' in line.product_id.name:
-                            rec['club']=line.price_subtotal
-                        
-
-    def _get_computer_field(self):
-        
         self.computer=0
-        for rec in self:
-            if rec.journal_id.id==125:
-                if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Computer' in line.product_id.name:
-                            rec['computer']=line.price_subtotal
-                       
-
-    def _get_library_field(self):
-
-
         self.library=0
-        for rec in self:
-            if rec.journal_id.id==125:
-                if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Library' in line.product_id.name:
-                            rec['library']=line.price_subtotal
-                
-    def _get_utility_field(self):
-   
         self.utility=0
-        for rec in self:
-            if rec.journal_id.id==125:
-                if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Utility' in line.product_id.name:
-                            rec['utility']=line.price_subtotal
+        if self.student_ids:
+            full_name=self.student_ids.first_name+" "+self.student_ids.last_name
+            self.student_name=full_name
+            self.class_sec=self.student_ids.homeroom
+            self.student_code=self.student_ids.facts_udid
+            self.campus=self.student_ids.school_ids.name
+            self.bill_date=self.invoice_date
+            self.due_date=self.invoice_date_due
+            self.due_amount=self.due_amount
+            if self.invoice_line_ids: 
+                    for line in self.invoice_line_ids:
+                        if 'Tuition Fee' in line.product_id.name:
+                             self.tuition=line.price_subtotal
+                        elif 'Club' in line.product_id.name:
+                            self.club=line.price_subtotal
+                        elif 'Computer' in line.product_id.name:
+                            self.computer=line.price_subtotal
+                        elif 'Library' in line.product_id.name:
+                            self.library=line.price_subtotal
+                        elif 'Utility' in line.product_id.name:
+                            self.utility=line.price_subtotal
+                        
+    
                             
   #admission
 
 
-    
-    @api.onchange('student_ids')
-    def _onchange_std_name_data(self):
-        self._get_std_name_field()
-
-    def _get_std_name_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_name=''
-        
-        for rec in adm_journals:
-            
-            if rec.student_ids:
-                full_name=rec.student_ids.first_name+" "+rec.student_ids.last_name
-                rec['std_name']=full_name
-
-    
-    @api.onchange('student_ids')
-    def _onchange_dob_data(self):
-        self._get_dob_field()
-    
-                
-    def _get_dob_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_dob=' '
-        for rec in adm_journals:
-
-            rec.std_dob=' '
-            if rec.student_ids:
-                rec['std_dob']=rec.student_ids.date_of_birth
-    
-
-
-    
-    @api.onchange('student_ids')
-    def _onchange_udid_data(self):
-        self._get_udid_field()
-    
-                
-    def _get_udid_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_udid=0
-        for rec in adm_journals:
-
-           
-            if rec.student_ids:
-                rec['std_udid']=rec.student_ids.facts_udid
-
-    @api.onchange('student_ids')
-    def _onchange_adm_amount_data(self):
-        self._get_adm_amt_field()
-    
-
-
-
-
-    @api.onchange('student_ids')
-    def _onchange_std_discount_data(self):
-        self._get_std_discount_field()
-    
-                
-    def _get_std_discount_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_discount=''
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_discount']=rec.discount_note
-    
-    @api.onchange('student_ids')
-    def _onchange_std_reason_data(self):
-        self._get_std_reason_field()
-    
-                
-    def _get_std_reason_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_reason=''
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_reason']=rec.reject_reason.name
-    
-    
-
-    @api.onchange('student_ids')
-    def _onchange_batch_data(self):
-        self._get_batch_field()
-    
-                
-    def _get_batch_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_batch=''
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_batch']=rec.x_studio_batch.x_name
-    
-    
-    @api.onchange('student_ids')
-    def _onchange_class_data(self):
-        self._get_class_field()
-
-    
-    def _get_class_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_class=' '
-        for rec in adm_journals:
-            if rec.student_ids:
-
-                rec['std_class']=rec.grade_level_ids.name
-   
-    @api.onchange('student_ids')
-    def _onchange_std_fathername_data(self):
-        self._get_father_field()
-
-    
-    def _get_father_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_fathername=' '
-        for rec in adm_journals:
-            if rec.student_ids:
-
-                rec['std_fathername']=rec.partner_id.name
-
-    @api.onchange('student_ids')
-    def _onchange_std_contactno_data(self):
-        self._get_contactno_field()
-
-    
-    def _get_contactno_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_contactno=' '
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_contactno']=rec.partner_id.mobile
-
-
-    
-    
-    @api.onchange('student_ids')
-    def _onchange_branch_data(self):
-        self._get_branch_field()
-
-    def _get_branch_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
+    @api.onchange('x_student_id_cred',"student_ids")
+    def _adm_students_onchange(self):
+        self.std_udid=''
+        self.std_class=" "
+        self.std_bill_date=""
+        self.std_due_date=""
         self.std_branch=' '
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_branch']=rec.student_ids.school_ids.name
-                
-    
-    
-    @api.onchange('student_ids')
-    def _onchange_std_bill_date_data(self):
-        self._get_std_bill_date_field()
+        self.std_dob=' '
+        self.std_name=""
+        self.std_batch=""
+        self.std_discount=""
+        self.std_reason=""
+        self.std_fathername=""
+        self.std_contactno=""
+        self.adm_amount=""
+        self.security_amount=""
+        self.bill_amount=""
+        self.std_factsid=""
+        self.std_payment_date=""
 
-    def _get_std_bill_date_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_bill_date=' '
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_bill_date']=rec.invoice_date
-
-    @api.onchange('student_ids')
-    def _onchange_std_due_date_data(self):
-        self._get_std_due_date_field()
-
-    def _get_std_due_date_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_due_date=' '
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_due_date']=rec.invoice_date_due  
-                
-    @api.onchange('student_ids')
-    def _onchange_facts_id_data(self):
-        self._get_facts_id_field()
-    
-                
-    def _get_facts_id_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_factsid=''
-        for rec in adm_journals:
-            if rec.student_ids:
-                rec['std_factsid']=rec.student_ids.facts_id
-
-    @api.onchange('invoice_line_ids')
-    def _onchange_adm_amount_data(self):
-        self._get_adm_amt_field()
-    
-                
-    def _get_adm_amt_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.adm_amount=0
-        for rec in adm_journals:
-            if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Admission' in line.product_id.name:
-                            rec['adm_amount']=line.price_subtotal
-
-    @api.onchange('invoice_line_ids')
-    def _onchange_security_amount_data(self):
-        self._get_sec_amt_field()
-    
-                
-    def _get_sec_amt_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.security_amount=''
-        for rec in adm_journals:
-             if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Security' in line.product_id.name:
-                            rec['security_amount']=line.price_subtotal
-
-    @api.onchange('invoice_line_ids')
-    def _onchange_bill_amount_data(self):
-        self._get_sec_bill_field()
-    
-                
-    def _get_sec_bill_field(self):
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.bill_amount=''
-        for rec in adm_journals:
-            rec['bill_amount']=rec.amount_total
- 
-
-    @api.onchange('payment_state')
-    def _onchange_payment_date_data(self):
-        self._get_payment_date_field()
+        if self.student_ids:
+            full_name=self.student_ids.first_name+" "+self.student_ids.last_name
+            self.std_name=full_name
+            self.std_class=self.grade_level_ids.name
+            self.campus=self.student_ids.school_ids.name
+            self.std_bill_date=self.invoice_date
+            self.std_due_date=self.invoice_date_due
+            self.std_discount=self.discount_note
+            self.std_reason=self.reject_reason.name
+            self.std_batch=self.x_studio_batch.x_name
+            self.std_dob=self.student_ids.date_of_birth
+            self.std_fathername=self.partner_id.name
+            self.std_udid==self.student_ids.facts_udid
+            self.std_factsid=self.student_ids.facts_id
+            self.std_contactno=self.partner_id.mobile
+            self.bill_amount=self.amount_total
+            if self.payment_state=="paid":
+                var=str(json.loads(self.invoice_payments_widget)["content"][-1]["date"])
+                self.std_payment_date=var
+            if self.invoice_line_ids: 
+                for line in self.invoice_line_ids:
+                    if 'Admission' in line.product_id.name:
+                        self.adm_amount=line.price_subtotal
+                    elif 'Security' in line.product_id.name:
+                           self.security_amount=line.price_subtotal
         
-    def _get_payment_date_field(self):
-        
-        adm_journal=self.env['account.journal'].search([('code','=','ADM')])
-        adm_journals=self.env['account.move'].search([('journal_id','=',adm_journal.id)])
-        self.std_payment_date=' '
-        for rec in adm_journals:
-            if rec.payment_state=="paid":
-                var=str(json.loads(rec.invoice_payments_widget)["content"][-1]["date"])
-                rec['std_payment_date']=var
                
+    
+
 
             
             
