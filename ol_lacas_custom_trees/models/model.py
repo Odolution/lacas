@@ -14,15 +14,12 @@ class ext(models.Model):
     utility=fields.Integer(string="utility Charges")
     student_code=fields.Char(string="UDID")
     student_name=fields.Char(string="Name")
-    class_sec=fields.Char(string="Class Section")
+    class_name=fields.Char(string="Class")
+    section_name=fields.Char(string="Section")
     campus=fields.Char(string="Campus")
     bill_date=fields.Char(string="Bill Date")
     due_date=fields.Char(string="Due Date")
     due_amount=fields.Integer(string="Due Amount")
-    
-    
-    std_udid=fields.Char(string="UDID")
-    std_class=fields.Char(string="Class")
     std_bill_date=fields.Char(string="Issue Date")
     std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
@@ -69,7 +66,6 @@ class ext(models.Model):
     def _students_onchange(self):
         self.student_name=''
         self.student_code=" "
-        self.class_sec=""
         self.campus=""
         self.bill_date=' '
         self.due_date=' '
@@ -79,37 +75,7 @@ class ext(models.Model):
         self.computer=0
         self.library=0
         self.utility=0
-        if self.student_ids:
-            full_name=self.student_ids.first_name+" "+self.student_ids.last_name
-            self.student_name=full_name
-            self.class_sec=self.student_ids.homeroom
-            self.student_code=self.student_ids.facts_udid
-            self.campus=self.student_ids.school_ids.name
-            self.bill_date=self.invoice_date
-            self.due_date=self.invoice_date_due
-            self.due_amount=self.due_amount
-            if self.invoice_line_ids: 
-                    for line in self.invoice_line_ids:
-                        if 'Tuition Fee' in line.product_id.name:
-                             self.tuition=line.price_subtotal
-                        elif 'Club' in line.product_id.name:
-                            self.club=line.price_subtotal
-                        elif 'Computer' in line.product_id.name:
-                            self.computer=line.price_subtotal
-                        elif 'Library' in line.product_id.name:
-                            self.library=line.price_subtotal
-                        elif 'Utility' in line.product_id.name:
-                            self.utility=line.price_subtotal
-                        
-    
-                            
-  #admission
-
-
-    @api.onchange('x_student_id_cred',"student_ids")
-    def _adm_students_onchange(self):
-        self.std_udid=''
-        self.std_class=" "
+        self.class_name=""
         self.std_bill_date=""
         self.std_due_date=""
         self.std_branch=' '
@@ -125,11 +91,16 @@ class ext(models.Model):
         self.bill_amount=""
         self.std_factsid=""
         self.std_payment_date=""
-
+        self.section_name=""
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
+            self.student_name=full_name
+            self.student_code=self.student_ids.facts_udid
+            self.campus=self.student_ids.school_ids.name
+            # self.bill_date=self.invoice_date
+            self.due_date=self.invoice_date_due
+            self.due_amount=self.due_amount
             self.std_name=full_name
-            self.std_class=self.grade_level_ids.name
             self.campus=self.student_ids.school_ids.name
             self.std_bill_date=self.invoice_date
             self.std_due_date=self.invoice_date_due
@@ -138,19 +109,78 @@ class ext(models.Model):
             self.std_batch=self.x_studio_batch.x_name
             self.std_dob=self.student_ids.date_of_birth
             self.std_fathername=self.partner_id.name
-            self.std_udid==self.student_ids.facts_udid
             self.std_factsid=self.student_ids.facts_id
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=self.amount_total
+
+            wholename=""
+            if self.student_ids.homeroom:
+                wholename=self.student_ids.homeroom
+                splitted_name=wholename.split('-')
+                if len(splitted_name)>2:
+                    self.class_name=splitted_name[0]+"-"+splitted_name[1]
+                    self.section_name=splitted_name[2]
+                elif len(splitted_name)>1:
+                    self.class_name=splitted_name[0]
+                    self.section_name=splitted_name[1]
+                elif len(splitted_name)>0:
+                        self.class_name=splitted_name[0]
+            wholedate=str(self.invoice_date)
+            splitted_name=wholedate.split('-')
+            if len(splitted_name)>2:
+                month=splitted_name[1]
+                date=splitted_name[2]
+                if month =='01':
+                    self.bill_date="Jan"+"-"+date
+                elif month =='02':
+                    self.bill_date="Feb"+"-"+date
+                elif month =='03':
+                    self.bill_date="Mar"+"-"+date
+                elif month =='04':
+                    self.bill_date="Apr"+"-"+date
+                elif month =='05':
+                    self.bill_date="May"+"-"+date
+                elif month =='06':
+                    self.bill_date="Jun"+"-"+date
+                elif month =='07':
+                    self.bill_date="Jul"+"-"+date
+                elif month =='08':
+                    self.bill_date="Aug"+"-"+date
+                elif month =='09':
+                    self.bill_date="Sep"+"-"+date
+                elif month =='10':
+                    self.bill_date="Oct"+"-"+date
+                elif month =='11':
+                    self.bill_date="Nov"+"-"+date
+                elif month =='12':
+                    self.bill_date="Dec"+"-"+date
+                
+    
+            if self.invoice_line_ids: 
+                    for line in self.invoice_line_ids:
+                        if 'Tuition Fee' in line.product_id.name:
+                             self.tuition=line.price_subtotal
+                        elif 'Club' in line.product_id.name:
+                            self.club=line.price_subtotal
+                        elif 'Computer' in line.product_id.name:
+                            self.computer=line.price_subtotal
+                        elif 'Library' in line.product_id.name:
+                            self.library=line.price_subtotal
+                        elif 'Utility' in line.product_id.name:
+                            self.utility=line.price_subtotal
+                        if 'Admission' in line.product_id.name:
+                            self.adm_amount=line.price_subtotal
+                        elif 'Security' in line.product_id.name:
+                           self.security_amount=line.price_subtotal
             if self.payment_state=="paid":
                 var=str(json.loads(self.invoice_payments_widget)["content"][-1]["date"])
                 self.std_payment_date=var
-            if self.invoice_line_ids: 
-                for line in self.invoice_line_ids:
-                    if 'Admission' in line.product_id.name:
-                        self.adm_amount=line.price_subtotal
-                    elif 'Security' in line.product_id.name:
-                           self.security_amount=line.price_subtotal
+          
+            
+                
+                        
+        
+
         
                
     
