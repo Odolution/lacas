@@ -75,7 +75,8 @@
                 
                 <field name="std_batch"/>
                 <field name="std_branch"/>
-                <field name="std_class"/>
+                <field name="class_name"/>
+                <field name="section_name"/>
                 <field name="std_payment_date"/>
              
 
@@ -128,10 +129,14 @@
                 </header>
                 <field name="name" decoration-bf="1"/>
                 <field name="partner_id" invisible="1"/>
+                <field name="std_udid"/>
                 <field name="student_code"/>
                 <field name="student_name"/>
-                <field name="class_sec"/>
+                <field name="std_fathername"/>
+                <field name="class_name"/>
+                <field name="section_name"/>
                 <field name="campus"/>
+                <field name="std_batch"/>
                 <field name="bill_date"/>
                 <field name="due_date"/>
                 <field name="due_amount"/>
