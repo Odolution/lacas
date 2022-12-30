@@ -99,7 +99,7 @@ class ext(models.Model):
             self.campus=self.student_ids.school_ids.name
             # self.bill_date=self.invoice_date
             self.due_date=self.invoice_date_due
-            self.due_amount=self.due_amount
+            self.due_amount=self.amount_residual
             self.std_name=full_name
             self.campus=self.student_ids.school_ids.name
             self.std_bill_date=self.invoice_date
