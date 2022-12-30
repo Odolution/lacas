@@ -97,7 +97,7 @@ class ext(models.Model):
             self.student_name=full_name
             self.student_code=self.student_ids.facts_udid
             self.campus=self.student_ids.school_ids.name
-            self.bill_date=self.invoice_date
+            # self.bill_date=self.invoice_date
             self.due_date=self.invoice_date_due
             self.due_amount=self.due_amount
             self.std_name=full_name
@@ -125,6 +125,37 @@ class ext(models.Model):
                     self.section_name=splitted_name[1]
                 elif len(splitted_name)>0:
                         self.class_name=splitted_name[0]
+            wholedate=str(self.invoice_date)
+            splitted_name=wholedate.split('-')
+            if len(splitted_name)>2:
+                month=splitted_name[1]
+                date=splitted_name[2]
+                if month =='01':
+                    self.bill_date="Jan"+"-"+date
+                elif month =='02':
+                    self.bill_date="Feb"+"-"+date
+                elif month =='03':
+                    self.bill_date="Mar"+"-"+date
+                elif month =='04':
+                    self.bill_date="Apr"+"-"+date
+                elif month =='05':
+                    self.bill_date="May"+"-"+date
+                elif month =='06':
+                    self.bill_date="Jun"+"-"+date
+                elif month =='07':
+                    self.bill_date="Jul"+"-"+date
+                elif month =='08':
+                    self.bill_date="Aug"+"-"+date
+                elif month =='09':
+                    self.bill_date="Sep"+"-"+date
+                elif month =='10':
+                    self.bill_date="Oct"+"-"+date
+                elif month =='11':
+                    self.bill_date="Nov"+"-"+date
+                elif month =='12':
+                    self.bill_date="Dec"+"-"+date
+                
+    
             if self.invoice_line_ids: 
                     for line in self.invoice_line_ids:
                         if 'Tuition Fee' in line.product_id.name:
