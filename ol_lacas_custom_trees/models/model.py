@@ -143,7 +143,6 @@ class ext(models.Model):
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.std_name=full_name
-            self.std_class=self.grade_level_ids.name
             self.campus=self.student_ids.school_ids.name
             self.std_bill_date=self.invoice_date
             self.std_due_date=self.invoice_date_due
