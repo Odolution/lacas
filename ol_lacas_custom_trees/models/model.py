@@ -14,7 +14,8 @@ class ext(models.Model):
     utility=fields.Integer(string="utility Charges")
     student_code=fields.Char(string="UDID")
     student_name=fields.Char(string="Name")
-    class_sec=fields.Char(string="Class Section")
+    class_name=fields.Char(string="Class")
+    section_name=fields.Char(string="Section")
     campus=fields.Char(string="Campus")
     bill_date=fields.Char(string="Bill Date")
     due_date=fields.Char(string="Due Date")
@@ -22,7 +23,6 @@ class ext(models.Model):
     
     
     std_udid=fields.Char(string="UDID")
-    std_class=fields.Char(string="Class")
     std_bill_date=fields.Char(string="Issue Date")
     std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
@@ -69,7 +69,6 @@ class ext(models.Model):
     def _students_onchange(self):
         self.student_name=''
         self.student_code=" "
-        self.class_sec=""
         self.campus=""
         self.bill_date=' '
         self.due_date=' '
@@ -79,15 +78,28 @@ class ext(models.Model):
         self.computer=0
         self.library=0
         self.utility=0
+        self.class_name=""
+        self.section_name=""
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.student_name=full_name
-            self.class_sec=self.student_ids.homeroom
             self.student_code=self.student_ids.facts_udid
             self.campus=self.student_ids.school_ids.name
             self.bill_date=self.invoice_date
             self.due_date=self.invoice_date_due
             self.due_amount=self.due_amount
+            wholename=""
+            if self.student_ids.homeroom:
+                wholename=self.student_ids.homeroom
+                splitted_name=wholename.split('-')
+            if len(splitted_name)>2:
+                self.class_name=splitted_name[0]+"-"+splitted_name[1]
+                self.section_name=splitted_name[2]
+            elif len(splitted_name)>1:
+                self.class_name=splitted_name[0]
+                self.section_name=splitted_name[1]
+            elif len(splitted_name)>0:
+                    self.class_name=splitted_name[0]
             if self.invoice_line_ids: 
                     for line in self.invoice_line_ids:
                         if 'Tuition Fee' in line.product_id.name:
@@ -100,8 +112,10 @@ class ext(models.Model):
                             self.library=line.price_subtotal
                         elif 'Utility' in line.product_id.name:
                             self.utility=line.price_subtotal
+            
+                
                         
-    
+        
                             
   #admission
 
@@ -109,7 +123,7 @@ class ext(models.Model):
     @api.onchange('x_student_id_cred',"student_ids")
     def _adm_students_onchange(self):
         self.std_udid=''
-        self.std_class=" "
+    
         self.std_bill_date=""
         self.std_due_date=""
         self.std_branch=' '
