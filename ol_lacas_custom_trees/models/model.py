@@ -119,9 +119,10 @@ class ext(models.Model):
                         enroll_history=self.student_ids.enrollment_history_ids
                         for lines in enroll_history:
                             lst.append(lines.program_id.name)
+                        self.campus=lst[0]
                 else:
                     self.campus=self.student_ids.school_ids.name
-            self.campus=lst[0]
+            
             
 
             wholename=""
