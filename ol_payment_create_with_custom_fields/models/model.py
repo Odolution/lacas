@@ -9,6 +9,10 @@ class extwiz(models.TransientModel):
     _inherit = "account.payment.register"
     ol_check_in_favor_of = fields.Char('Check in Favor Of')
     
+    @api.onchange('communication')
+    def _compute_check_in_favor_of(self):
+        self.ol_check_in_favor_of = self.partner_id.name
+    
     @api.model
     def _create_payments(self):
         payments=super(extwiz,self)._create_payments()
