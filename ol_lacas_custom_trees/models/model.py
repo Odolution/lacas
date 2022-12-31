@@ -122,7 +122,7 @@ class ext(models.Model):
                             lst.append(lines.program_id.name)
                         self.campus=lst[0]
                 else:
-                    self.campus=self.student_ids.school_ids.name
+                    self.campus=lst[0]
             
             
 
