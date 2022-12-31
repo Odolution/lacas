@@ -112,11 +112,12 @@ class ext(models.Model):
             self.std_factsid=self.student_ids.facts_id
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=self.amount_total
-            lst=[]
+            
             if self.student_ids.school_ids:
                 if len(self.student_ids.school_ids)>1:
                     if self.student_ids.enrollment_history_ids:
                         enroll_history=self.student_ids.enrollment_history_ids
+                        lst=[]
                         for lines in enroll_history:
                             lst.append(lines.program_id.name)
                         self.campus=lst[0]
