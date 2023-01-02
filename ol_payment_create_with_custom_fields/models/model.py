@@ -29,7 +29,7 @@ class extwiz(models.TransientModel):
                                         if lines.relationship_type_id.name=="Father":
                                             self.ol_check_in_favor_of =lines.individual_id.name
                         else:
-                            self.ol_check_in_favor_of = "None"
+                            self.ol_check_in_favor_of = self.partner_id.name
 
 
                     
