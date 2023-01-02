@@ -11,8 +11,25 @@ class extwiz(models.TransientModel):
     
     @api.onchange('communication')
     def _compute_check_in_favor_of(self):
-        self.ol_check_in_favor_of = self.line_ids.student_id.name
-    
+        for lines in self.lines_id:
+            if lines.student_id.name:
+                self.ol_check_in_favor_of = lines.student_id.name
+            else:
+                inv=self.env['account.move'].search(["name",'=',self.communication])
+                if inv:
+                    for lines in inv.invoice_line_ids:
+                        if lines.student_id:
+                            student=lines.student_id
+                        if student.relationship_ids:
+                            relation=student.relationship_ids
+                            for lines in relation:
+                                if lines.relationship_type_id.name=="Father":
+                                    self.ol_check_in_favor_of =lines.individual_id.name
+                else:
+                    self.ol_check_in_favor_of = "None"
+
+                                  
+
     @api.model
     def _create_payments(self):
         payments=super(extwiz,self)._create_payments()
