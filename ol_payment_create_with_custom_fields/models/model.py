@@ -11,7 +11,7 @@ class extwiz(models.TransientModel):
     
     @api.onchange('communication')
     def _compute_check_in_favor_of(self):
-        self.ol_check_in_favor_of = self.partner_id.name
+        self.ol_check_in_favor_of = self.line_ids.student_id.name
     
     @api.model
     def _create_payments(self):
