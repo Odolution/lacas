@@ -12,7 +12,7 @@ class extwiz(models.TransientModel):
     
     @api.onchange('communication')
     def _compute_check_in_favor_of(self):
-        for lines in self.lines_id:
+        for lines in self.line_ids:
             if lines.student_id.name:
                 self.ol_check_in_favor_of = lines.student_id.name
             else:
