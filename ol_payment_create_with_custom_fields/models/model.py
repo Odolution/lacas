@@ -28,6 +28,7 @@ class extwiz(models.TransientModel):
                 else:
                     self.ol_check_in_favor_of = "None"
 
+                    
                                   
 
     @api.model
