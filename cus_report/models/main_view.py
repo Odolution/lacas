@@ -51,3 +51,21 @@ class reportbutton(http.Controller):
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                           ('Content-Disposition', 'catalogue' + '.pdf;')]
         return request.make_response(pdf, headers=pdfhttpheaders)
+
+class inheritinvoices(models.Model):
+    _inherit="account.move"
+  
+
+    unpaid_inv_ids = fields.Many2many(
+        comodel_name='account.move',
+        compute='_compute_unpaid_invoice',
+        string='UnPaid Invoice Ids',
+        
+    )
+
+    def _compute_unpaid_invoice(self):
+        if self.ids:
+             self.unpaid_inv_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("partner_id","=",self.partner_id.id),("payment_state","=","not_paid")])
+        else:
+            self.unpaid_inv_ids = False
+    
