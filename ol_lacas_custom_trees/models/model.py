@@ -132,31 +132,32 @@ class ext(models.Model):
             splitted_name=wholedate.split('-')
             if len(splitted_name)>2:
                 month=splitted_name[1]
-                date=splitted_name[2]
+                wholeyear=splitted_name[0]
+                year=wholeyear[2:4]
                 if month =='01':
-                    self.bill_date="Jan"+"-"+date
+                    self.bill_date="Jan"+"-"+year
                 elif month =='02':
-                    self.bill_date="Feb"+"-"+date
+                    self.bill_date="Feb"+"-"+year
                 elif month =='03':
-                    self.bill_date="Mar"+"-"+date
+                    self.bill_date="Mar"+"-"+year
                 elif month =='04':
-                    self.bill_date="Apr"+"-"+date
+                    self.bill_date="Apr"+"-"+year
                 elif month =='05':
-                    self.bill_date="May"+"-"+date
+                    self.bill_date="May"+"-"+year
                 elif month =='06':
-                    self.bill_date="Jun"+"-"+date
+                    self.bill_date="Jun"+"-"+year
                 elif month =='07':
-                    self.bill_date="Jul"+"-"+date
+                    self.bill_date="Jul"+"-"+year
                 elif month =='08':
-                    self.bill_date="Aug"+"-"+date
+                    self.bill_date="Aug"+"-"+year
                 elif month =='09':
-                    self.bill_date="Sep"+"-"+date
+                    self.bill_date="Sep"+"-"+year
                 elif month =='10':
-                    self.bill_date="Oct"+"-"+date
+                    self.bill_date="Oct"+"-"+year
                 elif month =='11':
-                    self.bill_date="Nov"+"-"+date
+                    self.bill_date="Nov"+"-"+year
                 elif month =='12':
-                    self.bill_date="Dec"+"-"+date
+                    self.bill_date="Dec"+"-"+year
                 
     
             if self.invoice_line_ids: 
