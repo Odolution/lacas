@@ -7,6 +7,7 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo import http
 from odoo.http import request
+from datetime import datetime 
 # import base64
 # import requests
 # import datetime
@@ -63,9 +64,20 @@ class inheritinvoices(models.Model):
         
     )
 
+    due_date=fields.Integer(string="Due Date",compute='_compute_remaining_days')
+
     def _compute_unpaid_invoice(self):
         if self.ids:
              self.unpaid_inv_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("partner_id","=",self.partner_id.id),("payment_state","=","not_paid")])
         else:
             self.unpaid_inv_ids = False
+
+    def _compute_remaining_days(self):
+        self.due_date=0
+        self.end_date = str(datetime.now().date())
+        d1 = datetime.strptime(str(self.end_date), "%Y-%m-%d")
+        d2 = datetime.strptime(str(self.invoice_date_due), "%Y-%m-%d")
+        delta = d1 - d2
+        self["due_date"]=delta.days
+
     
