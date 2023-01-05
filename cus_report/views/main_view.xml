@@ -22,6 +22,7 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="unpaid_inv_ids" invisible="1"/>
                 <field name="due_day" invisible="1"/>
+                <field name="due_day_text" invisible="1"/>
                 
             </xpath>
         </field>
