@@ -106,6 +106,7 @@ class account_fields(models.Model):
                     
                   for rec in record.invoice_line_ids:
                     rec['name'] = new_no
+                    record.payment_reference = new_no
                     
               if record.move_type == 'out_refund':
 #                 record['name'] = 'Draft'
@@ -113,6 +114,7 @@ class account_fields(models.Model):
                   # raise UserError(record)
                   if record.x_school_id_cred:
                     new_no = record.x_school_id_cred.description + record.env['ir.sequence'].next_by_code('security')
+                    record.payment_reference = new_no
                     record.name = new_no
                     
                     for rec in record.invoice_line_ids:
