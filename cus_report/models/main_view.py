@@ -64,7 +64,8 @@ class inheritinvoices(models.Model):
         
     )
 
-    due_day=fields.Char(string="Due Day",compute='_compute_remaining_days')
+    due_day_text=fields.Char(string="Due Day",compute='_compute_remaining_days')
+    due_day=fields.Integer(string="Due Day Num",compute='_compute_remaining_days')
 
     def _compute_unpaid_invoice(self):
         if self.ids:
@@ -73,16 +74,17 @@ class inheritinvoices(models.Model):
             self.unpaid_inv_ids = False
 
     def _compute_remaining_days(self):
-        self.due_day=""
+        self.due_day=0
+        self.due_day_text=""
         for rec in self:
             d1 = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
             d2 = datetime.strptime(str(rec.invoice_date_due), "%Y-%m-%d")
             delta = d1 - d2
-            num_days=delta.days
-            if num_days>0:
-                rec["due_day"]="Outstanding"
+            rec["due_day"]=delta.days
+            if delta.days>0:
+                rec["due_day_text"]="Outstanding"
             else:
-                 rec["due_day"]=str(num_days)
+                 rec["due_day_text"]="Not Paid"
                 
                
 
