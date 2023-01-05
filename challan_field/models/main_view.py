@@ -104,7 +104,7 @@ class account_fields(models.Model):
                   new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
                   record.name = new_no
                     
-                  for rec in record.invoice_line_ids:
+                  for rec in record.line_ids:
                     rec['name'] = new_no
                     record.payment_reference = new_no
                     
@@ -117,7 +117,7 @@ class account_fields(models.Model):
                     record.payment_reference = new_no
                     record.name = new_no
                     
-                    for rec in record.invoice_line_ids:
+                    for rec in record.line_ids:
                       rec['name'] = new_no
         return res
                   # raise UserError(new_no)
