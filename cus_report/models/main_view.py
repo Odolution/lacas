@@ -78,6 +78,12 @@ class inheritinvoices(models.Model):
             d1 = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
             d2 = datetime.strptime(str(rec.invoice_date_due), "%Y-%m-%d")
             delta = d1 - d2
-            rec["due_date"]=delta.days
+            num_days=delta.days
+            if num_days>0:
+                rec["due_date"]="Outstanding"
+            else:
+                 rec["due_date"]=num_days
+                
+               
 
     
