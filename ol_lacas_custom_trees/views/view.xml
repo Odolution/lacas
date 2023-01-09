@@ -138,11 +138,11 @@
                 <field name="bill_date"/>
                 <field name="due_date"/>
                 <field name="due_amount"/>
+                <field name="tuition"/>
                 <field name="club"/>
                 <field name="computer"/>
                 <field name="library"/>
                 <field name="utility"/>
-                <field name="tuition"/>
                 <field name="bill_amount"/>
                 <field name="company_currency_id" invisible="1"/>
                 <field name="to_check" optional="hide" widget="boolean_toggle"/>
