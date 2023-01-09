@@ -20,9 +20,9 @@ class field_changes_custom_update(models.Model):
         if self.student_ids:
             self.udid_new_lv=self.student_ids.facts_udid
             self.facts_id_new_lv=self.student_ids.facts_id
-            self.adm_amount=self.student_ids.school_ids.name
+            # self.adm_amount=self.student_ids.school_ids.name
             self.std_dob=self.student_ids.date_of_birth
-            self.security_amount=self.invoice_date_due
+            # self.security_amount=self.invoice_date_due
 
 #         if self.invoice_line_ids:
 #             for line in self.invoice_line_ids: 
