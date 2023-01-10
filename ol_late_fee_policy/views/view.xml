@@ -5,7 +5,7 @@
         <field name="model_id" ref="account.model_account_move"/>
         <!-- <field name="model_id" ref="account.move"/> -->
         <field name="state">code</field>
-        <field name="code">action = model.apply_late_fee_policy()</field>
+        <field name="code">records.apply_late_fee_policy()</field>
     </record>
     <record id="view_late_fee_slabs_form" model="ir.ui.view">
         <field name="name">account.latefeeslab.form</field>
