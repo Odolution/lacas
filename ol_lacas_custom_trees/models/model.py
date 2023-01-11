@@ -18,6 +18,7 @@ class ext(models.Model):
     section_name=fields.Char(string="Section")
     campus=fields.Char(string="Campus")
     bill_date=fields.Char(string="Billing Month")
+    challan_date=fields.Char(string="Challan date")
     due_date=fields.Char(string="Due Date")
     due_amount=fields.Integer(string="Due Amount")
     std_bill_date=fields.Char(string="Issue Date")
@@ -68,6 +69,7 @@ class ext(models.Model):
         self.student_code=" "
         self.campus=""
         self.bill_date=' '
+        self.challan_date=' '
         self.due_date=' '
         self.due_amount=0
         self.tuition=0
@@ -97,7 +99,7 @@ class ext(models.Model):
             self.student_name=full_name
             self.student_code=self.student_ids.facts_udid
             # self.campus=self.student_ids.school_ids.name
-            # self.bill_date=self.invoice_date
+            self.challan_date=self.invoice_date
             self.due_date=self.invoice_date_due
             # self.due_amount=self.due_amount
             self.std_name=full_name
