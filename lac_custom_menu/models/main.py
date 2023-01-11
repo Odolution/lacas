@@ -11,11 +11,11 @@ class field_changes_custom_update(models.Model):
 
     @api.onchange('x_student_id_cred',"student_ids")
     def _studentsbill_onchange(self):
-        self.udid_new_lv=''
-        self.facts_id_new_lv=" "
-#         self.adm_amount=""
-#         self.security_amount=' '
-        self.std_dob=' '
+#         self.udid_new_lv=''
+#         self.facts_id_new_lv=" "
+# #         self.adm_amount=""
+# #         self.security_amount=' '
+#         self.std_dob=' '
 
         if self.student_ids:
             self.udid_new_lv=self.student_ids.facts_udid
