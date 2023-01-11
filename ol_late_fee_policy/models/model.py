@@ -59,7 +59,7 @@ class extwiz(models.TransientModel):
         super(extwiz,self)._compute_amount()
         self._compute_late_fee()
         for wizard in self:
-            wizard.amount=wizard.amount+wizard.late_fee
+            wizard.amount=wizard.amount_late_fee_exclusive+wizard.late_fee
             
     def _create_payments(self):
         late_fee=self.late_fee
