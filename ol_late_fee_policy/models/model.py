@@ -12,7 +12,7 @@ class apply_late_fee_wiz(models.TransientModel):
     def apply(self):
         for wizard in self:
             for move in wizard.account_move_ids:
-                move.apply_late_fee_policy(self, nowdate=payment_date)
+                move.apply_late_fee_policy(self, nowdate=self.payment_date)
 
 
     def default_get(self, fields_list):
