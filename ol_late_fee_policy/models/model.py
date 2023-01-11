@@ -43,7 +43,7 @@ class extwiz(models.TransientModel):
                 invoice=line.move_id
                 break
             if invoice!="":
-                 foundline=None
+                foundline=None
                 for line in invoice.invoice_line_ids:
                     if line.product_id.name=="Late Fee":
                         foundline=line
