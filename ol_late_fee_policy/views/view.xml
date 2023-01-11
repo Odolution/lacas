@@ -5,8 +5,25 @@
         <field name="model_id" ref="account.model_account_move"/>
         <!-- <field name="model_id" ref="account.move"/> -->
         <field name="state">code</field>
-        <field name="code">records.apply_late_fee_policy()</field>
+        <field name="code">action=records.get_late_fee_wizard()</field>
     </record>
+     <record id="view_apply_late_fee_wiz_form" model="ir.ui.view">
+            <field name="name">account.apply_late_fee.form</field>
+            <field name="model">account.apply_late_fee</field>
+            <field name="arch" type="xml">
+                <form string="Apply Late Fee">
+
+                        <group>
+                            <field name="payment_date" required="1"/>
+                        </group>
+                        
+                    <footer>
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
     <record id="view_late_fee_slabs_form" model="ir.ui.view">
         <field name="name">account.latefeeslab.form</field>
         <field name="model">account.latefeeslab</field>
