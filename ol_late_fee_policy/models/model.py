@@ -4,6 +4,24 @@ from odoo.exceptions import UserError
 import json
 import datetime
 
+
+class apply_late_fee_wiz(models.TransientModel):
+    _name='account.apply_late_fee'
+    payment_date = fields.Date('Payment Date')
+    account_move_ids = fields.Many2many('account.move', string='account_moves')
+    def apply(self):
+        for wizard in self:
+            for move in wizard.account_move_ids:
+                move.apply_late_fee_policy(self, nowdate=payment_date)
+
+
+    def default_get(self, fields_list):
+        # OVERRIDE
+        res = super().default_get(fields_list)
+        ids=self._context.get("active_ids")
+        res["account_move_ids"]=[(6,0,ids)]
+        return res
+
 class late_fee_slab(models.Model):
     _name = "account.latefeeslab"
     days = fields.Integer('Days')
@@ -17,10 +35,6 @@ class extwiz(models.TransientModel):
     _inherit = "account.payment.register"
     late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')
     amount_late_fee_exclusive=fields.Float(string="Total without Late Fee",compute='_compute_late_fee')
-class extwiz(models.TransientModel):
-    _inherit = "account.payment.register"
-    late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')
-    amount_late_fee_exclusive=fields.Float(string="Total without Late Fee",compute='_compute_late_fee')
     def _compute_late_fee(self):
         for wizard in self:
             invoice=""
@@ -29,24 +43,14 @@ class extwiz(models.TransientModel):
                 invoice=line.move_id
                 break
             if invoice!="":
-                foundline=None
-                for line in invoice.invoice_line_ids:
-                    if line.product_id.name=="Late Fee":
-                        foundline=line
-                        break
-                ##if line is found. removing that latefee from totalfirst .
-                if foundline is not None:
-                    wizard.amount_late_fee_exclusive=wizard.amount-foundline.price_unit
-                else:
-                    wizard.amount_late_fee_exclusive=wizard.amount
+                wizard.amount_late_fee_exclusive=wizard.amount
                 wizard.late_fee=invoice.late_fee_compute
 
     def _compute_amount(self):
         super(extwiz,self)._compute_amount()
         self._compute_late_fee()
         for wizard in self:
-            wizard.amount=wizard.amount_late_fee_exclusive+wizard.late_fee
-            
+            wizard.amount=wizard.amount+wizard.late_fee
             
     def _create_payments(self):
         late_fee=self.late_fee
@@ -82,14 +86,17 @@ class ext_invoice(models.Model):
             self.late_fee_compute=0
         else:  
             self.late_fee_compute=self.get_late_fee_charges()
-    def get_late_fee_charges(self):
+    def get_late_fee_charges(self, now=None):
         invoice=self
         if invoice.journal_id==False:
             return 0    ## if no journal_id found, can't be sure if we should apply late fee or not. 
         if not invoice.journal_id.apply_late_fee_policy:
             return 0    ## if invoice is for admission challan, no late fee will be charged
         ##get todays date
-        nowdate=datetime.datetime.now().date()
+        if now==None:
+            nowdate=datetime.datetime.now().date()
+        else:
+            nowdate=now
         if nowdate<invoice.invoice_date_due:
             return 0    ##if due date has not exceeded, then latefee charges are zero. 
         ## get late fee slabs
@@ -147,11 +154,25 @@ class ext_invoice(models.Model):
             if charges[key]>max:
                 max=charges[key]
         return max        
-
-    def apply_late_fee_policy(self):
+    def get_late_fee_wizard(self):
+        return {
+            'name': _('Apply Late Fee'),
+            'res_model': 'account.apply_late_fee',
+            'view_mode': 'form',
+            'context': {
+                'active_model': 'account.move',
+                'active_ids': self.ids,
+            },
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }
+    def apply_late_fee_policy(self, nowdate=None):
         
         for invoice in self:
-            late_fee_charges=invoice.get_late_fee_charges()
+            if nowdate==None:
+                late_fee_charges=invoice.get_late_fee_charges()
+            else:
+                late_fee_charges=invoice.get_late_fee_charges(nowdate)
             if late_fee_charges<=0:
                 return
             ##late fee calculations are complete. now to put these charges in to the invoice lines.
