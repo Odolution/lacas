@@ -43,7 +43,16 @@ class extwiz(models.TransientModel):
                 invoice=line.move_id
                 break
             if invoice!="":
-                wizard.amount_late_fee_exclusive=wizard.amount
+                 foundline=None
+                for line in invoice.invoice_line_ids:
+                    if line.product_id.name=="Late Fee":
+                        foundline=line
+                        break
+                ##if line is found. removing that latefee from totalfirst .
+                if foundline is not None:
+                    wizard.amount_late_fee_exclusive=wizard.amount-foundline.price_unit
+                else:
+                    wizard.amount_late_fee_exclusive=wizard.amount
                 wizard.late_fee=invoice.late_fee_compute
 
     def _compute_amount(self):
