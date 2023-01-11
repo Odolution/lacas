@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_latefeeslab,account.latefeeslab,model_account_latefeeslab,,1,1,1,1
+access_account_apply_late_fee,account.apply_late_fee,model_account_apply_late_fee,,1,1,1,1
