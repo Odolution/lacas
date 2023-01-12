@@ -178,7 +178,7 @@ class ext(models.Model):
                             self.adm_amount=line.price_subtotal
                         elif 'Security' in line.product_id.name:
                            self.security_amount=line.price_subtotal
-            if self.payment_state=="paid":
+            if self.payment_state=="paid" and self.journal_id==119:
                 if self.invoice_payments_widget:
                     var=str(json.loads(self.invoice_payments_widget)["content"][-1]["date"])
                     self.std_payment_date=var
