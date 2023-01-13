@@ -8,12 +8,14 @@ class edit_installment_wiz(models.TransientModel):
     _name='tuition.edit_installment_wiz'
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     installment_month=fields.Char(string="Installment")
-    month = fields.Char('Month')
+    month = fields.Integer('Month')
     day = fields.Integer('Day')
     def apply(self):
         for wizard in self:
             for plan in wizard.plan_ids:
-                pass
+                for installment in plan.installment_ids:
+                    if installment.name == wizard.installment_month:
+                        installment.x_inv_date=datetime.datetime(day=wizard.day,month=wizard.month,year=plan.plan_year)
 
     def default_get(self, fields_list):
         # OVERRIDE
