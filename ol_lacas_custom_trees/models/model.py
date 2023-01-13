@@ -204,7 +204,8 @@ class ext(models.Model):
                     if line.product_id.is_discount_type!=True:
                         amt.append(line.price_total)
                 total=sum(amt)
-                self.net_amount=str(total)
+                nofloat=int(total)
+                self.net_amount=str(nofloat)
             
                
             
