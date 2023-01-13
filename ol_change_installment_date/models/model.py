@@ -11,11 +11,10 @@ class edit_installment_wiz(models.TransientModel):
     month = fields.Integer('Month')
     day = fields.Integer('Day')
     def apply(self):
-        for wizard in self:
-            for plan in wizard.plan_ids:
+            for plan in self.plan_ids:
                 for installment in plan.installment_ids:
-                    if installment.name == wizard.installment_month:
-                        installment.x_inv_date=datetime.datetime(day=wizard.day,month=wizard.month,year=plan.plan_year)
+                    if installment.name == self.installment_month:
+                        installment.x_inv_date=datetime.datetime(day=self.day,month=self.month,year=plan.plan_year)
 
     def default_get(self, fields_list):
         # OVERRIDE
