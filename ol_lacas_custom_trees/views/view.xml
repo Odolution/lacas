@@ -70,7 +70,6 @@
                 <field name="adm_amount"/>
                 <field name="security_amount"/>
                 <field name="bill_amount"/>
-                <field name="net_amount"/>
                 <field name="std_discount"/>
                 <field name="std_batch"/>
                 <field name="std_branch"/>
@@ -144,6 +143,7 @@
                 <field name="library"/>
                 <field name="utility"/>
                 <field name="bill_amount"/>
+                <field name="net_amount"/>
                 <field name="company_currency_id" invisible="1"/>
                 <field name="to_check" optional="hide" widget="boolean_toggle"/>
                 <field name="payment_state" widget="badge" decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')" decoration-success="payment_state in ('paid', 'reversed')" attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}" optional="show"/>
