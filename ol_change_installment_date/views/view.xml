@@ -1,0 +1,58 @@
+<odoo>
+
+
+
+
+        <record id="view_bulk_edit_installment_wiz_form" model="ir.ui.view">
+            <field name="name">tuition.edit_installment_wiz.form</field>
+            <field name="model">tuition.edit_installment_wiz</field>
+            <field name="arch" type="xml">
+                <form string="Edit Installment">
+
+                        <group>
+                            <field name="installment_month" required="1"/>
+                            <field name="month" required="1"/>
+                            <field name="day" required="1"/>
+
+                        </group>
+                        
+                    <footer>
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+<!--         
+        
+        <record id="action_bulk_edit_move_wiz" model="ir.actions.act_window">
+            <field name="name">Bulk Edit Account Move</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.bulk_edit_move_wiz</field>
+            <field name="view_mode">form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                        No Instance Found
+                </p>
+            </field>
+        </record> -->
+        <record model="ir.actions.server" id="server_action_edit_installment_wiz">
+        <field name="name">Edit Installment</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="account.model_tuition_plan"/>
+        <field name="state">code</field>
+        <field name="code">action = {
+                                'name': _('Edit Installment'),
+                                'res_model': 'tuition.edit_installment_wiz',
+                                'view_mode': 'form',
+                                'context': {
+                                    'active_model': 'tuition.plan',
+                                    'active_ids': records.ids,
+                                },
+                                'target': 'new',
+                                'type': 'ir.actions.act_window',
+                            }
+        </field>
+    </record>
+  
+  </odoo>
