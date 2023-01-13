@@ -34,6 +34,7 @@ class ext(models.Model):
     adm_amount=fields.Char(string="Admission Amount")
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
+    net_amount=fields.Char(string="Net Amount")
     std_factsid=fields.Char(string="Facts ID")
     std_payment_date=fields.Char(string='Payment Date')
 
@@ -91,6 +92,7 @@ class ext(models.Model):
         self.adm_amount=""
         self.security_amount=""
         self.bill_amount=""
+        self.net_amount=""
         self.std_factsid=""
         self.std_payment_date=""
         self.section_name=""
@@ -178,6 +180,8 @@ class ext(models.Model):
                             self.adm_amount=line.price_subtotal
                         elif 'Security' in line.product_id.name:
                            self.security_amount=line.price_subtotal
+
+            
             if self.payment_state=="paid" and self.journal_id==119:
                 if self.invoice_payments_widget:
                     var=str(json.loads(self.invoice_payments_widget)["content"][-1]["date"])
@@ -193,6 +197,14 @@ class ext(models.Model):
                     self.campus=lst[0]
             if self.amount_residual:
                 self.due_amount=int(self.amount_residual)
+
+            if self.invoice_line_ids: 
+                amt=[]
+                for line in self.invoice_line_ids:
+                    if line.product_id.is_discount_type!=True:
+                        amt.append(line.price_total)
+                total=sum(amt)
+                self.net_amount=str(total)
             
                
             
