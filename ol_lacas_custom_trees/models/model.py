@@ -296,15 +296,15 @@ class ext(models.Model):
                            self.workbook=line.price_subtotal
                         elif 'Library Fine' in line.product_id.name:
                            self.libfine=line.price_subtotal
-                        elif 'ART' in line.product_id.x_studio_code:
+                        elif line.product_id.x_studio_code=='ART':
                             self.art=line.price_subtotal
-                        elif 'COM' in line.product_id.x_studio_code:
+                        elif line.product_id.x_studio_code=='COM':
                             self.computing=line.price_subtotal
-                        elif 'CHM' in line.product_id.x_studio_code:
+                        elif line.product_id.x_studio_code=='CHM':
                             self.chemistry=line.price_subtotal
-                        elif 'PHY' in line.product_id.x_studio_code:
+                        elif line.product_id.x_studio_code=='PHY':
                             self.physics=line.price_subtotal
-                        elif 'BIO' in line.product_id.x_studio_code:
+                        elif line.product_id.x_studio_code=='BIO':
                            self.biology=line.price_subtotal
                       
                         
