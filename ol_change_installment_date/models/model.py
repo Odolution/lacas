@@ -19,6 +19,7 @@ class edit_installment_wiz(models.TransientModel):
     def default_get(self, fields_list):
         # OVERRIDE
         res = super().default_get(fields_list)
+        raise UserError(ids)
         ids=self._context.get("active_ids")
         res["plan_ids"]=[(6,0,ids)]
         return res
