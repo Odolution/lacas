@@ -11,9 +11,7 @@ class edit_installment_wiz(models.TransientModel):
     month = fields.Integer('Month')
     day = fields.Integer('Day')
     def apply(self):
-        
-            raise UserError(str(self.plan_ids))
-            for plan in self.plan_ids:
+        for plan in self.plan_ids:
                 for installment in plan.installment_ids:
                     if installment.name == self.installment_month:
                         installment.x_inv_date=datetime.datetime(day=self.day,month=self.month,year=plan.plan_year)
