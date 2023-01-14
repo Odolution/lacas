@@ -11,8 +11,7 @@
 
                         <group>
                             <field name="installment_month" required="1"/>
-                            <field name="month" required="1"/>
-                            <field name="day" required="1"/>
+                            <field name="generation_date" required="1"/>
 
                         </group>
                         
