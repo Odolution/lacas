@@ -7,8 +7,7 @@ import datetime
 class edit_installment_wiz(models.TransientModel):
     _name='tuition.edit_installment_wiz'
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
-    installment_month=fields.Char(string="Installment")
-    month = fields.Selection([
+    installment_month = fields.Selection([
                 ('January', 'January')
                 ('February', 'February')
                 ('March', 'March')
@@ -21,15 +20,14 @@ class edit_installment_wiz(models.TransientModel):
                 ('October', 'October')
                 ('November', 'November')
                 ('December', 'December')
-            ], string='Month')
-    
-    day = fields.Integer('Day')
+            ], string='Billing Month')
+    generation_date=fields.Date(string="Invoice Generation Date")
+
     def apply(self):
         for plan in self.plan_ids:
                 for installment in plan.installment_ids:
                     if installment.name == self.installment_month:
-                        installment.x_inv_date=datetime.datetime(day=self.day,month=self.month,year=plan.plan_year)
-
+                        installment.x_inv_date=generation_date
     def default_get(self, fields_list):
         # OVERRIDE
         res = super().default_get(fields_list)
