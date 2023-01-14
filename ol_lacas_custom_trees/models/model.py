@@ -37,9 +37,44 @@ class ext(models.Model):
     net_amount=fields.Char(string="Net Amount")
     std_factsid=fields.Char(string="Facts ID")
     std_payment_date=fields.Char(string='Payment Date')
-
-
     
+    art=fields.Integer(string="Art")
+    biology=fields.Integer(string="Biology")
+    chemistry=fields.Integer(string="Chemistry")
+    physics=fields.Integer(string="Physics")
+    computing=fields.Integer(string="Computing")
+    classphoto=fields.Integer(string="Class Photo")
+    collegemagazine=fields.Integer(string="College Magazine")
+    dc=fields.Integer(string="Discipline Charges")
+    ec=fields.Integer(string="Examination Charges")
+    farewell=fields.Integer(string="Farewell")
+    gatepass=fields.Integer(string="Gate Pass")
+    idcard=fields.Integer(string="ID Card")
+    idcardfine=fields.Integer(string="ID Card Fine")
+    latecoming=fields.Integer(string="Late Coming")
+    latefee=fields.Integer(string="Late Fee")
+    libfine=fields.Integer(string="Library Fine")
+    mnf=fields.Integer(string="Miscellaneous & Fine")
+    mobfine=fields.Integer(string="Mobile Fine")
+    news=fields.Integer(string="Newsletter")
+    paragon=fields.Integer(string="Paragon 2nd Child and Onwards")
+    books=fields.Integer(string="Photocopy (Books)")
+    pcopy=fields.Integer(string="Photocopying Charges")
+    photo=fields.Integer(string="Photograph")
+    scarf=fields.Integer(string="Scarf")
+    sportd=fields.Integer(string="Sports Day")
+    stationary=fields.Integer(string="Stationary Charges")
+    welcome=fields.Integer(string="Wellcome Party")
+    workbook=fields.Integer(string="Work Books")
+    uniform=fields.Integer(string="Uniform Fine")
+    continuation=fields.Integer(string="Continuation")
+
+
+
+
+
+
+
 
     def get_charges_action(self):
         action = self.env.ref('ol_lacas_custom_trees.act_account_move_charges').read()[0]
@@ -96,6 +131,36 @@ class ext(models.Model):
         self.std_factsid=""
         self.std_payment_date=""
         self.section_name=""
+        self.art=0
+        self.biology=0
+        self.chemistry=0
+        self.physics=0
+        self.computing=0
+        self.classphoto=0
+        self.collegemagazine=0
+        self.dc=0
+        self.ec=0
+        self.farewell=0
+        self.gatepass=0
+        self.idcard=0
+        self.idcardfine=0
+        self.latecoming=0
+        self.latefee=0
+        self.libfine=0
+        self.mnf=0
+        self.mobfine=0
+        self.news=0
+        self.paragon=0
+        self.books=0
+        self.pcopy=0
+        self.photo=0
+        self.scarf=0
+        self.sportd=0
+        self.stationary=0
+        self.welcome=0
+        self.workbook=0
+        self.uniform=0
+        self.continuation=0
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.student_name=full_name
@@ -176,10 +241,73 @@ class ext(models.Model):
                             self.library=line.price_subtotal
                         elif 'Utility' in line.product_id.name:
                             self.utility=line.price_subtotal
-                        if 'Admission' in line.product_id.name:
+                        elif 'Admission' in line.product_id.name:
                             self.adm_amount=line.price_subtotal
                         elif 'Security' in line.product_id.name:
                            self.security_amount=line.price_subtotal
+
+                        elif 'Class Photo' in line.product_id.name:
+                            self.classphoto=line.price_subtotal
+                        elif 'College Magazine' in line.product_id.name:
+                            self.collegemagazine=line.price_subtotal
+                        elif 'Continuation' in line.product_id.name:
+                            self.continuation=line.price_subtotal
+                        elif 'Discipline' in line.product_id.name:
+                            self.dc=line.price_subtotal
+                        elif 'Examination' in line.product_id.name:
+                            self.ec=line.price_subtotal
+                        elif 'Farewell' in line.product_id.name:
+                           self.farewell=line.price_subtotal
+                        elif 'ID Card Fine' in line.product_id.name:
+                            self.idcardfine=line.price_subtotal
+                        elif 'Late Coming' in line.product_id.name:
+                            self.latecoming=line.price_subtotal
+                        elif 'Late Fee' in line.product_id.name:
+                            self.latefee=line.price_subtotal
+                        elif 'ID Card' in line.product_id.name:
+                            self.idcard=line.price_subtotal
+                        elif 'Gate Pass' in line.product_id.name:
+                            self.gatepass=line.price_subtotal
+                        elif 'Miscellaneous & Fine' in line.product_id.name:
+                            self.mnf=line.price_subtotal
+                        elif 'Mobile Fine' in line.product_id.name:
+                           self.mobfine=line.price_subtotal
+                        elif 'Newsletter' in line.product_id.name:
+                            self.news=line.price_subtotal
+                        elif 'Paragon 2nd Child and Onwards' in line.product_id.name:
+                            self.paragon=line.price_subtotal
+                        elif 'Photocopy (Books)' in line.product_id.name:
+                            self.books=line.price_subtotal
+                        elif 'Photocopying Charges' in line.product_id.name:
+                            self.pcopy=line.price_subtotal
+                        elif 'Photograph' in line.product_id.name:
+                           self.photo=line.price_subtotal
+                        elif 'Scarf' in line.product_id.name:
+                            self.scarf=line.price_subtotal
+                        elif 'Sports Day' in line.product_id.name:
+                            self.sportd=line.price_subtotal
+                        elif 'Stationary Charges' in line.product_id.name:
+                            self.stationary=line.price_subtotal
+                        elif 'Uniform Fine' in line.product_id.name:
+                            self.uniform=line.price_subtotal
+                        elif 'Wellcome Party' in line.product_id.name:
+                           self.welcome=line.price_subtotal
+                        elif 'Work Books' in line.product_id.name:
+                           self.workbook=line.price_subtotal
+                        elif 'Library Fine' in line.product_id.name:
+                           self.libfine=line.price_subtotal
+                        elif 'ART' in line.product_id.x_studio_code:
+                            self.art=line.price_subtotal
+                        elif 'COM' in line.product_id.x_studio_code:
+                            self.computing=line.price_subtotal
+                        elif 'CHM' in line.product_id.x_studio_code:
+                            self.chemistry=line.price_subtotal
+                        elif 'PHY' in line.product_id.x_studio_code:
+                            self.physics=line.price_subtotal
+                        elif 'BIO' in line.product_id.x_studio_code:
+                           self.biology=line.price_subtotal
+                      
+                        
 
             
             if self.payment_state=="paid" and self.journal_id==119:
