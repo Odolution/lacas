@@ -8,18 +8,18 @@ class edit_installment_wiz(models.TransientModel):
     _name='tuition.edit_installment_wiz'
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     installment_month = fields.Selection([
-                ('January', 'January')
-                ('February', 'February')
-                ('March', 'March')
-                ('April', 'April')
-                ('May', 'May')
-                ('June', 'June')
-                ('July', 'July')
-                ('August', 'August')
-                ('September', 'September')
-                ('October', 'October')
-                ('November', 'November')
-                ('December', 'December')
+                ('January', 'January'),
+                ('February', 'February'),
+                ('March', 'March'),
+                ('April', 'April'),
+                ('May', 'May'),
+                ('June', 'June'),
+                ('July', 'July'),
+                ('August', 'August'),
+                ('September', 'September'),
+                ('October', 'October'),
+                ('November', 'November'),
+                ('December', 'December'),
             ], string='Billing Month')
     generation_date=fields.Date(string="Invoice Generation Date")
 
