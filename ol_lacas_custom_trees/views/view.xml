@@ -95,7 +95,7 @@
 
 
     <record model="ir.actions.act_window" id="act_account_move_admission">
-       <field name="name">admissions</field>
+       <field name="name">Admissions</field>
        <field name="res_model">account.move</field>
        <field name="view_id" ref="account_move_tree_admission"/>
        <field name="context">{'default_move_type': 'out_invoice'}</field>
