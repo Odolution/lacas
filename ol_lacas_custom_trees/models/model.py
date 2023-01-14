@@ -242,9 +242,11 @@ class ext(models.Model):
                         elif 'Utility' in line.product_id.name:
                             self.utility=line.price_subtotal
                         elif 'Admission' in line.product_id.name:
-                            self.adm_amount=line.price_subtotal
+                            adm_amount=int(line.price_subtotal)
+                            self.adm_amount=str(adm_amount)
                         elif 'Security' in line.product_id.name:
-                           self.security_amount=line.price_subtotal
+                           security_amount=int(line.price_subtotal)
+                           self.security_amount=str(security_amount)
 
                         elif 'Class Photo' in line.product_id.name:
                             self.classphoto=line.price_subtotal
