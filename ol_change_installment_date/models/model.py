@@ -27,7 +27,7 @@ class edit_installment_wiz(models.TransientModel):
         for plan in self.plan_ids:
                 for installment in plan.installment_ids:
                     if installment.name == self.installment_month:
-                        installment.x_inv_date=generation_date
+                        installment.x_inv_date=self.generation_date
     def default_get(self, fields_list):
         # OVERRIDE
         res = super().default_get(fields_list)
