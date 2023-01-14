@@ -20,7 +20,7 @@ class edit_installment_wiz(models.TransientModel):
         # OVERRIDE
         res = super().default_get(fields_list)
         ids=self._context.get("active_ids")
-        raise UserError(self.env.context)
+        raise UserError(str(self.env.context))
         res["plan_ids"]=[(6,0,ids)]
         return res
 
