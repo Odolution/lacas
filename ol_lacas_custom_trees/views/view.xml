@@ -60,24 +60,22 @@
                 <field name="student_code"/>
                 <field name="std_factsid"/>
                 <field name="name" decoration-bf="1"/>
-                <field name="std_bill_date"/>
-                <field name="payment_state" widget="badge" decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')" decoration-success="payment_state in ('paid', 'reversed')" attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}" optional="show"/>
-                <field name="std_due_date"/>
                 <field name="std_name"/>
-                <field name="std_dob"/>
                 <field name="std_fathername"/>
+                <field name="std_dob"/>
                 <field name="std_contactno"/>
+                <field name="std_bill_date"/>
+                <field name="std_due_date"/>
                 <field name="adm_amount"/>
                 <field name="security_amount"/>
                 <field name="bill_amount"/>
+                <field name="payment_state" widget="badge" decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')" decoration-success="payment_state in ('paid', 'reversed')" attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}" optional="show"/>
                 <field name="std_discount"/>
                 <field name="std_batch"/>
                 <field name="std_branch"/>
                 <field name="class_name"/>
                 <field name="section_name"/>
                 <field name="std_payment_date"/>
-             
-
                 <field name="std_reason"/>
     
     
@@ -97,7 +95,7 @@
 
 
     <record model="ir.actions.act_window" id="act_account_move_admission">
-       <field name="name">admissions</field>
+       <field name="name">Admissions</field>
        <field name="res_model">account.move</field>
        <field name="view_id" ref="account_move_tree_admission"/>
        <field name="context">{'default_move_type': 'out_invoice'}</field>
@@ -136,14 +134,47 @@
                 <field name="campus"/>
                 <field name="std_batch"/>
                 <field name="bill_date"/>
+                <field name="challan_date"/>
                 <field name="due_date"/>
                 <field name="due_amount"/>
+                <field name="net_amount"/>
+                <field name="bill_amount"/>
+                <field name="tuition"/>
                 <field name="club"/>
                 <field name="computer"/>
                 <field name="library"/>
                 <field name="utility"/>
-                <field name="tuition"/>
-                <field name="bill_amount"/>
+                <field name="art"/>
+                <field name="biology"/>
+                <field name="chemistry"/>
+                <field name="physics"/>
+                <field name="computing"/>
+                <field name="classphoto"/>
+                <field name="collegemagazine"/>
+                <field name="dc"/>
+                <field name="ec"/>
+                <field name="farewell"/>
+                <field name="gatepass"/>
+                <field name="idcard"/>
+                <field name="idcardfine"/>
+                <field name="latecoming"/>
+                <field name="latefee"/>
+                <field name="libfine"/>
+                <field name="mnf"/>
+                <field name="mobfine"/>
+                <field name="news"/>
+                <field name="paragon"/>
+                <field name="books"/>
+                <field name="pcopy"/>
+                <field name="photo"/>
+                <field name="scarf"/>
+                <field name="sportd"/>
+                <field name="stationary"/>
+                <field name="welcome"/>
+                <field name="workbook"/>
+                <field name="uniform"/>
+                <field name="continuation"/>
+
                 <field name="company_currency_id" invisible="1"/>
                 <field name="to_check" optional="hide" widget="boolean_toggle"/>
                 <field name="payment_state" widget="badge" decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')" decoration-success="payment_state in ('paid', 'reversed')" attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}" optional="show"/>
