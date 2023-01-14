@@ -11,6 +11,8 @@ class edit_installment_wiz(models.TransientModel):
     month = fields.Integer('Month')
     day = fields.Integer('Day')
     def apply(self):
+        
+            raise UserError(str(self.plan_ids))
             for plan in self.plan_ids:
                 for installment in plan.installment_ids:
                     if installment.name == self.installment_month:
@@ -20,7 +22,6 @@ class edit_installment_wiz(models.TransientModel):
         # OVERRIDE
         res = super().default_get(fields_list)
         ids=self._context.get("active_ids")
-        raise UserError(str(self.env.context))
         res["plan_ids"]=[(6,0,ids)]
         return res
 
