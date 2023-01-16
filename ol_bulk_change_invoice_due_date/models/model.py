@@ -4,6 +4,8 @@ from odoo.exceptions import UserError
 import json
 import datetime
 
+
+
 class bulk_edit_move_wiz(models.TransientModel):
     _name='account.bulk_edit_move_wiz'
     invoice_date_due = fields.Date('invoice_date_due')
