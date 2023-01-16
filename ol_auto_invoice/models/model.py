@@ -1,6 +1,8 @@
 from odoo import models, fields, api, exceptions
 from odoo.exceptions import UserError
 from datetime import datetime
+
+
 class ext(models.Model):
     _inherit="account.move"
     def create_auto_invoices(self):
