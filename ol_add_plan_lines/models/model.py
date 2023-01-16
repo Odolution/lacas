@@ -8,7 +8,7 @@ class add_plan_line_wiz(models.TransientModel):
     _name='tuition.add_plan_line_wiz'
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     product_ids = fields.Many2many('product.product', string='Products')
-    installment_names=fields.Many2Many('tuition.installment_names',string="Billing Month")
+    installment_names=fields.Many2many('tuition.installment_names',string="Billing Month")
     def apply(self):
             for plan in self.plan_ids:
                 for product in self.product_ids:
