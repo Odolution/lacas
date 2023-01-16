@@ -14,7 +14,7 @@ class add_plan_line_wiz(models.TransientModel):
                 for product in self.product_ids:
                         installment_ids=self.env['tuition.installment'].search([
                                         ('name','in',[i.name for i in self.installment_names]),
-                                        ('plan_id','=',plan.id)])
+                                        ('tuition_plan_id','=',plan.id)])
                         linedata={
                                     'plan_id':plan.id,
                                     'product_id':product.id,
