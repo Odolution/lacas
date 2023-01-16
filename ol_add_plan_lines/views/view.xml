@@ -10,9 +10,8 @@
                 <form string="Add Plan Line">
 
                         <group>
-                            <field name="installment_month" required="1"/>
-                            <field name="month" required="1"/>
-                            <field name="day" required="1"/>
+                            <field name="installment_names" required="1"/>
+                            <field name="product_ids" required="1"/>
 
                         </group>
                         
@@ -23,19 +22,7 @@
                 </form>
             </field>
         </record>
-<!--         
-        
-        <record id="action_bulk_edit_move_wiz" model="ir.actions.act_window">
-            <field name="name">Bulk Edit Account Move</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">account.bulk_edit_move_wiz</field>
-            <field name="view_mode">form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                        No Instance Found
-                </p>
-            </field>
-        </record> -->
+
         <record model="ir.actions.server" id="server_action_Add_plan_lines_wiz">
         <field name="name">Add Plan Lines</field>
         <field name="type">ir.actions.server</field>
