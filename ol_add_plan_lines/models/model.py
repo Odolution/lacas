@@ -12,7 +12,7 @@ class add_plan_line_wiz(models.TransientModel):
     def apply(self):
             for plan in self.plan_ids:
                 for product in self.product_ids:
-                        installment_ids=self.env.search([
+                        installment_ids=self.env['tuition.installment'].search([
                                         ('name','in',[i.name for i in self.installment_names]),
                                         ('plan_id','=',plan.id)])
                         linedata={
