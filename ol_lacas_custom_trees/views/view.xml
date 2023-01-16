@@ -115,6 +115,7 @@
 
     <menuitem action="server_action_account_move_admission" id="account_move_admissions_menu" name="Admissions" parent="account.menu_finance_receivables" sequence="2"/>
 
+
     <record id="account_move_tree_monthlyBill" model="ir.ui.view">
         <field name="name">account.move.tree.monthlyBill</field>
         <field name="model">account.move</field>

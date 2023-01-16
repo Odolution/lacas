@@ -182,8 +182,6 @@ class ext(models.Model):
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=int(self.amount_total)
             
-        
-            
 
             wholename=""
             if self.student_ids.homeroom:
