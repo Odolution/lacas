@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_tuition_add_plan_line_wiz,tuition.add_plan_line_wiz,model_tuition_add_plan_line_wiz,,1,1,1,1
+access_tuition_installment_names,tuition.installment_names,model_tuition_installment_names,,1,1,1,1
