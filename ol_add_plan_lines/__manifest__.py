@@ -11,9 +11,8 @@
     'summary': 'Add Plan Line.',
     'description': "Add Plan Line",
     'website': '',
-    'images': [
-    ],
-    'depends': ['base','sale', 'edoob_finance'
+    'images': [],
+    'depends': ['base','sale',
     ],
     'data': [
         

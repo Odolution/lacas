@@ -28,7 +28,8 @@
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="edoob_finance.model_tuition_plan"/>
         <field name="state">code</field>
-        <field name="code">action = {
+        <field name="code">
+            action = {
                                 'name': 'Add Plan Lines',
                                 'res_model': 'tuition.add_plan_line_wiz',
                                 'view_mode': 'form',
@@ -40,6 +41,6 @@
                                 'type': 'ir.actions.act_window',
                             }
         </field>
-    </record>
+       </record>
 
   </odoo>
