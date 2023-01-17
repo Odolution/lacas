@@ -20,6 +20,8 @@ class add_plan_line_wiz(models.TransientModel):
                         linedata={
                                     'plan_id':plan.id,
                                     'product_id':product.id,
+                                    'name':product.name,
+                                    'account_id':product.property_account_income_id.id,
                                     'quantity':1,
                                     'installment_ids':[(6,0,[i.id for i in installment_ids])]
                                     }
