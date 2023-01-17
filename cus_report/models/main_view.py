@@ -7,6 +7,7 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo import http
 from odoo.http import request
+from datetime import datetime 
 # import base64
 # import requests
 # import datetime
@@ -51,3 +52,41 @@ class reportbutton(http.Controller):
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                           ('Content-Disposition', 'catalogue' + '.pdf;')]
         return request.make_response(pdf, headers=pdfhttpheaders)
+
+class inheritinvoices(models.Model):
+    _inherit="account.move"
+  
+
+    unpaid_inv_ids = fields.Many2many(
+        comodel_name='account.move',
+        compute='_compute_unpaid_invoice',
+        string='UnPaid Invoice Ids',
+        
+    )
+
+    due_day_text=fields.Char(string="Due Day",compute='_compute_remaining_days')
+    due_day=fields.Integer(string="Due Day Num",compute='_compute_remaining_days')
+
+    def _compute_unpaid_invoice(self):
+        if self.ids:
+             self.unpaid_inv_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("partner_id","=",self.partner_id.id),("payment_state","=","not_paid")])
+        else:
+            self.unpaid_inv_ids = False
+
+    def _compute_remaining_days(self):
+        self.due_day=0
+        self.due_day_text=""
+        for rec in self:
+            if rec.invoice_date_due:
+                d1 = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
+                d2 = datetime.strptime(str(rec.invoice_date_due), "%Y-%m-%d")
+                delta = d1 - d2
+                rec["due_day"]=delta.days
+                if delta.days>0:
+                    rec["due_day_text"]="Outstanding"
+                else:
+                    rec["due_day_text"]="Not Paid"
+                
+               
+
+    

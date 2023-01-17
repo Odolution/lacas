@@ -2,7 +2,7 @@
     <data>
 
     <template id="cus_report.dues_assesment_sheet">
-         <t t-call="web.html_container"> 
+          <t t-call="web.html_container"> 
                 <t t-foreach="docs" t-as="o">
                   
                   <div class="row" style="">
@@ -16,12 +16,12 @@
                               <img style="padding-left:2%; " t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="80" width="120" class="float-left" alt="Logo"/>
                   </td>
                   <td style="align-items: center;font-size: 10px;">
-                  <p style="text-align: center; "><strong style="font-size: 22px;">LACAS School Network</strong><br/><strong style="font-size: 18px;color:grey;">Dues Assessment Sheet </strong><br/></p>
+                  <p style="margin-left: 30px; "><strong style="font-size: 22px;">LACAS School Network</strong><br/><strong style="font-size: 18px;color:grey;">Dues Assessment Sheet </strong><br/></p>
                   </td>
-                  <td style=" align-items: left; ">
-                              <img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="70" width="120" class="float-left" alt="Logo"/>
+                  <!--<td style=" align-items: left; ">-->
+                  <!--            <img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="70" width="120" class="float-left" alt="Logo"/>-->
                   
-                  </td>
+                  <!--</td>-->
                   </tr> 
                   </tbody>
                   </table>
@@ -30,7 +30,7 @@
                      <table style="width: 100%; font-size: 10px;">
                     <tbody>
                     <tr>
-                    <td style="width: 100%;border-bottom: 1px solid black;border-right: 1px solid black; border-left: 1px solid black;  border-top: 1px solid black; text-align: center; font-size: 15px;"><strong style='color:#BD3B2F;' >Withdrawal No:</strong><span t-field="o.name"/></td>
+                    <td style="width: 100%;border-bottom: 1px solid black;border-right: 1px solid black; border-left: 1px solid black;  border-top: 1px solid black; text-align: center; font-size: 15px;"><strong style="color:#BD3B2F;">Withdrawal No:</strong><span t-field="o.name"/></td>
                   
                   
                     </tr>
@@ -81,11 +81,11 @@
 <tbody>
 <tr>
 <td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Branch:</strong>
+  <strong style="color:#BD3B2F;">Branch:</strong>
   <span style=" padding-left:10px;" t-field="o.x_school_id_cred"/>
   </td>
 <td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Application Submit Date :</strong>
+  <strong style="color:#BD3B2F;">Application Submit Date :</strong>
   <t t-if="o.withdrawl_submission_date">
     <span style=" padding-left:10px;" t-esc="o.withdrawl_submission_date.strftime('%d-%m-%Y')"/></t> 
   <t t-else="">-</t>
@@ -94,25 +94,37 @@
 </tr>
 <tr>
 <td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Class:</strong>
-   <t t-foreach="o.x_student_id_cred" t-as="i">
-      <t t-foreach="i.enrollment_state_ids" t-as="d">
-                     
-         <t t-if="d.enrollment_status_id.name == 'Admission'">
+  <strong style="color:#BD3B2F;">Class:</strong>
+  <t t-if="o.x_grade_level_cred">
             
-         <span style=" padding-left:10px;" ><t t-esc="d.next_grade_level_id.name"/></span>
+           <span style=" padding-left:10px;"><t t-esc="o.x_grade_level_cred.name"/></span>
           </t>
-         <t t-else="">
-          <span style=" padding-left:10px;" ><t t-esc="o.grade_level_ids.name"/></span>
-           </t>
-                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
-           </t>
-           </t>
+    <t t-else="">
+       <t t-foreach="o.x_student_id_cred" t-as="i">
+          <t t-foreach="i.enrollment_state_ids" t-as="d">
+                         
+             <t t-if="d.enrollment_status_id.name == 'Admission'">
+                
+               <span style=" padding-left:10px;"><t t-esc="d.next_grade_level_id.name"/></span>
+              </t>
+              <t t-if="d.enrollment_status_id.name == 'Enrolled'">
+                
+               <span style=" padding-left:10px;"><t t-esc="i.grade_level_ids.name"/></span>
+              </t>
+              
+             <t t-else="">
+              <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.homeroom"/></span>
+               </t>
+                        <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+               </t>
+               </t>
+               
+    </t>
   <!--<span style="  padding-left:10px;" t-field="o.x_student_id_cred.grade_level_ids.name"/>-->
   </td>
   
 <td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px;font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Actual Leaving Date:</strong>
+  <strong style="color:#BD3B2F;">Actual Leaving Date:</strong>
   <!--<span style=" padding-left:10px;" t-field="o.actual_leaving_date"/>-->
   <t t-if="o.actual_leaving_date">
     <span style=" padding-left:10px;" t-esc="o.actual_leaving_date.strftime('%d-%m-%Y')"/></t> 
@@ -121,11 +133,11 @@
 </tr>
 <tr>
 <td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Roll No:</strong>
+  <strong style="color:#BD3B2F;">Roll No:</strong>
   <span style="   padding-left:10px;" t-field="o.x_student_id_cred.facts_udid"/>
   </td>
 <td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Notice Completion Date :</strong>
+  <strong style="color:#BD3B2F;">Notice Completion Date :</strong>
   <!--<span style="  padding-left:10px;" t-field="o.notice_completion_date"/>-->
   <t t-if="o.notice_completion_date">
     <span style=" padding-left:10px;" t-esc="o.notice_completion_date.strftime('%d-%m-%Y')"/></t> 
@@ -134,37 +146,43 @@
 </tr>
 <tr>
 <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Student:</strong>
+  <strong style="color:#BD3B2F;">Student:</strong>
   <span style="  padding-left:10px;" t-field="o.x_student_id_cred"/>
   </td>
 <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Notice Fee  :</strong>
+  <strong style="color:#BD3B2F;">Notice Fee  :</strong>
   <span style="  padding-left:10px;" t-esc="int(o.notice_fee_withdrawal)"/>
   </td>
 </tr>
 
 <tr>
   <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Father:</strong>
+  <strong style="color:#BD3B2F;">Father:</strong>
    <span style="padding-left:10px;" t-field="o.partner_id"/>
   </td>
 <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Admission Date:</strong>
+  <strong style="color:#BD3B2F;">Admission Date:</strong>
   <t t-if="env['account.move'].search([('student_ids.id','=',o.x_student_id_cred.id),('journal_id','=',119)])">
    <span style="  padding-left:10px;" t-esc="env['account.move'].search([('student_ids.id','=',o.x_student_id_cred.id),('journal_id','=',119)]).invoice_date.strftime('%d-%m-%Y')"/>
     </t>
-    <t t-else="o.invoice_date"><span style="padding-left:10px;" t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>  </t>
+     <t t-else="o.x_student_id_cred">
+       <t t-foreach="o.x_student_id_cred.enrollment_state_ids" t-as="d">
+         <span style="padding-left:10px;" t-esc="d.enrolled_date.strftime('%d-%m-%Y')"/> 
+         
+         </t>
+         
+         </t>
   </td>
 
 </tr>
 
 <tr>
 <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
-  <strong style='color:#BD3B2F;'>Cheque in Favor of:</strong>
-  <t t-if="env['account.payment'].search([('ref','=',o.name)])">
+  <strong style="color:#BD3B2F;">Cheque in Favor of:</strong>
+ <t t-if="env['account.payment'].search([('ref','=',o.name)])">
    <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/>
    </t>
-   <t t-else=""> </t>
+   <t t-else="o.partner_id"><span style="padding-left:10px;" t-esc="o.partner_id.name"/>  </t>
   </td>
 
 </tr>
@@ -325,12 +343,22 @@
                      <h3 style="text-align:center; font-size:18px; ">Receiving</h3>
                      
                      <p style=" padding-left:40px; padding-right:40px;">
-                       I, <strong> <t t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/></strong>, do hereby confirm that I have received my entire dues from LACAS with
+                       I, <strong> <t t-if="env['account.payment'].search([('ref','=',o.name)])">
+                        <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/>
+                                        </t>
+                       <t t-else="o.partner_id">
+                        <span style="padding-left:10px;" t-esc="o.partner_id.name"/> </t> </strong>, do hereby confirm that I have received my entire dues from LACAS with
 Cheque # Dated :<strong> 
 <t t-if="o.invoice_date">
 <t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/></t>
 <t t-else="">----</t>
-</strong> Rs. <t t-esc="abs(receive_values-refund_values)"/> and I have no claim against School.
+</strong> Rs. <t t-if="o.refund_receive == 'Refundable'">
+            
+         <span style=""><t t-esc="abs(receive_values-refund_values)"/></span>
+          </t>
+         <t t-else="">
+          <span style="">0</span>
+          </t> and I have no claim against School.
                      </p><br/>
                      
                      <table class="table " style="width:100%; padding-top: 17%;">
@@ -346,12 +374,22 @@ Cheque # Dated :<strong>
                    
                    
                     <br/><br/><br/>
-                    <td style="width:9% ;">
-                         <hr style="height: 1px; border-width: 0; color: black; margin-right:30px; background-color: black;"/>
-                       <span align="center" style=""><t t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/></span>  
+                    <!--<td style="width:9% ;">-->
+                    <!--     <hr style="height: 1px; border-width: 0; color: black; margin-right:30px; background-color: black;"/>-->
+                    <!--   <span align="center" style=""><t t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/></span>  -->
+                      <!--<SPAN STYLE="text-decoration:overline; text-align: center;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
+                    <!--</td>-->
+                     
+                     <td style="width:10% ;">
+                         <hr style="height: 1px; border-width: 0; color: black;  background-color: black;"/>
+                       <span align="center" style=""><t t-if="env['account.payment'].search([('ref','=',o.name)])">
+                       <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/>
+                                </t>
+                        <t t-else="o.partner_id">
+                          <span style="padding-left:10px;" t-esc="o.partner_id.name"/>  </t></span>  
                       <!--<SPAN STYLE="text-decoration:overline; text-align: center;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
                     </td>
-                     
+                    
                     <!-- <td style="width:2%">-->
                     <!--</td>-->
                     </tbody>    
