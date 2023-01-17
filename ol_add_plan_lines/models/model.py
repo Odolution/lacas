@@ -11,6 +11,7 @@ class add_plan_line_wiz(models.TransientModel):
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     product_ids = fields.Many2many('product.product', string='Products')
     installment_names=fields.Many2many('installment.name',string="Billing Month")
+    unit_price=fields.Integer("Price")
     def apply(self):
             for plan in self.plan_ids:
                 for product in self.product_ids:
@@ -27,7 +28,7 @@ class add_plan_line_wiz(models.TransientModel):
                                     'quantity':1,
                                     'installment_ids':[(6,0,[i.id for i in installment_ids if i.name in names])],
                                     'currency_id':product.currency_id.id,
-                                    'unit_price':product.lst_price
+                                    'unit_price':self.unit_pric if self.unit_price>0 else product.lst_price
                                     }
                         new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
 
