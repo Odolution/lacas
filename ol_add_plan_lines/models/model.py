@@ -11,11 +11,12 @@ class add_plan_line_wiz(models.TransientModel):
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     product_ids = fields.Many2many('product.product', string='Products')
     installment_names=fields.Many2many('installment.name',string="Billing Month")
-    def apply(self):
+def apply(self):
             for plan in self.plan_ids:
                 for product in self.product_ids:
+                        names=[i.name for i in self.installment_names]
                         installment_ids=self.env['tuition.installment'].search([
-                                        ('name','in',[i.name for i in self.installment_names]),
+                                        ('name','in',names),
                                         ('tuition_plan_id','=',plan.id)])
                         
                         linedata={
@@ -24,11 +25,12 @@ class add_plan_line_wiz(models.TransientModel):
                                     'name':product.name,
                                     'account_id':product.property_account_income_id.id,
                                     'quantity':1,
-                                    'installment_ids':[(6,0,[i.id for i in installment_ids])],
+                                    'installment_ids':[(6,0,[i.id for i in installment_ids if i.name in names])],
                                     'currency_id':product.currency_id.id,
                                     'unit_price':product.lst_price
                                     }
                         new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
+
 
     def default_get(self, fields_list):
         # OVERRIDE
