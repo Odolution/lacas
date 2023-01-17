@@ -11,8 +11,7 @@
 
                         <group>
                             <field name="installment_month" required="1"/>
-                            <field name="month" required="1"/>
-                            <field name="day" required="1"/>
+                            <field name="generation_date" required="1"/>
 
                         </group>
                         
@@ -39,10 +38,10 @@
         <record model="ir.actions.server" id="server_action_edit_installment_wiz">
         <field name="name">Edit Installment</field>
         <field name="type">ir.actions.server</field>
-        <field name="model_id" ref="account.model_tuition_plan"/>
+        <field name="model_id" ref="edoob_finance.model_tuition_plan"/>
         <field name="state">code</field>
         <field name="code">action = {
-                                'name': _('Edit Installment'),
+                                'name': 'Edit Installment',
                                 'res_model': 'tuition.edit_installment_wiz',
                                 'view_mode': 'form',
                                 'context': {
