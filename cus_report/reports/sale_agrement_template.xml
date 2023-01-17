@@ -10,7 +10,7 @@
                  <div class="column"  style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
                     <t t-if="x.due_day&gt;0">
                           <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:5em;">
-                      <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
+                      <!--<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>-->
                       </div>
                   </t>
 
@@ -87,7 +87,7 @@
                     </tr>
                     <!--end-->
                     <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Registration ID :</td>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Roll No :</td>
                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.facts_udid"/></strong></td>
                     </tr>
                     <!--<tr style="height: 26.5px;">-->
@@ -107,7 +107,7 @@
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.school_ids.name"/></strong></td>
                     </tr>
                     <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Session :</td>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch:</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.x_studio_batch.display_name"/> </strong></td>
                     </tr>
                     <tr style="height: 18px;">
@@ -198,7 +198,7 @@
                         
                         <td style="border: 1px solid grey; text-align: center;color: grey">11</td>
                         <td style="border: 1px solid grey; text-align: center;color: grey">20</td>
-                        <td style="border: 1px solid grey; text-align: center;color: grey">200</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">300</td>
                       </tr>
                       <tr>
                         
@@ -251,7 +251,7 @@
                   <div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px;margin-right: 1%;">
                     <t t-if="x.due_day&gt;0">
                           <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:5em;">
-                          <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
+                          <!--<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>-->
                       </div>
                   </t>
 
@@ -326,7 +326,7 @@
                     </tr>
                     <!--end-->
                     <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Registration ID :</td>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Roll No :</td>
                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.facts_udid"/></strong></td>
                     </tr>
                     <!--<tr style="height: 26.5px;">-->
@@ -346,7 +346,7 @@
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.school_ids.name"/></strong></td>
                     </tr>
                     <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Session :</td>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.x_studio_batch.display_name"/> </strong></td>
                     </tr>
                     <tr style="height: 18px;">
@@ -436,7 +436,7 @@
                         
                         <td style="border: 1px solid grey; text-align: center;color: grey">11</td>
                         <td style="border: 1px solid grey; text-align: center;color: grey">20</td>
-                        <td style="border: 1px solid grey; text-align: center;color: grey">200</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">300</td>
                       </tr>
                       <tr>
                         
@@ -487,7 +487,7 @@
                 <div class="column" style="float: left; border: 1px solid black; width: 32%;height:750px; margin-right: 1%;">
                     <t t-if="x.due_day&gt;0">
                           <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:5em;">
-                         <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
+                         <!--<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>-->
                       </div>
                   </t>
 
@@ -563,7 +563,7 @@
                     </tr>
                     <!--end-->
                     <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Registration ID :</td>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Roll No :</td>
                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.facts_udid"/></strong></td>
                     </tr>
                     <!--<tr style="height: 26.5px;">-->
@@ -583,7 +583,7 @@
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.school_ids.name"/></strong></td>
                     </tr>
                     <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Session :</td>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.x_studio_batch.display_name"/> </strong></td>
                     </tr>
                     <tr style="height: 18px;">
@@ -673,7 +673,7 @@
                         
                         <td style="border: 1px solid grey; text-align: center;color: grey">11</td>
                         <td style="border: 1px solid grey; text-align: center;color: grey">20</td>
-                        <td style="border: 1px solid grey; text-align: center;color: grey">200</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">300</td>
                       </tr>
                       <tr>
                         
@@ -742,8 +742,8 @@
                <p style="page-break-after:always;"/>
               </t>
                </t>
-          </t>
-      </template>
+          </t>    
+        </template>
   
   </data>
 </odoo>
