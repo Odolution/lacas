@@ -6,7 +6,7 @@ import json
 class ext(models.Model):
     _inherit="account.move"
     # security_price=fields.Integer(string='Security Price')
-    
+
    
     tuition=fields.Integer(string="Tuition Fee")
     club=fields.Integer(string="Club Charges")
@@ -36,7 +36,7 @@ class ext(models.Model):
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
     net_amount=fields.Char(string="Net Amount")
-    std_factsid=fields.Char(string="Facts ID")
+    # std_factsid=fields.Char(string="Facts ID")
     std_payment_date=fields.Char(string='Payment Date')
     
     art=fields.Integer(string="Art")
@@ -129,7 +129,7 @@ class ext(models.Model):
         self.security_amount=""
         self.bill_amount=""
         self.net_amount=""
-        self.std_factsid=""
+        # self.std_factsid=""
         self.std_payment_date=""
         self.section_name=""
         self.art=0
@@ -179,7 +179,7 @@ class ext(models.Model):
             self.std_batch=self.x_studio_batch.x_name
             self.std_dob=self.student_ids.date_of_birth
             self.std_fathername=self.partner_id.name
-            self.std_factsid=self.student_ids.facts_id
+            # self.std_factsid=self.student_ids.facts_id
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=int(self.amount_total)
             
