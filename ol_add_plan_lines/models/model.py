@@ -23,7 +23,8 @@ class add_plan_line_wiz(models.TransientModel):
                                     'name':product.name,
                                     'account_id':product.property_account_income_id.id,
                                     'quantity':1,
-                                    'installment_ids':[(6,0,[i.id for i in installment_ids])]
+                                    'installment_ids':[(6,0,[i.id for i in installment_ids])],
+                                    'currency_id':product.currency_id.id
                                     }
                         new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
 
