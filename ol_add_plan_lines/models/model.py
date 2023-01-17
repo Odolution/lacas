@@ -11,7 +11,7 @@ class add_plan_line_wiz(models.TransientModel):
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     product_ids = fields.Many2many('product.product', string='Products')
     installment_names=fields.Many2many('installment.name',string="Billing Month")
-def apply(self):
+    def apply(self):
             for plan in self.plan_ids:
                 for product in self.product_ids:
                         names=[i.name for i in self.installment_names]
