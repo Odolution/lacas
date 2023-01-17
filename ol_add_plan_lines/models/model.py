@@ -9,12 +9,14 @@ import datetime
 class add_plan_line_wiz(models.TransientModel):
     _name='tuition.add_plan_line_wiz'
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
-    product_ids = fields.Many2many('product.product', string='Products')
-    installment_names=fields.Many2many('installment.name',string="Billing Month")
-    unit_price=fields.Integer("Price")
+    product_id = fields.Many2one('product.product', string='Product')
+    installment_names=fields.Many2many('installment.name',string="Billing Cycle")
+    
+    unit_price=fields.Integer("Unit Price")
+    currency_id=fields.Many2one('res.currency',"Currency")
+    quantity = fields.Integer("Quantity")
     def apply(self):
             for plan in self.plan_ids:
-                for product in self.product_ids:
                         names=[i.name for i in self.installment_names]
                         installment_ids=self.env['tuition.installment'].search([
                                         ('name','in',names),
@@ -22,13 +24,13 @@ class add_plan_line_wiz(models.TransientModel):
                         
                         linedata={
                                     'plan_id':plan.id,
-                                    'product_id':product.id,
-                                    'name':product.name,
-                                    'account_id':product.property_account_income_id.id,
-                                    'quantity':1,
+                                    'product_id':self.product_id.id,
+                                    'name':self.product_id.name,
+                                    'account_id':self.product_id.property_account_income_id.id,
+                                    'quantity':self.quantity,
                                     'installment_ids':[(6,0,[i.id for i in installment_ids if i.name in names])],
-                                    'currency_id':product.currency_id.id,
-                                    'unit_price':self.unit_pric if self.unit_price>0 else product.lst_price
+                                    'currency_id':self.currency_id.id,
+                                    'unit_price':self.unit_price if self.unit_price>0 else product.lst_price
                                     }
                         new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
 
