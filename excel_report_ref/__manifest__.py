@@ -18,7 +18,7 @@
     'data': [
         'security/ir.model.access.csv',
         # 'views/assets.xml',
-        'report/report_pdf.xml',
+#         'report/report_pdf.xml',
         'report/inventory_valuation_detail_template.xml',
         'wizard/sales_daybook_report_product_category_wizard.xml',
     ],
