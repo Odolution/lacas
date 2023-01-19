@@ -35,6 +35,7 @@ class AccountMoveReport(models.TransientModel):
     leaving_reason=fields.Char('Leaving Reason')
     remarks=fields.Char('Remarks')
     withdrawn_date=fields.Char('Withdrawn Date')
+    app_date=fields.Char('Withdrawn Date')
     total_amount=fields.Float("Total")
     name=fields.Char('Name')
     jan=fields.Integer('JAN-22')
@@ -103,6 +104,7 @@ class ReceivablesReportWizard(models.TransientModel):
         inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         
 
+        
         invoice_check = []
         final_lst = []
         temp_lst = []
@@ -122,6 +124,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "leaving_reason":"",
                         "remarks":"",
                         "withdrawn_date":'',
+                        "app_date":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -159,7 +162,8 @@ class ReceivablesReportWizard(models.TransientModel):
             custom_data['withdrawn_status'] = value.x_studio_withdrawn_status
             custom_data['leaving_reason'] = value.leaving_reason.name if value.leaving_reason.name else ''
             custom_data['remarks'] = value.remarks if  value.remarks else ''
-            custom_data['withdrawn_date'] = value.invoice_date
+            custom_data['withdrawn_date'] = value.invoice_date 
+            custom_data['app_date'] = value.withdrawl_submission_date if  value.withdrawl_submission_date  else ''
 
             # custom_data['name'] = value.partner_id.name
             # custom_data['record_id'] = value.name 
@@ -172,6 +176,7 @@ class ReceivablesReportWizard(models.TransientModel):
             # custom_data['leaving_reason'] =  ''
             # custom_data['remarks'] = ''
             # custom_data['withdrawn_date'] = value.invoice_date
+            # custom_data['app_date'] = value.x_studio_app_date if  value.x_studio_app_date  else ''
 
 
             
@@ -246,6 +251,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "leaving_reason":"",
                         "remarks":"",
                         "withdrawn_date":'',
+                        "app_date":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -313,6 +319,7 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dict["leaving_reason"]=   element["leaving_reason"]
             temp_dict["remarks"]        =  element["remarks"]
             temp_dict["withdrawn_date"] =  element["withdrawn_date"]
+            temp_dict["app_date"]       =  element["app_date"]
             temp_dict["total_amount"]   =  element["total_amount"]
 
             if element["name"] not in invoice_check:
@@ -555,6 +562,7 @@ class ReceivablesReportWizard(models.TransientModel):
                     "leaving_reason":mov['leaving_reason'],
                     "remarks":mov['remarks'],
                     "withdrawn_date":mov['withdrawn_date'],
+                   "app_date":mov['app_date'],
                     "full_roll_no":mov['full_roll_no'],
                     "jan":mov['jan'],
                     "feb":mov['feb'],
@@ -645,16 +653,17 @@ class ReceivablesReportWizard(models.TransientModel):
 
             worksheet.write_merge(2,3,0,0,"Sr.No", style=red_style_title)
             worksheet.write_merge(2,3,1,3,"ID",style=red_style_title)
-            worksheet.write_merge(2,3,4,5,"Roll No",style=red_style_title)
-            worksheet.write_merge(2,3,6,7,"6 Digit Roll No",style=yellow_style_title)
-            worksheet.write_merge(2,3,8,9,"Name",style=red_style_title)
-            worksheet.write_merge(2,3,10,11,"Batch #",style=red_style_title)
-            worksheet.write_merge(2,3,12,14,"Branch",style=red_style_title)
-            worksheet.write_merge(2,3,15,16,"Class",style=red_style_title)
-            worksheet.write_merge(2,3,17,18,"withdrawn Status", red_style_title)
-            worksheet.write_merge(2,3,19,20,"Leaving Reaon", red_style_title)
-            worksheet.write_merge(2,3,21,22,"Remarks", red_style_title)
-            worksheet.write_merge(2,3,23,24,"Withdrawn DT", red_style_title)
+            worksheet.write_merge(2,3,4,5,"App Date",style=red_style_title)
+            worksheet.write_merge(2,3,6,7,"Roll No",style=red_style_title)
+            worksheet.write_merge(2,3,8,9,"6 Digit Roll No",style=yellow_style_title)
+            worksheet.write_merge(2,3,10,11,"Name",style=red_style_title)
+            worksheet.write_merge(2,3,12,13,"Batch #",style=red_style_title)
+            worksheet.write_merge(2,3,14,16,"Branch",style=red_style_title)
+            worksheet.write_merge(2,3,17,18,"Class",style=red_style_title)
+            worksheet.write_merge(2,3,19,20,"withdrawn Status", red_style_title)
+            worksheet.write_merge(2,3,21,22,"Leaving Reaon", red_style_title)
+            worksheet.write_merge(2,3,23,24,"Remarks", red_style_title)
+            worksheet.write_merge(2,3,25,26,"Withdrawn DT", red_style_title)
 
 
             v_from_month=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%m')
@@ -699,7 +708,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            col = 25
+            col = 27
             
       
             for i in range(range_start,range_stop+1):
@@ -715,7 +724,7 @@ class ReceivablesReportWizard(models.TransientModel):
             # row = 4
             # sno = 1
         
-            column = 25
+            column = 27
             row = 4
             sn=1
             for rec in self.account_report_line:
@@ -724,20 +733,21 @@ class ReceivablesReportWizard(models.TransientModel):
                 
                 if rec:
 
-                    column = 25
+                    column = 27
 
                     worksheet.write(row,0,sn)
                     worksheet.write_merge(row,row,1,3,rec.record_id,heading_style)
-                    worksheet.write_merge(row,row,4,5,rec.roll_no,heading_style)
-                    worksheet.write_merge(row,row,6,7,rec.full_roll_no,heading_style)
-                    worksheet.write_merge(row,row,8,9,rec.name,heading_style)
-                    worksheet.write_merge(row,row,10,11,rec.student_batch,heading_style)
-                    worksheet.write_merge(row,row,12,14,rec.student_branch,heading_style)
-                    worksheet.write_merge(row,row,15,16,rec.student_class,heading_style)
-                    worksheet.write_merge(row,row,17,18,rec.withdrawn_status,heading_style)
-                    worksheet.write_merge(row,row,19,20,rec.leaving_reason,heading_style)
-                    worksheet.write_merge(row,row,21,22,rec.remarks,heading_style)
-                    worksheet.write_merge(row,row,23,24,rec.withdrawn_date,heading_style)
+                    worksheet.write_merge(row,row,4,5,rec.app_date,heading_style)
+                    worksheet.write_merge(row,row,6,7,rec.roll_no,heading_style)
+                    worksheet.write_merge(row,row,8,9,rec.full_roll_no,heading_style)
+                    worksheet.write_merge(row,row,10,11,rec.name,heading_style)
+                    worksheet.write_merge(row,row,12,13,rec.student_batch,heading_style)
+                    worksheet.write_merge(row,row,14,16,rec.student_branch,heading_style)
+                    worksheet.write_merge(row,row,17,18,rec.student_class,heading_style)
+                    worksheet.write_merge(row,row,19,20,rec.withdrawn_status,heading_style)
+                    worksheet.write_merge(row,row,21,22,rec.leaving_reason,heading_style)
+                    worksheet.write_merge(row,row,23,24,rec.remarks,heading_style)
+                    worksheet.write_merge(row,row,25,26,rec.withdrawn_date,heading_style)
 
                     data_month= {
                         1:['01','JAN-22',rec.jan,'22'],
