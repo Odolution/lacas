@@ -721,12 +721,12 @@ class ReceivablesReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,6,7,rec.full_roll_no,heading_style)
                     worksheet.write_merge(row,row,8,9,rec.name,heading_style)
                     worksheet.write_merge(row,row,10,11,rec.student_batch,heading_style)
-                    worksheet.write_merge(row,row,12,13,rec.student_branch,heading_style)
-                    worksheet.write_merge(row,row,14,15,rec.student_class,heading_style)
-                    worksheet.write_merge(row,row,16,17,rec.withdrawn_status,heading_style)
-                    worksheet.write_merge(row,row,18,19,rec.leaving_reason,heading_style)
-                    worksheet.write_merge(row,row,20,21,rec.remarks,heading_style)
-                    worksheet.write_merge(row,row,22,23,rec.withdrawn_date,heading_style)
+                    worksheet.write_merge(row,row,12,14,rec.student_branch,heading_style)
+                    worksheet.write_merge(row,row,15,16,rec.student_class,heading_style)
+                    worksheet.write_merge(row,row,17,18,rec.withdrawn_status,heading_style)
+                    worksheet.write_merge(row,row,19,20,rec.leaving_reason,heading_style)
+                    worksheet.write_merge(row,row,21,22,rec.remarks,heading_style)
+                    worksheet.write_merge(row,row,23,24,rec.withdrawn_date,heading_style)
 
                     data_month= {
                         1:['01','JAN-22',rec.jan,'22'],
