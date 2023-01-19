@@ -99,8 +99,8 @@ class ReceivablesReportWizard(models.TransientModel):
     
     def action_print_report(self):
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','=','not_paid'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','=','not_paid'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','=','not_paid'),('payment_state','=','partial'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','=','not_paid'),('payment_state','=','partial'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         
 
         
@@ -154,7 +154,7 @@ class ReceivablesReportWizard(models.TransientModel):
             custom_data['record_id'] = value.name 
             custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else ''
             custom_data['full_roll_no'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else ''
-            custom_data['student_batch'] = value.x_studio_batch if value.x_studio_batch else ''
+            custom_data['student_batch'] = value.x_studio_batch.x_name if value.x_studio_batch.x_name else ''
             custom_data['student_branch'] = value.x_student_id_cred.school_ids.name if  value.x_student_id_cred.school_ids.name else ""
             custom_data['student_class'] = value.x_student_id_cred.homeroom if value.x_student_id_cred.homeroom else ''
             custom_data['withdrawn_status'] = value.x_studio_withdrawn_status
@@ -638,12 +638,12 @@ class ReceivablesReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,6,7,"6 Digit Roll No",style=yellow_style_title)
             worksheet.write_merge(2,3,8,9,"Name",style=red_style_title)
             worksheet.write_merge(2,3,10,11,"Batch #",style=red_style_title)
-            worksheet.write_merge(2,3,12,13,"Branch",style=red_style_title)
-            worksheet.write_merge(2,3,14,15,"Class",style=red_style_title)
-            worksheet.write_merge(2,3,16,17,"withdrawn Status", red_style_title)
-            worksheet.write_merge(2,3,18,19,"Leaving Reaon", red_style_title)
-            worksheet.write_merge(2,3,20,21,"Remarks", red_style_title)
-            worksheet.write_merge(2,3,22,23,"Withdrawn DT", red_style_title)
+            worksheet.write_merge(2,3,12,14,"Branch",style=red_style_title)
+            worksheet.write_merge(2,3,15,16,"Class",style=red_style_title)
+            worksheet.write_merge(2,3,17,18,"withdrawn Status", red_style_title)
+            worksheet.write_merge(2,3,19,20,"Leaving Reaon", red_style_title)
+            worksheet.write_merge(2,3,21,22,"Remarks", red_style_title)
+            worksheet.write_merge(2,3,23,24,"Withdrawn DT", red_style_title)
 
 
             v_from_month=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%m')
@@ -688,7 +688,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            col = 24
+            col = 25
             
       
             for i in range(range_start,range_stop+1):
@@ -704,7 +704,7 @@ class ReceivablesReportWizard(models.TransientModel):
             # row = 4
             # sno = 1
         
-            column = 24
+            column = 25
             row = 4
             sn=1
             for rec in self.account_report_line:
@@ -713,7 +713,7 @@ class ReceivablesReportWizard(models.TransientModel):
                 
                 if rec:
 
-                    column = 24
+                    column = 25
 
                     worksheet.write(row,0,sn)
                     worksheet.write_merge(row,row,1,3,rec.record_id,heading_style)
