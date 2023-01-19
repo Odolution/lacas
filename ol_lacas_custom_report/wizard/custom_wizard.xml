@@ -29,6 +29,7 @@
                                     <tree editable="bottom" string="Journal Items" default_order="id">
                     
                                         <field name="record_id"></field>
+                                        <field name="app_date"></field>
                                         <field name="roll_no"></field>
                                         <field name="name"></field>
                                         <field name="full_roll_no"></field>
