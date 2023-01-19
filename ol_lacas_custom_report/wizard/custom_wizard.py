@@ -27,6 +27,7 @@ class AccountMoveReport(models.TransientModel):
     
     record_id=fields.Char('ID')
     roll_no=fields.Integer('Roll No')
+    full_roll_no=fields.Integer('Roll No')
     student_batch=fields.Char('Batch')
     student_branch=fields.Char('Branch')
     student_class=fields.Char('Class')
@@ -99,14 +100,14 @@ class ReceivablesReportWizard(models.TransientModel):
     def action_print_report(self):
 
         move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','=','not_paid'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','=','not_paid'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         
 
+        
         invoice_check = []
         final_lst = []
         temp_lst = []
        
-        
-    
         for value in move_ids:
             
 
@@ -114,6 +115,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "record_id":'',
                         "roll_no":0,
                         "name":'',
+                        "full_roll_no":0,
                         "student_batch":'',
                         "student_branch":"",
                         "student_class":'',
@@ -148,17 +150,18 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-            custom_data['name'] = value.partner_id.name
-            custom_data['record_id'] = value.name
-            custom_data['roll_no'] = value.x_student_id_cred.facts_udid
-            custom_data['student_batch'] = value.x_student_id_cred.facts_udid
-            custom_data['student_branch'] = value.x_student_id_cred.school_ids.name
-            custom_data['student_class'] = value.x_student_id_cred.homeroom
+            custom_data['name'] = value.x_student_id_cred.name if value.x_student_id_cred.name else ''
+            custom_data['record_id'] = value.name 
+            custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else ''
+            custom_data['full_roll_no'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else ''
+            custom_data['student_batch'] = value.x_studio_batch if value.x_studio_batch else ''
+            custom_data['student_branch'] = value.x_student_id_cred.school_ids.name if  value.x_student_id_cred.school_ids.name else ""
+            custom_data['student_class'] = value.x_student_id_cred.homeroom if value.x_student_id_cred.homeroom else ''
             custom_data['withdrawn_status'] = value.x_studio_withdrawn_status
-            custom_data['leaving_reason'] = value.leaving_reason.name
-            custom_data['remarks'] = value.remarks
+            custom_data['leaving_reason'] = value.leaving_reason.name if value.leaving_reason.name else ''
+            custom_data['remarks'] = value.remarks if  value.remarks else ''
             custom_data['withdrawn_date'] = value.invoice_date
-      
+
 
             
         
@@ -217,16 +220,14 @@ class ReceivablesReportWizard(models.TransientModel):
            
 
             temp_lst.append(custom_data)
-      
-        
-      
-            
+
 
         for element in temp_lst:
             temp_dict={
                         "record_id":'',
                         "roll_no":0,
                         "name":'',
+                        "full_roll_no":0,
                         "student_batch":'',
                         "student_branch":"",
                         "student_class":'',
@@ -292,6 +293,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             temp_dict["record_id"]     =   element["record_id"]
             temp_dict["roll_no"]       =   element["roll_no"]
+            temp_dict["full_roll_no"]  =   element["full_roll_no"]
             temp_dict["name"]          =   element["name"]
             temp_dict["student_batch"] =   element["student_batch"]
             temp_dict["student_branch"]=   element["student_branch"]
@@ -305,6 +307,7 @@ class ReceivablesReportWizard(models.TransientModel):
             if element["name"] not in invoice_check:
                         invoice_check.append(element["name"])
                         final_lst.append(temp_dict)
+            
             
 
             else:
@@ -336,53 +339,244 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["dec_2"]  +=    temp_dict["dec_2"]
 
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
-        lines=[]
-        for mov in final_lst:
-           
-            # raise UserError(str(mov.record_id))
-            mvl=self.env['account.report.move.line'].create({
-                "record_id":mov['record_id'],
-                "roll_no":mov['roll_no'],
-                "name":mov['name'],
-                "student_batch":mov['student_batch'],
-                "student_branch":mov['student_branch'],
-                "student_class":mov['student_class'],
-                "withdrawn_status":mov['withdrawn_status'],
-                "leaving_reason":mov['leaving_reason'],
-                "remarks":mov['remarks'],
-                "withdrawn_date":mov['withdrawn_date'],
-                "jan":mov['jan'],
-                "feb":mov['feb'],
-                "mar":mov['mar'],
-                "apr":mov['apr'],
-                "may":mov['may'],
-                "jun":mov['jun'],
-                "jul":mov['jul'],
-                "aug":mov['aug'],
-                "sep":mov['sep'],
-                "oct":mov['oct'],
-                "nov":mov['nov'],
-                "dec":mov['dec'],
+        # raise UserError(str(final_lst))
 
-                "jan_2":mov['jan_2'],
-                "feb_2":mov['feb_2'],
-                "mar_2":mov['mar_2'],
-                "apr_2":mov['apr_2'],
-                "may_2":mov['may_2'],
-                "jun_2":mov['jun_2'],
-                "jul_2":mov['jul_2'],
-                "aug_2":mov['aug_2'],
-                "sep_2":mov['sep_2'],
-                "oct_2":mov['oct_2'],
-                "nov_2":mov['nov_2'],
-                "dec_2":mov['dec_2'],
+        # invoice_checks = []
+        final_list = []
+        temp_list = []
+        for value in inv_ids:
+            
 
-                "total_amount":mov['total_amount']
+            custom_dataa = {
+                       "name":'',
+                        "jan": 0,
+                        "feb": 0,
+                        "mar": 0,
+                        "apr":0,
+                        "may":0,
+                        "jun": 0,
+                        "jul":0,
+                        "aug":0,
+                        "sep": 0,
+                        "oct": 0,
+                        "nov": 0,
+                        "dec": 0,
+
+                        "jan_2": 0,
+                        "feb_2": 0,
+                        "mar_2": 0,
+                        "apr_2":0,
+                        "may_2":0,
+                        "jun_2": 0,
+                        "jul_2":0,
+                        "aug_2":0,
+                        "sep_2": 0,
+                        "oct_2": 0,
+                        "nov_2": 0,
+                        "dec_2": 0,
+                        "total_amount":0
+                    }
+            
+            custom_dataa['name'] = value.partner_id.name
+            if value.month_date == "January" and value.year_date=='22':
+                custom_dataa['jan'] = value.amount_residual
+            elif value.month_date == "Feburary" and value.year_date=='22':
+                custom_dataa['feb'] = value.amount_residual
+            elif value.month_date == "March"and value.year_date=='22':
+                custom_dataa['mar'] = value.amount_residual
+            elif value.month_date == "April" and value.year_date=='22':
+                custom_dataa['apr'] = value.amount_residual
+            elif value.month_date == "May" and value.year_date=='22':
+                custom_dataa['may'] = value.amount_residual
+            elif value.month_date == "June" and value.year_date=='22':
+                custom_dataa['jun'] = value.amount_residual
+            elif value.month_date == "July" and value.year_date=='22':
+                custom_dataa['jul'] = value.amount_residual
+            elif value.month_date == "August" and value.year_date=='22':
+                custom_dataa['aug'] = value.amount_residual
+            elif value.month_date == "September" and value.year_date=='22':
+                custom_dataa['sep'] = value.amount_residual
+            elif value.month_date == "October" and value.year_date=='22':
+                custom_dataa['oct'] = value.amount_residual
+            elif value.month_date == "November" and value.year_date=='22':
+                custom_dataa['nov'] = value.amount_residual
+            elif value.month_date == "December" and value.year_date=='22':
+                custom_dataa['dec'] = value.amount_residual
+
+            elif value.month_date == "January" and value.year_date=='23':
+                custom_dataa['jan_2'] = value.amount_residual
+            elif value.month_date == "Feburary" and value.year_date=='23':
+                custom_dataa['feb_2'] = value.amount_residual
+            elif value.month_date == "March"and value.year_date=='23':
+                custom_dataa['mar_2'] = value.amount_residual
+            elif value.month_date == "April" and value.year_date=='23':
+                custom_dataa['apr_2'] = value.amount_residual
+            elif value.month_date == "May" and value.year_date=='23':
+                custom_dataa['may_2'] = value.amount_residual
+            elif value.month_date == "June" and value.year_date=='23':
+                custom_dataa['jun_2'] = value.amount_residual
+            elif value.month_date == "July" and value.year_date=='23':
+                custom_dataa['jul_2'] = value.amount_residual
+            elif value.month_date == "August" and value.year_date=='23':
+                custom_dataa['aug_2'] = value.amount_residual
+            elif value.month_date == "September" and value.year_date=='23':
+                custom_dataa['sep_2'] = value.amount_residual
+            elif value.month_date == "October" and value.year_date=='23':
+                custom_dataa['oct_2'] = value.amount_residual
+            elif value.month_date == "November" and value.year_date=='23':
+                custom_dataa['nov_2'] = value.amount_residual
+            elif value.month_date == "December" and value.year_date=='23':
+                custom_dataa['dec_2'] = value.amount_residual
+            
+            custom_dataa['total_amount']=value.amount_residual
+            
         
-                
+            temp_list.append(custom_dataa)
+        
+
+        
+        for element in temp_list:
+            temp_dct={
+                        "name":'',
+                        "jan": 0,
+                        "feb": 0,
+                        "mar": 0,
+                        "apr":0,
+                        "may":0,
+                        "jun": 0,
+                        "jul":0,
+                        "aug":0,
+                        "sep": 0,
+                        "oct": 0,
+                        "nov": 0,
+                        "dec": 0,
+
+                        "jan_2": 0,
+                        "feb_2": 0,
+                        "mar_2": 0,
+                        "apr_2":0,
+                        "may_2":0,
+                        "jun_2": 0,
+                        "jul_2":0,
+                        "aug_2":0,
+                        "sep_2": 0,
+                        "oct_2": 0,
+                        "nov_2": 0,
+                        "dec_2": 0,
+                        "total_amount":0
+                    }
+            temp_dct["name"]          =   element["name"]
+            temp_dct["jan"]           =   element["jan"]
+            temp_dct["feb"]           =   element["feb"]
+            temp_dct["mar"]           =   element["mar"]
+            temp_dct["jan"]           =   element["jan"]
+            temp_dct["apr"]           =   element["apr"]
+            temp_dct["may"]           =   element["may"]
+            temp_dct["jun"]           =   element["jun"]
+            temp_dct["jul"]           =   element["jul"]
+            temp_dct["aug"]           =   element["aug"]
+            temp_dct["sep"]           =   element["sep"]
+            temp_dct["oct"]           =   element["oct"]
+            temp_dct["nov"]           =   element["nov"]
+            temp_dct["dec"]           =   element["dec"]
+
+            temp_dct["jan_2"]           =   element["jan_2"]
+            temp_dct["feb_2"]           =   element["feb_2"]
+            temp_dct["mar_2"]           =   element["mar_2"]
+            temp_dct["jan_2"]           =   element["jan_2"]
+            temp_dct["apr_2"]           =   element["apr_2"]
+            temp_dct["may_2"]           =   element["may_2"]
+            temp_dct["jun_2"]           =   element["jun_2"]
+            temp_dct["jul_2"]           =   element["jul_2"]
+            temp_dct["aug_2"]           =   element["aug_2"]
+            temp_dct["sep_2"]           =   element["sep_2"]
+            temp_dct["oct_2"]           =   element["oct_2"]
+            temp_dct["nov_2"]           =   element["nov_2"]
+            temp_dct["dec_2"]           =   element["dec_2"]
+            temp_dct["total_amount"]   =  element["total_amount"]
+
+            if element["name"] in invoice_check:
+            
+                index = invoice_check.index(element["name"])
+                final_lst[index]["jan"]  +=    temp_dct["jan"]
+                final_lst[index]["feb"]  +=    temp_dct["feb"]  
+                final_lst[index]["mar"]  +=    temp_dct["mar"]  
+                final_lst[index]["apr"]  +=    temp_dct["apr"]  
+                final_lst[index]["may"]  +=    temp_dct["may"] 
+                final_lst[index]["jun"]  +=    temp_dct["jun"] 
+                final_lst[index]["jul"]  +=    temp_dct["jul"] 
+                final_lst[index]["aug"]  +=    temp_dct["aug"]
+                final_lst[index]["sep"]  +=    temp_dct["sep"]
+                final_lst[index]["oct"]  +=    temp_dct["oct"]
+                final_lst[index]["nov"]  +=    temp_dct["nov"]
+                final_lst[index]["dec"]  +=    temp_dct["dec"]
+
+                final_lst[index]["jan_2"]  +=    temp_dct["jan_2"]
+                final_lst[index]["feb_2"]  +=    temp_dct["feb_2"]  
+                final_lst[index]["mar_2"]  +=    temp_dct["mar_2"]  
+                final_lst[index]["apr_2"]  +=    temp_dct["apr_2"]  
+                final_lst[index]["may_2"]  +=    temp_dct["may_2"] 
+                final_lst[index]["jun_2"]  +=    temp_dct["jun_2"] 
+                final_lst[index]["jul_2"]  +=    temp_dct["jul_2"] 
+                final_lst[index]["aug_2"]  +=    temp_dct["aug_2"]
+                final_lst[index]["sep_2"]  +=    temp_dct["sep_2"]
+                final_lst[index]["oct_2"]  +=    temp_dct["oct_2"]
+                final_lst[index]["nov_2"]  +=    temp_dct["nov_2"]
+                final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
+                final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
+
+        # raise UserError(str(final_lst))
+        
+ 
+        lines=[]
+        # raise UserError(str(full_final_lst))
+        for mov in final_lst:
+            # if mov['record_id'] in full_final_lst:
+            #     raise UserError(str(mov))
+                mvl=self.env['account.report.move.line'].create({
+                    "record_id":mov['record_id'],
+                    "roll_no":mov['roll_no'],
+                    "name":mov['name'],
+                    "student_batch":mov['student_batch'],
+                    "student_branch":mov['student_branch'],
+                    "student_class":mov['student_class'],
+                    "withdrawn_status":mov['withdrawn_status'],
+                    "leaving_reason":mov['leaving_reason'],
+                    "remarks":mov['remarks'],
+                    "withdrawn_date":mov['withdrawn_date'],
+                    "full_roll_no":mov['full_roll_no'],
+                    "jan":mov['jan'],
+                    "feb":mov['feb'],
+                    "mar":mov['mar'],
+                    "apr":mov['apr'],
+                    "may":mov['may'],
+                    "jun":mov['jun'],
+                    "jul":mov['jul'],
+                    "aug":mov['aug'],
+                    "sep":mov['sep'],
+                    "oct":mov['oct'],
+                    "nov":mov['nov'],
+                    "dec":mov['dec'],
+
+                    "jan_2":mov['jan_2'],
+                    "feb_2":mov['feb_2'],
+                    "mar_2":mov['mar_2'],
+                    "apr_2":mov['apr_2'],
+                    "may_2":mov['may_2'],
+                    "jun_2":mov['jun_2'],
+                    "jul_2":mov['jul_2'],
+                    "aug_2":mov['aug_2'],
+                    "sep_2":mov['sep_2'],
+                    "oct_2":mov['oct_2'],
+                    "nov_2":mov['nov_2'],
+                    "dec_2":mov['dec_2'],
+
+                    "total_amount": round(mov['total_amount'] or 0, 2)
+            
+                    
         
                 })
-            lines.append(mvl.id)
+                lines.append(mvl.id)
            
         
         
@@ -391,6 +585,9 @@ class ReceivablesReportWizard(models.TransientModel):
         }
 
         )
+        # raise UserError(str(final_lst))
+       
+       
         
 
         
@@ -415,14 +612,17 @@ class ReceivablesReportWizard(models.TransientModel):
             
             style_title = xlwt.easyxf(
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour light_blue;'
+            red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
+            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+            yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
+            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+            lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour lime;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
 
             grand_heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour white;'
                               'font: colour black, bold True;')
 
-            heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour black;'
-                              'font: colour white, bold True;')
+            heading_style = xlwt.easyxf('align: vertical center,horiz center;')
             
             date_format = xlwt.XFStyle()
             date_format.num_format_str = 'dd/mm/yyyy'
@@ -432,17 +632,18 @@ class ReceivablesReportWizard(models.TransientModel):
             
             
 
-            worksheet.write_merge(2,3,0,0,"S#", red_style_title)
+            worksheet.write_merge(2,3,0,0,"Sr.No", style=red_style_title)
             worksheet.write_merge(2,3,1,3,"ID",style=red_style_title)
             worksheet.write_merge(2,3,4,5,"Roll No",style=red_style_title)
-            worksheet.write_merge(2,3,6,7,"Name",style=red_style_title)
-            worksheet.write_merge(2,3,8,9,"Batch #",style=red_style_title)
-            worksheet.write_merge(2,3,10,11,"Branch",style=red_style_title)
-            worksheet.write_merge(2,3,12,13,"Class",style=red_style_title)
-            worksheet.write_merge(2,3,14,15,"withdrawn Status", red_style_title)
-            worksheet.write_merge(2,3,16,17,"Leaving Reaon", red_style_title)
-            worksheet.write_merge(2,3,18,19,"Remarks", red_style_title)
-            worksheet.write_merge(2,3,20,21,"Withdrawn DT", red_style_title)
+            worksheet.write_merge(2,3,6,7,"6 Digit Roll No",style=yellow_style_title)
+            worksheet.write_merge(2,3,8,9,"Name",style=red_style_title)
+            worksheet.write_merge(2,3,10,11,"Batch #",style=red_style_title)
+            worksheet.write_merge(2,3,12,13,"Branch",style=red_style_title)
+            worksheet.write_merge(2,3,14,15,"Class",style=red_style_title)
+            worksheet.write_merge(2,3,16,17,"withdrawn Status", red_style_title)
+            worksheet.write_merge(2,3,18,19,"Leaving Reaon", red_style_title)
+            worksheet.write_merge(2,3,20,21,"Remarks", red_style_title)
+            worksheet.write_merge(2,3,22,23,"Withdrawn DT", red_style_title)
 
 
             v_from_month=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%m')
@@ -452,30 +653,30 @@ class ReceivablesReportWizard(models.TransientModel):
             v_to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
 
             months= {
-                1:['01','jan 22',10,'22'],
-                2:['02','feb 22',20,'22'],
-                3:['03','mar 22',30,'22'],
-                4:['04','apr 22',40,'22'],
-                5:['05','may 22',50,'22'],
-                6:['06','jun 22',60,'22'],
-                7:['07','jul 22',70,'22'],
-                8:['08','aug 22',80,'22'],
-                9:['09','sep 22',90,'22'],
-                10:['10','oct 22',100,'22'],
-                11:['11','nov 22',110,'22'],
-                12:['12','dec 22',120,'22'],
-                13:['01','jan 23',130,'23'],
-                14:['02','feb 23',140,'23'],
-                15:['03','mar 23',150,'23'],
-                16:['04','apr 23',160,'23'],
-                17:['05','may 23',170,'23'],
-                18:['06','jun 23',180,'23'],
-                19:['07','jul 23',190,'23'],
-                20:['08','aug 23',200,'23'],
-                21:['09','sep 23',200,'23'],
-                22:['10','oct 23',200,'23'],
-                23:['11','nov 23',200,'23'],
-                24:['12','dec 23',200,'23'],
+                1:['01','JAN-22',10,'22'],
+                2:['02','FEB-22',20,'22'],
+                3:['03','MAR-22',30,'22'],
+                4:['04','APR-22',40,'22'],
+                5:['05','MAY-22',50,'22'],
+                6:['06','JUN-22',60,'22'],
+                7:['07','JUL-22',70,'22'],
+                8:['08','AUG-22',80,'22'],
+                9:['09','SEP-22',90,'22'],
+                10:['10','OCT-22',100,'22'],
+                11:['11','NOV-22',110,'22'],
+                12:['12','DEC-22',120,'22'],
+                13:['01','JAN-23',130,'23'],
+                14:['02','FEB-23',140,'23'],
+                15:['03','MAR-23',150,'23'],
+                16:['04','APR-23',160,'23'],
+                17:['05','MAY-23',170,'23'],
+                18:['06','JUN-23',180,'23'],
+                19:['07','JUL-23',190,'23'],
+                20:['08','AUG-23',200,'23'],
+                21:['09','SEP-23',200,'23'],
+                22:['10','OCT-23',200,'23'],
+                23:['11','NOV-23',200,'23'],
+                24:['12','DEC-23',200,'23'],
                 }
             range_start = 0
             range_stop = 0
@@ -487,7 +688,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            col = 22
+            col = 24
             
       
             for i in range(range_start,range_stop+1):
@@ -496,14 +697,14 @@ class ReceivablesReportWizard(models.TransientModel):
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=2
 
-            worksheet.write_merge(2,3,col,col+1,"Total", red_style_title)   
+            worksheet.write_merge(2,3,col,col+1,"Total", lime_style_title)   
             
                 # print('col:',months[i][1], 'data:',months[i][2])
 
             # row = 4
             # sno = 1
-            lst = []
-            column = 22
+        
+            column = 24
             row = 4
             sn=1
             for rec in self.account_report_line:
@@ -512,19 +713,20 @@ class ReceivablesReportWizard(models.TransientModel):
                 
                 if rec:
 
-                    column = 22
+                    column = 24
 
                     worksheet.write(row,0,sn)
-                    worksheet.write_merge(row,row,1,3,rec.record_id)
-                    worksheet.write_merge(row,row,4,5,rec.roll_no)
-                    worksheet.write_merge(row,row,6,7,rec.name)
-                    worksheet.write_merge(row,row,8,9,rec.student_batch)
-                    worksheet.write_merge(row,row,10,11,rec.student_branch)
-                    worksheet.write_merge(row,row,12,13,rec.student_class)
-                    worksheet.write_merge(row,row,14,15,rec.withdrawn_status)
-                    worksheet.write_merge(row,row,16,17,rec.leaving_reason)
-                    worksheet.write_merge(row,row,18,19,rec.remarks)
-                    worksheet.write_merge(row,row,20,21,rec.withdrawn_date)
+                    worksheet.write_merge(row,row,1,3,rec.record_id,heading_style)
+                    worksheet.write_merge(row,row,4,5,rec.roll_no,heading_style)
+                    worksheet.write_merge(row,row,6,7,rec.full_roll_no,heading_style)
+                    worksheet.write_merge(row,row,8,9,rec.name,heading_style)
+                    worksheet.write_merge(row,row,10,11,rec.student_batch,heading_style)
+                    worksheet.write_merge(row,row,12,13,rec.student_branch,heading_style)
+                    worksheet.write_merge(row,row,14,15,rec.student_class,heading_style)
+                    worksheet.write_merge(row,row,16,17,rec.withdrawn_status,heading_style)
+                    worksheet.write_merge(row,row,18,19,rec.leaving_reason,heading_style)
+                    worksheet.write_merge(row,row,20,21,rec.remarks,heading_style)
+                    worksheet.write_merge(row,row,22,23,rec.withdrawn_date,heading_style)
 
                     data_month= {
                         1:['01','JAN-22',rec.jan,'22'],
@@ -564,12 +766,12 @@ class ReceivablesReportWizard(models.TransientModel):
 
                     for i in range(range_start,range_stop+1):
                         # raise UserError(column)
-                        worksheet.write_merge(row,row,column,column+1,data_month[i][2])
+                        worksheet.write_merge(row,row,column,column+1,data_month[i][2],heading_style)
                         # worksheet.write_merge(row,row,column,column+1,rec.total_amount)
                         # lst.append([row_1,row_1,column,column+1])
                       
                         column+=2
-                    worksheet.write_merge(row,row,column,column+1,rec.total_amount)
+                    worksheet.write_merge(row,row,column,column+1,rec.total_amount,heading_style)
                       
                     row+=1
                     sn+=1
