@@ -30,8 +30,8 @@
                     
                                         <field name="record_id"></field>
                                         <field name="roll_no"></field>
-                                         <field name="name"></field>
-                                          <field name="full_roll_no"></field>
+                                        <field name="name"></field>
+                                        <field name="full_roll_no"></field>
                                         <field name="student_batch"></field>
                                         <field name="student_branch"></field>
                                         <field name="student_class"></field>
