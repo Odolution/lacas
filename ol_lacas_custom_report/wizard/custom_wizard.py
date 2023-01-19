@@ -99,8 +99,8 @@ class ReceivablesReportWizard(models.TransientModel):
     
     def action_print_report(self):
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','=','not_paid'),('payment_state','=','partial'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','=','not_paid'),('payment_state','=','partial'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','=','not_paid'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         
 
         
@@ -152,8 +152,8 @@ class ReceivablesReportWizard(models.TransientModel):
                     }
             custom_data['name'] = value.x_student_id_cred.name if value.x_student_id_cred.name else ''
             custom_data['record_id'] = value.name 
-            custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else ''
-            custom_data['full_roll_no'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else ''
+            custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else 0
+            custom_data['full_roll_no'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else 0
             custom_data['student_batch'] = value.x_studio_batch.x_name if value.x_studio_batch.x_name else ''
             custom_data['student_branch'] = value.x_student_id_cred.school_ids.name if  value.x_student_id_cred.school_ids.name else ""
             custom_data['student_class'] = value.x_student_id_cred.homeroom if value.x_student_id_cred.homeroom else ''
@@ -161,6 +161,18 @@ class ReceivablesReportWizard(models.TransientModel):
             custom_data['leaving_reason'] = value.leaving_reason.name if value.leaving_reason.name else ''
             custom_data['remarks'] = value.remarks if  value.remarks else ''
             custom_data['withdrawn_date'] = value.invoice_date
+
+            # custom_data['name'] = value.partner_id.name
+            # custom_data['record_id'] = value.name 
+            # custom_data['roll_no'] =  0
+            # custom_data['full_roll_no'] = 0
+            # custom_data['student_batch'] =  ''
+            # custom_data['student_branch'] =  ""
+            # custom_data['student_class'] = ''
+            # custom_data['withdrawn_status'] =  ''
+            # custom_data['leaving_reason'] =  ''
+            # custom_data['remarks'] = ''
+            # custom_data['withdrawn_date'] = value.invoice_date
 
 
             
