@@ -16,7 +16,8 @@ class ext(models.Model):
     
     def refund_receive(self):
         if not self.x_studio_receiverefund:
-            self.x_studio_receiverefund=self.refund_receive
+            if self.x_studio_give_or_take:
+                self.x_studio_receiverefund=self.x_studio_give_or_take
     
     def _get_month_date(self):
         self.month_date=''
