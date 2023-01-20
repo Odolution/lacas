@@ -14,10 +14,9 @@ class ext(models.Model):
     year_date=fields.Char(string="Year",compute="_get_year_date")
     month_total=fields.Char(string="Month Total",compute="_get_month_date")
     
-    def refund_receive(self):
+    def refund_receive_action(self):
         if not self.x_studio_receiverefund:
-            if self.x_studio_give_or_take:
-                self.x_studio_receiverefund=str(self.refund_receive)
+            self.x_studio_receiverefund=self.refund_receive
     
     def _get_month_date(self):
         self.month_date=''
