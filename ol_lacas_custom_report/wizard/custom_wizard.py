@@ -395,7 +395,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "total_amount":0
                     }
             
-            custom_dataa['name'] = value.partner_id.name
+            custom_dataa['name'] = value.x_student_id_cred.name 
             if value.month_date == "January" and value.year_date=='22':
                 custom_dataa['jan'] = value.amount_residual
             elif value.month_date == "Feburary" and value.year_date=='22':
