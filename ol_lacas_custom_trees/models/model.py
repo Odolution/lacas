@@ -198,9 +198,12 @@ class ext(models.Model):
                 elif len(splitted_name)>0:
                         self.class_name=splitted_name[0]
             else:
-                if self.journal_id.id==119:
-                    for nxt_grade in self.student_ids.enrollment_state_ids:
-                        self.class_name=nxt_grade.next_grade_level_id.name
+                if self.grade_level_ids:
+                    self.class_name=self.grade_level_ids.name
+                else:
+                    if self.journal_id.id==119:
+                        for nxt_grade in self.student_ids.enrollment_state_ids:
+                            self.class_name=nxt_grade.next_grade_level_id.name
 
             wholedate=str(self.invoice_date)
             splitted_name=wholedate.split('-')
