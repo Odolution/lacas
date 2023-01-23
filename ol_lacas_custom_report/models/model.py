@@ -12,7 +12,7 @@ class ext(models.Model):
 
     month_date=fields.Char(string="Month",compute="_get_month_date")
     year_date=fields.Char(string="Year",compute="_get_year_date")
-    month_total=fields.Char(string="Month Total",compute="_get_month_date")
+#     month_total=fields.Char(string="Month Total",compute="_get_month_date")
     
     def refund_receive_action(self):
         if not self.x_studio_receiverefund:
