@@ -93,7 +93,7 @@ class SiblingsReportWizard(models.TransientModel):
                     # branch=students.school_ids.name
                     batch=students.x_studio_btachsesson 
                     classs=students.homeroom
-                    gender=students.gender
+                    gender=students.gender.name
                     if students.enrollment_state_ids:
                         for line in students.enrollment_state_ids:
                             enroll_dt=line.enrolled_date
@@ -126,23 +126,23 @@ class SiblingsReportWizard(models.TransientModel):
                     
                 "roll_no":roll_no,
                 "parent_code":'',
-                "father_name":f_name if f_name else 'No Father Name',
+                "father_name":f_name if f_name else '-',
                 "f_phone_no":f_ph  if f_name else phone,
                 "f_cnic":'',
-                "f_address":f_st  if f_st else 'No Father Address',
-                "std_address":street  if street else 'No Std Address',
+                "f_address":f_st  if f_st else '-',
+                "std_address":street  if street else '-',
                 "no_of_child":tot_child,
                 "m_cnic":"",
-                "mother_name":m_name  if m_name else 'No Mother Name',
-                "m_phone_no":m_ph  if f_ph else 'No Moth phone',
+                "mother_name":m_name  if m_name else '-',
+                "m_phone_no":m_ph  if f_ph else '-',
                 "emergency":'',
                 "std_name":name,
-                "std_gender":gender if gender else "Not Assigned",
+                "std_gender":gender if gender else "-",
                 "adm_date":enroll_dt ,
                 "std_branch":branch,
-                "std_batch":batch if batch else "Empty batch",
+                "std_batch":batch if batch else "-",
                 "std_term":"",
-                "std_class":classs if classs else "Not assigned class",
+                "std_class":classs if classs else "-",
                 "waiver_1":all_dis if all_dis else 'No Discount',
                 "waiver_2":fcraw_dis if fcraw_dis else 'No fcraw Disc',
                         
@@ -238,7 +238,7 @@ class SiblingsReportWizard(models.TransientModel):
 
             row=4
             for rec in self.account_sibling_report_line:
-            
+                if rec.roll_no:
                     worksheet.write_merge(row,row,0,1,rec.roll_no, style=style_title)
                     worksheet.write_merge(row,row,2,4,rec.parent_code,style=style_title)
                     worksheet.write_merge(row,row,5,8,rec.father_name,style=style_title)
