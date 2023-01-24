@@ -93,7 +93,7 @@ class SiblingsReportWizard(models.TransientModel):
                     # branch=students.school_ids.name
                     batch=students.x_studio_btachsesson 
                     classs=students.homeroom
-                    gender=students.gender.name
+                    gender=students.gender
                     if students.enrollment_state_ids:
                         for line in students.enrollment_state_ids:
                             enroll_dt=line.enrolled_date
@@ -122,33 +122,33 @@ class SiblingsReportWizard(models.TransientModel):
                         
 
 
-            mvl=self.env['account.sibling.report.move.line'].create({
-                    
-                "roll_no":roll_no,
-                "parent_code":'',
-                "father_name":f_name if f_name else '-',
-                "f_phone_no":f_ph  if f_name else phone,
-                "f_cnic":'',
-                "f_address":f_st  if f_st else '-',
-                "std_address":street  if street else '-',
-                "no_of_child":tot_child,
-                "m_cnic":"",
-                "mother_name":m_name  if m_name else '-',
-                "m_phone_no":m_ph  if f_ph else '-',
-                "emergency":'',
-                "std_name":name,
-                "std_gender":gender if gender else "-",
-                "adm_date":enroll_dt ,
-                "std_branch":branch,
-                "std_batch":batch if batch else "-",
-                "std_term":"",
-                "std_class":classs if classs else "-",
-                "waiver_1":all_dis if all_dis else 'No Discount',
-                "waiver_2":fcraw_dis if fcraw_dis else 'No fcraw Disc',
-                        
+                    mvl=self.env['account.sibling.report.move.line'].create({
+                            
+                        "roll_no":roll_no,
+                        "parent_code":'',
+                        "father_name":f_name if f_name else 'No Father Name',
+                        "f_phone_no":f_ph  if f_name else phone,
+                        "f_cnic":'',
+                        "f_address":f_st  if f_st else 'No Father Address',
+                        "std_address":street  if street else 'No Std Address',
+                        "no_of_child":tot_child,
+                        "m_cnic":"",
+                        "mother_name":m_name  if m_name else 'No Mother Name',
+                        "m_phone_no":m_ph  if f_ph else 'No Moth phone',
+                        "emergency":'',
+                        "std_name":name,
+                        "std_gender":gender if gender else "Not Assigned",
+                        "adm_date":enroll_dt ,
+                        "std_branch":branch,
+                        "std_batch":batch if batch else "Empty batch",
+                        "std_term":"",
+                        "std_class":classs if classs else "Not assigned class",
+                        "waiver_1":all_dis if all_dis else 'No Discount',
+                        "waiver_2":fcraw_dis if fcraw_dis else 'No fcraw Disc',
+                                
 
-        })
-            lines.append(mvl.id)
+                })
+                    lines.append(mvl.id)
 
             # lst=[]
             # lst.append(mvl.roll_no)
@@ -238,7 +238,7 @@ class SiblingsReportWizard(models.TransientModel):
 
             row=4
             for rec in self.account_sibling_report_line:
-                if rec.roll_no:
+            
                     worksheet.write_merge(row,row,0,1,rec.roll_no, style=style_title)
                     worksheet.write_merge(row,row,2,4,rec.parent_code,style=style_title)
                     worksheet.write_merge(row,row,5,8,rec.father_name,style=style_title)
@@ -258,8 +258,8 @@ class SiblingsReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,47,48,rec.std_batch, style_title)
                     worksheet.write_merge(row,row,49,50,rec.std_term, style_title)
                     worksheet.write_merge(row,row,51,53,rec.std_class, style_title)
-                    worksheet.write_merge(row,row,54,58,rec.waiver_1, style_title)
-                    worksheet.write_merge(row,row,59,63,rec.waiver_2, style_title)
+                    worksheet.write_merge(row,row,54,58,rec.wavier_1, style_title)
+                    worksheet.write_merge(row,row,59,63,rec.wavier_2, style_title)
 
    
                     row+=1
