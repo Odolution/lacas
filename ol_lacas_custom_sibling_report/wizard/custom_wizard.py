@@ -258,8 +258,8 @@ class SiblingsReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,47,48,rec.std_batch, style_title)
                     worksheet.write_merge(row,row,49,50,rec.std_term, style_title)
                     worksheet.write_merge(row,row,51,53,rec.std_class, style_title)
-                    worksheet.write_merge(row,row,54,58,rec.wavier_1, style_title)
-                    worksheet.write_merge(row,row,59,63,rec.wavier_2, style_title)
+                    worksheet.write_merge(row,row,54,58,rec.waiver_1, style_title)
+                    worksheet.write_merge(row,row,59,63,rec.waiver_2, style_title)
 
    
                     row+=1
