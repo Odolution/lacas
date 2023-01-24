@@ -91,7 +91,7 @@ class SiblingsReportWizard(models.TransientModel):
                     phone=students.phone
                     street=students.street
                     # branch=students.school_ids.name
-                    batch=students.x_studio_btachsesson 
+                    # batch=students.x_studio_btachsesson 
                     classs=students.homeroom
                     gender=students.gender.name
                     if students.enrollment_state_ids:
