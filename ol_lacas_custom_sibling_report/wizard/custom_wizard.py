@@ -193,7 +193,7 @@ class SiblingsReportWizard(models.TransientModel):
             
             style_title = xlwt.easyxf(
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
+            red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour pale_blue;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
@@ -236,33 +236,33 @@ class SiblingsReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,59,63,"Wavier 2", red_style_title)
 
 
-            # row=4
-            # for rec in self.account_sibling_report_line:
+            row=4
+            for rec in self.account_sibling_report_line:
             
-            #         worksheet.write_merge(row,row,0,1,rec.roll_no, style=style_title)
-            #         worksheet.write_merge(row,row,2,4,rec.parent_code,style=style_title)
-            #         worksheet.write_merge(row,row,5,8,rec.father_name,style=style_title)
-            #         worksheet.write_merge(row,row,9,10,rec.f_phone_no,style=style_title)
-            #         worksheet.write_merge(row,row,11,13,rec.f_cnic,style=style_title)
-            #         worksheet.write_merge(row,row,14,18,rec.f_address,style=style_title)
-            #         worksheet.write_merge(row,row,19,21,rec.std_address,style=style_title)
-            #         worksheet.write_merge(row,row,22,23,rec.no_of_child,style=style_title)
-            #         worksheet.write_merge(row,row,24,26,rec.m_cnic,style=style_title)
-            #         worksheet.write_merge(row,row,27,29,rec.mother_name, style_title)
-            #         worksheet.write_merge(row,row,30,31,rec.m_phone_no, style_title)
-            #         worksheet.write_merge(row,row,32,33,rec.emergency, style_title)
-            #         worksheet.write_merge(row,row,34,38,rec.std_name, style_title)
-            #         worksheet.write_merge(row,row,39,40,rec.std_gender, style_title)
-            #         worksheet.write_merge(row,row,41,43,rec.adm_date, style_title)
-            #         worksheet.write_merge(row,row,44,46,rec.std_branch, style_title)
-            #         worksheet.write_merge(row,row,47,48,rec.std_batch, style_title)
-            #         worksheet.write_merge(row,row,49,50,rec.std_term, style_title)
-            #         worksheet.write_merge(row,row,51,53,rec.std_class, style_title)
-            #         worksheet.write_merge(row,row,54,58,rec.wavier_1, style_title)
-            #         worksheet.write_merge(row,row,59,63,rec.wavier_2, style_title)
+                    worksheet.write_merge(row,row,0,1,rec.roll_no, style=style_title)
+                    worksheet.write_merge(row,row,2,4,rec.parent_code,style=style_title)
+                    worksheet.write_merge(row,row,5,8,rec.father_name,style=style_title)
+                    worksheet.write_merge(row,row,9,10,rec.f_phone_no,style=style_title)
+                    worksheet.write_merge(row,row,11,13,rec.f_cnic,style=style_title)
+                    worksheet.write_merge(row,row,14,18,rec.f_address,style=style_title)
+                    worksheet.write_merge(row,row,19,21,rec.std_address,style=style_title)
+                    worksheet.write_merge(row,row,22,23,rec.no_of_child,style=style_title)
+                    worksheet.write_merge(row,row,24,26,rec.m_cnic,style=style_title)
+                    worksheet.write_merge(row,row,27,29,rec.mother_name, style_title)
+                    worksheet.write_merge(row,row,30,31,rec.m_phone_no, style_title)
+                    worksheet.write_merge(row,row,32,33,rec.emergency, style_title)
+                    worksheet.write_merge(row,row,34,38,rec.std_name, style_title)
+                    worksheet.write_merge(row,row,39,40,rec.std_gender, style_title)
+                    worksheet.write_merge(row,row,41,43,rec.adm_date, style_title)
+                    worksheet.write_merge(row,row,44,46,rec.std_branch, style_title)
+                    worksheet.write_merge(row,row,47,48,rec.std_batch, style_title)
+                    worksheet.write_merge(row,row,49,50,rec.std_term, style_title)
+                    worksheet.write_merge(row,row,51,53,rec.std_class, style_title)
+                    worksheet.write_merge(row,row,54,58,rec.wavier_1, style_title)
+                    worksheet.write_merge(row,row,59,63,rec.wavier_2, style_title)
 
    
-            #         row+=1
+                    row+=1
                   
 
             fp = io.BytesIO()
