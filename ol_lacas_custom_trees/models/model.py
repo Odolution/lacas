@@ -98,12 +98,16 @@ class ext(models.Model):
         return action  
 
 
+    @api.onchange("payment_state")
+    def _students_onchange_onpayment_state(self):
+        self.student_code=" "
+        self.student_code=self.student_ids.facts_udid
 
 
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
         self.student_name=''
-        self.student_code=" "
+        #self.student_code=" "
         self.campus=""
         self.bill_date=' '
         self.challan_date=' '
@@ -165,7 +169,7 @@ class ext(models.Model):
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.student_name=full_name
-            self.student_code=self.student_ids.facts_udid
+            #self.student_code=self.student_ids.facts_udid
             # self.campus=self.student_ids.school_ids.name
             self.challan_date=self.invoice_date
             self.due_date=self.invoice_date_due
