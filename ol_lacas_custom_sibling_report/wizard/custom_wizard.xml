@@ -25,7 +25,6 @@
 
                                        
                                     <tree editable="bottom" string="Journal Items" default_order="id">
-                    
                                         <field name="roll_no"></field>
                                         <field name="parent_code"></field>
                                          <field name="father_name"></field>
@@ -38,6 +37,8 @@
                                         <field name="mother_name"></field>
                                         <field name="m_phone_no"></field>
                                         <field name="std_name"></field>
+                                        <field name="emergency"></field>
+                                        <field name="std_gender"></field>
                                         <field name="adm_date"></field>
                                         <field name="std_branch"></field>
                                         <field name="std_batch"></field>
@@ -45,7 +46,6 @@
                                         <field name="std_class"></field>
                                         <field name="waiver_1"></field>
                                         <field name="waiver_2"></field>
-                                    
                                 
                                         
                                         

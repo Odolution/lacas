@@ -149,18 +149,19 @@ class SiblingsReportWizard(models.TransientModel):
 
         })
             lines.append(mvl.id)
-            lst=[]
-            lst.append(mvl.roll_no)
-            lst.append(mvl.parent_code)
-            lst.append(mvl.father_name)
-            lst.append(mvl.f_phone_no)
-            lst.append(mvl.f_address)
-            lst.append(mvl.std_address)
-            lst.append(mvl.no_of_child)
-            lst.append(mvl.mother_name)
-            lst.append(mvl.adm_date)
-            lst.append(mvl.std_class)
-            raise UserError(lst)
+
+            # lst=[]
+            # lst.append(mvl.roll_no)
+            # lst.append(mvl.parent_code)
+            # lst.append(mvl.father_name)
+            # lst.append(mvl.f_phone_no)
+            # lst.append(mvl.f_address)
+            # lst.append(mvl.std_address)
+            # lst.append(mvl.no_of_child)
+            # lst.append(mvl.mother_name)
+            # lst.append(mvl.adm_date)
+            # lst.append(mvl.std_class)
+            # raise UserError(lst)
 
                         
         
@@ -169,6 +170,8 @@ class SiblingsReportWizard(models.TransientModel):
         }
 
       )
+
+
   
        
     
@@ -210,151 +213,57 @@ class SiblingsReportWizard(models.TransientModel):
             
             
 
-    #         worksheet.write_merge(2,3,0,0,"Sr.No", style=red_style_title)
-    #         worksheet.write_merge(2,3,1,3,"ID",style=red_style_title)
-    #         worksheet.write_merge(2,3,4,5,"App Date",style=red_style_title)
-    #         worksheet.write_merge(2,3,6,7,"Roll No",style=red_style_title)
-    #         worksheet.write_merge(2,3,8,9,"6 Digit Roll No",style=yellow_style_title)
-    #         worksheet.write_merge(2,3,10,11,"Name",style=red_style_title)
-    #         worksheet.write_merge(2,3,12,13,"Batch #",style=red_style_title)
-    #         worksheet.write_merge(2,3,14,16,"Branch",style=red_style_title)
-    #         worksheet.write_merge(2,3,17,18,"Class",style=red_style_title)
-    #         worksheet.write_merge(2,3,19,20,"withdrawn Status", red_style_title)
-    #         worksheet.write_merge(2,3,21,22,"Leaving Reaon", red_style_title)
-    #         worksheet.write_merge(2,3,23,24,"Remarks", red_style_title)
-    #         worksheet.write_merge(2,3,25,26,"Withdrawn DT", red_style_title)
+            worksheet.write_merge(2,3,0,1,"Roll No.", style=red_style_title)
+            worksheet.write_merge(2,3,2,4,"Parent Code",style=red_style_title)
+            worksheet.write_merge(2,3,5,8,"Father Name",style=red_style_title)
+            worksheet.write_merge(2,3,9,10,"Phone No",style=red_style_title)
+            worksheet.write_merge(2,3,11,13,"CNIC",style=yellow_style_title)
+            worksheet.write_merge(2,3,14,18,"Address",style=red_style_title)
+            worksheet.write_merge(2,3,19,21,"Student Address",style=red_style_title)
+            worksheet.write_merge(2,3,22,23,"# of Child",style=red_style_title)
+            worksheet.write_merge(2,3,24,26,"Mother CNIC",style=red_style_title)
+            worksheet.write_merge(2,3,27,29,"Mother Name", red_style_title)
+            worksheet.write_merge(2,3,30,31,"Mother Phone No.", red_style_title)
+            worksheet.write_merge(2,3,32,33,"Emergency Contact", red_style_title)
+            worksheet.write_merge(2,3,34,38,"Student Name", red_style_title)
+            worksheet.write_merge(2,3,39,40,"Gender", red_style_title)
+            worksheet.write_merge(2,3,41,43,"ADM Date.", red_style_title)
+            worksheet.write_merge(2,3,44,46,"Branch", red_style_title)
+            worksheet.write_merge(2,3,47,48,"Batch", red_style_title)
+            worksheet.write_merge(2,3,49,50,"Term", red_style_title)
+            worksheet.write_merge(2,3,51,53,"Class", red_style_title)
+            worksheet.write_merge(2,3,54,58,"Wavier 1", red_style_title)
+            worksheet.write_merge(2,3,59,63,"Wavier 2", red_style_title)
 
 
-    #         v_from_month=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%m')
-    #         v_from_year=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y')
-
-    #         v_to_month=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%m')
-    #         v_to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
-
-    #         months= {
-    #             1:['01','JAN-22',10,'22'],
-    #             2:['02','FEB-22',20,'22'],
-    #             3:['03','MAR-22',30,'22'],
-    #             4:['04','APR-22',40,'22'],
-    #             5:['05','MAY-22',50,'22'],
-    #             6:['06','JUN-22',60,'22'],
-    #             7:['07','JUL-22',70,'22'],
-    #             8:['08','AUG-22',80,'22'],
-    #             9:['09','SEP-22',90,'22'],
-    #             10:['10','OCT-22',100,'22'],
-    #             11:['11','NOV-22',110,'22'],
-    #             12:['12','DEC-22',120,'22'],
-    #             13:['01','JAN-23',130,'23'],
-    #             14:['02','FEB-23',140,'23'],
-    #             15:['03','MAR-23',150,'23'],
-    #             16:['04','APR-23',160,'23'],
-    #             17:['05','MAY-23',170,'23'],
-    #             18:['06','JUN-23',180,'23'],
-    #             19:['07','JUL-23',190,'23'],
-    #             20:['08','AUG-23',200,'23'],
-    #             21:['09','SEP-23',200,'23'],
-    #             22:['10','OCT-23',200,'23'],
-    #             23:['11','NOV-23',200,'23'],
-    #             24:['12','DEC-23',200,'23'],
-    #             }
-    #         range_start = 0
-    #         range_stop = 0
-    #         # raise UserError(v_to)
-    #         for key, value in months.items():
-    #             if value[0] == v_from_month and value[3] == v_from_year:
-    #                 range_start = key
-    #             if value[0] == v_to_month and value[3] == v_to_year:
-
-    #                 range_stop = key
-
-    #         col = 27
+            # row=4
+            # for rec in self.account_sibling_report_line:
             
-      
-    #         for i in range(range_start,range_stop+1):
-      
-    #             worksheet.write_merge(2,3,col,col+1,months[i][1],red_style_title)
-    #             # worksheet.write_merge(row,row,col,col+1,months[i][2])
-    #             col+=2
+            #         worksheet.write_merge(row,row,0,1,rec.roll_no, style=style_title)
+            #         worksheet.write_merge(row,row,2,4,rec.parent_code,style=style_title)
+            #         worksheet.write_merge(row,row,5,8,rec.father_name,style=style_title)
+            #         worksheet.write_merge(row,row,9,10,rec.f_phone_no,style=style_title)
+            #         worksheet.write_merge(row,row,11,13,rec.f_cnic,style=style_title)
+            #         worksheet.write_merge(row,row,14,18,rec.f_address,style=style_title)
+            #         worksheet.write_merge(row,row,19,21,rec.std_address,style=style_title)
+            #         worksheet.write_merge(row,row,22,23,rec.no_of_child,style=style_title)
+            #         worksheet.write_merge(row,row,24,26,rec.m_cnic,style=style_title)
+            #         worksheet.write_merge(row,row,27,29,rec.mother_name, style_title)
+            #         worksheet.write_merge(row,row,30,31,rec.m_phone_no, style_title)
+            #         worksheet.write_merge(row,row,32,33,rec.emergency, style_title)
+            #         worksheet.write_merge(row,row,34,38,rec.std_name, style_title)
+            #         worksheet.write_merge(row,row,39,40,rec.std_gender, style_title)
+            #         worksheet.write_merge(row,row,41,43,rec.adm_date, style_title)
+            #         worksheet.write_merge(row,row,44,46,rec.std_branch, style_title)
+            #         worksheet.write_merge(row,row,47,48,rec.std_batch, style_title)
+            #         worksheet.write_merge(row,row,49,50,rec.std_term, style_title)
+            #         worksheet.write_merge(row,row,51,53,rec.std_class, style_title)
+            #         worksheet.write_merge(row,row,54,58,rec.wavier_1, style_title)
+            #         worksheet.write_merge(row,row,59,63,rec.wavier_2, style_title)
 
-    #         worksheet.write_merge(2,3,col,col+1,"Total", lime_style_title)   
-            
-    #             # print('col:',months[i][1], 'data:',months[i][2])
-
-    #         # row = 4
-    #         # sno = 1
-        
-    #         column = 27
-    #         row = 4
-    #         sn=1
-    #         for rec in self.account_report_line:
-                
-
-                
-    #             if rec:
-
-    #                 column = 27
-
-    #                 worksheet.write(row,0,sn)
-    #                 worksheet.write_merge(row,row,1,3,rec.record_id,heading_style)
-    #                 worksheet.write_merge(row,row,4,5,rec.app_date,heading_style)
-    #                 worksheet.write_merge(row,row,6,7,rec.roll_no,heading_style)
-    #                 worksheet.write_merge(row,row,8,9,rec.full_roll_no,heading_style)
-    #                 worksheet.write_merge(row,row,10,11,rec.name,heading_style)
-    #                 worksheet.write_merge(row,row,12,13,rec.student_batch,heading_style)
-    #                 worksheet.write_merge(row,row,14,16,rec.student_branch,heading_style)
-    #                 worksheet.write_merge(row,row,17,18,rec.student_class,heading_style)
-    #                 worksheet.write_merge(row,row,19,20,rec.withdrawn_status,heading_style)
-    #                 worksheet.write_merge(row,row,21,22,rec.leaving_reason,heading_style)
-    #                 worksheet.write_merge(row,row,23,24,rec.remarks,heading_style)
-    #                 worksheet.write_merge(row,row,25,26,rec.withdrawn_date,heading_style)
-
-    #                 data_month= {
-    #                     1:['01','JAN-22',rec.jan,'22'],
-    #                     2:['02','FEB-22',rec.feb,'22'],
-    #                     3:['03','MAR-22',rec.mar,'22'],
-    #                     4:['04','APR-22',rec.apr,'22'],
-    #                     5:['05','MAY-22',rec.may,'22'],
-    #                     6:['06','JUN-22',rec.jun,'22'],
-    #                     7:['07','JUL-22',rec.jul,'22'],
-    #                     8:['08','AUG-22',rec.aug,'22'],
-    #                     9:['09','SEP-22',rec.sep,'22'],
-    #                     10:['10','OCT-22',rec.oct,'22'],
-    #                     11:['11','NOV-22',rec.nov,'22'],
-    #                     12:['12','DEC-22',rec.dec,'22'],
-    #                     13:['01','JAN-23',rec.jan_2,'23'],
-    #                     14:['02','FEB-23',rec.feb_2,'23'],
-    #                     15:['03','MAR-23',rec.mar_2,'23'],
-    #                     16:['04','APR-23',rec.apr_2,'23'],
-    #                     17:['05','MAY-23',rec.may_2,'23'],
-    #                     18:['06','JUN-23',rec.jun_2,'23'],
-    #                     19:['07','JUL-23',rec.jul_2,'23'],
-    #                     20:['08','AUG-23',rec.aug_2,'23'],
-    #                     21:['09','SEP-23',rec.sep_2,'23'],
-    #                     22:['10','OCT-23',rec.oct_2,'23'],
-    #                     23:['11','NOV-23',rec.nov_2,'23'],
-    #                     24:['12','DEC-23',rec.dec_2,'23'],
-    #                 }
-    #                 range_start = 0
-    #                 range_stop = 0
+   
+            #         row+=1
                   
-    #                 for key, value in data_month.items():
-    #                     if value[0] == v_from_month and value[3] == v_from_year:
-    #                         range_start = key
-    #                     if value[0] == v_to_month and value[3] == v_to_year:
-    #                         range_stop = key
-                    
-
-    #                 for i in range(range_start,range_stop+1):
-    #                     # raise UserError(column)
-    #                     worksheet.write_merge(row,row,column,column+1,data_month[i][2],heading_style)
-    #                     # worksheet.write_merge(row,row,column,column+1,rec.total_amount)
-    #                     # lst.append([row_1,row_1,column,column+1])
-                      
-    #                     column+=2
-    #                 worksheet.write_merge(row,row,column,column+1,rec.total_amount,heading_style)
-                      
-    #                 row+=1
-    #                 sn+=1
 
             fp = io.BytesIO()
             workbook.save(fp)
