@@ -95,8 +95,8 @@ class SiblingsReportWizard(models.TransientModel):
                     classs=students.homeroom
                     gender=students.gender
                     if students.enrollment_history_ids:
-                        for lines in students.enrollment_state_ids:
-                            enroll_dt=lines.enrolled_date
+                        for line in students.enrollment_state_ids:
+                            enroll_dt=line.enrolled_date
                             break
                     if students.tuition_plan_ids:
                         for plans in students.tuition_plan_ids:
