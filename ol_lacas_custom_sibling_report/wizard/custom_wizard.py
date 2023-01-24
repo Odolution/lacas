@@ -90,14 +90,20 @@ class SiblingsReportWizard(models.TransientModel):
                     name=students.name
                     phone=students.phone
                     street=students.street
-                    branch=students.school_ids.name
+                    # branch=students.school_ids.name
                     batch=students.x_studio_btachsesson 
                     classs=students.homeroom
                     gender=students.gender
-                    if students.enrollment_history_ids:
+                    if students.enrollment_state_ids:
                         for line in students.enrollment_state_ids:
                             enroll_dt=line.enrolled_date
                             break
+                    if students.enrollment_history_ids:
+                        enroll_history=students.enrollment_history_ids
+                        lst=[]
+                        for hist in enroll_history:
+                            lst.append(hist.program_id.name)
+                        branch=lst[0]
                     if students.tuition_plan_ids:
                         for plans in students.tuition_plan_ids:
                             all_dis=plans.x_studio_discount_name_1 
