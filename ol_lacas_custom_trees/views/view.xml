@@ -58,7 +58,7 @@
                 </header>
                 <field name="student_code"/>
                 <!-- <field name="std_factsid"/> -->
-                <field name="facts_id_new_lv"/>
+                <!-- <field name="facts_id_new_lv"/> -->
                 <field name="name" decoration-bf="1"/>
                 <field name="std_name"/>
                 <field name="std_fathername"/>
@@ -127,7 +127,7 @@
                 <field name="name" decoration-bf="1"/>
                 <field name="partner_id" invisible="1"/>
                 <field name="student_code"/>
-                <field name="facts_id_new_lv"/>
+                <!-- <field name="facts_id_new_lv"/> -->
                 <!-- <field name="std_factsid"/> -->
                 <field name="student_name"/>
                 <field name="std_fathername"/>
