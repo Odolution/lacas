@@ -217,7 +217,7 @@ class SiblingsReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,2,4,"Parent Code",style=red_style_title)
             worksheet.write_merge(2,3,5,8,"Father Name",style=red_style_title)
             worksheet.write_merge(2,3,9,10,"Phone No",style=red_style_title)
-            worksheet.write_merge(2,3,11,13,"CNIC",style=yellow_style_title)
+            worksheet.write_merge(2,3,11,13,"CNIC",style=red_style_title)
             worksheet.write_merge(2,3,14,18,"Address",style=red_style_title)
             worksheet.write_merge(2,3,19,21,"Student Address",style=red_style_title)
             worksheet.write_merge(2,3,22,23,"# of Child",style=red_style_title)

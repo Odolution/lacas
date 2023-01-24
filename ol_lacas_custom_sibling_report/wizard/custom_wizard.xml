@@ -25,7 +25,7 @@
 
                                        
                                     <tree editable="bottom" string="Journal Items" default_order="id">
-                                        <field name="roll_no"></field>
+                                        <field name="roll_no" </field>
                                         <field name="parent_code"></field>
                                          <field name="father_name"></field>
                                          <field name="f_phone_no"></field>
@@ -79,7 +79,7 @@
             <field name="view_id" ref="view_report_siblings"/>
             <field name="target">new</field>
         </record>
- <menuitem id="menu_sibling_student" name="Sibling Students" parent="account.menu_finance_reports" sequence="6"/>
+ <menuitem id="menu_sibling_student" name="Sibling Students" parent="account.menu_finance_receivables" sequence="6"/>
  <menuitem id="menu_action_sibling_report" name="Sibling Students Report" action="action_account_print_siblings_report" parent="menu_sibling_student"/>
 
  
