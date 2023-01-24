@@ -25,49 +25,31 @@
 
                                        
                                     <tree editable="bottom" string="Journal Items" default_order="id">
-<!--                     
-                                        <field name="record_id"></field>
-                                        <field name="roll_no"></field>
-                                         <field name="full_roll_no"></field>
-                                         <field name="name"></field>
-                                          <field name="app_date"></field>
-                                        <field name="student_batch"></field>
-                                        <field name="student_branch"></field>
-                                        <field name="student_class"></field>
-                                        <field name="withdrawn_status"></field>
-                                        <field name="leaving_reason"></field>
-                                        <field name="remarks"></field>
-                                        <field name="withdrawn_date"></field>
-                                        <field name="jan"></field>
-                                        <field name="feb"></field>
-                                        <field name="mar"></field>
-                                        <field name="apr"></field>
-                                        <field name="may"></field>
-                                        <field name="jun"></field>
-                                        <field name="jul"></field>
-                                        <field name="aug"></field>
-                                        <field name="sep"></field>
-                                        <field name="oct"></field>
-                                        <field name="nov"></field>
-                                        <field name="dec"></field>
-
-                                        <field name="jan_2"></field>
-                                        <field name="feb_2"></field>
-                                        <field name="mar_2"></field>
-                                        <field name="apr_2"></field>
-                                        <field name="may_2"></field>
-                                        <field name="jun_2"></field>
-                                        <field name="jul_2"></field>
-                                        <field name="aug_2"></field>
-                                        <field name="sep_2"></field>
-                                        <field name="oct_2"></field>
-                                        <field name="nov_2"></field>
-                                        <field name="dec_2"></field>
-                                        <field name="total_amount"></field>
+                                         <field name="roll_no"></field>
+                                        <field name="parent_code"></field>
+                                         <field name="father_name"></field>
+                                         <field name="f_phone_no"></field>
+                                        <field name="f_cnic"></field>
+                                        <field name="f_address"></field>
+                                        <field name="std_address"></field>
+                                        <field name="no_of_child"></field>
+                                        <field name="m_cnic"></field>
+                                        <field name="mother_name"></field>
+                                        <field name="m_phone_no"></field>
+                                        <field name="std_name"></field>
+                                        <field name="adm_date"></field>
+                                        <field name="std_branch"></field>
+                                        <field name="std_batch"></field>
+                                        <field name="std_term"></field>
+                                        <field name="std_class"></field>
+                                        <field name="waiver_1"></field>
+                                        <field name="waiver_2"></field>
+                                    
+                                
                                         
                                         
-                                         -->
-
+         
+                                    
 
 
                                 

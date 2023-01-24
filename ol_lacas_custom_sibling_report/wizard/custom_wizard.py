@@ -33,6 +33,7 @@ class AccountMoveReport(models.TransientModel):
     m_cnic=fields.Char('Mother CNIC')
     mother_name=fields.Char('Mother Name')
     m_phone_no=fields.Char('Mother Phone No.')
+    std_name=fields.Char('Student')
     emergency=fields.Char('Emergency Contact')
     std_gender=fields.Char('Gender')
     adm_date=fields.Char('Adm. Date')
