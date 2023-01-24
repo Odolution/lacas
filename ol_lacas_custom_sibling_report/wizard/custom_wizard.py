@@ -17,7 +17,7 @@ from odoo.exceptions import UserError
 #     xlwt = None
 
 class AccountMoveReport(models.TransientModel):
-    _name = 'account.report.move.line'
+    _name = 'account.sibling.report.move.line'
 
 
     
@@ -52,7 +52,7 @@ class SiblingsReportWizard(models.TransientModel):
     _description='Print Sibling Wizard'
 
     
-    account_report_line=fields.Many2many('account.report.move.line', string='Account report Line')
+    account_sibling_report_line=fields.Many2many('account.sibling.report.move.line', string='Account report Line')
  
 
 
@@ -116,7 +116,7 @@ class SiblingsReportWizard(models.TransientModel):
                         
 
 
-            mvl=self.env['account.report.move.line'].create({
+            mvl=self.env['account.sibling.report.move.line'].create({
                     
                 "roll_no":roll_no,
                 "parent_code":'',
@@ -147,7 +147,7 @@ class SiblingsReportWizard(models.TransientModel):
                         
         
         self.write({
-            "account_report_line":[(6,0,lines)]
+            "account_sibling_report_line":[(6,0,lines)]
         }
 
       )
