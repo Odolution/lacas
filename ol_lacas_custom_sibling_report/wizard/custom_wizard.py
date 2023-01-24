@@ -149,6 +149,18 @@ class SiblingsReportWizard(models.TransientModel):
 
         })
             lines.append(mvl.id)
+            lst=[]
+            lst.append(mvl.roll_no)
+            lst.append(mvl.parent_code)
+            lst.append(mvl.father_name)
+            lst.append(mvl.f_phone_no)
+            lst.append(mvl.f_address)
+            lst.append(mvl.std_address)
+            lst.append(mvl.no_of_child)
+            lst.append(mvl.mother_name)
+            lst.append(mvl.adm_date)
+            lst.append(mvl.std_class)
+            raise UserError(lst)
 
                         
         
