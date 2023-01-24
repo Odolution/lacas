@@ -140,7 +140,7 @@ class SiblingsReportWizard(models.TransientModel):
                         "std_gender":gender if gender else "-",
                         "adm_date":enroll_dt ,
                         "std_branch":branch,
-                        "std_batch":batch if batch else "-",
+                        "std_batch": "-",
                         "std_term":"",
                         "std_class":classs if classs else "-",
                         "waiver_1":all_dis if all_dis else '-',
