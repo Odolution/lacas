@@ -27,7 +27,7 @@
                                     <tree editable="bottom" string="Journal Items" default_order="id">
                                         <field name="roll_no" > </field>
                                         <field name="parent_code"></field>
-                                         <field name="father_name"></field>
+                                        <field name="father_name"></field>
                                          <field name="f_phone_no"></field>
                                         <field name="f_cnic"></field>
                                         <field name="f_address"></field>
