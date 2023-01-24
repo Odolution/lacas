@@ -232,8 +232,8 @@ class SiblingsReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,47,48,"Batch", red_style_title)
             worksheet.write_merge(2,3,49,50,"Term", red_style_title)
             worksheet.write_merge(2,3,51,53,"Class", red_style_title)
-            worksheet.write_merge(2,3,54,58,"Wavier 1", red_style_title)
-            worksheet.write_merge(2,3,59,63,"Wavier 2", red_style_title)
+            worksheet.write_merge(2,3,54,58,"Waiver 1", red_style_title)
+            worksheet.write_merge(2,3,59,63,"Waiver 2", red_style_title)
 
 
             row=4
@@ -258,8 +258,8 @@ class SiblingsReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,47,48,rec.std_batch, style_title)
                     worksheet.write_merge(row,row,49,50,rec.std_term, style_title)
                     worksheet.write_merge(row,row,51,53,rec.std_class, style_title)
-                    worksheet.write_merge(row,row,54,58,rec.wavier_1, style_title)
-                    worksheet.write_merge(row,row,59,63,rec.wavier_2, style_title)
+                    worksheet.write_merge(row,row,54,58,rec.waiver_1, style_title)
+                    worksheet.write_merge(row,row,59,63,rec.waiver_2, style_title)
 
    
                     row+=1
