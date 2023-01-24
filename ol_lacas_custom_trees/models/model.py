@@ -100,7 +100,7 @@ class ext(models.Model):
 
     @api.onchange("payment_state")
     def _students_onchange_onpayment_state(self):
-        self.student_code=" "
+        #self.student_code=" "
         self.student_code=self.student_ids.facts_udid
 
 
