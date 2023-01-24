@@ -93,7 +93,7 @@ class SiblingsReportWizard(models.TransientModel):
                     # branch=students.school_ids.name
                     batch=students.x_studio_btachsesson 
                     classs=students.homeroom
-                    gender=students.gender
+                    gender=students.gender.name
                     if students.enrollment_state_ids:
                         for line in students.enrollment_state_ids:
                             enroll_dt=line.enrolled_date
