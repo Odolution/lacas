@@ -207,6 +207,7 @@ class SiblingsReportWizard(models.TransientModel):
 
             row=4
             for rec in self.account_charges_report_line:
+                if rec.std_roll_no:
             
                     worksheet.write_merge(row,row,0,1,rec.std_roll_no, style=style_title)
                     worksheet.write_merge(row,row,2,4,rec.std_f_name,style=style_title)
