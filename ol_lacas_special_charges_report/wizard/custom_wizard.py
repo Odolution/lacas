@@ -17,7 +17,7 @@ except ImportError:
     xlwt = None
 
 class AccountMoveReport(models.TransientModel):
-    _name = 'account.special.charges.report.move.line'
+    _name = 'account.charges.report.move.line'
 
 
     
@@ -39,11 +39,11 @@ class AccountMoveReport(models.TransientModel):
    
 
 class SiblingsReportWizard(models.TransientModel):
-    _name="special.charges.report.wizard"
+    _name="charges.report.wizard"
     _description='Specialization Charges Wizard'
 
     
-    account_charges_report_line=fields.Many2many('account.special.charges.report.move.line', string='Account report Line')
+    account_charges_report_line=fields.Many2many('account.charges.report.move.line', string='Account report Line')
  
 
 
@@ -104,7 +104,7 @@ class SiblingsReportWizard(models.TransientModel):
             
 
 
-                    mvl=self.env['account.sibling.report.move.line'].create({
+                    mvl=self.env['account.charges.report.move.line'].create({
                             
                             "std_roll_no":roll_no,
                             "std_f_name":f_name,
