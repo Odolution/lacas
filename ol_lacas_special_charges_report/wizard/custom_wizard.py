@@ -105,26 +105,26 @@ class SiblingsReportWizard(models.TransientModel):
             
 
 
-            mvl=self.env['account.charges.report.move.line'].create({
-                    
-                    "std_roll_no":roll_no,
-                    "std_f_name":f_name,
-                    "std_m_name":m_name,
-                    "std_l_name":l_name,
-                    "special_charges":specialization,
-                    "department":dept,
-                    "program_name":program,
-                    "amount_charged":price,
-                    "academic_level":classs,
-                    "section_std":sec,
-                    "remarks_std":remarks,
+        mvl=self.env['account.charges.report.move.line'].create({
+                
+                "std_roll_no":roll_no,
+                "std_f_name":f_name,
+                "std_m_name":m_name,
+                "std_l_name":l_name,
+                "special_charges":specialization,
+                "department":dept,
+                "program_name":program,
+                "amount_charged":price,
+                "academic_level":classs,
+                "section_std":sec,
+                "remarks_std":remarks,
 
-  
-    
-                                
 
-                })
-            lines.append(mvl.id)
+
+                            
+
+            })
+        lines.append(mvl.id)
                     
 
          
