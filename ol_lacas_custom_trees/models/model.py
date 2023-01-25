@@ -5,7 +5,7 @@ import json
 
 class ext(models.Model):
     _inherit="account.move"
-    # security_price=fields.Integer(string='Security Price')
+   
    
     tuition=fields.Integer(string="Tuition Fee")
     club=fields.Integer(string="Club Charges")
