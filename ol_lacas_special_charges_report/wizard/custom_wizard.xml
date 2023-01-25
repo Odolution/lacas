@@ -1,7 +1,5 @@
 <odoo>
 
-
-
 <record model="ir.ui.view" id="view_report_special_charges">
         <field name="name">charges.report.wizard.form</field>
         <field name="model" >charges.report.wizard</field>
