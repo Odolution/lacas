@@ -99,29 +99,29 @@ class SiblingsReportWizard(models.TransientModel):
                                 dept=lst[0]
         
 
-                    mvl=self.env['account.charges.report.move.line'].create({
-                            
-                            "std_roll_no":roll_no,
-                            "std_f_name":f_name,
-                            "std_m_name":m_name,
-                            "std_l_name":l_name,
-                            "special_charges":specialization,
-                            "department":dept,
-                            "program_name":program,
-                            "amount_charged":price,
-                            "academic_level":classs,
-                            "section_std":sec,
-                            "remarks_std":'',
-
-
-
+                        mvl=self.env['account.charges.report.move.line'].create({
                                 
+                                "std_roll_no":roll_no,
+                                "std_f_name":f_name,
+                                "std_m_name":m_name,
+                                "std_l_name":l_name,
+                                "special_charges":specialization,
+                                "department":dept,
+                                "program_name":program,
+                                "amount_charged":price,
+                                "academic_level":classs,
+                                "section_std":sec,
+                                "remarks_std":'',
 
-                })
-                    lines.append(mvl.id)
-                    
 
-         
+
+                                    
+
+                    })
+                        lines.append(mvl.id)
+                        
+
+            
 
                         
         
@@ -202,7 +202,7 @@ class SiblingsReportWizard(models.TransientModel):
 
             row=4
             for rec in self.account_charges_report_line:
-                
+                if rec.std_roll_no:
             
                     worksheet.write_merge(row,row,0,1,rec.std_roll_no, style=style_title)
                     worksheet.write_merge(row,row,2,4,rec.std_f_name,style=style_title)
