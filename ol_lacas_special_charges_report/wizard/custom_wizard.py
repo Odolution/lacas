@@ -52,23 +52,21 @@ class SiblingsReportWizard(models.TransientModel):
     def action_print_report(self):
         tuition_plan=self.env['tuition.plan'].search([])
         lines=[]
-        roll_no=''
-        f_name=''
-        m_name=''
-        l_name=''
-        specialization=''
-        program=''
-        classs=''
-        sec=''
-        dept=''
-        price=0
-        remarks=''
+        # roll_no=''
+        # f_name=''
+        # m_name=''
+        # l_name=''
+        # specialization=''
+        # program=''
+        # classs=''
+        # sec=''
+        # dept=''
+        # price=0
+        # remarks=''
         
 
     
         for rec in tuition_plan:
-           
-
             if rec.line_ids:
                 for line in rec.line_ids:
                     if line.product_id.x_studio_code:
@@ -101,10 +99,6 @@ class SiblingsReportWizard(models.TransientModel):
                                 dept=lst[0]
         
 
-
-            
-
-
                     mvl=self.env['account.charges.report.move.line'].create({
                             
                             "std_roll_no":roll_no,
@@ -117,10 +111,10 @@ class SiblingsReportWizard(models.TransientModel):
                             "amount_charged":price,
                             "academic_level":classs,
                             "section_std":sec,
-                            "remarks_std":remarks,
+                            "remarks_std":'',
 
-  
-    
+
+
                                 
 
                 })
@@ -134,8 +128,7 @@ class SiblingsReportWizard(models.TransientModel):
         self.write({
             "account_charges_report_line":[(6,0,lines)]
         })
-        for line_id in self.account_charges_report_line:
-            raise UserError(str(lines_id.std_f_name))
+     
 #         lst=[]
 #         lst.append(mvl.std_roll_no)
 #         lst.append(mvl.std_f_name)
@@ -209,7 +202,7 @@ class SiblingsReportWizard(models.TransientModel):
 
             row=4
             for rec in self.account_charges_report_line:
-                if rec.std_roll_no:
+                
             
                     worksheet.write_merge(row,row,0,1,rec.std_roll_no, style=style_title)
                     worksheet.write_merge(row,row,2,4,rec.std_f_name,style=style_title)
