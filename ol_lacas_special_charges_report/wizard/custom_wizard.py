@@ -134,7 +134,7 @@ class SiblingsReportWizard(models.TransientModel):
         self.write({
             "account_charges_report_line":[(6,0,lines)]
         })
-        raise UserError(str(account_charges_report_line))
+        raise UserError(str(self.account_charges_report_line))
 #         lst=[]
 #         lst.append(mvl.std_roll_no)
 #         lst.append(mvl.std_f_name)
