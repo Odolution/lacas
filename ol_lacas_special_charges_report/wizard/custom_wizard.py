@@ -124,6 +124,7 @@ class SiblingsReportWizard(models.TransientModel):
 
                 })
                     lines.append(mvl.id)
+                    
 
          
 
@@ -131,9 +132,22 @@ class SiblingsReportWizard(models.TransientModel):
         
         self.write({
             "account_charges_report_line":[(6,0,lines)]
-        }
+        })
+        lst=[]
+        lst.append(mvl.std_roll_no)
+        lst.append(mvl.std_f_name)
+        lst.append(mvl.std_m_name)
+        lst.append(mvl.std_l_name)
+        lst.append(mvl.special_charges)
+        lst.append(mvl.department)
+        lst.append(mvl.program_name)
+        lst.append(mvl.amount_charged)
+        lst.append(mvl.academic_level)
+        lst.append(mvl.section_std)
 
-      )
+
+        
+        raise UserError(lst)
 
 
   
