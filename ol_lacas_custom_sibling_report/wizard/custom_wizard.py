@@ -107,7 +107,7 @@ class SiblingsReportWizard(models.TransientModel):
                     if students.tuition_plan_ids:
                         for plans in students.tuition_plan_ids:
                             all_dis=plans.x_studio_discount_name_1 
-                            fcraw_dis=plans.x_studio_fc_row
+                            fcraw_dis=plans.x_studio_fcraw_name
                     if students.relationship_ids:
                         for parents in students.relationship_ids:
                             if parents.relationship_type_id.name=='Father':
