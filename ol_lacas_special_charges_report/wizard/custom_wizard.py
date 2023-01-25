@@ -52,21 +52,22 @@ class SiblingsReportWizard(models.TransientModel):
     def action_print_report(self):
         tuition_plan=self.env['tuition.plan'].search([])
         lines=[]
+        roll_no=''
+        f_name=''
+        m_name=''
+        l_name=''
+        specialization=''
+        program=''
+        classs=''
+        sec=''
+        dept=''
+        price=0
+        remarks=''
         
 
     
         for rec in tuition_plan:
-            roll_no=''
-            f_name=''
-            m_name=''
-            l_name=''
-            specialization=''
-            program=''
-            classs=''
-            sec=''
-            dept=''
-            price=0
-            remarks=''
+           
 
             if rec.line_ids:
                 for line in rec.line_ids:
