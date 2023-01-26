@@ -12,7 +12,7 @@
             <group>
              <field name="date_from"/>
              <field name="date_to"/>
-             <field name="groups_ids" widget="many2many_tags" />
+            
              </group>
 
                <notebook>
@@ -23,13 +23,16 @@
                                        widget="section_and_note_one2many"
                                   
                                        mode="tree">
-                                          record_id=fields.Char('ID')
+                                       
 
                                        
                                     <tree editable="bottom" string="Journal Items" default_order="id">
-                                        <field name="heading"></field>
+                    
                                         <field name="record_id"></field>
+                                        <field name="app_date"></field>
                                         <field name="roll_no"></field>
+                                        <field name="name"></field>
+                                        <field name="full_roll_no"></field>
                                         <field name="student_batch"></field>
                                         <field name="student_branch"></field>
                                         <field name="student_class"></field>
@@ -37,11 +40,34 @@
                                         <field name="leaving_reason"></field>
                                         <field name="remarks"></field>
                                         <field name="withdrawn_date"></field>
-                                        <field name="Student"></field>
-                                        <field name="Month"></field>
-                                        <field name="receivable_amount"></field>
-                                        <field name="footer"></field>
+                                        <field name="jan"></field>
+                                        <field name="feb"></field>
+                                        <field name="mar"></field>
+                                        <field name="apr"></field>
+                                        <field name="may"></field>
+                                        <field name="jun"></field>
+                                        <field name="jul"></field>
+                                        <field name="aug"></field>
+                                        <field name="sep"></field>
+                                        <field name="oct"></field>
+                                        <field name="nov"></field>
+                                        <field name="dec"></field>
+
+                                        <field name="jan_2"></field>
+                                        <field name="feb_2"></field>
+                                        <field name="mar_2"></field>
+                                        <field name="apr_2"></field>
+                                        <field name="may_2"></field>
+                                        <field name="jun_2"></field>
+                                        <field name="jul_2"></field>
+                                        <field name="aug_2"></field>
+                                        <field name="sep_2"></field>
+                                        <field name="oct_2"></field>
+                                        <field name="nov_2"></field>
+                                        <field name="dec_2"></field>
                                         <field name="total_amount"></field>
+                                        
+                                        
                                         
 
 
@@ -55,7 +81,8 @@
                 </notebook>
              
              <footer>
-                <button name="action_print_report" type="object" string="Print" class="btn-primary" />
+                <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
+                <button name="action_print_excel_report" type="object" string="Print Excel" class="btn-primary" />
                 <!-- <button name="action_polulate" type="object" string="Populate" /> -->
                 
                  <button string="Cancel" class="btn-secondary" special="cancel"/>
