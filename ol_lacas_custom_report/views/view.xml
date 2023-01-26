@@ -10,6 +10,7 @@
 
                 
                             <field name="month_date"/>
+                            <field name="year_date" invisible='1' />
                            
             </xpath>
         </field>
