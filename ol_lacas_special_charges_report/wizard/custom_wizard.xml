@@ -1,0 +1,79 @@
+<odoo>
+
+<record model="ir.ui.view" id="view_report_special_charges">
+        <field name="name">charges.report.wizard.form</field>
+        <field name="model" >charges.report.wizard</field>
+      
+        <field name="arch" type="xml">
+        
+            <form string="Print Specialization charges of students">
+            <group>
+      
+             </group>
+
+               <notebook>
+                            <page id="special_charges_tab"
+                                  string=" Invoice Lines">
+
+                                <field name="account_charges_report_line"
+                                       widget="section_and_note_one2many"
+                                  
+                                       mode="tree">
+                                       
+
+                                       
+                                    <tree editable="bottom" string="Journal Items" default_order="id">
+                                        <field name="std_roll_no" > </field>
+                                        <field name="std_f_name"></field>
+                                        <field name="std_m_name"></field>
+                                         <field name="std_l_name"></field>
+                                        <field name="special_charges"></field>
+                                        <field name="department"></field>
+                                        <field name="program_name"></field>
+                                        <field name="amount_charged"></field>
+                                        <field name="academic_level"></field>
+                                        <field name="section_std"></field>
+                                        <field name="remarks_std"></field>
+                                 
+                            
+
+                                        
+                                        
+
+
+
+                                
+                                    </tree>
+
+                                </field>
+
+                            </page>
+                </notebook>
+             
+             <footer>
+                <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
+                <button name="action_print_charges_excel_report" type="object" string="Print Excel" class="btn-primary" />
+                <!-- <button name="action_polulate" type="object" string="Populate" /> -->
+                
+                 <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+            </form>
+            </field>      
+    </record>
+
+     <record id="action_account_print_special_charges_report" model="ir.actions.act_window">
+            <field name="name">Specialization Charges</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">charges.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_special_charges"/>
+            <field name="target">new</field>
+        </record>
+ <menuitem id="menu_special_charges_student" name="Specialization Charges" parent="account.menu_finance_receivables" sequence="11" />
+ <menuitem id="menu_action_special_charges_report" name="Specialization Charges Report" action="action_account_print_special_charges_report" parent="menu_special_charges_student"/>
+
+ 
+
+ 
+
+</odoo> 
