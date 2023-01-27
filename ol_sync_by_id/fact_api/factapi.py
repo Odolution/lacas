@@ -6,12 +6,11 @@ from iteration_utilities import unique_everseen
 
 
 # student_dic ={}
-fact_id =10901
 
 class Fact_Api():
     student_data_list = list()
     data = {}
-    def getstudentdata(self,page_by_page):
+    def getstudentdata(self,fact_id,page_by_page):
         url = f"https://api.factsmgt.com/Students?Page={page_by_page}"
         payload = {}
         headers = {
@@ -133,7 +132,7 @@ class Fact_Api():
 
 
             if i < 6:
-                self.getstudentdata(i)
+                self.getstudentdata(fact_id,i)
                 self.getpickupdata(fact_id,i)
             self.getpeopledata(fact_id, i)
             self.getpersonfamilydata(fact_id, i)
