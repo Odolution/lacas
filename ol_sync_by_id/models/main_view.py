@@ -13,8 +13,9 @@ class RespartnerInherit(models.Model):
     
     def sync_wd_facts(self,std):
         fact_obj = Fact_Api()
+        raise UserError(str(std))
+        
         fact_data = fact_obj.main(std)
-        raise UserError(str(fact_data))
         
         for rec in std:
             
