@@ -24,8 +24,13 @@ class RespartnerInherit(models.Model):
             family = fact_data['family']
             demographic = fact_data['demographic']
 
-            raise UserError(str(student)+" "+str(pickup)+" "+str(people)+" "+str(personfamily)+" "+str(family)+" "+str(demographic))    
+            school = self.env['school.school'].search([('code','=',student['schoolCode'])])
+            raise UserError(school)
+            if school:
+                rec['school_ids'] = i
+            
 
+                    
             x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
             data=x.json()
             
