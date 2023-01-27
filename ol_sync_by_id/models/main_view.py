@@ -25,60 +25,60 @@ class RespartnerInherit(models.Model):
             demographic = fact_data['demographic']
 
             school = self.env['school.school'].search([('code','=',student['schoolCode'])])
-            raise UserError(school)
+
             if school:
-                rec['school_ids'] = i
+                rec['school_ids'] = school
             
 
                     
-            x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
-            data=x.json()
+            # x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
+            # data=x.json()
             
-            data = eval(data)
+            # data = eval(data)
             
             
-            sch_id = False
-            grd_id = False
-            if 'Current School' in data:
-                if data['Current School']:
-                    schoo_name = data['Current School']
-                    school = self.env['school.school'].search([])
-                    for i in school:
-                        if i.name == schoo_name:
-                            rec['school_ids'] = i
+            # sch_id = False
+            # grd_id = False
+            # if 'Current School' in data:
+            #     if data['Current School']:
+            #         schoo_name = data['Current School']
+            #         school = self.env['school.school'].search([])
+            #         for i in school:
+            #             if i.name == schoo_name:
+            #                 rec['school_ids'] = i
                 
                
-            if 'Current_Enrolled' in data:
-                enrol = data['Current_Enrolled']  
-                enroled = self.env['school.enrollment.status'].search([])
-                for k in enroled:
-                    if enrol == k.name:
-                        if enrol == "Graduate":
-                            rec['grade_level_ids'] = False
-                            rec['enrollment_status_ids'] = k
+            # if 'Current_Enrolled' in data:
+            #     enrol = data['Current_Enrolled']  
+            #     enroled = self.env['school.enrollment.status'].search([])
+            #     for k in enroled:
+            #         if enrol == k.name:
+            #             if enrol == "Graduate":
+            #                 rec['grade_level_ids'] = False
+            #                 rec['enrollment_status_ids'] = k
                             
-                        else:
-                            rec['enrollment_status_ids'] = k
-                            if  'grade_level' in data:
-                                if data['grade_level']:
-                                    grade_name = data['grade_level']
-                                    grade = self.env['school.grade.level'].search([])
-                                    for j in grade:
-                                        if j.name == grade_name:
-                                            rec['grade_level_ids'] = j
+            #             else:
+            #                 rec['enrollment_status_ids'] = k
+            #                 if  'grade_level' in data:
+            #                     if data['grade_level']:
+            #                         grade_name = data['grade_level']
+            #                         grade = self.env['school.grade.level'].search([])
+            #                         for j in grade:
+            #                             if j.name == grade_name:
+            #                                 rec['grade_level_ids'] = j
             
             
-            if  'Homeroom' in data:
-                rec['homeroom'] = data['Homeroom']
+            # if  'Homeroom' in data:
+            #     rec['homeroom'] = data['Homeroom']
             
             
-            if data:
-                rec['name']=data["Name"]
-                rec['street']=data['Address']
-                rec['date_of_birth'] = data['Date Of Birth']
-                rec['facts_udid']=data['udid']
-                rec['email'] = data['Email'] 
-                rec['phone'] = data['Phone'] 
+            # if data:
+            #     rec['name']=data["Name"]
+            #     rec['street']=data['Address']
+            #     rec['date_of_birth'] = data['Date Of Birth']
+            #     rec['facts_udid']=data['udid']
+            #     rec['email'] = data['Email'] 
+            #     rec['phone'] = data['Phone'] 
                   
                                                            
                                                     
