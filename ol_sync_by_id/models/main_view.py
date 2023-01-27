@@ -6,12 +6,15 @@ from odoo.exceptions import UserError
 import base64
 import requests
 import datetime
-
+from api_data.facts_api import Fact_Api
 
 class RespartnerInherit(models.Model):
     _inherit = 'res.partner'
     
     def sync_wd_facts(self,std):
+        fact_obj = Fact_Api()
+        fact_data = fact_obj.main(std)
+        raise UserError(fact_data)
         for rec in std:
             
             x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
