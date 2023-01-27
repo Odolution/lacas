@@ -17,8 +17,8 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="ol_lacas_custom_trees.account_move_tree_admission"/>
         <field name="arch" type="xml">
-           
-            <xpath expr="//field[@name='section_name']" position="after">
+        
+           <xpath expr="//field[@name='payment_state']" position="after">
                 <field name="ol_payment_date"/>
             </xpath>
            
