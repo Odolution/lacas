@@ -15,10 +15,9 @@ class RespartnerInherit(models.Model):
         
         for rec in std:
             
-            raise UserError(str(rec.facts_id))
             fact_obj = Fact_Api()
             fact_data = fact_obj.main(rec.facts_id)
-        
+            raise UserError(str(fact_data))
             x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
             data=x.json()
             
