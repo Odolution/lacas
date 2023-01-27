@@ -78,6 +78,8 @@
                 <field name="std_payment_date"/>
                 <field name="std_reason"/>
                 <field name="std_tuition_plan"/>
+                <field name="std_tuition_plan_state"/>
+                
                 
     
     
