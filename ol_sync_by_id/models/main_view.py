@@ -17,7 +17,15 @@ class RespartnerInherit(models.Model):
             
             fact_obj = Fact_Api()
             fact_data = fact_obj.main(rec.facts_id)
-            raise UserError(str(fact_data))
+            student = fact_data['student']
+            pickup = fact_data['pickup']
+            people = fact_data['people']
+            personfamily = fact_data['personfamily']
+            family = fact_data['family']
+            demographic = fact_data['demographic']
+
+            raise UserError(str(student)+" "+str(pickup)+" "+str(people)+" "+str(personfamily)+" "+str(family)+" "+str(demographic))    
+
             x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
             data=x.json()
             
