@@ -23,7 +23,7 @@ class Fact_Api():
         for student in result:
             if fact_id == student.get('studentId'):
                 self.student_data_list.append(student)
-                
+                self.data['student'] = student
                 break
                 # student_dic.extend(student)
 
@@ -43,7 +43,7 @@ class Fact_Api():
             # for family in family_data:
             if fact_id == pickup.get('studentId'):
                 self.student_data_list.append(pickup)
-                
+                self.data['pickup'] = pickup
                 break
 
 
@@ -62,7 +62,7 @@ class Fact_Api():
             # for student in student_data:
                 if fact_id == people.get('personId'):
                     self.student_data_list.append(people)
-                    
+                    self.data['people'] = people
                     break
 
     #
@@ -81,7 +81,7 @@ class Fact_Api():
             # for person in poeple_data:
                 if fact_id == personfamily.get('personId'):
                     self.student_data_list.append(personfamily)
-                    
+                    self.data['personfamily'] = personfamily
                     break
 
 
@@ -100,7 +100,7 @@ class Fact_Api():
 
                 if personfamily.get('familyId') == family.get('familyID'):
                     self.student_data_list.append(family)
-                    
+                    self.data['family']=family
                     break
 
 
@@ -118,7 +118,7 @@ class Fact_Api():
             # for personfamily in person_family_data:
                 if fact_id == demo.get('personId'):
                     self.student_data_list.append(demo)
-                    
+                    self.data['demographic']= demo
                     break
 
 
@@ -139,7 +139,7 @@ class Fact_Api():
             self.getdemographicdata(fact_id, i)
             self.getfamilydata(self.student_data_list, i)
         finalstudent_data_list=list(unique_everseen([i for i in self.student_data_list]))
-        return finalstudent_data_list
+        return self.data
 
 
 #remove duplication
