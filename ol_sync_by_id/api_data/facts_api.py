@@ -138,7 +138,6 @@ class Fact_Api():
 
 #remove duplication
 
+fact = Fact_Api()
+print(fact.main(fact_id))
 
-if __name__ == '__main__':
-    fact = Fact_Api()
-    print(fact.main(fact_id))
