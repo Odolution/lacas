@@ -37,6 +37,8 @@ class ext(models.Model):
     net_amount=fields.Char(string="Net Amount")
     std_factsid=fields.Char(string="Facts ID")
     std_payment_date=fields.Char(string='Payment Date')
+    std_tuition_plan=fields.Char(string="Tuition Plan")
+
     
     art=fields.Integer(string="Art")
     biology=fields.Integer(string="Biology")
@@ -181,6 +183,13 @@ class ext(models.Model):
             self.std_factsid=self.student_ids.facts_id
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=int(self.amount_total)
+            
+
+            if self.tuition_plan_ids:
+                if self.tuition_plan_ids.journal_id==125:
+                    self.std_tuition_plan= self.tuition_plan_ids.name
+                else:
+                    self.std_tuition_plan="NO"
             
         
             
