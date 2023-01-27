@@ -12,13 +12,13 @@ class RespartnerInherit(models.Model):
     _inherit = 'res.partner'
     
     def sync_wd_facts(self,std):
-        fact_obj = Fact_Api()
-        raise UserError(str(std.id))
-        
-        fact_data = fact_obj.main(std)
         
         for rec in std:
             
+            raise UserError(str(rec.facts_id))
+            fact_obj = Fact_Api()
+            fact_data = fact_obj.main(rec.facts_id)
+        
             x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
             data=x.json()
             
