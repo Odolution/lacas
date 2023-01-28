@@ -32,12 +32,12 @@ class RespartnerInherit(models.Model):
             for line in rec['enrollment_state_ids']:
                 grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['gradeLevel'])])
                 for i in grade_obj:
-                    line['grade_level_ids'] = i.id
+                    line['grade_level_id'] = i.id
                 
 
                 next_grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['nextGradeLevel'])])
                 for i in next_grade_obj:
-                    line['next_grade_level_ids'] = i.id
+                    line['next_grade_level_id'] = i.id
                 
                 
                 enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['status']])
