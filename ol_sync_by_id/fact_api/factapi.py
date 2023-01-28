@@ -10,12 +10,12 @@ from iteration_utilities import unique_everseen
 class Fact_Api():
     student_data_list = list()
     data = {}
-    def getstudentdata(self,fact_id,page_by_page):
+    def getstudentdata(self,fact_id,page_by_page,school_name_key):
         url = f"https://api.factsmgt.com/Students?Page={page_by_page}"
         payload = {}
         headers = {
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
-            'Facts-Api-Key': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU='
+            'Facts-Api-Key': school_name_key
         }
 
         response = requests.request("GET", url, headers=headers, data=payload).json()
@@ -28,13 +28,13 @@ class Fact_Api():
                 # student_dic.extend(student)
 
 
-    def getpickupdata(self,fact_id, page_by_page):
+    def getpickupdata(self,fact_id, page_by_page,school_name_key):
         url_pickup = f"https://api.factsmgt.com/students/PickupContacts?Page={page_by_page}"
 
         payload = {}
         headers = {
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
-            'Facts-Api-Key': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU='
+            'Facts-Api-Key': school_name_key
         }
         response = requests.request("GET", url_pickup, headers=headers, data=payload).json()
         results = response['results']
@@ -47,13 +47,13 @@ class Fact_Api():
                 break
 
 
-    def getpeopledata(self,fact_id, page_by_page):
+    def getpeopledata(self,fact_id, page_by_page,school_name_key):
         url_person = f"https://api.factsmgt.com/people?Page={page_by_page}"
         # url = f"https://api.factsmgt.com/Students?Page={page_by_page}"
         payload = {}
         headers = {
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
-            'Facts-Api-Key': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU='
+            'Facts-Api-Key': school_name_key
         }
 
         response = requests.request("GET", url_person, headers=headers, data=payload).json()
@@ -66,13 +66,13 @@ class Fact_Api():
                     break
 
     #
-    def getpersonfamilydata(self,fact_id, page_by_page):
+    def getpersonfamilydata(self,fact_id, page_by_page,school_name_key):
         url_personfamily = f"https://api.factsmgt.com/people/PersonFamily?Page={page_by_page}"
 
         payload = {}
         headers = {
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
-            'Facts-Api-Key': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU='
+            'Facts-Api-Key': school_name_key
         }
 
         response = requests.request("GET", url_personfamily, headers=headers, data=payload).json()
@@ -85,13 +85,13 @@ class Fact_Api():
                     break
 
 
-    def getfamilydata(self,person_family_data, page_by_page):
+    def getfamilydata(self,person_family_data, page_by_page,school_name_key):
         url_family = f"https://api.factsmgt.com/families?Page={page_by_page}"
 
         payload = {}
         headers = {
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
-            'Facts-Api-Key': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU='
+            'Facts-Api-Key': school_name_key
         }
         response = requests.request("GET", url_family, headers=headers, data=payload).json()
         results = response['results']
@@ -104,13 +104,13 @@ class Fact_Api():
                     break
 
 
-    def getdemographicdata(self,fact_id, page_by_page):
+    def getdemographicdata(self,fact_id, page_by_page,school_name_key):
         url_demographic = f"https://api.factsmgt.com/people/Demographic?page={page_by_page}"
 
         payload = {}
         headers = {
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
-            'Facts-Api-Key': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU='
+            'Facts-Api-Key': school_name_key
         }
         response = requests.request("GET", url_demographic, headers=headers, data=payload).json()
         results = response['results']
@@ -123,7 +123,7 @@ class Fact_Api():
 
 
 
-    def main(self,fact_id):
+    def main(self,fact_id,school_name_key):
         for i in range(13):
 
             if i == 0:
@@ -132,12 +132,12 @@ class Fact_Api():
 
 
             if i < 6:
-                self.getstudentdata(fact_id,i)
-                self.getpickupdata(fact_id,i)
-            self.getpeopledata(fact_id, i)
-            self.getpersonfamilydata(fact_id, i)
-            self.getdemographicdata(fact_id, i)
-            self.getfamilydata(self.student_data_list, i)
+                self.getstudentdata(fact_id,i,school_name_key)
+                self.getpickupdata(fact_id,i,school_name_key)
+            self.getpeopledata(fact_id, i,school_name_key)
+            self.getpersonfamilydata(fact_id, i,school_name_key)
+            self.getdemographicdata(fact_id, i,school_name_key)
+            self.getfamilydata(self.student_data_list, i,school_name_key)
         finalstudent_data_list=list(unique_everseen([i for i in self.student_data_list]))
         return self.data
 
