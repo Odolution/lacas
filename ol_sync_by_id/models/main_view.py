@@ -26,7 +26,7 @@ class RespartnerInherit(models.Model):
             
             
             fact_obj = Fact_Api()
-            school_name = school_name_key[str(rec.school_ids.name)]
+            school_name = school_name_key[str(rec.program_ids.name)]
             fact_data = fact_obj.main(rec.facts_id,school_name)
             student = fact_data['student']
             pickup = fact_data['pickup']
