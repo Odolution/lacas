@@ -29,23 +29,24 @@ class RespartnerInherit(models.Model):
                 rec['school_ids'] = school
             
             #grade level
-            grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['gradeLevel'])])
-            for i in grade_obj:
-                rec['grade_level_ids'] = i
-            
+            for line in rec['enrollment_state_ids']:
+                grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['gradeLevel'])])
+                for i in grade_obj:
+                    line['grade_level_ids'] = i.id
+                
 
-            next_grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['nextGradeLevel'])])
-            for i in next_grade_obj:
-                rec['next_grade_level_ids'] = i
-            
-            
-            enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['status']])
-            for i in enrol_status_obj: 
-                rec['enrollment_status_id'] = i.id
-            
-            next_enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['nextStatus']])
-            for i in next_enrol_status_obj:
-                rec['next_enrollment_status_id'] = i.id
+                next_grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['nextGradeLevel'])])
+                for i in next_grade_obj:
+                    line['next_grade_level_ids'] = i.id
+                
+                
+                enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['status']])
+                for i in enrol_status_obj: 
+                    line['enrollment_status_id'] = i.id
+                
+                next_enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['nextStatus']])
+                for i in next_enrol_status_obj:
+                    line['next_enrollment_status_id'] = i.id
 
 
 
