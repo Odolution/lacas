@@ -28,9 +28,8 @@ class RespartnerInherit(models.Model):
 
             if school:
                 rec['school_ids'] = school
+            raise UserError(student['school']['gradeLevel'])
             
-
-                    
             # x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
             # data=x.json()
             
