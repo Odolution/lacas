@@ -25,10 +25,25 @@ class RespartnerInherit(models.Model):
             demographic = fact_data['demographic']
 
             school = self.env['school.school'].search([('code','=',student['schoolCode'])])
-
             if school:
                 rec['school_ids'] = school
-            raise UserError(student['school']['gradeLevel'])
+            
+            #grade level
+            grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['gradeLevel'])])
+            rec['grade_level_ids'] = grade_obj.id
+
+            next_grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['nextGradeLevel'])])
+            rec['next_grade_level_ids'] = next_grade_obj.id
+
+            
+            enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['status']])
+            rec['enrollment_status_id'] = enrol_status_obj.id 
+
+            next_enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['nextStatus']])
+            rec['next_enrollment_status_id'] = next_enrol_status_obj.id
+
+
+
             
             # x = requests.get('http://209.145.61.122:5631/facts/'+str(rec.facts_id))
             # data=x.json()
