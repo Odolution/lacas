@@ -40,7 +40,7 @@ class RespartnerInherit(models.Model):
                     line['next_grade_level_id'] = i.id
                 
                 
-                enrol_status_obj = self.env['school.enrollment.status'].search()
+                enrol_status_obj = self.env['school.enrollment.status'].search([])
                 for i in enrol_status_obj: 
                     if str(i.name) == str(student['school']['status']):
                         line['enrollment_status_id'] = i.id
