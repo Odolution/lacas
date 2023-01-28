@@ -14,7 +14,8 @@ class RespartnerInherit(models.Model):
     def sync_wd_facts(self,std):
         
         for rec in std:
-            
+            raise UserError(str(rec.school_ids.name))
+
             fact_obj = Fact_Api()
             fact_data = fact_obj.main(rec.facts_id)
             student = fact_data['student']
