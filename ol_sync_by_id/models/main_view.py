@@ -39,8 +39,9 @@ class RespartnerInherit(models.Model):
                 for i in next_grade_obj:
                     line['next_grade_level_id'] = i.id
                 
-                raise UserError(student['school']['status'])
-                # enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['status']])
+                
+                enrol_status_obj = self.env['school.enrollment.status'].search(['name','=',student['school']['status']])
+                raise UserError(str(enrol_status_obj))
                 # for i in enrol_status_obj: 
                 #     line['enrollment_status_id'] = i.id
                 
