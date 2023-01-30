@@ -26,7 +26,7 @@ class RespartnerInherit(models.Model):
             
             
             fact_obj = Fact_Api()
-            
+            raise UserError(str(rec.school_ids.name))
             school_name = school_name_key["Burki A-Level"]
             fact_data = fact_obj.main(rec.facts_id,school_name)
             student = fact_data['student']
