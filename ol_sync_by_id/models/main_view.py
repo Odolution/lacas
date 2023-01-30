@@ -73,7 +73,7 @@ class RespartnerInherit(models.Model):
             rec['phone'] = phone
             rec['mobile'] = mobile
             rec['date_of_birth'] = birthdate
-            gender_obj = self.env['school.gender'].serach([('name','=',gender)])
+            gender_obj = self.env['school.gender'].search([('name','=',gender)])
             for i in gender_obj:
                 rec['gender'] = i.id 
 
