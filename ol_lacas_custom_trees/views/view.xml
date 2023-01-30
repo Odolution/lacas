@@ -72,7 +72,7 @@
                 <field name="payment_state" widget="badge" decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')" decoration-success="payment_state in ('paid', 'reversed')" attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}" optional="show"/>
                 <field name="std_discount"/>
                 <field name="std_batch"/>
-                <field name="std_branch"/>
+                <field name="std_branch" widget="many2many_tags"/>
                 <field name="class_name"/>
                 <field name="section_name"/>
                 <field name="std_payment_date"/>
