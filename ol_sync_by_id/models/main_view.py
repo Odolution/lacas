@@ -13,7 +13,7 @@ class RespartnerInherit(models.Model):
     
     def sync_wd_facts(self,std):
         school_name_key = {
-                "LACAS Burki A-Level":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU=",
+                "LACAS Burki A Level":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU=",
                 "LACAS Burki Boys":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvlFxL8JZDP8b8yHRK/zLqt00IjeqpiNMsinE6yLyZbpp0itPr5auIhwYsRcAWgS2Y=",
                 "LACAS Burki Girls":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvXkvotYZrCGtco1K5xitUYFWwQOEH0YZZk9M6eEKA3aUI5f8pVNjnOUaK80r0c0l4=",
                 "LACAS Burki Pre-School":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvggvbAqbkN9REut7igY3Q46gqBotTnxmEIwF83Mx3GyuLstDwvhZS9WEvYRZ1wyc4=",
@@ -26,8 +26,8 @@ class RespartnerInherit(models.Model):
             
             
             fact_obj = Fact_Api()
-            raise UserError(str(rec.school_ids.name))
-            school_name = school_name_key["Burki A-Level"]
+            
+            school_name = school_name_key[str(rec.school_ids.name)]
             fact_data = fact_obj.main(rec.facts_id,school_name)
             student = fact_data['student']
             pickup = fact_data['pickup']
