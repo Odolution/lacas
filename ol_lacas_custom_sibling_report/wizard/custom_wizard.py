@@ -65,6 +65,7 @@ class SiblingsReportWizard(models.TransientModel):
 
     
         for rec in student_data:
+            parent_code=''
             roll_no=''
             name=''
             phone=''
@@ -85,6 +86,7 @@ class SiblingsReportWizard(models.TransientModel):
 
             if len(rec.student_ids)>1:
                 tot_child=(len(rec.student_ids))
+                parent_code=rec.facts_udid
                 for students in rec.student_ids:
                     roll_no=students.facts_udid
                     name=students.name
@@ -97,6 +99,10 @@ class SiblingsReportWizard(models.TransientModel):
                     if students.enrollment_state_ids:
                         for line in students.enrollment_state_ids:
                             enroll_dt=line.enrolled_date
+                            date=str(enroll_dt.day)
+                            month=str(enroll_dt.month)
+                            year=str(enroll_dt.year)
+                            full_date=date+"-"+month+'-'+year
                             break
                     if students.enrollment_history_ids:
                         enroll_history=students.enrollment_history_ids
@@ -125,7 +131,7 @@ class SiblingsReportWizard(models.TransientModel):
                     mvl=self.env['account.sibling.report.move.line'].create({
                             
                         "roll_no":roll_no,
-                        "parent_code":'',
+                        "parent_code":parent_code if parent_code else '',
                         "father_name":f_name if f_name else '-',
                         "f_phone_no":f_ph  if f_ph else '-',
                         "f_cnic":'',
@@ -138,7 +144,7 @@ class SiblingsReportWizard(models.TransientModel):
                         "emergency":phone,
                         "std_name":name,
                         "std_gender":gender if gender else "-",
-                        "adm_date":enroll_dt ,
+                        "adm_date":full_date ,
                         "std_branch":branch,
                         "std_batch": "-",
                         "std_term":"",
@@ -213,51 +219,48 @@ class SiblingsReportWizard(models.TransientModel):
             
             
 
-            worksheet.write_merge(2,3,0,1,"Roll No.", style=red_style_title)
-            worksheet.write_merge(2,3,2,4,"Parent Code",style=red_style_title)
-            worksheet.write_merge(2,3,5,8,"Father Name",style=red_style_title)
-            worksheet.write_merge(2,3,9,10,"Phone No",style=red_style_title)
-            worksheet.write_merge(2,3,11,13,"CNIC",style=red_style_title)
-            worksheet.write_merge(2,3,14,18,"Address",style=red_style_title)
-            worksheet.write_merge(2,3,19,21,"Student Address",style=red_style_title)
-            worksheet.write_merge(2,3,22,23,"# of Child",style=red_style_title)
-            worksheet.write_merge(2,3,24,26,"Mother CNIC",style=red_style_title)
-            worksheet.write_merge(2,3,27,29,"Mother Name", red_style_title)
-            worksheet.write_merge(2,3,30,31,"Mother Phone No.", red_style_title)
-            worksheet.write_merge(2,3,32,33,"Emergency Contact", red_style_title)
-            worksheet.write_merge(2,3,34,38,"Student Name", red_style_title)
-            worksheet.write_merge(2,3,39,40,"Gender", red_style_title)
-            worksheet.write_merge(2,3,41,43,"ADM Date.", red_style_title)
-            worksheet.write_merge(2,3,44,46,"Branch", red_style_title)
-            worksheet.write_merge(2,3,47,48,"Batch", red_style_title)
-            worksheet.write_merge(2,3,49,50,"Term", red_style_title)
-            worksheet.write_merge(2,3,51,53,"Class", red_style_title)
+            worksheet.write_merge(2,3,0,1,"Parent Code.", style=red_style_title)
+            worksheet.write_merge(2,3,2,4,"Father Name",style=red_style_title)
+            worksheet.write_merge(2,3,5,8,"Phone No",style=red_style_title)
+            worksheet.write_merge(2,3,9,10,"CNIC",style=red_style_title)
+            worksheet.write_merge(2,3,11,13,"Address",style=red_style_title)
+            worksheet.write_merge(2,3,14,18,"# of Child",style=red_style_title)
+            worksheet.write_merge(2,3,19,21,"Mother Name",style=red_style_title)
+            worksheet.write_merge(2,3,22,23,"Mother CNIC",style=red_style_title)
+            worksheet.write_merge(2,3,24,26,"Mother Phone No.",style=red_style_title)
+            worksheet.write_merge(2,3,27,29,"Emergency Contact", red_style_title)
+            worksheet.write_merge(2,3,30,31,"Roll No.", red_style_title)
+            worksheet.write_merge(2,3,32,33,"Student Name", red_style_title)
+            worksheet.write_merge(2,3,34,38,"Branch", red_style_title)
+            worksheet.write_merge(2,3,39,40,"Class", red_style_title)
+            worksheet.write_merge(2,3,41,43,"Batch", red_style_title)
+            worksheet.write_merge(2,3,44,46,"Term", red_style_title)
+            worksheet.write_merge(2,3,47,48,"Student Address", red_style_title)
+            worksheet.write_merge(2,3,49,50,"Gender", red_style_title)
+            worksheet.write_merge(2,3,51,53,"ADM Date", red_style_title)
             worksheet.write_merge(2,3,54,58,"Waiver 1", red_style_title)
             worksheet.write_merge(2,3,59,63,"Waiver 2", red_style_title)
-
-
             row=4
             for rec in self.account_sibling_report_line:
-            
-                    worksheet.write_merge(row,row,0,1,rec.roll_no, style=style_title)
-                    worksheet.write_merge(row,row,2,4,rec.parent_code,style=style_title)
-                    worksheet.write_merge(row,row,5,8,rec.father_name,style=style_title)
-                    worksheet.write_merge(row,row,9,10,rec.f_phone_no,style=style_title)
-                    worksheet.write_merge(row,row,11,13,rec.f_cnic,style=style_title)
-                    worksheet.write_merge(row,row,14,18,rec.f_address,style=style_title)
-                    worksheet.write_merge(row,row,19,21,rec.std_address,style=style_title)
-                    worksheet.write_merge(row,row,22,23,rec.no_of_child,style=style_title)
-                    worksheet.write_merge(row,row,24,26,rec.m_cnic,style=style_title)
-                    worksheet.write_merge(row,row,27,29,rec.mother_name, style_title)
-                    worksheet.write_merge(row,row,30,31,rec.m_phone_no, style_title)
-                    worksheet.write_merge(row,row,32,33,rec.emergency, style_title)
-                    worksheet.write_merge(row,row,34,38,rec.std_name, style_title)
-                    worksheet.write_merge(row,row,39,40,rec.std_gender, style_title)
-                    worksheet.write_merge(row,row,41,43,rec.adm_date, style_title)
-                    worksheet.write_merge(row,row,44,46,rec.std_branch, style_title)
-                    worksheet.write_merge(row,row,47,48,rec.std_batch, style_title)
-                    worksheet.write_merge(row,row,49,50,rec.std_term, style_title)
-                    worksheet.write_merge(row,row,51,53,rec.std_class, style_title)
+                    worksheet.write_merge(row,row,0,1,rec.parent_code, style=style_title)
+                    worksheet.write_merge(row,row,2,4,rec.father_name,style=style_title)
+                    worksheet.write_merge(row,row,5,8,rec.f_phone_no,style=style_title)
+                    worksheet.write_merge(row,row,9,10,rec.f_cnic,style=style_title)
+                    worksheet.write_merge(row,row,11,13,rec.f_address,style=style_title)
+                    worksheet.write_merge(row,row,14,18,rec.no_of_child,style=style_title)
+                    worksheet.write_merge(row,row,19,21,rec.mother_name,style=style_title)
+                    worksheet.write_merge(row,row,22,23,rec.m_cnic,style=style_title)
+                    worksheet.write_merge(row,row,24,26,rec.m_phone_no,style=style_title)
+                    worksheet.write_merge(row,row,27,29,rec.emergency, style_title)
+                    worksheet.write_merge(row,row,30,31,rec.roll_no, style_title)
+                    worksheet.write_merge(row,row,32,33,rec.std_name, style_title)
+                    worksheet.write_merge(row,row,34,38,rec.std_branch, style_title)
+                    worksheet.write_merge(row,row,39,40,rec.std_class, style_title)
+                    worksheet.write_merge(row,row,41,43,rec.std_batch, style_title)
+                    worksheet.write_merge(row,row,44,46,rec.std_term, style_title)
+                    worksheet.write_merge(row,row,47,48,rec.std_address, style_title)
+                    worksheet.write_merge(row,row,49,50,rec.std_gender, style_title)
+                    worksheet.write_merge(row,row,51,53,rec.adm_date, style_title)
                     worksheet.write_merge(row,row,54,58,rec.waiver_1, style_title)
                     worksheet.write_merge(row,row,59,63,rec.waiver_2, style_title)
 
