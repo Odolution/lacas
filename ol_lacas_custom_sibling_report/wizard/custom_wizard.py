@@ -99,11 +99,12 @@ class SiblingsReportWizard(models.TransientModel):
                     if students.enrollment_state_ids:
                         for line in students.enrollment_state_ids:
                             enroll_dt=line.enrolled_date
-                            date=str(enroll_dt.day)
-                            month=str(enroll_dt.month)
-                            year=str(enroll_dt.year)
-                            full_date=date+"-"+month+'-'+year
-                            break
+                            if enroll_dt:
+                                date=str(enroll_dt.day)
+                                month=str(enroll_dt.month)
+                                year=str(enroll_dt.year)
+                                full_date=date+"-"+month+'-'+year
+                                break
                     if students.enrollment_history_ids:
                         enroll_history=students.enrollment_history_ids
                         lst=[]
