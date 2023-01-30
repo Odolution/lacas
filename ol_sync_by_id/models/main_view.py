@@ -59,7 +59,21 @@ class RespartnerInherit(models.Model):
                     if str(i.name) == str(student['school']['nextStatus']):
                         line['next_enrollment_status_id'] = i.id
 
+            first_name = people['firstName']
+            last_name = people['lastName']
+            email = people['email']
+            phone = people['homePhone']
+            mobile = people['cellPhone']
+            gender = demographic['gender']
+            birthdate = demographic['birthdate']
 
+            rec['first_name'] = first_name
+            rec['last_name'] = last_name
+            rec['email'] = email
+            rec['phone'] = phone
+            rec['mobile'] = mobile
+            rec['date_of_birth'] = birthdate
+            rec['gender'] = gender 
 
 
             
