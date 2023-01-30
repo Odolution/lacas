@@ -23,7 +23,7 @@ class ext(models.Model):
     due_amount=fields.Integer(string="Due Amount")
     std_bill_date=fields.Char(string="Issue Date")
     std_due_date=fields.Char(string="Due Date")
-    std_branch=fields.Many2many('school.school',string="Branch")
+    std_branch=fields.Char(string="Branch")
     std_dob=fields.Char(string="Date of Birth")
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch")
