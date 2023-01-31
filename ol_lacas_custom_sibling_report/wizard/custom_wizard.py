@@ -87,7 +87,9 @@ class SiblingsReportWizard(models.TransientModel):
             if len(rec.student_ids)>1:
                 tot_child=(len(rec.student_ids))
                 parent_code=rec.facts_udid
-                for students in rec.student_ids:
+                li=[id for id in rec.student_ids]
+                li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
+                for students in li:
                     roll_no=students.facts_udid
                     name=students.name
                     phone=students.phone
