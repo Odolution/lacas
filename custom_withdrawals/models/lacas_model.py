@@ -24,9 +24,9 @@ class academics_tab(models.Model):
 
     @api.onchange('x_student_id_cred')
     def _student_reversal_onchange(self):
-      #self.udid_cred_custom=""
-      if self.x_student_id_cred:
-        self.udid_cred_custom=self.x_student_id_cred.facts_udid
+        self.udid_cred_custom=""
+        if self.x_student_id_cred:
+            self.udid_cred_custom=self.x_student_id_cred.facts_udid
     
     def _compute_notice_fee(self):
         # if self.move_type == "out_refund":
