@@ -24,7 +24,7 @@ class RespartnerInherit(models.Model):
             }    
         for rec in std:
             
-            
+            raise UserError(str(rec.school_ids.name))
             fact_obj = Fact_Api()
             
             school_name = school_name_key[str(rec.school_ids.name)]
