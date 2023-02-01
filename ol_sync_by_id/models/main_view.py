@@ -21,6 +21,18 @@ class RespartnerInherit(models.Model):
                 "LACAS DHA Islamabad":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EtfA3ffT3JqLDDzAGj4zitoMiRzc6uyA/CLZoeHk8K+G3lOG2tJLp1fcCNUyL34HPI=",
                 "LACAS Gujranwala Boys":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuxRKdVGo7v/fF5et+i4pfpdsli1s1Xpz/0RpoPavfOBAuYQUCiGVv+JZkbNb2u9pA=",
                 "LACAS Gujranwala Girls":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuFP+ahrehuubNGKr+ZQ2CVPGYPHkanVtwi+liVomCq2jrSdFbyiKQ3qIOxTfyge2s=",
+                'LACAS Gujranwala Pre-School':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvXUmtSx7BRoLlFWJSC+S8UvPfeJTrRKf1B39SqgL9IFgZPDgHuERPKNSTbvcs4zyU=",
+                'LACAS Gulberg Boys':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Eu7ZF0G/G+uhCWsREBymtiJW5tlVEPOaSDctrmMwWl2dWWP2L/6LFM2wsKjVFs5sKA=",
+                'LACAS Gulberg Gilrs':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Ev7yLv6RExMMdkIaqTCFdkEj+tLcR6vZTEsdzErN/3YOonsMlHpBVAhZpDu0QmShX0=",
+                'LACAS Johar Town A-Level':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EsfOTcUgpx0G1h3KDph3Q9FuXveh9gFPVh1+T5qHM7nNrwOwNqZeYM+hA3LOGjQWpU=",
+                'LACAS Johar Town Boys':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Ev2cn6iSZy5hGxz4wTMwVXGLYm033yS0nqW32u2tNgR86Q3qkjoJw0UMd9QL/1qZA0=",
+                'LACAS Johar Town Girls':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvVhNJSsiAoDMzjGGfjLOn3MsJDskvQOP6pxTIJDqIJLd63kAZ5ymGwj9LGWCEFBq0=",
+                'LACAS Johar Town Pre-School':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvJDl6xpxwXWT81A3Tyw71lgL+HPkmtHQUGu1301pcjWkVG6StVJGlc1wf4zpzlmU8=",
+                'LACAS Milestone Model':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Euvf1i+xmUPIxmuBbZDHa8pxcqoYIXK90PyjqZpWjQCybk4jXjv5AfCHR0yL5eVRWk=",
+                'LACAS Milestone Muslim Town':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EthDWAcjUshNdWkMCGMXRrkO4E2xI/Su3Htuu2fqnWd1nmO82I0s7ZLX15o8XD7fGQ=",
+                'LACAS Milestone Satellite':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvGbYG0n5QbcqTCYDNGsb/56dFX+3fd+prljyAo/ZqSy75iTii/cy5UMuZbVef1Wis=",
+                'LACAS Milestone UpperMall':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EsZwKzAHy9IvPdDUH58UdRf5EgcaMRRkHOf7TscdxY9IuHeuXoDAC3azV/P9TQT7lg=",
+                'LACAS Milestone Valencia':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EtlN0ghB6E5rDe1hC9kYe45vB6b26Zg+Ymzu7rr9W89Dg86wX4veamHfXvOG9M+gpU="
             }    
         for rec in std:
             
@@ -29,53 +41,66 @@ class RespartnerInherit(models.Model):
             
             school_name = school_name_key[str(rec.school_ids.name)]
             fact_data = fact_obj.main(rec.facts_id,school_name)
-            student = fact_data['student']
-            pickup = fact_data['pickup']
-            people = fact_data['people']
-            personfamily = fact_data['personfamily']
-            family = fact_data['family']
-            demographic = fact_data['demographic']
-
-            school = self.env['school.school'].search([('code','=',student['schoolCode'])])
-            if school:
-                rec['school_ids'] = school
-            
-            #grade level
-            for line in rec['enrollment_state_ids']:
-                grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['gradeLevel'])])
-                for i in grade_obj:
-                    line['grade_level_id'] = i.id
-                
-
+            if 'student' in fact_data:
+                student = fact_data['student']
+                school = self.env['school.school'].search([('code','=',student['schoolCode'])])
+                if school:
+                    rec['school_ids'] = school
+                #grade level
+                for line in rec['enrollment_state_ids']:
+                    grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['gradeLevel'])])
+                    for i in grade_obj:
+                        line['grade_level_id'] = i.id
                 next_grade_obj = self.env['school.grade.level'].search([('name','=',student['school']['nextGradeLevel'])])
                 for i in next_grade_obj:
                     line['next_grade_level_id'] = i.id
-                
-                
                 enrol_status_obj = self.env['school.enrollment.status'].search([])
                 for i in enrol_status_obj: 
                     if str(i.name) == str(student['school']['status']):
                         line['enrollment_status_id'] = i.id
                     if str(i.name) == str(student['school']['nextStatus']):
                         line['next_enrollment_status_id'] = i.id
+            if 'pickup' in fact_data:
+                pickup = fact_data['pickup']
+            if 'people' in fact_data: 
+                people = fact_data['people']
+                first_name = people['firstName']
+                last_name = people['lastName']
+                email = people['email']
+                phone = people['homePhone']
+                mobile = people['cellPhone']
+                rec['first_name'] = first_name
+                rec['last_name'] = last_name
+                rec['email'] = email
+                rec['phone'] = phone
+                rec['mobile'] = mobile
 
-            first_name = people['firstName']
-            last_name = people['lastName']
-            email = people['email']
-            phone = people['homePhone']
-            mobile = people['cellPhone']
-            gender = demographic['gender']
-            birthdate = demographic['birthdate']
+            if 'personfamily' in fact_data:
+                personfamily = fact_data['personfamily']
+            if 'family' in fact_data:
+                family = fact_data['family']
+            if 'demographic' in fact_data: 
+                demographic = fact_data['demographic']
+                gender = demographic['gender']
+                birthdate = demographic['birthdate']
+                rec['date_of_birth'] = birthdate
+                gender_obj = self.env['school.gender'].search([('name','=',gender)])
+                for i in gender_obj:
+                    rec['gender'] = i.id 
+            
+            
+                
 
-            rec['first_name'] = first_name
-            rec['last_name'] = last_name
-            rec['email'] = email
-            rec['phone'] = phone
-            rec['mobile'] = mobile
-            rec['date_of_birth'] = birthdate
-            gender_obj = self.env['school.gender'].search([('name','=',gender)])
-            for i in gender_obj:
-                rec['gender'] = i.id 
+      
+                
+                
+                
+
+            
+
+            
+            
+            
 
 
             
