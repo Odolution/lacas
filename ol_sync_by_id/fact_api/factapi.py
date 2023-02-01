@@ -74,8 +74,8 @@ class Fact_Api():
 
     #
     def getpersonfamilydata(self,fact_id, page_by_page,school_name_key):
-        url_personfamily = f"https://api.factsmgt.com/people/PersonFamily?Page={page_by_page}"
-
+        # url_personfamily = f"https://api.factsmgt.com/people/PersonFamily?Page={page_by_page}"
+        url_personfamily = f"https://api.factsmgt.com/people/PersonFamily?filters=personId=={fact_id}"
         payload = {}
         headers = {
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
@@ -84,16 +84,22 @@ class Fact_Api():
 
         response = requests.request("GET", url_personfamily, headers=headers, data=payload).json()
         results = response['results']
+        fam_id = 0
         for personfamily in results:
+            if 'familyId' in personfamily:
+                fam_id = personfamily['familyId']
+            self.student_data_list.append(personfamily)
+            self.data['personfamily'] = personfamily
             # for person in poeple_data:
-                if fact_id == personfamily.get('personId'):
-                    self.student_data_list.append(personfamily)
-                    self.data['personfamily'] = personfamily
-                    break
-
+                # if fact_id == personfamily.get('personId'):
+                #     self.student_data_list.append(personfamily)
+                #     self.data['personfamily'] = personfamily
+                #     break
+        return fam_id
 
     def getfamilydata(self,person_family_data, page_by_page,school_name_key):
         url_family = f"https://api.factsmgt.com/families?Page={page_by_page}"
+        url_family = f"https://api.factsmgt.com/families?api-version=1&filters=familyID=={person_family_data}"
 
         payload = {}
         headers = {
@@ -103,12 +109,9 @@ class Fact_Api():
         response = requests.request("GET", url_family, headers=headers, data=payload).json()
         results = response['results']
         for family in results:
-            for personfamily in person_family_data:
-
-                if personfamily.get('familyId') == family.get('familyID'):
-                    self.student_data_list.append(family)
-                    self.data['family']=family
-                    break
+            self.student_data_list.append(family)
+            self.data['family']=family
+                    
 
 
     def getdemographicdata(self,fact_id, page_by_page,school_name_key):
@@ -137,20 +140,11 @@ class Fact_Api():
         self.getpickupdata(fact_id,0,school_name_key)
         self.getpeopledata(fact_id, 0,school_name_key)
         self.getdemographicdata(fact_id, 0,school_name_key)
-        for i in range(13):
+        family_id = self.getpersonfamilydata(fact_id, 0,school_name_key)
+        if family_id != 0:
+            self.getfamilydata(family_id, 0,school_name_key)
+        
 
-            if i == 0:
-                continue
-
-
-
-            # if i < 6:
-            #     self.getstudentdata(fact_id,i,school_name_key)
-            #     self.getpickupdata(fact_id,i,school_name_key)
-            # self.getpeopledata(fact_id, i,school_name_key)
-            self.getpersonfamilydata(fact_id, i,school_name_key)
-            # self.getdemographicdata(fact_id, i,school_name_key)
-            self.getfamilydata(self.student_data_list, i,school_name_key)
         finalstudent_data_list=list(unique_everseen([i for i in self.student_data_list]))
         return self.data
 
