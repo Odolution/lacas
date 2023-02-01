@@ -60,10 +60,11 @@ class RespartnerInherit(models.Model):
                 
                 enrol_status_obj = self.env['school.enrollment.status'].search([])
                 for i in enrol_status_obj: 
-                    if str(i.name) == str(student['school']['status']):
-                        line['enrollment_status_id'] = i.id
-                    if str(i.name) == str(student['school']['nextStatus']):
-                        line['next_enrollment_status_id'] = i.id
+                    if 'nextStatus' in student['school'] and 'status' in student['school']:
+                        if str(i.name) == str(student['school']['status']):
+                            line['enrollment_status_id'] = i.id
+                        if str(i.name) == str(student['school']['nextStatus']):
+                            line['next_enrollment_status_id'] = i.id
             if 'pickup' in fact_data:
                 pickup = fact_data['pickup']
             if 'people' in fact_data: 
