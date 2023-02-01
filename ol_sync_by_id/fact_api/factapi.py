@@ -133,10 +133,10 @@ class Fact_Api():
 
 
     def main(self,fact_id,school_name_key):
-        self.getstudentdata(fact_id,i,school_name_key)
-        self.getpickupdata(fact_id,i,school_name_key)
-        self.getpeopledata(fact_id, i,school_name_key)
-        self.getdemographicdata(fact_id, i,school_name_key)
+        self.getstudentdata(fact_id,0,school_name_key)
+        self.getpickupdata(fact_id,0,school_name_key)
+        self.getpeopledata(fact_id, 0,school_name_key)
+        self.getdemographicdata(fact_id, 0,school_name_key)
         for i in range(13):
 
             if i == 0:
