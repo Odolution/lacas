@@ -69,7 +69,7 @@ class inheritinvoices(models.Model):
 
     def _compute_unpaid_invoice(self):
         for rec in self.ids:
-            rec.unpaid_inv_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("partner_id","=",self.partner_id.id),("payment_state","=","not_paid")])
+            rec.unpaid_inv_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("partner_id","=",rec.partner_id.id),("payment_state","=","not_paid")])
         # else:
         #     self.unpaid_inv_ids = False
 
