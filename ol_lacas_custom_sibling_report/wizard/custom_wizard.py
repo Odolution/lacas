@@ -90,7 +90,7 @@ class SiblingsReportWizard(models.TransientModel):
                 li=[id for id in rec.student_ids]
                 for grade in rec.grade_level_ids:
 
-                    li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
+                    li.sort(key=lambda x: x.grade.x_studio_class)
                 for students in li:
                     roll_no=students.facts_udid
                     name=students.name
