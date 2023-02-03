@@ -70,12 +70,14 @@ class RespartnerInherit(models.Model):
             if 'people' in fact_data: 
                 people = fact_data['people']
                 first_name = people['firstName']
+                middle_name = people['middleName']
                 last_name = people['lastName']
                 email = people['email']
                 phone = people['homePhone']
                 mobile = people['cellPhone']
                 rec['first_name'] = first_name
                 rec['last_name'] = last_name
+                rec['middle_name'] = middle_name
                 rec['email'] = email
                 rec['phone'] = phone
                 rec['mobile'] = mobile
