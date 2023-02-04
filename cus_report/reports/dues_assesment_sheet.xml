@@ -373,7 +373,7 @@ Cheque # Dated :<strong>
                   
                    
                    
-                    <br/><br/><br/>
+                    
                     <!--<td style="width:9% ;">-->
                     <!--     <hr style="height: 1px; border-width: 0; color: black; margin-right:30px; background-color: black;"/>-->
                     <!--   <span align="center" style=""><t t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/></span>  -->
