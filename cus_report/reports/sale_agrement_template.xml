@@ -14,7 +14,7 @@
                       <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
                       </div>
                        </div>
-                  </t>
+                 
                   </t>
                       
                       
