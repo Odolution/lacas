@@ -8,21 +8,15 @@
                 <div class="row" style="font-size:0.5rem;">
                   
                  <div class="column"  style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
-                    <t t-if="x.due_day&gt;0">
-                          <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:5em;">
-                      <!--<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>-->
+                     <t t-if="x.due_day&gt;0">
+                      <div class="watermark" style="position:relative;">
+                      <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
+                      <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
                       </div>
+                       </div>
+                 
                   </t>
-
-               
-
-                   <t t-else="">
-                        <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:8em;">
-                        <p t-field="x.payment_state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
-                      </div>
-                  </t>
-                      
-                      
+      
                     <table class="table table-dark" style="width:100%;">
                     <tbody>
                    
@@ -62,7 +56,6 @@
                   </div>
                   <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
                   <div>
-                  
                     <table class="table table-dark" style="width:100%;">
                     <tbody>
                     <tr>
@@ -249,19 +242,16 @@
                   
                   <!--2nd box-->
                   <div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px;margin-right: 1%;">
-                    <t t-if="x.due_day&gt;0">
-                          <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:5em;">
-                          <!--<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>-->
+                      <t t-if="x.due_day&gt;0">
+                      <div class="watermark" style="position:relative;">
+                      <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
+                      <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
                       </div>
+                       </div>
                   </t>
 
                
 
-                   <t t-else="">
-                        <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:8em;">
-                        <p t-field="x.payment_state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
-                      </div>
-                  </t>
                       
                     <table class="table table-dark" style="width:100%;">
                     <tbody>
@@ -485,19 +475,16 @@
                  
                   <!--3rd box-->
                 <div class="column" style="float: left; border: 1px solid black; width: 32%;height:750px; margin-right: 1%;">
-                    <t t-if="x.due_day&gt;0">
-                          <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:5em;">
-                         <!--<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>-->
+                      <t t-if="x.due_day&gt;0">
+                      <div class="watermark" style="position:relative;">
+                      <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
+                      <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
                       </div>
+                       </div>
                   </t>
 
                
 
-                   <t t-else="">
-                        <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:8em;">
-                        <p t-field="x.payment_state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
-                      </div>
-                  </t>
                       
                       
                     <table class="table table-dark" style="width:100%;">
