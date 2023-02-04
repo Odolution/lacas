@@ -77,6 +77,7 @@ class inheritinvoices(models.Model):
     def _compute_remaining_days(self):
         self.due_day=0
         self.due_day_text=""
+        
         for rec in self:
             if rec.invoice_date_due:
                 d1 = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
@@ -85,6 +86,14 @@ class inheritinvoices(models.Model):
                 rec["due_day"]=delta.days
                 if delta.days>0:
                     rec["due_day_text"]="Outstanding"
+            elif self.invoice_date_due:
+                d1 = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
+                d2 = datetime.strptime(str(self.invoice_date_due), "%Y-%m-%d")
+                delta = d1 - d2
+                self["due_day"]=delta.days
+                if delta.days>0:
+                    self["due_day_text"]="Outstanding"
+
                 
                
 

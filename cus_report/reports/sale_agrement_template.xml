@@ -254,11 +254,6 @@
 
                
 
-                   <t t-else="">
-                        <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:8em;">
-                        <p t-field="x.payment_state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
-                      </div>
-                  </t>
                       
                     <table class="table table-dark" style="width:100%;">
                     <tbody>
@@ -492,11 +487,6 @@
 
                
 
-                   <t t-else="">
-                        <div class="watermark" style="text-align:center; position:absolute;opacity:0.40;font-size:8em;">
-                        <p t-field="x.payment_state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
-                      </div>
-                  </t>
                       
                       
                     <table class="table table-dark" style="width:100%;">
