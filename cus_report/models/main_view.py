@@ -85,8 +85,6 @@ class inheritinvoices(models.Model):
                 rec["due_day"]=delta.days
                 if delta.days>0:
                     rec["due_day_text"]="Outstanding"
-                else:
-                    rec["due_day_text"]="Not Paid"
                 
                
 
