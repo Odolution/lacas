@@ -74,6 +74,8 @@ class academics_tab(models.Model):
 
                 if receive > refund:
                     rec.refund_receive = 'Receivable'
+                elif receive == refund:
+                    rec.refund_receive = 'Receivable'
                 else:
                     rec.refund_receive = 'Refundable'
             else:
