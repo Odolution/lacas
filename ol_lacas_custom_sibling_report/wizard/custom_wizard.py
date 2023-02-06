@@ -96,10 +96,16 @@ class SiblingsReportWizard(models.TransientModel):
                     name=students.name
                     phone=students.phone
                     street=students.street
+                    
                     # branch=students.school_ids.name
                     # batch=students.x_studio_btachsesson 
                     classs=students.homeroom
                     gender=students.gender.name
+                    if students.x_studio_batchsession:
+                        batch_Session=students.x_studio_batchsession
+                    else:
+                        batch_Session="-"
+                        
                     if students.enrollment_state_ids:
                         for line in students.enrollment_state_ids:
                             enroll_dt=line.enrolled_date
@@ -151,7 +157,7 @@ class SiblingsReportWizard(models.TransientModel):
                         "std_gender":gender if gender else "-",
                         "adm_date":full_date ,
                         "std_branch":branch,
-                        "std_batch": "-",
+                        "std_batch": batch_Session,
                         "std_term":"",
                         "std_class":classs if classs else "-",
                         "waiver_1":all_dis if all_dis else '-',
