@@ -170,7 +170,8 @@ class ext(models.Model):
             self.due_date=self.invoice_date_due
             # self.due_amount=self.due_amount
             self.std_name=full_name
-            self.std_branch=self.student_ids.school_ids.name
+            for schl in self.student_ids.school_ids:
+                self.std_branch=schl.name
         
             self.std_bill_date=self.invoice_date
             self.std_due_date=self.invoice_date_due
