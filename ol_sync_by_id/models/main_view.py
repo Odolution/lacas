@@ -41,7 +41,7 @@ class RespartnerInherit(models.Model):
             
             school_name = school_name_key[str(rec.school_ids.name)]
             fact_data = fact_obj.main(rec.facts_id,school_name)
-            raise UserError(str(fact_data))
+            
             if 'student' in fact_data:
                 student = fact_data['student']
                 school = self.env['school.school'].search([('code','=',student['schoolCode'])])
@@ -88,7 +88,7 @@ class RespartnerInherit(models.Model):
             if 'family' in fact_data:
                 family = fact_data['family']
                 rec.family_ids = False
-                family_obj = self.env['school.family'].search([('name','=',family['familyName'])])
+                family_obj = self.env['school.family'].search([('id','=',family['familyID'])])
                 rec.family_ids = family_obj
                 # if rec.family_ids:
                 #     for fm_id in rec.family_ids: 
