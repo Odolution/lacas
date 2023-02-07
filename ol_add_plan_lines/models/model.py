@@ -77,10 +77,12 @@ class set_next_installment_wiz(models.TransientModel):
     def apply(self):
         for plan in self.plan_ids:
                         
-            installment_id=self.env['tuition.installment'].search([
+            installment_ids=self.env['tuition.installment'].search([
                                         ('name','in',self.installment_name.name),
                                         ('tuition_plan_id','=',plan.id)])
-            plan.next_installment_id=installment_id.id     
+            for installment_id in installment_ids:
+                if installment_id.name==self.installment_name.name:
+                    plan.next_installment_id=installment_id.id     
                         
     def default_get(self, fields_list):
         # OVERRIDE
