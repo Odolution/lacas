@@ -88,13 +88,13 @@ class RespartnerInherit(models.Model):
             if 'family' in fact_data:
                 family = fact_data['family']
                 for fm_id in rec.family_ids: 
-                    if fm_id.facts_id == family['familyID']:
-                        pass
+                    if fm_id.name == family['familyName']:
+                        family_obj = self.env['school.family'].search([('name','=',family['familyName'])])
+                        rec.family_ids = family_obj
+                        
                     else:
                         rec.family_ids = False
-                        family_obj = self.env['school.family'].search([('id','=',family['familyID'])])
-                        raise UserError(family_obj.name)
-                        rec.family_ids = family_obj
+                        
 
 
             if 'demographic' in fact_data: 
