@@ -36,11 +36,12 @@ class RespartnerInherit(models.Model):
             }    
         for rec in std:
             
-            raise UserError(str(rec.family_ids)) 
+             
             fact_obj = Fact_Api()
-            
+            # rec.family_ids.facts_id
             school_name = school_name_key[str(rec.school_ids.name)]
             fact_data = fact_obj.main(rec.facts_id,school_name)
+            raise UserError(fact_data)
             if 'student' in fact_data:
                 student = fact_data['student']
                 school = self.env['school.school'].search([('code','=',student['schoolCode'])])
