@@ -10,6 +10,7 @@
                 <form string="Add Plan Line">
 
                         <group>
+                            <field name="operation" widget="radio">
                             <field name="installment_names" required="1" widget="many2many_tags"/>
                             <field name="product_id" required="1" />
                             <field name="unit_price" required="1"/>
@@ -19,8 +20,7 @@
                         </group>
 
                     <footer>
-                        <button string="Add" name="add" type="object" class="oe_highlight" data-hotkey="q"/>
-                        <button string="Update" name="update" type="object" class="oe_highlight" data-hotkey="w"/>
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
                         <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
                     </footer>
                 </form>
