@@ -89,7 +89,7 @@ class RespartnerInherit(models.Model):
                 family = fact_data['family']
                 if rec.family_ids:
                     for fm_id in rec.family_ids: 
-                        raise UserError(str(fm_id.name+""+family['familyName']))
+                        
                         if str(fm_id.name) == str(family['familyName']):
                             family_obj = self.env['school.family'].search([('name','=',family['familyName'])])
                             rec.family_ids = family_obj
