@@ -101,7 +101,7 @@
                     </tr>
                     <tr style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch:</td>
-                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.x_studio_batch.display_name"/> </strong></td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
                     </tr>
                     <tr style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
@@ -337,7 +337,7 @@
                     </tr>
                     <tr style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
-                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.x_studio_batch.display_name"/> </strong></td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
                     </tr>
                     <tr style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
@@ -571,7 +571,7 @@
                     </tr>
                     <tr style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
-                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.x_studio_batch.display_name"/> </strong></td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
                     </tr>
                     <tr style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
