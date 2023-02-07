@@ -93,6 +93,7 @@ class RespartnerInherit(models.Model):
                     else:
                         rec.family_ids = False
                         family_obj = self.env['school.family'].search([('id','=',family['familyID'])])
+                        raise UserError(family_obj.name)
                         rec.family_ids = family_obj
 
 
