@@ -15,6 +15,13 @@ class add_plan_line_wiz(models.TransientModel):
     unit_price=fields.Integer("Unit Price")
     currency_id=fields.Many2one('res.currency',"Currency")
     quantity = fields.Integer("Quantity")
+    
+    operation=fields.Selection([('add','Add'),('update','Update')],"Operation")
+    def apply(self):
+        if self.operation=="add":
+            self.add()
+        else:
+            self.update()
     def add(self):
             for plan in self.plan_ids:
                         names=[i.name for i in self.installment_names]
