@@ -68,6 +68,26 @@ class add_plan_line_wiz(models.TransientModel):
         ids=self._context.get("active_ids")
         res["plan_ids"]=[(6,0,ids)]
         return res
+    
+class set_next_installment_wiz(models.TransientModel):
+    _name='tuition.set_next_installment_wiz'
+    plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
+    installment_name=fields.Many2one('installment.name',string="Billing Cycle")
+    
+    def apply(self):
+        for plan in self.plan_ids:
+                        
+            installment_id=self.env['tuition.installment'].search([
+                                        ('name','in',self.installment_name.name),
+                                        ('tuition_plan_id','=',plan.id)])
+            plan.next_installment_id=installment_id.id     
+                        
+    def default_get(self, fields_list):
+        # OVERRIDE
+        res = super().default_get(fields_list)
+        ids=self._context.get("active_ids")
+        res["plan_ids"]=[(6,0,ids)]
+        return res
 class installment_names(models.Model):
 
     _name = "installment.name"
