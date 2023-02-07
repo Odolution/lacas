@@ -19,7 +19,8 @@
                         </group>
 
                     <footer>
-                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Add" name="add" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Update" name="update" type="object" class="oe_highlight" data-hotkey="w"/>
                         <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
                     </footer>
                 </form>
