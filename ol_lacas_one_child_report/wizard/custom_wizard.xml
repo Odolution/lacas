@@ -1,0 +1,89 @@
+<odoo>
+
+
+
+<record model="ir.ui.view" id="view_report_onechild">
+        <field name="name">onechild.report.wizard.form</field>
+        <field name="model" >onechild.report.wizard</field>
+      
+        <field name="arch" type="xml">
+        
+            <form string="Print Receivable of onechild students">
+            <group>
+      
+             </group>
+
+               <notebook>
+                            <page id="onechild_students_tab"
+                                  string=" Invoice Lines">
+
+                                <field name="account_onechild_report_line"
+                                       widget="section_and_note_one2many"
+                                  
+                                       mode="tree">
+                                       
+
+                                       
+                                    <tree editable="bottom" string="Journal Items" default_order="id">
+                                        <field name="roll_no" > </field>
+                                        <field name="parent_code"></field>
+                                        <field name="father_name"></field>
+                                         <field name="f_phone_no"></field>
+                                        <field name="f_cnic"></field>
+                                        <field name="f_address"></field>
+                                        <field name="std_address"></field>
+                                        <field name="no_of_child"></field>
+                                        <field name="m_cnic"></field>
+                                        <field name="mother_name"></field>
+                                        <field name="m_phone_no"></field>
+                                        <field name="std_name"></field>
+                                        <field name="emergency"></field>
+                                        <field name="std_gender"></field>
+                                        <field name="adm_date"></field>
+                                        <field name="std_branch"></field>
+                                        <field name="std_batch"></field>
+                                        <field name="std_term"></field>
+                                        <field name="std_class"></field>
+                                        <field name="waiver_1"></field>
+                                        <field name="waiver_2"></field>
+                                
+                                        
+                                        
+
+
+
+                                
+                                    </tree>
+
+                                </field>
+
+                            </page>
+                </notebook>
+             
+             <footer>
+                <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
+                <button name="action_print_excel_report" type="object" string="Print Excel" class="btn-primary" />
+                <!-- <button name="action_polulate" type="object" string="Populate" /> -->
+                
+                 <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+            </form>
+            </field>      
+    </record>
+
+     <record id="action_account_print_onechild_report" model="ir.actions.act_window">
+            <field name="name">onechild Students</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">onechild.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_onechild"/>
+            <field name="target">new</field>
+        </record>
+ <menuitem id="menu_onechild_student" name="onechild Students" parent="account.menu_finance_receivables" sequence="10" />
+ <menuitem id="menu_action_onechild_report" name="onechild Students Report" action="action_account_print_onechild_report" parent="menu_onechild_student"/>
+
+ 
+
+ 
+
+</odoo> 
