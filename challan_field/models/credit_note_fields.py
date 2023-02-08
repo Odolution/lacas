@@ -28,13 +28,13 @@ class credit_notes_fields(models.Model):
     def _next_month(self):
 
         if self.create_date:
-            self.next_month_Date = self.create_date + \
+            self.next_month_Date = self.invoice_date + \
                 relativedelta(months=1)
 
     def _get_next_month(self):
         self.next_month=''
         for rec in self:
-            create_on_date=str(rec.create_date)
+            create_on_date=str(rec.next_month_Date)
             splitted_name=create_on_date.split('-')
             if len(splitted_name)>2:
                 month_in_number=splitted_name[1]
