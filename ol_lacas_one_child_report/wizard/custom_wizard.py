@@ -84,14 +84,10 @@ class onechildReportWizard(models.TransientModel):
             m_name=''
             m_ph=''
 
-            if len(rec.student_ids)==1:
+            if len(rec.student_ids)==1 and rec.student_ids.enrollment_status_ids.name=='Enrolled':
                 tot_child=(len(rec.student_ids))
                 parent_code=rec.facts_id
-                li=[id for id in rec.student_ids]
-                #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
-                for grade in rec.student_ids.grade_level_ids:
-                    li.sort(key=lambda x: grade.x_studio_class)
-                for students in li:
+                for students in rec.student_ids:
                     roll_no=students.facts_udid
                     name=students.name
                     phone=students.phone
@@ -200,7 +196,7 @@ class onechildReportWizard(models.TransientModel):
         if xlwt:
 
             
-            filename = 'onechild STUDENTS.xls'
+            filename = 'One Child Report.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
