@@ -222,7 +222,7 @@ class onechildReportWizard(models.TransientModel):
             date_format.num_format_str = 'dd/mm/yyyy'
 
             worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
-            worksheet.write_merge(0, 1, 6, 11, "onechild STUDENTS REPORT", style=style_title)
+            worksheet.write_merge(0, 1, 6, 11, "ONE CHILD REPORT", style=style_title)
             
             
 
