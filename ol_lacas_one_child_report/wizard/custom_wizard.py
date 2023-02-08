@@ -84,7 +84,7 @@ class onechildReportWizard(models.TransientModel):
             m_name=''
             m_ph=''
 
-            if len(rec.student_ids)=11:
+            if len(rec.student_ids)==1:
                 tot_child=(len(rec.student_ids))
                 parent_code=rec.facts_udid
                 li=[id for id in rec.student_ids]
