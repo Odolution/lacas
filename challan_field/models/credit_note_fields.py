@@ -11,6 +11,7 @@ class credit_notes_fields(models.Model):
     notice_completion_date = fields.Date(string="Notice Completion")
     next_month_Date=fields.Date(string="next month date", compute="_next_month_date")
     next_month=fields.Char(string="next month ",compute="_get_next_month")
+    bi_monthly_cycle=fields.Char(string="by_monthly_cycle ",compute="_get_bi_monthly_cycle")
 
     # school_branch = fields.Char(string="Branch")
     # class_grade = fields.Char(string="Class")
@@ -62,7 +63,9 @@ class credit_notes_fields(models.Model):
                     rec['next_month']='Feburary'
                 elif month_in_number == '01':
                     rec['next_month']='January'
-
+    
+    def _get_bi_monthly_cycle(self):
+        self.bi_monthly_cycle=self.month_date+"-"+self.next_month
 
 
 # class report_sale_preview(models.Model):
