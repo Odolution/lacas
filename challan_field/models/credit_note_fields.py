@@ -9,7 +9,7 @@ class credit_notes_fields(models.Model):
     withdrawl_submission_date = fields.Date(string="Withdrawal Submission")
     actual_leaving_date = fields.Date(string="Leaving Date")
     notice_completion_date = fields.Date(string="Notice Completion")
-    next_month_Date=fields.Date(string="next month date")
+    next_month_Date=fields.Date(string="next month date", compute="_next_month_date")
     next_month=fields.Char(string="next month ",compute="_get_next_month")
 
     # school_branch = fields.Char(string="Branch")
@@ -24,8 +24,8 @@ class credit_notes_fields(models.Model):
             self.notice_completion_date = self.withdrawl_submission_date + \
                 relativedelta(months=1)
 
-    @api.onchange('create_date')
-    def _next_month(self):
+    
+    def _next_month_date(self):
 
         if self.create_date:
             self.next_month_Date = self.invoice_date + \
