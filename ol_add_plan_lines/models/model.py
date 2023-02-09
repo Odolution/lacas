@@ -37,7 +37,7 @@ class add_plan_line_wiz(models.TransientModel):
                                     'quantity':self.quantity,
                                     'installment_ids':[(6,0,[i.id for i in installment_ids if i.name in names])],
                                     'currency_id':self.currency_id.id,
-                                    'unit_price':self.unit_price if self.unit_price>0 else self.product_id.lst_price
+                                    'unit_price':self.unit_price
                                     }
                         new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
 
@@ -56,7 +56,7 @@ class add_plan_line_wiz(models.TransientModel):
                                     'quantity':self.quantity,
                                     'installment_ids':[(6,0,[i.id for i in installment_ids if i.name in names])],
                                     'currency_id':self.currency_id.id,
-                                    'unit_price':self.unit_price if self.unit_price>0 else self.product_id.lst_price
+                                    'unit_price':self.unit_price
                                     }
                         line=self.env['tuition.plan.line'].search([('plan_id',"=",plan.id),('product_id',"=",self.product_id.id)])
                         line.write(linedata)
