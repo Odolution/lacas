@@ -24,6 +24,7 @@ class add_plan_line_wiz(models.TransientModel):
             self.update()
     def add(self):
             for plan in self.plan_ids:
+
                
                         names=[i.name for i in self.installment_names]
                         installment_ids=self.env['tuition.installment'].search([
@@ -40,8 +41,12 @@ class add_plan_line_wiz(models.TransientModel):
                                     'currency_id':self.currency_id.id,
                                     'unit_price':self.unit_price
                                     }
-                        
-                        new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
+
+                        for p_lines in plan.line_ids:
+                            if p_lines.product_id.id == self.product_id.id
+                            raise UserError("already exist in plan")
+                        else:
+                            new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
 
     def update(self):
             for plan in self.plan_ids:
