@@ -84,105 +84,107 @@ class onechildReportWizard(models.TransientModel):
             m_name=''
             m_ph=''
 
-            if len(rec.student_ids)==1 and rec.student_ids.enrollment_status_ids.name=='Enrolled':
-                tot_child=(len(rec.student_ids))
-                parent_code=rec.facts_id
-                for students in rec.student_ids:
-                    roll_no=students.facts_udid
-                    name=students.name
-                    phone=students.phone
-                    street=students.street
-                    
-                    # branch=students.school_ids.name
-                    # batch=students.x_studio_btachsesson 
-                    classs=students.homeroom
-                    gender=students.gender.name
-                    if students.x_studio_batchsession:
-                        batch_Session=students.x_studio_batchsession
-                    else:
-                        batch_Session="-"
-                        
-                    if students.enrollment_state_ids:
-                        for line in students.enrollment_state_ids:
-                            enroll_dt=line.enrolled_date
-                            if enroll_dt:
-                                date=str(enroll_dt.day)
-                                month=str(enroll_dt.month)
-                                year=str(enroll_dt.year)
-                                full_date=date+"-"+month+'-'+year
-                                break
-                    if students.enrollment_history_ids:
-                        enroll_history=students.enrollment_history_ids
-                        lst=[]
-                        for hist in enroll_history:
-                            lst.append(hist.program_id.name)
-                        branch=lst[0]
-                    if students.tuition_plan_ids:
-                        for plans in students.tuition_plan_ids:
-                            all_dis=plans.x_studio_discount_name_1 
-                            fcraw_dis=plans.x_studio_fcraw_name
-                    if students.relationship_ids:
-                        for parents in students.relationship_ids:
-                            if parents.relationship_type_id.name=='Father':
-                                f_name=parents.individual_id.name 
-                                f_st=parents.individual_id.street
-                                f_ph=parents.individual_id.phone
-                             
-                            elif parents.relationship_type_id.name=='Mother':
-                                m_name=parents.individual_id.name 
-                                m_st=parents.individual_id.street
-                                m_ph=parents.individual_id.phone
-                        
-
-
-                    mvl=self.env['account.onechild.report.move.line'].create({
+            if len(rec.student_ids)==1:
+                for status in rec.student_ids.enrollment_status_ids:
+                    if status.name=='Enrolled':
+                        tot_child=(len(rec.student_ids))
+                        parent_code=rec.facts_id
+                        for students in rec.student_ids:
+                            roll_no=students.facts_udid
+                            name=students.name
+                            phone=students.phone
+                            street=students.street
                             
-                        "roll_no":roll_no,
-                        "parent_code":parent_code if parent_code else '',
-                        "father_name":f_name if f_name else '-',
-                        "f_phone_no":f_ph  if f_ph else '-',
-                        "f_cnic":'',
-                        "f_address":f_st  if f_st else '-',
-                        "std_address":street  if street else '-',
-                        "no_of_child":tot_child,
-                        "m_cnic":"",
-                        "mother_name":m_name  if m_name else '-',
-                        "m_phone_no":m_ph  if m_ph else '-',
-                        "emergency":phone,
-                        "std_name":name,
-                        "std_gender":gender if gender else "-",
-                        "adm_date":full_date ,
-                        "std_branch":branch,
-                        "std_batch": batch_Session,
-                        "std_term":"",
-                        "std_class":classs if classs else "-",
-                        "waiver_1":all_dis if all_dis else '-',
-                        "waiver_2":fcraw_dis if fcraw_dis else '-',
+                            # branch=students.school_ids.name
+                            # batch=students.x_studio_btachsesson 
+                            classs=students.homeroom
+                            gender=students.gender.name
+                            if students.x_studio_batchsession:
+                                batch_Session=students.x_studio_batchsession
+                            else:
+                                batch_Session="-"
+                                
+                            if students.enrollment_state_ids:
+                                for line in students.enrollment_state_ids:
+                                    enroll_dt=line.enrolled_date
+                                    if enroll_dt:
+                                        date=str(enroll_dt.day)
+                                        month=str(enroll_dt.month)
+                                        year=str(enroll_dt.year)
+                                        full_date=date+"-"+month+'-'+year
+                                        break
+                            if students.enrollment_history_ids:
+                                enroll_history=students.enrollment_history_ids
+                                lst=[]
+                                for hist in enroll_history:
+                                    lst.append(hist.program_id.name)
+                                branch=lst[0]
+                            if students.tuition_plan_ids:
+                                for plans in students.tuition_plan_ids:
+                                    all_dis=plans.x_studio_discount_name_1 
+                                    fcraw_dis=plans.x_studio_fcraw_name
+                            if students.relationship_ids:
+                                for parents in students.relationship_ids:
+                                    if parents.relationship_type_id.name=='Father':
+                                        f_name=parents.individual_id.name 
+                                        f_st=parents.individual_id.street
+                                        f_ph=parents.individual_id.phone
+                                    
+                                    elif parents.relationship_type_id.name=='Mother':
+                                        m_name=parents.individual_id.name 
+                                        m_st=parents.individual_id.street
+                                        m_ph=parents.individual_id.phone
                                 
 
-                })
-                    lines.append(mvl.id)
 
-            # lst=[]
-            # lst.append(mvl.roll_no)
-            # lst.append(mvl.parent_code)
-            # lst.append(mvl.father_name)
-            # lst.append(mvl.f_phone_no)
-            # lst.append(mvl.f_address)
-            # lst.append(mvl.std_address)
-            # lst.append(mvl.no_of_child)
-            # lst.append(mvl.mother_name)
-            # lst.append(mvl.adm_date)
-            # lst.append(mvl.std_class)
-            # raise UserError(lst)
+                            mvl=self.env['account.onechild.report.move.line'].create({
+                                    
+                                "roll_no":roll_no,
+                                "parent_code":parent_code if parent_code else '',
+                                "father_name":f_name if f_name else '-',
+                                "f_phone_no":f_ph  if f_ph else '-',
+                                "f_cnic":'',
+                                "f_address":f_st  if f_st else '-',
+                                "std_address":street  if street else '-',
+                                "no_of_child":tot_child,
+                                "m_cnic":"",
+                                "mother_name":m_name  if m_name else '-',
+                                "m_phone_no":m_ph  if m_ph else '-',
+                                "emergency":phone,
+                                "std_name":name,
+                                "std_gender":gender if gender else "-",
+                                "adm_date":full_date ,
+                                "std_branch":branch,
+                                "std_batch": batch_Session,
+                                "std_term":"",
+                                "std_class":classs if classs else "-",
+                                "waiver_1":all_dis if all_dis else '-',
+                                "waiver_2":fcraw_dis if fcraw_dis else '-',
+                                        
 
-                        
-        
-        self.write({
-            "account_onechild_report_line":[(6,0,lines)]
-        }
+                        })
+                            lines.append(mvl.id)
 
-      )
+                    # lst=[]
+                    # lst.append(mvl.roll_no)
+                    # lst.append(mvl.parent_code)
+                    # lst.append(mvl.father_name)
+                    # lst.append(mvl.f_phone_no)
+                    # lst.append(mvl.f_address)
+                    # lst.append(mvl.std_address)
+                    # lst.append(mvl.no_of_child)
+                    # lst.append(mvl.mother_name)
+                    # lst.append(mvl.adm_date)
+                    # lst.append(mvl.std_class)
+                    # raise UserError(lst)
+
+                                
+                
+                self.write({
+                    "account_onechild_report_line":[(6,0,lines)]
+                }
+
+            )
 
 
   
