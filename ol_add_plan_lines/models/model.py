@@ -43,10 +43,10 @@ class add_plan_line_wiz(models.TransientModel):
                                     }
 
                         for p_lines in plan.line_ids:
-                            if p_lines.product_id == self.product_id
-                            raise UserError("already exist in plan")
-                        else:
-                            new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
+                            if p_lines.product_id == self.product_id:
+                                raise UserError("already exist in plan")
+                            else:
+                                new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
 
     def update(self):
             for plan in self.plan_ids:
