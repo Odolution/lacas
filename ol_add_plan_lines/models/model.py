@@ -19,7 +19,17 @@ class add_plan_line_wiz(models.TransientModel):
     operation=fields.Selection([('add','Add'),('update','Update')],"Operation")
     def apply(self):
         if self.operation=="add":
-            self.add()
+            for p_lines in plan.line_ids:
+                val=""
+                if p_lines.product_id == self.product_id:
+                    #raise UserError("already exist in plan")
+                    val="yes"
+                else:
+                    val="no"
+            if val=="yes":
+                raise UserError("already exist!!")
+            else:
+                self.add()
         else:
             self.update()
     def add(self):
@@ -42,11 +52,8 @@ class add_plan_line_wiz(models.TransientModel):
                                     'unit_price':self.unit_price
                                     }
 
-                        for p_lines in plan.line_ids:
-                            if p_lines.product_id == self.product_id:
-                                raise UserError("already exist in plan")
-                            else:
-                                new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
+                        
+                        new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
 
     def update(self):
             for plan in self.plan_ids:
