@@ -253,7 +253,7 @@
         <field name="code">action = model.get_securityDeposit_action()</field>
     </record>
     <menuitem action="server_action_account_move_securityDeposit" id="account_move_securityDeposit_menu" name="Security Deposit" parent="account.menu_finance_receivables" sequence="2"/> -->
-
+<!-- 
      <record id="cron_trigger_fields" model="ir.cron">
         <field name="name">trigger fields Action</field>
         <field name="model_id" ref="account.model_account_move"/>
@@ -264,6 +264,7 @@
         <field name='interval_type'>hours</field>
         <field name="numbercall">-1</field>
         <field name="doall" eval="False"/>
-    </record>
+    </record> -->
+    
 </odoo>
 
