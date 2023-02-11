@@ -99,8 +99,8 @@ class ext(models.Model):
 
 
 
-    @api.onchange('x_student_id_cred',"student_ids")
-    def _students_onchange(self):
+    #@api.onchange('x_student_id_cred',"student_ids")
+    def students_onchange_monthly(self):
         self.student_name=''
         self.student_code=" "
         self.campus=""
