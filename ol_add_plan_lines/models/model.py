@@ -33,7 +33,7 @@ class add_plan_line_wiz(models.TransientModel):
                     name= li.student_id.name
                     stu=str(udid)+" "+ name+ " "
                     list2.append(stu)
-                raise UserError("Charge is Already Exist in the following students: "+str(list2))
+                raise UserError("Charge is Already Exist in the following students: "+str(list2)[1:-1])
             else:
                 self.add()
             # for t_plan in self.plan_ids:
