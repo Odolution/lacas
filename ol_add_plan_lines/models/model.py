@@ -22,7 +22,7 @@ class add_plan_line_wiz(models.TransientModel):
             val=""
             lis1t=[]
             list2=[]
-            for t_plan in plan_ids:
+            for t_plan in self.plan_ids:
                 for p in t_plan.line_ids:
                     if p.product_id==self.product_id:
                         lis1t.append(t_plan)
