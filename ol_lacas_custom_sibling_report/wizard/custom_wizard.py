@@ -1,6 +1,6 @@
 
 from odoo import models, api, fields, _
-# from odoo.exceptions import UserError
+
 from datetime import datetime
 import xlsxwriter
 _
@@ -85,108 +85,110 @@ class SiblingsReportWizard(models.TransientModel):
             m_ph=''
 
             if len(rec.student_ids)>1:
-                tot_child=(len(rec.student_ids))
-                parent_code=rec.facts_id
-                li=[id for id in rec.student_ids]
-                #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
-                for grade in rec.student_ids.grade_level_ids:
-                    li.sort(key=lambda x: grade.x_studio_class)
-                for students in li:
-                    roll_no=students.facts_udid
-                    name=students.name
-                    phone=students.phone
-                    street=students.street
-                    
-                    # branch=students.school_ids.name
-                    # batch=students.x_studio_btachsesson 
-                    classs=students.homeroom
-                    gender=students.gender.name
-                    if students.x_studio_batchsession:
-                        batch_Session=students.x_studio_batchsession
-                    else:
-                        batch_Session="-"
-                        
-                    if students.enrollment_state_ids:
-                        for line in students.enrollment_state_ids:
-                            enroll_dt=line.enrolled_date
-                            if enroll_dt:
-                                date=str(enroll_dt.day)
-                                month=str(enroll_dt.month)
-                                year=str(enroll_dt.year)
-                                full_date=date+"-"+month+'-'+year
-                                break
-                    if students.enrollment_history_ids:
-                        enroll_history=students.enrollment_history_ids
-                        lst=[]
-                        for hist in enroll_history:
-                            lst.append(hist.program_id.name)
-                        branch=lst[0]
-                    if students.tuition_plan_ids:
-                        for plans in students.tuition_plan_ids:
-                            all_dis=plans.x_studio_discount_name_1 
-                            fcraw_dis=plans.x_studio_fcraw_name
-                    if students.relationship_ids:
-                        for parents in students.relationship_ids:
-                            if parents.relationship_type_id.name=='Father':
-                                f_name=parents.individual_id.name 
-                                f_st=parents.individual_id.street
-                                f_ph=parents.individual_id.phone
-                             
-                            elif parents.relationship_type_id.name=='Mother':
-                                m_name=parents.individual_id.name 
-                                m_st=parents.individual_id.street
-                                m_ph=parents.individual_id.phone
-                        
-
-
-                    mvl=self.env['account.sibling.report.move.line'].create({
+                for status in rec.student_ids.enrollment_status_ids:
+                    if status.name=='Enrolled':
+                        tot_child=(len(rec.student_ids))
+                        parent_code=rec.facts_id
+                        li=[id for id in rec.student_ids]
+                        #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
+                        for grade in rec.student_ids.grade_level_ids:
+                            li.sort(key=lambda x: grade.x_studio_class)
+                        for students in li:
+                            roll_no=students.facts_udid
+                            name=students.name
+                            phone=students.phone
+                            street=students.street
                             
-                        "roll_no":roll_no,
-                        "parent_code":parent_code if parent_code else '',
-                        "father_name":f_name if f_name else '-',
-                        "f_phone_no":f_ph  if f_ph else '-',
-                        "f_cnic":'',
-                        "f_address":f_st  if f_st else '-',
-                        "std_address":street  if street else '-',
-                        "no_of_child":tot_child,
-                        "m_cnic":"",
-                        "mother_name":m_name  if m_name else '-',
-                        "m_phone_no":m_ph  if m_ph else '-',
-                        "emergency":phone,
-                        "std_name":name,
-                        "std_gender":gender if gender else "-",
-                        "adm_date":full_date ,
-                        "std_branch":branch,
-                        "std_batch": batch_Session,
-                        "std_term":"",
-                        "std_class":classs if classs else "-",
-                        "waiver_1":all_dis if all_dis else '-',
-                        "waiver_2":fcraw_dis if fcraw_dis else '-',
+                            # branch=students.school_ids.name
+                            # batch=students.x_studio_btachsesson 
+                            classs=students.homeroom
+                            gender=students.gender.name
+                            if students.x_studio_batchsession:
+                                batch_Session=students.x_studio_batchsession
+                            else:
+                                batch_Session="-"
+                                
+                            if students.enrollment_state_ids:
+                                for line in students.enrollment_state_ids:
+                                    enroll_dt=line.enrolled_date
+                                    if enroll_dt:
+                                        date=str(enroll_dt.day)
+                                        month=str(enroll_dt.month)
+                                        year=str(enroll_dt.year)
+                                        full_date=date+"-"+month+'-'+year
+                                        break
+                            if students.enrollment_history_ids:
+                                enroll_history=students.enrollment_history_ids
+                                lst=[]
+                                for hist in enroll_history:
+                                    lst.append(hist.program_id.name)
+                                branch=lst[0]
+                            if students.tuition_plan_ids:
+                                for plans in students.tuition_plan_ids:
+                                    all_dis=plans.x_studio_discount_name_1 
+                                    fcraw_dis=plans.x_studio_fcraw_name
+                            if students.relationship_ids:
+                                for parents in students.relationship_ids:
+                                    if parents.relationship_type_id.name=='Father':
+                                        f_name=parents.individual_id.name 
+                                        f_st=parents.individual_id.street
+                                        f_ph=parents.individual_id.phone
+                                    
+                                    elif parents.relationship_type_id.name=='Mother':
+                                        m_name=parents.individual_id.name 
+                                        m_st=parents.individual_id.street
+                                        m_ph=parents.individual_id.phone
                                 
 
-                })
-                    lines.append(mvl.id)
 
-            # lst=[]
-            # lst.append(mvl.roll_no)
-            # lst.append(mvl.parent_code)
-            # lst.append(mvl.father_name)
-            # lst.append(mvl.f_phone_no)
-            # lst.append(mvl.f_address)
-            # lst.append(mvl.std_address)
-            # lst.append(mvl.no_of_child)
-            # lst.append(mvl.mother_name)
-            # lst.append(mvl.adm_date)
-            # lst.append(mvl.std_class)
-            # raise UserError(lst)
+                            mvl=self.env['account.sibling.report.move.line'].create({
+                                    
+                                "roll_no":roll_no,
+                                "parent_code":parent_code if parent_code else '',
+                                "father_name":f_name if f_name else '-',
+                                "f_phone_no":f_ph  if f_ph else '-',
+                                "f_cnic":'',
+                                "f_address":f_st  if f_st else '-',
+                                "std_address":street  if street else '-',
+                                "no_of_child":tot_child,
+                                "m_cnic":"",
+                                "mother_name":m_name  if m_name else '-',
+                                "m_phone_no":m_ph  if m_ph else '-',
+                                "emergency":phone,
+                                "std_name":name,
+                                "std_gender":gender if gender else "-",
+                                "adm_date":full_date ,
+                                "std_branch":branch,
+                                "std_batch": batch_Session,
+                                "std_term":"",
+                                "std_class":classs if classs else "-",
+                                "waiver_1":all_dis if all_dis else '-',
+                                "waiver_2":fcraw_dis if fcraw_dis else '-',
+                                        
 
-                        
-        
-        self.write({
-            "account_sibling_report_line":[(6,0,lines)]
-        }
+                        })
+                            lines.append(mvl.id)
 
-      )
+                    # lst=[]
+                    # lst.append(mvl.roll_no)
+                    # lst.append(mvl.parent_code)
+                    # lst.append(mvl.father_name)
+                    # lst.append(mvl.f_phone_no)
+                    # lst.append(mvl.f_address)
+                    # lst.append(mvl.std_address)
+                    # lst.append(mvl.no_of_child)
+                    # lst.append(mvl.mother_name)
+                    # lst.append(mvl.adm_date)
+                    # lst.append(mvl.std_class)
+                    # raise UserError(lst)
+
+                                
+                
+                self.write({
+                    "account_sibling_report_line":[(6,0,lines)]
+                }
+
+            )
 
 
   
@@ -225,33 +227,33 @@ class SiblingsReportWizard(models.TransientModel):
             date_format = xlwt.XFStyle()
             date_format.num_format_str = 'dd/mm/yyyy'
 
-            worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
-            worksheet.write_merge(0, 1, 6, 11, "SIBLING STUDENTS REPORT", style=style_title)
+            # worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
+            # worksheet.write_merge(0, 1, 6, 11, "SIBLING STUDENTS REPORT", style=style_title)
             
             
 
-            worksheet.write_merge(2,3,0,1,"Parent Code.", style=red_style_title)
-            worksheet.write_merge(2,3,2,4,"Father Name",style=red_style_title)
-            worksheet.write_merge(2,3,5,7,"Phone No",style=red_style_title)
-            worksheet.write_merge(2,3,8,10,"CNIC",style=red_style_title)
-            worksheet.write_merge(2,3,11,15,"Address",style=red_style_title)
-            worksheet.write_merge(2,3,16,18,"# of Child",style=red_style_title)
-            worksheet.write_merge(2,3,19,21,"Mother Name",style=red_style_title)
-            worksheet.write_merge(2,3,22,24,"Mother CNIC",style=red_style_title)
-            worksheet.write_merge(2,3,25,26,"Mother Phone No.",style=red_style_title)
-            worksheet.write_merge(2,3,27,29,"Emergency Contact", red_style_title)
-            worksheet.write_merge(2,3,30,31,"Roll No.", red_style_title)
-            worksheet.write_merge(2,3,32,34,"Student Name", red_style_title)
-            worksheet.write_merge(2,3,35,38,"Branch", red_style_title)
-            worksheet.write_merge(2,3,39,40,"Class", red_style_title)
-            worksheet.write_merge(2,3,41,43,"Batch", red_style_title)
-            worksheet.write_merge(2,3,44,45,"Term", red_style_title)
-            worksheet.write_merge(2,3,46,50,"Student Address", red_style_title)
-            worksheet.write_merge(2,3,51,52,"Gender", red_style_title)
-            worksheet.write_merge(2,3,53,54,"ADM Date", red_style_title)
-            worksheet.write_merge(2,3,55,59,"Waiver 1", red_style_title)
-            worksheet.write_merge(2,3,60,64,"Waiver 2", red_style_title)
-            row=4
+            worksheet.write_merge(0,1,0,1,"Parent Code.", style=red_style_title)
+            worksheet.write_merge(0,1,2,4,"Father Name",style=red_style_title)
+            worksheet.write_merge(0,1,5,7,"Phone No",style=red_style_title)
+            worksheet.write_merge(0,1,8,10,"CNIC",style=red_style_title)
+            worksheet.write_merge(0,1,11,15,"Address",style=red_style_title)
+            worksheet.write_merge(0,1,16,18,"# of Child",style=red_style_title)
+            worksheet.write_merge(0,1,19,21,"Mother Name",style=red_style_title)
+            worksheet.write_merge(0,1,22,24,"Mother CNIC",style=red_style_title)
+            worksheet.write_merge(0,1,25,26,"Mother Phone No.",style=red_style_title)
+            worksheet.write_merge(0,1,27,29,"Emergency Contact", red_style_title)
+            worksheet.write_merge(0,1,30,31,"Roll No.", red_style_title)
+            worksheet.write_merge(0,1,32,34,"Student Name", red_style_title)
+            worksheet.write_merge(0,1,35,38,"Branch", red_style_title)
+            worksheet.write_merge(0,1,39,40,"Class", red_style_title)
+            worksheet.write_merge(0,1,41,43,"Batch", red_style_title)
+            # worksheet.write_merge(0,1,44,45,"Term", red_style_title)
+            worksheet.write_merge(0,1,44,50,"Student Address", red_style_title)
+            worksheet.write_merge(0,1,51,52,"Gender", red_style_title)
+            worksheet.write_merge(0,1,53,54,"ADM Date", red_style_title)
+            worksheet.write_merge(0,1,55,59,"Waiver 1", red_style_title)
+            worksheet.write_merge(0,1,60,64,"Waiver 2", red_style_title)
+            row=2
             for rec in self.account_sibling_report_line:
                     worksheet.write_merge(row,row,0,1,rec.parent_code, style=style_title)
                     worksheet.write_merge(row,row,2,4,rec.father_name,style=style_title)
@@ -268,8 +270,8 @@ class SiblingsReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,35,38,rec.std_branch, style_title)
                     worksheet.write_merge(row,row,39,40,rec.std_class, style_title)
                     worksheet.write_merge(row,row,41,43,rec.std_batch, style_title)
-                    worksheet.write_merge(row,row,44,45,rec.std_term, style_title)
-                    worksheet.write_merge(row,row,46,50,rec.std_address, style_title)
+                    # worksheet.write_merge(row,row,44,45,rec.std_term, style_title)
+                    worksheet.write_merge(row,row,44,50,rec.std_address, style_title)
                     worksheet.write_merge(row,row,51,52,rec.std_gender, style_title)
                     worksheet.write_merge(row,row,53,54,rec.adm_date, style_title)
                     worksheet.write_merge(row,row,55,59,rec.waiver_1, style_title)
