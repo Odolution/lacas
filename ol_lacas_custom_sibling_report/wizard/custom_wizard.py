@@ -194,7 +194,7 @@ class SiblingsReportWizard(models.TransientModel):
 
                 )
 
-        elif self.select_batch==oldbatch:
+        elif self.select_batch=='Session 2022-2023':
             for rec in student_data:
                 parent_code=''
                 roll_no=''
@@ -321,7 +321,7 @@ class SiblingsReportWizard(models.TransientModel):
 
                     )
 
-        elif self.select_batch==newbatch:
+        elif self.select_batch=='Session 2023-2024':
             for rec in student_data:
                 parent_code=''
                 roll_no=''
