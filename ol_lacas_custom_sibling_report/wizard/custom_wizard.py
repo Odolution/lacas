@@ -215,7 +215,7 @@ class SiblingsReportWizard(models.TransientModel):
                 m_name=''
                 m_ph=''
 
-                if len(rec.student_ids)>1 and rec.x_studio_batchsession=='Session 2022-2023':
+                if len(rec.student_ids)>1 and rec.student_ids.x_studio_batchsession=='Session 2022-2023':
                     for status in rec.student_ids.enrollment_status_ids:
                         if status.name=='Enrolled':
                             tot_child=(len(rec.student_ids))
@@ -342,7 +342,7 @@ class SiblingsReportWizard(models.TransientModel):
                 m_name=''
                 m_ph=''
 
-                if len(rec.student_ids)>1 and rec.x_studio_batchsession=='Session 2023-2024':
+                if len(rec.student_ids)>1 and rec.student_ids.x_studio_batchsession=='Session 2023-2024':
                     for status in rec.student_ids.enrollment_status_ids:
                         if status.name=='Enrolled':
                             tot_child=(len(rec.student_ids))
