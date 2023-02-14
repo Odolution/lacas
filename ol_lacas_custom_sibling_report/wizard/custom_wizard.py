@@ -51,7 +51,7 @@ class SiblingsReportWizard(models.TransientModel):
     _name="siblings.report.wizard"
     _description='Print Sibling Wizard'
 
-    select_batch = fields.Selection([('oldbatch', '	Session 2022-2023'), ('newbatch', 'Session 2023-2024'), ('all', 'All')])
+    select_batch = fields.Selection([('oldbatch', '	Session 2022-2023'), ('newbatch', 'Session 2023-2024'), ('allbatch', 'All')])
 
     
     account_sibling_report_line=fields.Many2many('account.sibling.report.move.line', string='Account report Line')
@@ -62,140 +62,394 @@ class SiblingsReportWizard(models.TransientModel):
     
     def action_print_report(self):
         student_data=self.env['school.family'].search([])
+        old_batch=self.env['school.family'].search([('x_studio_batchsession','=','Session 2022-2023')])
+        new_batch=self.env['school.family'].search([('x_studio_batchsession','=','Session 2023-2024')])
         lines=[]
-        
 
-    
-        for rec in student_data:
-            parent_code=''
-            roll_no=''
-            name=''
-            phone=''
-            tot_child=0
-            street=''
-            branch=''
-            batch=''
-            classs=''
-            gender=''
-            enroll_dt=''
-            all_dis=''
-            fcraw_dis=''
-            f_name=''
-            f_st=''
-            f_ph=''
-            m_name=''
-            m_ph=''
+        if self.select_batch==allbatch:
 
-            if len(rec.student_ids)>1:
-                for status in rec.student_ids.enrollment_status_ids:
-                    if status.name=='Enrolled':
-                        tot_child=(len(rec.student_ids))
-                        parent_code=rec.facts_id
-                        li=[id for id in rec.student_ids]
-                        #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
-                        for grade in rec.student_ids.grade_level_ids:
-                            li.sort(key=lambda x: grade.x_studio_class)
-                        for students in li:
-                            roll_no=students.facts_udid
-                            name=students.name
-                            phone=students.phone
-                            street=students.street
-                            
-                            # branch=students.school_ids.name
-                            # batch=students.x_studio_btachsesson 
-                            classs=students.homeroom
-                            gender=students.gender.name
-                            if students.x_studio_batchsession:
-                                batch_Session=students.x_studio_batchsession
-                            else:
-                                batch_Session="-"
+            for rec in student_data:
+                parent_code=''
+                roll_no=''
+                name=''
+                phone=''
+                tot_child=0
+                street=''
+                branch=''
+                batch=''
+                classs=''
+                gender=''
+                enroll_dt=''
+                all_dis=''
+                fcraw_dis=''
+                f_name=''
+                f_st=''
+                f_ph=''
+                m_name=''
+                m_ph=''
+
+                if len(rec.student_ids)>1:
+                    for status in rec.student_ids.enrollment_status_ids:
+                        if status.name=='Enrolled':
+                            tot_child=(len(rec.student_ids))
+                            parent_code=rec.facts_id
+                            li=[id for id in rec.student_ids]
+                            #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
+                            for grade in rec.student_ids.grade_level_ids:
+                                li.sort(key=lambda x: grade.x_studio_class)
+                            for students in li:
+                                roll_no=students.facts_udid
+                                name=students.name
+                                phone=students.phone
+                                street=students.street
                                 
-                            if students.enrollment_state_ids:
-                                for line in students.enrollment_state_ids:
-                                    enroll_dt=line.enrolled_date
-                                    if enroll_dt:
-                                        date=str(enroll_dt.day)
-                                        month=str(enroll_dt.month)
-                                        year=str(enroll_dt.year)
-                                        full_date=date+"-"+month+'-'+year
-                                        break
-                            if students.enrollment_history_ids:
-                                enroll_history=students.enrollment_history_ids
-                                lst=[]
-                                for hist in enroll_history:
-                                    lst.append(hist.program_id.name)
-                                branch=lst[0]
-                            if students.tuition_plan_ids:
-                                for plans in students.tuition_plan_ids:
-                                    all_dis=plans.x_studio_discount_name_1 
-                                    fcraw_dis=plans.x_studio_fcraw_name
-                            if students.relationship_ids:
-                                for parents in students.relationship_ids:
-                                    if parents.relationship_type_id.name=='Father':
-                                        f_name=parents.individual_id.name 
-                                        f_st=parents.individual_id.street
-                                        f_ph=parents.individual_id.phone
+                                # branch=students.school_ids.name
+                                # batch=students.x_studio_btachsesson 
+                                classs=students.homeroom
+                                gender=students.gender.name
+                                if students.x_studio_batchsession:
+                                    batch_Session=students.x_studio_batchsession
+                                else:
+                                    batch_Session="-"
                                     
-                                    elif parents.relationship_type_id.name=='Mother':
-                                        m_name=parents.individual_id.name 
-                                        m_st=parents.individual_id.street
-                                        m_ph=parents.individual_id.phone
-                                
-
-
-                            mvl=self.env['account.sibling.report.move.line'].create({
-                                    
-                                "roll_no":roll_no,
-                                "parent_code":parent_code if parent_code else '',
-                                "father_name":f_name if f_name else '-',
-                                "f_phone_no":f_ph  if f_ph else '-',
-                                "f_cnic":'',
-                                "f_address":f_st  if f_st else '-',
-                                "std_address":street  if street else '-',
-                                "no_of_child":tot_child,
-                                "m_cnic":"",
-                                "mother_name":m_name  if m_name else '-',
-                                "m_phone_no":m_ph  if m_ph else '-',
-                                "emergency":phone,
-                                "std_name":name,
-                                "std_gender":gender if gender else "-",
-                                "adm_date":full_date ,
-                                "std_branch":branch,
-                                "std_batch": batch_Session,
-                                "std_term":"",
-                                "std_class":classs if classs else "-",
-                                "waiver_1":all_dis if all_dis else '-',
-                                "waiver_2":fcraw_dis if fcraw_dis else '-',
+                                if students.enrollment_state_ids:
+                                    for line in students.enrollment_state_ids:
+                                        enroll_dt=line.enrolled_date
+                                        if enroll_dt:
+                                            date=str(enroll_dt.day)
+                                            month=str(enroll_dt.month)
+                                            year=str(enroll_dt.year)
+                                            full_date=date+"-"+month+'-'+year
+                                            break
+                                if students.enrollment_history_ids:
+                                    enroll_history=students.enrollment_history_ids
+                                    lst=[]
+                                    for hist in enroll_history:
+                                        lst.append(hist.program_id.name)
+                                    branch=lst[0]
+                                if students.tuition_plan_ids:
+                                    for plans in students.tuition_plan_ids:
+                                        all_dis=plans.x_studio_discount_name_1 
+                                        fcraw_dis=plans.x_studio_fcraw_name
+                                if students.relationship_ids:
+                                    for parents in students.relationship_ids:
+                                        if parents.relationship_type_id.name=='Father':
+                                            f_name=parents.individual_id.name 
+                                            f_st=parents.individual_id.street
+                                            f_ph=parents.individual_id.phone
                                         
+                                        elif parents.relationship_type_id.name=='Mother':
+                                            m_name=parents.individual_id.name 
+                                            m_st=parents.individual_id.street
+                                            m_ph=parents.individual_id.phone
+                                    
 
-                        })
-                            lines.append(mvl.id)
 
-                    # lst=[]
-                    # lst.append(mvl.roll_no)
-                    # lst.append(mvl.parent_code)
-                    # lst.append(mvl.father_name)
-                    # lst.append(mvl.f_phone_no)
-                    # lst.append(mvl.f_address)
-                    # lst.append(mvl.std_address)
-                    # lst.append(mvl.no_of_child)
-                    # lst.append(mvl.mother_name)
-                    # lst.append(mvl.adm_date)
-                    # lst.append(mvl.std_class)
-                    # raise UserError(lst)
+                                mvl=self.env['account.sibling.report.move.line'].create({
+                                        
+                                    "roll_no":roll_no,
+                                    "parent_code":parent_code if parent_code else '',
+                                    "father_name":f_name if f_name else '-',
+                                    "f_phone_no":f_ph  if f_ph else '-',
+                                    "f_cnic":'',
+                                    "f_address":f_st  if f_st else '-',
+                                    "std_address":street  if street else '-',
+                                    "no_of_child":tot_child,
+                                    "m_cnic":"",
+                                    "mother_name":m_name  if m_name else '-',
+                                    "m_phone_no":m_ph  if m_ph else '-',
+                                    "emergency":phone,
+                                    "std_name":name,
+                                    "std_gender":gender if gender else "-",
+                                    "adm_date":full_date ,
+                                    "std_branch":branch,
+                                    "std_batch": batch_Session,
+                                    "std_term":"",
+                                    "std_class":classs if classs else "-",
+                                    "waiver_1":all_dis if all_dis else '-',
+                                    "waiver_2":fcraw_dis if fcraw_dis else '-',
+                                            
 
+                            })
+                                lines.append(mvl.id)
+
+                        # lst=[]
+                        # lst.append(mvl.roll_no)
+                        # lst.append(mvl.parent_code)
+                        # lst.append(mvl.father_name)
+                        # lst.append(mvl.f_phone_no)
+                        # lst.append(mvl.f_address)
+                        # lst.append(mvl.std_address)
+                        # lst.append(mvl.no_of_child)
+                        # lst.append(mvl.mother_name)
+                        # lst.append(mvl.adm_date)
+                        # lst.append(mvl.std_class)
+                        # raise UserError(lst)
+
+                                    
+                    
+                    self.write({
+                        "account_sibling_report_line":[(6,0,lines)]
+                    }
+
+                )
+
+        elif self.select_batch==oldbatch:
+            for rec in old_batch:
+                parent_code=''
+                roll_no=''
+                name=''
+                phone=''
+                tot_child=0
+                street=''
+                branch=''
+                batch=''
+                classs=''
+                gender=''
+                enroll_dt=''
+                all_dis=''
+                fcraw_dis=''
+                f_name=''
+                f_st=''
+                f_ph=''
+                m_name=''
+                m_ph=''
+
+                if len(rec.student_ids)>1:
+                    for status in rec.student_ids.enrollment_status_ids:
+                        if status.name=='Enrolled':
+                            tot_child=(len(rec.student_ids))
+                            parent_code=rec.facts_id
+                            li=[id for id in rec.student_ids]
+                            #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
+                            for grade in rec.student_ids.grade_level_ids:
+                                li.sort(key=lambda x: grade.x_studio_class)
+                            for students in li:
+                                roll_no=students.facts_udid
+                                name=students.name
+                                phone=students.phone
+                                street=students.street
                                 
-                
-                self.write({
-                    "account_sibling_report_line":[(6,0,lines)]
-                }
+                                # branch=students.school_ids.name
+                                # batch=students.x_studio_btachsesson 
+                                classs=students.homeroom
+                                gender=students.gender.name
+                                if students.x_studio_batchsession:
+                                    batch_Session=students.x_studio_batchsession
+                                else:
+                                    batch_Session="-"
+                                    
+                                if students.enrollment_state_ids:
+                                    for line in students.enrollment_state_ids:
+                                        enroll_dt=line.enrolled_date
+                                        if enroll_dt:
+                                            date=str(enroll_dt.day)
+                                            month=str(enroll_dt.month)
+                                            year=str(enroll_dt.year)
+                                            full_date=date+"-"+month+'-'+year
+                                            break
+                                if students.enrollment_history_ids:
+                                    enroll_history=students.enrollment_history_ids
+                                    lst=[]
+                                    for hist in enroll_history:
+                                        lst.append(hist.program_id.name)
+                                    branch=lst[0]
+                                if students.tuition_plan_ids:
+                                    for plans in students.tuition_plan_ids:
+                                        all_dis=plans.x_studio_discount_name_1 
+                                        fcraw_dis=plans.x_studio_fcraw_name
+                                if students.relationship_ids:
+                                    for parents in students.relationship_ids:
+                                        if parents.relationship_type_id.name=='Father':
+                                            f_name=parents.individual_id.name 
+                                            f_st=parents.individual_id.street
+                                            f_ph=parents.individual_id.phone
+                                        
+                                        elif parents.relationship_type_id.name=='Mother':
+                                            m_name=parents.individual_id.name 
+                                            m_st=parents.individual_id.street
+                                            m_ph=parents.individual_id.phone
+                                    
 
-            )
+
+                                mvl=self.env['account.sibling.report.move.line'].create({
+                                        
+                                    "roll_no":roll_no,
+                                    "parent_code":parent_code if parent_code else '',
+                                    "father_name":f_name if f_name else '-',
+                                    "f_phone_no":f_ph  if f_ph else '-',
+                                    "f_cnic":'',
+                                    "f_address":f_st  if f_st else '-',
+                                    "std_address":street  if street else '-',
+                                    "no_of_child":tot_child,
+                                    "m_cnic":"",
+                                    "mother_name":m_name  if m_name else '-',
+                                    "m_phone_no":m_ph  if m_ph else '-',
+                                    "emergency":phone,
+                                    "std_name":name,
+                                    "std_gender":gender if gender else "-",
+                                    "adm_date":full_date ,
+                                    "std_branch":branch,
+                                    "std_batch": batch_Session,
+                                    "std_term":"",
+                                    "std_class":classs if classs else "-",
+                                    "waiver_1":all_dis if all_dis else '-',
+                                    "waiver_2":fcraw_dis if fcraw_dis else '-',
+                                            
+
+                            })
+                                lines.append(mvl.id)
+
+                        # lst=[]
+                        # lst.append(mvl.roll_no)
+                        # lst.append(mvl.parent_code)
+                        # lst.append(mvl.father_name)
+                        # lst.append(mvl.f_phone_no)
+                        # lst.append(mvl.f_address)
+                        # lst.append(mvl.std_address)
+                        # lst.append(mvl.no_of_child)
+                        # lst.append(mvl.mother_name)
+                        # lst.append(mvl.adm_date)
+                        # lst.append(mvl.std_class)
+                        # raise UserError(lst)
+
+                                    
+                    
+                    self.write({
+                        "account_sibling_report_line":[(6,0,lines)]
+                    }
+
+                    )
+
+        elif self.select_batch==newbatch:
+            for rec in new_batch:
+                parent_code=''
+                roll_no=''
+                name=''
+                phone=''
+                tot_child=0
+                street=''
+                branch=''
+                batch=''
+                classs=''
+                gender=''
+                enroll_dt=''
+                all_dis=''
+                fcraw_dis=''
+                f_name=''
+                f_st=''
+                f_ph=''
+                m_name=''
+                m_ph=''
+
+                if len(rec.student_ids)>1:
+                    for status in rec.student_ids.enrollment_status_ids:
+                        if status.name=='Enrolled':
+                            tot_child=(len(rec.student_ids))
+                            parent_code=rec.facts_id
+                            li=[id for id in rec.student_ids]
+                            #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
+                            for grade in rec.student_ids.grade_level_ids:
+                                li.sort(key=lambda x: grade.x_studio_class)
+                            for students in li:
+                                roll_no=students.facts_udid
+                                name=students.name
+                                phone=students.phone
+                                street=students.street
+                                
+                                # branch=students.school_ids.name
+                                # batch=students.x_studio_btachsesson 
+                                classs=students.homeroom
+                                gender=students.gender.name
+                                if students.x_studio_batchsession:
+                                    batch_Session=students.x_studio_batchsession
+                                else:
+                                    batch_Session="-"
+                                    
+                                if students.enrollment_state_ids:
+                                    for line in students.enrollment_state_ids:
+                                        enroll_dt=line.enrolled_date
+                                        if enroll_dt:
+                                            date=str(enroll_dt.day)
+                                            month=str(enroll_dt.month)
+                                            year=str(enroll_dt.year)
+                                            full_date=date+"-"+month+'-'+year
+                                            break
+                                if students.enrollment_history_ids:
+                                    enroll_history=students.enrollment_history_ids
+                                    lst=[]
+                                    for hist in enroll_history:
+                                        lst.append(hist.program_id.name)
+                                    branch=lst[0]
+                                if students.tuition_plan_ids:
+                                    for plans in students.tuition_plan_ids:
+                                        all_dis=plans.x_studio_discount_name_1 
+                                        fcraw_dis=plans.x_studio_fcraw_name
+                                if students.relationship_ids:
+                                    for parents in students.relationship_ids:
+                                        if parents.relationship_type_id.name=='Father':
+                                            f_name=parents.individual_id.name 
+                                            f_st=parents.individual_id.street
+                                            f_ph=parents.individual_id.phone
+                                        
+                                        elif parents.relationship_type_id.name=='Mother':
+                                            m_name=parents.individual_id.name 
+                                            m_st=parents.individual_id.street
+                                            m_ph=parents.individual_id.phone
+                                    
 
 
-  
+                                mvl=self.env['account.sibling.report.move.line'].create({
+                                        
+                                    "roll_no":roll_no,
+                                    "parent_code":parent_code if parent_code else '',
+                                    "father_name":f_name if f_name else '-',
+                                    "f_phone_no":f_ph  if f_ph else '-',
+                                    "f_cnic":'',
+                                    "f_address":f_st  if f_st else '-',
+                                    "std_address":street  if street else '-',
+                                    "no_of_child":tot_child,
+                                    "m_cnic":"",
+                                    "mother_name":m_name  if m_name else '-',
+                                    "m_phone_no":m_ph  if m_ph else '-',
+                                    "emergency":phone,
+                                    "std_name":name,
+                                    "std_gender":gender if gender else "-",
+                                    "adm_date":full_date ,
+                                    "std_branch":branch,
+                                    "std_batch": batch_Session,
+                                    "std_term":"",
+                                    "std_class":classs if classs else "-",
+                                    "waiver_1":all_dis if all_dis else '-',
+                                    "waiver_2":fcraw_dis if fcraw_dis else '-',
+                                            
+
+                            })
+                                lines.append(mvl.id)
+
+                        # lst=[]
+                        # lst.append(mvl.roll_no)
+                        # lst.append(mvl.parent_code)
+                        # lst.append(mvl.father_name)
+                        # lst.append(mvl.f_phone_no)
+                        # lst.append(mvl.f_address)
+                        # lst.append(mvl.std_address)
+                        # lst.append(mvl.no_of_child)
+                        # lst.append(mvl.mother_name)
+                        # lst.append(mvl.adm_date)
+                        # lst.append(mvl.std_class)
+                        # raise UserError(lst)
+
+                                    
+                    
+                    self.write({
+                        "account_sibling_report_line":[(6,0,lines)]
+                    }
+
+                )
        
-    
+        else:
+            raise UserError("Please select batch")
     
     def action_print_excel_report(self):
         self.action_print_report()
