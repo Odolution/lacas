@@ -249,7 +249,7 @@ class onechildReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,53,54,"ADM Date", red_style_title)
             worksheet.write_merge(0,1,55,59,"Waiver 1", red_style_title)
             worksheet.write_merge(0,1,60,64,"Waiver 2", red_style_title)
-            row=4
+            row=2
             for rec in self.account_onechild_report_line:
                     worksheet.write_merge(row,row,0,1,rec.parent_code, style=style_title)
                     worksheet.write_merge(row,row,2,4,rec.father_name,style=style_title)
