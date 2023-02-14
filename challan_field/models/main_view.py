@@ -92,7 +92,7 @@ class account_fields(models.Model):
             if record.state == 'posted':
               if record.move_type == 'out_invoice':
 #                 record['name'] = 'Draft'
-                  raise UserError(record)
+                raise UserError(record)
                 if seq == 0:
                   
                   school_code=""
