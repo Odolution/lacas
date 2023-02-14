@@ -51,6 +51,8 @@ class SiblingsReportWizard(models.TransientModel):
     _name="siblings.report.wizard"
     _description='Print Sibling Wizard'
 
+    select_batch = fields.Selection([('oldbatch', '	Session 2022-2023'), ('newbatch', 'Session 2023-2024'), ('all', 'All')])
+
     
     account_sibling_report_line=fields.Many2many('account.sibling.report.move.line', string='Account report Line')
  
