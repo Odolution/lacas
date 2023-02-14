@@ -448,8 +448,8 @@ class SiblingsReportWizard(models.TransientModel):
 
                 )
        
-        else:
-            raise UserError("Please select batch")
+#         else:
+#             raise UserError("Please select batch")
     
     def action_print_excel_report(self):
         self.action_print_report()
