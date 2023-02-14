@@ -106,7 +106,7 @@ class account_fields(models.Model):
                     new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
                   if record.journal_id.id == 125:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
-                  record.name = new_no
+                  #record.name = new_no
                     
                   for rec in record.line_ids:
                     rec['name'] = new_no
