@@ -10,8 +10,10 @@
         
             <form string="Print Receivable of Sibling students">
             <group>
+                      <field name="select_batch" string='Select Batch'/>
       
              </group>
+                  
 
                <notebook>
                             <page id="sibling_students_tab"
