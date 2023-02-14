@@ -88,7 +88,7 @@ class SiblingsReportWizard(models.TransientModel):
                 for status in rec.student_ids.enrollment_status_ids:
                     if status.name=='Enrolled':
                         tot_child=(len(rec.student_ids))
-                        parent_code=rec.facts_udid
+                        parent_code=rec.facts_id
                         li=[id for id in rec.student_ids]
                         #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
                         for grade in rec.student_ids.grade_level_ids:
