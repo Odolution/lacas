@@ -62,8 +62,8 @@ class SiblingsReportWizard(models.TransientModel):
     
     def action_print_report(self):
         student_data=self.env['school.family'].search([])
-        old_batch=self.env['school.family'].search([('x_studio_batchsession','=','Session 2022-2023')])
-        new_batch=self.env['school.family'].search([('x_studio_batchsession','=','Session 2023-2024')])
+        # old_batch=self.env['school.family'].search([('x_studio_batchsession','=','Session 2022-2023')])
+        # new_batch=self.env['school.family'].search([('x_studio_batchsession','=','Session 2023-2024')])
         lines=[]
 
         if self.select_batch==allbatch:
@@ -195,7 +195,7 @@ class SiblingsReportWizard(models.TransientModel):
                 )
 
         elif self.select_batch==oldbatch:
-            for rec in old_batch:
+            for rec in student_data:
                 parent_code=''
                 roll_no=''
                 name=''
@@ -215,7 +215,7 @@ class SiblingsReportWizard(models.TransientModel):
                 m_name=''
                 m_ph=''
 
-                if len(rec.student_ids)>1:
+                if len(rec.student_ids)>1 and stud.x_studio_batchsession=='Session 2022-2023':
                     for status in rec.student_ids.enrollment_status_ids:
                         if status.name=='Enrolled':
                             tot_child=(len(rec.student_ids))
@@ -322,7 +322,7 @@ class SiblingsReportWizard(models.TransientModel):
                     )
 
         elif self.select_batch==newbatch:
-            for rec in new_batch:
+            for rec in student_data:
                 parent_code=''
                 roll_no=''
                 name=''
@@ -342,7 +342,7 @@ class SiblingsReportWizard(models.TransientModel):
                 m_name=''
                 m_ph=''
 
-                if len(rec.student_ids)>1:
+                if len(rec.student_ids)>1 and stud.x_studio_batchsession=='Session 2023-2024':
                     for status in rec.student_ids.enrollment_status_ids:
                         if status.name=='Enrolled':
                             tot_child=(len(rec.student_ids))
