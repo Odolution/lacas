@@ -8,7 +8,7 @@
       
         <field name="arch" type="xml">
         
-            <form string="Print Receivable of One Child Student">
+            <form string="Print Receivable of One Sibling Student">
             <group>
       
              </group>
@@ -79,8 +79,8 @@
             <field name="view_id" ref="view_report_onechild"/>
             <field name="target">new</field>
         </record>
- <menuitem id="menu_onechild_student" name="One child Student " parent="account.menu_finance_receivables" sequence="10" />
- <menuitem id="menu_action_onechild_report" name="One Child Report" action="action_account_print_onechild_report" parent="menu_onechild_student"/>
+ <menuitem id="menu_onechild_student" name="One Sibling Student " parent="account.menu_finance_receivables" sequence="10" />
+ <menuitem id="menu_action_onechild_report" name="One Sibling Report" action="action_account_print_onechild_report" parent="menu_onechild_student"/>
 
  
 
