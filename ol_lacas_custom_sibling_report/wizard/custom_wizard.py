@@ -241,7 +241,7 @@ class SiblingsReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,25,26,"Mother Phone No.",style=red_style_title)
             worksheet.write_merge(0,1,27,29,"Emergency Contact", red_style_title)
             worksheet.write_merge(0,1,30,31,"Roll No.", red_style_title)
-            worksheet.write_merge(0,1,30,14,"Student Name", red_style_title)
+            worksheet.write_merge(0,1,32,34,"Student Name", red_style_title)
             worksheet.write_merge(0,1,35,38,"Branch", red_style_title)
             worksheet.write_merge(0,1,39,40,"Class", red_style_title)
             worksheet.write_merge(0,1,41,43,"Batch", red_style_title)
