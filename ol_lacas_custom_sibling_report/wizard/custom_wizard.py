@@ -66,7 +66,7 @@ class SiblingsReportWizard(models.TransientModel):
         # new_batch=self.env['school.family'].search([('x_studio_batchsession','=','Session 2023-2024')])
         lines=[]
 
-        if self.select_batch==allbatch:
+        if self.select_batch=='All':
 
             for rec in student_data:
                 parent_code=''
