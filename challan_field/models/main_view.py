@@ -104,9 +104,10 @@ class account_fields(models.Model):
               if record.journal_id.id == 125:
                 new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                   
-              if record.journal_id.id == 120:
+              if record.journal_id.id == 124:
                 
-                new_no = school_code + record.env['ir.sequence'].next_by_code('Charges')      
+                new_no = school_code + record.env['ir.sequence'].next_by_code('Charges')  
+                    
               for rec in record.line_ids: 
                 raise UserError(record.journal_id.id)
                 new_no=rec['name']
