@@ -109,7 +109,7 @@ class account_fields(models.Model):
                 new_no = school_code + record.env['ir.sequence'].next_by_code('Charges')  
 
               for rec in record.line_ids: 
-                raise UserError(new_no)
+                raise UserError(str(new_no))
                 new_no=rec['name']
                 record.payment_reference = new_no
                     
