@@ -79,7 +79,7 @@ class account_fields(models.Model):
             
         
 #     @api.onchange('state')
-    def action_post(self):
+     def action_post(self):
 #         record = self
         for rec in self:
             seq = 1
@@ -92,8 +92,9 @@ class account_fields(models.Model):
             if record.state == 'posted':
               if record.move_type == 'out_invoice':
 #                 record['name'] = 'Draft'
+                
                 if seq == 0:
-                  # raise UserError(record)
+                  
                   school_code=""
                   if record.school_ids:
                     for school in record.school_ids:
@@ -101,11 +102,21 @@ class account_fields(models.Model):
                   if record.x_school_id_cred:
                     for school in record.x_school_id_cred:
                       school_code = school.description
-                  new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
-                  record.name = new_no
+                 # new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
+                  if record.journal_id.id == 119:
+                    new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
+                  if record.journal_id.id == 125:
+                    new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
+                  #record.name = new_no
+                  if record.journal_id.id == 124:
+                    raise UserError("charges")
+                    new_no = school_code + record.env['ir.sequence'].next_by_code('Charges')
+                    
+                    #record.name = new_no
                     
                   for rec in record.line_ids:
-                    rec['name'] = new_no
+                    #raise UserError(rec.new_no)  
+                    new_no=rec['name']
                     record.payment_reference = new_no
                     
               if record.move_type == 'out_refund':
