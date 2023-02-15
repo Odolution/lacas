@@ -107,9 +107,9 @@ class account_fields(models.Model):
               if record.journal_id.id == 124:
                 
                 new_no = school_code + record.env['ir.sequence'].next_by_code('Charges')  
-                    
+
               for rec in record.line_ids: 
-                raise UserError(record.journal_id.id)
+                raise UserError(new_no)
                 new_no=rec['name']
                 record.payment_reference = new_no
                     
