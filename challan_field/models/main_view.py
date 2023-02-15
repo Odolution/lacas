@@ -83,7 +83,7 @@ class account_fields(models.Model):
       for rec in self:
         eq = 1
         if '/' in rec.name:
-        seq = 0
+          seq = 0
 #             raise UserError(rec.name)
       res = super(account_fields, self).action_post()
 
