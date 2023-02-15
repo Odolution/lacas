@@ -101,17 +101,20 @@ class account_fields(models.Model):
                  # new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
               if record.journal_id.id == 119:
                 new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
+                rec['name']=new_no
               if record.journal_id.id == 125:
                 new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
+                rec['name']=new_no
                   
               if record.journal_id.id == 124:
                 
-                new_no = school_code+"-" + record.env['ir.sequence'].next_by_code('charges')  
+                new_no = school_code+"-" + record.env['ir.sequence'].next_by_code('charges')
+                rec['name']=new_no  
 
-              for rec in record.line_ids: 
-                #raise UserError(str(new_no))
-                new_no=rec['name']
-                record.payment_reference = new_no
+              # for rec in record.line_ids: 
+              #   #raise UserError(str(new_no))
+              #   rec['name']=new_no
+              #   record.payment_reference = new_no
                     
           if record.move_type == 'out_refund':
             if seq == 0:
