@@ -27,7 +27,8 @@ class credit_notes_fields(models.Model):
 
     
     def _next_month_date(self):
-        if self.move_type=='out_invoice'
+        if self.move_type=='out_invoice':
+            
             if self.create_date:
                 if self.invoice_date:
                     self.next_month_Date = self.invoice_date + relativedelta(months=1)
