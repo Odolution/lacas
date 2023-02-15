@@ -114,7 +114,8 @@ class account_fields(models.Model):
                     #record.name = new_no
                     
                   for rec in record.line_ids:
-                    raise UserError(rec)
+                    raise UserError(new_no)
+                    
                     rec['name'] = new_no
                     record.payment_reference = new_no
                     
