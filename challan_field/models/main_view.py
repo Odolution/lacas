@@ -114,9 +114,8 @@ class account_fields(models.Model):
                     #record.name = new_no
                     
                   for rec in record.line_ids:
-                    raise UserError(new_no)
-                    
-                    rec['name'] = new_no
+                    #raise UserError(rec.new_no)  
+                    new_no=rec['name']
                     record.payment_reference = new_no
                     
               if record.move_type == 'out_refund':
