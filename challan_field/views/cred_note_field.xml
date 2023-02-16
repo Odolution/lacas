@@ -36,6 +36,10 @@
                 <field name="withdrawl_submission_date" string="App Date"/>
                 <field name="notice_completion_date" string='Notice Fee Completion Date' />
                 <field name="father_facts_id"  />
+                <field name="security_amnt_lv"  />
+                <field name="other_refunds_lv"  />
+                
+                
                 
 
                 </xpath>

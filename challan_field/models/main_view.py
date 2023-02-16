@@ -26,6 +26,8 @@ class account_fields(models.Model):
     leaving_reason = fields.Many2one("leaving.reason", string = "Leaving Reason")
     remarks = fields.Char('remarks')
     father_facts_id=fields.Char('Father Facts ID')
+    security_amnt_lv=fields.Integer("Secuirity Amount")
+    other_refunds_lv=fields.Integer("Other Amount")
     
 
     class_name = fields.Char(string='Class')
@@ -35,6 +37,8 @@ class account_fields(models.Model):
       self.class_name=""
       self.section_name=""
       self.father_name=""
+      self.security_amnt_lv=0
+      self.other_refunds_lv=0
       ##work for class and section picking
       if self.x_student_id_cred:
         wholename=""
@@ -49,6 +53,13 @@ class account_fields(models.Model):
             self.section_name=splitted_name[1]
           elif len(splitted_name)>0:
             self.class_name=splitted_name[0]
+
+      if self.invoice_line_ids:
+        for line_inv in self.invoice_line_ids:
+          if line_inv.product_id.id==83:
+            self.security_amnt_lv=line_inv.price_total
+          if line_inv.product_id.id==612:
+            self.other_refunds_lv=line_inv.price_total
 
         ##work for father name picking
         for relation in self.x_student_id_cred.relationship_ids:
