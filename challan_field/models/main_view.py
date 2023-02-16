@@ -57,9 +57,9 @@ class account_fields(models.Model):
       if self.invoice_line_ids:
         for line_inv in self.invoice_line_ids:
           if line_inv.product_id.id==83:
-            self.security_amnt_lv=line_inv.price_subtotal
+            self.security_amnt_lv=line_inv.price_total
           if line_inv.product_id.id==612:
-            self.other_refunds_lv=line_inv.price_subtotal
+            self.other_refunds_lv=line_inv.price_total
 
 
         ##work for father name picking
