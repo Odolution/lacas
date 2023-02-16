@@ -27,7 +27,7 @@ class account_fields(models.Model):
     remarks = fields.Char('remarks')
     father_facts_id=fields.Char('Father Facts ID')
     security_amnt_lv=fields.Integer("Secuirity Amount")
-    other_refunds_lv=fields.Integer("Other Amount")
+    other_refunds_lv=fields.Integer("Other Refunds")
     
 
     class_name = fields.Char(string='Class')
