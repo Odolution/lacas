@@ -190,9 +190,9 @@ class ext(models.Model):
             
             if self.student_ids.tuition_plan_ids:
                 tp=self.student_ids.tuition_plan_ids
-                for tp_id in tp:
-                    if tp_id.journal_id.id==125:
-                        self.std_tuition_plan= self.tp_id.name
+                for t_plan in tp:
+                    if t_plan.journal_id.id==125:
+                        self.std_tuition_plan= t_plan.name
                     else:
                         self.std_tuition_plan="NO TP"
 
@@ -201,7 +201,7 @@ class ext(models.Model):
                 tp=self.student_ids.tuition_plan_ids
                 for tp_id in tp:
                     if tp_id.journal_id.id==125:
-                        self.std_tuition_plan_state= self.tp_id.state
+                        self.std_tuition_plan_state= tp_id.state
                     else:
                         self.std_tuition_plan_state="NO TP"
 
