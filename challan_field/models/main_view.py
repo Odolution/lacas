@@ -55,7 +55,7 @@ class account_fields(models.Model):
             self.class_name=splitted_name[0]
 
       if self.invoice_line_ids:
-        for line_inv in invoice_line_ids:
+        for line_inv in self.invoice_line_ids:
           if line_inv.product_id.id==83:
             self.security_amnt_lv=line_inv.price_subtotal
           elif line_inv.product_id.id==612:
