@@ -71,24 +71,7 @@ class ext(models.Model):
     uniform=fields.Integer(string="Uniform Fine")
     continuation=fields.Integer(string="Continuation")
 
-    if self.student_ids:
-        if self.student_ids.tuition_plan_ids:
-            tp=self.student_ids.tuition_plan_ids
-            for tp_id in tp:
-                if tp_id.journal_id.id==125:
-                    self.std_tuition_plan= self.tuition_plan_ids.name
-                else:
-                    self.std_tuition_plan="NO TP"
-
-    if self.student_ids:
-        if self.student_ids.tuition_plan_ids:
-            tp=self.student_ids.tuition_plan_ids
-            for tp_id in tp:
-                if tp_id.journal_id.id==125:
-                    self.std_tuition_plan_state= self.tuition_plan_ids.state
-                else:
-                    self.std_tuition_plan_state="NO TP"
-
+    
 
 
 
@@ -204,7 +187,24 @@ class ext(models.Model):
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=int(self.amount_total)
             
-        
+            
+            if self.student_ids.tuition_plan_ids:
+                tp=self.student_ids.tuition_plan_ids
+                for tp_id in tp:
+                    if tp_id.journal_id.id==125:
+                        self.std_tuition_plan= self.tuition_plan_ids.name
+                    else:
+                        self.std_tuition_plan="NO TP"
+
+    
+            if self.student_ids.tuition_plan_ids:
+                tp=self.student_ids.tuition_plan_ids
+                for tp_id in tp:
+                    if tp_id.journal_id.id==125:
+                        self.std_tuition_plan_state= self.tuition_plan_ids.state
+                    else:
+                        self.std_tuition_plan_state="NO TP"
+
             
 
             wholename=""
