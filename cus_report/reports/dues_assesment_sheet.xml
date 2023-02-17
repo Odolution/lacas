@@ -2,7 +2,7 @@
     <data>
 
     <template id="cus_report.dues_assesment_sheet">
-          <t t-call="web.html_container"> 
+        <t t-call="web.html_container"> 
                 <t t-foreach="docs" t-as="o">
                   
                   <div class="row" style="">
@@ -99,27 +99,51 @@
             
            <span style=" padding-left:10px;"><t t-esc="o.x_grade_level_cred.name"/></span>
           </t>
+          
+    <!--<t t-else="o.x_student_id_cred.homeroom">-->
+            
+    <!--       <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.homeroom"/></span>-->
+    <!--      </t>-->
     <t t-else="">
-       <t t-foreach="o.x_student_id_cred" t-as="i">
-          <t t-foreach="i.enrollment_state_ids" t-as="d">
-                         
-             <t t-if="d.enrollment_status_id.name == 'Admission'">
-                
-               <span style=" padding-left:10px;"><t t-esc="d.next_grade_level_id.name"/></span>
-              </t>
-              <t t-if="d.enrollment_status_id.name == 'Enrolled'">
-                
-               <span style=" padding-left:10px;"><t t-esc="i.grade_level_ids.name"/></span>
-              </t>
-              
-             <t t-else="">
-              <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.homeroom"/></span>
-               </t>
-                        <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
-               </t>
-               </t>
-               
+      <t t-if="o.x_student_id_cred.homeroom">
+            
+          <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.homeroom"/></span>
+      </t>
+      <t t-else="o.x_student_id_cred.grade_level_ids">
+            
+           <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.grade_level_ids.name"/></span>
+          </t>
+      
+      
     </t>
+          
+    <!--<t t-if="o.x_student_id_cred.grade_level_ids">-->
+            
+    <!--       <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.grade_level_ids.name"/></span>-->
+    <!--      </t>-->
+
+    <!--<t t-else="">-->
+    <!--   <t t-foreach="o.x_student_id_cred" t-as="i">-->
+    <!--      <t t-foreach="i.enrollment_state_ids" t-as="d">-->
+                         
+    <!--         <t t-if="d.enrollment_status_id.name == 'Admission'">-->
+                
+    <!--           <span style=" padding-left:10px;"><t t-esc="d.next_grade_level_id.name"/></span>-->
+    <!--          </t>-->
+    <!--          <t t-if="d.enrollment_status_id.name == 'Enrolled'">-->
+                
+    <!--           <span style=" padding-left:10px;"><t t-esc="i.grade_level_ids.name"/></span>-->
+    <!--          </t>-->
+              
+             <!--<t t-else="">-->
+             <!-- <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.homeroom"/></span>-->
+             <!--  </t>-->
+                        <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+    <!--           </t>-->
+    <!--           </t>-->
+               
+    <!--</t>-->
+    <!--testing-->
   <!--<span style="  padding-left:10px;" t-field="o.x_student_id_cred.grade_level_ids.name"/>-->
   </td>
   
@@ -130,6 +154,7 @@
     <span style=" padding-left:10px;" t-esc="o.actual_leaving_date.strftime('%d-%m-%Y')"/></t> 
   <t t-else="">-</t>
   </td>
+
 </tr>
 <tr>
 <td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
@@ -166,12 +191,20 @@
    <span style="  padding-left:10px;" t-esc="env['account.move'].search([('student_ids.id','=',o.x_student_id_cred.id),('journal_id','=',119)]).invoice_date.strftime('%d-%m-%Y')"/>
     </t>
      <t t-else="o.x_student_id_cred">
+        
        <t t-foreach="o.x_student_id_cred.enrollment_state_ids" t-as="d">
-         <span style="padding-left:10px;" t-esc="d.enrolled_date.strftime('%d-%m-%Y')"/> 
+         <t t-if="d.enrolled_date">
+         
+         <span style="padding-left:10px;" t-esc="d.enrolled_date.strftime('%d-%m-%Y')"/>
+         </t>
+          
          
          </t>
+         <!--<span style="padding-left:10px;" t-esc="d.enrolled_date"/>-->
          
+        
          </t>
+        
   </td>
 
 </tr>
@@ -180,9 +213,15 @@
 <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
   <strong style="color:#BD3B2F;">Cheque in Favor of:</strong>
  <t t-if="env['account.payment'].search([('ref','=',o.name)])">
-   <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/>
+   <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name),('state','=','posted')]).ol_check_in_favor_of"/>
    </t>
    <t t-else="o.partner_id"><span style="padding-left:10px;" t-esc="o.partner_id.name"/>  </t>
+  </td>
+  <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Leaving Reason:</strong>
+ <t t-if="o.leaving_reason">
+   <span style="  padding-left:10px;" t-esc="o.leaving_reason.name"/>
+   </t>
   </td>
 
 </tr>
@@ -343,8 +382,8 @@
                      <h3 style="text-align:center; font-size:18px; ">Receiving</h3>
                      
                      <p style=" padding-left:40px; padding-right:40px;">
-                       I, <strong> <t t-if="env['account.payment'].search([('ref','=',o.name)])">
-                        <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/>
+                       I, <strong> <t t-if="env['account.payment'].search([('ref','=',o.name),('state','=','posted')])">
+                        <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name),('state','=','posted')]).ol_check_in_favor_of"/>
                                         </t>
                        <t t-else="o.partner_id">
                         <span style="padding-left:10px;" t-esc="o.partner_id.name"/> </t> </strong>, do hereby confirm that I have received my entire dues from LACAS with
@@ -361,7 +400,7 @@ Cheque # Dated :<strong>
           </t> and I have no claim against School.
                      </p><br/>
                      
-                     <table class="table " style="width:100%; padding-top: 17%;">
+                     <table class="table " style="width:100%; padding-top: 12%;">
                       <tbody>
                        <td style="width:20%"> 
                        
@@ -382,8 +421,9 @@ Cheque # Dated :<strong>
                      
                      <td style="width:10% ;">
                          <hr style="height: 1px; border-width: 0; color: black;  background-color: black;"/>
-                       <span align="center" style=""><t t-if="env['account.payment'].search([('ref','=',o.name)])">
-                       <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/>
+                       <span align="center" style="">
+                         <t t-if="env['account.payment'].search([('ref','=',o.name),('state','=','posted')])">
+                           <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name),('state','=','posted')]).ol_check_in_favor_of"/>
                                 </t>
                         <t t-else="o.partner_id">
                           <span style="padding-left:10px;" t-esc="o.partner_id.name"/>  </t></span>  
