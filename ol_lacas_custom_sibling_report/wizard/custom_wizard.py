@@ -133,11 +133,20 @@ class SiblingsReportWizard(models.TransientModel):
                                         f_name=parents.individual_id.name 
                                         f_st=parents.individual_id.street
                                         f_ph=parents.individual_id.phone
+                                        if parents.individual_id.x_studio_cnic:
+                                            f_cnic=parents.individual_id.x_studio_cnic
+                                        else:
+                                            f_cnic=''
+
                                     
                                     elif parents.relationship_type_id.name=='Mother':
                                         m_name=parents.individual_id.name 
                                         m_st=parents.individual_id.street
                                         m_ph=parents.individual_id.phone
+                                        if parents.individual_id.x_studio_cnic:
+                                            m_cnic=parents.individual_id.x_studio_cnic
+                                        else:
+                                            m_cnic=''
                                 
 
 
@@ -147,11 +156,11 @@ class SiblingsReportWizard(models.TransientModel):
                                 "parent_code":parent_code if parent_code else '',
                                 "father_name":f_name if f_name else '-',
                                 "f_phone_no":f_ph  if f_ph else '-',
-                                "f_cnic":'',
+                                "f_cnic":f_cnic,
                                 "f_address":f_st  if f_st else '-',
                                 "std_address":street  if street else '-',
                                 "no_of_child":tot_child,
-                                "m_cnic":"",
+                                "m_cnic":m_cnic,
                                 "mother_name":m_name  if m_name else '-',
                                 "m_phone_no":m_ph  if m_ph else '-',
                                 "emergency":phone,
