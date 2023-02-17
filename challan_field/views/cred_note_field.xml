@@ -15,8 +15,8 @@
                 <field name="notice_completion_date" 
                 attrs="{'invisible': [('move_type', 'in', 'out_invoice')]}"/>
 
-                <field name="next_month_Date" invisible=1 />
-                <field name="next_month" invisible=1  />
+                <field name="next_month_Date" invisible="1" />
+                <field name="next_month" invisible=""1""  />
                 <field name="bi_monthly_cycle" invisible=1 />
 
                 <!-- <field name="school_branch" 
