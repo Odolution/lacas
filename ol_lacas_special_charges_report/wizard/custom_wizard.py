@@ -187,20 +187,20 @@ class SiblingsReportWizard(models.TransientModel):
             
             
 
-            worksheet.write_merge(2,3,0,0,"Roll No.", style=red_style_title)
-            worksheet.write_merge(2,3,1,1,"First Name",style=red_style_title)
-            worksheet.write_merge(2,3,2,2,"Middle Name",style=red_style_title)
-            worksheet.write_merge(2,3,3,3,"Last Name",style=red_style_title)
-            worksheet.write_merge(2,3,4,4,"Department",style=red_style_title)
-            worksheet.write_merge(2,3,5,5,"Program",style=red_style_title)
-            worksheet.write_merge(2,3,6,6,"Specialization Name",style=red_style_title)
-            worksheet.write_merge(2,3,7,7,"Amount Charged",style=red_style_title)
-            worksheet.write_merge(2,3,8,8,"Academic Level",style=red_style_title)
-            worksheet.write_merge(2,3,9,9,"Section", red_style_title)
-            worksheet.write_merge(2,3,10,10,"Remarks", red_style_title)
+            worksheet.write_merge(0,1,0,0,"Roll No.", style=red_style_title)
+            worksheet.write_merge(0,1,1,1,"First Name",style=red_style_title)
+            worksheet.write_merge(0,1,2,2,"Middle Name",style=red_style_title)
+            worksheet.write_merge(0,1,3,3,"Last Name",style=red_style_title)
+            worksheet.write_merge(0,1,4,4,"Department",style=red_style_title)
+            worksheet.write_merge(0,1,5,5,"Program",style=red_style_title)
+            worksheet.write_merge(0,1,6,6,"Specialization Name",style=red_style_title)
+            worksheet.write_merge(0,1,7,7,"Amount Charged",style=red_style_title)
+            worksheet.write_merge(0,1,8,8,"Academic Level",style=red_style_title)
+            worksheet.write_merge(0,1,9,9,"Section", red_style_title)
+            worksheet.write_merge(0,1,10,10,"Remarks", red_style_title)
       
 
-            row=4
+            row=2
             for rec in self.account_charges_report_line:
                 if rec.std_roll_no:
             
