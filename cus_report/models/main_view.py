@@ -66,6 +66,7 @@ class inheritinvoices(models.Model):
 
     due_day_text=fields.Char(string="Due Day",compute='_compute_remaining_days')
     due_day=fields.Integer(string="Due Day Num",compute='_compute_remaining_days')
+    account_identifier=fields.Char(string="Account Identifier")
 
     def _compute_unpaid_invoice(self):
         
