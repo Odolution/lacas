@@ -1,13 +1,12 @@
 <odoo>
-  <data>
-      
+  <data>   
       <template id="cus_report.report_post_view">
-         <t t-call="web.html_container">
+        <t t-call="web.html_container">
               <t t-foreach="docs" t-as="x">
                 <t t-foreach="x.unpaid_inv_ids" t-as="o">
                 <div class="row" style="font-size:0.5rem;">
                   
-                 <div class="column"  style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
+                 <div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
                      <t t-if="x.due_day&gt;0">
                       <div class="watermark" style="position:relative;">
                       <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
@@ -45,7 +44,7 @@
                     </tr>
                     <tr>
                     <td style="text-align: left;color: grey; font-size:11px; width: 30%;">Issue Date :</td>
-                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%d-%b-%Y')"/></strong></td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.create_date.strftime('%d-%b-%Y')"/></strong></td>
                     </tr>
                     <tr>
                     <td style="text-align: left; color: grey; font-size:11px; width: 30%;">Due Date :</td>
@@ -88,11 +87,22 @@
                     <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>-->
                     <!--</tr>-->
                     <!--class next grade level-->
-                    <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Class :</td>
-                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.homeroom"/></strong></td>
-                    
- 
+                    <tr style="height: 23px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>
+                  
+                    <t t-foreach="o.student_ids" t-as="i">
+                    <t t-foreach="i.enrollment_state_ids" t-as="d">
+                     <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                     <t t-if="d.enrollment_status_id.name == 'Admission'">
+                       
+                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
+                    </t>
+                    <t t-else="">
+                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
+                    </t>
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                    </t>
+                    </t>
                     </tr>
                     <!--next grade level-->
                     <tr style="height: 18px;">
@@ -103,9 +113,14 @@
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch:</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
                     </tr>
-                    <tr style="height: 18px;">
+                     <tr t-if="o.journal_id.id != 126" style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr t-if="o.journal_id.id == 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="x.bi_monthly_cycle"/></strong></td>
+                      
                     </tr>
                     </tbody>
                     </table>
@@ -280,7 +295,7 @@
                     </tr>
                     <tr>
                     <td style="text-align: left;color: grey; font-size:11px; width: 30%;">Issue Date :</td>
-                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%d-%b-%Y')"/></strong></td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.create_date.strftime('%d-%b-%Y')"/></strong></td>
                     </tr>
                     <tr>
                     <td style="text-align: left; color: grey; font-size:11px; width: 30%;">Due Date :</td>
@@ -324,11 +339,22 @@
                     <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>-->
                     <!--</tr>-->
                     <!--class next grade level-->
-                    <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Class :</td>
-                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.homeroom"/></strong></td>
-                    
- 
+                   <tr style="height: 23px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>
+                  
+                    <t t-foreach="o.student_ids" t-as="i">
+                    <t t-foreach="i.enrollment_state_ids" t-as="d">
+                     <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                     <t t-if="d.enrollment_status_id.name == 'Admission'">
+                       
+                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
+                    </t>
+                    <t t-else="">
+                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
+                    </t>
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                    </t>
+                    </t>
                     </tr>
                     <!--next grade level-->
                     <tr style="height: 18px;">
@@ -339,9 +365,14 @@
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
                     </tr>
-                    <tr style="height: 18px;">
+                     <tr t-if="o.journal_id.id != 126" style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr t-if="o.journal_id.id == 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="x.bi_monthly_cycle"/></strong></td>
+                      
                     </tr>
                     </tbody>
                     </table>
@@ -514,7 +545,7 @@
                     </tr>
                     <tr>
                     <td style="text-align: left;color: grey; font-size:11px; width: 30%;">Issue Date :</td>
-                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%d-%b-%Y')"/></strong></td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.create_date.strftime('%d-%b-%Y')"/></strong></td>
                     </tr>
                     <tr>
                     <td style="text-align: left; color: grey; font-size:11px; width: 30%;">Due Date :</td>
@@ -558,11 +589,22 @@
                     <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>-->
                     <!--</tr>-->
                     <!--class next grade level-->
-                    <tr style="height: 18px;">
-                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Class :</td>
-                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.homeroom"/></strong></td>
-                    
- 
+                    <tr style="height: 23px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>
+                  
+                    <t t-foreach="o.student_ids" t-as="i">
+                    <t t-foreach="i.enrollment_state_ids" t-as="d">
+                     <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                     <t t-if="d.enrollment_status_id.name == 'Admission'">
+                       
+                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
+                    </t>
+                    <t t-else="">
+                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
+                    </t>
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                    </t>
+                    </t>
                     </tr>
                     <!--next grade level-->
                     <tr style="height: 18px;">
@@ -573,9 +615,14 @@
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
                     </tr>
-                    <tr style="height: 18px;">
+                     <tr t-if="o.journal_id.id != 126" style="height: 18px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
                       <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr t-if="o.journal_id.id == 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="x.bi_monthly_cycle"/></strong></td>
+                      
                     </tr>
                     </tbody>
                     </table>
