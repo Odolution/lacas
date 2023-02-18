@@ -120,6 +120,10 @@ class account_fields(models.Model):
                   if record.journal_id.id == 125:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                     rec['name']=new_no
+                  if record.journal_id.id == 126:
+                    new_no = school_code + record.env['ir.sequence'].next_by_code('bi_monthly')
+                    rec['name']=new_no
+                    
                   #record.name = new_no
                   if record.journal_id.id == 124:
                     new_no = record.env['ir.sequence'].next_by_code('charges_reversal')
