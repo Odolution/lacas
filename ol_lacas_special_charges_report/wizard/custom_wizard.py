@@ -182,39 +182,39 @@ class SiblingsReportWizard(models.TransientModel):
             date_format = xlwt.XFStyle()
             date_format.num_format_str = 'dd/mm/yyyy'
 
-            worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
-            worksheet.write_merge(0, 1, 6, 11, "SPECIALIZATION CHARGES REPORT", style=style_title)
+            # worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
+            # worksheet.write_merge(0, 1, 6, 11, "SPECIALIZATION CHARGES REPORT", style=style_title)
             
             
 
-            worksheet.write_merge(2,3,0,1,"Roll No.", style=red_style_title)
-            worksheet.write_merge(2,3,2,4,"First Name",style=red_style_title)
-            worksheet.write_merge(2,3,5,7,"Middle Name",style=red_style_title)
-            worksheet.write_merge(2,3,8,10,"Last Name",style=red_style_title)
-            worksheet.write_merge(2,3,11,14,"Department",style=red_style_title)
-            worksheet.write_merge(2,3,15,17,"Program",style=red_style_title)
-            worksheet.write_merge(2,3,18,21,"Specialization Name",style=red_style_title)
-            worksheet.write_merge(2,3,22,23,"Amount Charged",style=red_style_title)
-            worksheet.write_merge(2,3,24,26,"Academic Level",style=red_style_title)
-            worksheet.write_merge(2,3,27,28,"Section", red_style_title)
-            worksheet.write_merge(2,3,29,31,"Remarks", red_style_title)
+            worksheet.write_merge(2,3,0,0,"Roll No.", style=red_style_title)
+            worksheet.write_merge(2,3,1,1,"First Name",style=red_style_title)
+            worksheet.write_merge(2,3,2,2,"Middle Name",style=red_style_title)
+            worksheet.write_merge(2,3,3,3,"Last Name",style=red_style_title)
+            worksheet.write_merge(2,3,4,4,"Department",style=red_style_title)
+            worksheet.write_merge(2,3,5,5,"Program",style=red_style_title)
+            worksheet.write_merge(2,3,6,6,"Specialization Name",style=red_style_title)
+            worksheet.write_merge(2,3,7,7,"Amount Charged",style=red_style_title)
+            worksheet.write_merge(2,3,8,8,"Academic Level",style=red_style_title)
+            worksheet.write_merge(2,3,9,9,"Section", red_style_title)
+            worksheet.write_merge(2,3,10,10,"Remarks", red_style_title)
       
 
             row=4
             for rec in self.account_charges_report_line:
                 if rec.std_roll_no:
             
-                    worksheet.write_merge(row,row,0,1,rec.std_roll_no, style=style_title)
-                    worksheet.write_merge(row,row,2,4,rec.std_f_name,style=style_title)
-                    worksheet.write_merge(row,row,5,7,rec.std_m_name,style=style_title)
-                    worksheet.write_merge(row,row,8,10,rec.std_l_name,style=style_title)
-                    worksheet.write_merge(row,row,11,14,rec.department,style=style_title)
-                    worksheet.write_merge(row,row,15,17,rec.program_name,style=style_title)
-                    worksheet.write_merge(row,row,18,21,rec.special_charges,style=style_title)
-                    worksheet.write_merge(row,row,22,23,rec.amount_charged,style=style_title)
-                    worksheet.write_merge(row,row,24,26,rec.academic_level,style=style_title)
-                    worksheet.write_merge(row,row,27,28,rec.section_std, style_title)
-                    worksheet.write_merge(row,row,29,31,rec.remarks_std, style_title)
+                    worksheet.write_merge(row,row,0,0,rec.std_roll_no, style=style_title)
+                    worksheet.write_merge(row,row,1,1,rec.std_f_name,style=style_title)
+                    worksheet.write_merge(row,row,2,2,rec.std_m_name,style=style_title)
+                    worksheet.write_merge(row,row,3,3,rec.std_l_name,style=style_title)
+                    worksheet.write_merge(row,row,4,4,rec.department,style=style_title)
+                    worksheet.write_merge(row,row,5,5,rec.program_name,style=style_title)
+                    worksheet.write_merge(row,row,6,6,rec.special_charges,style=style_title)
+                    worksheet.write_merge(row,row,7,7,rec.amount_charged,style=style_title)
+                    worksheet.write_merge(row,row,8,8,rec.academic_level,style=style_title)
+                    worksheet.write_merge(row,row,9,9,rec.section_std, style_title)
+                    worksheet.write_merge(row,row,10,10,rec.remarks_std, style_title)
               
 
    
