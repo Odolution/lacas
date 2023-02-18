@@ -83,6 +83,7 @@ class onechildReportWizard(models.TransientModel):
             f_ph=''
             m_name=''
             m_ph=''
+            m_cnic=''
 
             if len(rec.student_ids)==1:
                 for status in rec.student_ids.enrollment_status_ids:
