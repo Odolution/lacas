@@ -104,8 +104,8 @@ class SiblingsReportWizard(models.TransientModel):
                             # branch=students.school_ids.name
                             # batch=students.x_studio_btachsesson 
                             #classs=students.homeroom
-                            if rec.student_id.homeroom:
-                                wholename=rec.student_id.homeroom
+                            if students.homeroom:
+                                wholename=students.homeroom
                                 splitted_name=wholename.split('-')
                                 if len(splitted_name)>2:
                                     classs=splitted_name[0]+"-"+splitted_name[1]
