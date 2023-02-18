@@ -41,6 +41,7 @@ class AccountMoveReport(models.TransientModel):
     std_batch=fields.Char('Batch')
     std_term=fields.Char('Term')
     std_class=fields.Char('Class')
+    section=fields.Char('Section')
     waiver_1=fields.Char('Waiver 1')
     waiver_2=fields.Char('Waiver 2')
   
@@ -74,6 +75,7 @@ class SiblingsReportWizard(models.TransientModel):
             branch=''
             batch=''
             classs=''
+            sec=''
             gender=''
             enroll_dt=''
             all_dis=''
@@ -101,7 +103,19 @@ class SiblingsReportWizard(models.TransientModel):
                             
                             # branch=students.school_ids.name
                             # batch=students.x_studio_btachsesson 
-                            classs=students.homeroom
+                            #classs=students.homeroom
+                            if rec.student_id.homeroom:
+                                wholename=rec.student_id.homeroom
+                                splitted_name=wholename.split('-')
+                                if len(splitted_name)>2:
+                                    classs=splitted_name[0]+"-"+splitted_name[1]
+                                    sec=splitted_name[2]
+                                elif len(splitted_name)>1:
+                                    classs=splitted_name[0]
+                                    sec=splitted_name[1]
+                                elif len(splitted_name)>0:
+                                    classs=splitted_name[0]
+
                             gender=students.gender.name
                             if students.x_studio_batchsession:
                                 batch_Session=students.x_studio_batchsession
@@ -171,6 +185,7 @@ class SiblingsReportWizard(models.TransientModel):
                                 "std_batch": batch_Session,
                                 "std_term":"",
                                 "std_class":classs if classs else "-",
+                                "section":sec if sec else "-",
                                 "waiver_1":all_dis if all_dis else '-',
                                 "waiver_2":fcraw_dis if fcraw_dis else '-',
                                         
@@ -255,13 +270,14 @@ class SiblingsReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,11,11,"Student Name", red_style_title)
             worksheet.write_merge(0,1,12,12,"Branch", red_style_title)
             worksheet.write_merge(0,1,13,13,"Class", red_style_title)
-            worksheet.write_merge(0,1,14,14,"Batch", red_style_title)
+            worksheet.write_merge(0,1,14,14,"Section", red_style_title)
+            worksheet.write_merge(0,1,15,15,"Batch", red_style_title)
             # worksheet.write_merge(0,1,15,15,"Term", red_style_title)
-            worksheet.write_merge(0,1,15,15,"Student Address", red_style_title)
-            worksheet.write_merge(0,1,16,16,"Gender", red_style_title)
-            worksheet.write_merge(0,1,17,17,"ADM Date", red_style_title)
-            worksheet.write_merge(0,1,18,18,"Waiver 1", red_style_title)
-            worksheet.write_merge(0,1,19,19,"Waiver 2", red_style_title)
+            worksheet.write_merge(0,1,16,16,"Student Address", red_style_title)
+            worksheet.write_merge(0,1,17,17,"Gender", red_style_title)
+            worksheet.write_merge(0,1,18,18,"ADM Date", red_style_title)
+            worksheet.write_merge(0,1,19,19,"Waiver 1", red_style_title)
+            worksheet.write_merge(0,1,20,20,"Waiver 2", red_style_title)
             row=2
             for rec in self.account_sibling_report_line:
                     worksheet.write_merge(row,row,0,0,rec.parent_code, style=style_title)
@@ -278,13 +294,14 @@ class SiblingsReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,11,11,rec.std_name, style_title)
                     worksheet.write_merge(row,row,12,12,rec.std_branch, style_title)
                     worksheet.write_merge(row,row,13,13,rec.std_class, style_title)
-                    worksheet.write_merge(row,row,14,14,rec.std_batch, style_title)
+                    worksheet.write_merge(row,row,14,14,rec.section, style_title)
+                    worksheet.write_merge(row,row,15,15,rec.std_batch, style_title)
                     # worksheet.write_merge(row,row,44,45,rec.std_term, style_title)
-                    worksheet.write_merge(row,row,15,15,rec.std_address, style_title)
-                    worksheet.write_merge(row,row,16,16,rec.std_gender, style_title)
-                    worksheet.write_merge(row,row,17,17,rec.adm_date, style_title)
-                    worksheet.write_merge(row,row,18,18,rec.waiver_1, style_title)
-                    worksheet.write_merge(row,row,19,19,rec.waiver_2, style_title)
+                    worksheet.write_merge(row,row,16,16,rec.std_address, style_title)
+                    worksheet.write_merge(row,row,17,17,rec.std_gender, style_title)
+                    worksheet.write_merge(row,row,18,18,rec.adm_date, style_title)
+                    worksheet.write_merge(row,row,19,19,rec.waiver_1, style_title)
+                    worksheet.write_merge(row,row,20,20,rec.waiver_2, style_title)
 
    
                     row+=1
