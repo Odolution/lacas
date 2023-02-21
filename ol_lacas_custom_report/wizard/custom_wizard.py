@@ -93,6 +93,15 @@ class ReceivablesReportWizard(models.TransientModel):
         elif to_year <"22" or to_year >"23":
             raise UserError("Sorry, Year must be between 2022-2023..")
             raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+
+        elif not self.date_to or not self.date_from:
+            raise UserError("Sorry, you must enter both dates..")
+        
+        
+        elif not self.date_from and not self.date_to :
+            raise UserError("Sorry, you must enter dates..")
+
+
     
 
 
