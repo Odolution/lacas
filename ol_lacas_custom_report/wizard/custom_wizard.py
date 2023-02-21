@@ -91,7 +91,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             from_year=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y')
             to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
-            raise UserError(from_year)
+            # raise UserError(from_year)
 
             if self.date_to < self.date_from:
                 # raise UserError(datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y'))
