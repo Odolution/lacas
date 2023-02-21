@@ -87,12 +87,15 @@ class ReceivablesReportWizard(models.TransientModel):
 
             raise ValidationError(_('Sorry, End Date Must be greater Than Start Date...'))
 
-        elif from_year < '22' or from_year >'23':
-            raise UserError("Sorry, Year must be between 2022-2023..")
-            raise ValidationError(_('Sorry, Year must be 2022-2023...'))
-        elif to_year <"22" or to_year >"23":
-            raise UserError("Sorry, Year must be between 2022-2023..")
-            raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+        if from_year and to_year :
+
+            if  from_year < '22' or from_year >'23':
+                raise UserError("Sorry, Year must be between 2022-2023..")
+                raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+
+            elif to_year <"22" or to_year >"23":
+                raise UserError("Sorry, Year must be between 2022-2023..")
+                raise ValidationError(_('Sorry, Year must be 2022-2023...'))
 
         elif not self.date_to or not self.date_from:
             raise UserError("Sorry, you must enter both dates..")
