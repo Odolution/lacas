@@ -1,6 +1,6 @@
 import requests
 
-from iteration_utilities import unique_everseen
+#from iteration_utilities import unique_everseen
 
 # global variable
 
