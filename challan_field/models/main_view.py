@@ -132,7 +132,7 @@ class account_fields(models.Model):
                     
                   for rec in record.line_ids:
                     #raise UserError(rec.new_no)  
-                    new_no=rec['name']
+                    rec['name'] = new_no
                     record.payment_reference = new_no
                     
               if record.move_type == 'out_refund':
