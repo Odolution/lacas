@@ -181,6 +181,7 @@ class ext(models.Model):
                         self.std_branch=self.student_ids.school_ids.name
             else:
                 self.std_branch=self.student_ids.school_ids.name
+                self.std_current_branch=self.student_ids.school_ids.name
                 # for sch in self.student_ids.school_ids:
                 #     if sch==1:
                         
