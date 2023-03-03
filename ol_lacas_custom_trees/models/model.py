@@ -24,6 +24,7 @@ class ext(models.Model):
     std_bill_date=fields.Char(string="Issue Date")
     std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
+    std_current_branch=fields.Char(string="Current Branch")
     std_dob=fields.Char(string="Date of Birth")
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch")
@@ -119,6 +120,7 @@ class ext(models.Model):
         self.std_bill_date=""
         self.std_due_date=""
         self.std_branch=' '
+        self.std_current_branch=''
         self.std_dob=' '
         self.std_name=""
         self.std_batch=""
@@ -172,9 +174,16 @@ class ext(models.Model):
             self.due_date=self.invoice_date_due
             # self.due_amount=self.due_amount
             self.std_name=full_name
-            for sch in self.student_ids.school_ids:
-                if sch==1:
-                    self.std_branch=sch.name
+            if len(self.student_ids) > 1:
+                self.std_current_branch=self.student_ids.x_last_school_id.name
+                for sch in self.student_ids.school_ids:
+                    if sch==1:
+                        self.std_branch=self.student_ids.school_ids.name
+            else:
+                self.std_branch=self.student_ids.school_ids.name
+                # for sch in self.student_ids.school_ids:
+                #     if sch==1:
+                        
         
             self.std_bill_date=self.invoice_date
             self.std_due_date=self.invoice_date_due
