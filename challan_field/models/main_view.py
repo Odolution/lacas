@@ -41,18 +41,21 @@ class account_fields(models.Model):
       self.other_refunds_lv=0
       ##work for class and section picking
       if self.x_student_id_cred:
-        wholename=""
-        if self.x_student_id_cred.homeroom:
-          wholename=self.x_student_id_cred.homeroom
-          splitted_name=wholename.split('-')
-          if len(splitted_name)>2:
-            self.class_name=splitted_name[0]+"-"+splitted_name[1]
-            self.section_name=splitted_name[2]
-          elif len(splitted_name)>1:
-            self.class_name=splitted_name[0]
-            self.section_name=splitted_name[1]
-          elif len(splitted_name)>0:
-            self.class_name=splitted_name[0]
+        if self.x_grade_level_cred:
+          self.self.class_name=self.x_grade_level_cred.name
+        else:   
+          wholename=""
+          if self.x_student_id_cred.homeroom:
+            wholename=self.x_student_id_cred.homeroom
+            splitted_name=wholename.split('-')
+            if len(splitted_name)>2:
+              self.class_name=splitted_name[0]+"-"+splitted_name[1]
+              self.section_name=splitted_name[2]
+            elif len(splitted_name)>1:
+              self.class_name=splitted_name[0]
+              self.section_name=splitted_name[1]
+            elif len(splitted_name)>0:
+              self.class_name=splitted_name[0]
 
       if self.invoice_line_ids:
         for line_inv in self.invoice_line_ids:
@@ -70,6 +73,7 @@ class account_fields(models.Model):
       
       for student in self['student_ids']:
          wholename=""
+
          if student.homeroom:
              wholename=student.homeroom
              splitted_name=wholename.split('-')
