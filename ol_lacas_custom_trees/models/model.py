@@ -223,13 +223,17 @@ class ext(models.Model):
                 wholename=self.student_ids.homeroom
                 splitted_name=wholename.split('-')
                 if len(splitted_name)>2:
-                    self.class_name=splitted_name[0]+"-"+splitted_name[1]
+                    #self.class_name=splitted_name[0]+"-"+splitted_name[1]
+                    self.class_name=self.grade_level_ids.name
                     self.section_name=splitted_name[2]
                 elif len(splitted_name)>1:
-                    self.class_name=splitted_name[0]
+                    #self.class_name=splitted_name[0]
+                    self.class_name=self.grade_level_ids.name
                     self.section_name=splitted_name[1]
                 elif len(splitted_name)>0:
-                        self.class_name=splitted_name[0]
+                    
+                    self.class_name=self.grade_level_ids.name
+                        #self.class_name=splitted_name[0]
             else:
                 if self.grade_level_ids:
                     self.class_name=self.grade_level_ids.name
