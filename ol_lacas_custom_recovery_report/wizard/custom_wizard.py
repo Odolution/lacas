@@ -97,7 +97,7 @@ class RecoveryReportWizard(models.TransientModel):
             raise ValidationError(_('Sorry, Year must be 2022-2023...'))
     
 
-    def _branch_constrains(self,vals):
+    def _branch_constrains(self):
 
         if self.all_branch:
             if self.one_branch!=False:
