@@ -16,9 +16,9 @@
              </group>
 
               <group>
-             <field name="date_from"/>
-             <field name="date_to"/>
-            
+
+                <field name="select_month"/>
+          
              </group>
 
                <!-- <notebook>
