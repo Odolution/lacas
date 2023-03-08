@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  
+        <template id="report_receivable_details">
+
+        <t t-call="web.basic_layout">
+        <t t-call="web.html_container">
+          <!--<t t-foreach="datalines" t-as="o">-->
+           <div class="header">
+                  <!--<div class="page" style="font-size:0.8rem;">-->
+                 
+                 <div class="row border border-dark font-weight-bolder" style="font-size:0.9rem;"> 
+                  
+                    <div class="col-4 border-right border-dark" style="text-align: left;"> LACAS Report</div>
+                    <div class="col-4 border-right border-dark" style="text-align: center;">RECEIVABLE OF WITHDRAWL STUDENTS</div>
+                    <div class="col-4 border-right border-dark" style="text-align: right;"> Reversals</div>
+                     </div>
+                  
+                  
+
+
+              </div>  
+
+
+
+
+
+
+              <!--</t>-->
+              <div class="row">
+              
+              <table class="col-12 table">
+
+                <tr>
+                  
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">S#</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Name</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">ID</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Roll No</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Batch</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Branch</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Class</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">WithDrawn Status</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Leaving reason</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Remarks</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">WithDrawn Date</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Month</th>
+                  <th class="border-right border-bottom border-dark" style="background-color: black;color: white;width : 8%;">Amount</th>
+                  
+
+                  
+                </tr>
+                
+                <t t-set="srn" t-value="1"/>
+                
+                  <t t-foreach="datalines" t-as="ol">
+                  
+                  <t t-if="ol[0] and ol[2]">
+                    <!--<span t-esc="'%.2f'% ol.product_uom_qty"/>-->
+                    
+                    <tr>
+                    
+                      
+                      <td class="border-right border-bottom border-dark">
+                        <t t-raw="srn"/>
+                        <t t-set="srn" t-value="srn + 1"/>
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark" style="background-color: grey;color: black;">
+                        <t t-raw="ol[0]"/>
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                        <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                     
+                          
+                     
+                    
+                    </tr>
+                    
+                  </t>
+                  
+                    <t t-if="ol[7] and ol[8]">
+                    <!--<span t-esc="'%.2f'% ol.product_uom_qty"/>-->
+                    
+                    <tr>
+                    
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                         <t t-raw="ol[3]"/>
+                         
+                      </td>
+                      
+                         <td class="border-right border-bottom border-dark">
+                             <t t-raw="ol[7]"/>
+                      </td>
+                        
+                      
+                      <td class="border-right border-bottom border-dark">
+                          <t t-raw="ol[8]"/>
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                          <t t-raw="ol[9]"/>
+                      </td>
+                      
+                          <td class="border-right border-bottom border-dark">
+                              <t t-raw="ol[10]"/>
+                      </td>
+                        
+                      
+                      <td class="border-right border-bottom border-dark">
+                          <t t-raw="ol[11]"/>
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                          <t t-raw="ol[12]"/>
+                      </td>
+                      
+                         <td class="border-right border-bottom border-dark">
+                             <t t-raw="ol[13]"/>
+                      </td>
+                        
+                      
+                      <td class="border-right border-bottom border-dark">
+                        <t t-raw="ol[14]"/>
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                        <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      
+                        
+                     
+                          
+                     
+                    
+                    </tr>
+                    
+                  </t>
+                  
+                  
+                  
+                  
+                   <t t-elif="ol[1] and ol[5]">
+                    
+                    <tr>
+                      
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                          
+                
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                         <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                      
+                        
+                     
+                        
+                      <td class="border-right border-bottom border-dark">
+                        <t t-raw="ol[1]"/>
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                         <t t-raw="ol[6]"/>
+                      </td>
+                        
+                    
+                    
+                    </tr>
+                    
+                  </t>
+                  
+                  <t t-elif="ol[2] and ol[5]">
+                    
+                    <tr>
+                      
+                    <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                          
+                
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                       <td class="border-right border-bottom border-dark">
+                      </td>
+                      
+                         <td class="border-right border-bottom border-dark">
+                      </td>
+                        
+                      
+                        
+                      <td class="border-right border-bottom border-dark">
+                        <t t-raw="ol[5]"/>
+                      </td>
+                        
+                       <td class="border-right border-bottom border-dark" style="background-color: grey;color: black;">
+                        <t t-raw="'%.2f'% ol[6]"/>
+                       
+                      </td>
+                        
+                    
+                    
+                    </tr>
+                    
+                  </t>
+                  
+                    
+                  
+               
+                
+                </t>
+              </table>
+              </div>
+                
+                
+            </t>
+            
+              </t>
+      
+         
+              
+      
+    
+   
+
+        </template>
+</odoo>
