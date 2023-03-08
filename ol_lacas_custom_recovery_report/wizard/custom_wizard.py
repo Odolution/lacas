@@ -131,7 +131,7 @@ class RecoveryReportWizard(models.TransientModel):
 
 
                     })
-                        lines.append(mvl.id)
+            lines.append(mvl.id)
 
 
             self.write({
@@ -182,7 +182,7 @@ class RecoveryReportWizard(models.TransientModel):
 
 
                     })
-                        lines.append(mvl.id)
+            lines.append(mvl.id)
 
 
             self.write({
