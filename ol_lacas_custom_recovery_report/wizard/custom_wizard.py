@@ -94,10 +94,11 @@ class RecoveryReportWizard(models.TransientModel):
                 nostd=len(stud_lst)    
                 unpaids=month_issuance
                 paids=month_recovery
-                if paids==0:
+                if unpaids or paids==0 ::
                     perc=0
                 else:
-                    perc=paids/unpaids*100
+                    number=(paids/unpaids)*100
+                    perc = round(number, 2)  
 
 
 
@@ -151,10 +152,11 @@ class RecoveryReportWizard(models.TransientModel):
                 nostd=len(stud_lst)    
                 unpaids=month_issuance
                 paids=month_recovery
-                if paids==0:
+                if unpaids or paids==0 :
                     perc=0
                 else:
-                    perc=paids/unpaids*100
+                    number=(paids/unpaids)*100
+                    perc = round(number, 2)  
 
 
 
