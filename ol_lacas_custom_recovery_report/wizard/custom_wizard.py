@@ -72,14 +72,14 @@ class RecoveryReportWizard(models.TransientModel):
 
         if self.all_branch==True and self.one_branch!=False::
                 raise ValidationError(_('Sorry, You Must select one option...'))
-                if not self.select_month:
-                    raise ValidationError(_('Please Select Billing Month...'))
+         
 
 
         elif self.one_branch!=False and if self.all_branch==True:
                 raise ValidationError(_('Sorry, You Must select one option...'))
-                if not self.select_month:
-                    raise ValidationError(_('Please Select Billing Month...'))
+
+        if not self.select_month:
+            raise ValidationError(_('Please Select Billing Month...'))
 
         
 
