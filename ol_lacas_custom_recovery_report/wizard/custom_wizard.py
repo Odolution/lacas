@@ -94,7 +94,7 @@ class RecoveryReportWizard(models.TransientModel):
                 nostd=len(stud_lst)    
                 unpaids=month_issuance
                 paids=month_recovery
-                if unpaids or paids==0 ::
+                if unpaids or paids==0 :
                     perc=0
                 else:
                     number=(paids/unpaids)*100
