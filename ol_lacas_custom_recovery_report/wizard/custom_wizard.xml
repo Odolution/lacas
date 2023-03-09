@@ -17,7 +17,7 @@
 
               <group>
 
-                <field name="selected_month"  />
+                <field name="selected_month" widget="many2many_tags"/>
           
              </group>
 
