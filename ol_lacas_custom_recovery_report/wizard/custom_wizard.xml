@@ -11,13 +11,13 @@
             <form string="Print Recovery of students">
             <group>
              <field name="all_branch"/>
-             <field name="one_branch" />
+             <field name="one_branch" widget="many2many_tags" />
             
              </group>
 
               <group>
 
-                <field name="select_month" widget="many2many_tags" />
+                <field name="select_month"  />
           
              </group>
 
