@@ -64,12 +64,13 @@ class RecoveryReportWizard(models.TransientModel):
   
     
     def action_print_report(self):
+        lines=[]
      
         if self.all_branch:
             for month in self.selected_month:
                 bill_month=month.name
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month.name)])
-                lines=[]
+                
 
                 
                 stud_lst=[]
@@ -121,12 +122,12 @@ class RecoveryReportWizard(models.TransientModel):
         else:
            
             selected_campus=self.one_branch.name
-            raise UserError(selected_campus)
-
+           
+            lines=[]
             for month in self.selected_month:
             
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month.name),('campus','=',selected_campus)])
-                lines=[]
+                
 
                 
                 stud_lst=[]
