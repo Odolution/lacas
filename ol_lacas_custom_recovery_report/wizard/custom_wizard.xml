@@ -11,13 +11,13 @@
             <form string="Print Recovery of students">
             <group>
              <field name="all_branch"/>
-             <field name="one_branch" />
+             <field name="one_branch" widget="selection"/>
             
              </group>
 
               <group>
 
-                <field name="select_month"  />
+                <field name="select_month" widget='checkboxes' />
           
              </group>
 
