@@ -61,9 +61,9 @@ class RecoveryReportWizard(models.TransientModel):
                 ('Oct-23', 'Oct-23'),
                 ('Nov-23', 'Nov-23'),
                 ('Dec-23', 'Dec-23'),
-            ], string='Select Month')
+            ], string='Select Month', widget='checkboxes')
     all_branch=fields.Boolean(string=" Select All Branches")
-    one_branch=fields.Many2many('school.school','name', string= 'Select any one branch')
+    one_branch=fields.Many2one('school.program', string= 'Select any one branch')
 
     account_recovery_report_line=fields.Many2many('account.recovery.report.move.line', string='Account report Line')
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
@@ -88,107 +88,110 @@ class RecoveryReportWizard(models.TransientModel):
 
 
         if self.all_branch:
+            for month in self.select_month:
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month)])
+                lines=[]
 
-            inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',self.select_month)])
-            lines=[]
+                
+                stud_lst=[]
+                month_issuance=0
+                month_recovery=0
 
             
-            stud_lst=[]
-            month_issuance=0
-            month_recovery=0
-
-        
-            for rec in inv_ids:
-                bill_month=rec.bill_date
-                if rec.student_name not in stud_lst:
-                    stud_lst.append(rec.student_name)
-            
+                for rec in inv_ids:
+                    bill_month=rec.bill_date
+                    if rec.student_name not in stud_lst:
+                        stud_lst.append(rec.student_name)
                 
-                if rec.payment_state=='not_paid':
-                    month_issuance=month_issuance+rec.amount_residual
-                
-                if rec.payment_state=='paid':
-                    if rec.bill_amount:
-                        month_recovery=month_recovery+int(rec.bill_amount)
-            nostd=len(stud_lst)    
-            unpaids=month_issuance
-            paids=month_recovery
-            # if paids==0:
-            #     perc=0
-            # else:
-            #     perc=unpaids/paids*100
+                    
+                    if rec.payment_state=='not_paid':
+                        month_issuance=month_issuance+rec.amount_residual
+                    
+                    if rec.payment_state=='paid':
+                        if rec.bill_amount:
+                            month_recovery=month_recovery+int(rec.bill_amount)
+                nostd=len(stud_lst)    
+                unpaids=month_issuance
+                paids=month_recovery
+                # if paids==0:
+                #     perc=0
+                # else:
+                #     perc=unpaids/paids*100
 
 
 
-            mvl=self.env['account.recovery.report.move.line'].create({
-                                
-                                "billing_cycle":bill_month,
-                                "total_issuance":unpaids,
-                                "no_of_std":nostd,
-                                "total_recovery":paids,
-                                "recovery_percentage":'100'+'%',
-                                
+                mvl=self.env['account.recovery.report.move.line'].create({
+                                    
+                                    "billing_cycle":bill_month,
+                                    "total_issuance":unpaids,
+                                    "no_of_std":nostd,
+                                    "total_recovery":paids,
+                                    "recovery_percentage":'100'+'%',
+                                    
 
 
-                    })
-            lines.append(mvl.id)
+                        })
+                lines.append(mvl.id)
 
 
-            self.write({
-                "account_recovery_report_line":[(6,0,lines)]
-            })  
+                self.write({
+                    "account_recovery_report_line":[(6,0,lines)]
+                })  
 
         else:
-            selected_campus=self.one_branch.id
-            
-            inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',self.select_month),('campus','=',selected_campus)])
-            lines=[]
+            selected_campus=self.one_branch.name
 
+            for month in self.select_month:
             
-            stud_lst=[]
-            month_issuance=0
-            month_recovery=0
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month),('campus','=',selected_campus)])
+                raise UserError(selected_campus)
+                lines=[]
 
-            bill_month=self.select_month
-            for rec in inv_ids:
-                # bill_month=rec.bill_date
-                if rec.student_name not in stud_lst:
-                    stud_lst.append(rec.student_name)
-            
                 
-                if rec.payment_state=='not_paid':
-                    month_issuance=month_issuance+rec.amount_residual
+                stud_lst=[]
+                month_issuance=0
+                month_recovery=0
+
+                bill_month=self.select_month
+                for rec in inv_ids:
+                    # bill_month=rec.bill_date
+                    if rec.student_name not in stud_lst:
+                        stud_lst.append(rec.student_name)
                 
-                if rec.payment_state=='paid':
-                    if rec.bill_amount:
-                        month_recovery=month_recovery+int(rec.bill_amount)
-            nostd=len(stud_lst)    
-            unpaids=month_issuance
-            paids=month_recovery
-            # if paids==0:
-            #     perc=0
-            # else:
-            #     perc=unpaids/paids*100
+                    
+                    if rec.payment_state=='not_paid':
+                        month_issuance=month_issuance+rec.amount_residual
+                    
+                    if rec.payment_state=='paid':
+                        if rec.bill_amount:
+                            month_recovery=month_recovery+int(rec.bill_amount)
+                nostd=len(stud_lst)    
+                unpaids=month_issuance
+                paids=month_recovery
+                # if paids==0:
+                #     perc=0
+                # else:
+                #     perc=unpaids/paids*100
 
 
 
-            mvl=self.env['account.recovery.report.move.line'].create({
-                                
-                                "billing_cycle":bill_month,
-                                "total_issuance":unpaids,
-                                "no_of_std":nostd,
-                                "total_recovery":paids,
-                                "recovery_percentage":'100'+'%',
-                                
+                mvl=self.env['account.recovery.report.move.line'].create({
+                                    
+                                    "billing_cycle":bill_month,
+                                    "total_issuance":unpaids,
+                                    "no_of_std":nostd,
+                                    "total_recovery":paids,
+                                    "recovery_percentage":'100'+'%',
+                                    
 
 
-                    })
-            lines.append(mvl.id)
+                        })
+                lines.append(mvl.id)
 
 
-            self.write({
-                "account_recovery_report_line":[(6,0,lines)]
-            })  
+                self.write({
+                    "account_recovery_report_line":[(6,0,lines)]
+                })  
 
 
 
