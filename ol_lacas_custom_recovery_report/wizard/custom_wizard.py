@@ -137,6 +137,7 @@ class RecoveryReportWizard(models.TransientModel):
                 stud_lst=[]
                 month_issuance=0
                 month_recovery=0
+                perc=0
 
                 # bill_month=self.selected_month
                 for rec in inv_ids:
@@ -154,9 +155,7 @@ class RecoveryReportWizard(models.TransientModel):
                 nostd=len(stud_lst)    
                 unpaids=month_issuance
                 paids=month_recovery
-                if unpaids or paids==0 :
-                    perc=0
-                else:
+                if unpaids !=0 :
                     number=(paids/unpaids)*100
                     perc = round(number, 2)  
 
