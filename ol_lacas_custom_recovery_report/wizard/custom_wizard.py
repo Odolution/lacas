@@ -27,136 +27,142 @@ class billingMonthModel(models.Model):
     _description = 'Billing Month Model'
 
     name = fields.Char(string='Name', required=True)
-    # description = fields.Text(string='Description')
+    description = fields.Text(string='Description')
 
-my_model_obj = self.env['billing.month']
-values_to_create = [
-    {
-        'name': 'Jan-22',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'Feb-22',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Mar-22',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
+#     @api.model
+#     def create(self, vals):
+#         values_to_create = [
+#     {
+#         'name': 'Jan-22',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'Feb-22',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Mar-22',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
 
-       {
-        'name': 'Apr-22',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'May-22',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Jun-22',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
-       {
-        'name': 'Jul-22',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'Aug-22',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Sep-22',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
-       {
-        'name': 'Oct-22',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'Nov-22',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Dec-22',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
-        {
-        'name': 'Jan-23',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'Feb-23',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Mar-23',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
+#        {
+#         'name': 'Apr-22',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'May-22',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Jun-22',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
+#        {
+#         'name': 'Jul-22',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'Aug-22',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Sep-22',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
+#        {
+#         'name': 'Oct-22',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'Nov-22',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Dec-22',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
+#         {
+#         'name': 'Jan-23',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'Feb-23',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Mar-23',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
 
-       {
-        'name': 'Apr-23',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'May-23',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Jun-23',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
-       {
-        'name': 'Jul-23',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'Aug-23',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Sep-23',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
-       {
-        'name': 'Oct-23',
-        'description': 'This is record 1',
-        #'value': 10.0,
-    },
-    {
-        'name': 'Nov-23',
-        'description': 'This is record 2',
-        #'value': 20.0,
-    },
-    {
-        'name': 'Dec-23',
-        'description': 'This is record 3',
-        #'value': 30.0,
-    },
+#        {
+#         'name': 'Apr-23',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'May-23',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Jun-23',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
+#        {
+#         'name': 'Jul-23',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'Aug-23',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Sep-23',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
+#        {
+#         'name': 'Oct-23',
+#         'description': 'This is record 1',
+#         #'value': 10.0,
+#     },
+#     {
+#         'name': 'Nov-23',
+#         'description': 'This is record 2',
+#         #'value': 20.0,
+#     },
+#     {
+#         'name': 'Dec-23',
+#         'description': 'This is record 3',
+#         #'value': 30.0,
+#     },
  
-]
-for values in values_to_create:
-    my_model_obj.create(values)
+# ]
+# for values in values_to_create:
+#     my_model_obj.create(values)
+#         # Add some custom logic when creating a record
+#         return super(billingMonthModel, self).create(values_to_create)
+
+# my_model_obj = self.env['billing.month']
+
 
 
 class AccountMoveReport(models.TransientModel):
