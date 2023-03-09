@@ -186,133 +186,133 @@ class RecoveryReportWizard(models.TransientModel):
     account_recovery_report_line=fields.Many2many('account.recovery.report.move.line', string='Account report Line')
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
 
-    def _branch_constrains(self):
+    # def _branch_constrains(self):
 
-        if self.all_branch==True and self.one_branch!=False:
-                raise ValidationError(_('Sorry, You Must select one option...'))
+    #     if self.all_branch==True and self.one_branch!=False:
+    #             raise ValidationError(_('Sorry, You Must select one option...'))
              
 
-        elif self.one_branch!=False and self.all_branch==True:
-                raise ValidationError(_('Sorry, You Must select one option...'))
+    #     elif self.one_branch!=False and self.all_branch==True:
+    #             raise ValidationError(_('Sorry, You Must select one option...'))
 
-        if not self.select_month:
-            raise ValidationError(_('Please Select Billing Month...'))
+    #     if not self.select_month:
+    #         raise ValidationError(_('Please Select Billing Month...'))
 
         
 
   
     
-    def action_print_report(self):
+    # def action_print_report(self):
 
 
-        if self.all_branch:
-            for month in self.select_month:
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month)])
-                lines=[]
+    #     if self.all_branch:
+    #         for month in self.select_month:
+    #             inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month)])
+    #             lines=[]
 
                 
-                stud_lst=[]
-                month_issuance=0
-                month_recovery=0
+    #             stud_lst=[]
+    #             month_issuance=0
+    #             month_recovery=0
 
             
-                for rec in inv_ids:
-                    bill_month=rec.bill_date
-                    if rec.student_name not in stud_lst:
-                        stud_lst.append(rec.student_name)
+    #             for rec in inv_ids:
+    #                 bill_month=rec.bill_date
+    #                 if rec.student_name not in stud_lst:
+    #                     stud_lst.append(rec.student_name)
                 
                     
-                    if rec.payment_state=='not_paid':
-                        month_issuance=month_issuance+rec.amount_residual
+    #                 if rec.payment_state=='not_paid':
+    #                     month_issuance=month_issuance+rec.amount_residual
                     
-                    if rec.payment_state=='paid':
-                        if rec.bill_amount:
-                            month_recovery=month_recovery+int(rec.bill_amount)
-                nostd=len(stud_lst)    
-                unpaids=month_issuance
-                paids=month_recovery
-                # if paids==0:
-                #     perc=0
-                # else:
-                #     perc=unpaids/paids*100
+    #                 if rec.payment_state=='paid':
+    #                     if rec.bill_amount:
+    #                         month_recovery=month_recovery+int(rec.bill_amount)
+    #             nostd=len(stud_lst)    
+    #             unpaids=month_issuance
+    #             paids=month_recovery
+    #             # if paids==0:
+    #             #     perc=0
+    #             # else:
+    #             #     perc=unpaids/paids*100
 
 
 
-                mvl=self.env['account.recovery.report.move.line'].create({
+    #             mvl=self.env['account.recovery.report.move.line'].create({
                                     
-                                    "billing_cycle":bill_month,
-                                    "total_issuance":unpaids,
-                                    "no_of_std":nostd,
-                                    "total_recovery":paids,
-                                    "recovery_percentage":'100'+'%',
+    #                                 "billing_cycle":bill_month,
+    #                                 "total_issuance":unpaids,
+    #                                 "no_of_std":nostd,
+    #                                 "total_recovery":paids,
+    #                                 "recovery_percentage":'100'+'%',
                                     
 
 
-                        })
-                lines.append(mvl.id)
+    #                     })
+    #             lines.append(mvl.id)
 
 
-                self.write({
-                    "account_recovery_report_line":[(6,0,lines)]
-                })  
+    #             self.write({
+    #                 "account_recovery_report_line":[(6,0,lines)]
+    #             })  
 
-        else:
-            selected_campus=self.one_branch.id
+    #     else:
+    #         selected_campus=self.one_branch.id
 
-            for month in self.select_month:
+    #         for month in self.select_month:
             
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month),('campus','=',selected_campus)])
-                lines=[]
+    #             inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month),('campus','=',selected_campus)])
+    #             lines=[]
 
                 
-                stud_lst=[]
-                month_issuance=0
-                month_recovery=0
+    #             stud_lst=[]
+    #             month_issuance=0
+    #             month_recovery=0
 
-                bill_month=self.select_month
-                for rec in inv_ids:
-                    # bill_month=rec.bill_date
-                    if rec.student_name not in stud_lst:
-                        stud_lst.append(rec.student_name)
+    #             bill_month=self.select_month
+    #             for rec in inv_ids:
+    #                 # bill_month=rec.bill_date
+    #                 if rec.student_name not in stud_lst:
+    #                     stud_lst.append(rec.student_name)
                 
                     
-                    if rec.payment_state=='not_paid':
-                        month_issuance=month_issuance+rec.amount_residual
+    #                 if rec.payment_state=='not_paid':
+    #                     month_issuance=month_issuance+rec.amount_residual
                     
-                    if rec.payment_state=='paid':
-                        if rec.bill_amount:
-                            month_recovery=month_recovery+int(rec.bill_amount)
-                nostd=len(stud_lst)    
-                unpaids=month_issuance
-                paids=month_recovery
-                # if paids==0:
-                #     perc=0
-                # else:
-                #     perc=unpaids/paids*100
+    #                 if rec.payment_state=='paid':
+    #                     if rec.bill_amount:
+    #                         month_recovery=month_recovery+int(rec.bill_amount)
+    #             nostd=len(stud_lst)    
+    #             unpaids=month_issuance
+    #             paids=month_recovery
+    #             # if paids==0:
+    #             #     perc=0
+    #             # else:
+    #             #     perc=unpaids/paids*100
 
 
 
-                mvl=self.env['account.recovery.report.move.line'].create({
+    #             mvl=self.env['account.recovery.report.move.line'].create({
                                     
-                                    "billing_cycle":bill_month,
-                                    "total_issuance":unpaids,
-                                    "no_of_std":nostd,
-                                    "total_recovery":paids,
-                                    "recovery_percentage":'100'+'%',
+    #                                 "billing_cycle":bill_month,
+    #                                 "total_issuance":unpaids,
+    #                                 "no_of_std":nostd,
+    #                                 "total_recovery":paids,
+    #                                 "recovery_percentage":'100'+'%',
                                     
 
 
-                        })
-                lines.append(mvl.id)
+    #                     })
+    #             lines.append(mvl.id)
 
 
-                self.write({
-                    "account_recovery_report_line":[(6,0,lines)]
-                })  
+    #             self.write({
+    #                 "account_recovery_report_line":[(6,0,lines)]
+    #             })  
 
 
 
-    def action_print_excel_recovery_report(self):
+    # def action_print_excel_recovery_report(self):
         self.action_print_report()
         if xlwt:
 
