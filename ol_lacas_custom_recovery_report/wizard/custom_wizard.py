@@ -151,10 +151,10 @@ class RecoveryReportWizard(models.TransientModel):
                 nostd=len(stud_lst)    
                 unpaids=month_issuance
                 paids=month_recovery
-                # if paids==0:
-                #     perc=0
-                # else:
-                #     perc=unpaids/paids*100
+                if paids==0:
+                    perc=0
+                else:
+                    perc=unpaids/paids*100
 
 
 
@@ -164,7 +164,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     "total_issuance":unpaids,
                                     "no_of_std":nostd,
                                     "total_recovery":paids,
-                                    "recovery_percentage":'100'+'%',
+                                    "recovery_percentage":str(perc)+'%',
                                     
 
 
