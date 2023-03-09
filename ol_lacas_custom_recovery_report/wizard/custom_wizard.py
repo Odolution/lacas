@@ -191,7 +191,7 @@ class RecoveryReportWizard(models.TransientModel):
 
 
 
-    def action_print_charges_excel_report(self):
+    def action_account_print_recovery_report(self):
         self.action_print_report()
         if xlwt:
 
