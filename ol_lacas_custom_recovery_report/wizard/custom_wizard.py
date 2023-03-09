@@ -70,12 +70,12 @@ class RecoveryReportWizard(models.TransientModel):
 
     def _branch_constrains(self):
 
-        if self.all_branch:
+        if self.all_branch==True:
             if self.one_branch!=False:
                 raise ValidationError(_('Sorry, You Must select one option...'))
 
         if self.one_branch!=False:
-            if self.all_branch:
+            if self.all_branch==True:
                 raise ValidationError(_('Sorry, You Must select one option...'))
 
         if not self.select_month:
