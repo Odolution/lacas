@@ -17,7 +17,7 @@
 
               <group>
 
-                <field name="select_month"/>
+                <field name="select_month" widget=widget="many2many_checkboxes" />
           
              </group>
 
