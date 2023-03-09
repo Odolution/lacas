@@ -315,6 +315,10 @@ class RecoveryReportWizard(models.TransientModel):
 
 
     def action_print_excel_recovery_report(self):
+        lst = []
+        for i in self.selected_month:
+            lst.append([i,i.id,i.name])
+        raise UserError(str(lst))
         pass
         # self.action_print_report()
         # if xlwt:
