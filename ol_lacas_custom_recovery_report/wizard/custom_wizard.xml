@@ -17,8 +17,8 @@
 
               <group>
 
-                <!-- <field name="select_month"  />
-           -->
+                <field name="selected_month"  />
+          
              </group>
 
                <!-- <notebook>
