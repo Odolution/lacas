@@ -22,6 +22,13 @@ except ImportError:
 #     name  =  fields.Char(string="Name")
 #     grouping = fields.Char('Groups')
 
+class billingMonthModel(models.Model):
+    _name = 'billing.month'
+    _description = 'Billing Month '
+
+    name = fields.Char(string='Name', required=True)
+    # description = fields.Text(string='Description')
+
 class AccountMoveReport(models.TransientModel):
     _name = 'account.recovery.report.move.line'
     
@@ -139,12 +146,11 @@ class RecoveryReportWizard(models.TransientModel):
                 })  
 
         else:
-            selected_campus=self.one_branch.name
+            selected_campus=self.one_branch.id
 
             for month in self.select_month:
             
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month),('campus','=',selected_campus)])
-                raise UserError(selected_campus)
                 lines=[]
 
                 
