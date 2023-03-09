@@ -139,8 +139,9 @@ class RecoveryReportWizard(models.TransientModel):
             })  
 
         else:
+            selected_campus=self.one_branch.id
             
-            inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',self.select_month),('campus','=',self.one_branch)])
+            inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',self.select_month),('campus','=',selected_campus)])
             lines=[]
 
             
