@@ -63,7 +63,7 @@ class RecoveryReportWizard(models.TransientModel):
                 ('Dec-23', 'Dec-23'),
             ], string='Select Month')
     all_branch=fields.Boolean(string=" Select All Branches")
-    one_branch=fields.Many2one('school.program', string= 'Select any one branch')
+    one_branch=fields.Many2one('school.school', string= 'Select any one branch')
 
     account_recovery_report_line=fields.Many2many('account.recovery.report.move.line', string='Account report Line')
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')

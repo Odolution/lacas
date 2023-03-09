@@ -11,7 +11,7 @@
             <form string="Print Recovery of students">
             <group>
              <field name="all_branch"/>
-             <field name="one_branch" widget="selection"/>
+             <field name="one_branch" />
             
              </group>
 
