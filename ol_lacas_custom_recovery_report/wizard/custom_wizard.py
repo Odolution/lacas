@@ -24,10 +24,140 @@ except ImportError:
 
 class billingMonthModel(models.Model):
     _name = 'billing.month'
-    _description = 'Billing Month '
+    _description = 'Billing Month Model'
 
     name = fields.Char(string='Name', required=True)
     # description = fields.Text(string='Description')
+
+my_model_obj = self.env['billing.month']
+values_to_create = [
+    {
+        'name': 'Jan-22',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'Feb-22',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Mar-22',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+
+       {
+        'name': 'Apr-22',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'May-22',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Jun-22',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+       {
+        'name': 'Jul-22',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'Aug-22',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Sep-22',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+       {
+        'name': 'Oct-22',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'Nov-22',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Dec-22',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+        {
+        'name': 'Jan-23',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'Feb-23',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Mar-23',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+
+       {
+        'name': 'Apr-23',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'May-23',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Jun-23',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+       {
+        'name': 'Jul-23',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'Aug-23',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Sep-23',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+       {
+        'name': 'Oct-23',
+        'description': 'This is record 1',
+        #'value': 10.0,
+    },
+    {
+        'name': 'Nov-23',
+        'description': 'This is record 2',
+        #'value': 20.0,
+    },
+    {
+        'name': 'Dec-23',
+        'description': 'This is record 3',
+        #'value': 30.0,
+    },
+ 
+]
+for values in values_to_create:
+    my_model_obj.create(values)
+
 
 class AccountMoveReport(models.TransientModel):
     _name = 'account.recovery.report.move.line'
@@ -43,32 +173,7 @@ class RecoveryReportWizard(models.TransientModel):
     _name="recovery.report.wizard"
     _description='Print Recovery Wizard'
 
-    select_month= fields.Selection([
-                ('Jan-22', 'Jan-22'),
-                ('Feb-22', 'Feb-22'),
-                ('Mar-22', 'Mar-22'),
-                ('Apr-22', 'Apr-22'),
-                ('May-22', 'May-22'),
-                ('Jun-22', 'Jun-22'),
-                ('Jul-22', 'Jul-22'),
-                ('Aug-22', 'Aug-22'),
-                ('Sep-22', 'Sep-22'),
-                ('Oct-22', 'Oct-22'),
-                ('Nov-22', 'Nov-22'),
-                ('Dec-22', 'Dec-22'),
-                ('Jan-23', 'Jan-23'),
-                ('Feb-23', 'Feb-23'),
-                ('Mar-23', 'Mar-23'),
-                ('Apr-23', 'Apr-23'),
-                ('May-23', 'May-23'),
-                ('Jun-23', 'Jun-23'),
-                ('Jul-23', 'Jul-23'),
-                ('Aug-23', 'Aug-23'),
-                ('Sep-23', 'Sep-23'),
-                ('Oct-23', 'Oct-23'),
-                ('Nov-23', 'Nov-23'),
-                ('Dec-23', 'Dec-23'),
-            ], string='Select Month', widget='checkboxes')
+    select_month= fields.Many2many('billing.month','name', string= 'Select Month',widget="many2many_tags")
     all_branch=fields.Boolean(string=" Select All Branches")
     one_branch=fields.Many2one('school.program', string= 'Select any one branch')
 
