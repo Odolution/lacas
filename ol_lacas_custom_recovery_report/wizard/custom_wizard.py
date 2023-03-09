@@ -149,9 +149,9 @@ class RecoveryReportWizard(models.TransientModel):
             month_issuance=0
             month_recovery=0
 
-        
+            bill_month=self.select_month
             for rec in inv_ids:
-                bill_month=rec.bill_date
+                # bill_month=rec.bill_date
                 if rec.student_name not in stud_lst:
                     stud_lst.append(rec.student_name)
             
