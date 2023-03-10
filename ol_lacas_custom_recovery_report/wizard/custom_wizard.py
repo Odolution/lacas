@@ -88,7 +88,7 @@ class RecoveryReportWizard(models.TransientModel):
                 
                     
                     if rec.payment_state=='not_paid':
-                        month_issuance=month_issuance+rec.amount_residual
+                        month_issuance=month_issuance+rec.due_amount
 
                     
                     if rec.payment_state=='paid':
