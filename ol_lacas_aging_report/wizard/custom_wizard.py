@@ -1133,6 +1133,15 @@ class agingsReportWizard(models.TransientModel):
             
                     })
                     lines.append(mvl.id)
+                    lst=[]
+                    lst.append(mvl['student_branch'])
+                    lst.append(mvl['student_campus'])
+                    lst.append(mvl['recievable_jan_2'])
+                    lst.append(mvl['recievable_mar_2'])
+                    raise UserError(lst)
+
+
+            
             
             
             
