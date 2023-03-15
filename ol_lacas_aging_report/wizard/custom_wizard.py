@@ -1002,7 +1002,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------apr23-------
                        
-                        "recievable_apr_2": custom_data['recievable_apr_2'],,
+                        "recievable_apr_2": custom_data['recievable_apr_2'],
                         "ondue_apr_2": 0,
                         "afterdue_apr_2": 0,
                         "firstmon_apr_2":0,
@@ -1016,7 +1016,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------may23-------
                        
-                        "recievable_may_2": custom_data['recievable_may_2'],,
+                        "recievable_may_2": custom_data['recievable_may_2'],
                         "ondue_may_2": 0,
                         "afterdue_may_2": 0,
                         "firstmon_may_2":0,
@@ -1030,7 +1030,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------jun23-------
                        
-                        "recievable_jun_2": custom_data['recievable_jun_2'],,
+                        "recievable_jun_2": custom_data['recievable_jun_2'],
                         "ondue_jun_2": 0,
                         "afterdue_jun_2": 0,
                         "firstmon_jun_2":0,
@@ -1044,7 +1044,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------jul23-------
                        
-                        "recievable_jul_2": custom_data['recievable_jul_2'],,
+                        "recievable_jul_2": custom_data['recievable_jul_2'],
                         "ondue_jul_2": 0,
                         "afterdue_jul_2": 0,
                         "firstmon_jul_2":0,
@@ -1058,7 +1058,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------aug23-------
                        
-                        "recievable_aug_2": custom_data['recievable_aug_2'],,
+                        "recievable_aug_2": custom_data['recievable_aug_2'],
                         "ondue_aug_2": 0,
                         "afterdue_aug_2": 0,
                         "firstmon_aug_2":0,
@@ -1072,7 +1072,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------sep23-------
                        
-                        "recievable_sep_2": custom_data['recievable_sep_2'],,
+                        "recievable_sep_2": custom_data['recievable_sep_2'],
                         "ondue_sep_2": 0,
                         "afterdue_sep_2": 0,
                         "firstmon_sep_2":0,
@@ -1086,7 +1086,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------oct23-------
                        
-                        "recievable__oct_2": custom_data['recievable_oct_2'],,
+                        "recievable__oct_2": custom_data['recievable_oct_2'],
                         "ondue__oct_2": 0,
                         "afterdue__oct_2": 0,
                         "firstmon__oct_2":0,
@@ -1100,7 +1100,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------nov23-------
                        
-                        "recievable_nov_2": custom_data['recievable_nov_2'],,
+                        "recievable_nov_2": custom_data['recievable_nov_2'],
                         "ondue_nov_2": 0,
                         "afterdue_nov_2": 0,
                         "firstmon_nov_2":0,
@@ -1114,7 +1114,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------dec23-------
                        
-                        "recievable_dec_2": custom_data['recievable_dec_2'],,
+                        "recievable_dec_2": custom_data['recievable_dec_2'],
                         "ondue_dec_2": 0,
                         "afterdue_dec_2": 0,
                         "firstmon_dec_2":0,
