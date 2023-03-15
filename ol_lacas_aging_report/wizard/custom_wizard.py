@@ -1154,7 +1154,7 @@ class agingsReportWizard(models.TransientModel):
             lst.append(mvl['student_branch'])
             lst.append(mvl['student_campus'])
             lst.append(mvl['recievable_jan_2'])
-            lst.append(mvl['recievable_mar_2'])
+            lst.append(mvl['ondue_jan_2'])
             raise UserError(lst)
 
 
