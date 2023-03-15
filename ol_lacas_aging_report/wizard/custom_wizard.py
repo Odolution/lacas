@@ -793,8 +793,8 @@ class agingsReportWizard(models.TransientModel):
         
                     mvl=self.env['account.aging.move.line'].create({
                         
-                        "student_batch":custom_data['student_batch'],
-                        "student_campus":custom_data['student_branch'],
+                        "student_branch":custom_data['student_branch'],
+                        "student_campus":custom_data['student_campus'],
                        #------jan22-------
 
                         "recievable_jan": custom_data['recievable_jan'],
