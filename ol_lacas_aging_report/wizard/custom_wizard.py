@@ -816,6 +816,8 @@ class agingsReportWizard(models.TransientModel):
             
 
             
+            total_recovered=custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2']
+            bad_debt=custom_data['recievable_jan_2']-total_recovered
         
             mvl=self.env['account.aging.move.line'].create({
                 
@@ -997,8 +999,8 @@ class agingsReportWizard(models.TransientModel):
                 "secmon_jan_2":custom_data['secmon_jan_2'],
                 "thirdmon_jan_2": custom_data['thirdmon_jan_2'],
                 "actual_recievable_jan_2":0,
-                "total_recieve_jan_2":custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2']
-                "bad_debt_jan_2":custom_data['recievable_jan_2']-custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2'],
+                "total_recieve_jan_2":total_recovered,
+                "bad_debt_jan_2":bad_debt
                 "percentage_bd_jan_2": 0,
 
                 
