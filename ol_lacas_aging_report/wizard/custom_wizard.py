@@ -340,9 +340,11 @@ class agingsReportWizard(models.TransientModel):
         for branch in branch_lst:
 
            
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),("program_ids","=",branch),('payment_state','in',['not_paid','paid']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('payment_state','in',['not_paid','paid']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
           
             for value in branch_wise_inv:
+                if value.program_ids==branch:
+                    
                     custom_data = {
                    
                         "student_branch":"",
