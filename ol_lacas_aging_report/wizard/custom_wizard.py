@@ -645,16 +645,16 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------oct23-------
                        
-                        "recievable__oct_2": 0,
-                        "ondue__oct_2": 0,
-                        "afterdue__oct_2": 0,
-                        "firstmon__oct_2":0,
-                        "secmon__oct_2":0,
-                        "thirdmon__oct_2": 0,
-                        "actual_recievable__oct_2":0,
-                        "total_recieve__oct_2":0,
-                        "bad_debt__oct_2": 0,
-                        "percentage_bd__oct_2": 0,
+                        "recievable_oct_2": 0,
+                        "ondue_oct_2": 0,
+                        "afterdue_oct_2": 0,
+                        "firstmon_oct_2":0,
+                        "secmon_oct_2":0,
+                        "thirdmon_oct_2": 0,
+                        "actual_recievable_oct_2":0,
+                        "total_recieve_oct_2":0,
+                        "bad_debt_oct_2": 0,
+                        "percentage_bd_oct_2": 0,
 
                         
                         #------nov23-------
@@ -1090,16 +1090,16 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------oct23-------
                        
-                        "recievable__oct_2": custom_data['recievable_oct_2'],
-                        "ondue__oct_2": 0,
-                        "afterdue__oct_2": 0,
-                        "firstmon__oct_2":0,
-                        "secmon__oct_2":0,
-                        "thirdmon__oct_2": 0,
-                        "actual_recievable__oct_2":0,
-                        "total_recieve__oct_2":0,
-                        "bad_debt__oct_2": 0,
-                        "percentage_bd__oct_2": 0,
+                        "recievable_oct_2": custom_data['recievable_oct_2'],
+                        "ondue_oct_2": 0,
+                        "afterdue_oct_2": 0,
+                        "firstmon_oct_2":0,
+                        "secmon_oct_2":0,
+                        "thirdmon_oct_2": 0,
+                        "actual_recievable_oct_2":0,
+                        "total_recieve_oct_2":0,
+                        "bad_debt_oct_2": 0,
+                        "percentage_bd_oct_2": 0,
 
                         
                         #------nov23-------
