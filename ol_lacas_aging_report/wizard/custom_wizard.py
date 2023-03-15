@@ -1148,13 +1148,13 @@ class agingsReportWizard(models.TransientModel):
                     lst.append(mvl['student_campus'])
                     lst.append(mvl['recievable_jan_2'])
                     lst.append(mvl['recievable_mar_2'])
-                    raise UserError(lst)
+                    # raise UserError(lst)
 
 
             
             
             
-            
+            raise UserError(lines)
             self.write({
                 "account_report_line":[(6,0,lines)]
             }
