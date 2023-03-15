@@ -765,6 +765,9 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['secmon_jan_2'] += (int(value.bill_amount))
                             if diff.days>90 and diff.days<121:
                                 custom_data['thirdmon_jan_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_jan_2'] += (int(value.bill_amount))
+
 
 
                 elif value.month_date == "Feburary" and value.year_date=='23':
@@ -816,8 +819,9 @@ class agingsReportWizard(models.TransientModel):
             
 
             
-            total_recovered=custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2']
+            total_recovered=custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2']+ custom_data['actual_recievable_jan_2']
             bad_debt=custom_data['recievable_jan_2']-total_recovered
+            # percent_bd=custom_data['recievable_jan_2']
         
             mvl=self.env['account.aging.move.line'].create({
                 
@@ -998,7 +1002,7 @@ class agingsReportWizard(models.TransientModel):
                 "firstmon_jan_2": custom_data['firstmon_jan_2'],
                 "secmon_jan_2":custom_data['secmon_jan_2'],
                 "thirdmon_jan_2": custom_data['thirdmon_jan_2'],
-                "actual_recievable_jan_2":0,
+                "actual_recievable_jan_2":custom_data['actual_recievable_jan_2'],
                 "total_recieve_jan_2":total_recovered,
                 "bad_debt_jan_2":bad_debt,
                 "percentage_bd_jan_2": 0,
