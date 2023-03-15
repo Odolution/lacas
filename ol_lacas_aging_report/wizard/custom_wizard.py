@@ -337,13 +337,16 @@ class agingsReportWizard(models.TransientModel):
                     branch_lst.append(inv.program_ids)
 
         lines=[]
+
+
+
         for branch in branch_lst:
 
            
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            raise UserError(branch_wise_inv)
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            
             for value in branch_wise_inv:
-                if value.program_ids==branch:
+                # if value.program_ids==branch:
 
                     custom_data = {
                    
