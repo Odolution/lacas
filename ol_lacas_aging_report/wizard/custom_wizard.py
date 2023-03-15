@@ -1000,7 +1000,7 @@ class agingsReportWizard(models.TransientModel):
                 "thirdmon_jan_2": custom_data['thirdmon_jan_2'],
                 "actual_recievable_jan_2":0,
                 "total_recieve_jan_2":total_recovered,
-                "bad_debt_jan_2":bad_debt
+                "bad_debt_jan_2":bad_debt,
                 "percentage_bd_jan_2": 0,
 
                 
