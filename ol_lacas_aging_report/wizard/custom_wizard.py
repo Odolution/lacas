@@ -755,15 +755,15 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff<11:
+                            if diff.days >0 and diff.days<11:
                                 custom_data['ondue_jan_2'] += (int(value.bill_amount))
-                            if diff.days >10 and diff<31:
+                            if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_jan_2'] += (int(value.bill_amount))
-                            if diff.days>30 and diff<61:
+                            if diff.days>30 and diff.days<61:
                                 custom_data['firstmon_jan_2'] += (int(value.bill_amount))
-                            if diff.days>60 and diff<91:
+                            if diff.days>60 and diff.days<91:
                                 custom_data['secmon_jan_2'] += (int(value.bill_amount))
-                            if diff.days>90 and diff<121:
+                            if diff.days>90 and diff.days<121:
                                 custom_data['thirdmon_jan_2'] += (int(value.bill_amount))
 
 
