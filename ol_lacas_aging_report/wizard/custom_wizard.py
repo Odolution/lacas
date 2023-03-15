@@ -988,7 +988,7 @@ class agingsReportWizard(models.TransientModel):
                         
                         #------mar23-------
                        
-                        "recievable_mar_2": custom_data['recievable_mar_2'],,
+                        "recievable_mar_2": custom_data['recievable_mar_2'],
                         "ondue_mar_2": 0,
                         "afterdue_mar_2": 0,
                         "firstmon_mar_2":0,
