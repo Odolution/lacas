@@ -753,7 +753,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='paid':
                         custom_data['recievable_jan_2'] += (int(value.bill_amount))
                         if value.ol_payment_date:
-                            diff=rec.ol_payment_date-rec.invoice_date
+                            diff=value.ol_payment_date-value.invoice_date
                             if diff.days <= 10:
                                 custom_data['ondue_jan_2'] += (int(value.bill_amount))
 
