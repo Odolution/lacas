@@ -755,7 +755,7 @@ class agingsReportWizard(models.TransientModel):
                     elif value.month_date == "March"and value.year_date=='23':
                         if value.payment_state=='not_paid':
                             custom_data['recievable_mar_2'] += value.due_amount
-                        if value.payment_state=='paid':
+                        elif value.payment_state=='paid':
                             custom_data['recievable_mar_2'] += (int(value.bill_amount))
 
 
