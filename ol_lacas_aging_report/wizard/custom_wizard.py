@@ -344,7 +344,7 @@ class agingsReportWizard(models.TransientModel):
           
             for value in branch_wise_inv:
                 if value.program_ids==branch:
-                    
+
                     custom_data = {
                    
                         "student_branch":"",
@@ -691,102 +691,102 @@ class agingsReportWizard(models.TransientModel):
 
                     if value.month_date == "January" and value.year_date=='22':
                         custom_data['recievable_jan'] += value.amount_residual
-                        custom_data['recievable_jan'] += value.bill_amount
+                        custom_data['recievable_jan'] += (int(value.bill_amount))
 
                     elif value.month_date == "Feburary" and value.year_date=='22':
                         custom_data['recievable_feb'] += value.amount_residual
-                        custom_data['recievable_feb'] += value.bill_amount
+                        custom_data['recievable_feb'] += int(value.bill_amount)
 
                     elif value.month_date == "March"and value.year_date=='22':
                         custom_data['recievable_mar'] += value.amount_residual
-                        custom_data['recievable_mar'] += value.bill_amount
+                        custom_data['recievable_mar'] += int(value.bill_amount)
 
                     elif value.month_date == "April" and value.year_date=='22':
                         custom_data['recievable_apr'] += value.amount_residual
-                        custom_data['recievable_apr'] += value.bill_amount
+                        custom_data['recievable_apr'] += int(value.bill_amount)
 
 
                     elif value.month_date == "May" and value.year_date=='22':
                         custom_data['recievable_may'] += value.amount_residual
-                        custom_data['recievable_may'] += value.bill_amount
+                        custom_data['recievable_may'] += int(value.bill_amount)
 
 
                     elif value.month_date == "June" and value.year_date=='22':
                         custom_data['recievable_jun'] += value.amount_residual
-                        custom_data['recievable_jun'] += value.bill_amount
+                        custom_data['recievable_jun'] += int(value.bill_amount)
 
 
                     elif value.month_date == "July" and value.year_date=='22':
                         custom_data['recievable_jul'] += value.amount_residual
-                        custom_data['recievable_jul'] += value.bill_amount
+                        custom_data['recievable_jul'] += int(value.bill_amount)
 
                     elif value.month_date == "August" and value.year_date=='22':
                         custom_data['recievable_aug'] += value.amount_residual
-                        custom_data['recievable_aug'] += value.bill_amount
+                        custom_data['recievable_aug'] += int(value.bill_amount)
 
                     elif value.month_date == "September" and value.year_date=='22':
                         custom_data['recievable_sep'] += value.amount_residual
-                        custom_data['recievable_sep'] += value.bill_amount
+                        custom_data['recievable_sep'] += int(value.bill_amount)
 
                     elif value.month_date == "October" and value.year_date=='22':
                         custom_data['recievable_oct'] += value.amount_residual
-                        custom_data['recievable_oct'] += value.bill_amount
+                        custom_data['recievable_oct'] += int(value.bill_amount)
 
                     elif value.month_date == "November" and value.year_date=='22':
                         custom_data['recievable_nov'] += value.amount_residual
-                        custom_data['recievable_nov'] += value.bill_amount
+                        custom_data['recievable_nov'] += int(value.bill_amount)
 
                     elif value.month_date == "December" and value.year_date=='22':
                         custom_data['recievable_dec'] += value.amount_residual
-                        custom_data['recievable_dec'] += value.bill_amount
+                        custom_data['recievable_dec'] += int(value.bill_amount)
 
                     elif value.month_date == "January" and value.year_date=='23':
                         custom_data['recievable_jan_2'] += value.amount_residual
-                        custom_data['recievable_jan_2'] += value.bill_amount
+                        custom_data['recievable_jan_2'] += int(value.bill_amount)
 
                     elif value.month_date == "Feburary" and value.year_date=='23':
                         custom_data['recievable_feb_2'] += value.amount_residual
-                        custom_data['recievable_feb_2'] += value.bill_amount
+                        custom_data['recievable_feb_2'] += int(value.bill_amount)
 
                     elif value.month_date == "March"and value.year_date=='23':
                         custom_data['recievable_mar_2'] += value.amount_residual
-                        custom_data['recievable_mar_2'] += value.bill_amount
+                        custom_data['recievable_mar_2'] += int(value.bill_amount)
 
                     elif value.month_date == "April" and value.year_date=='23':
                         custom_data['recievable_apr_2'] += value.amount_residual
-                        custom_data['recievable_apr_2'] += value.bill_amount
+                        custom_data['recievable_apr_2'] += int(value.bill_amount)
 
                     elif value.month_date == "May" and value.year_date=='23':
                         custom_data['recievable_may_2'] += value.amount_residual
-                        custom_data['recievable_may_2'] += value.bill_amount
+                        custom_data['recievable_may_2'] += int(value.bill_amount)
 
                     elif value.month_date == "June" and value.year_date=='23':
                         custom_data['recievable_jun_2'] += value.amount_residual
-                        custom_data['recievable_jun_2'] += value.bill_amount
+                        custom_data['recievable_jun_2'] += int(value.bill_amount)
 
                     elif value.month_date == "July" and value.year_date=='23':
                         custom_data['recievable_jul_2'] += value.amount_residual
-                        custom_data['recievable_jul_2'] += value.bill_amount
+                        custom_data['recievable_jul_2'] += int(value.bill_amount)
 
                     elif value.month_date == "August" and value.year_date=='23':
                         custom_data['recievable_aug_2'] += value.amount_residual
-                        custom_data['recievable_aug_2'] += value.bill_amount
+                        custom_data['recievable_aug_2'] += int(value.bill_amount)
 
                     elif value.month_date == "September" and value.year_date=='23':
                         custom_data['recievable_sep_2'] += value.amount_residual
-                        custom_data['recievable_sep_2'] += value.bill_amount
+                        custom_data['recievable_sep_2'] += int(value.bill_amount)
 
                     elif value.month_date == "October" and value.year_date=='23':
                         custom_data['recievable_oct_2'] += value.amount_residual
-                        custom_data['recievable_oct_2'] += value.bill_amount
+                        custom_data['recievable_oct_2'] += int(value.bill_amount)
 
                     elif value.month_date == "November" and value.year_date=='23':
                         custom_data['recievable_nov_2'] += value.amount_residual
-                        custom_data['recievable_nov_2'] += value.bill_amount
+                        custom_data['recievable_nov_2'] += int(value.bill_amount)
 
                     elif value.month_date == "December" and value.year_date=='23':
                         custom_data['recievable_dec_2'] += value.amount_residual
-                        custom_data['recievable_dec_2'] += value.bill_amount
+                        custom_data['recievable_dec_2'] += int(value.bill_amount)
             
 
             
