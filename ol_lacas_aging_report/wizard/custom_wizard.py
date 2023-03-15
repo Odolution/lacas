@@ -343,7 +343,7 @@ class agingsReportWizard(models.TransientModel):
         for branch in branch_lst:
 
            
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',2),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             
             custom_data = {
                    
@@ -752,6 +752,11 @@ class agingsReportWizard(models.TransientModel):
                         custom_data['recievable_jan_2'] += value.due_amount
                     if value.payment_state=='paid':
                         custom_data['recievable_jan_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            diff=rec.ol_payment_date-rec.invoice_date
+                            if diff.days <= 10:
+                                custom_data['ondue_jan_2'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "Feburary" and value.year_date=='23':
                     custom_data['recievable_feb_2'] += value.amount_residual
@@ -977,7 +982,7 @@ class agingsReportWizard(models.TransientModel):
                         #------jan23-------
                 
                 "recievable_jan_2":  custom_data['recievable_jan_2'],
-                "ondue_jan_2": 0,
+                "ondue_jan_2": custom_data['ondue_jan_2'],
                 "afterdue_jan_2": 0,
                 "firstmon_jan_2":0,
                 "secmon_jan_2":0,
