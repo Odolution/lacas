@@ -344,11 +344,8 @@ class agingsReportWizard(models.TransientModel):
 
            
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            raise UserError(branch_wise_inv)
-            for value in branch_wise_inv:
-                # if value.program_ids==branch:
-
-                    custom_data = {
+            
+            custom_data = {
                    
                         "student_branch":"",
                         "student_campus":'',
@@ -689,472 +686,477 @@ class agingsReportWizard(models.TransientModel):
 
                     } 
 
-                    custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
-                    custom_data['student_campus'] = value.campus if value.campus else ''
+            for value in branch_wise_inv:
+                # if value.program_ids==branch:
 
-                    if value.month_date == "January" and value.year_date=='22':
-                        if value.payment_state=='not_paid':
-                            custom_data['recievable_jan'] += value.due_amount
-                        if value.payment_state=='paid':
-                            custom_data['recievable_jan'] += (int(value.bill_amount))
+                    
 
-                    elif value.month_date == "Feburary" and value.year_date=='22':
-                        custom_data['recievable_feb'] += value.amount_residual
-                        custom_data['recievable_feb'] += int(value.bill_amount)
+                custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
+                custom_data['student_campus'] = value.campus if value.campus else ''
 
-                    elif value.month_date == "March"and value.year_date=='22':
-                        custom_data['recievable_mar'] += value.amount_residual
-                        custom_data['recievable_mar'] += int(value.bill_amount)
+                if value.month_date == "January" and value.year_date=='22':
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_jan'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_jan'] += (int(value.bill_amount))
 
-                    elif value.month_date == "April" and value.year_date=='22':
-                        custom_data['recievable_apr'] += value.amount_residual
-                        custom_data['recievable_apr'] += int(value.bill_amount)
+                elif value.month_date == "Feburary" and value.year_date=='22':
+                    custom_data['recievable_feb'] += value.amount_residual
+                    custom_data['recievable_feb'] += int(value.bill_amount)
 
+                elif value.month_date == "March"and value.year_date=='22':
+                    custom_data['recievable_mar'] += value.amount_residual
+                    custom_data['recievable_mar'] += int(value.bill_amount)
 
-                    elif value.month_date == "May" and value.year_date=='22':
-                        custom_data['recievable_may'] += value.amount_residual
-                        custom_data['recievable_may'] += int(value.bill_amount)
-
-
-                    elif value.month_date == "June" and value.year_date=='22':
-                        custom_data['recievable_jun'] += value.amount_residual
-                        custom_data['recievable_jun'] += int(value.bill_amount)
+                elif value.month_date == "April" and value.year_date=='22':
+                    custom_data['recievable_apr'] += value.amount_residual
+                    custom_data['recievable_apr'] += int(value.bill_amount)
 
 
-                    elif value.month_date == "July" and value.year_date=='22':
-                        custom_data['recievable_jul'] += value.amount_residual
-                        custom_data['recievable_jul'] += int(value.bill_amount)
-
-                    elif value.month_date == "August" and value.year_date=='22':
-                        custom_data['recievable_aug'] += value.amount_residual
-                        custom_data['recievable_aug'] += int(value.bill_amount)
-
-                    elif value.month_date == "September" and value.year_date=='22':
-                        custom_data['recievable_sep'] += value.amount_residual
-                        custom_data['recievable_sep'] += int(value.bill_amount)
-
-                    elif value.month_date == "October" and value.year_date=='22':
-                        custom_data['recievable_oct'] += value.amount_residual
-                        custom_data['recievable_oct'] += int(value.bill_amount)
-
-                    elif value.month_date == "November" and value.year_date=='22':
-                        custom_data['recievable_nov'] += value.amount_residual
-                        custom_data['recievable_nov'] += int(value.bill_amount)
-
-                    elif value.month_date == "December" and value.year_date=='22':
-                        custom_data['recievable_dec'] += value.amount_residual
-                        custom_data['recievable_dec'] += int(value.bill_amount)
-
-                    elif value.month_date == "January" and value.year_date=='23':
-                        if value.payment_state=='not_paid':
-                            custom_data['recievable_jan_2'] += value.due_amount
-                        if value.payment_state=='paid':
-                            custom_data['recievable_jan_2'] += (int(value.bill_amount))
-
-                    elif value.month_date == "Feburary" and value.year_date=='23':
-                        custom_data['recievable_feb_2'] += value.amount_residual
-                        custom_data['recievable_feb_2'] += int(value.bill_amount)
-
-                    elif value.month_date == "March"and value.year_date=='23':
-                        if value.payment_state=='not_paid':
-                            custom_data['recievable_mar_2'] = value.due_amount
-                        elif value.payment_state=='paid':
-                            custom_data['recievable_mar_2'] = (int(value.bill_amount))
+                elif value.month_date == "May" and value.year_date=='22':
+                    custom_data['recievable_may'] += value.amount_residual
+                    custom_data['recievable_may'] += int(value.bill_amount)
 
 
-                    elif value.month_date == "April" and value.year_date=='23':
-                        custom_data['recievable_apr_2'] += value.amount_residual
-                        custom_data['recievable_apr_2'] += int(value.bill_amount)
+                elif value.month_date == "June" and value.year_date=='22':
+                    custom_data['recievable_jun'] += value.amount_residual
+                    custom_data['recievable_jun'] += int(value.bill_amount)
 
-                    elif value.month_date == "May" and value.year_date=='23':
-                        custom_data['recievable_may_2'] += value.amount_residual
-                        custom_data['recievable_may_2'] += int(value.bill_amount)
 
-                    elif value.month_date == "June" and value.year_date=='23':
-                        custom_data['recievable_jun_2'] += value.amount_residual
-                        custom_data['recievable_jun_2'] += int(value.bill_amount)
+                elif value.month_date == "July" and value.year_date=='22':
+                    custom_data['recievable_jul'] += value.amount_residual
+                    custom_data['recievable_jul'] += int(value.bill_amount)
 
-                    elif value.month_date == "July" and value.year_date=='23':
-                        custom_data['recievable_jul_2'] += value.amount_residual
-                        custom_data['recievable_jul_2'] += int(value.bill_amount)
+                elif value.month_date == "August" and value.year_date=='22':
+                    custom_data['recievable_aug'] += value.amount_residual
+                    custom_data['recievable_aug'] += int(value.bill_amount)
 
-                    elif value.month_date == "August" and value.year_date=='23':
-                        custom_data['recievable_aug_2'] += value.amount_residual
-                        custom_data['recievable_aug_2'] += int(value.bill_amount)
+                elif value.month_date == "September" and value.year_date=='22':
+                    custom_data['recievable_sep'] += value.amount_residual
+                    custom_data['recievable_sep'] += int(value.bill_amount)
 
-                    elif value.month_date == "September" and value.year_date=='23':
-                        custom_data['recievable_sep_2'] += value.amount_residual
-                        custom_data['recievable_sep_2'] += int(value.bill_amount)
+                elif value.month_date == "October" and value.year_date=='22':
+                    custom_data['recievable_oct'] += value.amount_residual
+                    custom_data['recievable_oct'] += int(value.bill_amount)
 
-                    elif value.month_date == "October" and value.year_date=='23':
-                        custom_data['recievable_oct_2'] += value.amount_residual
-                        custom_data['recievable_oct_2'] += int(value.bill_amount)
+                elif value.month_date == "November" and value.year_date=='22':
+                    custom_data['recievable_nov'] += value.amount_residual
+                    custom_data['recievable_nov'] += int(value.bill_amount)
 
-                    elif value.month_date == "November" and value.year_date=='23':
-                        custom_data['recievable_nov_2'] += value.amount_residual
-                        custom_data['recievable_nov_2'] += int(value.bill_amount)
+                elif value.month_date == "December" and value.year_date=='22':
+                    custom_data['recievable_dec'] += value.amount_residual
+                    custom_data['recievable_dec'] += int(value.bill_amount)
 
-                    elif value.month_date == "December" and value.year_date=='23':
-                        custom_data['recievable_dec_2'] += value.amount_residual
-                        custom_data['recievable_dec_2'] += int(value.bill_amount)
+                elif value.month_date == "January" and value.year_date=='23':
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_jan_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_jan_2'] += (int(value.bill_amount))
+
+                elif value.month_date == "Feburary" and value.year_date=='23':
+                    custom_data['recievable_feb_2'] += value.amount_residual
+                    custom_data['recievable_feb_2'] += int(value.bill_amount)
+
+                elif value.month_date == "March"and value.year_date=='23':
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_mar_2'] += value.due_amount
+                    elif value.payment_state=='paid':
+                        custom_data['recievable_mar_2'] += (int(value.bill_amount))
+
+
+                elif value.month_date == "April" and value.year_date=='23':
+                    custom_data['recievable_apr_2'] += value.amount_residual
+                    custom_data['recievable_apr_2'] += int(value.bill_amount)
+
+                elif value.month_date == "May" and value.year_date=='23':
+                    custom_data['recievable_may_2'] += value.amount_residual
+                    custom_data['recievable_may_2'] += int(value.bill_amount)
+
+                elif value.month_date == "June" and value.year_date=='23':
+                    custom_data['recievable_jun_2'] += value.amount_residual
+                    custom_data['recievable_jun_2'] += int(value.bill_amount)
+
+                elif value.month_date == "July" and value.year_date=='23':
+                    custom_data['recievable_jul_2'] += value.amount_residual
+                    custom_data['recievable_jul_2'] += int(value.bill_amount)
+
+                elif value.month_date == "August" and value.year_date=='23':
+                    custom_data['recievable_aug_2'] += value.amount_residual
+                    custom_data['recievable_aug_2'] += int(value.bill_amount)
+
+                elif value.month_date == "September" and value.year_date=='23':
+                    custom_data['recievable_sep_2'] += value.amount_residual
+                    custom_data['recievable_sep_2'] += int(value.bill_amount)
+
+                elif value.month_date == "October" and value.year_date=='23':
+                    custom_data['recievable_oct_2'] += value.amount_residual
+                    custom_data['recievable_oct_2'] += int(value.bill_amount)
+
+                elif value.month_date == "November" and value.year_date=='23':
+                    custom_data['recievable_nov_2'] += value.amount_residual
+                    custom_data['recievable_nov_2'] += int(value.bill_amount)
+
+                elif value.month_date == "December" and value.year_date=='23':
+                    custom_data['recievable_dec_2'] += value.amount_residual
+                    custom_data['recievable_dec_2'] += int(value.bill_amount)
             
 
             
         
-                    mvl=self.env['account.aging.move.line'].create({
-                        
-                        "student_branch":custom_data['student_branch'],
-                        "student_campus":custom_data['student_campus'],
-                       #------jan22-------
+            mvl=self.env['account.aging.move.line'].create({
+                
+                "student_branch":custom_data['student_branch'],
+                "student_campus":custom_data['student_campus'],
+                #------jan22-------
 
-                        "recievable_jan": custom_data['recievable_jan'],
-                        "ondue_jan": 0,
-                        "afterdue_jan": 0,
-                        "firstmon_jan":0,
-                        "secmon_jan":0,
-                        "thirdmon_jan": 0,
-                        "actual_recievable_jan":0,
-                        "total_recieve_jan":0,
-                        "bad_debt_jan": 0,
-                        "percentage_bd_jan": 0,
+                "recievable_jan": custom_data['recievable_jan'],
+                "ondue_jan": 0,
+                "afterdue_jan": 0,
+                "firstmon_jan":0,
+                "secmon_jan":0,
+                "thirdmon_jan": 0,
+                "actual_recievable_jan":0,
+                "total_recieve_jan":0,
+                "bad_debt_jan": 0,
+                "percentage_bd_jan": 0,
 
-                        
-                        #------feb22-------
-                       
-                        "recievable_feb":  custom_data['recievable_feb'],
-                        "ondue_feb": 0,
-                        "afterdue_feb": 0,
-                        "firstmon_feb":0,
-                        "secmon_feb":0,
-                        "thirdmon_feb": 0,
-                        "actual_recievable_feb":0,
-                        "total_recieve_feb":0,
-                        "bad_debt_feb": 0,
-                        "percentage_bd_feb": 0,
+                
+                #------feb22-------
+                
+                "recievable_feb":  custom_data['recievable_feb'],
+                "ondue_feb": 0,
+                "afterdue_feb": 0,
+                "firstmon_feb":0,
+                "secmon_feb":0,
+                "thirdmon_feb": 0,
+                "actual_recievable_feb":0,
+                "total_recieve_feb":0,
+                "bad_debt_feb": 0,
+                "percentage_bd_feb": 0,
 
-                        
-                        #------mar22-------
-                       
-                        "recievable_mar":  custom_data['recievable_mar'],
-                        "ondue_mar": 0,
-                        "afterdue_mar": 0,
-                        "firstmon_mar":0,
-                        "secmon_mar":0,
-                        "thirdmon_mar": 0,
-                        "actual_recievable_mar":0,
-                        "total_recieve_mar":0,
-                        "bad_debt_mar": 0,
-                        "percentage_bd_mar": 0,
+                
+                #------mar22-------
+                
+                "recievable_mar":  custom_data['recievable_mar'],
+                "ondue_mar": 0,
+                "afterdue_mar": 0,
+                "firstmon_mar":0,
+                "secmon_mar":0,
+                "thirdmon_mar": 0,
+                "actual_recievable_mar":0,
+                "total_recieve_mar":0,
+                "bad_debt_mar": 0,
+                "percentage_bd_mar": 0,
 
-                        
-                        #------apr22-------
-                       
-                        "recievable_apr":  custom_data['recievable_apr'],
-                        "ondue_apr": 0,
-                        "afterdue_apr": 0,
-                        "firstmon_apr":0,
-                        "secmon_apr":0,
-                        "thirdmon_apr": 0,
-                        "actual_recievable_apr":0,
-                        "total_recieve_apr":0,
-                        "bad_debt_apr": 0,
-                        "percentage_bd_apr": 0,
+                
+                #------apr22-------
+                
+                "recievable_apr":  custom_data['recievable_apr'],
+                "ondue_apr": 0,
+                "afterdue_apr": 0,
+                "firstmon_apr":0,
+                "secmon_apr":0,
+                "thirdmon_apr": 0,
+                "actual_recievable_apr":0,
+                "total_recieve_apr":0,
+                "bad_debt_apr": 0,
+                "percentage_bd_apr": 0,
 
-                        
-                        #------may22-------
-                       
-                        "recievable_may":  custom_data['recievable_may'],
-                        "ondue_may": 0,
-                        "afterdue_may": 0,
-                        "firstmon_may":0,
-                        "secmon_may":0,
-                        "thirdmon_may": 0,
-                        "actual_recievable_may":0,
-                        "total_recieve_may":0,
-                        "bad_debt_may": 0,
-                        "percentage_bd_may": 0,
+                
+                #------may22-------
+                
+                "recievable_may":  custom_data['recievable_may'],
+                "ondue_may": 0,
+                "afterdue_may": 0,
+                "firstmon_may":0,
+                "secmon_may":0,
+                "thirdmon_may": 0,
+                "actual_recievable_may":0,
+                "total_recieve_may":0,
+                "bad_debt_may": 0,
+                "percentage_bd_may": 0,
 
-                        
-                        #------jun22-------
-                       
-                        "recievable_jun":  custom_data['recievable_jun'],
-                        "ondue_jun": 0,
-                        "afterdue_jun": 0,
-                        "firstmon_jun":0,
-                        "secmon_jun":0,
-                        "thirdmon_jun": 0,
-                        "actual_recievable_jun":0,
-                        "total_recieve_jun":0,
-                        "bad_debt_jun": 0,
-                        "percentage_bd_jun": 0,
+                
+                #------jun22-------
+                
+                "recievable_jun":  custom_data['recievable_jun'],
+                "ondue_jun": 0,
+                "afterdue_jun": 0,
+                "firstmon_jun":0,
+                "secmon_jun":0,
+                "thirdmon_jun": 0,
+                "actual_recievable_jun":0,
+                "total_recieve_jun":0,
+                "bad_debt_jun": 0,
+                "percentage_bd_jun": 0,
 
-                        
-                        #------jul22-------
-                       
-                        "recievable_jul":  custom_data['recievable_jul'],
-                        "ondue_jul": 0,
-                        "afterdue_jul": 0,
-                        "firstmon_jul":0,
-                        "secmon_jul":0,
-                        "thirdmon_jul": 0,
-                        "actual_recievable_jul":0,
-                        "total_recieve_jul":0,
-                        "bad_debt_jul": 0,
-                        "percentage_bd_jul": 0,
+                
+                #------jul22-------
+                
+                "recievable_jul":  custom_data['recievable_jul'],
+                "ondue_jul": 0,
+                "afterdue_jul": 0,
+                "firstmon_jul":0,
+                "secmon_jul":0,
+                "thirdmon_jul": 0,
+                "actual_recievable_jul":0,
+                "total_recieve_jul":0,
+                "bad_debt_jul": 0,
+                "percentage_bd_jul": 0,
 
-                        
-                        #------aug22-------
-                       
-                        "recievable_aug":  custom_data['recievable_aug'],
-                        "ondue_aug": 0,
-                        "afterdue_aug": 0,
-                        "firstmon_aug":0,
-                        "secmon_aug":0,
-                        "thirdmon_aug": 0,
-                        "actual_recievable_aug":0,
-                        "total_recieve_aug":0,
-                        "bad_debt_aug": 0,
-                        "percentage_bd_aug": 0,
+                
+                #------aug22-------
+                
+                "recievable_aug":  custom_data['recievable_aug'],
+                "ondue_aug": 0,
+                "afterdue_aug": 0,
+                "firstmon_aug":0,
+                "secmon_aug":0,
+                "thirdmon_aug": 0,
+                "actual_recievable_aug":0,
+                "total_recieve_aug":0,
+                "bad_debt_aug": 0,
+                "percentage_bd_aug": 0,
 
-                        
-                        #------sep22-------
-                       
-                        "recievable_sep":  custom_data['recievable_sep'],
-                        "ondue_sep": 0,
-                        "afterdue_sep": 0,
-                        "firstmon_sep":0,
-                        "secmon_sep":0,
-                        "thirdmon_sep": 0,
-                        "actual_recievable_sep":0,
-                        "total_recieve_sep":0,
-                        "bad_debt_sep": 0,
-                        "percentage_bd_sep": 0,
+                
+                #------sep22-------
+                
+                "recievable_sep":  custom_data['recievable_sep'],
+                "ondue_sep": 0,
+                "afterdue_sep": 0,
+                "firstmon_sep":0,
+                "secmon_sep":0,
+                "thirdmon_sep": 0,
+                "actual_recievable_sep":0,
+                "total_recieve_sep":0,
+                "bad_debt_sep": 0,
+                "percentage_bd_sep": 0,
 
-                        
-                        #------oct22-------
-                       
-                        "recievable_oct":  custom_data['recievable_oct'],
-                        "ondue_oct": 0,
-                        "afterdue_oct": 0,
-                        "firstmon_oct":0,
-                        "secmon_oct":0,
-                        "thirdmon_oct": 0,
-                        "actual_recievable_oct":0,
-                        "total_recieve_oct":0,
-                        "bad_debt_oct": 0,
-                        "percentage_bd_oct": 0,
+                
+                #------oct22-------
+                
+                "recievable_oct":  custom_data['recievable_oct'],
+                "ondue_oct": 0,
+                "afterdue_oct": 0,
+                "firstmon_oct":0,
+                "secmon_oct":0,
+                "thirdmon_oct": 0,
+                "actual_recievable_oct":0,
+                "total_recieve_oct":0,
+                "bad_debt_oct": 0,
+                "percentage_bd_oct": 0,
 
-                        
-                        #------nov22-------
-                       
-                        "recievable_nov":  custom_data['recievable_nov'],
-                        "ondue_nov": 0,
-                        "afterdue_nov": 0,
-                        "firstmon_nov":0,
-                        "secmon_nov":0,
-                        "thirdmon_nov": 0,
-                        "actual_recievable_nov":0,
-                        "total_recieve_nov":0,
-                        "bad_debt_nov": 0,
-                        "percentage_bd_nov": 0,
+                
+                #------nov22-------
+                
+                "recievable_nov":  custom_data['recievable_nov'],
+                "ondue_nov": 0,
+                "afterdue_nov": 0,
+                "firstmon_nov":0,
+                "secmon_nov":0,
+                "thirdmon_nov": 0,
+                "actual_recievable_nov":0,
+                "total_recieve_nov":0,
+                "bad_debt_nov": 0,
+                "percentage_bd_nov": 0,
 
-                        
-                        #------dec22-------
-                       
-                        "recievable_dec":  custom_data['recievable_dec'],
-                        "ondue_dec": 0,
-                        "afterdue_dec": 0,
-                        "firstmon_dec":0,
-                        "secmon_dec":0,
-                        "thirdmon_dec": 0,
-                        "actual_recievable_dec":0,
-                        "total_recieve_dec":0,
-                        "bad_debt_dec": 0,
-                        "percentage_bd_dec": 0,
+                
+                #------dec22-------
+                
+                "recievable_dec":  custom_data['recievable_dec'],
+                "ondue_dec": 0,
+                "afterdue_dec": 0,
+                "firstmon_dec":0,
+                "secmon_dec":0,
+                "thirdmon_dec": 0,
+                "actual_recievable_dec":0,
+                "total_recieve_dec":0,
+                "bad_debt_dec": 0,
+                "percentage_bd_dec": 0,
 
-                             #------jan23-------
-                       
-                        "recievable_jan_2":  custom_data['recievable_jan_2'],
-                        "ondue_jan_2": 0,
-                        "afterdue_jan_2": 0,
-                        "firstmon_jan_2":0,
-                        "secmon_jan_2":0,
-                        "thirdmon_jan_2": 0,
-                        "actual_recievable_jan_2":0,
-                        "total_recieve_jan_2":0,
-                        "bad_debt_jan_2": 0,
-                        "percentage_bd_jan_2": 0,
+                        #------jan23-------
+                
+                "recievable_jan_2":  custom_data['recievable_jan_2'],
+                "ondue_jan_2": 0,
+                "afterdue_jan_2": 0,
+                "firstmon_jan_2":0,
+                "secmon_jan_2":0,
+                "thirdmon_jan_2": 0,
+                "actual_recievable_jan_2":0,
+                "total_recieve_jan_2":0,
+                "bad_debt_jan_2": 0,
+                "percentage_bd_jan_2": 0,
 
-                        
-                        #------feb23-------
-                       
-                        "recievable_feb_2":  custom_data['recievable_feb_2'],
-                        "ondue_feb_2": 0,
-                        "afterdue_feb_2": 0,
-                        "firstmon_feb_2":0,
-                        "secmon_feb_2":0,
-                        "thirdmon_feb_2": 0,
-                        "actual_recievable_feb_2":0,
-                        "total_recieve_feb_2":0,
-                        "bad_debt_feb_2": 0,
-                        "percentage_bd_feb_2": 0,
+                
+                #------feb23-------
+                
+                "recievable_feb_2":  custom_data['recievable_feb_2'],
+                "ondue_feb_2": 0,
+                "afterdue_feb_2": 0,
+                "firstmon_feb_2":0,
+                "secmon_feb_2":0,
+                "thirdmon_feb_2": 0,
+                "actual_recievable_feb_2":0,
+                "total_recieve_feb_2":0,
+                "bad_debt_feb_2": 0,
+                "percentage_bd_feb_2": 0,
 
-                        
-                        #------mar23-------
-                       
-                        "recievable_mar_2": custom_data['recievable_mar_2'],
-                        "ondue_mar_2": 0,
-                        "afterdue_mar_2": 0,
-                        "firstmon_mar_2":0,
-                        "secmon_mar_2":0,
-                        "thirdmon_mar_2": 0,
-                        "actual_recievable_mar_2":0,
-                        "total_recieve_mar_2":0,
-                        "bad_debt_mar_2": 0,
-                        "percentage_bd_mar_2": 0,
+                
+                #------mar23-------
+                
+                "recievable_mar_2": custom_data['recievable_mar_2'],
+                "ondue_mar_2": 0,
+                "afterdue_mar_2": 0,
+                "firstmon_mar_2":0,
+                "secmon_mar_2":0,
+                "thirdmon_mar_2": 0,
+                "actual_recievable_mar_2":0,
+                "total_recieve_mar_2":0,
+                "bad_debt_mar_2": 0,
+                "percentage_bd_mar_2": 0,
 
-                        
-                        #------apr23-------
-                       
-                        "recievable_apr_2": custom_data['recievable_apr_2'],
-                        "ondue_apr_2": 0,
-                        "afterdue_apr_2": 0,
-                        "firstmon_apr_2":0,
-                        "secmon_apr_2":0,
-                        "thirdmon_apr_2": 0,
-                        "actual_recievable_apr_2":0,
-                        "total_recieve_apr_2":0,
-                        "bad_debt_apr_2": 0,
-                        "percentage_bd_apr_2": 0,
+                
+                #------apr23-------
+                
+                "recievable_apr_2": custom_data['recievable_apr_2'],
+                "ondue_apr_2": 0,
+                "afterdue_apr_2": 0,
+                "firstmon_apr_2":0,
+                "secmon_apr_2":0,
+                "thirdmon_apr_2": 0,
+                "actual_recievable_apr_2":0,
+                "total_recieve_apr_2":0,
+                "bad_debt_apr_2": 0,
+                "percentage_bd_apr_2": 0,
 
-                        
-                        #------may23-------
-                       
-                        "recievable_may_2": custom_data['recievable_may_2'],
-                        "ondue_may_2": 0,
-                        "afterdue_may_2": 0,
-                        "firstmon_may_2":0,
-                        "secmon_may_2":0,
-                        "thirdmon_may_2": 0,
-                        "actual_recievable_may_2":0,
-                        "total_recieve_may_2":0,
-                        "bad_debt_may_2": 0,
-                        "percentage_bd_may_2": 0,
+                
+                #------may23-------
+                
+                "recievable_may_2": custom_data['recievable_may_2'],
+                "ondue_may_2": 0,
+                "afterdue_may_2": 0,
+                "firstmon_may_2":0,
+                "secmon_may_2":0,
+                "thirdmon_may_2": 0,
+                "actual_recievable_may_2":0,
+                "total_recieve_may_2":0,
+                "bad_debt_may_2": 0,
+                "percentage_bd_may_2": 0,
 
-                        
-                        #------jun23-------
-                       
-                        "recievable_jun_2": custom_data['recievable_jun_2'],
-                        "ondue_jun_2": 0,
-                        "afterdue_jun_2": 0,
-                        "firstmon_jun_2":0,
-                        "secmon_jun_2":0,
-                        "thirdmon_jun_2": 0,
-                        "actual_recievable_jun_2":0,
-                        "total_recieve_jun_2":0,
-                        "bad_debt_jun_2": 0,
-                        "percentage_bd_jun_2": 0,
+                
+                #------jun23-------
+                
+                "recievable_jun_2": custom_data['recievable_jun_2'],
+                "ondue_jun_2": 0,
+                "afterdue_jun_2": 0,
+                "firstmon_jun_2":0,
+                "secmon_jun_2":0,
+                "thirdmon_jun_2": 0,
+                "actual_recievable_jun_2":0,
+                "total_recieve_jun_2":0,
+                "bad_debt_jun_2": 0,
+                "percentage_bd_jun_2": 0,
 
-                        
-                        #------jul23-------
-                       
-                        "recievable_jul_2": custom_data['recievable_jul_2'],
-                        "ondue_jul_2": 0,
-                        "afterdue_jul_2": 0,
-                        "firstmon_jul_2":0,
-                        "secmon_jul_2":0,
-                        "thirdmon_jul_2": 0,
-                        "actual_recievable_jul_2":0,
-                        "total_recieve_jul_2":0,
-                        "bad_debt_jul_2": 0,
-                        "percentage_bd_jul_2": 0,
+                
+                #------jul23-------
+                
+                "recievable_jul_2": custom_data['recievable_jul_2'],
+                "ondue_jul_2": 0,
+                "afterdue_jul_2": 0,
+                "firstmon_jul_2":0,
+                "secmon_jul_2":0,
+                "thirdmon_jul_2": 0,
+                "actual_recievable_jul_2":0,
+                "total_recieve_jul_2":0,
+                "bad_debt_jul_2": 0,
+                "percentage_bd_jul_2": 0,
 
-                        
-                        #------aug23-------
-                       
-                        "recievable_aug_2": custom_data['recievable_aug_2'],
-                        "ondue_aug_2": 0,
-                        "afterdue_aug_2": 0,
-                        "firstmon_aug_2":0,
-                        "secmon_aug_2":0,
-                        "thirdmon_aug_2": 0,
-                        "actual_recievable_aug_2":0,
-                        "total_recieve_aug_2":0,
-                        "bad_debt_aug_2": 0,
-                        "percentage_bd_aug_2": 0,
+                
+                #------aug23-------
+                
+                "recievable_aug_2": custom_data['recievable_aug_2'],
+                "ondue_aug_2": 0,
+                "afterdue_aug_2": 0,
+                "firstmon_aug_2":0,
+                "secmon_aug_2":0,
+                "thirdmon_aug_2": 0,
+                "actual_recievable_aug_2":0,
+                "total_recieve_aug_2":0,
+                "bad_debt_aug_2": 0,
+                "percentage_bd_aug_2": 0,
 
-                        
-                        #------sep23-------
-                       
-                        "recievable_sep_2": custom_data['recievable_sep_2'],
-                        "ondue_sep_2": 0,
-                        "afterdue_sep_2": 0,
-                        "firstmon_sep_2":0,
-                        "secmon_sep_2":0,
-                        "thirdmon_sep_2": 0,
-                        "actual_recievable_sep_2":0,
-                        "total_recieve_sep_2":0,
-                        "bad_debt_sep_2": 0,
-                        "percentage_bd_sep_2": 0,
+                
+                #------sep23-------
+                
+                "recievable_sep_2": custom_data['recievable_sep_2'],
+                "ondue_sep_2": 0,
+                "afterdue_sep_2": 0,
+                "firstmon_sep_2":0,
+                "secmon_sep_2":0,
+                "thirdmon_sep_2": 0,
+                "actual_recievable_sep_2":0,
+                "total_recieve_sep_2":0,
+                "bad_debt_sep_2": 0,
+                "percentage_bd_sep_2": 0,
 
-                        
-                        #------oct23-------
-                       
-                        "recievable_oct_2": custom_data['recievable_oct_2'],
-                        "ondue_oct_2": 0,
-                        "afterdue_oct_2": 0,
-                        "firstmon_oct_2":0,
-                        "secmon_oct_2":0,
-                        "thirdmon_oct_2": 0,
-                        "actual_recievable_oct_2":0,
-                        "total_recieve_oct_2":0,
-                        "bad_debt_oct_2": 0,
-                        "percentage_bd_oct_2": 0,
+                
+                #------oct23-------
+                
+                "recievable_oct_2": custom_data['recievable_oct_2'],
+                "ondue_oct_2": 0,
+                "afterdue_oct_2": 0,
+                "firstmon_oct_2":0,
+                "secmon_oct_2":0,
+                "thirdmon_oct_2": 0,
+                "actual_recievable_oct_2":0,
+                "total_recieve_oct_2":0,
+                "bad_debt_oct_2": 0,
+                "percentage_bd_oct_2": 0,
 
-                        
-                        #------nov23-------
-                       
-                        "recievable_nov_2": custom_data['recievable_nov_2'],
-                        "ondue_nov_2": 0,
-                        "afterdue_nov_2": 0,
-                        "firstmon_nov_2":0,
-                        "secmon_nov_2":0,
-                        "thirdmon_nov_2": 0,
-                        "actual_recievable_nov_2":0,
-                        "total_recieve_nov_2":0,
-                        "bad_debt_nov_2": 0,
-                        "percentage_bd_nov_2": 0,
+                
+                #------nov23-------
+                
+                "recievable_nov_2": custom_data['recievable_nov_2'],
+                "ondue_nov_2": 0,
+                "afterdue_nov_2": 0,
+                "firstmon_nov_2":0,
+                "secmon_nov_2":0,
+                "thirdmon_nov_2": 0,
+                "actual_recievable_nov_2":0,
+                "total_recieve_nov_2":0,
+                "bad_debt_nov_2": 0,
+                "percentage_bd_nov_2": 0,
 
-                        
-                        #------dec23-------
-                       
-                        "recievable_dec_2": custom_data['recievable_dec_2'],
-                        "ondue_dec_2": 0,
-                        "afterdue_dec_2": 0,
-                        "firstmon_dec_2":0,
-                        "secmon_dec_2":0,
-                        "thirdmon_dec_2": 0,
-                        "actual_recievable_dec_2":0,
-                        "total_recieve_dec_2":0,
-                        "bad_debt_dec_2": 0,
-                        "percentage_bd_dec_2": 0,
+                
+                #------dec23-------
+                
+                "recievable_dec_2": custom_data['recievable_dec_2'],
+                "ondue_dec_2": 0,
+                "afterdue_dec_2": 0,
+                "firstmon_dec_2":0,
+                "secmon_dec_2":0,
+                "thirdmon_dec_2": 0,
+                "actual_recievable_dec_2":0,
+                "total_recieve_dec_2":0,
+                "bad_debt_dec_2": 0,
+                "percentage_bd_dec_2": 0,
 
-                        
+                
+    
+            })
+            lines.append(mvl.id)
+            lst=[]
+            lst.append(mvl['student_branch'])
+            lst.append(mvl['student_campus'])
+            lst.append(mvl['recievable_jan_2'])
+            lst.append(mvl['recievable_mar_2'])
+            raise UserError(lst)
+
+
             
-                    })
-                    lines.append(mvl.id)
-                    lst=[]
-                    lst.append(mvl['student_branch'])
-                    lst.append(mvl['student_campus'])
-                    lst.append(mvl['recievable_jan_2'])
-                    lst.append(mvl['recievable_mar_2'])
-                    # raise UserError(lst)
-
-
             
             
             
-            raise UserError(lines)
             self.write({
                 "account_report_line":[(6,0,lines)]
             }
