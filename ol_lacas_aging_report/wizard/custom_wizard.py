@@ -753,9 +753,18 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='paid':
                         custom_data['recievable_jan_2'] += (int(value.bill_amount))
                         if value.ol_payment_date:
-                            diff=value.ol_payment_date-value.invoice_date
-                            if diff.days <= 10:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff<11:
                                 custom_data['ondue_jan_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff<31:
+                                custom_data['afterdue_jan_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff<61:
+                                custom_data['firstmon_jan_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff<91:
+                                custom_data['secmon_jan_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff<121:
+                                custom_data['thirdmon_jan_2'] += (int(value.bill_amount))
 
 
                 elif value.month_date == "Feburary" and value.year_date=='23':
@@ -983,13 +992,13 @@ class agingsReportWizard(models.TransientModel):
                 
                 "recievable_jan_2":  custom_data['recievable_jan_2'],
                 "ondue_jan_2": custom_data['ondue_jan_2'],
-                "afterdue_jan_2": 0,
-                "firstmon_jan_2":0,
-                "secmon_jan_2":0,
-                "thirdmon_jan_2": 0,
+                "afterdue_jan_2": custom_data['afterdue_jan_2'],
+                "firstmon_jan_2": custom_data['firstmon_jan_2'],
+                "secmon_jan_2":custom_data['secmon_jan_2'],
+                "thirdmon_jan_2": custom_data['thirdmon_jan_2'],
                 "actual_recievable_jan_2":0,
-                "total_recieve_jan_2":0,
-                "bad_debt_jan_2": 0,
+                "total_recieve_jan_2":custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2']
+                "bad_debt_jan_2":custom_data['recievable_jan_2']-custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2'],
                 "percentage_bd_jan_2": 0,
 
                 
@@ -1155,6 +1164,12 @@ class agingsReportWizard(models.TransientModel):
             lst.append(mvl['student_campus'])
             lst.append(mvl['recievable_jan_2'])
             lst.append(mvl['ondue_jan_2'])
+            lst.append(mvl['afterdue_jan_2'])
+            lst.append(mvl['firstmon_jan_2'])
+            lst.append(mvl['secmon_jan_2'])
+            lst.append(mvl['thirdmon_jan_2'])
+            lst.append(mvl['total_recieve_jan_2'])
+            lst.append(mvl['bad_debt_jan_2'])
             raise UserError(lst)
 
 
