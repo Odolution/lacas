@@ -328,7 +328,7 @@ class agingsReportWizard(models.TransientModel):
 
         
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','paid']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         branch_lst=[]
 
         for inv in move_ids:
@@ -340,7 +340,7 @@ class agingsReportWizard(models.TransientModel):
         for branch in branch_lst:
 
            
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('payment_state','in',['not_paid','paid']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
           
             for value in branch_wise_inv:
                 if value.program_ids==branch:
@@ -686,12 +686,14 @@ class agingsReportWizard(models.TransientModel):
 
                     } 
 
-                    custom_data['student_branch'] = value.program_ids if  len(value.program_ids)==1  else ""
+                    custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
                     custom_data['student_campus'] = value.campus if value.campus else ''
 
                     if value.month_date == "January" and value.year_date=='22':
-                        custom_data['recievable_jan'] += value.amount_residual
-                        custom_data['recievable_jan'] += (int(value.bill_amount))
+                        if value.payment_state=='not_paid':
+                            custom_data['recievable_jan'] += value.due_amount
+                        if value.payment_state=='paid':
+                            custom_data['recievable_jan'] += (int(value.bill_amount))
 
                     elif value.month_date == "Feburary" and value.year_date=='22':
                         custom_data['recievable_feb'] += value.amount_residual
@@ -741,16 +743,21 @@ class agingsReportWizard(models.TransientModel):
                         custom_data['recievable_dec'] += int(value.bill_amount)
 
                     elif value.month_date == "January" and value.year_date=='23':
-                        custom_data['recievable_jan_2'] += value.amount_residual
-                        custom_data['recievable_jan_2'] += int(value.bill_amount)
+                        if value.payment_state=='not_paid':
+                            custom_data['recievable_jan_2'] += value.due_amount
+                        if value.payment_state=='paid':
+                            custom_data['recievable_jan_2'] += (int(value.bill_amount))
 
                     elif value.month_date == "Feburary" and value.year_date=='23':
                         custom_data['recievable_feb_2'] += value.amount_residual
                         custom_data['recievable_feb_2'] += int(value.bill_amount)
 
                     elif value.month_date == "March"and value.year_date=='23':
-                        custom_data['recievable_mar_2'] += value.amount_residual
-                        custom_data['recievable_mar_2'] += int(value.bill_amount)
+                        if value.payment_state=='not_paid':
+                            custom_data['recievable_mar_2'] += value.due_amount
+                        if value.payment_state=='paid':
+                            custom_data['recievable_mar_2'] += (int(value.bill_amount))
+
 
                     elif value.month_date == "April" and value.year_date=='23':
                         custom_data['recievable_apr_2'] += value.amount_residual
