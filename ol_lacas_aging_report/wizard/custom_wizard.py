@@ -1222,6 +1222,7 @@ class agingsReportWizard(models.TransientModel):
             bd_jan=custom_data['recievable_jan']-tr_jan
             if custom_data['recievable_jan']!=0:
                 bd_perc_jan=bd_jan/custom_data['recievable_jan']
+            
 
             tr_feb=custom_data['ondue_feb']+custom_data['afterdue_feb']+ custom_data['firstmon_feb']+custom_data['secmon_feb']+custom_data['thirdmon_feb']+ custom_data['actual_recievable_feb']
             bd_feb=custom_data['recievable_feb']-tr_feb
@@ -1359,7 +1360,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan":custom_data['actual_recievable_jan'],
                 "total_recieve_jan":tr_jan,
                 "bad_debt_jan": bd_jan,
-                "percentage_bd_jan": bd_perc_jan,
+                "percentage_bd_jan": bd_perc_jan if bd_perc_jan else 0,
 
                 
                 #------feb22-------
@@ -1373,7 +1374,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_feb":custom_data['actual_recievable_feb'],
                 "total_recieve_feb":tr_feb,
                 "bad_debt_feb": bd_feb,
-                "percentage_bd_feb": bd_perc_feb,
+                "percentage_bd_feb": bd_perc_feb if bd_perc_feb else 0,
 
                 
                 #------mar22-------
@@ -1387,7 +1388,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_mar":custom_data['actual_recievable_mar'],
                 "total_recieve_mar":tr_mar,
                 "bad_debt_mar": bd_mar,
-                "percentage_bd_mar": bd_perc_mar,
+                "percentage_bd_mar": bd_perc_mar if bd_perc_mar else 0,
 
                 
                 #------apr22-------
@@ -1402,7 +1403,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_apr":custom_data['actual_recievable_apr'],
                 "total_recieve_apr":tr_apr,
                 "bad_debt_apr": bd_apr,
-                "percentage_bd_apr": bd_perc_apr,
+                "percentage_bd_apr": bd_perc_apr if bd_perc_apr else 0,
 
                 
 
@@ -1419,7 +1420,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_may":custom_data['actual_recievable_may'],
                 "total_recieve_may":tr_may,
                 "bad_debt_may": bd_may,
-                "percentage_bd_may": bd_perc_may,
+                "percentage_bd_may": bd_perc_may if bd_perc_may else 0,
 
                 
 
@@ -1436,7 +1437,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jun":custom_data['actual_recievable_jun'],
                 "total_recieve_jun":tr_jun,
                 "bad_debt_jun": bd_jun,
-                "percentage_bd_jun": bd_perc_jun,
+                "percentage_bd_jun": bd_perc_jun if bd_perc_jun else 0,
 
                 
 
@@ -1453,7 +1454,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jul":custom_data['actual_recievable_jul'],
                 "total_recieve_jul":tr_jul,
                 "bad_debt_jul": bd_jul,
-                "percentage_bd_jul": bd_perc_jul,
+                "percentage_bd_jul": bd_perc_jul if bd_perc_jul else 0,
 
                 
 
@@ -1470,7 +1471,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_aug":custom_data['actual_recievable_aug'],
                 "total_recieve_aug":tr_aug,
                 "bad_debt_aug": bd_aug,
-                "percentage_bd_aug": bd_perc_aug,
+                "percentage_bd_aug": bd_perc_aug if bd_perc_aug else 0,
 
                 
                 
@@ -1486,7 +1487,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_sep":custom_data['actual_recievable_sep'],
                 "total_recieve_sep":tr_sep,
                 "bad_debt_sep": bd_sep,
-                "percentage_bd_sep": bd_perc_sep,
+                "percentage_bd_sep": bd_perc_sep if bd_perc_sep else 0,
 
                 
                 
@@ -1501,7 +1502,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_oct":custom_data['actual_recievable_oct'],
                 "total_recieve_oct":tr_oct,
                 "bad_debt_oct": bd_oct,
-                "percentage_bd_oct": bd_perc_oct,
+                "percentage_bd_oct": bd_perc_oct if bd_perc_oct else 0,
 
                 
 
@@ -1517,7 +1518,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_nov":custom_data['actual_recievable_nov'],
                 "total_recieve_nov":tr_nov,
                 "bad_debt_nov": bd_nov,
-                "percentage_bd_nov": bd_perc_nov,
+                "percentage_bd_nov": bd_perc_nov if bd_perc_nov else 0 ,
 
                 
 
@@ -1534,7 +1535,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_dec":custom_data['actual_recievable_dec'],
                 "total_recieve_dec":tr_dec,
                 "bad_debt_dec": bd_dec,
-                "percentage_bd_dec": bd_perc_dec,
+                "percentage_bd_dec": bd_perc_dec if bd_perc_dec else 0,
 
                 
                         #------jan23-------
@@ -1548,7 +1549,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan_2":custom_data['actual_recievable_jan_2'],
                 "total_recieve_jan_2":tr_jan_2,
                 "bad_debt_jan_2":bd_jan_2,
-                "percentage_bd_jan_2": bd_perc_jan_2,
+                "percentage_bd_jan_2": bd_perc_jan_2 if bd_perc_jan_2 else 0,
 
                 
                 #------feb23-------
@@ -1563,7 +1564,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_feb_2":custom_data['actual_recievable_feb_2'],
                 "total_recieve_feb_2":tr_feb_2,
                 "bad_debt_feb_2": bd_feb_2,
-                "percentage_bd_feb_2": bd_perc_feb_2,
+                "percentage_bd_feb_2": bd_perc_feb_2 if bd_perc_feb_2 else 0,
 
                 
                 
@@ -1579,7 +1580,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_mar_2":custom_data['actual_recievable_mar_2'],
                 "total_recieve_mar_2":tr_mar_2,
                 "bad_debt_mar_2": bd_mar_2,
-                "percentage_bd_mar_2": bd_perc_mar_2,
+                "percentage_bd_mar_2": bd_perc_mar_2 if bd_perc_mar_2 else 0,
 
                 
 
@@ -1596,7 +1597,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_apr_2":custom_data['actual_recievable_apr_2'],
                 "total_recieve_apr_2":tr_apr_2,
                 "bad_debt_apr_2": bd_apr_2,
-                "percentage_bd_apr_2": bd_perc_apr_2,
+                "percentage_bd_apr_2": bd_perc_apr_2 if bd_perc_apr_2 else 0,
 
                 
 
@@ -1613,7 +1614,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_may_2":custom_data['actual_recievable_may_2'],
                 "total_recieve_may_2":tr_may_2,
                 "bad_debt_may_2": bd_may_2,
-                "percentage_bd_may_2": bd_perc_may_2,
+                "percentage_bd_may_2": bd_perc_may_2 if bd_perc_may_2 else 0,
 
                 
                 
@@ -1629,7 +1630,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jun_2":custom_data['actual_recievable_jun_2'],
                 "total_recieve_jun_2":tr_jun_2,
                 "bad_debt_jun_2": bd_jun_2,
-                "percentage_bd_jun_2": bd_perc_jun_2,
+                "percentage_bd_jun_2": bd_perc_jun_2 if bd_perc_jun_2 else 0,
 
                 
 
@@ -1646,7 +1647,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jul_2":custom_data['actual_recievable_jul_2'],
                 "total_recieve_jul_2":tr_jul_2,
                 "bad_debt_jul_2": bd_jul_2,
-                "percentage_bd_jul_2": bd_perc_jul_2,
+                "percentage_bd_jul_2": bd_perc_jul_2 if bd_perc_jul_2 else 0,
 
                 
 
@@ -1663,7 +1664,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_aug_2":custom_data['actual_recievable_aug_2'],
                 "total_recieve_aug_2":tr_aug_2,
                 "bad_debt_aug_2": bd_aug_2,
-                "percentage_bd_aug_2": bd_perc_aug_2,
+                "percentage_bd_aug_2": bd_perc_aug_2 if bd_perc_aug_2 else 0,
 
                 
 
@@ -1680,7 +1681,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_sep_2":custom_data['actual_recievable_sep_2'],
                 "total_recieve_sep_2":tr_sep_2,
                 "bad_debt_sep_2": bd_sep_2,
-                "percentage_bd_sep_2": bd_perc_sep_2,
+                "percentage_bd_sep_2": bd_perc_sep_2 if bd_perc_sep_2 else 0,
 
                 
                 
@@ -1695,7 +1696,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_oct_2":custom_data['actual_recievable_oct_2'],
                 "total_recieve_oct_2":tr_oct_2,
                 "bad_debt_oct_2": bd_oct_2,
-                "percentage_bd_oct_2": bd_perc_oct_2,
+                "percentage_bd_oct_2": bd_perc_oct_2 if bd_perc_oct_2 else 0,
 
                 
                 
@@ -1711,7 +1712,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_nov_2":custom_data['actual_recievable_nov_2'],
                 "total_recieve_nov_2":tr_nov_2,
                 "bad_debt_nov_2": bd_nov_2,
-                "percentage_bd_nov_2": bd_perc_nov_2,
+                "percentage_bd_nov_2": bd_perc_nov_2 if bd_perc_nov_2 else 0,
 
                 
                 
@@ -1727,7 +1728,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_dec_2":custom_data['actual_recievable_dec_2'],
                 "total_recieve_dec_2":tr_dec_2,
                 "bad_debt_dec_2": bd_dec_2,
-                "percentage_bd_dec_2": bd_perc_dec_2,
+                "percentage_bd_dec_2": bd_perc_dec_2 if bd_perc_dec_2 else 0,
 
                 
                 
