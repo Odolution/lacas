@@ -1801,7 +1801,7 @@ class agingsReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            col = 3
+            col = 4
             
       
             for i in range(range_start,range_stop+1):
