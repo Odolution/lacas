@@ -1748,8 +1748,7 @@ class agingsReportWizard(models.TransientModel):
             date_format = xlwt.XFStyle()
             date_format.num_format_str = 'dd/mm/yyyy'
 
-            worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
-            worksheet.write_merge(0, 1, 6, 11, "aging Report OF  STUDENTS", style=style_title)
+         
             
             
 
