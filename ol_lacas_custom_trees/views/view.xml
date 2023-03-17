@@ -138,10 +138,10 @@
                 <field name="bill_date"/>
                 <field name="challan_date"/>
                 <field name="due_date"/>
-                <field name="due_amount"/>
+                <!-- <field name="due_amount"/>
                 <field name="net_amount"/>
                 <field name="bill_amount"/>
-                <field name="tuition"/>
+                <field name="tuition"/> -->
                 <!-- <field name="club"/> -->
                 <!-- <field name="computer"/>
                 <field name="library"/>
