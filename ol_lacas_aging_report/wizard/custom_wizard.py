@@ -1222,74 +1222,74 @@ class agingsReportWizard(models.TransientModel):
             bd_jan=custom_data['recievable_jan']-tr_jan
             bd_perc_jan=0
             if custom_data['recievable_jan']!=0:
-                bd_perc_jan=bd_jan/custom_data['recievable_jan']
+                bd_perc_jan=bd_jan/custom_data['recievable_jan']*100
             
 
             tr_feb=custom_data['ondue_feb']+custom_data['afterdue_feb']+ custom_data['firstmon_feb']+custom_data['secmon_feb']+custom_data['thirdmon_feb']+ custom_data['actual_recievable_feb']
             bd_feb=custom_data['recievable_feb']-tr_feb
             bd_perc_feb=0
             if custom_data['recievable_feb']!=0:
-                bd_perc_feb=bd_feb/custom_data['recievable_feb']
+                bd_perc_feb=bd_feb/custom_data['recievable_feb']*100
 
             tr_mar=custom_data['ondue_mar']+custom_data['afterdue_mar']+ custom_data['firstmon_mar']+custom_data['secmon_mar']+custom_data['thirdmon_mar']+ custom_data['actual_recievable_mar']
             bd_mar=custom_data['recievable_mar']-tr_mar
             bd_perc_mar=0
             if custom_data['recievable_mar']!=0:
-                bd_perc_mar=bd_mar/custom_data['recievable_mar']
+                bd_perc_mar=bd_mar/custom_data['recievable_mar']*100
 
             tr_apr=custom_data['ondue_apr']+custom_data['afterdue_apr']+ custom_data['firstmon_apr']+custom_data['secmon_apr']+custom_data['thirdmon_apr']+ custom_data['actual_recievable_apr']
             bd_apr=custom_data['recievable_apr']-tr_apr
             bd_perc_apr=0
             if custom_data['recievable_apr']!=0:
-                bd_perc_apr=bd_apr/custom_data['recievable_apr']
+                bd_perc_apr=bd_apr/custom_data['recievable_apr']*100
 
             tr_may=custom_data['ondue_may']+custom_data['afterdue_may']+ custom_data['firstmon_may']+custom_data['secmon_may']+custom_data['thirdmon_may']+ custom_data['actual_recievable_may']
             bd_may=custom_data['recievable_may']-tr_may
             bd_perc_may=0
             if custom_data['recievable_may']!=0:
-                bd_perc_may=bd_may/custom_data['recievable_may']
+                bd_perc_may=bd_may/custom_data['recievable_may']*100
 
             tr_jun=custom_data['ondue_jun']+custom_data['afterdue_jun']+ custom_data['firstmon_jun']+custom_data['secmon_jun']+custom_data['thirdmon_jun']+ custom_data['actual_recievable_jun']
             bd_jun=custom_data['recievable_jun']-tr_jun
             bd_perc_jun=0
             if custom_data['recievable_jun']!=0:
-                bd_perc_jun=bd_jun/custom_data['recievable_jun']
+                bd_perc_jun=bd_jun/custom_data['recievable_jun']*100
 
             tr_jul=custom_data['ondue_jul']+custom_data['afterdue_jul']+ custom_data['firstmon_jul']+custom_data['secmon_jul']+custom_data['thirdmon_jul']+ custom_data['actual_recievable_jul']
             bd_jul=custom_data['recievable_jul']-tr_jul
             bd_perc_jul=0
             if custom_data['recievable_jul']!=0:
-                bd_perc_jul=bd_jul/custom_data['recievable_jul']
+                bd_perc_jul=bd_jul/custom_data['recievable_jul']*100
 
             tr_aug=custom_data['ondue_aug']+custom_data['afterdue_aug']+ custom_data['firstmon_aug']+custom_data['secmon_aug']+custom_data['thirdmon_aug']+ custom_data['actual_recievable_aug']
             bd_aug=custom_data['recievable_aug']-tr_aug
             bd_perc_aug=0
             if custom_data['recievable_aug']!=0:
-                bd_perc_aug=bd_aug/custom_data['recievable_aug']
+                bd_perc_aug=bd_aug/custom_data['recievable_aug']*100
 
             tr_sep=custom_data['ondue_sep']+custom_data['afterdue_sep']+ custom_data['firstmon_sep']+custom_data['secmon_sep']+custom_data['thirdmon_sep']+ custom_data['actual_recievable_sep']
             bd_sep=custom_data['recievable_sep']-tr_sep
             bd_perc_sep=0
             if custom_data['recievable_sep']!=0:
-                bd_perc_sep=bd_sep/custom_data['recievable_sep']
+                bd_perc_sep=bd_sep/custom_data['recievable_sep']*100
 
             tr_oct=custom_data['ondue_oct']+custom_data['afterdue_oct']+ custom_data['firstmon_oct']+custom_data['secmon_oct']+custom_data['thirdmon_oct']+ custom_data['actual_recievable_oct']
             bd_oct=custom_data['recievable_oct']-tr_oct
             bd_perc_oct=0
             if custom_data['recievable_oct']!=0:
-                bd_perc_oct=bd_oct/custom_data['recievable_oct']
+                bd_perc_oct=bd_oct/custom_data['recievable_oct']*100
 
             tr_nov=custom_data['ondue_nov']+custom_data['afterdue_nov']+ custom_data['firstmon_nov']+custom_data['secmon_nov']+custom_data['thirdmon_nov']+ custom_data['actual_recievable_nov']
             bd_nov=custom_data['recievable_nov']-tr_nov
             bd_perc_nov=0
             if custom_data['recievable_nov']!=0:
-                bd_perc_nov=bd_nov/custom_data['recievable_nov']
+                bd_perc_nov=bd_nov/custom_data['recievable_nov']*100
 
             tr_dec=custom_data['ondue_dec']+custom_data['afterdue_dec']+ custom_data['firstmon_dec']+custom_data['secmon_dec']+custom_data['thirdmon_dec']+ custom_data['actual_recievable_dec']
             bd_dec=custom_data['recievable_dec']-tr_dec
             bd_perc_dec=0
             if custom_data['recievable_dec']!=0:
-                bd_perc_dec=bd_dec/custom_data['recievable_dec']
+                bd_perc_dec=bd_dec/custom_data['recievable_dec']*100
 
             
             
@@ -1297,74 +1297,74 @@ class agingsReportWizard(models.TransientModel):
             bd_jan_2=custom_data['recievable_jan_2']-tr_jan_2
             bd_perc_jan_2=0
             if custom_data['recievable_jan_2']!=0:
-                bd_perc_jan_2=bd_jan_2/custom_data['recievable_jan_2']
+                bd_perc_jan_2=bd_jan_2/custom_data['recievable_jan_2']*100
 
 
             tr_feb_2=custom_data['ondue_feb_2']+custom_data['afterdue_feb_2']+ custom_data['firstmon_feb_2']+custom_data['secmon_feb_2']+custom_data['thirdmon_feb_2']+ custom_data['actual_recievable_feb_2']
             bd_feb_2=custom_data['recievable_feb_2']-tr_feb_2
             bd_perc_feb_2=0
             if custom_data['recievable_feb_2']!=0:
-                bd_perc_feb_2=bd_feb_2/custom_data['recievable_feb_2']
+                bd_perc_feb_2=bd_feb_2/custom_data['recievable_feb_2']*100
 
             tr_mar_2=custom_data['ondue_mar_2']+custom_data['afterdue_mar_2']+ custom_data['firstmon_mar_2']+custom_data['secmon_mar_2']+custom_data['thirdmon_mar_2']+ custom_data['actual_recievable_mar_2']
             bd_mar_2=custom_data['recievable_mar_2']-tr_mar_2
             bd_perc_mar_2=0
             if custom_data['recievable_mar_2']!=0:
-                bd_perc_mar_2=bd_mar_2/custom_data['recievable_mar_2']
+                bd_perc_mar_2=bd_mar_2/custom_data['recievable_mar_2']*100
 
             tr_apr_2=custom_data['ondue_apr_2']+custom_data['afterdue_apr_2']+ custom_data['firstmon_apr_2']+custom_data['secmon_apr_2']+custom_data['thirdmon_apr_2']+ custom_data['actual_recievable_apr_2']
             bd_apr_2=custom_data['recievable_apr_2']-tr_apr_2
             bd_perc_apr_2=0
             if custom_data['recievable_apr_2']!=0:
-                bd_perc_apr_2=bd_apr_2/custom_data['recievable_apr_2']
+                bd_perc_apr_2=bd_apr_2/custom_data['recievable_apr_2']*100
 
             tr_may_2=custom_data['ondue_may_2']+custom_data['afterdue_may_2']+ custom_data['firstmon_may_2']+custom_data['secmon_may_2']+custom_data['thirdmon_may_2']+ custom_data['actual_recievable_may_2']
             bd_may_2=custom_data['recievable_may_2']-tr_may_2
             bd_perc_may_2=0
             if custom_data['recievable_may_2']!=0:
-                bd_perc_may_2=bd_may_2/custom_data['recievable_may_2']
+                bd_perc_may_2=bd_may_2/custom_data['recievable_may_2']*100
 
             tr_jun_2=custom_data['ondue_jun_2']+custom_data['afterdue_jun_2']+ custom_data['firstmon_jun_2']+custom_data['secmon_jun_2']+custom_data['thirdmon_jun_2']+ custom_data['actual_recievable_jun_2']
             bd_jun_2=custom_data['recievable_jun_2']-tr_jun_2
             bd_perc_jun_2=0
             if custom_data['recievable_jun_2']!=0:
-                bd_perc_jun_2=bd_jun_2/custom_data['recievable_jun_2']
+                bd_perc_jun_2=bd_jun_2/custom_data['recievable_jun_2']*100
 
             tr_jul_2=custom_data['ondue_jul_2']+custom_data['afterdue_jul_2']+ custom_data['firstmon_jul_2']+custom_data['secmon_jul_2']+custom_data['thirdmon_jul_2']+ custom_data['actual_recievable_jul_2']
             bd_jul_2=custom_data['recievable_jul_2']-tr_jul_2
             bd_perc_jul_2=0
             if custom_data['recievable_jul_2']!=0:
-                bd_perc_jul_2=bd_jul_2/custom_data['recievable_jul_2']
+                bd_perc_jul_2=bd_jul_2/custom_data['recievable_jul_2']*100
 
             tr_aug_2=custom_data['ondue_aug_2']+custom_data['afterdue_aug_2']+ custom_data['firstmon_aug_2']+custom_data['secmon_aug_2']+custom_data['thirdmon_aug_2']+ custom_data['actual_recievable_aug_2']
             bd_aug_2=custom_data['recievable_aug_2']-tr_aug_2
             bd_perc_aug_2=0
             if custom_data['recievable_aug_2']!=0:
-                bd_perc_aug_2=bd_aug_2/custom_data['recievable_aug_2']
+                bd_perc_aug_2=bd_aug_2/custom_data['recievable_aug_2']*100
 
             tr_sep_2=custom_data['ondue_sep_2']+custom_data['afterdue_sep_2']+ custom_data['firstmon_sep_2']+custom_data['secmon_sep_2']+custom_data['thirdmon_sep_2']+ custom_data['actual_recievable_sep_2']
             bd_sep_2=custom_data['recievable_sep_2']-tr_sep_2
             bd_perc_sep_2=0
             if custom_data['recievable_sep_2']!=0:
-                bd_perc_sep_2=bd_sep_2/custom_data['recievable_sep_2']
+                bd_perc_sep_2=bd_sep_2/custom_data['recievable_sep_2']*100
 
             tr_oct_2=custom_data['ondue_oct_2']+custom_data['afterdue_oct_2']+ custom_data['firstmon_oct_2']+custom_data['secmon_oct_2']+custom_data['thirdmon_oct_2']+ custom_data['actual_recievable_oct_2']
             bd_oct_2=custom_data['recievable_oct_2']-tr_oct_2
             bd_perc_oct_2=0
             if custom_data['recievable_oct_2']!=0:
-                bd_perc_oct_2=bd_oct_2/custom_data['recievable_oct_2']
+                bd_perc_oct_2=bd_oct_2/custom_data['recievable_oct_2']*100
 
             tr_nov_2=custom_data['ondue_nov_2']+custom_data['afterdue_nov_2']+ custom_data['firstmon_nov_2']+custom_data['secmon_nov_2']+custom_data['thirdmon_nov_2']+ custom_data['actual_recievable_nov_2']
             bd_nov_2=custom_data['recievable_nov_2']-tr_nov_2
             bd_perc_nov_2=0
             if custom_data['recievable_nov_2']!=0:
-                bd_perc_nov_2=bd_nov_2/custom_data['recievable_nov_2']
+                bd_perc_nov_2=bd_nov_2/custom_data['recievable_nov_2']*100
 
             tr_dec_2=custom_data['ondue_dec_2']+custom_data['afterdue_dec_2']+ custom_data['firstmon_dec_2']+custom_data['secmon_dec_2']+custom_data['thirdmon_dec_2']+ custom_data['actual_recievable_dec_2']
             bd_dec_2=custom_data['recievable_dec_2']-tr_dec_2
             bd_perc_dec_2=0
             if custom_data['recievable_dec_2']!=0:
-                bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']
+                bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']*100
 
 
 
