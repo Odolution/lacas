@@ -42,7 +42,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_jan=fields.Integer('JAN-22')
     total_recieve_jan=fields.Integer('JAN-22')
     bad_debt_jan=fields.Integer('JAN-22')
-    percentage_bd_jan=fields.Integer('JAN-22')
+    percentage_bdb_jan=fields.Char('JAN-22')
 
 
   
@@ -55,7 +55,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_feb=fields.Integer('FEB-22')
     total_recieve_feb=fields.Integer('FEB-22')
     bad_debt_feb=fields.Integer('FEB-22')
-    percentage_bd_feb=fields.Integer('FEB-22')
+    percentage_bdb_feb=fields.Char('FEB-22')
 
 
     recievable_mar=fields.Integer('MAR-22')
@@ -67,7 +67,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_mar=fields.Integer('MAR-22')
     total_recieve_mar=fields.Integer('MAR-22')
     bad_debt_mar=fields.Integer('MAR-22')
-    percentage_bd_mar=fields.Integer('MAR-22')
+    percentage_bdb_mar=fields.Char('MAR-22')
 
     recievable_apr=fields.Integer('APR-22')
     ondue_apr=fields.Integer('APR-22')
@@ -78,7 +78,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_apr=fields.Integer('APR-22')
     total_recieve_apr=fields.Integer('APR-22')
     bad_debt_apr=fields.Integer('APR-22')
-    percentage_bd_apr=fields.Integer('APR-22')
+    percentage_bdb_apr=fields.Char('APR-22')
 
     recievable_may=fields.Integer('MAY-22')
     ondue_may=fields.Integer('MAY-22')
@@ -89,7 +89,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_may=fields.Integer('MAY-22')
     total_recieve_may=fields.Integer('MAY-22')
     bad_debt_may=fields.Integer('MAY-22')
-    percentage_bd_may=fields.Integer('MAY-22')
+    percentage_bdb_may=fields.Char('MAY-22')
 
     recievable_jun=fields.Integer('JUN-22')
     ondue_jun=fields.Integer('JUN-22')
@@ -100,7 +100,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_jun=fields.Integer('JUN-22')
     total_recieve_jun=fields.Integer('JUN-22')
     bad_debt_jun=fields.Integer('JUN-22')
-    percentage_bd_jun=fields.Integer('JUN-22')
+    percentage_bdb_jun=fields.Char('JUN-22')
 
     recievable_jul=fields.Integer('JUL-22')
     ondue_jul=fields.Integer('JUL-22')
@@ -111,7 +111,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_jul=fields.Integer('JUL-22')
     total_recieve_jul=fields.Integer('JUL-22')
     bad_debt_jul=fields.Integer('JUL-22')
-    percentage_bd_jul=fields.Integer('JUL-22')
+    percentage_bdb_jul=fields.Char('JUL-22')
 
     recievable_aug=fields.Integer('AUG-22')
     ondue_aug=fields.Integer('AUG-22')
@@ -122,7 +122,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_aug=fields.Integer('AUG-22')
     total_recieve_aug=fields.Integer('AUG-22')
     bad_debt_aug=fields.Integer('AUG-22')
-    percentage_bd_aug=fields.Integer('AUG-22')
+    percentage_bdb_aug=fields.Char('AUG-22')
 
     recievable_sep=fields.Integer('SEP-22')
     ondue_sep=fields.Integer('SEP-22')
@@ -133,7 +133,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_sep=fields.Integer('SEP-22')
     total_recieve_sep=fields.Integer('SEP-22')
     bad_debt_sep=fields.Integer('SEP-22')
-    percentage_bd_sep=fields.Integer('SEP-22')
+    percentage_bdb_sep=fields.Char('SEP-22')
 
     recievable_oct=fields.Integer('OCT-22')
     ondue_oct=fields.Integer('OCT-22')
@@ -144,7 +144,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_oct=fields.Integer('OCT-22')
     total_recieve_oct=fields.Integer('OCT-22')
     bad_debt_oct=fields.Integer('OCT-22')
-    percentage_bd_oct=fields.Integer('OCT-22')
+    percentage_bdb_oct=fields.Char('OCT-22')
 
     recievable_nov=fields.Integer('NOV-22')
     ondue_nov=fields.Integer('NOV-22')
@@ -155,7 +155,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_nov=fields.Integer('NOV-22')
     total_recieve_nov=fields.Integer('NOV-22')
     bad_debt_nov=fields.Integer('NOV-22')
-    percentage_bd_nov=fields.Integer('NOV-22')
+    percentage_bdb_nov=fields.Char('NOV-22')
 
     recievable_dec=fields.Integer('DEC-22')
     ondue_dec=fields.Integer('DEC-22')
@@ -166,7 +166,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_dec=fields.Integer('DEC-22')
     total_recieve_dec=fields.Integer('DEC-22')
     bad_debt_dec=fields.Integer('DEC-22')
-    percentage_bd_dec=fields.Integer('DEC-22')
+    percentage_bdb_dec=fields.Char('DEC-22')
 
 #-------------------------------------------------------------2023-------------------------------------------------------
 
@@ -181,7 +181,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_jan_2=fields.Integer('JAN-23')
     total_recieve_jan_2=fields.Integer('JAN-23')
     bad_debt_jan_2=fields.Integer('JAN-23')
-    percentage_bd_jan_2=fields.Integer('JAN-23')
+    percentage_bdb_jan_2=fields.Char('JAN-23')
 
 
   
@@ -194,7 +194,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_feb_2=fields.Integer('FEB-23')
     total_recieve_feb_2=fields.Integer('FEB-23')
     bad_debt_feb_2=fields.Integer('FEB-23')
-    percentage_bd_feb_2=fields.Integer('FEB-23')
+    percentage_bdb_feb_2=fields.Char('FEB-23')
 
 
     recievable_mar_2=fields.Integer('MAR-23')
@@ -206,7 +206,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_mar_2=fields.Integer('MAR-23')
     total_recieve_mar_2=fields.Integer('MAR-23')
     bad_debt_mar_2=fields.Integer('MAR-23')
-    percentage_bd_mar_2=fields.Integer('MAR-23')
+    percentage_bdb_mar_2=fields.Char('MAR-23')
 
     recievable_apr_2=fields.Integer('APR-23')
     ondue_apr_2=fields.Integer('APR-23')
@@ -217,7 +217,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_apr_2=fields.Integer('APR-23')
     total_recieve_apr_2=fields.Integer('APR-23')
     bad_debt_apr_2=fields.Integer('APR-23')
-    percentage_bd_apr_2=fields.Integer('APR-23')
+    percentage_bdb_apr_2=fields.Char('APR-23')
 
     recievable_may_2=fields.Integer('MAY-23')
     ondue_may_2=fields.Integer('MAY-23')
@@ -228,7 +228,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_may_2=fields.Integer('MAY-23')
     total_recieve_may_2=fields.Integer('MAY-23')
     bad_debt_may_2=fields.Integer('MAY-23')
-    percentage_bd_may_2=fields.Integer('MAY-23')
+    percentage_bdb_may_2=fields.Char('MAY-23')
 
     recievable_jun_2=fields.Integer('JUN-23')
     ondue_jun_2=fields.Integer('JUN-23')
@@ -239,7 +239,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_jun_2=fields.Integer('JUN-23')
     total_recieve_jun_2=fields.Integer('JUN-23')
     bad_debt_jun_2=fields.Integer('JUN-23')
-    percentage_bd_jun_2=fields.Integer('JUN-23')
+    percentage_bdb_jun_2=fields.Char('JUN-23')
 
     recievable_jul_2=fields.Integer('JUL-23')
     ondue_jul_2=fields.Integer('JUL-23')
@@ -250,7 +250,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_jul_2=fields.Integer('JUL-23')
     total_recieve_jul_2=fields.Integer('JUL-23')
     bad_debt_jul_2=fields.Integer('JUL-23')
-    percentage_bd_jul_2=fields.Integer('JUL-23')
+    percentage_bdb_jul_2=fields.Char('JUL-23')
 
     recievable_aug_2=fields.Integer('AUG-23')
     ondue_aug_2=fields.Integer('AUG-23')
@@ -261,7 +261,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_aug_2=fields.Integer('AUG-23')
     total_recieve_aug_2=fields.Integer('AUG-23')
     bad_debt_aug_2=fields.Integer('AUG-23')
-    percentage_bd_aug_2=fields.Integer('AUG-23')
+    percentage_bdb_aug_2=fields.Char('AUG-23')
 
     recievable_sep_2=fields.Integer('SEP-23')
     ondue_sep_2=fields.Integer('SEP-23')
@@ -272,7 +272,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_sep_2=fields.Integer('SEP-23')
     total_recieve_sep_2=fields.Integer('SEP-23')
     bad_debt_sep_2=fields.Integer('SEP-23')
-    percentage_bd_sep_2=fields.Integer('SEP-23')
+    percentage_bdb_sep_2=fields.Char('SEP-23')
 
     recievable_oct_2=fields.Integer('OCT-23')
     ondue_oct_2=fields.Integer('OCT-23')
@@ -283,7 +283,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_oct_2=fields.Integer('OCT-23')
     total_recieve_oct_2=fields.Integer('OCT-23')
     bad_debt_oct_2=fields.Integer('OCT-23')
-    percentage_bd_oct_2=fields.Integer('OCT-23')
+    percentage_bdb_oct_2=fields.Char('OCT-23')
 
     recievable_nov_2=fields.Integer('NOV-23')
     ondue_nov_2=fields.Integer('NOV-23')
@@ -294,7 +294,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_nov_2=fields.Integer('NOV-23')
     total_recieve_nov_2=fields.Integer('NOV-23')
     bad_debt_nov_2=fields.Integer('NOV-23')
-    percentage_bd_nov_2=fields.Integer('NOV-23')
+    percentage_bdb_nov_2=fields.Char('NOV-23')
 
     recievable_dec_2=fields.Integer('DEC-23')
     ondue_dec_2=fields.Integer('DEC-23')
@@ -305,7 +305,7 @@ class AccountMoveReport(models.TransientModel):
     actual_recievable_dec_2=fields.Integer('DEC-23')
     total_recieve_dec_2=fields.Integer('DEC-23')
     bad_debt_dec_2=fields.Integer('DEC-23')
-    percentage_bd_dec_2=fields.Integer('DEC-23')
+    percentage_bdb_dec_2=fields.Char('DEC-23')
 
 
     
@@ -361,7 +361,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_jan":0,
                         "total_recieve_jan":0,
                         "bad_debt_jan": 0,
-                        "percentage_bd_jan": 0,
+                        "percentage_bdb_jan": '',
 
                         
                         #------feb22-------
@@ -375,7 +375,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_feb":0,
                         "total_recieve_feb":0,
                         "bad_debt_feb": 0,
-                        "percentage_bd_feb": 0,
+                        "percentage_bdb_feb": '',
 
                         
                         #------mar22-------
@@ -389,7 +389,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_mar":0,
                         "total_recieve_mar":0,
                         "bad_debt_mar": 0,
-                        "percentage_bd_mar": 0,
+                        "percentage_bdb_mar": '',
 
                         
                         #------apr22-------
@@ -403,7 +403,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_apr":0,
                         "total_recieve_apr":0,
                         "bad_debt_apr": 0,
-                        "percentage_bd_apr": 0,
+                        "percentage_bdb_apr": '',
 
                         
                         #------may22-------
@@ -417,7 +417,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_may":0,
                         "total_recieve_may":0,
                         "bad_debt_may": 0,
-                        "percentage_bd_may": 0,
+                        "percentage_bdb_may": '',
 
                         
                         #------jun22-------
@@ -431,7 +431,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_jun":0,
                         "total_recieve_jun":0,
                         "bad_debt_jun": 0,
-                        "percentage_bd_jun": 0,
+                        "percentage_bdb_jun": '',
 
                         
                         #------jul22-------
@@ -445,7 +445,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_jul":0,
                         "total_recieve_jul":0,
                         "bad_debt_jul": 0,
-                        "percentage_bd_jul": 0,
+                        "percentage_bdb_jul": '',
 
                         
                         #------aug22-------
@@ -459,7 +459,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_aug":0,
                         "total_recieve_aug":0,
                         "bad_debt_aug": 0,
-                        "percentage_bd_aug": 0,
+                        "percentage_bd_aug": '',
 
                         
                         #------sep22-------
@@ -473,7 +473,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_sep":0,
                         "total_recieve_sep":0,
                         "bad_debt_sep": 0,
-                        "percentage_bd_sep": 0,
+                        "percentage_bdb_sep": '',
 
                         
                         #------oct22-------
@@ -487,7 +487,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_oct":0,
                         "total_recieve_oct":0,
                         "bad_debt_oct": 0,
-                        "percentage_bd_oct": 0,
+                        "percentage_bd_oct": '',
 
                         
                         #------nov22-------
@@ -501,7 +501,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_nov":0,
                         "total_recieve_nov":0,
                         "bad_debt_nov": 0,
-                        "percentage_bd_nov": 0,
+                        "percentage_bd_nov": '',
 
                         
                         #------dec22-------
@@ -515,7 +515,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_dec":0,
                         "total_recieve_dec":0,
                         "bad_debt_dec": 0,
-                        "percentage_bd_dec": 0,
+                        "percentage_bdb_dec": '',
 
                              #------jan23-------
                        
@@ -528,7 +528,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_jan_2":0,
                         "total_recieve_jan_2":0,
                         "bad_debt_jan_2": 0,
-                        "percentage_bd_jan_2": 0,
+                        "percentage_bdb_jan_2": '',
 
                         
                         #------feb23-------
@@ -542,7 +542,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_feb_2":0,
                         "total_recieve_feb_2":0,
                         "bad_debt_feb_2": 0,
-                        "percentage_bd_feb_2": 0,
+                        "percentage_bdb_feb_2": '',
 
                         
                         #------mar23-------
@@ -556,7 +556,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_mar_2":0,
                         "total_recieve_mar_2":0,
                         "bad_debt_mar_2": 0,
-                        "percentage_bd_mar_2": 0,
+                        "percentage_bdb_mar_2": '',
 
                         
                         #------apr23-------
@@ -570,7 +570,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_apr_2":0,
                         "total_recieve_apr_2":0,
                         "bad_debt_apr_2": 0,
-                        "percentage_bd_apr_2": 0,
+                        "percentage_bdb_apr_2": '',
 
                         
                         #------may23-------
@@ -584,7 +584,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_may_2":0,
                         "total_recieve_may_2":0,
                         "bad_debt_may_2": 0,
-                        "percentage_bd_may_2": 0,
+                        "percentage_bdb_may_2": '',
 
                         
                         #------jun23-------
@@ -598,7 +598,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_jun_2":0,
                         "total_recieve_jun_2":0,
                         "bad_debt_jun_2": 0,
-                        "percentage_bd_jun_2": 0,
+                        "percentage_bdb_jun_2": '',
 
                         
                         #------jul23-------
@@ -612,7 +612,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_jul_2":0,
                         "total_recieve_jul_2":0,
                         "bad_debt_jul_2": 0,
-                        "percentage_bd_jul_2": 0,
+                        "percentage_bdb_jul_2": '',
 
                         
                         #------aug23-------
@@ -626,7 +626,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_aug_2":0,
                         "total_recieve_aug_2":0,
                         "bad_debt_aug_2": 0,
-                        "percentage_bd_aug_2": 0,
+                        "percentage_bdb_aug_2": '',
 
                         
                         #------sep23-------
@@ -640,7 +640,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_sep_2":0,
                         "total_recieve_sep_2":0,
                         "bad_debt_sep_2": 0,
-                        "percentage_bd_sep_2": 0,
+                        "percentage_bdb_sep_2": '',
 
                         
                         #------oct23-------
@@ -654,7 +654,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_oct_2":0,
                         "total_recieve_oct_2":0,
                         "bad_debt_oct_2": 0,
-                        "percentage_bd_oct_2": 0,
+                        "percentage_bdb_oct_2": '',
 
                         
                         #------nov23-------
@@ -668,7 +668,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_nov_2":0,
                         "total_recieve_nov_2":0,
                         "bad_debt_nov_2": 0,
-                        "percentage_bd_nov_2": 0,
+                        "percentage_bdb_nov_2": '',
 
                         
                         #------dec23-------
@@ -682,7 +682,7 @@ class agingsReportWizard(models.TransientModel):
                         "actual_recievable_dec_2":0,
                         "total_recieve_dec_2":0,
                         "bad_debt_dec_2": 0,
-                        "percentage_bd_dec_2": 0,
+                        "percentage_bdb_dec_2": '',
 
                     } 
 
@@ -1384,7 +1384,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan":custom_data['actual_recievable_jan'],
                 "total_recieve_jan":tr_jan,
                 "bad_debt_jan": bd_jan,
-                "percentage_bd_jan": bd_perc_jan if bd_perc_jan else 0,
+                "percentage_bdb_jan": str(bd_perc_jan)+'%' ,
 
                 
                 #------feb22-------
@@ -1398,7 +1398,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_feb":custom_data['actual_recievable_feb'],
                 "total_recieve_feb":tr_feb,
                 "bad_debt_feb": bd_feb,
-                "percentage_bd_feb": bd_perc_feb if bd_perc_feb else 0,
+                "percentage_bdb_feb": str(bd_perc_feb)+'%',
 
                 
                 #------mar22-------
@@ -1412,7 +1412,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_mar":custom_data['actual_recievable_mar'],
                 "total_recieve_mar":tr_mar,
                 "bad_debt_mar": bd_mar,
-                "percentage_bd_mar": bd_perc_mar if bd_perc_mar else 0,
+                "percentage_bdb_mar": str(bd_perc_mar)+'%',
 
                 
                 #------apr22-------
@@ -1427,7 +1427,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_apr":custom_data['actual_recievable_apr'],
                 "total_recieve_apr":tr_apr,
                 "bad_debt_apr": bd_apr,
-                "percentage_bd_apr": bd_perc_apr if bd_perc_apr else 0,
+                "percentage_bdb_apr": str(bd_perc_apr)+'%',
 
                 
 
@@ -1444,7 +1444,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_may":custom_data['actual_recievable_may'],
                 "total_recieve_may":tr_may,
                 "bad_debt_may": bd_may,
-                "percentage_bd_may": bd_perc_may if bd_perc_may else 0,
+                "percentage_bdb_may": str(bd_perc_may)+'%',
 
                 
 
@@ -1461,7 +1461,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jun":custom_data['actual_recievable_jun'],
                 "total_recieve_jun":tr_jun,
                 "bad_debt_jun": bd_jun,
-                "percentage_bd_jun": bd_perc_jun if bd_perc_jun else 0,
+                "percentage_bdb_jun": str(bd_perc_jun)+'%',
 
                 
 
@@ -1478,7 +1478,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jul":custom_data['actual_recievable_jul'],
                 "total_recieve_jul":tr_jul,
                 "bad_debt_jul": bd_jul,
-                "percentage_bd_jul": bd_perc_jul if bd_perc_jul else 0,
+                "percentage_bdb_jul": str(bd_perc_jul)+'%',
 
                 
 
@@ -1495,7 +1495,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_aug":custom_data['actual_recievable_aug'],
                 "total_recieve_aug":tr_aug,
                 "bad_debt_aug": bd_aug,
-                "percentage_bd_aug": bd_perc_aug if bd_perc_aug else 0,
+                "percentage_bdb_aug": str(bd_perc_aug)+'%',
 
                 
                 
@@ -1511,7 +1511,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_sep":custom_data['actual_recievable_sep'],
                 "total_recieve_sep":tr_sep,
                 "bad_debt_sep": bd_sep,
-                "percentage_bd_sep": bd_perc_sep if bd_perc_sep else 0,
+                "percentage_bdb_sep": str(bd_perc_sep)+'%',
 
                 
                 
@@ -1526,7 +1526,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_oct":custom_data['actual_recievable_oct'],
                 "total_recieve_oct":tr_oct,
                 "bad_debt_oct": bd_oct,
-                "percentage_bd_oct": bd_perc_oct if bd_perc_oct else 0,
+                "percentage_bdb_oct":str(bd_perc_oct)+'%',
 
                 
 
@@ -1542,7 +1542,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_nov":custom_data['actual_recievable_nov'],
                 "total_recieve_nov":tr_nov,
                 "bad_debt_nov": bd_nov,
-                "percentage_bd_nov": bd_perc_nov if bd_perc_nov else 0 ,
+                "percentage_bdb_nov": str(bd_perc_nov)+'%' ,
 
                 
 
@@ -1559,7 +1559,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_dec":custom_data['actual_recievable_dec'],
                 "total_recieve_dec":tr_dec,
                 "bad_debt_dec": bd_dec,
-                "percentage_bd_dec": bd_perc_dec if bd_perc_dec else 0,
+                "percentage_bdb_dec": str(bd_perc_dec)+'%',
 
                 
                         #------jan23-------
@@ -1573,7 +1573,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan_2":custom_data['actual_recievable_jan_2'],
                 "total_recieve_jan_2":tr_jan_2,
                 "bad_debt_jan_2":bd_jan_2,
-                "percentage_bd_jan_2": bd_perc_jan_2 if bd_perc_jan_2 else 0,
+                "percentage_bdb_jan_2": str(bd_perc_jan_2)+'%',
 
                 
                 #------feb23-------
@@ -1588,7 +1588,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_feb_2":custom_data['actual_recievable_feb_2'],
                 "total_recieve_feb_2":tr_feb_2,
                 "bad_debt_feb_2": bd_feb_2,
-                "percentage_bd_feb_2": bd_perc_feb_2 if bd_perc_feb_2 else 0,
+                "percentage_bdb_feb_2":str(bd_perc_feb_2)+'%',
 
                 
                 
@@ -1604,7 +1604,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_mar_2":custom_data['actual_recievable_mar_2'],
                 "total_recieve_mar_2":tr_mar_2,
                 "bad_debt_mar_2": bd_mar_2,
-                "percentage_bd_mar_2": bd_perc_mar_2 if bd_perc_mar_2 else 0,
+                "percentage_bdb_mar_2": str(bd_perc_mar_2)+'%',
 
                 
 
@@ -1621,7 +1621,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_apr_2":custom_data['actual_recievable_apr_2'],
                 "total_recieve_apr_2":tr_apr_2,
                 "bad_debt_apr_2": bd_apr_2,
-                "percentage_bd_apr_2": bd_perc_apr_2 if bd_perc_apr_2 else 0,
+                "percentage_bdb_apr_2": str(bd_perc_apr_2)+'%',
 
                 
 
@@ -1638,7 +1638,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_may_2":custom_data['actual_recievable_may_2'],
                 "total_recieve_may_2":tr_may_2,
                 "bad_debt_may_2": bd_may_2,
-                "percentage_bd_may_2": bd_perc_may_2 if bd_perc_may_2 else 0,
+                "percentage_bdb_may_2": str(bd_perc_may_2)+'%',
 
                 
                 
@@ -1654,7 +1654,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jun_2":custom_data['actual_recievable_jun_2'],
                 "total_recieve_jun_2":tr_jun_2,
                 "bad_debt_jun_2": bd_jun_2,
-                "percentage_bd_jun_2": bd_perc_jun_2 if bd_perc_jun_2 else 0,
+                "percentage_bdb_jun_2": str(bd_perc_jun_2)+'%',
 
                 
 
@@ -1671,7 +1671,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jul_2":custom_data['actual_recievable_jul_2'],
                 "total_recieve_jul_2":tr_jul_2,
                 "bad_debt_jul_2": bd_jul_2,
-                "percentage_bd_jul_2": bd_perc_jul_2 if bd_perc_jul_2 else 0,
+                "percentage_bdb_jul_2": str(bd_perc_jul_2)+'%',
 
                 
 
@@ -1688,7 +1688,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_aug_2":custom_data['actual_recievable_aug_2'],
                 "total_recieve_aug_2":tr_aug_2,
                 "bad_debt_aug_2": bd_aug_2,
-                "percentage_bd_aug_2": bd_perc_aug_2 if bd_perc_aug_2 else 0,
+                "percentage_bdb_aug_2": str(bd_perc_aug_2)+'%',
 
                 
 
@@ -1705,7 +1705,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_sep_2":custom_data['actual_recievable_sep_2'],
                 "total_recieve_sep_2":tr_sep_2,
                 "bad_debt_sep_2": bd_sep_2,
-                "percentage_bd_sep_2": bd_perc_sep_2 if bd_perc_sep_2 else 0,
+                "percentage_bdb_sep_2":str(bd_perc_sep_2)+'%',
 
                 
                 
@@ -1720,7 +1720,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_oct_2":custom_data['actual_recievable_oct_2'],
                 "total_recieve_oct_2":tr_oct_2,
                 "bad_debt_oct_2": bd_oct_2,
-                "percentage_bd_oct_2": bd_perc_oct_2 if bd_perc_oct_2 else 0,
+                "percentage_bdb_oct_2": str(bd_perc_oct_2)+'%',
 
                 
                 
@@ -1736,7 +1736,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_nov_2":custom_data['actual_recievable_nov_2'],
                 "total_recieve_nov_2":tr_nov_2,
                 "bad_debt_nov_2": bd_nov_2,
-                "percentage_bd_nov_2": bd_perc_nov_2 if bd_perc_nov_2 else 0,
+                "percentage_bdb_nov_2": str(bd_perc_nov_2)+'%',
 
                 
                 
@@ -1752,7 +1752,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_dec_2":custom_data['actual_recievable_dec_2'],
                 "total_recieve_dec_2":tr_dec_2,
                 "bad_debt_dec_2": bd_dec_2,
-                "percentage_bd_dec_2": bd_perc_dec_2 if bd_perc_dec_2 else 0,
+                "percentage_bdb_dec_2": str(bd_perc_dec_2)+'%',
 
                 
                 
@@ -1941,76 +1941,76 @@ class agingsReportWizard(models.TransientModel):
 
                     data_month= {
                         1:['01','JAN-22',rec.recievable_jan,rec.ondue_jan,rec.afterdue_jan,rec.firstmon_jan,rec.secmon_jan,
-                        rec.thirdmon_jan,rec.actual_recievable_jan,rec.total_recieve_jan,rec.bad_debt_jan,rec.percentage_bd_jan,'22'],
+                        rec.thirdmon_jan,rec.actual_recievable_jan,rec.total_recieve_jan,rec.bad_debt_jan,rec.percentage_bdb_jan,'22'],
 
                         2:['02','FEB-22',rec.recievable_feb,rec.ondue_feb,rec.afterdue_feb,rec.firstmon_feb,rec.secmon_feb,
-                        rec.thirdmon_feb,rec.actual_recievable_feb,rec.total_recieve_feb,rec.bad_debt_feb,rec.percentage_bd_feb,'22'],
+                        rec.thirdmon_feb,rec.actual_recievable_feb,rec.total_recieve_feb,rec.bad_debt_feb,rec.percentage_bdb_feb,'22'],
 
                         3:['03','MAR-22',rec.recievable_mar,rec.ondue_mar,rec.afterdue_mar,rec.firstmon_mar,rec.secmon_mar,
-                        rec.thirdmon_mar,rec.actual_recievable_mar,rec.total_recieve_mar,rec.bad_debt_mar,rec.percentage_bd_mar,'22'],
+                        rec.thirdmon_mar,rec.actual_recievable_mar,rec.total_recieve_mar,rec.bad_debt_mar,rec.percentage_bdb_mar,'22'],
 
                         4:['04','APR-22',rec.recievable_apr,rec.ondue_apr,rec.afterdue_apr,rec.firstmon_apr,rec.secmon_apr,
-                        rec.thirdmon_apr,rec.actual_recievable_apr,rec.total_recieve_apr,rec.bad_debt_apr,rec.percentage_bd_apr,'22'],
+                        rec.thirdmon_apr,rec.actual_recievable_apr,rec.total_recieve_apr,rec.bad_debt_apr,rec.percentage_bdb_apr,'22'],
 
                         5:['05','MAY-22',rec.recievable_may,rec.ondue_may,rec.afterdue_may,rec.firstmon_may,rec.secmon_may,
-                        rec.thirdmon_may,rec.actual_recievable_may,rec.total_recieve_may,rec.bad_debt_may,rec.percentage_bd_may,'22'],
+                        rec.thirdmon_may,rec.actual_recievable_may,rec.total_recieve_may,rec.bad_debt_may,rec.percentage_bdb_may,'22'],
 
                         6:['06','JUN-22',rec.recievable_jun,rec.ondue_jun,rec.afterdue_jun,rec.firstmon_jun,rec.secmon_jun,
-                        rec.thirdmon_jun,rec.actual_recievable_jun,rec.total_recieve_jun,rec.bad_debt_jun,rec.percentage_bd_jun,'22'],
+                        rec.thirdmon_jun,rec.actual_recievable_jun,rec.total_recieve_jun,rec.bad_debt_jun,rec.percentage_bdb_jun,'22'],
 
                         7:['07','JUL-22',rec.recievable_jul,rec.ondue_jul,rec.afterdue_jul,rec.firstmon_jul,rec.secmon_jul,
-                        rec.thirdmon_jul,rec.actual_recievable_jul,rec.total_recieve_jul,rec.bad_debt_jul,rec.percentage_bd_jul,'22'],
+                        rec.thirdmon_jul,rec.actual_recievable_jul,rec.total_recieve_jul,rec.bad_debt_jul,rec.percentage_bdb_jul,'22'],
 
                         8:['08','AUG-22',rec.recievable_aug,rec.ondue_aug,rec.afterdue_aug,rec.firstmon_aug,rec.secmon_aug,
-                        rec.thirdmon_aug,rec.actual_recievable_aug,rec.total_recieve_aug,rec.bad_debt_aug,rec.percentage_bd_aug,'22'],
+                        rec.thirdmon_aug,rec.actual_recievable_aug,rec.total_recieve_aug,rec.bad_debt_aug,rec.percentage_bdb_aug,'22'],
 
                         9:['09','SEP-22',rec.recievable_sep,rec.ondue_sep,rec.afterdue_sep,rec.firstmon_sep,rec.secmon_sep,
-                        rec.thirdmon_sep,rec.actual_recievable_sep,rec.total_recieve_sep,rec.bad_debt_sep,rec.percentage_bd_sep,'22'],
+                        rec.thirdmon_sep,rec.actual_recievable_sep,rec.total_recieve_sep,rec.bad_debt_sep,rec.percentage_bdb_sep,'22'],
 
                         10:['10','OCT-22',rec.recievable_oct,rec.ondue_oct,rec.afterdue_oct,rec.firstmon_oct,rec.secmon_oct,
-                        rec.thirdmon_oct,rec.actual_recievable_oct,rec.total_recieve_oct,rec.bad_debt_oct,rec.percentage_bd_oct,'22'],
+                        rec.thirdmon_oct,rec.actual_recievable_oct,rec.total_recieve_oct,rec.bad_debt_oct,rec.percentage_bdb_oct,'22'],
 
                         11:['11','NOV-22',rec.recievable_nov,rec.ondue_nov,rec.afterdue_nov,rec.firstmon_nov,rec.secmon_nov,
-                        rec.thirdmon_nov,rec.actual_recievable_nov,rec.total_recieve_nov,rec.bad_debt_nov,rec.percentage_bd_nov,'22'],
+                        rec.thirdmon_nov,rec.actual_recievable_nov,rec.total_recieve_nov,rec.bad_debt_nov,rec.percentage_bdb_nov,'22'],
 
                         12:['12','DEC-22',rec.recievable_dec,rec.ondue_dec,rec.afterdue_dec,rec.firstmon_dec,rec.secmon_dec,
-                        rec.thirdmon_dec,rec.actual_recievable_dec,rec.total_recieve_dec,rec.bad_debt_dec,rec.percentage_bd_dec,'22'],
+                        rec.thirdmon_dec,rec.actual_recievable_dec,rec.total_recieve_dec,rec.bad_debt_dec,rec.percentage_bdb_dec,'22'],
 
                         13:['01','JAN-23',rec.recievable_jan_2,rec.ondue_jan_2,rec.afterdue_jan_2,rec.firstmon_jan_2,rec.secmon_jan_2,
-                        rec.thirdmon_jan_2,rec.actual_recievable_jan_2,rec.total_recieve_jan_2,rec.bad_debt_jan_2,rec.percentage_bd_jan_2,'23'],
+                        rec.thirdmon_jan_2,rec.actual_recievable_jan_2,rec.total_recieve_jan_2,rec.bad_debt_jan_2,rec.percentage_bdb_jan_2,'23'],
 
                         14:['02','FEB-23',rec.recievable_feb_2,rec.ondue_feb_2,rec.afterdue_feb_2,rec.firstmon_feb_2,rec.secmon_feb_2,
-                        rec.thirdmon_feb_2,rec.actual_recievable_feb_2,rec.total_recieve_feb_2,rec.bad_debt_feb_2,rec.percentage_bd_feb_2,'23'],
+                        rec.thirdmon_feb_2,rec.actual_recievable_feb_2,rec.total_recieve_feb_2,rec.bad_debt_feb_2,rec.percentage_bdb_feb_2,'23'],
 
                         15:['03','MAR-23',rec.recievable_mar_2,rec.ondue_mar_2,rec.afterdue_mar_2,rec.firstmon_mar_2,rec.secmon_mar_2,
-                        rec.thirdmon_mar_2,rec.actual_recievable_mar_2,rec.total_recieve_mar_2,rec.bad_debt_mar_2,rec.percentage_bd_mar_2,'23'],
+                        rec.thirdmon_mar_2,rec.actual_recievable_mar_2,rec.total_recieve_mar_2,rec.bad_debt_mar_2,rec.percentage_bdb_mar_2,'23'],
 
                         16:['04','APR-23',rec.recievable_apr_2,rec.ondue_apr_2,rec.afterdue_apr_2,rec.firstmon_apr_2,rec.secmon_apr_2,
-                        rec.thirdmon_apr_2,rec.actual_recievable_apr_2,rec.total_recieve_apr_2,rec.bad_debt_apr_2,rec.percentage_bd_apr_2,'23'],
+                        rec.thirdmon_apr_2,rec.actual_recievable_apr_2,rec.total_recieve_apr_2,rec.bad_debt_apr_2,rec.percentage_bdb_apr_2,'23'],
 
                         17:['05','MAY-23',rec.recievable_may_2,rec.ondue_may_2,rec.afterdue_may_2,rec.firstmon_may_2,rec.secmon_may_2,
-                        rec.thirdmon_may_2,rec.actual_recievable_may_2,rec.total_recieve_may_2,rec.bad_debt_may_2,rec.percentage_bd_may_2,'23'],
+                        rec.thirdmon_may_2,rec.actual_recievable_may_2,rec.total_recieve_may_2,rec.bad_debt_may_2,rec.percentage_bdb_may_2,'23'],
 
                         18:['06','JUN-23',rec.recievable_may_2,rec.ondue_may_2,rec.afterdue_may_2,rec.firstmon_may_2,rec.secmon_may_2,
-                        rec.thirdmon_may_2,rec.actual_recievable_may_2,rec.total_recieve_may_2,rec.bad_debt_may_2,rec.percentage_bd_may_2,'23'],
+                        rec.thirdmon_may_2,rec.actual_recievable_may_2,rec.total_recieve_may_2,rec.bad_debt_may_2,rec.percentage_bdb_may_2,'23'],
 
                         19:['07','JUL-23',rec.recievable_jul_2,rec.ondue_jul_2,rec.afterdue_jul_2,rec.firstmon_jul_2,rec.secmon_jul_2,
-                        rec.thirdmon_jul_2,rec.actual_recievable_jul_2,rec.total_recieve_jul_2,rec.bad_debt_jul_2,rec.percentage_bd_jul_2,'23'],
+                        rec.thirdmon_jul_2,rec.actual_recievable_jul_2,rec.total_recieve_jul_2,rec.bad_debt_jul_2,rec.percentage_bdb_jul_2,'23'],
 
                         20:['08','AUG-23',rec.recievable_aug_2,rec.ondue_aug_2,rec.afterdue_aug_2,rec.firstmon_aug_2,rec.secmon_aug_2,
-                        rec.thirdmon_aug_2,rec.actual_recievable_aug_2,rec.total_recieve_aug_2,rec.bad_debt_aug_2,rec.percentage_bd_aug_2,'23'],
+                        rec.thirdmon_aug_2,rec.actual_recievable_aug_2,rec.total_recieve_aug_2,rec.bad_debt_aug_2,rec.percentage_bdb_aug_2,'23'],
 
                         21:['09','SEP-23',rec.recievable_sep_2,rec.ondue_sep_2,rec.afterdue_sep_2,rec.firstmon_sep_2,rec.secmon_sep_2,
-                        rec.thirdmon_sep_2,rec.actual_recievable_sep_2,rec.total_recieve_sep_2,rec.bad_debt_sep_2,rec.percentage_bd_sep_2,'23'],
+                        rec.thirdmon_sep_2,rec.actual_recievable_sep_2,rec.total_recieve_sep_2,rec.bad_debt_sep_2,rec.percentage_bdb_sep_2,'23'],
 
                         22:['10','OCT-23',rec.recievable_oct_2,rec.ondue_oct_2,rec.afterdue_oct_2,rec.firstmon_oct_2,rec.secmon_oct_2,
-                        rec.thirdmon_oct_2,rec.actual_recievable_oct_2,rec.total_recieve_oct_2,rec.bad_debt_oct_2,rec.percentage_bd_oct_2,'23'],
+                        rec.thirdmon_oct_2,rec.actual_recievable_oct_2,rec.total_recieve_oct_2,rec.bad_debt_oct_2,rec.percentage_bdb_oct_2,'23'],
 
                         23:['11','NOV-23',rec.recievable_nov_2,rec.ondue_nov_2,rec.afterdue_nov_2,rec.firstmon_nov_2,rec.secmon_nov_2,
-                        rec.thirdmon_nov_2,rec.actual_recievable_nov_2,rec.total_recieve_nov_2,rec.bad_debt_nov_2,rec.percentage_bd_nov_2,'23'],
+                        rec.thirdmon_nov_2,rec.actual_recievable_nov_2,rec.total_recieve_nov_2,rec.bad_debt_nov_2,rec.percentage_bdb_nov_2,'23'],
 
                         24:['12','DEC-23',rec.recievable_dec_2,rec.ondue_dec_2,rec.afterdue_dec_2,rec.firstmon_dec_2,rec.secmon_dec_2,
-                        rec.thirdmon_dec_2,rec.actual_recievable_dec_2,rec.total_recieve_dec_2,rec.bad_debt_dec_2,rec.percentage_bd_dec_2,'23'],
+                        rec.thirdmon_dec_2,rec.actual_recievable_dec_2,rec.total_recieve_dec_2,rec.bad_debt_dec_2,rec.percentage_bdb_dec_2,'23'],
 
                     }
                     range_start = 0
