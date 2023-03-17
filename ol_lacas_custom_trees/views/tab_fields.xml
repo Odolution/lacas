@@ -28,6 +28,10 @@
                             <field name="latefee"/>
                             <field name="libfine"/>
                             <field name="mnf"/>
+                           
+
+                            </group>    
+                            <group>
                             <field name="mobfine"/>
                             <field name="news"/>
                             <field name="paragon"/>
@@ -41,12 +45,6 @@
                             <field name="workbook"/>
                             <field name="uniform"/>
                             <field name="continuation"/>
-
-                            </group>    
-                            <group>
-                                <field name="Registration_id"/>
-                                <field name="start_session"/>
-                                <field name="end_session"/>
                             </group>
                     </group>   
                     </page>
