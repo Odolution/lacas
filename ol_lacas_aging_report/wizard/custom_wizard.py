@@ -699,53 +699,262 @@ class agingsReportWizard(models.TransientModel):
                         custom_data['recievable_jan'] += value.due_amount
                     if value.payment_state=='paid':
                         custom_data['recievable_jan'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_jan'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_jan'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_jan'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_jan'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_jan'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_jan'] += (int(value.bill_amount))
+
+
 
                 elif value.month_date == "Feburary" and value.year_date=='22':
-                    custom_data['recievable_feb'] += value.amount_residual
-                    custom_data['recievable_feb'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_feb'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_feb'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_feb'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_feb'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_feb'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_feb'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_feb'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_feb'] += (int(value.bill_amount))
 
                 elif value.month_date == "March"and value.year_date=='22':
-                    custom_data['recievable_mar'] += value.amount_residual
-                    custom_data['recievable_mar'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_mar'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_mar'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_mar'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_mar'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_mar'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_mar'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_mar'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_mar'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "April" and value.year_date=='22':
-                    custom_data['recievable_apr'] += value.amount_residual
-                    custom_data['recievable_apr'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_apr'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_apr'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_apr'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_apr'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_apr'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_apr'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_apr'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_apr'] += (int(value.bill_amount))
 
 
                 elif value.month_date == "May" and value.year_date=='22':
-                    custom_data['recievable_may'] += value.amount_residual
-                    custom_data['recievable_may'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_may'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_may'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_may'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_may'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_may'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_may'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_may'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_may'] += (int(value.bill_amount))
 
 
                 elif value.month_date == "June" and value.year_date=='22':
-                    custom_data['recievable_jun'] += value.amount_residual
-                    custom_data['recievable_jun'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_jun'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_jun'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_jun'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_jun'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_jun'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_jun'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_jun'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_jun'] += (int(value.bill_amount))
 
 
                 elif value.month_date == "July" and value.year_date=='22':
-                    custom_data['recievable_jul'] += value.amount_residual
-                    custom_data['recievable_jul'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_jul'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_jul'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_jul'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_jul'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_jul'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_jul'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_jul'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_jul'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "August" and value.year_date=='22':
-                    custom_data['recievable_aug'] += value.amount_residual
-                    custom_data['recievable_aug'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_aug'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_aug'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_aug'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_aug'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_aug'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_aug'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_aug'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_aug'] += (int(value.bill_amount))
 
                 elif value.month_date == "September" and value.year_date=='22':
-                    custom_data['recievable_sep'] += value.amount_residual
-                    custom_data['recievable_sep'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_sep'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_sep'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_sep'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_sep'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_sep'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_sep'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_sep'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_sep'] += (int(value.bill_amount))
 
                 elif value.month_date == "October" and value.year_date=='22':
-                    custom_data['recievable_oct'] += value.amount_residual
-                    custom_data['recievable_oct'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_oct'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_oct'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_oct'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_oct'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_oct'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_oct'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_oct'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_oct'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "November" and value.year_date=='22':
-                    custom_data['recievable_nov'] += value.amount_residual
-                    custom_data['recievable_nov'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_nov'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_nov'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_nov'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_nov'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_nov'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_nov'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_nov'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_nov'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "December" and value.year_date=='22':
-                    custom_data['recievable_dec'] += value.amount_residual
-                    custom_data['recievable_dec'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_dec'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_dec'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_dec'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_dec'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_dec'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_dec'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_dec'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_dec'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "January" and value.year_date=='23':
                     if value.payment_state=='not_paid':
@@ -771,58 +980,318 @@ class agingsReportWizard(models.TransientModel):
 
 
                 elif value.month_date == "Feburary" and value.year_date=='23':
-                    custom_data['recievable_feb_2'] += value.amount_residual
-                    custom_data['recievable_feb_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_feb_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_feb_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_feb_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_feb_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_feb_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_feb_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_feb_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_feb_2'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "March"and value.year_date=='23':
                     if value.payment_state=='not_paid':
                         custom_data['recievable_mar_2'] += value.due_amount
-                    elif value.payment_state=='paid':
+                    if value.payment_state=='paid':
                         custom_data['recievable_mar_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_mar_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_mar_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_mar_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_mar_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_mar_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_mar_2'] += (int(value.bill_amount))
+
 
 
                 elif value.month_date == "April" and value.year_date=='23':
-                    custom_data['recievable_apr_2'] += value.amount_residual
-                    custom_data['recievable_apr_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_apr_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_apr_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_apr_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_apr_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_apr_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_apr_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_apr_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_apr_2'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "May" and value.year_date=='23':
-                    custom_data['recievable_may_2'] += value.amount_residual
-                    custom_data['recievable_may_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_may_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_may_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_may_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_may_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_may_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_may_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_may_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_may_2'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "June" and value.year_date=='23':
-                    custom_data['recievable_jun_2'] += value.amount_residual
-                    custom_data['recievable_jun_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_jun_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_jun_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_jun_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_jun_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_jun_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_jun_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_jun_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_jun_2'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "July" and value.year_date=='23':
-                    custom_data['recievable_jul_2'] += value.amount_residual
-                    custom_data['recievable_jul_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_jul_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_jul_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_jul_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_jul_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_jul_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_jul_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_jul_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_jul_2'] += (int(value.bill_amount))
 
                 elif value.month_date == "August" and value.year_date=='23':
-                    custom_data['recievable_aug_2'] += value.amount_residual
-                    custom_data['recievable_aug_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_aug_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_aug_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_aug_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_aug_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_aug_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_aug_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_aug_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_aug_2'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "September" and value.year_date=='23':
-                    custom_data['recievable_sep_2'] += value.amount_residual
-                    custom_data['recievable_sep_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_sep_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_sep_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_sep_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_sep_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_sep_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_sep_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_sep_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_sep_2'] += (int(value.bill_amount))
+
 
                 elif value.month_date == "October" and value.year_date=='23':
-                    custom_data['recievable_oct_2'] += value.amount_residual
-                    custom_data['recievable_oct_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_oct_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_oct_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_oct_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_oct_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_oct_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_oct_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_oct_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_oct_2'] += (int(value.bill_amount))
 
                 elif value.month_date == "November" and value.year_date=='23':
-                    custom_data['recievable_nov_2'] += value.amount_residual
-                    custom_data['recievable_nov_2'] += int(value.bill_amount)
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_nov_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_nov_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_nov_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_nov_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_nov_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_nov_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_nov_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_nov_2'] += (int(value.bill_amount))
 
                 elif value.month_date == "December" and value.year_date=='23':
-                    custom_data['recievable_dec_2'] += value.amount_residual
-                    custom_data['recievable_dec_2'] += int(value.bill_amount)
-            
+                    if value.payment_state=='not_paid':
+                        custom_data['recievable_dec_2'] += value.due_amount
+                    if value.payment_state=='paid':
+                        custom_data['recievable_dec_2'] += (int(value.bill_amount))
+                        if value.ol_payment_date:
+                            first_date=value.invoice_date.replace(day=1)
+                            diff=value.ol_payment_date-first_date
+                            if diff.days >0 and diff.days<11:
+                                custom_data['ondue_dec_2'] += (int(value.bill_amount))
+                            if diff.days >10 and diff.days<31:
+                                custom_data['afterdue_dec_2'] += (int(value.bill_amount))
+                            if diff.days>30 and diff.days<61:
+                                custom_data['firstmon_dec_2'] += (int(value.bill_amount))
+                            if diff.days>60 and diff.days<91:
+                                custom_data['secmon_dec_2'] += (int(value.bill_amount))
+                            if diff.days>90 and diff.days<121:
+                                custom_data['thirdmon_dec_2'] += (int(value.bill_amount))
+                            if diff.days>120:
+                                custom_data['actual_recievable_dec_2'] += (int(value.bill_amount))
+
+            tr_jan=custom_data['ondue_jan']+custom_data['afterdue_jan']+ custom_data['firstmon_jan']+custom_data['secmon_jan']+custom_data['thirdmon_jan']+ custom_data['actual_recievable_jan']
+            bd_jan=custom_data['recievable_jan']-tr_jan
+
+            tr_feb=custom_data['ondue_feb']+custom_data['afterdue_feb']+ custom_data['firstmon_feb']+custom_data['secmon_feb']+custom_data['thirdmon_feb']+ custom_data['actual_recievable_feb']
+            bd_feb=custom_data['recievable_feb']-tr_feb
+
+            tr_mar=custom_data['ondue_mar']+custom_data['afterdue_mar']+ custom_data['firstmon_mar']+custom_data['secmon_mar']+custom_data['thirdmon_mar']+ custom_data['actual_recievable_mar']
+            bd_mar=custom_data['recievable_mar']-tr_mar
+
+            tr_apr=custom_data['ondue_apr']+custom_data['afterdue_apr']+ custom_data['firstmon_apr']+custom_data['secmon_apr']+custom_data['thirdmon_apr']+ custom_data['actual_recievable_apr']
+            bd_apr=custom_data['recievable_apr']-tr_apr
+
+            tr_may=custom_data['ondue_may']+custom_data['afterdue_may']+ custom_data['firstmon_may']+custom_data['secmon_may']+custom_data['thirdmon_may']+ custom_data['actual_recievable_may']
+            bd_may=custom_data['recievable_may']-tr_may
+
+            tr_jun=custom_data['ondue_jun']+custom_data['afterdue_jun']+ custom_data['firstmon_jun']+custom_data['secmon_jun']+custom_data['thirdmon_jun']+ custom_data['actual_recievable_jun']
+            bd_jun=custom_data['recievable_jun']-tr_jun
+
+            tr_jul=custom_data['ondue_jul']+custom_data['afterdue_jul']+ custom_data['firstmon_jul']+custom_data['secmon_jul']+custom_data['thirdmon_jul']+ custom_data['actual_recievable_jul']
+            bd_jul=custom_data['recievable_jul']-tr_jul
+
+            tr_aug=custom_data['ondue_aug']+custom_data['afterdue_aug']+ custom_data['firstmon_aug']+custom_data['secmon_aug']+custom_data['thirdmon_aug']+ custom_data['actual_recievable_aug']
+            bd_aug=custom_data['recievable_aug']-tr_aug
+
+            tr_sep=custom_data['ondue_sep']+custom_data['afterdue_sep']+ custom_data['firstmon_sep']+custom_data['secmon_sep']+custom_data['thirdmon_sep']+ custom_data['actual_recievable_sep']
+            bd_sep=custom_data['recievable_sep']-tr_sep
+
+            tr_oct=custom_data['ondue_oct']+custom_data['afterdue_oct']+ custom_data['firstmon_oct']+custom_data['secmon_oct']+custom_data['thirdmon_oct']+ custom_data['actual_recievable_oct']
+            bd_oct=custom_data['recievable_oct']-tr_oct
+
+            tr_nov=custom_data['ondue_nov']+custom_data['afterdue_nov']+ custom_data['firstmon_nov']+custom_data['secmon_nov']+custom_data['thirdmon_nov']+ custom_data['actual_recievable_nov']
+            bd_nov=custom_data['recievable_nov']-tr_nov
+
+            tr_dec=custom_data['ondue_dec']+custom_data['afterdue_dec']+ custom_data['firstmon_dec']+custom_data['secmon_dec']+custom_data['thirdmon_dec']+ custom_data['actual_recievable_dec']
+            bd_dec=custom_data['recievable_dec']-tr_dec
 
             
-            total_recovered=custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2']+ custom_data['actual_recievable_jan_2']
-            bad_debt=custom_data['recievable_jan_2']-total_recovered
-            # percent_bd=custom_data['recievable_jan_2']
-        
+            
+            tr_jan_2=custom_data['ondue_jan_2']+custom_data['afterdue_jan_2']+ custom_data['firstmon_jan_2']+custom_data['secmon_jan_2']+custom_data['thirdmon_jan_2']+ custom_data['actual_recievable_jan_2']
+            bd_jan_2=custom_data['recievable_jan_2']-tr_jan_2
+
+
+            tr_feb_2=custom_data['ondue_feb_2']+custom_data['afterdue_feb_2']+ custom_data['firstmon_feb_2']+custom_data['secmon_feb_2']+custom_data['thirdmon_feb_2']+ custom_data['actual_recievable_feb_2']
+            bd_feb_2=custom_data['recievable_feb_2']-tr_feb_2
+
+            tr_mar_2=custom_data['ondue_mar_2']+custom_data['afterdue_mar_2']+ custom_data['firstmon_mar_2']+custom_data['secmon_mar_2']+custom_data['thirdmon_mar_2']+ custom_data['actual_recievable_mar_2']
+            bd_mar_2=custom_data['recievable_mar_2']-tr_mar_2
+
+            tr_apr_2=custom_data['ondue_apr_2']+custom_data['afterdue_apr_2']+ custom_data['firstmon_apr_2']+custom_data['secmon_apr_2']+custom_data['thirdmon_apr_2']+ custom_data['actual_recievable_apr_2']
+            bd_apr_2=custom_data['recievable_apr_2']-tr_apr_2
+
+            tr_may_2=custom_data['ondue_may_2']+custom_data['afterdue_may_2']+ custom_data['firstmon_may_2']+custom_data['secmon_may_2']+custom_data['thirdmon_may_2']+ custom_data['actual_recievable_may_2']
+            bd_may_2=custom_data['recievable_may_2']-tr_may_2
+
+            tr_jun_2=custom_data['ondue_jun_2']+custom_data['afterdue_jun_2']+ custom_data['firstmon_jun_2']+custom_data['secmon_jun_2']+custom_data['thirdmon_jun_2']+ custom_data['actual_recievable_jun_2']
+            bd_jun_2=custom_data['recievable_jun_2']-tr_jun_2
+
+            tr_jul_2=custom_data['ondue_jul_2']+custom_data['afterdue_jul_2']+ custom_data['firstmon_jul_2']+custom_data['secmon_jul_2']+custom_data['thirdmon_jul_2']+ custom_data['actual_recievable_jul_2']
+            bd_jul_2=custom_data['recievable_jul_2']-tr_jul_2
+
+            tr_aug_2=custom_data['ondue_aug_2']+custom_data['afterdue_aug_2']+ custom_data['firstmon_aug_2']+custom_data['secmon_aug_2']+custom_data['thirdmon_aug_2']+ custom_data['actual_recievable_aug_2']
+            bd_aug_2=custom_data['recievable_aug_2']-tr_aug_2
+
+            tr_sep_2=custom_data['ondue_sep_2']+custom_data['afterdue_sep_2']+ custom_data['firstmon_sep_2']+custom_data['secmon_sep_2']+custom_data['thirdmon_sep_2']+ custom_data['actual_recievable_sep_2']
+            bd_sep_2=custom_data['recievable_sep_2']-tr_sep_2
+
+            tr_oct_2=custom_data['ondue_oct_2']+custom_data['afterdue_oct_2']+ custom_data['firstmon_oct_2']+custom_data['secmon_oct_2']+custom_data['thirdmon_oct_2']+ custom_data['actual_recievable_oct_2']
+            bd_oct_2=custom_data['recievable_oct_2']-tr_oct_2
+
+            tr_nov_2=custom_data['ondue_nov_2']+custom_data['afterdue_nov_2']+ custom_data['firstmon_nov_2']+custom_data['secmon_nov_2']+custom_data['thirdmon_nov_2']+ custom_data['actual_recievable_nov_2']
+            bd_nov_2=custom_data['recievable_nov_2']-tr_nov_2
+
+            tr_dec_2=custom_data['ondue_dec_2']+custom_data['afterdue_dec_2']+ custom_data['firstmon_dec_2']+custom_data['secmon_dec_2']+custom_data['thirdmon_dec_2']+ custom_data['actual_recievable_dec_2']
+            bd_dec_2=custom_data['recievable_dec_2']-tr_dec_2
             mvl=self.env['account.aging.move.line'].create({
                 
                 "student_branch":custom_data['student_branch'],
@@ -830,170 +1299,192 @@ class agingsReportWizard(models.TransientModel):
                 #------jan22-------
 
                 "recievable_jan": custom_data['recievable_jan'],
-                "ondue_jan": 0,
-                "afterdue_jan": 0,
-                "firstmon_jan":0,
-                "secmon_jan":0,
-                "thirdmon_jan": 0,
-                "actual_recievable_jan":0,
-                "total_recieve_jan":0,
-                "bad_debt_jan": 0,
+                "ondue_jan": custom_data['ondue_jan'],
+                "afterdue_jan": custom_data['afterdue_jan'],
+                "firstmon_jan":custom_data['firstmon_jan'],
+                "secmon_jan":custom_data['secmon_jan'],
+                "thirdmon_jan": custom_data['thirdmon_jan'],
+                "actual_recievable_jan":custom_data['actual_recievable_jan'],
+                "total_recieve_jan":tr_jan,
+                "bad_debt_jan": bd_jan,
                 "percentage_bd_jan": 0,
 
                 
                 #------feb22-------
                 
-                "recievable_feb":  custom_data['recievable_feb'],
-                "ondue_feb": 0,
-                "afterdue_feb": 0,
-                "firstmon_feb":0,
-                "secmon_feb":0,
-                "thirdmon_feb": 0,
-                "actual_recievable_feb":0,
-                "total_recieve_feb":0,
-                "bad_debt_feb": 0,
+                "recievable_feb": custom_data['recievable_feb'],
+                "ondue_feb": custom_data['ondue_feb'],
+                "afterdue_feb": custom_data['afterdue_feb'],
+                "firstmon_feb":custom_data['firstmon_feb'],
+                "secmon_feb":custom_data['secmon_feb'],
+                "thirdmon_feb": custom_data['thirdmon_feb'],
+                "actual_recievable_feb":custom_data['actual_recievable_feb'],
+                "total_recieve_feb":tr_feb,
+                "bad_debt_feb": bd_feb,
                 "percentage_bd_feb": 0,
 
                 
                 #------mar22-------
                 
-                "recievable_mar":  custom_data['recievable_mar'],
-                "ondue_mar": 0,
-                "afterdue_mar": 0,
-                "firstmon_mar":0,
-                "secmon_mar":0,
-                "thirdmon_mar": 0,
-                "actual_recievable_mar":0,
-                "total_recieve_mar":0,
-                "bad_debt_mar": 0,
+                "recievable_mar": custom_data['recievable_mar'],
+                "ondue_mar": custom_data['ondue_mar'],
+                "afterdue_mar": custom_data['afterdue_mar'],
+                "firstmon_mar":custom_data['firstmon_mar'],
+                "secmon_mar":custom_data['secmon_mar'],
+                "thirdmon_mar": custom_data['thirdmon_mar'],
+                "actual_recievable_mar":custom_data['actual_recievable_mar'],
+                "total_recieve_mar":tr_mar,
+                "bad_debt_mar": bd_mar,
                 "percentage_bd_mar": 0,
 
                 
                 #------apr22-------
                 
-                "recievable_apr":  custom_data['recievable_apr'],
-                "ondue_apr": 0,
-                "afterdue_apr": 0,
-                "firstmon_apr":0,
-                "secmon_apr":0,
-                "thirdmon_apr": 0,
-                "actual_recievable_apr":0,
-                "total_recieve_apr":0,
-                "bad_debt_apr": 0,
+
+                "recievable_apr": custom_data['recievable_apr'],
+                "ondue_apr": custom_data['ondue_apr'],
+                "afterdue_apr": custom_data['afterdue_apr'],
+                "firstmon_apr":custom_data['firstmon_apr'],
+                "secmon_apr":custom_data['secmon_apr'],
+                "thirdmon_apr": custom_data['thirdmon_apr'],
+                "actual_recievable_apr":custom_data['actual_recievable_apr'],
+                "total_recieve_apr":tr_apr,
+                "bad_debt_apr": bd_apr,
                 "percentage_bd_apr": 0,
+
+                
 
                 
                 #------may22-------
                 
-                "recievable_may":  custom_data['recievable_may'],
-                "ondue_may": 0,
-                "afterdue_may": 0,
-                "firstmon_may":0,
-                "secmon_may":0,
-                "thirdmon_may": 0,
-                "actual_recievable_may":0,
-                "total_recieve_may":0,
-                "bad_debt_may": 0,
+
+                "recievable_may": custom_data['recievable_may'],
+                "ondue_may": custom_data['ondue_may'],
+                "afterdue_may": custom_data['afterdue_may'],
+                "firstmon_may":custom_data['firstmon_may'],
+                "secmon_may":custom_data['secmon_may'],
+                "thirdmon_may": custom_data['thirdmon_may'],
+                "actual_recievable_may":custom_data['actual_recievable_may'],
+                "total_recieve_may":tr_may,
+                "bad_debt_may": bd_may,
                 "percentage_bd_may": 0,
+
+                
 
                 
                 #------jun22-------
                 
-                "recievable_jun":  custom_data['recievable_jun'],
-                "ondue_jun": 0,
-                "afterdue_jun": 0,
-                "firstmon_jun":0,
-                "secmon_jun":0,
-                "thirdmon_jun": 0,
-                "actual_recievable_jun":0,
-                "total_recieve_jun":0,
-                "bad_debt_jun": 0,
+
+                "recievable_jun": custom_data['recievable_jun'],
+                "ondue_jun": custom_data['ondue_jun'],
+                "afterdue_jun": custom_data['afterdue_jun'],
+                "firstmon_jun":custom_data['firstmon_jun'],
+                "secmon_jun":custom_data['secmon_jun'],
+                "thirdmon_jun": custom_data['thirdmon_jun'],
+                "actual_recievable_jun":custom_data['actual_recievable_jun'],
+                "total_recieve_jun":tr_jun,
+                "bad_debt_jun": bd_jun,
                 "percentage_bd_jun": 0,
+
+                
 
                 
                 #------jul22-------
                 
-                "recievable_jul":  custom_data['recievable_jul'],
-                "ondue_jul": 0,
-                "afterdue_jul": 0,
-                "firstmon_jul":0,
-                "secmon_jul":0,
-                "thirdmon_jul": 0,
-                "actual_recievable_jul":0,
-                "total_recieve_jul":0,
-                "bad_debt_jul": 0,
+
+                "recievable_jul": custom_data['recievable_jul'],
+                "ondue_jul": custom_data['ondue_jul'],
+                "afterdue_jul": custom_data['afterdue_jul'],
+                "firstmon_jul":custom_data['firstmon_jul'],
+                "secmon_jul":custom_data['secmon_jul'],
+                "thirdmon_jul": custom_data['thirdmon_jul'],
+                "actual_recievable_jul":custom_data['actual_recievable_jul'],
+                "total_recieve_jul":tr_jul,
+                "bad_debt_jul": bd_jul,
                 "percentage_bd_jul": 0,
+
+                
 
                 
                 #------aug22-------
                 
-                "recievable_aug":  custom_data['recievable_aug'],
-                "ondue_aug": 0,
-                "afterdue_aug": 0,
-                "firstmon_aug":0,
-                "secmon_aug":0,
-                "thirdmon_aug": 0,
-                "actual_recievable_aug":0,
-                "total_recieve_aug":0,
-                "bad_debt_aug": 0,
+
+                "recievable_aug": custom_data['recievable_aug'],
+                "ondue_aug": custom_data['ondue_aug'],
+                "afterdue_aug": custom_data['afterdue_aug'],
+                "firstmon_aug":custom_data['firstmon_aug'],
+                "secmon_aug":custom_data['secmon_aug'],
+                "thirdmon_aug": custom_data['thirdmon_aug'],
+                "actual_recievable_aug":custom_data['actual_recievable_aug'],
+                "total_recieve_aug":tr_aug,
+                "bad_debt_aug": bd_aug,
                 "percentage_bd_aug": 0,
 
                 
+                
                 #------sep22-------
                 
-                "recievable_sep":  custom_data['recievable_sep'],
-                "ondue_sep": 0,
-                "afterdue_sep": 0,
-                "firstmon_sep":0,
-                "secmon_sep":0,
-                "thirdmon_sep": 0,
-                "actual_recievable_sep":0,
-                "total_recieve_sep":0,
-                "bad_debt_sep": 0,
+
+                "recievable_sep": custom_data['recievable_sep'],
+                "ondue_sep": custom_data['ondue_sep'],
+                "afterdue_sep": custom_data['afterdue_sep'],
+                "firstmon_sep":custom_data['firstmon_sep'],
+                "secmon_sep":custom_data['secmon_sep'],
+                "thirdmon_sep": custom_data['thirdmon_sep'],
+                "actual_recievable_sep":custom_data['actual_recievable_sep'],
+                "total_recieve_sep":tr_sep,
+                "bad_debt_sep": bd_sep,
                 "percentage_bd_sep": 0,
 
                 
-                #------oct22-------
                 
-                "recievable_oct":  custom_data['recievable_oct'],
-                "ondue_oct": 0,
-                "afterdue_oct": 0,
-                "firstmon_oct":0,
-                "secmon_oct":0,
-                "thirdmon_oct": 0,
-                "actual_recievable_oct":0,
-                "total_recieve_oct":0,
-                "bad_debt_oct": 0,
+                #------oct22-------
+
+                "recievable_oct": custom_data['recievable_oct'],
+                "ondue_oct": custom_data['ondue_oct'],
+                "afterdue_oct": custom_data['afterdue_oct'],
+                "firstmon_oct":custom_data['firstmon_oct'],
+                "secmon_oct":custom_data['secmon_oct'],
+                "thirdmon_oct": custom_data['thirdmon_oct'],
+                "actual_recievable_oct":custom_data['actual_recievable_oct'],
+                "total_recieve_oct":tr_oct,
+                "bad_debt_oct": bd_oct,
                 "percentage_bd_oct": 0,
 
                 
-                #------nov22-------
+
                 
-                "recievable_nov":  custom_data['recievable_nov'],
-                "ondue_nov": 0,
-                "afterdue_nov": 0,
-                "firstmon_nov":0,
-                "secmon_nov":0,
-                "thirdmon_nov": 0,
-                "actual_recievable_nov":0,
-                "total_recieve_nov":0,
-                "bad_debt_nov": 0,
+                #------nov22-------
+
+                "recievable_nov": custom_data['recievable_nov'],
+                "ondue_nov": custom_data['ondue_nov'],
+                "afterdue_nov": custom_data['afterdue_nov'],
+                "firstmon_nov":custom_data['firstmon_nov'],
+                "secmon_nov":custom_data['secmon_nov'],
+                "thirdmon_nov": custom_data['thirdmon_nov'],
+                "actual_recievable_nov":custom_data['actual_recievable_nov'],
+                "total_recieve_nov":tr_nov,
+                "bad_debt_nov": bd_nov,
                 "percentage_bd_nov": 0,
+
+                
 
                 
                 #------dec22-------
                 
-                "recievable_dec":  custom_data['recievable_dec'],
-                "ondue_dec": 0,
-                "afterdue_dec": 0,
-                "firstmon_dec":0,
-                "secmon_dec":0,
-                "thirdmon_dec": 0,
-                "actual_recievable_dec":0,
-                "total_recieve_dec":0,
-                "bad_debt_dec": 0,
+
+                "recievable_dec": custom_data['recievable_dec'],
+                "ondue_dec": custom_data['ondue_dec'],
+                "afterdue_dec": custom_data['afterdue_dec'],
+                "firstmon_dec":custom_data['firstmon_dec'],
+                "secmon_dec":custom_data['secmon_dec'],
+                "thirdmon_dec": custom_data['thirdmon_dec'],
+                "actual_recievable_dec":custom_data['actual_recievable_dec'],
+                "total_recieve_dec":tr_dec,
+                "bad_debt_dec": bd_dec,
                 "percentage_bd_dec": 0,
 
+                
                         #------jan23-------
                 
                 "recievable_jan_2":  custom_data['recievable_jan_2'],
@@ -1003,164 +1494,190 @@ class agingsReportWizard(models.TransientModel):
                 "secmon_jan_2":custom_data['secmon_jan_2'],
                 "thirdmon_jan_2": custom_data['thirdmon_jan_2'],
                 "actual_recievable_jan_2":custom_data['actual_recievable_jan_2'],
-                "total_recieve_jan_2":total_recovered,
-                "bad_debt_jan_2":bad_debt,
+                "total_recieve_jan_2":tr_jan_2,
+                "bad_debt_jan_2":bd_jan_2,
                 "percentage_bd_jan_2": 0,
 
                 
                 #------feb23-------
                 
-                "recievable_feb_2":  custom_data['recievable_feb_2'],
-                "ondue_feb_2": 0,
-                "afterdue_feb_2": 0,
-                "firstmon_feb_2":0,
-                "secmon_feb_2":0,
-                "thirdmon_feb_2": 0,
-                "actual_recievable_feb_2":0,
-                "total_recieve_feb_2":0,
-                "bad_debt_feb_2": 0,
+
+                "recievable_feb_2": custom_data['recievable_feb_2'],
+                "ondue_feb_2": custom_data['ondue_feb_2'],
+                "afterdue_feb_2": custom_data['afterdue_feb_2'],
+                "firstmon_feb_2":custom_data['firstmon_feb_2'],
+                "secmon_feb_2":custom_data['secmon_feb_2'],
+                "thirdmon_feb_2": custom_data['thirdmon_feb_2'],
+                "actual_recievable_feb_2":custom_data['actual_recievable_feb_2'],
+                "total_recieve_feb_2":tr_feb_2,
+                "bad_debt_feb_2": bd_feb_2,
                 "percentage_bd_feb_2": 0,
 
                 
+                
                 #------mar23-------
                 
+
                 "recievable_mar_2": custom_data['recievable_mar_2'],
-                "ondue_mar_2": 0,
-                "afterdue_mar_2": 0,
-                "firstmon_mar_2":0,
-                "secmon_mar_2":0,
-                "thirdmon_mar_2": 0,
-                "actual_recievable_mar_2":0,
-                "total_recieve_mar_2":0,
-                "bad_debt_mar_2": 0,
+                "ondue_mar_2": custom_data['ondue_mar_2'],
+                "afterdue_mar_2": custom_data['afterdue_mar_2'],
+                "firstmon_mar_2":custom_data['firstmon_mar_2'],
+                "secmon_mar_2":custom_data['secmon_mar_2'],
+                "thirdmon_mar_2": custom_data['thirdmon_mar_2'],
+                "actual_recievable_mar_2":custom_data['actual_recievable_mar_2'],
+                "total_recieve_mar_2":tr_mar_2,
+                "bad_debt_mar_2": bd_mar_2,
                 "percentage_bd_mar_2": 0,
+
+                
 
                 
                 #------apr23-------
                 
+
                 "recievable_apr_2": custom_data['recievable_apr_2'],
-                "ondue_apr_2": 0,
-                "afterdue_apr_2": 0,
-                "firstmon_apr_2":0,
-                "secmon_apr_2":0,
-                "thirdmon_apr_2": 0,
-                "actual_recievable_apr_2":0,
-                "total_recieve_apr_2":0,
-                "bad_debt_apr_2": 0,
+                "ondue_apr_2": custom_data['ondue_apr_2'],
+                "afterdue_apr_2": custom_data['afterdue_apr_2'],
+                "firstmon_apr_2":custom_data['firstmon_apr_2'],
+                "secmon_apr_2":custom_data['secmon_apr_2'],
+                "thirdmon_apr_2": custom_data['thirdmon_apr_2'],
+                "actual_recievable_apr_2":custom_data['actual_recievable_apr_2'],
+                "total_recieve_apr_2":tr_apr_2,
+                "bad_debt_apr_2": bd_apr_2,
                 "percentage_bd_apr_2": 0,
+
+                
 
                 
                 #------may23-------
                 
+
                 "recievable_may_2": custom_data['recievable_may_2'],
-                "ondue_may_2": 0,
-                "afterdue_may_2": 0,
-                "firstmon_may_2":0,
-                "secmon_may_2":0,
-                "thirdmon_may_2": 0,
-                "actual_recievable_may_2":0,
-                "total_recieve_may_2":0,
-                "bad_debt_may_2": 0,
+                "ondue_may_2": custom_data['ondue_may_2'],
+                "afterdue_may_2": custom_data['afterdue_may_2'],
+                "firstmon_may_2":custom_data['firstmon_may_2'],
+                "secmon_may_2":custom_data['secmon_may_2'],
+                "thirdmon_may_2": custom_data['thirdmon_may_2'],
+                "actual_recievable_may_2":custom_data['actual_recievable_may_2'],
+                "total_recieve_may_2":tr_may_2,
+                "bad_debt_may_2": bd_may_2,
                 "percentage_bd_may_2": 0,
 
                 
+                
                 #------jun23-------
                 
+
                 "recievable_jun_2": custom_data['recievable_jun_2'],
-                "ondue_jun_2": 0,
-                "afterdue_jun_2": 0,
-                "firstmon_jun_2":0,
-                "secmon_jun_2":0,
-                "thirdmon_jun_2": 0,
-                "actual_recievable_jun_2":0,
-                "total_recieve_jun_2":0,
-                "bad_debt_jun_2": 0,
+                "ondue_jun_2": custom_data['ondue_jun_2'],
+                "afterdue_jun_2": custom_data['afterdue_jun_2'],
+                "firstmon_jun_2":custom_data['firstmon_jun_2'],
+                "secmon_jun_2":custom_data['secmon_jun_2'],
+                "thirdmon_jun_2": custom_data['thirdmon_jun_2'],
+                "actual_recievable_jun_2":custom_data['actual_recievable_jun_2'],
+                "total_recieve_jun_2":tr_jun_2,
+                "bad_debt_jun_2": bd_jun_2,
                 "percentage_bd_jun_2": 0,
+
+                
 
                 
                 #------jul23-------
                 
+
                 "recievable_jul_2": custom_data['recievable_jul_2'],
-                "ondue_jul_2": 0,
-                "afterdue_jul_2": 0,
-                "firstmon_jul_2":0,
-                "secmon_jul_2":0,
-                "thirdmon_jul_2": 0,
-                "actual_recievable_jul_2":0,
-                "total_recieve_jul_2":0,
-                "bad_debt_jul_2": 0,
+                "ondue_jul_2": custom_data['ondue_jul_2'],
+                "afterdue_jul_2": custom_data['afterdue_jul_2'],
+                "firstmon_jul_2":custom_data['firstmon_jul_2'],
+                "secmon_jul_2":custom_data['secmon_jul_2'],
+                "thirdmon_jul_2": custom_data['thirdmon_jul_2'],
+                "actual_recievable_jul_2":custom_data['actual_recievable_jul_2'],
+                "total_recieve_jul_2":tr_jul_2,
+                "bad_debt_jul_2": bd_jul_2,
                 "percentage_bd_jul_2": 0,
+
+                
 
                 
                 #------aug23-------
                 
+
                 "recievable_aug_2": custom_data['recievable_aug_2'],
-                "ondue_aug_2": 0,
-                "afterdue_aug_2": 0,
-                "firstmon_aug_2":0,
-                "secmon_aug_2":0,
-                "thirdmon_aug_2": 0,
-                "actual_recievable_aug_2":0,
-                "total_recieve_aug_2":0,
-                "bad_debt_aug_2": 0,
+                "ondue_aug_2": custom_data['ondue_aug_2'],
+                "afterdue_aug_2": custom_data['afterdue_aug_2'],
+                "firstmon_aug_2":custom_data['firstmon_aug_2'],
+                "secmon_aug_2":custom_data['secmon_aug_2'],
+                "thirdmon_aug_2": custom_data['thirdmon_aug_2'],
+                "actual_recievable_aug_2":custom_data['actual_recievable_aug_2'],
+                "total_recieve_aug_2":tr_aug_2,
+                "bad_debt_aug_2": bd_aug_2,
                 "percentage_bd_aug_2": 0,
+
+                
 
                 
                 #------sep23-------
                 
+
                 "recievable_sep_2": custom_data['recievable_sep_2'],
-                "ondue_sep_2": 0,
-                "afterdue_sep_2": 0,
-                "firstmon_sep_2":0,
-                "secmon_sep_2":0,
-                "thirdmon_sep_2": 0,
-                "actual_recievable_sep_2":0,
-                "total_recieve_sep_2":0,
-                "bad_debt_sep_2": 0,
+                "ondue_sep_2": custom_data['ondue_sep_2'],
+                "afterdue_sep_2": custom_data['afterdue_sep_2'],
+                "firstmon_sep_2":custom_data['firstmon_sep_2'],
+                "secmon_sep_2":custom_data['secmon_sep_2'],
+                "thirdmon_sep_2": custom_data['thirdmon_sep_2'],
+                "actual_recievable_sep_2":custom_data['actual_recievable_sep_2'],
+                "total_recieve_sep_2":tr_sep_2,
+                "bad_debt_sep_2": bd_sep_2,
                 "percentage_bd_sep_2": 0,
 
                 
-                #------oct23-------
                 
+                #------oct23-------
+
                 "recievable_oct_2": custom_data['recievable_oct_2'],
-                "ondue_oct_2": 0,
-                "afterdue_oct_2": 0,
-                "firstmon_oct_2":0,
-                "secmon_oct_2":0,
-                "thirdmon_oct_2": 0,
-                "actual_recievable_oct_2":0,
-                "total_recieve_oct_2":0,
-                "bad_debt_oct_2": 0,
+                "ondue_oct_2": custom_data['ondue_oct_2'],
+                "afterdue_oct_2": custom_data['afterdue_oct_2'],
+                "firstmon_oct_2":custom_data['firstmon_oct_2'],
+                "secmon_oct_2":custom_data['secmon_oct_2'],
+                "thirdmon_oct_2": custom_data['thirdmon_oct_2'],
+                "actual_recievable_oct_2":custom_data['actual_recievable_oct_2'],
+                "total_recieve_oct_2":tr_oct_2,
+                "bad_debt_oct_2": bd_oct_2,
                 "percentage_bd_oct_2": 0,
 
                 
+                
                 #------nov23-------
                 
+
                 "recievable_nov_2": custom_data['recievable_nov_2'],
-                "ondue_nov_2": 0,
-                "afterdue_nov_2": 0,
-                "firstmon_nov_2":0,
-                "secmon_nov_2":0,
-                "thirdmon_nov_2": 0,
-                "actual_recievable_nov_2":0,
-                "total_recieve_nov_2":0,
-                "bad_debt_nov_2": 0,
+                "ondue_nov_2": custom_data['ondue_nov_2'],
+                "afterdue_nov_2": custom_data['afterdue_nov_2'],
+                "firstmon_nov_2":custom_data['firstmon_nov_2'],
+                "secmon_nov_2":custom_data['secmon_nov_2'],
+                "thirdmon_nov_2": custom_data['thirdmon_nov_2'],
+                "actual_recievable_nov_2":custom_data['actual_recievable_nov_2'],
+                "total_recieve_nov_2":tr_nov_2,
+                "bad_debt_nov_2": bd_nov_2,
                 "percentage_bd_nov_2": 0,
 
                 
+                
                 #------dec23-------
                 
+
                 "recievable_dec_2": custom_data['recievable_dec_2'],
-                "ondue_dec_2": 0,
-                "afterdue_dec_2": 0,
-                "firstmon_dec_2":0,
-                "secmon_dec_2":0,
-                "thirdmon_dec_2": 0,
-                "actual_recievable_dec_2":0,
-                "total_recieve_dec_2":0,
-                "bad_debt_dec_2": 0,
+                "ondue_dec_2": custom_data['ondue_dec_2'],
+                "afterdue_dec_2": custom_data['afterdue_dec_2'],
+                "firstmon_dec_2":custom_data['firstmon_dec_2'],
+                "secmon_dec_2":custom_data['secmon_dec_2'],
+                "thirdmon_dec_2": custom_data['thirdmon_dec_2'],
+                "actual_recievable_dec_2":custom_data['actual_recievable_dec_2'],
+                "total_recieve_dec_2":tr_dec_2,
+                "bad_debt_dec_2": bd_dec_2,
                 "percentage_bd_dec_2": 0,
 
+                
                 
     
             })
@@ -1174,7 +1691,8 @@ class agingsReportWizard(models.TransientModel):
             lst.append(mvl['firstmon_jan_2'])
             lst.append(mvl['secmon_jan_2'])
             lst.append(mvl['thirdmon_jan_2'])
-            lst.append(mvl['total_recieve_jan_2'])
+            lst.append(mvl['thirdmon_jan_2'])
+            lst.append(mvl['actual_recievable_jan_2'])
             lst.append(mvl['bad_debt_jan_2'])
             raise UserError(lst)
 
