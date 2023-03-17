@@ -343,7 +343,7 @@ class agingsReportWizard(models.TransientModel):
         for branch in branch_lst:
 
            
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',2),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             
             custom_data = {
                    
@@ -1723,7 +1723,7 @@ class agingsReportWizard(models.TransientModel):
         if xlwt:
 
             
-            filename = 'aging OF WITHDRAWAL STUDENTS.xls'
+            filename = 'Aging Report.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
