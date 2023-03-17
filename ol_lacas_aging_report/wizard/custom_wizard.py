@@ -1759,54 +1759,54 @@ class agingsReportWizard(models.TransientModel):
 
 
 
-            # v_from_month=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%m')
-            # v_from_year=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y')
+            v_from_month=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%m')
+            v_from_year=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y')
 
-            # v_to_month=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%m')
-            # v_to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
+            v_to_month=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%m')
+            v_to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
 
-            # months= {
-            #     1:['01','JAN-22',10,'22'],
-            #     2:['02','FEB-22',20,'22'],
-            #     3:['03','MAR-22',30,'22'],
-            #     4:['04','APR-22',40,'22'],
-            #     5:['05','MAY-22',50,'22'],
-            #     6:['06','JUN-22',60,'22'],
-            #     7:['07','JUL-22',70,'22'],
-            #     8:['08','AUG-22',80,'22'],
-            #     9:['09','SEP-22',90,'22'],
-            #     10:['10','OCT-22',100,'22'],
-            #     11:['11','NOV-22',110,'22'],
-            #     12:['12','DEC-22',120,'22'],
-            #     13:['01','JAN-23',130,'23'],
-            #     14:['02','FEB-23',140,'23'],
-            #     15:['03','MAR-23',150,'23'],
-            #     16:['04','APR-23',160,'23'],
-            #     17:['05','MAY-23',170,'23'],
-            #     18:['06','JUN-23',180,'23'],
-            #     19:['07','JUL-23',190,'23'],
-            #     20:['08','AUG-23',200,'23'],
-            #     21:['09','SEP-23',200,'23'],
-            #     22:['10','OCT-23',200,'23'],
-            #     23:['11','NOV-23',200,'23'],
-            #     24:['12','DEC-23',200,'23'],
-            #     }
-            # range_start = 0
-            # range_stop = 0
-            # # raise UserError(v_to)
-            # for key, value in months.items():
-            #     if value[0] == v_from_month and value[3] == v_from_year:
-            #         range_start = key
-            #     if value[0] == v_to_month and value[3] == v_to_year:
+            months= {
+                1:['01','JAN-22',10,'22'],
+                2:['02','FEB-22',20,'22'],
+                3:['03','MAR-22',30,'22'],
+                4:['04','APR-22',40,'22'],
+                5:['05','MAY-22',50,'22'],
+                6:['06','JUN-22',60,'22'],
+                7:['07','JUL-22',70,'22'],
+                8:['08','AUG-22',80,'22'],
+                9:['09','SEP-22',90,'22'],
+                10:['10','OCT-22',100,'22'],
+                11:['11','NOV-22',110,'22'],
+                12:['12','DEC-22',120,'22'],
+                13:['01','JAN-23',130,'23'],
+                14:['02','FEB-23',140,'23'],
+                15:['03','MAR-23',150,'23'],
+                16:['04','APR-23',160,'23'],
+                17:['05','MAY-23',170,'23'],
+                18:['06','JUN-23',180,'23'],
+                19:['07','JUL-23',190,'23'],
+                20:['08','AUG-23',200,'23'],
+                21:['09','SEP-23',200,'23'],
+                22:['10','OCT-23',200,'23'],
+                23:['11','NOV-23',200,'23'],
+                24:['12','DEC-23',200,'23'],
+                }
+            range_start = 0
+            range_stop = 0
+            # raise UserError(v_to)
+            for key, value in months.items():
+                if value[0] == v_from_month and value[3] == v_from_year:
+                    range_start = key
+                if value[0] == v_to_month and value[3] == v_to_year:
 
-            #         range_stop = key
+                    range_stop = key
 
-            # col = 3
+            col = 3
             
       
-            # for i in range(range_start,range_stop+1):
+            for i in range(range_start,range_stop+1):
       
-            #     worksheet.write_merge(1,2,col+1,col+2,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+1,col+2,months[i][1],red_style_title)
             #     worksheet.write_merge(1,2,col+2,col+3,months[i][1],red_style_title)
             #     worksheet.write_merge(1,2,col+4,col+5,months[i][1],red_style_title)
             #     worksheet.write_merge(1,2,col+6,col+7,months[i][1],red_style_title)
@@ -1818,7 +1818,7 @@ class agingsReportWizard(models.TransientModel):
             #     worksheet.write_merge(1,2,col+18,col+19,months[i][1],red_style_title)
 
             
-            #     col+=1
+                col+=1
 
         #     worksheet.write_merge(0,1,col,col+1,"Total", lime_style_title)   
             
