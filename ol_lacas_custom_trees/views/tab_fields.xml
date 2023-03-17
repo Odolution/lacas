@@ -8,6 +8,8 @@
                     <page name="report fields" string="List view monthly" attrs="{'invisible': [('move_type', 'in', ['entry','out_refund','in_invoice','in_refund'])], 'required': [('move_type', '=', 'out_invoice')]}">
                         <group>
                             <group>
+                            <!-- <field name="campus"/> -->
+                            <field name="std_current_branch"/>
                             <field name="computer"/>
                             <field name="library"/>
                             <field name="utility"/>
@@ -30,6 +32,9 @@
                             <field name="mnf"/>
                             </group>    
                             <group>
+                            <field name="std_fathername"/>
+                            <field name="class_name"/>
+                            <field name="section_name"/>
                             <field name="mobfine"/>
                             <field name="news"/>
                             <field name="paragon"/>

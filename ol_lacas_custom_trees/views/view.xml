@@ -130,11 +130,11 @@
                 <field name="student_code"/>
                 <field name="std_factsid"/>
                 <field name="student_name"/>
-                <field name="std_fathername"/>
+                <!-- <field name="std_fathername"/>
                 <field name="class_name"/>
-                <field name="section_name"/>
-                <field name="campus"/>
-                <field name="std_current_branch"/>
+                <field name="section_name"/> -->
+                <!-- <field name="campus"/>
+                <field name="std_current_branch"/> -->
                 <field name="std_batch"/>
                 <field name="bill_date"/>
                 <field name="challan_date"/>
