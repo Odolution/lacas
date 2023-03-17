@@ -1807,15 +1807,15 @@ class agingsReportWizard(models.TransientModel):
             for i in range(range_start,range_stop+1):
       
                 worksheet.write_merge(1,2,col+1,col+2,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+2,col+3,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+4,col+5,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+6,col+7,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+8,col+9,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+10,col+11,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+12,col+13,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+14,col+15,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+16,col+17,months[i][1],red_style_title)
-                worksheet.write_merge(1,2,col+18,col+19,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+3,col+4,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+5,col+6,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+7,col+8,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+9,col+10,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+11,col+12,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+13,col+14,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+15,col+16,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+17,col+18,months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col+19,col+20,months[i][1],red_style_title)
 
             
                 col+=1
