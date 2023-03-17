@@ -1737,7 +1737,7 @@ class agingsReportWizard(models.TransientModel):
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour lime;'
+            lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour aqua;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
 
             grand_heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour white;'
@@ -1766,38 +1766,62 @@ class agingsReportWizard(models.TransientModel):
             v_to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
 
             months= {
-                1:['01','JAN-22',10,'22'],
-                2:['02','FEB-22',20,'22'],
-                3:['03','MAR-22',30,'22'],
-                4:['04','APR-22',40,'22'],
-                5:['05','MAY-22',50,'22'],
-                6:['06','JUN-22',60,'22'],
-                7:['07','JUL-22',70,'22'],
-                8:['08','AUG-22',80,'22'],
-                9:['09','SEP-22',90,'22'],
-                10:['10','OCT-22',100,'22'],
-                11:['11','NOV-22',110,'22'],
-                12:['12','DEC-22',120,'22'],
-                13:['01','JAN-23',130,'23'],
-                14:['02','FEB-23',140,'23'],
-                15:['03','MAR-23',150,'23'],
-                16:['04','APR-23',160,'23'],
-                17:['05','MAY-23',170,'23'],
-                18:['06','JUN-23',180,'23'],
-                19:['07','JUL-23',190,'23'],
-                20:['08','AUG-23',200,'23'],
-                21:['09','SEP-23',200,'23'],
-                22:['10','OCT-23',200,'23'],
-                23:['11','NOV-23',200,'23'],
-                24:['12','DEC-23',200,'23'],
+                1:['01','JAN-22 (RECEIVABLES)','JAN-22 (ON DUE)','JAN-22 (AFTER DUE ON JAN)','JAN-22 (30 DAYS)','JAN-22 (60 DAYS)','JAN-22 (90 DAYS)',
+                'JAN-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',10,'22'],
+                2:['02','FEB-22 (RECEIVABLES)','FEB-22 (ON DUE)','FEB-22 (AFTER DUE ON JAN)','FEB-22 (30 DAYS)','FEB-22 (60 DAYS)','FEB-22 (90 DAYS)',
+                'FEB-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',20,'22'],
+                3:['03','MAR-22 (RECEIVABLES)','MAR-22 (ON DUE)','MAR-22 (AFTER DUE ON JAN)','MAR-22 (30 DAYS)','MAR-22 (60 DAYS)','MAR-22 (90 DAYS)',
+                'MAR-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',30,'22'],
+                4:['04','APR-22 (RECEIVABLES)','APR-22 (ON DUE)','APR-22 (AFTER DUE ON JAN)','APR-22 (30 DAYS)','APR-22 (60 DAYS)','APR-22 (90 DAYS)',
+                'APR-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',40,'22'],
+                5:['05','MAY-22 (RECEIVABLES)','MAY-22 (ON DUE)','MAY-22 (AFTER DUE ON JAN)','MAY-22 (30 DAYS)','MAY-22 (60 DAYS)','MAY-22 (90 DAYS)',
+                'MAY-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',50,'22'],
+                6:['06','JUN-22 (RECEIVABLES)','JUN-22 (ON DUE)','JUN-22 (AFTER DUE ON JAN)','JUN-22 (30 DAYS)','JUN-22 (60 DAYS)','JUN-22 (90 DAYS)',
+                'JUN-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',60,'22'],
+                7:['07','JUL-22 (RECEIVABLES)','JUL-22 (ON DUE)','JUL-22 (AFTER DUE ON JAN)','JUL-22 (30 DAYS)','JUL-22 (60 DAYS)','JUL-22 (90 DAYS)',
+                'JUL-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',70,'22'],
+                8:['08','AUG-22 (RECEIVABLES)','AUG-22 (ON DUE)','AUG-22 (AFTER DUE ON JAN)','AUG-22 (30 DAYS)','AUG-22 (60 DAYS)','AUG-22 (90 DAYS)',
+                'AUG-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',80,'22'],
+                9:['09','SEP-22 (RECEIVABLES)','SEP-22 (ON DUE)','SEP-22 (AFTER DUE ON JAN)','SEP-22 (30 DAYS)','SEP-22 (60 DAYS)','SEP-22 (90 DAYS)',
+                'SEP-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',90,'22'],
+                10:['10','OCT-22 (RECEIVABLES)','OCT-22 (ON DUE)','OCT-22 (AFTER DUE ON JAN)','OCT-22 (30 DAYS)','OCT-22 (60 DAYS)','OCT-22 (90 DAYS)',
+                'OCT-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',100,'22'],
+                11:['11','NOV-22 (RECEIVABLES)','NOV-22 (ON DUE)','NOV-22 (AFTER DUE ON JAN)','NOV-22 (30 DAYS)','NOV-22 (60 DAYS)','NOV-22 (90 DAYS)',
+                'NOV-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',110,'22'],
+                12:['12','DEC-22 (RECEIVABLES)','DEC-22 (ON DUE)','DEC-22 (AFTER DUE ON JAN)','DEC-22 (30 DAYS)','DEC-22 (60 DAYS)','DEC-22 (90 DAYS)',
+                'DEC-22 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',120,'22'],
+                13:['01','JAN-23 (RECEIVABLES)','JAN-23 (ON DUE)','JAN-23 (AFTER DUE ON JAN)','JAN-23 (30 DAYS)','JAN-23 (60 DAYS)','JAN-23 (90 DAYS)',
+                'JAN-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',130,'23'],
+                14:['02','FEB-23 (RECEIVABLES)','FEB-23 (ON DUE)','FEB-23 (AFTER DUE ON FEB)','FEB-23 (30 DAYS)','FEB-23 (60 DAYS)','FEB-23 (90 DAYS)',
+                'FEB-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',140,'23'],
+                15:['03','MAR-23 (RECEIVABLES)','MAR-23 (ON DUE)','MAR-23 (AFTER DUE ON MAR)','MAR-23 (30 DAYS)','MAR-23 (60 DAYS)','MAR-23 (90 DAYS)',
+                'MAR-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',150,'23'],
+                16:['04','APR-23 (RECEIVABLES)','APR-23 (ON DUE)','APR-23 (AFTER DUE ON APR)','APR-23 (30 DAYS)','APR-23 (60 DAYS)','APR-23 (90 DAYS)',
+                'APR-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',160,'23'],
+                17:['05','MAY-23 (RECEIVABLES)','MAY-23 (ON DUE)','MAY-23 (AFTER DUE ON MAY)','MAY-23 (30 DAYS)','MAY-23 (60 DAYS)','MAY-23 (90 DAYS)',
+                'MAY-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',170,'23'],
+                18:['06','JUN-23 (RECEIVABLES)','JUN-23 (ON DUE)','JUN-23 (AFTER DUE ON JUN)','JUN-23 (30 DAYS)','JUN-23 (60 DAYS)','JUN-23 (90 DAYS)',
+                'JUN-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',180,'23'],
+                19:['07','JUL-23 (RECEIVABLES)','JUL-23 (ON DUE)','JUL-23 (AFTER DUE ON JUL)','JUL-23 (30 DAYS)','JUL-23 (60 DAYS)','JUL-23 (90 DAYS)',
+                'JUL-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',190,'23'],
+                20:['08','AUG-23 (RECEIVABLES)','AUG-23 (ON DUE)','AUG-23 (AFTER DUE ON AUG)','AUG-23 (30 DAYS)','AUG-23 (60 DAYS)','AUG-23 (90 DAYS)',
+                'AUG-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
+                21:['09','SEP-23 (RECEIVABLES)','SEP-23 (ON DUE)','SEP-23 (AFTER DUE ON SEP)','SEP-23 (30 DAYS)','SEP-23 (60 DAYS)','SEP-23 (90 DAYS)',
+                'SEP-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
+                23:['10','OCT-23 (RECEIVABLES)','OCT-23 (ON DUE)','OCT-23 (AFTER DUE ON OCT)','OCT-23 (30 DAYS)','OCT-23 (60 DAYS)','OCT-23 (90 DAYS)',
+                'OCT-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
+                23:['11','NOV-23 (RECEIVABLES)','NOV-23 (ON DUE)','NOV-23 (AFTER DUE ON NOV)','NOV-23 (30 DAYS)','NOV-23 (60 DAYS)','NOV-23 (90 DAYS)',
+                'NOV-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
+                24:['12','DEC-23 (RECEIVABLES)','DEC-23 (ON DUE)','DEC-23 (AFTER DUE ON DEC)','DEC-23 (30 DAYS)','DEC-23 (60 DAYS)','DEC-23 (90 DAYS)',
+                'DEC-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
                 }
             range_start = 0
             range_stop = 0
             # raise UserError(v_to)
             for key, value in months.items():
-                if value[0] == v_from_month and value[3] == v_from_year:
+                if value[0] == v_from_month and value[12] == v_from_year:
                     range_start = key
-                if value[0] == v_to_month and value[3] == v_to_year:
+                if value[0] == v_to_month and value[12] == v_to_year:
 
                     range_stop = key
 
@@ -1807,15 +1831,15 @@ class agingsReportWizard(models.TransientModel):
             for i in range(range_start,range_stop+1):
       
                 worksheet.write_merge(0,1,col,col,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+1,col+1,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+2,col+2,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+3,col+3,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+4,col+4,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+5,col+5,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+6,col+6,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+7,col+7,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+8,col+8,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+9,col+9,months[i][1],lime_style_title)
+                worksheet.write_merge(0,1,col+1,col+1,months[i][2],lime_style_title)
+                worksheet.write_merge(0,1,col+2,col+2,months[i][3],lime_style_title)
+                worksheet.write_merge(0,1,col+3,col+3,months[i][4],lime_style_title)
+                worksheet.write_merge(0,1,col+4,col+4,months[i][5],lime_style_title)
+                worksheet.write_merge(0,1,col+5,col+5,months[i][6],lime_style_title)
+                worksheet.write_merge(0,1,col+6,col+6,months[i][7],lime_style_title)
+                worksheet.write_merge(0,1,col+7,col+7,months[i][8],lime_style_title)
+                worksheet.write_merge(0,1,col+8,col+8,months[i][9],lime_style_title)
+                worksheet.write_merge(0,1,col+9,col+9,months[i][10],lime_style_title)
 
             
                 col+=10
