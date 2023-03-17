@@ -1,5 +1,5 @@
 <odoo>
-<record id="view_move_form_inherit" model="ir.ui.view">
+<record id="view_move_form_inherit_mnt_tab" model="ir.ui.view">
             <field name="name">account.move.form.inherit</field>
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account_edi.view_move_form_inherit"/>
@@ -52,6 +52,35 @@
                             <field name="net_amount"/>
                             <field name="bill_amount"/>
                             <field name="tuition"/>
+                            </group>
+                    </group>   
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_move_form_inherit_adm_tab" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account_edi.view_move_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@id='edi_documents']" position="after">
+                    <page name="report fields" string="List view admission" attrs="{'invisible': [('move_type', 'in', ['entry','out_refund','in_invoice','in_refund'])], 'required': [('move_type', '=', 'out_invoice')]}">
+                        <group>
+                            <group>
+                            <!-- <field name="campus"/> -->
+                            <field name="std_reason"/>
+                            <field name="std_tuition_plan"/>
+                            <field name="std_tuition_plan_state"/>
+                            <field name="std_discount"/>
+                           
+                            </group>    
+                            <group>
+
+                            <field name="adm_amount"/>
+                            <field name="security_amount"/>
+                            
                             </group>
                     </group>   
                     </page>
