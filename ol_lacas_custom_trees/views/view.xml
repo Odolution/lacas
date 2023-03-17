@@ -139,7 +139,7 @@
                 <field name="bill_date"/>
                 <field name="challan_date"/>
                 <field name="due_date"/>
-                <field name="due_amount"/>
+                <!-- <field name="due_amount"/>
                 <field name="net_amount"/>
                 <field name="bill_amount"/>
                 <field name="tuition"/>
@@ -176,7 +176,7 @@
                 <field name="welcome"/>
                 <field name="workbook"/>
                 <field name="uniform"/>
-                <field name="continuation"/>
+                <field name="continuation"/> -->
 
                 <field name="company_currency_id" invisible="1"/>
                 <field name="to_check" optional="hide" widget="boolean_toggle"/>
