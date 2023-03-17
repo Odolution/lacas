@@ -1806,7 +1806,7 @@ class agingsReportWizard(models.TransientModel):
       
             for i in range(range_start,range_stop+1):
       
-                worksheet.write_merge(0,1,col+1,col+2,months[i][1],red_style_title)
+                worksheet.write_merge(0,1,3,3,months[i][1],red_style_title)
             #     worksheet.write_merge(1,2,col+2,col+3,months[i][1],red_style_title)
             #     worksheet.write_merge(1,2,col+4,col+5,months[i][1],red_style_title)
             #     worksheet.write_merge(1,2,col+6,col+7,months[i][1],red_style_title)
