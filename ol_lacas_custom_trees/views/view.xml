@@ -96,7 +96,7 @@
         <field name="model_id" ref="account.model_account_move"/>
         <!-- <field name="model_id" ref="account.move"/> -->
         <field name="state">code</field>
-        <field name="code">action = model.get_monthlyBill_action()</field>
+        <field name="code">action = model.get_bimonthlyBill_action()</field>
     </record>
     <menuitem action="server_action_account_move_bimonthly" id="account_move_bimonthly_menu" name="Bi Monthly Bills" parent="account.menu_finance_receivables" sequence="2"/>
 
