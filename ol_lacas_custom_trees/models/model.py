@@ -98,6 +98,13 @@ class ext(models.Model):
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action  
+    
+    def get_bimonthlyBill_action(self):
+        action = self.env.ref('ol_lacas_custom_trees.act_account_move_bimonthlyBill').read()[0]
+        journals=self.env["account.journal"].search([("name","=","Bi Monthly")])
+        domain = [('journal_id','in',[i.id for i in journals])]
+        action['domain'] = domain
+        return action
 
 
 
@@ -244,34 +251,40 @@ class ext(models.Model):
 
             wholedate=str(self.invoice_date)
             splitted_name=wholedate.split('-')
-            if len(splitted_name)>2:
-                month=splitted_name[1]
-                wholeyear=splitted_name[0]
-                year=wholeyear[2:4]
-                if month =='01':
-                    self.bill_date="Jan"+"-"+year
-                elif month =='02':
-                    self.bill_date="Feb"+"-"+year
-                elif month =='03':
-                    self.bill_date="Mar"+"-"+year
-                elif month =='04':
-                    self.bill_date="Apr"+"-"+year
-                elif month =='05':
-                    self.bill_date="May"+"-"+year
-                elif month =='06':
-                    self.bill_date="Jun"+"-"+year
-                elif month =='07':
-                    self.bill_date="Jul"+"-"+year
-                elif month =='08':
-                    self.bill_date="Aug"+"-"+year
-                elif month =='09':
-                    self.bill_date="Sep"+"-"+year
-                elif month =='10':
-                    self.bill_date="Oct"+"-"+year
-                elif month =='11':
-                    self.bill_date="Nov"+"-"+year
-                elif month =='12':
-                    self.bill_date="Dec"+"-"+year
+            if self.journal_id.id==125:
+                if len(splitted_name)>2:
+                    month=splitted_name[1]
+                    wholeyear=splitted_name[0]
+                    year=wholeyear[2:4]
+                    if month =='01':
+                        self.bill_date="Jan"+"-"+year
+                    elif month =='02':
+                        self.bill_date="Feb"+"-"+year
+                    elif month =='03':
+                        self.bill_date="Mar"+"-"+year
+                    elif month =='04':
+                        self.bill_date="Apr"+"-"+year
+                    elif month =='05':
+                        self.bill_date="May"+"-"+year
+                    elif month =='06':
+                        self.bill_date="Jun"+"-"+year
+                    elif month =='07':
+                        self.bill_date="Jul"+"-"+year
+                    elif month =='08':
+                        self.bill_date="Aug"+"-"+year
+                    elif month =='09':
+                        self.bill_date="Sep"+"-"+year
+                    elif month =='10':
+                        self.bill_date="Oct"+"-"+year
+                    elif month =='11':
+                        self.bill_date="Nov"+"-"+year
+                    elif month =='12':
+                        self.bill_date="Dec"+"-"+year
+            else:
+                if self.journal_id.id==126:
+                    self.bill_date=self._get_bi_monthly_cycle
+                else:
+                    self.bill_date=""
                 
     
             if self.invoice_line_ids: 
