@@ -280,11 +280,10 @@ class ext(models.Model):
                         self.bill_date="Nov"+"-"+year
                     elif month =='12':
                         self.bill_date="Dec"+"-"+year
-            else:
-                if self.journal_id.id==126:
-                    self.bill_date=self.bi_monthly_cycle
-                else:
-                    self.bill_date=""
+            
+            if self.journal_id.id==126:
+                self.bill_date=self.bi_monthly_cycle
+           
                 
     
             if self.invoice_line_ids: 
