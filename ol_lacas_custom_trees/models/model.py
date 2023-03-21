@@ -251,7 +251,7 @@ class ext(models.Model):
 
             wholedate=str(self.invoice_date)
             splitted_name=wholedate.split('-')
-            if self.journal_id.id==125:
+            if self.journal_id.id==125 :
                 if len(splitted_name)>2:
                     month=splitted_name[1]
                     wholeyear=splitted_name[0]
@@ -282,7 +282,7 @@ class ext(models.Model):
                         self.bill_date="Dec"+"-"+year
             else:
                 if self.journal_id.id==126:
-                    self.bill_date=self._get_bi_monthly_cycle
+                    self.bill_date=self.bi_monthly_cycle
                 else:
                     self.bill_date=""
                 
