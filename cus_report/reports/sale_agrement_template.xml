@@ -11,9 +11,9 @@
                       <div class="watermark" style="position:relative;">
                       <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
                       <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
-                      </div>
-                       </div>
-                 
+                      </div>        
+                       </div>            
+                   
                   </t>
       
                     <table class="table table-dark" style="width:100%;">
