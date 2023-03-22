@@ -25,5 +25,5 @@ class ext_invoice(models.Model):
                         rec.ol_payment_date=datetime.datetime.strptime(date,"%Y-%m-%d").date()
                     else:
                         rec.ol_payment_date=False
-                if self.amount_residual==0:
+                if self.amount_residual<1:
                     self.ol_payment_date=self.x_studio_date_field_wiRJz
