@@ -1,6 +1,6 @@
 <odoo>
   <data>   
-      <template id="cus_report.report_post_view">
+      <template id="cus_report.fee_challan_student_wise">
         <t t-call="web.html_container">
               <t t-foreach="docs" t-as="x">
                 <t t-foreach="x.unpaid_std_ids" t-as="o">
