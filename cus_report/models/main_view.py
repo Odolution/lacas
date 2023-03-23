@@ -106,7 +106,7 @@ class ReportGenerator(models.Model):
     _description = 'Generate a report with sorted records'
 
     def generate_report(self, record_ids):
-        record_objs = self.env['account.move'].browse(record_ids)
+        record_objs = self.env['account_move'].browse(record_ids)
         sorted_objs = record_objs.sorted(key=lambda obj: obj.id)
         report_obj = self.env['ir.actions.report']
         report_name = 'cus_report.base.act_report_xml_view'
