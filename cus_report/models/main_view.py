@@ -72,8 +72,12 @@ class inheritinvoices(models.Model):
 
     due_day_text=fields.Char(string="Due Day",compute='_compute_remaining_days')
     due_day=fields.Integer(string="Due Day Num",compute='_compute_remaining_days')
+    
+    def print_report(self):
+        return self.env.ref('cus_report.generate_report').report_action(self)
 
     def _compute_unpaid_invoice(self):
+        
         
         for rec in self:
             rec.unpaid_inv_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("partner_id","=",rec.partner_id.id),("payment_state","=","not_paid")])
