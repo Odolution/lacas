@@ -72,9 +72,6 @@ class inheritinvoices(models.Model):
 
     due_day_text=fields.Char(string="Due Day",compute='_compute_remaining_days')
     due_day=fields.Integer(string="Due Day Num",compute='_compute_remaining_days')
-    
-    def print_report(self):
-        return self.env.ref('cus_report.generate_report').report_action(self)
 
     def _compute_unpaid_invoice(self):
         
@@ -100,6 +97,22 @@ class inheritinvoices(models.Model):
                     rec["due_day_text"]="Outstanding"
                 else:
                     rec["due_day_text"]=""
+
+
+
+
+class ReportGenerator(models.AbstractModel):
+    _name = 'account.move'
+    _description = 'Generate a report with sorted records'
+
+    def generate_report(self, record_ids):
+        record_objs = self.env['account.move'].browse(record_ids)
+        sorted_objs = record_objs.sorted(key=lambda obj: obj.id)
+        report_obj = self.env['ir.actions.report']
+        report_name = 'cus_report.base.act_report_xml_view'
+        report_template = self.env.ref(report_name)
+        report = report_obj.sudo().render_qweb_pdf(sorted_objs.ids, report_template.data)
+        return report
                 
                
 
