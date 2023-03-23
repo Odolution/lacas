@@ -9,7 +9,7 @@ import datetime
 class ext_invoice(models.Model):
     _inherit = "account.move"
     ol_payment_date = fields.Date(string='Payment Date')
-    @api.onchange('payment_state')
+    @api.onchange('payment_state','x_studio_payment_for_zero_bill')
     def onchange_invoice_payments_widget(self):
         print("onchange")
         for rec in self:
