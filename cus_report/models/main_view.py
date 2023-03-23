@@ -56,7 +56,7 @@ class reportbutton(http.Controller):
 class inheritinvoices(models.Model):
     _inherit="account.move"
 
-    sequence = fields.Char(string='Sequence')
+    sequence = fields.Integer(string='Sequence')
   
 
     unpaid_inv_ids = fields.Many2many(
