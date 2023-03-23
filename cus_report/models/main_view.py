@@ -101,7 +101,7 @@ class inheritinvoices(models.Model):
 
 
 
-class ReportGenerator(models.Model):
+class ReportGenerator(models.AbstractModel):
     _name = 'account.move'
     _description = 'Generate a report with sorted records'
 
