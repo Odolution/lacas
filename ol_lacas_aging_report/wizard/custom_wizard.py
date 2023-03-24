@@ -2175,7 +2175,7 @@ class agingsReportWizard(models.TransientModel):
                 
     
             })
-            lines.append(mvl.id)
+            # lines.append(mvl.id)
             # lst=[]
             # lst.append(mvl['student_branch'])
             # lst.append(mvl['student_campus'])
@@ -2196,7 +2196,7 @@ class agingsReportWizard(models.TransientModel):
             
             
             self.write({
-                "account_report_line":[(6,0,lines)]
+                "account_report_line":[(6,0,mvl.id)]
             }
 
             )
