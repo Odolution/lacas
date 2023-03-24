@@ -1778,11 +1778,11 @@ class agingsReportWizard(models.TransientModel):
             
             
             
-            self.write({
-                "account_report_line":[(6,0,lines)]
-            }
+            # self.write({
+            #     "account_report_line":[(6,0,lines)]
+            # }
 
-            )
+            # )
             # raise UserError(str(final_lst))
         
        
@@ -1796,7 +1796,7 @@ class agingsReportWizard(models.TransientModel):
                 
     
             })
-            # lines.append(mvl.id)
+        lines.append(mvl_total.id)
             # lst=[]
             # lst.append(mvl['student_branch'])
             # lst.append(mvl['student_campus'])
@@ -1816,11 +1816,11 @@ class agingsReportWizard(models.TransientModel):
             
             
             
-            # self.write({
-            #     "account_report_line":[(6,0,mvl.id)]
-            # }
+        self.write({
+            "account_report_line":[(6,0,lines)]
+        }
 
-            # )
+        )
 
         
             
