@@ -1,0 +1,102 @@
+<odoo>
+
+
+
+<record model="ir.ui.view" id="view_report_agings">
+        <field name="name">aging.report.wizard.form</field>
+        <field name="model" >aging.report.wizard</field>
+      
+        <field name="arch" type="xml">
+        
+            <form string="Print aging  report">
+            <group>
+             <field name="date_from"/>
+             <field name="date_to"/>
+            
+             </group>
+
+               <notebook>
+                            <page id="aging_invoice_tab"
+                                  string=" Invoice Lines">
+
+                                <field name="account_report_line"
+                                       widget="section_and_note_one2many"
+                                  
+                                       mode="tree">
+                                       
+
+                                       
+                                    <tree editable="bottom" string="Journal Items" default_order="id">
+                    
+                                        <field name="student_branch"></field>
+                                        <field name="student_campus"></field>
+
+
+                                
+                                        <field name="recievable_jan"></field>
+                                        <field name="recievable_feb"></field>
+                                        <field name="recievable_mar"></field>
+                                        <field name="recievable_apr"></field>
+                                        <field name="recievable_may"></field>
+                                        <field name="recievable_jun"></field>
+                                        <field name="recievable_jul"></field>
+                                        <field name="recievable_aug"></field>
+                                        <field name="recievable_sep"></field>
+                                        <field name="recievable_oct"></field>
+                                        <field name="recievable_nov"></field>
+                                        <field name="recievable_dec"></field>
+
+                                        <field name="recievable_jan_2"></field>
+                                        <field name="recievable_feb_2"></field>
+                                        <field name="recievable_mar_2"></field>
+                                        <field name="recievable_apr_2"></field>
+                                        <field name="recievable_may_2"></field>
+                                        <field name="recievable_jun_2"></field>
+                                        <field name="recievable_jul_2"></field>
+                                        <field name="recievable_aug_2"></field>
+                                        <field name="recievable_sep_2"></field>
+                                        <field name="recievable_oct_2"></field>
+                                        <field name="recievable_nov_2"></field>
+                                        <field name="recievable_dec_2"></field>
+                                  
+                                        
+                                        
+                                        
+
+
+
+                                
+                                    </tree>
+
+                                </field>
+
+                            </page>
+                </notebook>
+             
+             <footer>
+                <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
+                <button name="action_print_excel_report" type="object" string="Print Excel" class="btn-primary" />
+                <!-- <button name="action_polulate" type="object" string="Populate" /> -->
+                
+                 <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+            </form>
+            </field>      
+    </record>
+
+     <record id="action_account_print_aging_report" model="ir.actions.act_window">
+            <field name="name">agings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">aging.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_agings"/>
+            <field name="target">new</field>
+        </record>
+ <menuitem id="menu_aging_report" name="aging menu" parent="account.menu_finance_reports" sequence="5"/>
+ <menuitem id="menu_action_aging_report" name="aging Report" action="action_account_print_aging_report" parent="menu_aging_report"/>
+
+ 
+
+ 
+
+</odoo> 
