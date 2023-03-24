@@ -337,9 +337,270 @@ class agingsReportWizard(models.TransientModel):
                     branch_lst.append(inv.program_ids)
 
         lines=[]
+        
+        total_jan_rec_22 = 0
+        total_feb_rec_22 = 0
+        total_mar_rec_22 = 0
+        total_apr_rec_22 = 0
+        total_may_rec_22 = 0
+        total_jun_rec_22 = 0
+        total_jul_rec_22 = 0
+        total_aug_rec_22 = 0
+        total_sep_rec_22 = 0
+        total_oct_rec_22 = 0
+        total_nov_rec_22 = 0
+        total_dec_rec_22 = 0
 
-        total_feb_23 = 0
+        total_jan_ondue_22 = 0
+        total_feb_ondue_22 = 0
+        total_mar_ondue_22 = 0
+        total_apr_ondue_22 = 0
+        total_may_ondue_22 = 0
+        total_jun_ondue_22 = 0
+        total_jul_ondue_22 = 0
+        total_aug_ondue_22 = 0
+        total_sep_ondue_22 = 0
+        total_oct_ondue_22 = 0
+        total_nov_ondue_22 = 0
+        total_dec_ondue_22 = 0
+      
+        total_jan_aftdue_22 = 0
+        total_feb_aftdue_22 = 0
+        total_mar_aftdue_22 = 0
+        total_apr_aftdue_22 = 0
+        total_may_aftdue_22 = 0
+        total_jun_aftdue_22 = 0
+        total_jul_aftdue_22 = 0
+        total_aug_aftdue_22 = 0
+        total_sep_aftdue_22 = 0
+        total_oct_aftdue_22 = 0
+        total_nov_aftdue_22 = 0
+        total_dec_aftdue_22 = 0
 
+      
+        total_jan_fmon_22 = 0
+        total_feb_fmon_22 = 0
+        total_mar_fmon_22 = 0
+        total_apr_fmon_22 = 0
+        total_may_fmon_22 = 0
+        total_jun_fmon_22 = 0
+        total_jul_fmon_22 = 0
+        total_aug_fmon_22 = 0
+        total_sep_fmon_22 = 0
+        total_oct_fmon_22 = 0
+        total_nov_fmon_22 = 0
+        total_dec_fmon_22 = 0
+
+        total_jan_smon_22 = 0
+        total_feb_smon_22 = 0
+        total_mar_smon_22 = 0
+        total_apr_smon_22 = 0
+        total_may_smon_22 = 0
+        total_jun_smon_22 = 0
+        total_jul_smon_22 = 0
+        total_aug_smon_22 = 0
+        total_sep_smon_22 = 0
+        total_oct_smon_22 = 0
+        total_nov_smon_22 = 0
+        total_dec_smon_22 = 0
+        
+        total_jan_tmon_22 = 0
+        total_feb_tmon_22 = 0
+        total_mar_tmon_22 = 0
+        total_apr_tmon_22 = 0
+        total_may_tmon_22 = 0
+        total_jun_tmon_22 = 0
+        total_jul_tmon_22 = 0
+        total_aug_tmon_22 = 0
+        total_sep_tmon_22 = 0
+        total_oct_tmon_22 = 0
+        total_nov_tmon_22 = 0
+        total_dec_tmon_22 = 0
+
+        total_jan_tillnow_22 = 0
+        total_feb_tillnow_22 = 0
+        total_mar_tillnow_22 = 0
+        total_apr_tillnow_22 = 0
+        total_may_tillnow_22 = 0
+        total_jun_tillnow_22 = 0
+        total_jul_tillnow_22 = 0
+        total_aug_tillnow_22 = 0
+        total_sep_tillnow_22 = 0
+        total_oct_tillnow_22 = 0
+        total_nov_tillnow_22 = 0
+        total_dec_tillnow_22 = 0
+
+        total_jan_totrecov_22 = 0
+        total_feb_totrecov_22 = 0
+        total_mar_totrecov_22 = 0
+        total_apr_totrecov_22 = 0
+        total_may_totrecov_22 = 0
+        total_jun_totrecov_22 = 0
+        total_jul_totrecov_22 = 0
+        total_aug_totrecov_22 = 0
+        total_sep_totrecov_22 = 0
+        total_oct_totrecov_22 = 0
+        total_nov_totrecov_22 = 0
+        total_dec_totrecov_22 = 0
+
+        total_jan_baddb_22 = 0
+        total_feb_baddb_22 = 0
+        total_mar_baddb_22 = 0
+        total_apr_baddb_22 = 0
+        total_may_baddb_22 = 0
+        total_jun_baddb_22 = 0
+        total_jul_baddb_22 = 0
+        total_aug_baddb_22 = 0
+        total_sep_baddb_22 = 0
+        total_oct_baddb_22 = 0
+        total_nov_baddb_22 = 0
+        total_dec_baddb_22 = 0
+
+        total_jan_bdper_22 = 0
+        total_feb_bdper_22 = 0
+        total_mar_bdper_22 = 0
+        total_apr_bdper_22 = 0
+        total_may_bdper_22 = 0
+        total_jun_bdper_22 = 0
+        total_jul_bdper_22 = 0
+        total_aug_bdper_22 = 0
+        total_sep_bdper_22 = 0
+        total_oct_bdper_22 = 0
+        total_nov_bdper_22 = 0
+        total_dec_bdper_22 = 0
+
+        total_jan_rec_23 = 0
+        total_feb_rec_23 = 0
+        total_mar_rec_23 = 0
+        total_apr_rec_23 = 0
+        total_may_rec_23 = 0
+        total_jun_rec_23 = 0
+        total_jul_rec_23 = 0
+        total_aug_rec_23 = 0
+        total_sep_rec_23 = 0
+        total_oct_rec_23 = 0
+        total_nov_rec_23 = 0
+        total_dec_rec_23 = 0
+
+        total_jan_ondue_23 = 0
+        total_feb_ondue_23 = 0
+        total_mar_ondue_23 = 0
+        total_apr_ondue_23 = 0
+        total_may_ondue_23 = 0
+        total_jun_ondue_23 = 0
+        total_jul_ondue_23 = 0
+        total_aug_ondue_23 = 0
+        total_sep_ondue_23 = 0
+        total_oct_ondue_23 = 0
+        total_nov_ondue_23 = 0
+        total_dec_ondue_23 = 0
+      
+        total_jan_aftdue_23 = 0
+        total_feb_aftdue_23 = 0
+        total_mar_aftdue_23 = 0
+        total_apr_aftdue_23 = 0
+        total_may_aftdue_23 = 0
+        total_jun_aftdue_23 = 0
+        total_jul_aftdue_23 = 0
+        total_aug_aftdue_23 = 0
+        total_sep_aftdue_23 = 0
+        total_oct_aftdue_23 = 0
+        total_nov_aftdue_23 = 0
+        total_dec_aftdue_23 = 0
+
+      
+        total_jan_fmon_23 = 0
+        total_feb_fmon_23 = 0
+        total_mar_fmon_23 = 0
+        total_apr_fmon_23 = 0
+        total_may_fmon_23 = 0
+        total_jun_fmon_23 = 0
+        total_jul_fmon_23 = 0
+        total_aug_fmon_23 = 0
+        total_sep_fmon_23 = 0
+        total_oct_fmon_23 = 0
+        total_nov_fmon_23 = 0
+        total_dec_fmon_23 = 0
+
+        total_jan_smon_23 = 0
+        total_feb_smon_23 = 0
+        total_mar_smon_23 = 0
+        total_apr_smon_23 = 0
+        total_may_smon_23 = 0
+        total_jun_smon_23 = 0
+        total_jul_smon_23 = 0
+        total_aug_smon_23 = 0
+        total_sep_smon_23 = 0
+        total_oct_smon_23 = 0
+        total_nov_smon_23 = 0
+        total_dec_smon_23 = 0
+        
+        total_jan_tmon_23 = 0
+        total_feb_tmon_23 = 0
+        total_mar_tmon_23 = 0
+        total_apr_tmon_23 = 0
+        total_may_tmon_23 = 0
+        total_jun_tmon_23 = 0
+        total_jul_tmon_23 = 0
+        total_aug_tmon_23 = 0
+        total_sep_tmon_23 = 0
+        total_oct_tmon_23 = 0
+        total_nov_tmon_23 = 0
+        total_dec_tmon_23 = 0
+
+        total_jan_tillnow_23 = 0
+        total_feb_tillnow_23 = 0
+        total_mar_tillnow_23 = 0
+        total_apr_tillnow_23 = 0
+        total_may_tillnow_23 = 0
+        total_jun_tillnow_23 = 0
+        total_jul_tillnow_23 = 0
+        total_aug_tillnow_23 = 0
+        total_sep_tillnow_23 = 0
+        total_oct_tillnow_23 = 0
+        total_nov_tillnow_23 = 0
+        total_dec_tillnow_23 = 0
+
+        total_jan_totrecov_23 = 0
+        total_feb_totrecov_23 = 0
+        total_mar_totrecov_23 = 0
+        total_apr_totrecov_23 = 0
+        total_may_totrecov_23 = 0
+        total_jun_totrecov_23 = 0
+        total_jul_totrecov_23 = 0
+        total_aug_totrecov_23 = 0
+        total_sep_totrecov_23 = 0
+        total_oct_totrecov_23 = 0
+        total_nov_totrecov_23 = 0
+        total_dec_totrecov_23 = 0
+
+        total_jan_baddb_23 = 0
+        total_feb_baddb_23 = 0
+        total_mar_baddb_23 = 0
+        total_apr_baddb_23 = 0
+        total_may_baddb_23 = 0
+        total_jun_baddb_23 = 0
+        total_jul_baddb_23 = 0
+        total_aug_baddb_23 = 0
+        total_sep_baddb_23 = 0
+        total_oct_baddb_23 = 0
+        total_nov_baddb_23 = 0
+        total_dec_baddb_23 = 0
+
+        total_jan_bdper_23 = 0
+        total_feb_bdper_23 = 0
+        total_mar_bdper_23 = 0
+        total_apr_bdper_23 = 0
+        total_may_bdper_23 = 0
+        total_jun_bdper_23 = 0
+        total_jul_bdper_23 = 0
+        total_aug_bdper_23 = 0
+        total_sep_bdper_23 = 0
+        total_oct_bdper_23 = 0
+        total_nov_bdper_23 = 0
+        total_dec_bdper_23 = 0
+
+ 
 
 
         for branch in branch_lst:
@@ -1369,7 +1630,279 @@ class agingsReportWizard(models.TransientModel):
                 bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']*100
 
 
-            total_feb_23 += custom_data['recievable_feb_2']
+            total_jan_rec_22 += custom_data['recievable_jan']
+            total_feb_rec_22 += custom_data['recievable_feb']
+            total_mar_rec_22 += custom_data['recievable_mar']
+            total_apr_rec_22 += custom_data['recievable_apr']
+            total_may_rec_22 += custom_data['recievable_may']
+            total_jun_rec_22 += custom_data['recievable_jun']
+            total_jul_rec_22 += custom_data['recievable_jul']
+            total_aug_rec_22 += custom_data['recievable_aug']
+            total_sep_rec_22 += custom_data['recievable_sep']
+            total_oct_rec_22 += custom_data['recievable_oct']
+            total_nov_rec_22 += custom_data['recievable_nov']
+            total_dec_rec_22 += custom_data['recievable_dec']
+
+            total_jan_ondue_22 += custom_data['ondue_jan']
+            total_feb_ondue_22 += custom_data['ondue_feb']
+            total_mar_ondue_22 += custom_data['ondue_mar']
+            total_apr_ondue_22 += custom_data['ondue_apr']
+            total_may_ondue_22 += custom_data['ondue_may']
+            total_jun_ondue_22 += custom_data['ondue_jun']
+            total_jul_ondue_22 += custom_data['ondue_jul']
+            total_aug_ondue_22 += custom_data['ondue_aug']
+            total_sep_ondue_22 += custom_data['ondue_sep']
+            total_oct_ondue_22 += custom_data['ondue_oct']
+            total_nov_ondue_22 += custom_data['ondue_nov']
+            total_dec_ondue_22 += custom_data['ondue_dec']
+
+            total_jan_aftdue_22 += custom_data['afterdue_jan']
+            total_feb_aftdue_22 += custom_data['afterdue_feb']
+            total_mar_aftdue_22 += custom_data['afterdue_mar']
+            total_apr_aftdue_22 += custom_data['afterdue_apr']
+            total_may_aftdue_22 += custom_data['afterdue_may']
+            total_jun_aftdue_22 += custom_data['afterdue_jun']
+            total_jul_aftdue_22 += custom_data['afterdue_jul']
+            total_aug_aftdue_22 += custom_data['afterdue_aug']
+            total_sep_aftdue_22 += custom_data['afterdue_sep']
+            total_oct_aftdue_22 += custom_data['afterdue_oct']
+            total_nov_aftdue_22 += custom_data['afterdue_nov']
+            total_dec_aftdue_22 += custom_data['afterdue_dec']
+
+            total_jan_fmon_22 += custom_data['firstmon_jan']
+            total_feb_fmon_22 += custom_data['firstmon_feb']
+            total_mar_fmon_22 += custom_data['firstmon_mar']
+            total_apr_fmon_22 += custom_data['firstmon_apr']
+            total_may_fmon_22 += custom_data['firstmon_may']
+            total_jun_fmon_22 += custom_data['firstmon_jun']
+            total_jul_fmon_22 += custom_data['firstmon_jul']
+            total_aug_fmon_22 += custom_data['firstmon_aug']
+            total_sep_fmon_22 += custom_data['firstmon_sep']
+            total_oct_fmon_22 += custom_data['firstmon_oct']
+            total_nov_fmon_22 += custom_data['firstmon_nov']
+            total_dec_fmon_22 += custom_data['firstmon_dec']
+
+
+            total_jan_smon_22 += custom_data['secmon_jan']
+            total_feb_smon_22 += custom_data['secmon_feb']
+            total_mar_smon_22 += custom_data['secmon_mar']
+            total_apr_smon_22 += custom_data['secmon_apr']
+            total_may_smon_22 += custom_data['secmon_may']
+            total_jun_smon_22 += custom_data['secmon_jun']
+            total_jul_smon_22 += custom_data['secmon_jul']
+            total_aug_smon_22 += custom_data['secmon_aug']
+            total_sep_smon_22 += custom_data['secmon_sep']
+            total_oct_smon_22 += custom_data['secmon_oct']
+            total_nov_smon_22 += custom_data['secmon_nov']
+            total_dec_smon_22 += custom_data['secmon_dec']
+
+            total_jan_tmon_22 += custom_data['thirdmon_jan']
+            total_feb_tmon_22 += custom_data['thirdmon_feb']
+            total_mar_tmon_22 += custom_data['thirdmon_mar']
+            total_apr_tmon_22 += custom_data['thirdmon_apr']
+            total_may_tmon_22 += custom_data['thirdmon_may']
+            total_jun_tmon_22 += custom_data['thirdmon_jun']
+            total_jul_tmon_22 += custom_data['thirdmon_jul']
+            total_aug_tmon_22 += custom_data['thirdmon_aug']
+            total_sep_tmon_22 += custom_data['thirdmon_sep']
+            total_oct_tmon_22 += custom_data['thirdmon_oct']
+            total_nov_tmon_22 += custom_data['thirdmon_nov']
+            total_dec_tmon_22 += custom_data['thirdmon_dec']
+
+
+            total_jan_tillnow_22 += custom_data['actual_recievable_jan']
+            total_feb_tillnow_22 += custom_data['actual_recievable_feb']
+            total_mar_tillnow_22 += custom_data['actual_recievable_mar']
+            total_apr_tillnow_22 += custom_data['actual_recievable_apr']
+            total_may_tillnow_22 += custom_data['actual_recievable_may']
+            total_jun_tillnow_22 += custom_data['actual_recievable_jun']
+            total_jul_tillnow_22 += custom_data['actual_recievable_jul']
+            total_aug_tillnow_22 += custom_data['actual_recievable_aug']
+            total_sep_tillnow_22 += custom_data['actual_recievable_sep']
+            total_oct_tillnow_22 += custom_data['actual_recievable_oct']
+            total_nov_tillnow_22 += custom_data['actual_recievable_nov']
+            total_dec_tillnow_22 += custom_data['actual_recievable_dec']
+
+            total_jan_totrecov_22 +=tr_jan
+            total_feb_totrecov_22 +=tr_feb
+            total_mar_totrecov_22 +=tr_mar
+            total_apr_totrecov_22 +=tr_apr
+            total_may_totrecov_22 +=tr_may
+            total_jun_totrecov_22 +=tr_jun
+            total_jul_totrecov_22 +=tr_jul
+            total_aug_totrecov_22 +=tr_aug
+            total_sep_totrecov_22 +=tr_sep
+            total_oct_totrecov_22 +=tr_oct
+            total_nov_totrecov_22 +=tr_nov
+            total_dec_totrecov_22 +=tr_dec
+
+            total_jan_baddb_22 +=bd_jan
+            total_feb_baddb_22 +=bd_feb
+            total_mar_baddb_22 +=bd_mar
+            total_apr_baddb_22 +=bd_apr
+            total_may_baddb_22 +=bd_may
+            total_jun_baddb_22 +=bd_jun
+            total_jul_baddb_22 +=bd_jul
+            total_aug_baddb_22 +=bd_aug
+            total_sep_baddb_22 +=bd_sep
+            total_oct_baddb_22 +=bd_oct
+            total_nov_baddb_22 +=bd_nov
+            total_dec_baddb_22 +=bd_dec
+
+            total_jan_bdper_22 += bd_perc_jan
+            total_feb_bdper_22 +=bd_perc_feb
+            total_mar_bdper_22 +=bd_perc_mar
+            total_apr_bdper_22 +=bd_perc_apr
+            total_may_bdper_22 +=bd_perc_may
+            total_jun_bdper_22 +=bd_perc_jun
+            total_jul_bdper_22 +=bd_perc_jul
+            total_aug_bdper_22 +=bd_perc_aug
+            total_sep_bdper_22 +=bd_perc_sep
+            total_oct_bdper_22 +=bd_perc_oct
+            total_nov_bdper_22 +=bd_perc_nov
+            total_dec_bdper_22 +=bd_perc_dec
+
+            
+            total_jan_rec_23 += custom_data['recievable_jan_2']
+            total_feb_rec_23 += custom_data['recievable_feb_2']
+            total_mar_rec_23 += custom_data['recievable_mar_2']
+            total_apr_rec_23 += custom_data['recievable_apr_2']
+            total_may_rec_23 += custom_data['recievable_may_2']
+            total_jun_rec_23 += custom_data['recievable_jun_2']
+            total_jul_rec_23 += custom_data['recievable_jul_2']
+            total_aug_rec_23 += custom_data['recievable_aug_2']
+            total_sep_rec_23 += custom_data['recievable_sep_2']
+            total_oct_rec_23 += custom_data['recievable_oct_2']
+            total_nov_rec_23 += custom_data['recievable_nov_2']
+            total_dec_rec_23 += custom_data['recievable_dec_2']
+
+            total_jan_ondue_23 += custom_data['ondue_jan_2']
+            total_feb_ondue_23 += custom_data['ondue_feb_2']
+            total_mar_ondue_23 += custom_data['ondue_mar_2']
+            total_apr_ondue_23 += custom_data['ondue_apr_2']
+            total_may_ondue_23 += custom_data['ondue_may_2']
+            total_jun_ondue_23 += custom_data['ondue_jun_2']
+            total_jul_ondue_23 += custom_data['ondue_jul_2']
+            total_aug_ondue_23 += custom_data['ondue_aug_2']
+            total_sep_ondue_23 += custom_data['ondue_sep_2']
+            total_oct_ondue_23 += custom_data['ondue_oct_2']
+            total_nov_ondue_23 += custom_data['ondue_nov_2']
+            total_dec_ondue_23 += custom_data['ondue_dec_2']
+
+            total_jan_aftdue_23 += custom_data['afterdue_jan_2']
+            total_feb_aftdue_23 += custom_data['afterdue_feb_2']
+            total_mar_aftdue_23 += custom_data['afterdue_mar_2']
+            total_apr_aftdue_23 += custom_data['afterdue_apr_2']
+            total_may_aftdue_23 += custom_data['afterdue_may_2']
+            total_jun_aftdue_23 += custom_data['afterdue_jun_2']
+            total_jul_aftdue_23 += custom_data['afterdue_jul_2']
+            total_aug_aftdue_23 += custom_data['afterdue_aug_2']
+            total_sep_aftdue_23 += custom_data['afterdue_sep_2']
+            total_oct_aftdue_23 += custom_data['afterdue_oct_2']
+            total_nov_aftdue_23 += custom_data['afterdue_nov_2']
+            total_dec_aftdue_23 += custom_data['afterdue_dec_2']
+
+            total_jan_fmon_23 += custom_data['firstmon_jan_2']
+            total_feb_fmon_23 += custom_data['firstmon_feb_2']
+            total_mar_fmon_23 += custom_data['firstmon_mar_2']
+            total_apr_fmon_23 += custom_data['firstmon_apr_2']
+            total_may_fmon_23 += custom_data['firstmon_may_2']
+            total_jun_fmon_23 += custom_data['firstmon_jun_2']
+            total_jul_fmon_23 += custom_data['firstmon_jul_2']
+            total_aug_fmon_23 += custom_data['firstmon_aug_2']
+            total_sep_fmon_23 += custom_data['firstmon_sep_2']
+            total_oct_fmon_23 += custom_data['firstmon_oct_2']
+            total_nov_fmon_23 += custom_data['firstmon_nov_2']
+            total_dec_fmon_23 += custom_data['firstmon_dec_2']
+
+
+            total_jan_smon_23 += custom_data['secmon_jan_2']
+            total_feb_smon_23 += custom_data['secmon_feb_2']
+            total_mar_smon_23 += custom_data['secmon_mar_2']
+            total_apr_smon_23 += custom_data['secmon_apr_2']
+            total_may_smon_23 += custom_data['secmon_may_2']
+            total_jun_smon_23 += custom_data['secmon_jun_2']
+            total_jul_smon_23 += custom_data['secmon_jul_2']
+            total_aug_smon_23 += custom_data['secmon_aug_2']
+            total_sep_smon_23 += custom_data['secmon_sep_2']
+            total_oct_smon_23 += custom_data['secmon_oct_2']
+            total_nov_smon_23 += custom_data['secmon_nov_2']
+            total_dec_smon_23 += custom_data['secmon_dec_2']
+
+            total_jan_tmon_23 += custom_data['thirdmon_jan_2']
+            total_feb_tmon_23 += custom_data['thirdmon_feb_2']
+            total_mar_tmon_23 += custom_data['thirdmon_mar_2']
+            total_apr_tmon_23 += custom_data['thirdmon_apr_2']
+            total_may_tmon_23 += custom_data['thirdmon_may_2']
+            total_jun_tmon_23 += custom_data['thirdmon_jun_2']
+            total_jul_tmon_23 += custom_data['thirdmon_jul_2']
+            total_aug_tmon_23 += custom_data['thirdmon_aug_2']
+            total_sep_tmon_23 += custom_data['thirdmon_sep_2']
+            total_oct_tmon_23 += custom_data['thirdmon_oct_2']
+            total_nov_tmon_23 += custom_data['thirdmon_nov_2']
+            total_dec_tmon_23 += custom_data['thirdmon_dec_2']
+
+
+            total_jan_tillnow_23 += custom_data['actual_recievable_jan_2']
+            total_feb_tillnow_23 += custom_data['actual_recievable_feb_2']
+            total_mar_tillnow_23 += custom_data['actual_recievable_mar_2']
+            total_apr_tillnow_23 += custom_data['actual_recievable_apr_2']
+            total_may_tillnow_23 += custom_data['actual_recievable_may_2']
+            total_jun_tillnow_23 += custom_data['actual_recievable_jun_2']
+            total_jul_tillnow_23 += custom_data['actual_recievable_jul_2']
+            total_aug_tillnow_23 += custom_data['actual_recievable_aug_2']
+            total_sep_tillnow_23 += custom_data['actual_recievable_sep_2']
+            total_oct_tillnow_23 += custom_data['actual_recievable_oct_2']
+            total_nov_tillnow_23 += custom_data['actual_recievable_nov_2']
+            total_dec_tillnow_23 += custom_data['actual_recievable_dec_2']
+
+            total_jan_totrecov_23 +=tr_jan_2
+            total_feb_totrecov_23 +=tr_feb_2
+            total_mar_totrecov_23 +=tr_mar_2
+            total_apr_totrecov_23 +=tr_apr_2
+            total_may_totrecov_23 +=tr_may_2
+            total_jun_totrecov_23 +=tr_jun_2
+            total_jul_totrecov_23 +=tr_jul_2
+            total_aug_totrecov_23 +=tr_aug_2
+            total_sep_totrecov_23 +=tr_sep_2
+            total_oct_totrecov_23 +=tr_oct_2
+            total_nov_totrecov_23 +=tr_nov_2
+            total_dec_totrecov_23 +=tr_dec_2
+
+            total_jan_baddb_23 +=bd_jan_2
+            total_feb_baddb_23 +=bd_feb_2
+            total_mar_baddb_23 +=bd_mar_2
+            total_apr_baddb_23 +=bd_apr_2
+            total_may_baddb_23 +=bd_may_2
+            total_jun_baddb_23 +=bd_jun_2
+            total_jul_baddb_23 +=bd_jul_2
+            total_aug_baddb_23 +=bd_aug_2
+            total_sep_baddb_23 +=bd_sep_2
+            total_oct_baddb_23 +=bd_oct_2
+            total_nov_baddb_23 +=bd_nov_2
+            total_dec_baddb_23 +=bd_dec_2
+
+            total_jan_bdper_23 += bd_perc_jan_2
+            total_feb_bdper_23 +=bd_perc_feb_2
+            total_mar_bdper_23 +=bd_perc_mar_2
+            total_apr_bdper_23 +=bd_perc_apr_2
+            total_may_bdper_23 +=bd_perc_may_2
+            total_jun_bdper_23 +=bd_perc_jun_2
+            total_jul_bdper_23 +=bd_perc_jul_2
+            total_aug_bdper_23 +=bd_perc_aug_2
+            total_sep_bdper_23 +=bd_perc_sep_2
+            total_oct_bdper_23 +=bd_perc_oct_2
+            total_nov_bdper_23 +=bd_perc_nov_2
+            total_dec_bdper_23 +=bd_perc_dec_2
+
+
+
+
+
+
+
+
+
 
             mvl=self.env['account.aging.move.line'].create({
                 
@@ -1790,12 +2323,378 @@ class agingsReportWizard(models.TransientModel):
        
         mvl_total=self.env['account.aging.move.line'].create({
                 
-                # "student_branch":custom_data['student_branch'],
-                "student_campus":"total",
-                "recievable_feb_2":total_feb_23
+                "student_branch":"-",
+                "student_campus":"-",
+                #------jan22-------
+
+                "recievable_jan": total_jan_rec_22,
+                "ondue_jan": total_jan_ondue_22,
+                "afterdue_jan": total_jan_aftdue_22,
+                "firstmon_jan":total_jan_fmon_22,
+                "secmon_jan":total_jan_smon_22,
+                "thirdmon_jan": total_jan_tmon_22,
+                "actual_recievable_jan":total_jan_tillnow_22,
+                "total_recieve_jan":total_jan_totrecov_22,
+                "bad_debt_jan": total_jan_baddb_22,
+                "percentage_bdb_jan": str(total_jan_bdper_22)+'%' ,
+
+                
+                #------feb22-------
+                
+                "recievable_feb": total_feb_rec_22,
+                "ondue_feb": total_feb_ondue_22,
+                "afterdue_feb": total_feb_aftdue_22,
+                "firstmon_feb":total_feb_fmon_22,
+                "secmon_feb":total_feb_smon_22,
+                "thirdmon_feb": total_feb_tmon_22,
+                "actual_recievable_feb":total_feb_tillnow_22,
+                "total_recieve_feb":total_feb_totrecov_22,
+                "bad_debt_feb": total_feb_baddb_22,
+                "percentage_bdb_feb": str(total_feb_bdper_22)+'%' ,
+
+
+                
+                #------mar22-------
+                
+                "recievable_mar": total_mar_rec_22,
+                "ondue_mar": total_mar_ondue_22,
+                "afterdue_mar": total_mar_aftdue_22,
+                "firstmon_mar":total_mar_fmon_22,
+                "secmon_mar":total_mar_smon_22,
+                "thirdmon_mar": total_mar_tmon_22,
+                "actual_recievable_mar":total_mar_tillnow_22,
+                "total_recieve_mar":total_mar_totrecov_22,
+                "bad_debt_mar": total_mar_baddb_22,
+                "percentage_bdb_mar": str(total_mar_bdper_22)+'%' ,
+
+                #------apr22-------
+                
+                "recievable_apr": total_apr_rec_22,
+                "ondue_apr": total_apr_ondue_22,
+                "afterdue_apr": total_apr_aftdue_22,
+                "firstmon_apr":total_apr_fmon_22,
+                "secmon_apr":total_apr_smon_22,
+                "thirdmon_apr": total_apr_tmon_22,
+                "actual_recievable_apr":total_apr_tillnow_22,
+                "total_recieve_apr":total_apr_totrecov_22,
+                "bad_debt_apr": total_apr_baddb_22,
+                "percentage_bdb_apr": str(total_apr_bdper_22)+'%' ,
+
+
                 
 
                 
+                #------may22-------
+                
+
+                "recievable_may": total_may_rec_22,
+                "ondue_may": total_may_ondue_22,
+                "afterdue_may": total_may_aftdue_22,
+                "firstmon_may":total_may_fmon_22,
+                "secmon_may":total_may_smon_22,
+                "thirdmon_may": total_may_tmon_22,
+                "actual_recievable_may":total_may_tillnow_22,
+                "total_recieve_may":total_may_totrecov_22,
+                "bad_debt_may": total_may_baddb_22,
+                "percentage_bdb_may": str(total_may_bdper_22)+'%' ,
+
+
+                
+                #------jun22-------
+                
+                "recievable_jun": total_jun_rec_22,
+                "ondue_jun": total_jun_ondue_22,
+                "afterdue_jun": total_jun_aftdue_22,
+                "firstmon_jun":total_jun_fmon_22,
+                "secmon_jun":total_jun_smon_22,
+                "thirdmon_jun": total_jun_tmon_22,
+                "actual_recievable_jun":total_jun_tillnow_22,
+                "total_recieve_jun":total_jun_totrecov_22,
+                "bad_debt_jun": total_jun_baddb_22,
+                "percentage_bdb_jun": str(total_jun_bdper_22)+'%' ,
+
+
+                
+                #------jul22-------
+                
+
+                "recievable_jul_2": total_jul_rec_22,
+                "ondue_jul_2": total_jul_ondue_22,
+                "afterdue_jul_2": total_jul_aftdue_22,
+                "firstmon_jul_2":total_jul_fmon_22,
+                "secmon_jul_2":total_jul_smon_22,
+                "thirdmon_jul_2": total_jul_tmon_22,
+                "actual_recievable_jul_2":total_jul_tillnow_22,
+                "total_recieve_jul_2":total_jul_totrecov_22,
+                "bad_debt_jul_2": total_jul_baddb_22,
+                "percentage_bdb_jul_2": str(total_jul_bdper_22)+'%' ,
+
+                
+
+                
+                #------aug22-------
+                
+
+                "recievable_aug": total_aug_rec_22,
+                "ondue_aug": total_aug_ondue_22,
+                "afterdue_aug": total_aug_aftdue_22,
+                "firstmon_aug":total_aug_fmon_22,
+                "secmon_aug":total_aug_smon_22,
+                "thirdmon_aug": total_aug_tmon_22,
+                "actual_recievable_aug":total_aug_tillnow_22,
+                "total_recieve_aug":total_aug_totrecov_22,
+                "bad_debt_aug": total_aug_baddb_22,
+                "percentage_bdb_aug": str(total_aug_bdper_22)+'%' ,
+
+                
+                
+                #------sep22-------
+                
+
+                "recievable_sep": total_sep_rec_22,
+                "ondue_sep": total_sep_ondue_22,
+                "afterdue_sep": total_sep_aftdue_22,
+                "firstmon_sep":total_sep_fmon_22,
+                "secmon_sep":total_sep_smon_22,
+                "thirdmon_sep": total_sep_tmon_22,
+                "actual_recievable_sep":total_sep_tillnow_22,
+                "total_recieve_sep":total_sep_totrecov_22,
+                "bad_debt_sep": total_sep_baddb_22,
+                "percentage_bdb_sep": str(total_sep_bdper_22)+'%' ,
+
+                
+                
+                #------oct22-------
+                "recievable_oct": total_oct_rec_22,
+                "ondue_oct": total_oct_ondue_22,
+                "afterdue_oct": total_oct_aftdue_22,
+                "firstmon_oct":total_oct_fmon_22,
+                "secmon_oct":total_oct_smon_22,
+                "thirdmon_oct": total_oct_tmon_22,
+                "actual_recievable_oct":total_oct_tillnow_22,
+                "total_recieve_oct":total_oct_totrecov_22,
+                "bad_debt_oct": total_oct_baddb_22,
+                "percentage_bdb_oct": str(total_oct_bdper_22)+'%' ,
+
+                
+
+                
+                #------nov22-------
+                "recievable_nov": total_nov_rec_22,
+                "ondue_nov": total_nov_ondue_22,
+                "afterdue_nov": total_nov_aftdue_22,
+                "firstmon_nov":total_nov_fmon_22,
+                "secmon_nov":total_nov_smon_22,
+                "thirdmon_nov": total_nov_tmon_22,
+                "actual_recievable_nov":total_nov_tillnow_22,
+                "total_recieve_nov":total_nov_totrecov_22,
+                "bad_debt_nov": total_nov_baddb_22,
+                "percentage_bdb_nov": str(total_nov_bdper_22)+'%' ,
+
+
+                
+
+                
+                #------dec22-------
+                
+                "recievable_dec": total_dec_rec_22,
+                "ondue_dec": total_dec_ondue_22,
+                "afterdue_dec": total_dec_aftdue_22,
+                "firstmon_dec":total_dec_fmon_22,
+                "secmon_dec":total_dec_smon_22,
+                "thirdmon_dec": total_dec_tmon_22,
+                "actual_recievable_dec":total_dec_tillnow_22,
+                "total_recieve_dec":total_dec_totrecov_22,
+                "bad_debt_dec": total_dec_baddb_22,
+                "percentage_bdb_dec": str(total_dec_bdper_22)+'%' ,
+
+                
+                #------jan_23-------
+
+                "recievable_jan_2": total_jan_rec_23,
+                "ondue_jan_2": total_jan_ondue_23,
+                "afterdue_jan_2": total_jan_aftdue_23,
+                "firstmon_jan_2":total_jan_fmon_23,
+                "secmon_jan_2":total_jan_smon_23,
+                "thirdmon_jan_2": total_jan_tmon_23,
+                "actual_recievable_jan_2":total_jan_tillnow_23,
+                "total_recieve_jan_2":total_jan_totrecov_23,
+                "bad_debt_jan_2": total_jan_baddb_23,
+                "percentage_bdb_jan_2": str(total_jan_bdper_23)+'%' ,
+
+                
+                #------feb_23-------
+                
+                "recievable_feb_2": total_feb_rec_23,
+                "ondue_feb_2": total_feb_ondue_23,
+                "afterdue_feb_2": total_feb_aftdue_23,
+                "firstmon_feb_2":total_feb_fmon_23,
+                "secmon_feb_2":total_feb_smon_23,
+                "thirdmon_feb_2": total_feb_tmon_23,
+                "actual_recievable_feb_2":total_feb_tillnow_23,
+                "total_recieve_feb_2":total_feb_totrecov_23,
+                "bad_debt_feb_2": total_feb_baddb_23,
+                "percentage_bdb_feb_2": str(total_feb_bdper_23)+'%' ,
+
+
+                
+                #------mar_23-------
+                
+                "recievable_mar_2": total_mar_rec_23,
+                "ondue_mar_2": total_mar_ondue_23,
+                "afterdue_mar_2": total_mar_aftdue_23,
+                "firstmon_mar_2":total_mar_fmon_23,
+                "secmon_mar_2":total_mar_smon_23,
+                "thirdmon_mar_2": total_mar_tmon_23,
+                "actual_recievable_mar_2":total_mar_tillnow_23,
+                "total_recieve_mar_2":total_mar_totrecov_23,
+                "bad_debt_mar_2": total_mar_baddb_23,
+                "percentage_bdb_mar_2": str(total_mar_bdper_23)+'%' ,
+
+                #------apr_23-------
+                
+                "recievable_apr_2": total_apr_rec_23,
+                "ondue_apr_2": total_apr_ondue_23,
+                "afterdue_apr_2": total_apr_aftdue_23,
+                "firstmon_apr_2":total_apr_fmon_23,
+                "secmon_apr_2":total_apr_smon_23,
+                "thirdmon_apr_2": total_apr_tmon_23,
+                "actual_recievable_apr_2":total_apr_tillnow_23,
+                "total_recieve_apr_2":total_apr_totrecov_23,
+                "bad_debt_apr_2": total_apr_baddb_23,
+                "percentage_bdb_apr_2": str(total_apr_bdper_23)+'%' ,
+
+
+                
+
+                
+                #------may_23-------
+                
+
+                "recievable_may_2": total_may_rec_23,
+                "ondue_may_2": total_may_ondue_23,
+                "afterdue_may_2": total_may_aftdue_23,
+                "firstmon_may_2":total_may_fmon_23,
+                "secmon_may_2":total_may_smon_23,
+                "thirdmon_may_2": total_may_tmon_23,
+                "actual_recievable_may_2":total_may_tillnow_23,
+                "total_recieve_may_2":total_may_totrecov_23,
+                "bad_debt_may_2": total_may_baddb_23,
+                "percentage_bdb_may_2": str(total_may_bdper_23)+'%' ,
+
+
+                
+                #------jun_23-------
+                
+                "recievable_jun_2": total_jun_rec_23,
+                "ondue_jun_2": total_jun_ondue_23,
+                "afterdue_jun_2": total_jun_aftdue_23,
+                "firstmon_jun_2":total_jun_fmon_23,
+                "secmon_jun_2":total_jun_smon_23,
+                "thirdmon_jun_2": total_jun_tmon_23,
+                "actual_recievable_jun_2":total_jun_tillnow_23,
+                "total_recieve_jun_2":total_jun_totrecov_23,
+                "bad_debt_jun_2": total_jun_baddb_23,
+                "percentage_bdb_jun_2": str(total_jun_bdper_23)+'%' ,
+
+
+                
+                #------jul_23-------
+                
+
+                "recievable_jul": total_jul_rec_23,
+                "ondue_jul": total_jul_ondue_23,
+                "afterdue_jul": total_jul_aftdue_23,
+                "firstmon_jul":total_jul_fmon_23,
+                "secmon_jul":total_jul_smon_23,
+                "thirdmon_jul": total_jul_tmon_23,
+                "actual_recievable_jul":total_jul_tillnow_23,
+                "total_recieve_jul":total_jul_totrecov_23,
+                "bad_debt_jul": total_jul_baddb_23,
+                "percentage_bdb_jul": str(total_jul_bdper_23)+'%' ,
+
+                
+
+                
+                #------aug_23-------
+                
+
+                "recievable_aug": total_aug_rec_23,
+                "ondue_aug_2": total_aug_ondue_23,
+                "afterdue_aug_2": total_aug_aftdue_23,
+                "firstmon_aug_2":total_aug_fmon_23,
+                "secmon_aug_2":total_aug_smon_23,
+                "thirdmon_aug_2": total_aug_tmon_23,
+                "actual_recievable_aug_2":total_aug_tillnow_23,
+                "total_recieve_aug_2":total_aug_totrecov_23,
+                "bad_debt_aug_2": total_aug_baddb_23,
+                "percentage_bdb_aug_2": str(total_aug_bdper_23)+'%' ,
+
+                
+                
+                #------sep_23-------
+                
+
+                "recievable_sep_2": total_sep_rec_23,
+                "ondue_sep_2": total_sep_ondue_23,
+                "afterdue_sep_2": total_sep_aftdue_23,
+                "firstmon_sep_2":total_sep_fmon_23,
+                "secmon_sep_2":total_sep_smon_23,
+                "thirdmon_sep_2": total_sep_tmon_23,
+                "actual_recievable_sep_2":total_sep_tillnow_23,
+                "total_recieve_sep_2":total_sep_totrecov_23,
+                "bad_debt_sep_2": total_sep_baddb_23,
+                "percentage_bdb_sep_2": str(total_sep_bdper_23)+'%' ,
+
+                
+                
+                #------oct_23-------
+                "recievable_oct_2": total_oct_rec_23,
+                "ondue_oct_2": total_oct_ondue_23,
+                "afterdue_oct_2": total_oct_aftdue_23,
+                "firstmon_oct_2":total_oct_fmon_23,
+                "secmon_oct_2":total_oct_smon_23,
+                "thirdmon_oct_2": total_oct_tmon_23,
+                "actual_recievable_oct_2":total_oct_tillnow_23,
+                "total_recieve_oct_2":total_oct_totrecov_23,
+                "bad_debt_oct_2": total_oct_baddb_23,
+                "percentage_bdb_oct_2": str(total_oct_bdper_23)+'%' ,
+
+                
+
+                
+                #------nov_23-------
+                "recievable_nov_2": total_nov_rec_23,
+                "ondue_nov_2": total_nov_ondue_23,
+                "afterdue_nov_2": total_nov_aftdue_23,
+                "firstmon_nov_2":total_nov_fmon_23,
+                "secmon_nov_2":total_nov_smon_23,
+                "thirdmon_nov_2": total_nov_tmon_23,
+                "actual_recievable_nov_2":total_nov_tillnow_23,
+                "total_recieve_nov_2":total_nov_totrecov_23,
+                "bad_debt_nov_2": total_nov_baddb_23,
+                "percentage_bdb_nov_2": str(total_nov_bdper_23)+'%' ,
+
+
+                
+
+                
+                #------dec_23-------
+                
+                "recievable_dec_2": total_dec_rec_23,
+                "ondue_dec_2": total_dec_ondue_23,
+                "afterdue_dec_2": total_dec_aftdue_23,
+                "firstmon_dec_2":total_dec_fmon_23,
+                "secmon_dec_2":total_dec_smon_23,
+                "thirdmon_dec_2": total_dec_tmon_23,
+                "actual_recievable_dec_2":total_dec_tillnow_23,
+                "total_recieve_dec_2":total_dec_totrecov_23,
+                "bad_debt_dec_2": total_dec_baddb_23,
+                "percentage_bdb_dec_2": str(total_dec_bdper_23)+'%' ,
+
+                
+    
+        
                 
     
             })
