@@ -338,6 +338,8 @@ class agingsReportWizard(models.TransientModel):
 
         lines=[]
 
+        total_feb_23 = 0
+
 
 
         for branch in branch_lst:
@@ -1367,7 +1369,7 @@ class agingsReportWizard(models.TransientModel):
                 bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']*100
 
 
-
+            total_feb_23 += custom_data['recievable_feb_2']
 
             mvl=self.env['account.aging.move.line'].create({
                 
@@ -1790,6 +1792,7 @@ class agingsReportWizard(models.TransientModel):
                 
                 # "student_branch":custom_data['student_branch'],
                 "student_campus":"total",
+                "recievable_feb_2":total_feb_23
                 
 
                 
