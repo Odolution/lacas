@@ -2750,17 +2750,17 @@ class agingsReportWizard(models.TransientModel):
             
             style_title = xlwt.easyxf(
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour rose;'
+            red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
              "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour rose;'
+            lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
 
             grand_heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour white;'
                               'font: colour black, bold True;')
 
-            grey_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour ice_blue;'
+            grey_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour gray25;'
              "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
 
             heading_style = xlwt.easyxf('align: vertical center,horiz center;')
