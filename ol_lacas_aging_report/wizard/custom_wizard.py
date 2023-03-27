@@ -2761,7 +2761,7 @@ class agingsReportWizard(models.TransientModel):
                               'font: colour black, bold True;')
 
             heading_style = xlwt.easyxf('align: vertical center,horiz center;')
-            heading_style_2 = xlwt.easyxf('align: vertical center,horiz center,fore_colour aqua;')
+            # heading_style_2 = xlwt.easyxf('align: vertical center,horiz center,fore_colour aqua;')
             
             date_format = xlwt.XFStyle()
             date_format.num_format_str = 'dd/mm/yyyy'
