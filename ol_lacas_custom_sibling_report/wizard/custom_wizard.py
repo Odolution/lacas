@@ -288,7 +288,7 @@ class SiblingsReportWizard(models.TransientModel):
                                         if students.x_studio_batchsession==old_batch_val:
                                             batch_Session=students.x_studio_batchsession
                                         else:
-                                            batch_Session=self.old_batch_val
+                                            batch_Session=old_batch_val
                                             
                                         if students.enrollment_state_ids:
                                             for line in students.enrollment_state_ids:
