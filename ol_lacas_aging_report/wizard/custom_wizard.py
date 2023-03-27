@@ -2751,7 +2751,7 @@ class agingsReportWizard(models.TransientModel):
             style_title = xlwt.easyxf(
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
-            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour aqua;'
@@ -2990,8 +2990,8 @@ class agingsReportWizard(models.TransientModel):
                     column = 3
 
                     worksheet.write(row,0)
-                    worksheet.write_merge(row,row,1,1,rec.student_campus,heading_style_2)
-                    worksheet.write_merge(row,row,2,2,rec.student_branch,heading_style_2)
+                    worksheet.write_merge(row,row,1,1,rec.student_campus,red_style_title)
+                    worksheet.write_merge(row,row,2,2,rec.student_branch,red_style_title)
 
   
 
@@ -3081,16 +3081,16 @@ class agingsReportWizard(models.TransientModel):
 
                     for i in range(range_start,range_stop+1):
                         # raise UserError(column)
-                        worksheet.write_merge(row,row,column,column,data_month[i][2],heading_style_2)
-                        worksheet.write_merge(row,row,column+1,column+1,data_month[i][3],heading_style_2)
-                        worksheet.write_merge(row,row,column+2,column+2,data_month[i][4],heading_style_2)
-                        worksheet.write_merge(row,row,column+3,column+3,data_month[i][5],heading_style_2)
-                        worksheet.write_merge(row,row,column+4,column+4,data_month[i][6],heading_style_2)
-                        worksheet.write_merge(row,row,column+5,column+5,data_month[i][7],heading_style_2)
-                        worksheet.write_merge(row,row,column+6,column+6,data_month[i][8],heading_style_2)
-                        worksheet.write_merge(row,row,column+7,column+7,data_month[i][9],heading_style_2)
-                        worksheet.write_merge(row,row,column+8,column+8,data_month[i][10],heading_style_2)
-                        worksheet.write_merge(row,row,column+9,column+9,data_month[i][11],heading_style_2)
+                        worksheet.write_merge(row,row,column,column,data_month[i][2],red_style_title)
+                        worksheet.write_merge(row,row,column+1,column+1,data_month[i][3],red_style_title)
+                        worksheet.write_merge(row,row,column+2,column+2,data_month[i][4],red_style_title)
+                        worksheet.write_merge(row,row,column+3,column+3,data_month[i][5],red_style_title)
+                        worksheet.write_merge(row,row,column+4,column+4,data_month[i][6],red_style_title)
+                        worksheet.write_merge(row,row,column+5,column+5,data_month[i][7],red_style_title)
+                        worksheet.write_merge(row,row,column+6,column+6,data_month[i][8],red_style_title)
+                        worksheet.write_merge(row,row,column+7,column+7,data_month[i][9],red_style_title)
+                        worksheet.write_merge(row,row,column+8,column+8,data_month[i][10],red_style_title)
+                        worksheet.write_merge(row,row,column+9,column+9,data_month[i][11],red_style_title)
 
                         # worksheet.write_merge(row,row,column,column+1,rec.total_amount)
                         # lst.append([row_1,row_1,column,column+1])
