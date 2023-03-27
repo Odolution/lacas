@@ -230,7 +230,7 @@ class SiblingsReportWizard(models.TransientModel):
                 )
 
         else:
-            if self.one_batch==old_batch:
+            if self.one_batch=='old_batch':
                 old_batch_val=dict(self._fields['one_batch'].selection).get(self.one_batch)
                 for rec in student_data:
                     parent_code=''
