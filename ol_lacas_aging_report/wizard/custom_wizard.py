@@ -2520,7 +2520,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan_2":total_jan_tillnow_23,
                 "total_recieve_jan_2":total_jan_totrecov_23,
                 "bad_debt_jan_2": total_jan_baddb_23,
-                "percentage_bdb_jan_2": str(total_jan_bdper_23)+'%' ,
+                "percentage_bdb_jan_2": str(total_jan_bdper_23/len(branch_lst))+'%' ,
 
                 
                 #------feb_23-------
