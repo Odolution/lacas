@@ -34,6 +34,7 @@ class inheritincompany(models.Model):
     _inherit = 'res.company'
 
     image = fields.Image(string='Bank Image')
+    milestone_logo = fields.Image(string='Milestone Logo')
     
 class reportbutton(http.Controller):
     @http.route('/attachment/download/<int:invoice_id>', methods=['POST', 'GET'], csrf=False, type='http', auth="user",
