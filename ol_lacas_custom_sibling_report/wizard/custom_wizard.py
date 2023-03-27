@@ -287,8 +287,7 @@ class SiblingsReportWizard(models.TransientModel):
                                         gender=students.gender.name
                                         if students.x_studio_batchsession==old_batch_val:
                                             batch_Session=students.x_studio_batchsession
-                                        else:
-                                            batch_Session='-'
+                                    
                                             
                                         if students.enrollment_state_ids:
                                             for line in students.enrollment_state_ids:
@@ -439,8 +438,7 @@ class SiblingsReportWizard(models.TransientModel):
                                         gender=students.gender.name
                                         if students.x_studio_batchsession==new_batch_val:
                                             batch_Session=students.x_studio_batchsession
-                                        else:
-                                            batch_Session='-'
+                                   
                                             
                                         if students.enrollment_state_ids:
                                             for line in students.enrollment_state_ids:
