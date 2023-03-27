@@ -2754,11 +2754,14 @@ class agingsReportWizard(models.TransientModel):
              "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour aqua;'
+            lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour coral;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
 
             grand_heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour white;'
                               'font: colour black, bold True;')
+
+            grey_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour gray40;'
+             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
 
             heading_style = xlwt.easyxf('align: vertical center,horiz center;')
             # heading_style_2 = xlwt.easyxf('align: vertical center,horiz center,fore_colour aqua;')
@@ -2771,9 +2774,9 @@ class agingsReportWizard(models.TransientModel):
             
             
 
-            worksheet.write_merge(0,1,0,0,"Sr.No", style=red_style_title)
-            worksheet.write_merge(0,1,1,1,"Campus",style=red_style_title)
-            worksheet.write_merge(0,1,2,2,"Branch Name",style=red_style_title)
+            worksheet.write_merge(0,1,0,0,"Sr.No", style=grey_style_title)
+            worksheet.write_merge(0,1,1,1,"Campus",style=grey_style_title)
+            worksheet.write_merge(0,1,2,2,"Branch Name",style=grey_style_title)
 
 
 
@@ -2875,8 +2878,8 @@ class agingsReportWizard(models.TransientModel):
                     column = 3
 
                     worksheet.write(row,0,sn)
-                    worksheet.write_merge(row,row,1,1,rec.student_campus,heading_style)
-                    worksheet.write_merge(row,row,2,2,rec.student_branch,heading_style)
+                    worksheet.write_merge(row,row,1,1,rec.student_campus,grey_style_title)
+                    worksheet.write_merge(row,row,2,2,rec.student_branch,grey_style_title)
 
   
 
