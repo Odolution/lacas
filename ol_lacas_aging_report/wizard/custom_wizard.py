@@ -2878,8 +2878,8 @@ class agingsReportWizard(models.TransientModel):
                     column = 3
 
                     worksheet.write(row,0,sn)
-                    worksheet.write_merge(row,row,1,1,rec.student_campus,grey_style_title)
-                    worksheet.write_merge(row,row,2,2,rec.student_branch,grey_style_title)
+                    worksheet.write_merge(row,row,1,1,rec.student_campus,heading_style)
+                    worksheet.write_merge(row,row,2,2,rec.student_branch,heading_style)
 
   
 
@@ -2993,8 +2993,8 @@ class agingsReportWizard(models.TransientModel):
                     column = 3
 
                     worksheet.write(row,0)
-                    worksheet.write_merge(row,row,1,1,rec.student_campus,red_style_title)
-                    worksheet.write_merge(row,row,2,2,rec.student_branch,red_style_title)
+                    worksheet.write_merge(row,row,1,1,rec.student_campus,grey_style_title)
+                    worksheet.write_merge(row,row,2,2,rec.student_branch,grey_style_title)
 
   
 
