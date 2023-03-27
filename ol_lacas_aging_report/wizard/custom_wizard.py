@@ -2869,7 +2869,7 @@ class agingsReportWizard(models.TransientModel):
             row = 2
             sn=1
             for rec in self.account_report_line:
-                if rec:
+                if rec.student_campus!='TOTAL':
 
                     column = 3
 
@@ -2984,6 +2984,122 @@ class agingsReportWizard(models.TransientModel):
                       
                     row+=1
                     sn+=1
+                else:
+
+                    column = 3
+
+                    worksheet.write(row,0)
+                    worksheet.write_merge(row,row,1,1,rec.student_campus,heading_style)
+                    worksheet.write_merge(row,row,2,2,rec.student_branch,heading_style)
+
+  
+
+                    data_month= {
+                        1:['01','JAN-22',rec.recievable_jan,rec.ondue_jan,rec.afterdue_jan,rec.firstmon_jan,rec.secmon_jan,
+                        rec.thirdmon_jan,rec.actual_recievable_jan,rec.total_recieve_jan,rec.bad_debt_jan,rec.percentage_bdb_jan,'22'],
+
+                        2:['02','FEB-22',rec.recievable_feb,rec.ondue_feb,rec.afterdue_feb,rec.firstmon_feb,rec.secmon_feb,
+                        rec.thirdmon_feb,rec.actual_recievable_feb,rec.total_recieve_feb,rec.bad_debt_feb,rec.percentage_bdb_feb,'22'],
+
+                        3:['03','MAR-22',rec.recievable_mar,rec.ondue_mar,rec.afterdue_mar,rec.firstmon_mar,rec.secmon_mar,
+                        rec.thirdmon_mar,rec.actual_recievable_mar,rec.total_recieve_mar,rec.bad_debt_mar,rec.percentage_bdb_mar,'22'],
+
+                        4:['04','APR-22',rec.recievable_apr,rec.ondue_apr,rec.afterdue_apr,rec.firstmon_apr,rec.secmon_apr,
+                        rec.thirdmon_apr,rec.actual_recievable_apr,rec.total_recieve_apr,rec.bad_debt_apr,rec.percentage_bdb_apr,'22'],
+
+                        5:['05','MAY-22',rec.recievable_may,rec.ondue_may,rec.afterdue_may,rec.firstmon_may,rec.secmon_may,
+                        rec.thirdmon_may,rec.actual_recievable_may,rec.total_recieve_may,rec.bad_debt_may,rec.percentage_bdb_may,'22'],
+
+                        6:['06','JUN-22',rec.recievable_jun,rec.ondue_jun,rec.afterdue_jun,rec.firstmon_jun,rec.secmon_jun,
+                        rec.thirdmon_jun,rec.actual_recievable_jun,rec.total_recieve_jun,rec.bad_debt_jun,rec.percentage_bdb_jun,'22'],
+
+                        7:['07','JUL-22',rec.recievable_jul,rec.ondue_jul,rec.afterdue_jul,rec.firstmon_jul,rec.secmon_jul,
+                        rec.thirdmon_jul,rec.actual_recievable_jul,rec.total_recieve_jul,rec.bad_debt_jul,rec.percentage_bdb_jul,'22'],
+
+                        8:['08','AUG-22',rec.recievable_aug,rec.ondue_aug,rec.afterdue_aug,rec.firstmon_aug,rec.secmon_aug,
+                        rec.thirdmon_aug,rec.actual_recievable_aug,rec.total_recieve_aug,rec.bad_debt_aug,rec.percentage_bdb_aug,'22'],
+
+                        9:['09','SEP-22',rec.recievable_sep,rec.ondue_sep,rec.afterdue_sep,rec.firstmon_sep,rec.secmon_sep,
+                        rec.thirdmon_sep,rec.actual_recievable_sep,rec.total_recieve_sep,rec.bad_debt_sep,rec.percentage_bdb_sep,'22'],
+
+                        10:['10','OCT-22',rec.recievable_oct,rec.ondue_oct,rec.afterdue_oct,rec.firstmon_oct,rec.secmon_oct,
+                        rec.thirdmon_oct,rec.actual_recievable_oct,rec.total_recieve_oct,rec.bad_debt_oct,rec.percentage_bdb_oct,'22'],
+
+                        11:['11','NOV-22',rec.recievable_nov,rec.ondue_nov,rec.afterdue_nov,rec.firstmon_nov,rec.secmon_nov,
+                        rec.thirdmon_nov,rec.actual_recievable_nov,rec.total_recieve_nov,rec.bad_debt_nov,rec.percentage_bdb_nov,'22'],
+
+                        12:['12','DEC-22',rec.recievable_dec,rec.ondue_dec,rec.afterdue_dec,rec.firstmon_dec,rec.secmon_dec,
+                        rec.thirdmon_dec,rec.actual_recievable_dec,rec.total_recieve_dec,rec.bad_debt_dec,rec.percentage_bdb_dec,'22'],
+
+                        13:['01','JAN-23',rec.recievable_jan_2,rec.ondue_jan_2,rec.afterdue_jan_2,rec.firstmon_jan_2,rec.secmon_jan_2,
+                        rec.thirdmon_jan_2,rec.actual_recievable_jan_2,rec.total_recieve_jan_2,rec.bad_debt_jan_2,rec.percentage_bdb_jan_2,'23'],
+
+                        14:['02','FEB-23',rec.recievable_feb_2,rec.ondue_feb_2,rec.afterdue_feb_2,rec.firstmon_feb_2,rec.secmon_feb_2,
+                        rec.thirdmon_feb_2,rec.actual_recievable_feb_2,rec.total_recieve_feb_2,rec.bad_debt_feb_2,rec.percentage_bdb_feb_2,'23'],
+
+                        15:['03','MAR-23',rec.recievable_mar_2,rec.ondue_mar_2,rec.afterdue_mar_2,rec.firstmon_mar_2,rec.secmon_mar_2,
+                        rec.thirdmon_mar_2,rec.actual_recievable_mar_2,rec.total_recieve_mar_2,rec.bad_debt_mar_2,rec.percentage_bdb_mar_2,'23'],
+
+                        16:['04','APR-23',rec.recievable_apr_2,rec.ondue_apr_2,rec.afterdue_apr_2,rec.firstmon_apr_2,rec.secmon_apr_2,
+                        rec.thirdmon_apr_2,rec.actual_recievable_apr_2,rec.total_recieve_apr_2,rec.bad_debt_apr_2,rec.percentage_bdb_apr_2,'23'],
+
+                        17:['05','MAY-23',rec.recievable_may_2,rec.ondue_may_2,rec.afterdue_may_2,rec.firstmon_may_2,rec.secmon_may_2,
+                        rec.thirdmon_may_2,rec.actual_recievable_may_2,rec.total_recieve_may_2,rec.bad_debt_may_2,rec.percentage_bdb_may_2,'23'],
+
+                        18:['06','JUN-23',rec.recievable_may_2,rec.ondue_may_2,rec.afterdue_may_2,rec.firstmon_may_2,rec.secmon_may_2,
+                        rec.thirdmon_may_2,rec.actual_recievable_may_2,rec.total_recieve_may_2,rec.bad_debt_may_2,rec.percentage_bdb_may_2,'23'],
+
+                        19:['07','JUL-23',rec.recievable_jul_2,rec.ondue_jul_2,rec.afterdue_jul_2,rec.firstmon_jul_2,rec.secmon_jul_2,
+                        rec.thirdmon_jul_2,rec.actual_recievable_jul_2,rec.total_recieve_jul_2,rec.bad_debt_jul_2,rec.percentage_bdb_jul_2,'23'],
+
+                        20:['08','AUG-23',rec.recievable_aug_2,rec.ondue_aug_2,rec.afterdue_aug_2,rec.firstmon_aug_2,rec.secmon_aug_2,
+                        rec.thirdmon_aug_2,rec.actual_recievable_aug_2,rec.total_recieve_aug_2,rec.bad_debt_aug_2,rec.percentage_bdb_aug_2,'23'],
+
+                        21:['09','SEP-23',rec.recievable_sep_2,rec.ondue_sep_2,rec.afterdue_sep_2,rec.firstmon_sep_2,rec.secmon_sep_2,
+                        rec.thirdmon_sep_2,rec.actual_recievable_sep_2,rec.total_recieve_sep_2,rec.bad_debt_sep_2,rec.percentage_bdb_sep_2,'23'],
+
+                        22:['10','OCT-23',rec.recievable_oct_2,rec.ondue_oct_2,rec.afterdue_oct_2,rec.firstmon_oct_2,rec.secmon_oct_2,
+                        rec.thirdmon_oct_2,rec.actual_recievable_oct_2,rec.total_recieve_oct_2,rec.bad_debt_oct_2,rec.percentage_bdb_oct_2,'23'],
+
+                        23:['11','NOV-23',rec.recievable_nov_2,rec.ondue_nov_2,rec.afterdue_nov_2,rec.firstmon_nov_2,rec.secmon_nov_2,
+                        rec.thirdmon_nov_2,rec.actual_recievable_nov_2,rec.total_recieve_nov_2,rec.bad_debt_nov_2,rec.percentage_bdb_nov_2,'23'],
+
+                        24:['12','DEC-23',rec.recievable_dec_2,rec.ondue_dec_2,rec.afterdue_dec_2,rec.firstmon_dec_2,rec.secmon_dec_2,
+                        rec.thirdmon_dec_2,rec.actual_recievable_dec_2,rec.total_recieve_dec_2,rec.bad_debt_dec_2,rec.percentage_bdb_dec_2,'23'],
+
+                    }
+                    range_start = 0
+                    range_stop = 0
+                  
+                    for key, value in data_month.items():
+                        if value[0] == v_from_month and value[12] == v_from_year:
+                            range_start = key
+                        if value[0] == v_to_month and value[12] == v_to_year:
+                            range_stop = key
+                    
+
+                    for i in range(range_start,range_stop+1):
+                        # raise UserError(column)
+                        worksheet.write_merge(row,row,column,column,data_month[i][2],heading_style)
+                        worksheet.write_merge(row,row,column+1,column+1,data_month[i][3],heading_style)
+                        worksheet.write_merge(row,row,column+2,column+2,data_month[i][4],heading_style)
+                        worksheet.write_merge(row,row,column+3,column+3,data_month[i][5],heading_style)
+                        worksheet.write_merge(row,row,column+4,column+4,data_month[i][6],heading_style)
+                        worksheet.write_merge(row,row,column+5,column+5,data_month[i][7],heading_style)
+                        worksheet.write_merge(row,row,column+6,column+6,data_month[i][8],heading_style)
+                        worksheet.write_merge(row,row,column+7,column+7,data_month[i][9],heading_style)
+                        worksheet.write_merge(row,row,column+8,column+8,data_month[i][10],heading_style)
+                        worksheet.write_merge(row,row,column+9,column+9,data_month[i][11],heading_style)
+
+                        # worksheet.write_merge(row,row,column,column+1,rec.total_amount)
+                        # lst.append([row_1,row_1,column,column+1])
+                      
+                        column+=10
+                    # worksheet.write_merge(row,row,column,column+1,rec.total_amount,heading_style)
+                      
+                    row+=1
+                   
+            
 
             fp = io.BytesIO()
             workbook.save(fp)
