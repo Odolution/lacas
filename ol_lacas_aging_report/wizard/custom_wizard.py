@@ -2324,9 +2324,11 @@ class agingsReportWizard(models.TransientModel):
         
        
         mvl_total=self.env['account.aging.move.line'].create({
+
+
                 
-                "student_branch":"-",
-                "student_campus":"-",
+                "student_branch":"TOTAL",
+                "student_campus":"TOTAL",
                 #------jan22-------
 
                 "recievable_jan": total_jan_rec_22,
@@ -2338,7 +2340,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan":total_jan_tillnow_22,
                 "total_recieve_jan":total_jan_totrecov_22,
                 "bad_debt_jan": total_jan_baddb_22,
-                "percentage_bdb_jan": str((total_jan_bdper_22)/len(branch_lst))+'%' ,
+                "percentage_bdb_jan": str(round((total_jan_bdper_22)/len(branch_lst)))+'%' ,
 
                 
                 #------feb22-------
