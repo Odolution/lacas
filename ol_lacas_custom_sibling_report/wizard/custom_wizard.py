@@ -284,7 +284,7 @@ class SiblingsReportWizard(models.TransientModel):
 
                                     gender=students.gender.name
                                     if students.x_studio_batchsession==self.one_batch:
-                                        batch_Session=students.x_studio_batchsession
+                                        batch_Session=self.one_batch
                                     else:
                                         batch_Session="-"
                                         
