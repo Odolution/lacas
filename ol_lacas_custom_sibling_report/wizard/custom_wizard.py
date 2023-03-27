@@ -253,8 +253,9 @@ class SiblingsReportWizard(models.TransientModel):
                     m_name=''
                     m_ph=''
                         
-                    
-                    if len(rec.student_ids)>1:
+                    if rec.x_studio_batchsession==old_batch_val:
+                        batch_Session=rec.x_studio_batchsession
+                        if len(rec.student_ids)>1:
                             for status in rec.student_ids.enrollment_status_ids:
                                 if status.name=='Enrolled':
                                     tot_child=(len(rec.student_ids))
@@ -285,8 +286,7 @@ class SiblingsReportWizard(models.TransientModel):
                                                 classs=splitted_name[0]
 
                                         gender=students.gender.name
-                                        if students.x_studio_batchsession==old_batch_val:
-                                            batch_Session=students.x_studio_batchsession
+                                        
                                     
                                             
                                         if students.enrollment_state_ids:
