@@ -52,8 +52,24 @@ class onechildReportWizard(models.TransientModel):
     _name="onechild.report.wizard"
     _description='Print onechild Wizard'
 
+    all_batch=fields.Boolean(string=" Select All Branches")
+    one_batch=fields.Selection(
+        [('old_batch','Session 2022-2023'),
+        ('new_batch','Session 2023-2024')]
+        ,string="Select any one Batch")
+
     
     account_onechild_report_line=fields.Many2many('account.onechild.report.move.line', string='Account report Line')
+
+    def _batch_constrains(self):
+      
+
+        if self.all_batch==True and self.one_batch!=False:
+                raise ValidationError(_('Sorry, You Must select one option...'))
+             
+
+        elif self.one_batch!=False and self.all_batch==True:
+                raise ValidationError(_('Sorry, You Must select one option...'))
  
 
 
