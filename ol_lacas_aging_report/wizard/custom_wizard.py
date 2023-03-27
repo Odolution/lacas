@@ -1921,7 +1921,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan":custom_data['actual_recievable_jan'],
                 "total_recieve_jan":tr_jan,
                 "bad_debt_jan": bd_jan,
-                "percentage_bdb_jan": str(round(bd_percjan))+'%' ,
+                "percentage_bdb_jan": str(round(bd_perc_jan))+'%' ,
 
                 
                 #------feb22-------
@@ -1935,7 +1935,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_feb":custom_data['actual_recievable_feb'],
                 "total_recieve_feb":tr_feb,
                 "bad_debt_feb": bd_feb,
-                "percentage_bdb_feb": str(round(bd_percfeb))+'%',
+                "percentage_bdb_feb": str(round(bd_perc_feb))+'%',
 
                 
                 #------mar22-------
@@ -1949,7 +1949,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_mar":custom_data['actual_recievable_mar'],
                 "total_recieve_mar":tr_mar,
                 "bad_debt_mar": bd_mar,
-                "percentage_bdb_mar": str(round(bd_percmar))+'%',
+                "percentage_bdb_mar": str(round(bd_perc_mar))+'%',
 
                 
                 #------apr22-------
@@ -1964,7 +1964,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_apr":custom_data['actual_recievable_apr'],
                 "total_recieve_apr":tr_apr,
                 "bad_debt_apr": bd_apr,
-                "percentage_bdb_apr": str(round(bd_percapr))+'%',
+                "percentage_bdb_apr": str(round(bd_perc_apr))+'%',
 
                 
 
@@ -1981,7 +1981,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_may":custom_data['actual_recievable_may'],
                 "total_recieve_may":tr_may,
                 "bad_debt_may": bd_may,
-                "percentage_bdb_may": str(round(bd_percmay))+'%',
+                "percentage_bdb_may": str(round(bd_perc_may))+'%',
 
                 
 
@@ -1998,7 +1998,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jun":custom_data['actual_recievable_jun'],
                 "total_recieve_jun":tr_jun,
                 "bad_debt_jun": bd_jun,
-                "percentage_bdb_jun": str(round(bd_percjun))+'%',
+                "percentage_bdb_jun": str(round(bd_perc_jun))+'%',
 
                 
 
@@ -2015,7 +2015,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jul":custom_data['actual_recievable_jul'],
                 "total_recieve_jul":tr_jul,
                 "bad_debt_jul": bd_jul,
-                "percentage_bdb_jul": str(round(bd_percjul))+'%',
+                "percentage_bdb_jul": str(round(bd_perc_jul))+'%',
 
                 
 
@@ -2032,7 +2032,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_aug":custom_data['actual_recievable_aug'],
                 "total_recieve_aug":tr_aug,
                 "bad_debt_aug": bd_aug,
-                "percentage_bdb_aug": str(round(bd_percaug))+'%',
+                "percentage_bdb_aug": str(round(bd_perc_aug))+'%',
 
                 
                 
@@ -2048,7 +2048,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_sep":custom_data['actual_recievable_sep'],
                 "total_recieve_sep":tr_sep,
                 "bad_debt_sep": bd_sep,
-                "percentage_bdb_sep": str(round(bd_percsep))+'%',
+                "percentage_bdb_sep": str(round(bd_perc_sep))+'%',
 
                 
                 
@@ -2063,7 +2063,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_oct":custom_data['actual_recievable_oct'],
                 "total_recieve_oct":tr_oct,
                 "bad_debt_oct": bd_oct,
-                "percentage_bdb_oct":str(round(bd_percoct))+'%',
+                "percentage_bdb_oct":str(round(bd_perc_oct))+'%',
 
                 
 
@@ -2079,7 +2079,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_nov":custom_data['actual_recievable_nov'],
                 "total_recieve_nov":tr_nov,
                 "bad_debt_nov": bd_nov,
-                "percentage_bdb_nov": str(round(bd_percnov))+'%' ,
+                "percentage_bdb_nov": str(round(bd_perc_nov))+'%' ,
 
                 
 
@@ -2096,7 +2096,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_dec":custom_data['actual_recievable_dec'],
                 "total_recieve_dec":tr_dec,
                 "bad_debt_dec": bd_dec,
-                "percentage_bdb_dec": str(round(bd_percdec))+'%',
+                "percentage_bdb_dec": str(round(bd_perc_dec))+'%',
 
                 
                         #------jan23-------
@@ -2110,7 +2110,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jan_2":custom_data['actual_recievable_jan_2'],
                 "total_recieve_jan_2":tr_jan_2,
                 "bad_debt_jan_2":bd_jan_2,
-                "percentage_bdb_jan_2": str(round(bd_percjan_2))+'%',
+                "percentage_bdb_jan_2": str(round(bd_perc_jan_2))+'%',
 
                 
                 #------feb23-------
@@ -2125,7 +2125,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_feb_2":custom_data['actual_recievable_feb_2'],
                 "total_recieve_feb_2":tr_feb_2,
                 "bad_debt_feb_2": bd_feb_2,
-                "percentage_bdb_feb_2":str(round(bd_percfeb_2))+'%',
+                "percentage_bdb_feb_2":str(round(bd_perc_feb_2))+'%',
 
                 
                 
@@ -2141,7 +2141,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_mar_2":custom_data['actual_recievable_mar_2'],
                 "total_recieve_mar_2":tr_mar_2,
                 "bad_debt_mar_2": bd_mar_2,
-                "percentage_bdb_mar_2": str(round(bd_percmar_2))+'%',
+                "percentage_bdb_mar_2": str(round(bd_perc_mar_2))+'%',
 
                 
 
@@ -2158,7 +2158,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_apr_2":custom_data['actual_recievable_apr_2'],
                 "total_recieve_apr_2":tr_apr_2,
                 "bad_debt_apr_2": bd_apr_2,
-                "percentage_bdb_apr_2": str(round(bd_percapr_2))+'%',
+                "percentage_bdb_apr_2": str(round(bd_perc_apr_2))+'%',
 
                 
 
@@ -2175,7 +2175,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_may_2":custom_data['actual_recievable_may_2'],
                 "total_recieve_may_2":tr_may_2,
                 "bad_debt_may_2": bd_may_2,
-                "percentage_bdb_may_2": str(round(bd_percmay_2))+'%',
+                "percentage_bdb_may_2": str(round(bd_perc_may_2))+'%',
 
                 
                 
@@ -2191,7 +2191,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jun_2":custom_data['actual_recievable_jun_2'],
                 "total_recieve_jun_2":tr_jun_2,
                 "bad_debt_jun_2": bd_jun_2,
-                "percentage_bdb_jun_2": str(round(bd_percjun_2))+'%',
+                "percentage_bdb_jun_2": str(round(bd_perc_jun_2))+'%',
 
                 
 
@@ -2208,7 +2208,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_jul_2":custom_data['actual_recievable_jul_2'],
                 "total_recieve_jul_2":tr_jul_2,
                 "bad_debt_jul_2": bd_jul_2,
-                "percentage_bdb_jul_2": str(round(bd_percjul_2))+'%',
+                "percentage_bdb_jul_2": str(round(bd_perc_jul_2))+'%',
 
                 
 
@@ -2225,7 +2225,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_aug_2":custom_data['actual_recievable_aug_2'],
                 "total_recieve_aug_2":tr_aug_2,
                 "bad_debt_aug_2": bd_aug_2,
-                "percentage_bdb_aug_2": str(round(bd_percaug_2))+'%',
+                "percentage_bdb_aug_2": str(round(bd_perc_aug_2))+'%',
 
                 
 
@@ -2242,7 +2242,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_sep_2":custom_data['actual_recievable_sep_2'],
                 "total_recieve_sep_2":tr_sep_2,
                 "bad_debt_sep_2": bd_sep_2,
-                "percentage_bdb_sep_2":str(round(bd_percsep_2))+'%',
+                "percentage_bdb_sep_2":str(round(bd_perc_sep_2))+'%',
 
                 
                 
@@ -2257,7 +2257,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_oct_2":custom_data['actual_recievable_oct_2'],
                 "total_recieve_oct_2":tr_oct_2,
                 "bad_debt_oct_2": bd_oct_2,
-                "percentage_bdb_oct_2": str(round(bd_percoct_2))+'%',
+                "percentage_bdb_oct_2": str(round(bd_perc_oct_2))+'%',
 
                 
                 
@@ -2273,7 +2273,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_nov_2":custom_data['actual_recievable_nov_2'],
                 "total_recieve_nov_2":tr_nov_2,
                 "bad_debt_nov_2": bd_nov_2,
-                "percentage_bdb_nov_2": str(round(bd_percnov_2))+'%',
+                "percentage_bdb_nov_2": str(round(bd_perc_nov_2))+'%',
 
                 
                 
@@ -2289,7 +2289,7 @@ class agingsReportWizard(models.TransientModel):
                 "actual_recievable_dec_2":custom_data['actual_recievable_dec_2'],
                 "total_recieve_dec_2":tr_dec_2,
                 "bad_debt_dec_2": bd_dec_2,
-                "percentage_bdb_dec_2": str(round(bd_percdec_2))+'%',
+                "percentage_bdb_dec_2": str(round(bd_perc_dec_2))+'%',
 
                 
                 
