@@ -252,14 +252,18 @@ class SiblingsReportWizard(models.TransientModel):
                     f_ph=''
                     m_name=''
                     m_ph=''
+                    batch_Session=''
                         
-                    if rec.x_studio_batchsession==old_batch_val:
-                        batch_Session=rec.x_studio_batchsession
-                        if len(rec.student_ids)>1:
+                    
+                    if len(rec.student_ids)>1:
+                        if rec.student_ids.x_studio_batchsession==old_batch_val:
+                            batch_Session=old_batch_val
                             for status in rec.student_ids.enrollment_status_ids:
                                 if status.name=='Enrolled':
                                     tot_child=(len(rec.student_ids))
                                     parent_code=rec.facts_id
+                            
+
                                     li=[id for id in rec.student_ids]
                                     #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
                                     for grade in rec.student_ids.grade_level_ids:
@@ -269,10 +273,7 @@ class SiblingsReportWizard(models.TransientModel):
                                         name=students.name
                                         phone=students.phone
                                         street=students.street
-                                        
-                                        # branch=students.school_ids.name
-                                        # batch=students.x_studio_btachsesson 
-                                        #classs=students.homeroom
+                           
                                         if students.homeroom:
                                             wholename=students.homeroom
                                             splitted_name=wholename.split('-')
@@ -286,8 +287,10 @@ class SiblingsReportWizard(models.TransientModel):
                                                 classs=splitted_name[0]
 
                                         gender=students.gender.name
-                                        
-                                    
+                                        # if students.x_studio_batchsession==old_batch_val:
+                                        #     batch_Session=students.x_studio_batchsession
+                                        # else:
+                                        #     batch_Session='-'
                                             
                                         if students.enrollment_state_ids:
                                             for line in students.enrollment_state_ids:
@@ -403,14 +406,17 @@ class SiblingsReportWizard(models.TransientModel):
                     f_ph=''
                     m_name=''
                     m_ph=''
+                    batch_Session=''
+
                         
                     
                     if len(rec.student_ids)>1:
+                        if rec.student_ids.x_studio_batchsession==new_batch_val:
+                            batch_Session=new_batch_val
                             for status in rec.student_ids.enrollment_status_ids:
                                 if status.name=='Enrolled':
                                     tot_child=(len(rec.student_ids))
                                     parent_code=rec.facts_id
-                                    li=[id for id in rec.student_ids]
                                     #li.sort(key=lambda x: x.grade_level_ids.x_studio_class)
                                     for grade in rec.student_ids.grade_level_ids:
                                         li.sort(key=lambda x: grade.x_studio_class)
