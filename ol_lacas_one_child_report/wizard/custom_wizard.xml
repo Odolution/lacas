@@ -10,6 +10,8 @@
         
             <form string="Print Receivable of One Sibling Student">
             <group>
+                       <field name="all_batch"/>
+                       <field name="one_batch" />
       
              </group>
 
