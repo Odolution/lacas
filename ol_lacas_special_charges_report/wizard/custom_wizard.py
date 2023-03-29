@@ -278,7 +278,7 @@ class SiblingsReportWizard(models.TransientModel):
         if xlwt:
 
 
-            filename='Specilaization Charges Report'
+            filename='Specilaization Charges Report.xls'
             # if self.all_batch==True:
             #     filename = 'All Batch Specilaization Charges Report '
             # elif self.one_batch:
