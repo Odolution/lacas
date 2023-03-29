@@ -1,20 +1,22 @@
 <odoo>
 
-
-
 <record model="ir.ui.view" id="view_report_special_charges">
-        <field name="name">siblings.report.wizard.form</field>
-        <field name="model" >siblings.report.wizard</field>
+        <field name="name">charges.report.wizard.form</field>
+        <field name="model" >charges.report.wizard</field>
       
         <field name="arch" type="xml">
         
             <form string="Print Specialization charges of students">
             <group>
+
+            
+             <field name="all_batch"/>
+             <field name="one_batch" />
       
              </group>
 
                <notebook>
-                            <page id="special_carges_tab"
+                            <page id="special_charges_tab"
                                   string=" Invoice Lines">
 
                                 <field name="account_charges_report_line"
@@ -66,7 +68,7 @@
      <record id="action_account_print_special_charges_report" model="ir.actions.act_window">
             <field name="name">Specialization Charges</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">special.charges.report.wizard</field>
+            <field name="res_model">charges.report.wizard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_report_special_charges"/>
             <field name="target">new</field>
