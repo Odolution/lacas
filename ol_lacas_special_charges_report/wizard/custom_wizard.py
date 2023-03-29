@@ -94,7 +94,7 @@ class SiblingsReportWizard(models.TransientModel):
                             price=line.unit_price
                             splitted_name=specialization.split(' ')
                             if len(splitted_name)>2:
-                            program=splitted_name[0]+" "+splitted_name[1]
+                                program=splitted_name[0]+" "+splitted_name[1]
                             if rec.student_id.homeroom:
                                 wholename=rec.student_id.homeroom
                                 splitted_name=wholename.split('-')
@@ -161,7 +161,7 @@ class SiblingsReportWizard(models.TransientModel):
                                     price=line.unit_price
                                     splitted_name=specialization.split(' ')
                                     if len(splitted_name)>2:
-                                    program=splitted_name[0]+" "+splitted_name[1]
+                                        program=splitted_name[0]+" "+splitted_name[1]
                                     if rec.student_id.homeroom:
                                         wholename=rec.student_id.homeroom
                                         splitted_name=wholename.split('-')
@@ -218,7 +218,7 @@ class SiblingsReportWizard(models.TransientModel):
                                     price=line.unit_price
                                     splitted_name=specialization.split(' ')
                                     if len(splitted_name)>2:
-                                    program=splitted_name[0]+" "+splitted_name[1]
+                                        program=splitted_name[0]+" "+splitted_name[1]
                                     if rec.student_id.homeroom:
                                         wholename=rec.student_id.homeroom
                                         splitted_name=wholename.split('-')
