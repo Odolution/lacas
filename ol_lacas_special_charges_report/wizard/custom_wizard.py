@@ -277,12 +277,14 @@ class SiblingsReportWizard(models.TransientModel):
         
         if xlwt:
 
+
+            file_name='Specilaization Charges Report'
             if self.all_batch==True:
                 filename = 'All Batch Specilaization Charges Report '
             elif self.one_batch:
                 file_name=dict(self._fields['one_batch'].selection).get(self.one_batch)+'Specilaization Charges Report'
-            else:
-                file_name='Specilaization Charges Report'
+         
+               
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
