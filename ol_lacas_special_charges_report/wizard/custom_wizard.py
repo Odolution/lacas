@@ -279,10 +279,10 @@ class SiblingsReportWizard(models.TransientModel):
 
 
             filename='Specilaization Charges Report'
-            if self.all_batch==True:
-                filename = 'All Batch Specilaization Charges Report '
-            elif self.one_batch:
-                filename=dict(self._fields['one_batch'].selection).get(self.one_batch)+'Specilaization Charges Report'
+            # if self.all_batch==True:
+            #     filename = 'All Batch Specilaization Charges Report '
+            # elif self.one_batch:
+            #     filename=dict(self._fields['one_batch'].selection).get(self.one_batch)+'Specilaization Charges Report'
          
                
             # One sheet by partner
