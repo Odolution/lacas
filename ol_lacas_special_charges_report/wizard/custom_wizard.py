@@ -149,7 +149,7 @@ class SiblingsReportWizard(models.TransientModel):
             if self.one_batch=='old_batch':
                 old_batch_val=dict(self._fields['one_batch'].selection).get(self.one_batch)
                 for rec in tuition_plan:
-                    if rec.student_ids.x_studio_batchsession==old_batch_val:
+                    if rec.student_id.x_studio_batchsession==old_batch_val:
                         if rec.line_ids:
                             for line in rec.line_ids:
                                 if line.product_id.x_studio_code:
@@ -206,7 +206,7 @@ class SiblingsReportWizard(models.TransientModel):
             elif self.one_batch=='new_batch':
                 new_batch_val=dict(self._fields['one_batch'].selection).get(self.one_batch)
                 for rec in tuition_plan:
-                    if rec.student_ids.x_studio_batchsession==new_batch_val:
+                    if rec.student_id.x_studio_batchsession==new_batch_val:
                         if rec.line_ids:
                             for line in rec.line_ids:
                                 if line.product_id.x_studio_code:
