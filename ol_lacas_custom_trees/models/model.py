@@ -109,6 +109,7 @@ class ext(models.Model):
     def _compute_tuition_fee_amount(self):
         for invoice in self:
             tuition_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Tuition Fee')
+            print("tuition fee lines: ", tuition_fee_lines)
             if tuition_fee_lines:
                 invoice.tuition =tuition_fee_lines.price_subtotal
             else:
