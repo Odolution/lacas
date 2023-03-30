@@ -7,11 +7,11 @@ class ext(models.Model):
     _inherit="account.move"
    
    
-    tuition=fields.Integer(string="Tuition Fee",compute='_compute_tuition_fee_amount', store=True)
-    club=fields.Integer(string="Club Charges",compute='_compute_club_fee_amount', store=True)
-    computer=fields.Integer(string="computer Charges",compute='_compute_computer_fee_amount', store=True)
-    library=fields.Integer(string="library Charges",compute='_compute_library_fee_amount', store=True)
-    utility=fields.Integer(string="utility Charges",compute='_compute_utility_fee_amount', store=True)
+    tuition=fields.Integer(string="Tuition Fee")
+    club=fields.Integer(string="Club Charges")
+    computer=fields.Integer(string="computer Charges")
+    library=fields.Integer(string="library Charges")
+    utility=fields.Integer(string="utility Charges")
     student_code=fields.Char(string="UDID")
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
@@ -105,61 +105,139 @@ class ext(models.Model):
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action
-#compute fields changes 
-    @api.depends('invoice_line_ids')
-    def _compute_tuition_fee_amount(self):
-        for line in self.invoice_line_ids:
-            if line.product_id.name == 'Tuition Fee':
-                self.tuition = line.price_subtotal
-            else:
-                self.tuition = 0
-    def _compute_club_fee_amount(self):
-        for invoice in self:
-            club_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Club')
-            if club_fee_lines:
-                invoice.club = sum(club_fee_lines.mapped('price_subtotal'))
-            else:
-                invoice.club = None
-
-    def _compute_computer_fee_amount(self):
-        for invoice in self:
-            Computer_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Computer')
-            if Computer_fee_lines:
-                invoice.club = sum(Computer_fee_lines.mapped('price_subtotal'))
-            else:
-                invoice.club = None
-    def _compute_library_fee_amount(self):
-        for invoice in self:
-            library_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Library')
-            if library_fee_lines:
-                invoice.library = sum(library_fee_lines.mapped('price_subtotal'))
-            else:
-                invoice.library = None
-
-    def _compute_utility_fee_amount(self):
-        for invoice in self:
-            utility_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Utility')
-            if utility_fee_lines:
-                invoice.utility = sum(utility_fee_lines.mapped('price_subtotal'))
-            else:
-                invoice.utility = None
 
 
+    @api.onchange('invoice_line_ids')
+    def _invoice_lines_onchange(self):
+        if self.invoice_line_ids: 
+
+            self.tuition=0
+            self.club=0
+            self.computer=0
+            self.library=0
+            self.utility=0
+            self.art=0
+            self.biology=0
+            self.chemistry=0
+            self.physics=0
+            self.computing=0
+            self.classphoto=0
+            self.collegemagazine=0
+            self.dc=0
+            self.ec=0
+            self.farewell=0
+            self.gatepass=0
+            self.idcard=0
+            self.idcardfine=0
+            self.latecoming=0
+            self.latefee=0
+            self.libfine=0
+            self.mnf=0
+            self.mobfine=0
+            self.news=0
+            self.paragon=0
+            self.books=0
+            self.pcopy=0
+            self.photo=0
+            self.scarf=0
+            self.sportd=0
+            self.stationary=0
+            self.welcome=0
+            self.workbook=0
+            self.uniform=0
+            self.continuation=0
+            self.adm_amount=""
+
+
+            for line in self.invoice_line_ids:
+                if 'Tuition Fee' in line.product_id.name:
+                        self.tuition=line.price_subtotal
+                elif 'Club' in line.product_id.name:
+                    self.club=line.price_subtotal
+                elif 'Computer' in line.product_id.name:
+                    self.computer=line.price_subtotal
+                elif 'Library' in line.product_id.name:
+                    self.library=line.price_subtotal
+                elif 'Utility' in line.product_id.name:
+                    self.utility=line.price_subtotal
+                elif 'Admission' in line.product_id.name:
+                    adm_amount=int(line.price_subtotal)
+                    self.adm_amount=str(adm_amount)
+                elif 'Security' in line.product_id.name:
+                    security_amount=int(line.price_subtotal)
+                    self.security_amount=str(security_amount)
+
+                elif 'Class Photo' in line.product_id.name:
+                    self.classphoto=line.price_subtotal
+                elif 'College Magazine' in line.product_id.name:
+                    self.collegemagazine=line.price_subtotal
+                elif 'Continuation' in line.product_id.name:
+                    self.continuation=line.price_subtotal
+                elif 'Discipline' in line.product_id.name:
+                    self.dc=line.price_subtotal
+                elif 'Examination' in line.product_id.name:
+                    self.ec=line.price_subtotal
+                elif 'Farewell' in line.product_id.name:
+                    self.farewell=line.price_subtotal
+                elif 'ID Card Fine' in line.product_id.name:
+                    self.idcardfine=line.price_subtotal
+                elif 'Late Coming' in line.product_id.name:
+                    self.latecoming=line.price_subtotal
+                elif 'Late Fee' in line.product_id.name:
+                    self.latefee=line.price_subtotal
+                elif 'ID Card' in line.product_id.name:
+                    self.idcard=line.price_subtotal
+                elif 'Gate Pass' in line.product_id.name:
+                    self.gatepass=line.price_subtotal
+                elif 'Miscellaneous & Fine' in line.product_id.name:
+                    self.mnf=line.price_subtotal
+                elif 'Mobile Fine' in line.product_id.name:
+                    self.mobfine=line.price_subtotal
+                elif 'Newsletter' in line.product_id.name:
+                    self.news=line.price_subtotal
+                elif 'Paragon 2nd Child and Onwards' in line.product_id.name:
+                    self.paragon=line.price_subtotal
+                elif 'Photocopy (Books)' in line.product_id.name:
+                    self.books=line.price_subtotal
+                elif 'Photocopying Charges' in line.product_id.name:
+                    self.pcopy=line.price_subtotal
+                elif 'Photograph' in line.product_id.name:
+                    self.photo=line.price_subtotal
+                elif 'Scarf' in line.product_id.name:
+                    self.scarf=line.price_subtotal
+                elif 'Sports Day' in line.product_id.name:
+                    self.sportd=line.price_subtotal
+                elif 'Stationary Charges' in line.product_id.name:
+                    self.stationary=line.price_subtotal
+                elif 'Uniform Fine' in line.product_id.name:
+                    self.uniform=line.price_subtotal
+                elif 'Wellcome Party' in line.product_id.name:
+                    self.welcome=line.price_subtotal
+                elif 'Work Books' in line.product_id.name:
+                    self.workbook=line.price_subtotal
+                elif 'Library Fine' in line.product_id.name:
+                    self.libfine=line.price_subtotal
+                elif line.product_id.x_studio_code=='ART':
+                    self.art=line.price_subtotal
+                elif line.product_id.x_studio_code=='COM':
+                    self.computing=line.price_subtotal
+                elif line.product_id.x_studio_code=='CHM':
+                    self.chemistry=line.price_subtotal
+                elif line.product_id.x_studio_code=='PHY':
+                    self.physics=line.price_subtotal
+                elif line.product_id.x_studio_code=='BIO':
+                    self.biology=line.price_subtotal
 
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
-        #self.student_name=''
+        self.student_name=''
         self.student_code=" "
         self.campus=""
         self.bill_date=' '
         self.challan_date=' '
         self.due_date=' '
         self.due_amount=0
-        # self.tuition=0
-        # self.club=0
-        # self.computer=0
-        # self.library=0
-        # self.utility=0
+        
         self.class_name=""
         self.std_bill_date=""
         self.std_due_date=""
@@ -172,43 +250,14 @@ class ext(models.Model):
         self.std_reason=""
         self.std_fathername=""
         self.std_contactno=""
-        self.adm_amount=""
+        
         self.security_amount=""
         self.bill_amount=""
         self.net_amount=""
         self.std_factsid=""
         self.std_payment_date=""
         self.section_name=""
-        self.art=0
-        self.biology=0
-        self.chemistry=0
-        self.physics=0
-        self.computing=0
-        self.classphoto=0
-        self.collegemagazine=0
-        self.dc=0
-        self.ec=0
-        self.farewell=0
-        self.gatepass=0
-        self.idcard=0
-        self.idcardfine=0
-        self.latecoming=0
-        self.latefee=0
-        self.libfine=0
-        self.mnf=0
-        self.mobfine=0
-        self.news=0
-        self.paragon=0
-        self.books=0
-        self.pcopy=0
-        self.photo=0
-        self.scarf=0
-        self.sportd=0
-        self.stationary=0
-        self.welcome=0
-        self.workbook=0
-        self.uniform=0
-        self.continuation=0
+       
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.student_name=full_name
@@ -323,85 +372,85 @@ class ext(models.Model):
            
                 
     
-            if self.invoice_line_ids: 
-                    for line in self.invoice_line_ids:
-                        # if 'Tuition Fee' in line.product_id.name:
-                        #      self.tuition=line.price_subtotal
-                        # elif 'Club' in line.product_id.name:
-                        #     self.club=line.price_subtotal
-                        # elif 'Computer' in line.product_id.name:
-                        #     self.computer=line.price_subtotal
-                        # elif 'Library' in line.product_id.name:
-                        #     self.library=line.price_subtotal
-                        # elif 'Utility' in line.product_id.name:
-                        #     self.utility=line.price_subtotal
-                        if 'Admission' in line.product_id.name:
-                            adm_amount=int(line.price_subtotal)
-                            self.adm_amount=str(adm_amount)
-                        elif 'Security' in line.product_id.name:
-                           security_amount=int(line.price_subtotal)
-                           self.security_amount=str(security_amount)
+            # if self.invoice_line_ids: 
+            #         for line in self.invoice_line_ids:
+            #             if 'Tuition Fee' in line.product_id.name:
+            #                  self.tuition=line.price_subtotal
+            #             elif 'Club' in line.product_id.name:
+            #                 self.club=line.price_subtotal
+            #             elif 'Computer' in line.product_id.name:
+            #                 self.computer=line.price_subtotal
+            #             elif 'Library' in line.product_id.name:
+            #                 self.library=line.price_subtotal
+            #             elif 'Utility' in line.product_id.name:
+            #                 self.utility=line.price_subtotal
+            #             elif 'Admission' in line.product_id.name:
+            #                 adm_amount=int(line.price_subtotal)
+            #                 self.adm_amount=str(adm_amount)
+            #             elif 'Security' in line.product_id.name:
+            #                security_amount=int(line.price_subtotal)
+            #                self.security_amount=str(security_amount)
 
-                        elif 'Class Photo' in line.product_id.name:
-                            self.classphoto=line.price_subtotal
-                        elif 'College Magazine' in line.product_id.name:
-                            self.collegemagazine=line.price_subtotal
-                        elif 'Continuation' in line.product_id.name:
-                            self.continuation=line.price_subtotal
-                        elif 'Discipline' in line.product_id.name:
-                            self.dc=line.price_subtotal
-                        elif 'Examination' in line.product_id.name:
-                            self.ec=line.price_subtotal
-                        elif 'Farewell' in line.product_id.name:
-                           self.farewell=line.price_subtotal
-                        elif 'ID Card Fine' in line.product_id.name:
-                            self.idcardfine=line.price_subtotal
-                        elif 'Late Coming' in line.product_id.name:
-                            self.latecoming=line.price_subtotal
-                        elif 'Late Fee' in line.product_id.name:
-                            self.latefee=line.price_subtotal
-                        elif 'ID Card' in line.product_id.name:
-                            self.idcard=line.price_subtotal
-                        elif 'Gate Pass' in line.product_id.name:
-                            self.gatepass=line.price_subtotal
-                        elif 'Miscellaneous & Fine' in line.product_id.name:
-                            self.mnf=line.price_subtotal
-                        elif 'Mobile Fine' in line.product_id.name:
-                           self.mobfine=line.price_subtotal
-                        elif 'Newsletter' in line.product_id.name:
-                            self.news=line.price_subtotal
-                        elif 'Paragon 2nd Child and Onwards' in line.product_id.name:
-                            self.paragon=line.price_subtotal
-                        elif 'Photocopy (Books)' in line.product_id.name:
-                            self.books=line.price_subtotal
-                        elif 'Photocopying Charges' in line.product_id.name:
-                            self.pcopy=line.price_subtotal
-                        elif 'Photograph' in line.product_id.name:
-                           self.photo=line.price_subtotal
-                        elif 'Scarf' in line.product_id.name:
-                            self.scarf=line.price_subtotal
-                        elif 'Sports Day' in line.product_id.name:
-                            self.sportd=line.price_subtotal
-                        elif 'Stationary Charges' in line.product_id.name:
-                            self.stationary=line.price_subtotal
-                        elif 'Uniform Fine' in line.product_id.name:
-                            self.uniform=line.price_subtotal
-                        elif 'Wellcome Party' in line.product_id.name:
-                           self.welcome=line.price_subtotal
-                        elif 'Work Books' in line.product_id.name:
-                           self.workbook=line.price_subtotal
-                        elif 'Library Fine' in line.product_id.name:
-                           self.libfine=line.price_subtotal
-                        elif line.product_id.x_studio_code=='ART':
-                            self.art=line.price_subtotal
-                        elif line.product_id.x_studio_code=='COM':
-                            self.computing=line.price_subtotal
-                        elif line.product_id.x_studio_code=='CHM':
-                            self.chemistry=line.price_subtotal
-                        elif line.product_id.x_studio_code=='PHY':
-                            self.physics=line.price_subtotal
-                        elif line.product_id.x_studio_code=='BIO':
-                           self.biology=line.price_subtotal
+            #             elif 'Class Photo' in line.product_id.name:
+            #                 self.classphoto=line.price_subtotal
+            #             elif 'College Magazine' in line.product_id.name:
+            #                 self.collegemagazine=line.price_subtotal
+            #             elif 'Continuation' in line.product_id.name:
+            #                 self.continuation=line.price_subtotal
+            #             elif 'Discipline' in line.product_id.name:
+            #                 self.dc=line.price_subtotal
+            #             elif 'Examination' in line.product_id.name:
+            #                 self.ec=line.price_subtotal
+            #             elif 'Farewell' in line.product_id.name:
+            #                self.farewell=line.price_subtotal
+            #             elif 'ID Card Fine' in line.product_id.name:
+            #                 self.idcardfine=line.price_subtotal
+            #             elif 'Late Coming' in line.product_id.name:
+            #                 self.latecoming=line.price_subtotal
+            #             elif 'Late Fee' in line.product_id.name:
+            #                 self.latefee=line.price_subtotal
+            #             elif 'ID Card' in line.product_id.name:
+            #                 self.idcard=line.price_subtotal
+            #             elif 'Gate Pass' in line.product_id.name:
+            #                 self.gatepass=line.price_subtotal
+            #             elif 'Miscellaneous & Fine' in line.product_id.name:
+            #                 self.mnf=line.price_subtotal
+            #             elif 'Mobile Fine' in line.product_id.name:
+            #                self.mobfine=line.price_subtotal
+            #             elif 'Newsletter' in line.product_id.name:
+            #                 self.news=line.price_subtotal
+            #             elif 'Paragon 2nd Child and Onwards' in line.product_id.name:
+            #                 self.paragon=line.price_subtotal
+            #             elif 'Photocopy (Books)' in line.product_id.name:
+            #                 self.books=line.price_subtotal
+            #             elif 'Photocopying Charges' in line.product_id.name:
+            #                 self.pcopy=line.price_subtotal
+            #             elif 'Photograph' in line.product_id.name:
+            #                self.photo=line.price_subtotal
+            #             elif 'Scarf' in line.product_id.name:
+            #                 self.scarf=line.price_subtotal
+            #             elif 'Sports Day' in line.product_id.name:
+            #                 self.sportd=line.price_subtotal
+            #             elif 'Stationary Charges' in line.product_id.name:
+            #                 self.stationary=line.price_subtotal
+            #             elif 'Uniform Fine' in line.product_id.name:
+            #                 self.uniform=line.price_subtotal
+            #             elif 'Wellcome Party' in line.product_id.name:
+            #                self.welcome=line.price_subtotal
+            #             elif 'Work Books' in line.product_id.name:
+            #                self.workbook=line.price_subtotal
+            #             elif 'Library Fine' in line.product_id.name:
+            #                self.libfine=line.price_subtotal
+            #             elif line.product_id.x_studio_code=='ART':
+            #                 self.art=line.price_subtotal
+            #             elif line.product_id.x_studio_code=='COM':
+            #                 self.computing=line.price_subtotal
+            #             elif line.product_id.x_studio_code=='CHM':
+            #                 self.chemistry=line.price_subtotal
+            #             elif line.product_id.x_studio_code=='PHY':
+            #                 self.physics=line.price_subtotal
+            #             elif line.product_id.x_studio_code=='BIO':
+            #                self.biology=line.price_subtotal
                       
                         
 
