@@ -7,12 +7,12 @@ class ext(models.Model):
     _inherit="account.move"
    
    
-    tuition=fields.Integer(string="Tuition Fee")
-    club=fields.Integer(string="Club Charges")
-    computer=fields.Integer(string="computer Charges")
-    library=fields.Integer(string="library Charges")
-    utility=fields.Integer(string="utility Charges")
-    student_code=fields.Char(string="UDID")
+    tuition=fields.Integer(string="Tuition Fee",compute='_compute_tuition_fee_amount', store=True)
+    club=fields.Integer(string="Club Charges",compute='_compute_club_fee_amount', store=True)
+    computer=fields.Integer(string="computer Charges",compute='_compute_computer_fee_amount', store=True)
+    library=fields.Integer(string="library Charges",compute='_compute_library_fee_amount', store=True)
+    utility=fields.Integer(string="utility Charges",compute='_compute_utility_fee_amount', store=True)
+    student_code=fields.Char(string="UDID",related='student_ids.facts_udid')
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
@@ -105,24 +105,61 @@ class ext(models.Model):
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action
+#compute fields changes 
+    def _compute_tuition_fee_amount(self):
+        for invoice in self:
+            tuition_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Tuition Fee')
+            if tuition_fee_lines:
+                invoice.tuition = sum(tuition_fee_lines.mapped('price_subtotal'))
+            else:
+                invoice.tuition = None
+    def _compute_club_fee_amount(self):
+        for invoice in self:
+            club_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Club')
+            if club_fee_lines:
+                invoice.club = sum(club_fee_lines.mapped('price_subtotal'))
+            else:
+                invoice.club = None
 
+    def _compute_computer_fee_amount(self):
+        for invoice in self:
+            Computer_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Computer')
+            if Computer_fee_lines:
+                invoice.club = sum(Computer_fee_lines.mapped('price_subtotal'))
+            else:
+                invoice.club = None
+    def _compute_library_fee_amount(self):
+        for invoice in self:
+            library_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Library')
+            if library_fee_lines:
+                invoice.library = sum(library_fee_lines.mapped('price_subtotal'))
+            else:
+                invoice.library = None
+
+    def _compute_utility_fee_amount(self):
+        for invoice in self:
+            utility_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Utility')
+            if utility_fee_lines:
+                invoice.utility = sum(utility_fee_lines.mapped('price_subtotal'))
+            else:
+                invoice.utility = None
 
 
 
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
-        self.student_name=''
-        self.student_code=" "
+        #self.student_name=''
+        # self.student_code=" "
         self.campus=""
         self.bill_date=' '
         self.challan_date=' '
         self.due_date=' '
         self.due_amount=0
-        self.tuition=0
-        self.club=0
-        self.computer=0
-        self.library=0
-        self.utility=0
+        # self.tuition=0
+        # self.club=0
+        # self.computer=0
+        # self.library=0
+        # self.utility=0
         self.class_name=""
         self.std_bill_date=""
         self.std_due_date=""
@@ -175,7 +212,7 @@ class ext(models.Model):
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.student_name=full_name
-            self.student_code=self.student_ids.facts_udid
+            # self.student_code=self.student_ids.facts_udid
             # self.campus=self.student_ids.school_ids.name
             self.challan_date=self.invoice_date
             self.due_date=self.invoice_date_due
@@ -288,17 +325,17 @@ class ext(models.Model):
     
             if self.invoice_line_ids: 
                     for line in self.invoice_line_ids:
-                        if 'Tuition Fee' in line.product_id.name:
-                             self.tuition=line.price_subtotal
-                        elif 'Club' in line.product_id.name:
-                            self.club=line.price_subtotal
-                        elif 'Computer' in line.product_id.name:
-                            self.computer=line.price_subtotal
-                        elif 'Library' in line.product_id.name:
-                            self.library=line.price_subtotal
-                        elif 'Utility' in line.product_id.name:
-                            self.utility=line.price_subtotal
-                        elif 'Admission' in line.product_id.name:
+                        # if 'Tuition Fee' in line.product_id.name:
+                        #      self.tuition=line.price_subtotal
+                        # elif 'Club' in line.product_id.name:
+                        #     self.club=line.price_subtotal
+                        # elif 'Computer' in line.product_id.name:
+                        #     self.computer=line.price_subtotal
+                        # elif 'Library' in line.product_id.name:
+                        #     self.library=line.price_subtotal
+                        # elif 'Utility' in line.product_id.name:
+                        #     self.utility=line.price_subtotal
+                        if 'Admission' in line.product_id.name:
                             adm_amount=int(line.price_subtotal)
                             self.adm_amount=str(adm_amount)
                         elif 'Security' in line.product_id.name:
