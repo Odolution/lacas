@@ -7,7 +7,7 @@ class ext(models.Model):
     _inherit="account.move"
    
    
-    tuition=fields.Monetary(string="Tuition Fee",compute='_compute_tuition_fee_amount', store=True)
+    tuition=fields.Integer(string="Tuition Fee",compute='_compute_tuition_fee_amount', store=True)
     club=fields.Integer(string="Club Charges",compute='_compute_club_fee_amount', store=True)
     computer=fields.Integer(string="computer Charges",compute='_compute_computer_fee_amount', store=True)
     library=fields.Integer(string="library Charges",compute='_compute_library_fee_amount', store=True)
@@ -107,13 +107,15 @@ class ext(models.Model):
         return action
 #compute fields changes 
     def _compute_tuition_fee_amount(self):
-        for invoice in self:
-            tuition_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Tuition Fee')
-            print("tuition fee lines: ", tuition_fee_lines)
-            if tuition_fee_lines:
-                invoice['tuition'] =tuition_fee_lines.price_subtotal
-            else:
-                invoice['tuition'] = None
+        for line in self.invoice_line_ids:
+            if 'Tuition Fee' in line.product_id.name:
+                self.tuition=line.price_subtotal
+            # tuition_fee_lines = line.filtered(lambda l: l.product_id.name == 'Tuition Fee')
+            # print("tuition fee lines: ", tuition_fee_lines)
+            # if tuition_fee_lines:
+               # invoice['tuition'] =tuition_fee_lines.price_subtotal
+            # else:
+            #     invoice['tuition'] = None
     def _compute_club_fee_amount(self):
         for invoice in self:
             club_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Club')
