@@ -106,16 +106,13 @@ class ext(models.Model):
         action['domain'] = domain
         return action
 #compute fields changes 
+    @api.depends('invoice_line_ids')
     def _compute_tuition_fee_amount(self):
         for line in self.invoice_line_ids:
-            if 'Tuition Fee' in line.product_id.name:
-                self.tuition=line.price_subtotal
-            # tuition_fee_lines = line.filtered(lambda l: l.product_id.name == 'Tuition Fee')
-            # print("tuition fee lines: ", tuition_fee_lines)
-            # if tuition_fee_lines:
-               # invoice['tuition'] =tuition_fee_lines.price_subtotal
-            # else:
-            #     invoice['tuition'] = None
+            if line.product_id.name == 'Tuition Fee':
+                self.tuition = line.price_subtotal
+            else:
+                self.tuition = 0
     def _compute_club_fee_amount(self):
         for invoice in self:
             club_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Club')
