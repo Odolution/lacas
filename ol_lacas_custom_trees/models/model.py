@@ -7,7 +7,7 @@ class ext(models.Model):
     _inherit="account.move"
    
    
-    tuition=fields.Integer(string="Tuition Fee",compute='_compute_tuition_fee_amount', store=True)
+    tuition=fields.Monetary(string="Tuition Fee",compute='_compute_tuition_fee_amount', store=True)
     club=fields.Integer(string="Club Charges",compute='_compute_club_fee_amount', store=True)
     computer=fields.Integer(string="computer Charges",compute='_compute_computer_fee_amount', store=True)
     library=fields.Integer(string="library Charges",compute='_compute_library_fee_amount', store=True)
@@ -110,7 +110,7 @@ class ext(models.Model):
         for invoice in self:
             tuition_fee_lines = invoice.invoice_line_ids.filtered(lambda l: l.product_id.name == 'Tuition Fee')
             if tuition_fee_lines:
-                invoice.tuition = tuition_fee_lines.price_subtotal
+                invoice.tuition =sum(club_fee_lines.mapped('price_subtotal'))
             else:
                 invoice.tuition = None
     def _compute_club_fee_amount(self):
