@@ -12,7 +12,7 @@ class ext(models.Model):
     computer=fields.Integer(string="computer Charges",compute='_compute_computer_fee_amount', store=True)
     library=fields.Integer(string="library Charges",compute='_compute_library_fee_amount', store=True)
     utility=fields.Integer(string="utility Charges",compute='_compute_utility_fee_amount', store=True)
-    student_code=fields.Char(string="UDID",related='student_ids.facts_udid')
+    student_code=fields.Char('school.student',string="UDID",related='student_ids.facts_udid')
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
