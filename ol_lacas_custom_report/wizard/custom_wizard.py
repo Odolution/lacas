@@ -175,7 +175,10 @@ class ReceivablesReportWizard(models.TransientModel):
             custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else 0
             custom_data['full_roll_no'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else 0
             custom_data['student_batch'] = value.x_studio_batch.x_name if value.x_studio_batch.x_name else ''
-            custom_data['student_branch'] = value.x_student_id_cred.school_ids.name if  value.x_student_id_cred.school_ids.name else ""
+            # custom_data['student_branch'] = value.x_student_id_cred.school_ids.name if  value.x_student_id_cred.school_ids.name else ""
+            if value.x_student_id_cred:
+                if len(value.x_student_id_cred.school_ids)==1:
+                    custom_data['student_branch'] = value.x_student_id_cred.school_ids.name
             custom_data['student_class'] = value.x_student_id_cred.homeroom if value.x_student_id_cred.homeroom else ''
             custom_data['withdrawn_status'] = value.x_studio_withdrawn_status
             custom_data['leaving_reason'] = value.leaving_reason.name if value.leaving_reason.name else ''
