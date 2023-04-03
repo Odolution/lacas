@@ -118,7 +118,7 @@ class ReceivablesReportWizard(models.TransientModel):
     
     def action_print_report(self):
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("x_studio_receiverefund","=",'Receivable'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         
 
