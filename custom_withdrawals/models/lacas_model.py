@@ -49,8 +49,8 @@ class academics_tab(models.Model):
         for rec in self:
 
             if rec.invoice_line_ids:
-                for cred in rec.invoice_line_ids:
-                    rec.amount_total_withdrawal = abs(rec.notice_fee_withdrawal- rec.amount_total)
+                #for cred in rec.invoice_line_ids:
+                rec.amount_total_withdrawal = abs(rec.notice_fee_withdrawal- rec.amount_total)
 
                    # rec.amount_total_withdrawal = abs(rec.notice_fee_withdrawal-cred.price_subtotal)
             else:
