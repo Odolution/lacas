@@ -47,16 +47,13 @@ class academics_tab(models.Model):
 
     def _compute_total_amount(self):
         for rec in self:
-            if rec.notice_fee_withdrawal==0:
             
-            else:
+            if rec.invoice_line_ids:
+                for cred in rec.invoice_line_ids:
 
-                if rec.invoice_line_ids:
-                    for cred in rec.invoice_line_ids:
-                        rec.amount_total_withdrawal = abs(
-                            cred.notice_fee_withdrawal-cred.price_subtotal)
-                else:
-                    rec.amount_total_withdrawal = 0
+                    rec.amount_total_withdrawal = abs(cred.notice_fee_withdrawal-cred.price_subtotal)
+            else:
+                rec.amount_total_withdrawal = 0
 
 
 
