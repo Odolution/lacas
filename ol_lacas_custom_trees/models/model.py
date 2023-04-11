@@ -109,7 +109,7 @@ class ext(models.Model):
         if self.invoice_line_ids: 
             for line in self.invoice_line_ids:
                 if 'Tuition Fee' in line.product_id.name:
-                        self.tuition=line.price_subtotal
+                    self.tuition=line.price_subtotal
                 elif 'Club' in line.product_id.name:
                     self.club=line.price_subtotal
                 elif 'Computer' in line.product_id.name:
