@@ -12,7 +12,7 @@ class ext(models.Model):
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="utility Charges")
-    student_code=fields.Char(string="UDID", compute='_compute_UDID', store=True)
+    student_code=fields.Char(string="UDID", compute='_compute_UDID')
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
@@ -110,7 +110,7 @@ class ext(models.Model):
             for line in self.invoice_line_ids:
                 if 'Tuition Fee' in line.product_id.name:
                     self.tuition=line.price_subtotal
-                    
+
     def _compute_UDID(self):
         if self.student_ids:
             self.student_code=self.student_ids.facts_udid
