@@ -12,7 +12,7 @@ class ext(models.Model):
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="utility Charges")
-    student_code=fields.Char(string="UDID")
+    student_code=fields.Char(string="UDID", compute='_compute_UDID', store=True)
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
@@ -110,81 +110,11 @@ class ext(models.Model):
             for line in self.invoice_line_ids:
                 if 'Tuition Fee' in line.product_id.name:
                     self.tuition=line.price_subtotal
-                elif 'Club' in line.product_id.name:
-                    self.club=line.price_subtotal
-                elif 'Computer' in line.product_id.name:
-                    self.computer=line.price_subtotal
-                elif 'Library' in line.product_id.name:
-                    self.library=line.price_subtotal
-                elif 'Utility' in line.product_id.name:
-                    self.utility=line.price_subtotal
-                elif 'Admission' in line.product_id.name:
-                    adm_amount=int(line.price_subtotal)
-                    self.adm_amount=str(adm_amount)
-                elif 'Security' in line.product_id.name:
-                    security_amount=int(line.price_subtotal)
-                    self.security_amount=str(security_amount)
-
-                elif 'Class Photo' in line.product_id.name:
-                    self.classphoto=line.price_subtotal
-                elif 'College Magazine' in line.product_id.name:
-                    self.collegemagazine=line.price_subtotal
-                elif 'Continuation' in line.product_id.name:
-                    self.continuation=line.price_subtotal
-                elif 'Discipline' in line.product_id.name:
-                    self.dc=line.price_subtotal
-                elif 'Examination' in line.product_id.name:
-                    self.ec=line.price_subtotal
-                elif 'Farewell' in line.product_id.name:
-                    self.farewell=line.price_subtotal
-                elif 'ID Card Fine' in line.product_id.name:
-                    self.idcardfine=line.price_subtotal
-                elif 'Late Coming' in line.product_id.name:
-                    self.latecoming=line.price_subtotal
-                elif 'Late Fee' in line.product_id.name:
-                    self.latefee=line.price_subtotal
-                elif 'ID Card' in line.product_id.name:
-                    self.idcard=line.price_subtotal
-                elif 'Gate Pass' in line.product_id.name:
-                    self.gatepass=line.price_subtotal
-                elif 'Miscellaneous & Fine' in line.product_id.name:
-                    self.mnf=line.price_subtotal
-                elif 'Mobile Fine' in line.product_id.name:
-                    self.mobfine=line.price_subtotal
-                elif 'Newsletter' in line.product_id.name:
-                    self.news=line.price_subtotal
-                elif 'Paragon 2nd Child and Onwards' in line.product_id.name:
-                    self.paragon=line.price_subtotal
-                elif 'Photocopy (Books)' in line.product_id.name:
-                    self.books=line.price_subtotal
-                elif 'Photocopying Charges' in line.product_id.name:
-                    self.pcopy=line.price_subtotal
-                elif 'Photograph' in line.product_id.name:
-                    self.photo=line.price_subtotal
-                elif 'Scarf' in line.product_id.name:
-                    self.scarf=line.price_subtotal
-                elif 'Sports Day' in line.product_id.name:
-                    self.sportd=line.price_subtotal
-                elif 'Stationary Charges' in line.product_id.name:
-                    self.stationary=line.price_subtotal
-                elif 'Uniform Fine' in line.product_id.name:
-                    self.uniform=line.price_subtotal
-                elif 'Wellcome Party' in line.product_id.name:
-                    self.welcome=line.price_subtotal
-                elif 'Work Books' in line.product_id.name:
-                    self.workbook=line.price_subtotal
-                elif 'Library Fine' in line.product_id.name:
-                    self.libfine=line.price_subtotal
-                elif line.product_id.x_studio_code=='ART':
-                    self.art=line.price_subtotal
-                elif line.product_id.x_studio_code=='COM':
-                    self.computing=line.price_subtotal
-                elif line.product_id.x_studio_code=='CHM':
-                    self.chemistry=line.price_subtotal
-                elif line.product_id.x_studio_code=='PHY':
-                    self.physics=line.price_subtotal
-                elif line.product_id.x_studio_code=='BIO':
-                    self.biology=line.price_subtotal
+                    
+    def _compute_UDID(self):
+        if self.student_ids:
+            self.student_code=self.student_ids.facts_udid
+                
     
     @api.onchange('invoice_line_ids')
     def _invc_lines_onchange(self):
