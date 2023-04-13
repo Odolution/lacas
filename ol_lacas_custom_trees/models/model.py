@@ -7,12 +7,12 @@ class ext(models.Model):
     _inherit="account.move"
    
    
-    tuition=fields.Integer(string="Tuition Fee", compute='_compute_tuition', store=True)
+    tuition=fields.Integer(string="Tuition Fee", compute='_compute_tuition')
     club=fields.Integer(string="Club Charges")
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="utility Charges")
-    student_code=fields.Char(string="UDID", compute='_compute_UDID')
+    student_code=fields.Char(string="UDID", compute='_compute_UDID', store=True)
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
@@ -106,10 +106,11 @@ class ext(models.Model):
         return action  
 
     def _compute_tuition(self):
-        if self.invoice_line_ids: 
-            for line in self.invoice_line_ids:
-                if 'Tuition Fee' in line.product_id.name:
-                    self.tuition=line.price_subtotal
+        for rec in self:
+            if rec.invoice_line_ids: 
+                for line in rec.invoice_line_ids:
+                    if 'Tuition Fee' in line.product_id.name:
+                        self.tuition=line.price_subtotal
 
     def _compute_UDID(self):
         if self.student_ids:
