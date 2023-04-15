@@ -109,6 +109,7 @@ class ext(models.Model):
         return action  
 
     def _compute_tuition(self):
+        self.tuition=''
         for rec in self:
             if rec.journal_id==125:
                 if rec.invoice_line_ids: 
