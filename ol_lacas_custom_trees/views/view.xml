@@ -186,11 +186,11 @@
                 <field name="std_fathername"/>
                 <field name="class_name"/>
                 <field name="section_name"/>
-                <field name="campus"/>
+                <!-- <field name="campus"/> -->
                 <field name="std_batch"/>
-                <field name="bill_date"/>
-                <field name="challan_date"/>
-                <field name="due_date"/>
+                <!-- <field name="bill_date"/>
+                <field name="challan_date"/> -->
+                <!-- <field name="due_date"/> -->
                 <!-- <field name="due_amount"/>
                 <field name="net_amount"/>
                 <field name="bill_amount"/>

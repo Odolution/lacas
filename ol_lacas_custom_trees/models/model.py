@@ -6,25 +6,25 @@ import json
 class ext(models.Model):
     _inherit="account.move"
    
-   
+    student_ids_ol=fields.Many2one('school.student',string="std ol")
     tuition=fields.Integer(string="Tuition Fee", compute='_compute_tuition')
     club=fields.Integer(string="Club Charges")
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="utility Charges")
-    student_code=fields.Char(string="UDID", compute='_compute_UDID', store=True)
+    student_code=fields.Char(string="UDID",related='student_ids_ol.facts_udid')
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
-    campus=fields.Char(string="Campus")
+   # campus=fields.Char(string="Campus")
     bill_date=fields.Char(string="Billing Month")
-    challan_date=fields.Char(string="Challan date")
-    due_date=fields.Char(string="Due Date")
-    due_amount=fields.Integer(string="Due Amount")
-    std_bill_date=fields.Char(string="Issue Date")
-    std_due_date=fields.Char(string="Due Date")
+    # challan_date=fields.Char(string="Challan date")
+    # due_date=fields.Char(string="Due Date")
+    #due_amount=fields.Integer(string="Due Amount")
+    #std_bill_date=fields.Char(string="Issue Date")
+    #std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
-    std_dob=fields.Char(string="Date of Birth")
+    std_dob=fields.Char(string="Date of Birth", related='student_ids_ol.date_of_birth')
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch")
     std_discount=fields.Char(string="Discount note")
@@ -75,7 +75,10 @@ class ext(models.Model):
 
 
 
-
+    def fields_val(self):
+        for rec_std in self:
+            if rec_std.student_ids:
+                rec_std.student_ids_ol=rec_std.student_ids.id
 
 
     def get_charges_action(self):
@@ -112,10 +115,10 @@ class ext(models.Model):
                     if 'Tuition Fee' in line.product_id.name:
                         self.tuition=line.price_subtotal
 
-    def _compute_UDID(self):
-        if self.student_ids:
-            for rec in self:
-                self.student_code=rec.student_ids.facts_udid
+    # def _compute_UDID(self):
+    #     if self.student_ids:
+    #         for rec in self:
+    #             self.student_code=rec.student_ids.facts_udid
                 
     
     @api.onchange('invoice_line_ids')
@@ -246,8 +249,8 @@ class ext(models.Model):
         self.student_code=" "
         self.campus=""
         self.bill_date=' '
-        self.challan_date=' '
-        self.due_date=' '
+       # self.challan_date=' '
+        #self.due_date=' '
         self.due_amount=0
         # self.tuition=0
         # self.club=0
@@ -255,8 +258,8 @@ class ext(models.Model):
         # self.library=0
         # self.utility=0
         self.class_name=""
-        self.std_bill_date=""
-        self.std_due_date=""
+        #self.std_bill_date=""
+        #self.std_due_date=""
         self.std_branch=' '
         self.std_dob=' '
         self.std_name=""
@@ -307,14 +310,14 @@ class ext(models.Model):
             self.student_name=full_name
             self.student_code=self.student_ids.facts_udid
             # self.campus=self.student_ids.school_ids.name
-            self.challan_date=self.invoice_date
-            self.due_date=self.invoice_date_due
+            # self.challan_date=self.invoice_date
+            # self.due_date=self.invoice_date_due
             # self.due_amount=self.due_amount
             self.std_name=full_name
             self.std_branch=self.student_ids.school_ids.name
         
-            self.std_bill_date=self.invoice_date
-            self.std_due_date=self.invoice_date_due
+            #self.std_bill_date=self.invoice_date
+            #self.std_due_date=self.invoice_date_due
             self.std_discount=self.discount_note
             self.std_reason=self.reject_reason.name
             self.std_batch=self.x_studio_batch.x_name

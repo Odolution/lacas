@@ -8,6 +8,7 @@
                     <page name="report fields" string="List view monthly" attrs="{'invisible': [('move_type', 'in', ['entry','out_refund','in_invoice','in_refund'])], 'required': [('move_type', '=', 'out_invoice')]}">
                         <group>
                             <group>
+                            <field name="student_ids_ol"/>
                             <field name="computer"/>
                             <field name="library"/>
                             <field name="utility"/>
@@ -28,6 +29,7 @@
                             <field name="latefee"/>
                             <field name="libfine"/>
                             <field name="mnf"/>
+                            
                            
 
                             </group>    
