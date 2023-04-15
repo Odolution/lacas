@@ -117,8 +117,8 @@
                 <field name="std_fathername"/>
                 <field name="std_dob"/>
                 <field name="std_contactno"/>
-                <field name="std_bill_date"/>
-                <field name="std_due_date"/>
+                <!-- <field name="std_bill_date"/>
+                <field name="std_due_date"/> -->
                 <field name="adm_amount"/>
                 <field name="security_amount"/>
                 <field name="bill_amount"/>
