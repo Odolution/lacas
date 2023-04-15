@@ -69,9 +69,9 @@
                 <field name="section_name"/>
                 <!-- <field name="campus"/> -->
                 <field name="std_batch"/>
-                <field name="bill_date"/>
+                <!-- <field name="bill_date"/>
                 <field name="challan_date"/>
-                <field name="due_date"/>
+                <field name="due_date"/> -->
             </tree>
         </field>
     </record>
