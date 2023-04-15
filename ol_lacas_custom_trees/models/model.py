@@ -6,7 +6,7 @@ import json
 class ext(models.Model):
     _inherit="account.move"
    
-    student_ids_ol=fields.Many2one(string="std ol",compute='_compute_students')
+    student_ids_ol=fields.Many2one('school.student', string="std ol")
     tuition=fields.Integer(string="Tuition Fee", compute='_compute_tuition')
     club=fields.Integer(string="Club Charges")
     computer=fields.Integer(string="computer Charges")
@@ -24,7 +24,7 @@ class ext(models.Model):
     #std_bill_date=fields.Char(string="Issue Date")
     #std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
-    std_dob=fields.Date(string="Date of Birth", related='student_ids_ol.date_of_birth')
+    std_dob=fields.Date(string="Date of Birth")
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch")
     std_discount=fields.Char(string="Discount note")
@@ -75,7 +75,7 @@ class ext(models.Model):
 
 
 
-    def _compute_students(self):
+    def feild_students(self):
         for rec_std in self:
             if rec_std.student_ids:
                 rec_std.student_ids_ol=rec_std.student_ids.id
