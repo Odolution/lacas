@@ -67,7 +67,7 @@
                 <field name="std_fathername"/>
                 <field name="class_name"/>
                 <field name="section_name"/>
-                <field name="campus"/>
+                <!-- <field name="campus"/> -->
                 <field name="std_batch"/>
                 <field name="bill_date"/>
                 <field name="challan_date"/>
