@@ -12,7 +12,7 @@ class ext(models.Model):
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="utility Charges")
-    student_code=fields.Char(string="UDID",related='student_ids_ol.facts_udid')
+    student_code=fields.Char(string="UDID", related='student_ids_ol.facts_udid')
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
@@ -246,7 +246,7 @@ class ext(models.Model):
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
         self.student_name=''
-        self.student_code=" "
+        # self.student_code=" "
         self.campus=""
         self.bill_date=' '
        # self.challan_date=' '
@@ -308,7 +308,7 @@ class ext(models.Model):
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.student_name=full_name
-            self.student_code=self.student_ids.facts_udid
+            # self.student_code=self.student_ids.facts_udid
             # self.campus=self.student_ids.school_ids.name
             # self.challan_date=self.invoice_date
             # self.due_date=self.invoice_date_due
