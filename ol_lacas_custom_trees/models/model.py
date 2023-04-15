@@ -110,10 +110,11 @@ class ext(models.Model):
 
     def _compute_tuition(self):
         for rec in self:
-            if rec.invoice_line_ids: 
-                for line in rec.invoice_line_ids:
-                    if 'Tuition Fee' in line.product_id.name:
-                        self.tuition=line.price_subtotal
+            if rec.journal_id==125:
+                if rec.invoice_line_ids: 
+                    for line in rec.invoice_line_ids:
+                        if 'Tuition Fee' in line.product_id.name:
+                            self.tuition=line.price_subtotal
 
     def _compute_UDID(self):
         if self.student_ids:
