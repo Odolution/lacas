@@ -115,6 +115,9 @@ class ext(models.Model):
                     for line in rec.invoice_line_ids:
                         if 'Tuition Fee' in line.product_id.name:
                             rec.tuition=line.price_subtotal
+                        else:
+                             rec.tuition=0
+
 
     def _compute_UDID(self):
         if self.student_ids:
