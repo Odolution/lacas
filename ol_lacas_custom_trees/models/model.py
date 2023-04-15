@@ -24,7 +24,7 @@ class ext(models.Model):
     #std_bill_date=fields.Char(string="Issue Date")
     #std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
-    std_dob=fields.Date(string="Date of Birth")
+    std_dob=fields.Date(string="Date of Birth", related='student_ids_ol.date_of_birth')
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch")
     std_discount=fields.Char(string="Discount note")
@@ -261,7 +261,7 @@ class ext(models.Model):
         #self.std_bill_date=""
         #self.std_due_date=""
         self.std_branch=' '
-        self.std_dob=' '
+        # self.std_dob=' '
         self.std_name=""
         self.std_batch=""
         self.std_discount=""
@@ -321,7 +321,7 @@ class ext(models.Model):
             self.std_discount=self.discount_note
             self.std_reason=self.reject_reason.name
             self.std_batch=self.x_studio_batch.x_name
-            self.std_dob=self.student_ids.date_of_birth
+            # self.std_dob=self.student_ids.date_of_birth
             self.std_fathername=self.partner_id.name
             self.std_factsid=self.student_ids.facts_id
             self.std_contactno=self.partner_id.mobile
