@@ -24,7 +24,7 @@ class ext(models.Model):
     #std_bill_date=fields.Char(string="Issue Date")
     #std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
-    std_dob=fields.Char(string="Date of Birth", related='student_ids_ol.date_of_birth')
+    std_dob=fields.Date(string="Date of Birth", related='student_ids_ol.date_of_birth')
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch")
     std_discount=fields.Char(string="Discount note")
