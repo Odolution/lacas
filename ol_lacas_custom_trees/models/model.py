@@ -148,13 +148,16 @@ class ext(models.Model):
 
 
     def _compute_UDID(self):
+
+        self.student_code=""
         if self.student_ids:
-            for rec in self:
-                self.student_code=rec.student_ids.facts_udid
+                self.student_code=self.student_ids.facts_udid
+
     def _compute_facts_id(self):
+        self.std_factsid=""
         if self.student_ids:
-            for rec in self:
-                self.std_factsid=rec.student_ids.facts_id
+                self.std_factsid=self.student_ids.facts_id
+                
                 
     
     @api.onchange('invoice_line_ids')
