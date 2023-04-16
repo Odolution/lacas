@@ -35,7 +35,7 @@ class ext(models.Model):
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
     net_amount=fields.Char(string="Net Amount")
-    std_factsid=fields.Integer(string="Facts ID", related='student_ids_ol.facts_id')
+    std_factsid=fields.Integer(string="Facts ID", compute='_compute_facts_id')
     std_payment_date=fields.Char(string='Payment Date')
     std_tuition_plan=fields.Char(string="Tuition Plan")
     std_tuition_plan_state=fields.Char(string="Tuition Plan State")
@@ -151,6 +151,10 @@ class ext(models.Model):
         if self.student_ids:
             for rec in self:
                 self.student_code=rec.student_ids.facts_udid
+    def _compute_facts_id(self):
+        if self.student_ids:
+            for rec in self:
+                self.student_code=rec.student_ids.facts_id
                 
     
     @api.onchange('invoice_line_ids')
