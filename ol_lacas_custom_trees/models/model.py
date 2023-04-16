@@ -79,6 +79,9 @@ class ext(models.Model):
         for rec_std in self:
             if rec_std.student_ids:
                 rec_std.student_ids_ol=rec_std.student_ids.id
+            else:
+                rec_std.student_ids_ol=''
+
 
 
     def get_charges_action(self):
