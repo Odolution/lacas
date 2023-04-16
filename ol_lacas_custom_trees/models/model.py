@@ -154,7 +154,7 @@ class ext(models.Model):
     def _compute_facts_id(self):
         if self.student_ids:
             for rec in self:
-                self.student_code=rec.student_ids.facts_id
+                self.std_factsid=rec.student_ids.facts_id
                 
     
     @api.onchange('invoice_line_ids')
