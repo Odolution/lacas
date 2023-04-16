@@ -27,15 +27,15 @@ class ext(models.Model):
     std_dob=fields.Date(string="Date of Birth")
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch", related='student_ids_ol.x_studio_batchsession')
-    std_discount=fields.Char(string="Discount note")
-    std_reason=fields.Char(string="Concession Name")
-    std_fathername=fields.Char(string="Father Name")
-    std_contactno=fields.Char(string="Contact No.")
+    #std_discount=fields.Char(string="Discount note")
+    #std_reason=fields.Char(string="Concession Name")
+    std_fathername=fields.Char(string="Father Name", compute='_compute_father_name')
+    std_contactno=fields.Char(string="Contact No.", related='student_ids_ol.mobile')
     adm_amount=fields.Char(string="Admission Amount")
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
     net_amount=fields.Char(string="Net Amount")
-    std_factsid=fields.Char(string="Facts ID")
+    std_factsid=fields.Char(string="Facts ID", related='student_ids_ol.facts_id')
     std_payment_date=fields.Char(string='Payment Date')
     std_tuition_plan=fields.Char(string="Tuition Plan")
     std_tuition_plan_state=fields.Char(string="Tuition Plan State")
@@ -110,17 +110,41 @@ class ext(models.Model):
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action  
+    def _compute_father_name(self):
+        for relation in self.student_ids.relationship_ids:
+          if relation.relationship_type_id.name == "Father":
+            self.std_fathername = relation.individual_id.name
+            break
 
     def _compute_tuition(self):
         self.tuition=''
         for rec in self:
-            if rec.journal_id==125:
-                if rec.invoice_line_ids: 
-                    for line in rec.invoice_line_ids:
-                        if 'Tuition Fee' in line.product_id.name:
-                            rec.tuition=line.price_subtotal
-                        else:
-                             rec.tuition=0
+            if rec.invoice_line_ids: 
+                for line in rec.invoice_line_ids:
+                    if 'Tuition Fee' in line.product_id.name:
+                        rec.tuition=line.price_subtotal
+                    else:
+                        rec.tuition=0
+
+    # def _compute_computer(self):
+    #     self.computer=''
+    #     for rec in self:
+    #         if rec.invoice_line_ids: 
+    #             for line in rec.invoice_line_ids:
+    #                 if 'Computer' in line.product_id.name:
+    #                     self.computer=line.price_subtotal
+    #                 else:
+    #                         rec.computer=0
+    
+    # def _compute_club(self):
+    #     self.club=''
+    #     for rec in self:
+    #         if rec.invoice_line_ids: 
+    #             for line in rec.invoice_line_ids:
+    #                 if 'Club' in line.product_id.name:
+    #                     self.club=line.price_subtotal
+    #                 else:
+    #                         rec.computer=0
 
 
     def _compute_UDID(self):
@@ -272,9 +296,9 @@ class ext(models.Model):
         # self.std_dob=' '
         self.std_name=""
         self.std_batch=""
-        self.std_discount=""
-        self.std_reason=""
-        self.std_fathername=""
+        #self.std_discount=""
+        #self.std_reason=""
+        #self.std_fathername=""
         self.std_contactno=""
         self.adm_amount=""
         self.security_amount=""
@@ -326,11 +350,11 @@ class ext(models.Model):
         
             #self.std_bill_date=self.invoice_date
             #self.std_due_date=self.invoice_date_due
-            self.std_discount=self.discount_note
-            self.std_reason=self.reject_reason.name
+            # self.std_discount=self.discount_note
+            # self.std_reason=self.reject_reason.name
             self.std_batch=self.x_studio_batch.x_name
             # self.std_dob=self.student_ids.date_of_birth
-            self.std_fathername=self.partner_id.name
+            #self.std_fathername=self.partner_id.name
             self.std_factsid=self.student_ids.facts_id
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=int(self.amount_total)
