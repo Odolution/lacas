@@ -74,7 +74,7 @@ class ext(models.Model):
 
 
 
-    @api.depends('student_ids')
+    
     def _feild_students(self):
         for rec_std in self:
             if rec_std.student_ids:
