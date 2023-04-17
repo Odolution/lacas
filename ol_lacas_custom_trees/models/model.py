@@ -150,8 +150,9 @@ class ext(models.Model):
     def _compute_UDID(self):
 
         self.student_code=""
-        if self.student_ids:
-                self.student_code=self.student_ids.facts_udid
+        for rec in self:
+            if rec.student_ids:
+                    rec.student_code=rec.student_ids.facts_udid
 
     def _compute_facts_id(self):
         self.std_factsid=""
