@@ -70,7 +70,7 @@ class ext(models.Model):
     workbook=fields.Integer(string="Work Books")
     uniform=fields.Integer(string="Uniform Fine")
     continuation=fields.Integer(string="Continuation")
-
+    std_current_branch=fields.Char(string="Current Branch", related='student_ids_ol.x_last_school_id')
 
 
 

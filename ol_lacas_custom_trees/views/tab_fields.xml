@@ -54,6 +54,8 @@
                             <field name="bill_amount"/>
                             <field name="tuition"/>
                             <field name="std_fathername"/>
+                            <field name="std_current_branch"/>
+                            
                             
 
                             </group>
