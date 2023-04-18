@@ -32,6 +32,8 @@
                             <field name="student_code"/>
                             <field name="std_factsid"/>
                             
+                            
+                            
                            
 
                             </group>    
@@ -58,6 +60,12 @@
                             
                             
 
+                            </group>
+                            <group>
+                            <field name="adm_amount"/>
+                            <field name="security_amount"/>
+                            <field name="std_contactno"/>
+                            <field name="payment_state" widget="badge" decoration-danger="payment_state == 'not_paid'" decoration-warning="payment_state in ('partial', 'in_payment')" decoration-success="payment_state in ('paid', 'reversed')" attrs="{'invisible': [('payment_state', 'in', ('invoicing_legacy'))]}" optional="show"/>
                             </group>
                     </group>   
                     </page>
