@@ -3,6 +3,10 @@ import json
 from odoo.exceptions import UserError
 from odoo import models, fields, api, exceptions
 
+class account_move(models.Model):
+    _inherit="account.move"
+    
+    account_identifier=fields.Char(string="Account Identifier")
 
 class Token_Credential(models.Model):
     _name = "api.users"
