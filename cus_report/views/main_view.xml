@@ -25,6 +25,13 @@
                 <field name="due_day_text" invisible="1"/>
                 
             </xpath>
+
+           
+
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='other_info']/group[1]/group[@name='accounting_info_group']/field[@name='to_check']" position="after">
+            <field name="account_identifier"/>
+                 </xpath>
+
         </field>
     </record>
     
