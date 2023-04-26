@@ -1,0 +1,115 @@
+<odoo>
+
+
+
+<record model="ir.ui.view" id="view_report_recovery">
+        <field name="name">recovery.report.wizard.form</field>
+        <field name="model" >recovery.report.wizard</field>
+      
+        <field name="arch" type="xml">
+        
+            <form string="Print Recovery of students">
+            <group>
+             <field name="all_branch"/>
+             <field name="one_branch" widget="selection"/>
+            
+             </group>
+
+              <group>
+
+                <field name="selected_month" widget="many2many_tags"/>
+          
+             </group>
+
+               <!-- <notebook>
+                            <page id="receivable_invoice_tab"
+                                  string=" Invoice Lines">
+
+                                <field name="account_report_line"
+                                       widget="section_and_note_one2many"
+                                  
+                                       mode="tree">
+                                       
+
+                                       
+                                    <tree editable="bottom" string="Journal Items" default_order="id">
+                    
+                                        <field name="record_id"></field>
+                                        <field name="app_date"></field>
+                                        <field name="roll_no"></field>
+                                        <field name="name"></field>
+                                        <field name="full_roll_no"></field>
+                                        <field name="student_batch"></field>
+                                        <field name="student_branch"></field>
+                                        <field name="student_class"></field>
+                                        <field name="withdrawn_status"></field>
+                                        <field name="leaving_reason"></field>
+                                        <field name="remarks"></field>
+                                        <field name="withdrawn_date"></field>
+                                        <field name="jan"></field>
+                                        <field name="feb"></field>
+                                        <field name="mar"></field>
+                                        <field name="apr"></field>
+                                        <field name="may"></field>
+                                        <field name="jun"></field>
+                                        <field name="jul"></field>
+                                        <field name="aug"></field>
+                                        <field name="sep"></field>
+                                        <field name="oct"></field>
+                                        <field name="nov"></field>
+                                        <field name="dec"></field>
+
+                                        <field name="jan_2"></field>
+                                        <field name="feb_2"></field>
+                                        <field name="mar_2"></field>
+                                        <field name="apr_2"></field>
+                                        <field name="may_2"></field>
+                                        <field name="jun_2"></field>
+                                        <field name="jul_2"></field>
+                                        <field name="aug_2"></field>
+                                        <field name="sep_2"></field>
+                                        <field name="oct_2"></field>
+                                        <field name="nov_2"></field>
+                                        <field name="dec_2"></field>
+                                        <field name="total_amount"></field>
+                                        
+                                        
+                                        
+
+
+
+                                
+                                    </tree>
+
+                                </field>
+
+                            </page>
+                </notebook>
+              -->
+             <footer>
+                <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
+                <button name="action_print_excel_recovery_report" type="object" string="Print Excel" class="btn-primary" />
+                <!-- <button name="action_polulate" type="object" string="Populate" /> -->
+                
+                 <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+            </form>
+            </field>      
+    </record>
+
+     <record id="action_account_print_recovery_report" model="ir.actions.act_window">
+            <field name="name">Recoveries</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">recovery.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_recovery"/>
+            <field name="target">new</field>
+        </record>
+ <menuitem id="menu_recovery_of_student" name="Recovery of Students" parent="account.menu_finance_reports" sequence="6"/>
+ <menuitem id="menu_action_recovery_report" name="Recovery Report" action="action_account_print_recovery_report" parent="menu_recovery_of_student"/>
+
+ 
+
+ 
+
+</odoo> 
