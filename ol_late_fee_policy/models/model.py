@@ -13,6 +13,8 @@ class payment_ext(models.Model):
     _inherit = "account.payment"
     late_fee=fields.Float(string="Late Fee")   
     amount_late_fee_exclusive=fields.Float(string="Total without Late Fee")
+    cancel_latefee=fields.Boolean(string="Cancel Late Fee")
+
 class extwiz(models.TransientModel):
     _inherit = "account.payment.register"
     late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')
