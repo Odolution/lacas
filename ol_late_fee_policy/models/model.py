@@ -17,6 +17,7 @@ class extwiz(models.TransientModel):
     _inherit = "account.payment.register"
     late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')
     amount_late_fee_exclusive=fields.Float(string="Total without Late Fee",compute='_compute_late_fee')
+    cancel_latefee=fields.Boolean(string="Cancel Late Fee")
     def _compute_late_fee(self):
         for wizard in self:
             invoice=""

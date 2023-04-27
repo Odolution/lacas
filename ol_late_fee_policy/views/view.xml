@@ -102,7 +102,8 @@
                     <field name="apply_late_fee_policy"/>
             </xpath>
         </field>
-    </record><record id="account_jpayment_ext" model="ir.ui.view">
+    </record>
+    <record id="account_jpayment_ext" model="ir.ui.view">
         <field name="name">account_payment_form_ext</field>
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_payment_form"/>
@@ -111,6 +112,7 @@
             <xpath expr="//label[@for='amount']" position="before">
                      <label for="late_fee"/>
                     <div name="late_fee_div" class="o_row">
+                                    <field name="cancel_latefee" />
                                     <field name="late_fee" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                     <field name="currency_id" options="{'no_create': True, 'no_open': True}" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="base.group_multi_currency"/>
                     </div>
