@@ -13,13 +13,13 @@ class payment_ext(models.Model):
     _inherit = "account.payment"
     late_fee=fields.Float(string="Late Fee")   
     amount_late_fee_exclusive=fields.Float(string="Total without Late Fee")
-    cancel_latefee=fields.Boolean(string="Cancel Late Fee")
+    cancel_latefee=fields.Boolean(string="Cancel Late Fee",default=False)
 
 class extwiz(models.TransientModel):
     _inherit = "account.payment.register"
     late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')
     amount_late_fee_exclusive=fields.Float(string="Total without Late Fee",compute='_compute_late_fee')
-    cancel_latefee=fields.Boolean(string="Cancel Late Fee")
+    cancel_latefee=fields.Boolean(string="Cancel Late Fee",default=False)
     def _compute_late_fee(self):
         for wizard in self:
             invoice=""
@@ -60,6 +60,7 @@ class extwiz(models.TransientModel):
 class ext_journal(models.Model):
     _inherit = "account.journal"
     apply_late_fee_policy = fields.Boolean(string='Apply Late Fee Policy',default=False)
+    cancel_latefee=fields.Boolean(string="Cancel Late Fee",default=False)
     
 class ext_invoice(models.Model):
     _inherit = "account.move"

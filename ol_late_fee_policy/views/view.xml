@@ -82,6 +82,7 @@
                 <label for="late_fee" attrs="{'invisible': ['|', ('can_edit_wizard', '=', False), '&amp;', ('can_group_payments', '=', True), ('group_payment', '=', False)]}"/>
                 <div name="latefee_div" class="o_row" attrs="{'invisible': ['|', ('can_edit_wizard', '=', False), '&amp;', ('can_group_payments', '=', True), ('group_payment', '=', False)]}">
                     <field name="late_fee"/>
+                    <field name="cancel_latefee"/>
                     <field name="currency_id" required="1" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
                 </div>
                 <label for="amount_late_fee_exclusive" attrs="{'invisible': ['|', ('can_edit_wizard', '=', False), '&amp;', ('can_group_payments', '=', True), ('group_payment', '=', False)]}"/>
