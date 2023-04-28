@@ -26,7 +26,7 @@ class extwiz(models.TransientModel):
                 break
             if invoice!="":
                 wizard.amount_late_fee_exclusive=wizard.amount
-                wizard.late_fee=invoice.late_fee_compute
+                wizard.late_fee=invoice.get_late_fee_charges(payment_date=wizard.payment_date)
 
     def _compute_amount(self):
         super(extwiz,self)._compute_amount()
@@ -68,14 +68,17 @@ class ext_invoice(models.Model):
             self.late_fee_compute=0
         else:  
             self.late_fee_compute=self.get_late_fee_charges()
-    def get_late_fee_charges(self):
+    def get_late_fee_charges(self,payment_date=None):
         invoice=self
         if invoice.journal_id==False:
             return 0    ## if no journal_id found, can't be sure if we should apply late fee or not. 
         if not invoice.journal_id.apply_late_fee_policy:
             return 0    ## if invoice is for admission challan, no late fee will be charged
         ##get todays date
-        nowdate=datetime.datetime.now().date()
+        if payment_date:
+            nowdate=payment_date
+        else:
+            nowdate=datetime.datetime.now().date()
         if nowdate<invoice.invoice_date_due:
             return 0    ##if due date has not exceeded, then latefee charges are zero. 
         ## get late fee slabs
