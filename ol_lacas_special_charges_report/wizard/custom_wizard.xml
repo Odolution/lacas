@@ -8,6 +8,10 @@
         
             <form string="Print Specialization charges of students">
             <group>
+
+            
+             <field name="all_batch"/>
+             <field name="one_batch" />
       
              </group>
 
