@@ -321,6 +321,36 @@ class agingsReportWizard(models.TransientModel):
     account_report_line=fields.Many2many('account.aging.move.line', string='Account report Line')
     groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
 
+    def _date_constrains(self):
+        if not self.date_to or not self.date_from:
+            raise UserError("Sorry, you must enter both dates..")
+        
+        
+        if not self.date_from and not self.date_to :
+            raise UserError("Sorry, you must enter dates..")
+        
+        else:
+
+            from_year=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y')
+            to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
+            # raise UserError(from_year)
+
+            if self.date_to < self.date_from:
+                # raise UserError(datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y'))
+
+                raise ValidationError(_('Sorry, End Date Must be greater Than Start Date...'))
+
+            if from_year and to_year :
+
+                if  from_year < '22' or from_year >'23':
+                    raise UserError("Sorry, Year must be between 2022-2023..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+
+                elif to_year <"22" or to_year >"23":
+                    raise UserError("Sorry, Year must be between 2022-2023..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+
+
 
   
     
