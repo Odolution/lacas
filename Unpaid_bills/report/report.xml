@@ -4,7 +4,7 @@
         <field name="name">Unpaid Bills</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">account.move.unpaid_bill</field>
+        <field name="report_name">Unpaid_bills.unpaid_bill</field>
         <field name="binding_model_id" ref="model_account_move"/>
         <field name="binding_type">report</field>
     </record>
