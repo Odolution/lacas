@@ -4,11 +4,11 @@
         <field name="name">Unpaid Bills</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">unpaid_bills</field>
-        <field name="binding_model_id" ref="model_account_move" />
+        <field name="report_name">account.move.unpaid_bill</field>
+        <field name="binding_model_id" ref="model_account_move"/>
         <field name="binding_type">report</field>
     </record>
-    <template id="unpaid_bills">
+    <template id="unpaid_bill">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page">
