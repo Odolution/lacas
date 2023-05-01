@@ -184,8 +184,8 @@
                 <!-- <field name="campus"/>
                 <field name="std_current_branch"/> -->
                 <field name="std_batch"/>
-                <!-- <field name="bill_date"/>
-                <field name="challan_date"/>
+                 <field name="bill_date"/>
+                <!--<field name="challan_date"/>
                 <field name="due_date"/> -->
                 <!-- <field name="due_amount"/>
                 <field name="net_amount"/>

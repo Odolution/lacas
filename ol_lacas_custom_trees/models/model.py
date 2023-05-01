@@ -246,7 +246,7 @@ class ext(models.Model):
         self.student_name=''
         #self.student_code=" "
         # self.campus=""
-        # self.bill_date=' '
+        self.bill_date=' '
         # self.challan_date=' '
         # self.due_date=' '
         # self.due_amount=0
@@ -292,7 +292,7 @@ class ext(models.Model):
                 #     if sch==1:
                         
         
-            # self.std_bill_date=self.invoice_date
+            self.std_bill_date=self.invoice_date
             # self.std_due_date=self.invoice_date_due
             self.std_discount=self.discount_note
             self.std_reason=self.reject_reason.name
