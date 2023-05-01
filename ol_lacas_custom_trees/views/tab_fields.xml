@@ -72,10 +72,10 @@
                         <group>
                             <group>
                             <!-- <field name="campus"/> -->
-                            <field name="std_reason"/>
+                            <!-- <field name="std_reason"/> -->
                             <field name="std_tuition_plan"/>
                             <field name="std_tuition_plan_state"/>
-                            <field name="std_discount"/>
+                            <!-- <field name="std_discount"/> -->
                            
                             </group>    
                             <group>

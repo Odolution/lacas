@@ -28,8 +28,8 @@ class ext(models.Model):
     std_dob=fields.Date(string="Date of Birth", related='student_ids_ol.date_of_birth')
     std_name=fields.Char(string="Student")
     std_batch=fields.Char(string="Batch", related='student_ids_ol.x_studio_batchsession')
-    std_discount=fields.Char(string="Discount note")
-    std_reason=fields.Char(string="Concession Name")
+    #std_discount=fields.Char(string="Discount note")
+    #std_reason=fields.Char(string="Concession Name")
     std_fathername=fields.Char(string="Father Name", compute='_compute_father_name')
     std_contactno=fields.Char(string="Contact No.", related='student_ids_ol.mobile')
     adm_amount=fields.Char(string="Admission Amount")
@@ -266,8 +266,8 @@ class ext(models.Model):
         #self.std_dob=' '
         #self.std_name=""
         #self.std_batch=""
-        self.std_discount=""
-        self.std_reason=""
+        #self.std_discount=""
+        #self.std_reason=""
         #self.std_fathername=""
         #self.std_contactno=""
         
@@ -301,8 +301,8 @@ class ext(models.Model):
         
             self.std_bill_date=self.invoice_date
             # self.std_due_date=self.invoice_date_due
-            self.std_discount=self.discount_note
-            self.std_reason=self.reject_reason.name
+            #self.std_discount=self.discount_note
+            #self.std_reason=self.reject_reason.name
             #self.std_batch=self.x_studio_batch.x_name
             #self.std_dob=self.student_ids.date_of_birth
             #self.std_fathername=self.partner_id.name
