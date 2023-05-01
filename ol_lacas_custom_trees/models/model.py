@@ -17,7 +17,7 @@ class ext(models.Model):
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
     #campus=fields.Char(string="Campus")
-    # bill_date=fields.Char(string="Billing Month")
+    bill_date=fields.Char(string="Billing Month")
     # challan_date=fields.Char(string="Challan date")
     # due_date=fields.Char(string="Due Date")
     # due_amount=fields.Integer(string="Due Amount")
