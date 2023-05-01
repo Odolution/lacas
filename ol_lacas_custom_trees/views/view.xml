@@ -67,11 +67,11 @@
                 <field name="std_fathername"/>
                 <field name="class_name"/>
                 <field name="section_name"/>
-                <field name="campus"/>
+                <!-- <field name="campus"/>
                 <field name="std_batch"/>
                 <field name="bill_date"/>
                 <field name="challan_date"/>
-                <field name="due_date"/>
+                <field name="due_date"/> -->
             </tree>
         </field>
     </record>
@@ -116,8 +116,8 @@
                 <!-- <field name="std_fathername"/>
                 <field name="std_dob"/>
                 <field name="std_contactno"/> -->
-                <field name="std_bill_date"/>
-                <field name="std_due_date"/>
+                <!-- <field name="std_bill_date"/>
+                <field name="std_due_date"/> -->
                 <!-- <field name="adm_amount"/>
                 <field name="security_amount"/> -->
                 <field name="bill_amount"/>
@@ -184,9 +184,9 @@
                 <!-- <field name="campus"/>
                 <field name="std_current_branch"/> -->
                 <field name="std_batch"/>
-                <field name="bill_date"/>
+                <!-- <field name="bill_date"/>
                 <field name="challan_date"/>
-                <field name="due_date"/>
+                <field name="due_date"/> -->
                 <!-- <field name="due_amount"/>
                 <field name="net_amount"/>
                 <field name="bill_amount"/>

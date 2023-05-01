@@ -6,28 +6,28 @@ import json
 class ext(models.Model):
     _inherit="account.move"
    
-   
+    student_ids_ol=fields.Many2one('school.student', string="std ol", compute='_feild_students')
     tuition=fields.Integer(string="Tuition Fee")
     club=fields.Integer(string="Club Charges")
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="utility Charges")
-    student_code=fields.Char(string="UDID")
+    student_code=fields.Char(string="UDID", compute="_compute_UDID")
     student_name=fields.Char(string="Name")
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
-    campus=fields.Char(string="Campus")
-    bill_date=fields.Char(string="Billing Month")
-    challan_date=fields.Char(string="Challan date")
-    due_date=fields.Char(string="Due Date")
-    due_amount=fields.Integer(string="Due Amount")
-    std_bill_date=fields.Char(string="Issue Date")
-    std_due_date=fields.Char(string="Due Date")
+    #campus=fields.Char(string="Campus")
+    # bill_date=fields.Char(string="Billing Month")
+    # challan_date=fields.Char(string="Challan date")
+    # due_date=fields.Char(string="Due Date")
+    # due_amount=fields.Integer(string="Due Amount")
+    # std_bill_date=fields.Char(string="Issue Date")
+    #std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
     std_current_branch=fields.Char(string="Current Branch")
     std_dob=fields.Char(string="Date of Birth")
     std_name=fields.Char(string="Student")
-    std_batch=fields.Char(string="Batch")
+    std_batch=fields.Char(string="Batch", related='student_ids_ol.x_studio_batchsession')
     std_discount=fields.Char(string="Discount note")
     std_reason=fields.Char(string="Concession Name")
     std_fathername=fields.Char(string="Father Name")
@@ -73,7 +73,20 @@ class ext(models.Model):
     continuation=fields.Integer(string="Continuation")
 
 
+    def _feild_students(self):
+        for rec_std in self:
+            if rec_std.student_ids:
+                rec_std.student_ids_ol=rec_std.student_ids.id
+            else:
+                rec_std.student_ids_ol=''
 
+
+    def _compute_UDID(self):
+
+        self.student_code=""
+        for rec in self:
+            if rec.student_ids:
+                    rec.student_code=rec.student_ids.facts_udid
 
 
 
@@ -231,12 +244,12 @@ class ext(models.Model):
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
         self.student_name=''
-        self.student_code=" "
-        self.campus=""
-        self.bill_date=' '
-        self.challan_date=' '
-        self.due_date=' '
-        self.due_amount=0
+        #self.student_code=" "
+        # self.campus=""
+        # self.bill_date=' '
+        # self.challan_date=' '
+        # self.due_date=' '
+        # self.due_amount=0
         
         self.class_name=""
         self.std_bill_date=""
@@ -261,10 +274,10 @@ class ext(models.Model):
         if self.student_ids:
             full_name=self.student_ids.first_name+" "+self.student_ids.last_name
             self.student_name=full_name
-            self.student_code=self.student_ids.facts_udid
+            #self.student_code=self.student_ids.facts_udid
             # self.campus=self.student_ids.school_ids.name
-            self.challan_date=self.invoice_date
-            self.due_date=self.invoice_date_due
+            # self.challan_date=self.invoice_date
+            # self.due_date=self.invoice_date_due
             # self.due_amount=self.due_amount
             self.std_name=full_name
             if len(self.student_ids.school_ids) > 1:
@@ -279,8 +292,8 @@ class ext(models.Model):
                 #     if sch==1:
                         
         
-            self.std_bill_date=self.invoice_date
-            self.std_due_date=self.invoice_date_due
+            # self.std_bill_date=self.invoice_date
+            # self.std_due_date=self.invoice_date_due
             self.std_discount=self.discount_note
             self.std_reason=self.reject_reason.name
             self.std_batch=self.x_studio_batch.x_name

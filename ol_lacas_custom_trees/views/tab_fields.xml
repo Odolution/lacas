@@ -10,6 +10,7 @@
                             <group>
                             <!-- <field name="campus"/> -->
                             <field name="std_current_branch"/>
+                            <field name="student_ids_ol"/>
                             <field name="computer"/>
                             <field name="library"/>
                             <field name="utility"/>
