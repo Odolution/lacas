@@ -16,7 +16,7 @@ class ext(models.Model):
     student_name=fields.Char(string="Name",related='student_ids_ol.name')
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
-    #campus=fields.Char(string="Campus")
+    campus=fields.Char(string="Campus")
     bill_date=fields.Char(string="Billing Month")
     challan_date=fields.Char(string="Challan date")
     due_date=fields.Char(string="Due Date")
@@ -252,7 +252,7 @@ class ext(models.Model):
     def _students_onchange(self):
         #self.student_name=''
         #self.student_code=" "
-        # self.campus=""
+        #self.campus=""
         self.bill_date=' '
         # self.challan_date=' '
         # self.due_date=' '
