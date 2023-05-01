@@ -16,7 +16,7 @@ class ext(models.Model):
     student_name=fields.Char(string="Name",related='student_ids_ol.name')
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
-    campus=fields.Char(string="Campus")
+    #campus=fields.Char(string="Campus")
     bill_date=fields.Char(string="Billing Month")
     challan_date=fields.Char(string="Challan date")
     due_date=fields.Char(string="Due Date")
@@ -35,8 +35,8 @@ class ext(models.Model):
     adm_amount=fields.Char(string="Admission Amount")
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
-    net_amount=fields.Char(string="Net Amount")
-    std_factsid=fields.Char(string="Facts ID")
+    net_amount=fields.Char(string="Net Amount",compute="_compute_net_amnt")
+    std_factsid=fields.Char(string="Facts ID",compute="_compute_facts_id")
     std_payment_date=fields.Char(string='Payment Date')
     std_tuition_plan=fields.Char(string="Tuition Plan")
     std_tuition_plan_state=fields.Char(string="Tuition Plan State")
@@ -88,11 +88,26 @@ class ext(models.Model):
             if rec.student_ids:
                     rec.student_code=rec.student_ids.facts_udid
 
+    def _compute_facts_id(self):
+        self.std_factsid=""
+        if self.student_ids:
+                self.std_factsid=self.student_ids.facts_id
+
     def _compute_father_name(self):
         for relation in self.student_ids.relationship_ids:
           if relation.relationship_type_id.name == "Father":
             self.std_fathername = relation.individual_id.name
             break
+    def _compute_net_amnt(self):
+
+        if self.invoice_line_ids:
+            amt=[]
+            for line in self.invoice_line_ids:
+                if line.product_id.is_discount_type!=True:
+                    amt.append(line.price_total)
+            total=sum(amt)
+            nofloat=int(total)
+            self.net_amount=str(nofloat)
 
 
 
@@ -273,8 +288,8 @@ class ext(models.Model):
         
         self.security_amount=""
         self.bill_amount=""
-        self.net_amount=""
-        self.std_factsid=""
+        #self.net_amount=""
+        #self.std_factsid=""
         self.std_payment_date=""
         self.section_name=""
        
@@ -306,7 +321,7 @@ class ext(models.Model):
             #self.std_batch=self.x_studio_batch.x_name
             #self.std_dob=self.student_ids.date_of_birth
             #self.std_fathername=self.partner_id.name
-            self.std_factsid=self.student_ids.facts_id
+           # self.std_factsid=self.student_ids.facts_id
             #self.std_contactno=self.partner_id.mobile
             self.bill_amount=int(self.amount_total)
 
@@ -481,24 +496,24 @@ class ext(models.Model):
                     self.std_payment_date=var
                 
 
-            if self.student_ids.school_ids:
-                if self.student_ids.enrollment_history_ids:
-                    enroll_history=self.student_ids.enrollment_history_ids
-                    lst=[]
-                    for lines in enroll_history:
-                        lst.append(lines.program_id.name)
-                    self.campus=lst[0]
+            # if self.student_ids.school_ids:
+            #     if self.student_ids.enrollment_history_ids:
+            #         enroll_history=self.student_ids.enrollment_history_ids
+            #         lst=[]
+            #         for lines in enroll_history:
+            #             lst.append(lines.program_id.name)
+            #         self.campus=lst[0]
             if self.amount_residual:
                 self.due_amount=int(self.amount_residual)
 
-            if self.invoice_line_ids: 
-                amt=[]
-                for line in self.invoice_line_ids:
-                    if line.product_id.is_discount_type!=True:
-                        amt.append(line.price_total)
-                total=sum(amt)
-                nofloat=int(total)
-                self.net_amount=str(nofloat)
+            # if self.invoice_line_ids: 
+            #     amt=[]
+            #     for line in self.invoice_line_ids:
+            #         if line.product_id.is_discount_type!=True:
+            #             amt.append(line.price_total)
+            #     total=sum(amt)
+            #     nofloat=int(total)
+            #     self.net_amount=str(nofloat)
             
                
             
