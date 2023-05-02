@@ -7,7 +7,6 @@
                 <!-- Report header content -->
                 <t t-foreach="docs" t-as="o">
                     <div class="container">
-
                         <tr>
                             <Strong>
                                 <td style="text-align: left;  width: 30%; font-size:11px;">Roll No: </td>
@@ -75,7 +74,11 @@
                                 style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 14px;">
                                 Dear Parents/Guardian,<br /> As per our latest accounts information
                                 the fee for your child remains outstanding for the following
-                                month/s: <br /> The School management has tried to facilitate you in
+                                month/s: 
+                            </p>
+
+                            <p>
+                                <br /> The School management has tried to facilitate you in
                                 this matter. We have sent repeated reminders, made phone calls
                                 requesting you to clear the outstanding fee bills. However, despite
                                 all measures taken by school, your fee bills are still outstanding. <br />
