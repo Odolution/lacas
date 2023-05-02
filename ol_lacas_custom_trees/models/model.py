@@ -91,7 +91,7 @@ class ext(models.Model):
     def _compute_facts_id(self):
         self.std_factsid=""
         if self.student_ids:
-                self.std_factsid=self.student_ids.facts_id
+            self.std_factsid=self.student_ids.facts_id
 
     def _compute_father_name(self):
         for relation in self.student_ids.relationship_ids:
@@ -276,7 +276,7 @@ class ext(models.Model):
         self.class_name=""
         # self.std_bill_date=""
         # self.std_due_date=""
-        # self.std_branch=' '
+        self.std_branch=' '
         #self.std_current_branch=''
         #self.std_dob=' '
         #self.std_name=""
