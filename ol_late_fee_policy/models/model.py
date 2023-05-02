@@ -141,6 +141,7 @@ class ext_invoice(models.Model):
         
         for invoice in self:
             late_fee_charges=invoice.get_late_fee_charges()
+            raise UserError(late_fee_charges)
             #late_fee_charges=invoice._compute_late_fee()
             
             if late_fee_charges<=0:
@@ -152,12 +153,13 @@ class ext_invoice(models.Model):
             foundline=None
             for line in invoice.invoice_line_ids:
                 if line.product_id.name=="Late Fee":
+                    
                     foundline=line
                     break
             ##if line is found. adding all charges to it.
             if foundline is not None:
                 #--------------------------------------#
-                raise UserError(late_fee_charges)
+                
                 foundline.price_unit=late_fee_charges
             else:   ##else creating new late fee line and adding charges there
                 latefee_product=self.env["product.product"].search([("name","=","Late Fee")])
