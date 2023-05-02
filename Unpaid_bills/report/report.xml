@@ -1,119 +1,111 @@
-<odoo>
-    <record id="action_notpaid_report"
-        model="ir.actions.report">
-        <field name="name">Unpaid Bills</field>
-        <field name="model">account.move</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="report_name">Unpaid_bills.unpaid_bill</field>
-        <field name="binding_model_id" ref="model_account_move"/>
-        <field name="binding_type">report</field>
-    </record>
-    <template id="unpaid_bill">
-        <t t-call="web.html_container">
-            <t t-call="web.external_layout">
-                <div class="page">
-                    <!-- Report header content -->
-                    <t t-foreach="docs" t-as="o">
-                        <div class="container">
-                            <tr style="height: 65.5px;">
-                                <td style="align-items: center; ">
-                                    <img t-if="o.company_id.logo"
-                                        t-att-src="image_data_uri(o.company_id.logo)"
-                                        height="50"
-                                        width="100" class="float-left" alt="Logo" />
-                                </td>
+<?xml version="1.0"?>
+<t t-name="Unpaid_bills.unpaid_bill">
+    <t t-call="web.html_container">
+        <t t-call="web.external_layout">
 
-                            </tr>
-                            <tr>
-                                <Strong>
-                                    <td style="text-align: left;  width: 30%; font-size:11px;">Roll
-                                        No: </td>
-                                </Strong>
-                                <td style="width: 70%; font-size:11px;">
-                                    <strong>
-                                        <t t-esc="o.name" />
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr>
+            <div class="page">
+                <!-- Report header content -->
+                <t t-foreach="docs" t-as="o">
+                    <div class="container">
+
+                        <tr>
+                            <Strong>
+                                <td style="text-align: left;  width: 30%; font-size:11px;">Roll No: </td>
+                            </Strong>
+                            <td style="width: 70%; font-size:11px;">
+                                <strong>
+                                    <t t-esc="o.student_ids.facts_udid" />
+                                </strong>
+                            </td>
+                        </tr>
+                        <br/>
+                        <tr>
+                            <Strong>
                                 <td style="text-align: left; font-size:11px; width: 30%;">Name : </td>
-                                <td style="width: 70%; font-size:11px;">
-                                    <strong>
-                                        <t t-esc="o.create_date.strftime('%d-%b-%Y')" />
-                                    </strong>
-                                </td>
-                            </tr>
-                            <tr>
+                            </Strong>
+
+                            <td style="width: 70%; font-size:11px;">
+                                <strong>
+                                    <t t-esc="o.student_ids.display_name" />
+                                </strong>
+                            </td>
+                        </tr>
+                        <br/>
+                        <tr>
+                            <Strong>
                                 <td style="text-align: left;  font-size:11px; width: 30%;">Class : </td>
-                                <td>
-                                    <span
-                                        style="width: 70%; font-size:11px;">
-                                        <strong>
-                                            <t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
-                                        </strong>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
+                            </Strong>
+                            <td>
+                                <span style="width: 70%; font-size:11px;">
+                                    <strong>
+                                        <t t-esc="o.student_ids.grade_level_ids.name" />
+                                    </strong>
+                                </span>
+                            </td>
+                        </tr>
+                        <br/>
+                        <tr>
+                            <Strong>
                                 <td style="text-align: left;  font-size:11px; width: 30%;">Branch : </td>
-                                <td>
-                                    <span
-                                        style=" width: 70%; font-size:11px;">
-                                        <strong>
-                                            <t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
-                                        </strong>
-                                    </span>
-                                </td>
-                            </tr>
+                            </Strong>
 
-                            <!-- Report row content -->
-                            <div style=" margin-left: 2%">
-                                <h4 style="font-size:11px;">
-                                    <u>
-                                        <strong>Subject: REMINDER FOR PAYMENT OF SCHOOL FEE BILL</strong>
-                                    </u>
-                                </h4>
-                                <h4 style="font-size:11px;">Days After Due Date</h4>
-                            </div>
-                            <div>
-                                <p
-                                    style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 11px;">
-                                    Dear Parents/Guardian,<br />
-                                    As per our latest accounts information the fee for your child remains outstanding for the following month/s:
-                                    <div>
+                            <td>
+                                <span style=" width: 70%; font-size:11px;">
+                                    <strong>
+                                        <t t-esc="o.student_ids.x_last_school_id.name" />
+                                    </strong>
+                                </span>
+                            </td>
+                        </tr>
+                        <br/>
 
-                                    </div>
-                                    <br/>
-                                    The School management has tried to facilitate you in this matter. We have sent repeated
-                                    reminders, made phone calls requesting you to clear the outstanding fee bills. However, despite
-                                    all measures taken by school, your fee bills are still outstanding. <br />
-                                    Please consider this letter as the last reminder and clear all the above-mentioned dues of your
-                                    child by <span style=" width: 70%; font-size:11px;">
-                                        <strong>
-                                            <t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
-                                        </strong>
-                                    </span>. IF the dues continue to remain unpaid, the school shall be constrained 
-                                    to take the necessary action as per its rules and regulations.
-                                    <br/>If the aforementioned dues have been cleared, please submit a copy of the paid 
-                                    fee challan(s).<br />We look forward to your cooperation in this matter.
-                                    <br />Best regards,
-                                    <br />Account Deparment
+                        <!-- Report row content -->
+                        <div style=" margin-left: 2%">
+                            <h4>
+                                <!--style="font-size:11px;"-->
+                                <u>
+                                    <strong>Subject: REMINDER FOR PAYMENT OF SCHOOL FEE BILL</strong>
+                                </u>
+                            </h4>
+                            <!--<h4>Days
+                            After Due Date</h4>-->
+                        </div>
+                        <div>
+                            <p
+                                style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 14px;">
+                                Dear Parents/Guardian,<br /> As per our latest accounts information
+                                the fee for your child remains outstanding for the following
+                                month/s: <br /> The School management has tried to facilitate you in
+                                this matter. We have sent repeated reminders, made phone calls
+                                requesting you to clear the outstanding fee bills. However, despite
+                                all measures taken by school, your fee bills are still outstanding. <br />
+                                Please consider this letter as the last reminder and clear all the
+                                above-mentioned dues of your child by <span
+                                    style=" width: 70%; font-size:11px;">
+                                    <strong>
+                                        <t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
+                                    </strong>
+                                </span>.
+                                IF the dues continue to remain unpaid, the school shall be
+                                constrained to take the necessary action as per its rules and
+                                regulations. <br />If the aforementioned dues have been cleared,
+                                please submit a copy of the paid fee challan(s).<br />We look
+                                forward to your cooperation in this matter. <br />Best regards, <br />Account
+                                Deparment </p>
+                        </div>
 
-                                </p>
-                            </div>
 
-
-                            <!-- Report footer content -->
-                            <div>
+                        <!-- Report footer content -->
+                        <div>
                             <p>
-                                <td style="text-align: centre;  font-size:8px; width: 30%;">This is a computer generated report, does not required any signature</td>
+                                <td style="text-align: centre;  font-size:8px; width: 30%;">This is
+                                    a computer generated report, does not required any signature</td>
                             </p>
-                            </div>
-                        </div> <!--container-->
-                    </t>
+                        </div>
+                    </div> <!--container-->
+                </t>
 
-                </div> <!--page -->
-            </t>
+            </div> <!--page -->
         </t>
-    </template>
-</odoo>
+    </t>
+</t>
