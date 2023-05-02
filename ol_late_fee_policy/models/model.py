@@ -138,10 +138,12 @@ class ext_invoice(models.Model):
         return max        
 
     def apply_late_fee_policy(self):
+        raise UserError(invoice.get_late_fee_charges())
+
         
         for invoice in self:
             late_fee_charges=invoice.get_late_fee_charges()
-        raise UserError(late_fee_charges)
+        
             #late_fee_charges=invoice._compute_late_fee()
             
             if late_fee_charges<=0:
