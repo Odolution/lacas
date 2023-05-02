@@ -11,7 +11,7 @@
     </record>
     <record id="report_post_view_paper" model="report.paperformat">
         <field name="name">Unpaid bills</field>
-        <field name="default" eval="True"/>
+        <field name="default" eval="True" />
         <field name="format">A4</field>
         <field name="page_height">0</field>
         <field name="page_width">0</field>
@@ -20,7 +20,7 @@
         <field name="margin_bottom">3</field>
         <field name="margin_left">3</field>
         <field name="margin_right">3</field>
-        <field name="header_line" eval="False"/>
+        <field name="header_line" eval="False" />
         <field name="header_spacing">3</field>
         <field name="dpi">80</field>
     </record>
@@ -102,29 +102,41 @@
                             <div>
                                 <p
                                     style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 14px;">
-                                Dear Parents/Guardian,<br /> As per our latest accounts information
-                                the fee for your child remains outstanding for the following
-                                month/s: </p>
+                                    Dear Parents/Guardian,
+                                    <br /> 
+                                    As per our latest accounts
+                                    information the fee for your child remains outstanding for the
+                                    following month/s: 
+                                </p>
 
-                            <p>
+                                <p>
                                     <br /> The School management has tried to facilitate you in this
-                                matter. We have sent repeated reminders, made phone calls requesting
-                                you to clear the outstanding fee bills. However, despite all
-                                measures taken by school, your fee bills are still outstanding. <br />
-                                Please consider this letter as the last reminder and clear all the
-                                above-mentioned dues of your child by </p>
+                                    matter. We have sent repeated reminders, made phone calls
+                                    requesting you to clear the outstanding fee bills. However,
+                                    despite all measures taken by school, your fee bills are still
+                                    outstanding. 
+                                    <br />
+                                    Please consider this letter as the last
+                                    reminder and clear all the above-mentioned dues of your child by 
+                                </p>
                                 <span
                                     style=" width: 70%; font-size:11px;">
                                     <strong>
                                         <t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
                                     </strong>
                                 </span>
-                                . <p> If the dues continue to remain unpaid, the school shall be
-                                constrained to take the necessary action as per its rules and
-                                regulations. <br /> If the aforementioned dues have been cleared,
-                                please submit a copy of the paid fee challan(s). <br /> We look
-                                forward to your cooperation in this matter. <br /> Best regards, <br />
-                                Account Deparment. </p>
+                                <p> 
+                                    If the dues continue to remain unpaid, the school shall be
+                                    constrained to take the necessary action as per its rules and
+                                    regulations. 
+                                    <br />
+                                    If the aforementioned dues have been
+                                    cleared, please submit a copy of the paid fee challan(s). <br />
+                                    We look forward to your cooperation in this matter. <br /> Best
+                                    regards, 
+                                    <br />
+                                    Account Deparment. 
+                                </p>
                             </div>
 
 
