@@ -142,7 +142,8 @@ class ext_invoice(models.Model):
 
         
         for invoice in self:
-            late_fee_charges=invoice.get_late_fee_charges()
+            late_fee_charges=invoice.get_late_fee_charges(payment_date=invoice.ol_payment_date)
+            raise UserError(late_fee_charges)
         
             #late_fee_charges=invoice._compute_late_fee()
             
