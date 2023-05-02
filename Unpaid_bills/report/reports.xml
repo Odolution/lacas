@@ -7,7 +7,7 @@
         <field name="report_name">Unpaid_bills.unpaid_bills</field>
         <field name="binding_model_id" ref="model_account_move" />
         <field name="binding_type">report</field>
-        <!-- <field name="paperformat_id" ref="report_post_view_paper" /> -->
+        <field name="paperformat_id" ref="report_post_view_paper" />
     </record>
     <record id="report_post_view_paper" model="report.paperformat">
         <field name="name">Unpaid bills</field>
