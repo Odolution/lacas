@@ -156,6 +156,8 @@ class ext_invoice(models.Model):
                     break
             ##if line is found. adding all charges to it.
             if foundline is not None:
+                #--------------------------------------#
+                raise UserError(late_fee_charges)
                 foundline.price_unit=late_fee_charges
             else:   ##else creating new late fee line and adding charges there
                 latefee_product=self.env["product.product"].search([("name","=","Late Fee")])
