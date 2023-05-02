@@ -20,7 +20,7 @@
 
     # always loaded
     'data': [
-        'report/report.xml',
+        'report/reports.xml',
     ],
 
 }
