@@ -140,8 +140,8 @@ class ext_invoice(models.Model):
     def apply_late_fee_policy(self):
         
         for invoice in self:
-            #late_fee_charges=invoice.get_late_fee_charges()
-            late_fee_charges=invoice._compute_late_fee()
+            late_fee_charges=invoice.get_late_fee_charges()
+            #late_fee_charges=invoice._compute_late_fee()
             
             if late_fee_charges<=0:
                 return
