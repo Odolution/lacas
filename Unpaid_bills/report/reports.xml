@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <odoo>
     <record id="action_notpaid_report" model="ir.actions.report">
-        <field name="name">unpaid Bill</field>
-        <field name="model">account.move</field>
+        <field name="name">Unpaid Bills</field>
+        <field name="model">Unpaid_Bills</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">Unpaid_bills.unpaid_bills</field>
         <field name="binding_model_id" ref="model_account_move" />
