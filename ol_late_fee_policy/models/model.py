@@ -27,6 +27,8 @@ class extwiz(models.TransientModel):
             if invoice!="":
                 wizard.amount_late_fee_exclusive=wizard.amount
                 wizard.late_fee=invoice.get_late_fee_charges(payment_date=wizard.payment_date)
+                if self.ol_check_in_favor_of:
+                    raise UserError('yes')
 
     def _compute_amount(self):
         super(extwiz,self)._compute_amount()
@@ -68,9 +70,9 @@ class ext_invoice(models.Model):
             self.late_fee_compute=0
         else:  
             self.late_fee_compute=self.get_late_fee_charges()
+            
     def get_late_fee_charges(self,payment_date=None):
-        if self.ol_check_in_favor_of:
-            raise UserError('yes')
+        
         
         invoice=self
         if invoice.journal_id==False:
