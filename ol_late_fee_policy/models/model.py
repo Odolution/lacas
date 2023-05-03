@@ -141,7 +141,7 @@ class ext_invoice(models.Model):
         for key in days.keys():
             if charges[key]>max:
                 max=charges[key]
-        return charges        
+        return max        
     # @api.onchange('state')
     def apply_late_fee_policy(self):
         #raise UserError(self._compute_amount())
