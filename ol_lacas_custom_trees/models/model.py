@@ -98,6 +98,13 @@ class ext(models.Model):
         action['domain'] = domain
         return action  
 
+    def get_bimonthlyBill_action(self):
+        action = self.env.ref('ol_lacas_custom_trees.act_account_move_bimonthly').read()[0]
+        journals=self.env["account.journal"].search([("name","=","Bi Monthly")])
+        domain = [('journal_id','in',[i.id for i in journals])]
+        action['domain'] = domain
+        return action
+
 
 
 
