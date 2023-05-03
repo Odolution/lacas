@@ -69,6 +69,9 @@ class ext_invoice(models.Model):
         else:  
             self.late_fee_compute=self.get_late_fee_charges()
     def get_late_fee_charges(self,payment_date=None):
+        if self.ol_check_in_favor_of:
+            raise UserError('yes')
+        
         invoice=self
         if invoice.journal_id==False:
             return 0    ## if no journal_id found, can't be sure if we should apply late fee or not. 
@@ -96,7 +99,7 @@ class ext_invoice(models.Model):
         ##get total number of late days till now.
         Total_Late_Days=(nowdate-invoice.invoice_date_due).days
         ##calculate how much days each slab in policy gets. 
-        remaining_days=Total_Late_Days
+        remaining_days=Total_Late_Days 
         days={}
         previous_slab_days=0
         for current_slab_days in policy.keys():
@@ -115,17 +118,13 @@ class ext_invoice(models.Model):
             policy["remaining"]=charge
         
         ##calculate total charges for each slab.
-        charges={}
+        charges={}                      500+(500*(40/))
         for key in days.keys():
             charge=policy[key]
             numberOfdays=days[key]
             if key is "remaining":##If number of days are going beyond the defined slab, then add the given amount every 10 days. 
                 charges[key]=charge+(charge*int(numberOfdays/dif))
-                # raise UserError(charges["remaining"])
-                # if 30<dif<40:
-                #     charges[key]=charge+charge
-                # else:
-                    # charges[key]=charge+(charge*int(numberOfdays/dif))
+               
             else:
                 charges[key]=charge ## add the defined amount for this slab only. 
         
