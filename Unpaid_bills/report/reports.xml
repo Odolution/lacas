@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
     <record id="action_notpaid_report" model="ir.actions.report">
-        <field name="name">Unpaid Bills</field>
+        <field name="name">defaulter</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">Unpaid_bills.unpaid_bills</field>
@@ -10,7 +10,7 @@
         <field name="paperformat_id" ref="report_post_view_paper" />
     </record>
     <record id="report_post_view_paper" model="report.paperformat">
-        <field name="name">Unpaid bills</field>
+        <field name="name">paper_size_defaulter</field>
         <field name="default" eval="True" />
         <field name="format">A4</field>
         <field name="page_height">0</field>
