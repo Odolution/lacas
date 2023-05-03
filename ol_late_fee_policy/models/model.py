@@ -136,7 +136,7 @@ class ext_invoice(models.Model):
             if charges[key]>max:
                 max=charges[key]
         return max        
-    @api.onchange('state')
+    # @api.onchange('state')
     def apply_late_fee_policy(self):
         #raise UserError(self._compute_amount())
 
@@ -152,7 +152,7 @@ class ext_invoice(models.Model):
             ##late fee calculations are complete. now to put these charges in to the invoice lines.
             ##reset invoice to draft to be able to insert the new line
             invoice.button_draft()
-            raise UserError(late_fee_charges)
+            # raise UserError(late_fee_charges)
             ##find any pre existing line for late fee. 
 
             foundline=None
