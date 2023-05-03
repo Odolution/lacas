@@ -16,8 +16,8 @@
         <field name="page_height">0</field>
         <field name="page_width">0</field>
         <field name="orientation">Portrait</field>
-        <field name="margin_top">10</field>
-        <field name="margin_bottom">3</field>
+        <field name="margin_top">12</field>
+        <field name="margin_bottom">10</field>
         <field name="margin_left">3</field>
         <field name="margin_right">3</field>
         <field name="header_line" eval="False" />
@@ -40,10 +40,10 @@
                                 
                                 <tr>
                                     <Strong>
-                                        <td style="text-align: right;  width: 30%; font-size:21px;">Roll No: </td>
+                                        <td style="text-align: left; font-size:16px; width: 30%;">Roll No: </td>
                                     </Strong>
-                                    <td style="width: 70%; font-size:21px;">
-                                        <span style="width: 70%; font-size:16px;">
+                                    <td>
+                                        <span>
                                             <strong>
                                                 <t t-esc="o.student_ids.facts_udid" />
                                             </strong>
@@ -54,10 +54,10 @@
                                 <br />
                                 <tr>
                                     <Strong>
-                                        <td style="text-align: left; font-size:21px; width: 30%;">Name: </td>
+                                        <td style="text-align: left; font-size:16px; width: 30%;">Name: </td>
                                     </Strong>
                                     <td>
-                                        <span style="width: 70%; font-size:16px;">
+                                        <span>
                                             <strong>
                                                 <t t-esc="o.student_ids.display_name" />
                                             </strong>
@@ -71,7 +71,7 @@
                                         <td style="text-align: left;  font-size:16px; width: 30%;">Class: </td>
                                     </Strong>
                                     <td>
-                                        <span style="width: 70%; font-size:16px;">
+                                        <span>
                                             <strong>
                                                 <t t-esc="o.student_ids.grade_level_ids.name" />
                                             </strong>
@@ -85,7 +85,7 @@
                                         <td style="text-align: left;  font-size:16px; width: 30%;">Branch: </td>
                                     </Strong>
                                     <td>
-                                        <span style=" width: 70%; font-size:16px;">
+                                        <span>
                                             <strong>
                                                 <t t-esc="o.student_ids.x_last_school_id.name" />
                                             </strong>
@@ -105,9 +105,14 @@
 
                                 </div>
                                 <div>
-                                    <p> Dear Parents/Guardian, <br /> As per our latest accounts
+
+                                    <p style="font-size:14px">
+                                        Dear Parents/Guardian,
+                                        <br />
+                                        As per our latest accounts
                                         information the fee for your child remains outstanding for the
-                                        following month/s: </p>
+                                        following month/s: 
+                                    </p>
                                     <div>
                                         <table class="col-12 table">
                                             <tr>
@@ -117,16 +122,16 @@
                                             <t t-foreach="o.unpaid_std_ids" t-as="d">
                                                 <tr>
                                                     <td>
-                                                        <span style="width: 70%; font-size:16px;">
+                                                        <span>
                                                             <strong>
                                                                 <t t-esc="d.month_date" />
                                                             </strong>
                                                         </span>
                                                     </td>
                                                     <td>
-                                                        <span style="width: 70%; font-size:16px;">
+                                                        <span>
                                                             <strong>
-                                                                <t t-esc="d.amount_residual" />
+                                                                <t t-esc="int(d.amount_residual)" />
                                                             </strong>
                                                         </span>
                                                     </td>
@@ -136,7 +141,8 @@
                                     </div>
 
 
-                                    <p>
+                                    <p style="font-size:14px">
+
                                         <br /> The School management has tried to facilitate you in this
                                         matter. We have sent repeated reminders, made phone calls
                                         requesting you to clear the outstanding fee bills. However,
@@ -152,7 +158,8 @@
                                         regulations. <br /> If the aforementioned dues have been
                                         cleared, please submit a copy of the paid fee challan(s). <br />
                                         We look forward to your cooperation in this matter. <br /> Best
-                                        regards, <br /> Account Deparment. </p>
+                                        regards, <br /> Account Deparment. 
+                                    </p>
                                 </div>
 
 
