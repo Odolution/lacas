@@ -118,7 +118,7 @@ class ext_invoice(models.Model):
             policy["remaining"]=charge
         
         ##calculate total charges for each slab.
-        charges={}                      500+(500*(40/))
+        charges={}                   
         for key in days.keys():
             charge=policy[key]
             numberOfdays=days[key]
