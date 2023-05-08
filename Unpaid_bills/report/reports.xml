@@ -9,6 +9,7 @@
         <field name="binding_type">report</field>
         <field name="paperformat_id" ref="report_post_view_paper" />
     </record>
+    
     <record id="report_post_view_paper" model="report.paperformat">
         <field name="name">paper_size_defaulter</field>
         <field name="default" eval="True" />
