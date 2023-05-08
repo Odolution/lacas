@@ -69,61 +69,61 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
      
         if self.all_branch:
-            #for month in self.selected_month:
-            bill_month=month.name
-            #inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month.name),('invoice_date', '>=', start_date_recovery), ('invoice_date', '<', end_date_recovery),])
-            inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('invoice_date', '>=', self.start_date_recovery), ('invoice_date', '<', self.end_date_recovery),])
-            
-
-            
-            stud_lst=[]
-            month_issuance=0
-            month_recovery=0
-            perc=0
-            
-            
-
-        
-            for rec in inv_ids:
-                # bill_month=rec.bill_date
-                if rec.student_name not in stud_lst:
-                    stud_lst.append(rec.student_name)
-            
+            for month in self.selected_month:
+                bill_month=month.name
+                #inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month.name),('invoice_date', '>=', start_date_recovery), ('invoice_date', '<', end_date_recovery),])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('invoice_date', '>=', self.start_date_recovery), ('invoice_date', '<', self.end_date_recovery),])
                 
-                if rec.payment_state=='not_paid':
-                    month_issuance=month_issuance+rec.amount_residual
 
                 
-                if rec.payment_state=='paid':
-                    if rec.bill_amount:
-                        month_recovery=month_recovery+int(rec.bill_amount)
+                stud_lst=[]
+                month_issuance=0
+                month_recovery=0
+                perc=0
+               
                 
-            nostd=len(stud_lst)    
-            unpaids=month_issuance
-            paids=month_recovery
-            if unpaids !=0 :
-                number=(paids/unpaids)*100
-                perc = round(number, 2)  
+
+            
+                for rec in inv_ids:
+                    # bill_month=rec.bill_date
+                    if rec.student_name not in stud_lst:
+                        stud_lst.append(rec.student_name)
+                
+                    
+                    if rec.payment_state=='not_paid':
+                        month_issuance=month_issuance+rec.amount_residual
+
+                    
+                    if rec.payment_state=='paid':
+                        if rec.bill_amount:
+                            month_recovery=month_recovery+int(rec.bill_amount)
+                    
+                nostd=len(stud_lst)    
+                unpaids=month_issuance
+                paids=month_recovery
+                if unpaids !=0 :
+                    number=(paids/unpaids)*100
+                    perc = round(number, 2)  
 
 
 
-            mvl=self.env['account.recovery.report.move.line'].create({
-                                
-                                "billing_cycle":bill_month,
-                                "total_issuance":unpaids,
-                                "no_of_std":nostd,
-                                "total_recovery":paids,
-                                "recovery_percentage":str(perc)+'%',
-                                
+                mvl=self.env['account.recovery.report.move.line'].create({
+                                    
+                                    "billing_cycle":bill_month,
+                                    "total_issuance":unpaids,
+                                    "no_of_std":nostd,
+                                    "total_recovery":paids,
+                                    "recovery_percentage":str(perc)+'%',
+                                    
 
 
-                    })
-            lines.append(mvl.id)
+                        })
+                lines.append(mvl.id)
 
 
-            self.write({
-                "account_recovery_report_line":[(6,0,lines)]
-            })  
+                self.write({
+                    "account_recovery_report_line":[(6,0,lines)]
+                })  
 
         else:
            
