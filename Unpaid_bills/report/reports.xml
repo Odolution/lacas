@@ -2,12 +2,12 @@
 <odoo>
     <record id="action_notpaid_report" model="ir.actions.report">
         <field name="name">defaulter</field>
-        <field name="model">Unpaid_Bills</field>
+        <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">Unpaid_bills.unpaids_bills</field>
         <field name="binding_model_id" ref="model_account_move" />
         <field name="binding_type">report</field>
-        <field name="paperformat_id" ref="report_post_view_paper" />
+        <!-- <field name="paperformat_id" ref="report_post_view_paper" /> -->
     </record>
 
     <record id="report_post_view_paper" model="report.paperformat">
