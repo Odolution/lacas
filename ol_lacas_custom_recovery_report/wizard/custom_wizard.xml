@@ -18,6 +18,8 @@
               <group>
 
                 <field name="selected_month" widget="many2many_tags"/>
+                <field name="start_date_recovery" />
+                <field name="end_date_recovery"/>
           
              </group>
 
