@@ -71,7 +71,8 @@ class RecoveryReportWizard(models.TransientModel):
         if self.all_branch:
             for month in self.selected_month:
                 bill_month=month.name
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month.name),('invoice_date', '>=', start_date_recovery), ('invoice_date', '<', end_date_recovery),])
+                #inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('bill_date','=',month.name),('invoice_date', '>=', start_date_recovery), ('invoice_date', '<', end_date_recovery),])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('invoice_date', '>=', start_date_recovery), ('invoice_date', '<', end_date_recovery),])
                 
 
                 
