@@ -280,7 +280,7 @@ class ext(models.Model):
         self.std_branch=' '
         #self.std_current_branch=''
         #self.std_dob=' '
-        #self.std_name=""
+        self.std_name=""
         #self.std_batch=""
         #self.std_discount=""
         #self.std_reason=""
@@ -302,7 +302,7 @@ class ext(models.Model):
             # self.challan_date=self.invoice_date
             # self.due_date=self.invoice_date_due
             # self.due_amount=self.due_amount
-            #self.std_name=full_name
+            self.std_name=full_name
             if len(self.student_ids.school_ids) > 1:
                 #self.std_current_branch=self.student_ids.x_last_school_id.name
                 for sch in self.student_ids.school_ids:

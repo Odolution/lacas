@@ -9,6 +9,8 @@
                         <group>
                             <group>
                             <!-- <field name="campus"/> -->
+                            
+                            <field name="std_name"/>
                             <field name="std_current_branch"/>
                             <field name="student_ids_ol"/>
                             <field name="std_fathername"/>
