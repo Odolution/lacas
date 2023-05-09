@@ -75,6 +75,12 @@ class add_plan_line_wiz(models.TransientModel):
                         installment_ids=self.env['tuition.installment'].search([
                                         ('name','in',names),
                                         ('tuition_plan_id','=',plan.id)])
+                        if self.product_id.is_discount_type:
+                            tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
+                            if self.unit_price==0:
+                                tuition_plan["x_studio_have_discount_1"]=0
+                            if self.unit_price<0:
+                                tuition_plan["x_studio_have_discount_1"]=1
                         
                         linedata={
                                     'plan_id':plan.id,
