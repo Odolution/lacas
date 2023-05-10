@@ -56,7 +56,7 @@ class add_plan_line_wiz(models.TransientModel):
                         installment_ids=self.env['tuition.installment'].search([
                                         ('name','in',names),
                                         ('tuition_plan_id','=',plan.id)])
-                                        
+
                         #if discounted product then add discount name and value 
                         if self.product_id.is_discount_type:
                             tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
@@ -73,8 +73,8 @@ class add_plan_line_wiz(models.TransientModel):
                                 for dis in self.product_id.discount_ids:
                                     if length!=0:
                                     # length=len(dis)
-                                    val=int(dis.discount_value)
-                                    sum=val+sum
+                                        val=int(dis.discount_value)
+                                        sum=val+sum
                                 div=sum/length
                                 valst.append(div)
                                 total = 0
