@@ -67,7 +67,7 @@ class add_plan_line_wiz(models.TransientModel):
                                 tuition_plan["x_studio_have_discount_1"]=1
                             if not self.product_id.x_studio_is_fcraw:
                                 lst.append(self.product_id.name)
-                                installment_ids["x_studio_discount_name_1"]=' |  '.join(lst)
+                                tuition_plan["x_studio_discount_name_1"]=' |  '.join(lst)
                                 valst=[]
                                 total=[]
                                 length=len(self.product_id.discount_ids)
