@@ -51,6 +51,8 @@ class add_plan_line_wiz(models.TransientModel):
         else:
             self.update()
     def add(self):
+            lst=[]
+            lst_fc=[]
             for plan in self.plan_ids:
                         names=[i.name for i in self.installment_names]
                         installment_ids=self.env['tuition.installment'].search([
