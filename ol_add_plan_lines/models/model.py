@@ -104,8 +104,8 @@ class add_plan_line_wiz(models.TransientModel):
                                 val=int(dis.discount_value)
                                 sum=val+sum
                                 if length!=0:
-                                div=sum/length
-                                valst_fc.append(div)
+                                    div=sum/length
+                                    valst_fc.append(div)
                             total_fc = 0
                             for num in valst_fc:
                                 total_fc += num
