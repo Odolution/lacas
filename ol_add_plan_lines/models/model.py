@@ -90,35 +90,35 @@ class add_plan_line_wiz(models.TransientModel):
                                 else:
                                     tuition_plan["x_studio_discount_value_1"]="0"
                         #fcraw discounted values 
-                        if self.product_id.x_studio_is_fcraw:
-                            tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
-                            
-                            lst_fc.append(self.product_id.name)
-                            tuition_plan["x_studio_fcraw_name"]=' |  '.join(lst_fc)
-                            valst_fc=[]
-                            total_fc=[]
-                            length=len(self.product_id.discount_ids)
-                            sum=0
-                            for dis in self.product_id.discount_ids:
-                                # length=len(dis)
-                                val=int(dis.discount_value)
-                                sum=val+sum
-                                if length!=0:
-                                    div=sum/length
-                                    valst_fc.append(div)
-                            total_fc = 0
-                            for num in valst_fc:
-                                total_fc += num
-                            t=int(total_fc)
-                            tot=str(t)
-                            if tot!='0':
-                                tuition_plan["x_studio_fcraw_value"]=tot
-                            else:
-                                tuition_plan["x_studio_fcraw_value"]=''
-                            if self.unit_price==0:
-                                tuition_plan["x_studio_fcraw"]=0
-                            if self.unit_price>0:
-                                tuition_plan["x_studio_fcraw"]=1
+                            if self.product_id.x_studio_is_fcraw:
+                                tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
+                                
+                                lst_fc.append(self.product_id.name)
+                                tuition_plan["x_studio_fcraw_name"]=' |  '.join(lst_fc)
+                                valst_fc=[]
+                                total_fc=[]
+                                length=len(self.product_id.discount_ids)
+                                sum=0
+                                for dis in self.product_id.discount_ids:
+                                    # length=len(dis)
+                                    val=int(dis.discount_value)
+                                    sum=val+sum
+                                    if length!=0:
+                                        div=sum/length
+                                        valst_fc.append(div)
+                                total_fc = 0
+                                for num in valst_fc:
+                                    total_fc += num
+                                t=int(total_fc)
+                                tot=str(t)
+                                if tot!='0':
+                                    tuition_plan["x_studio_fcraw_value"]=tot
+                                else:
+                                    tuition_plan["x_studio_fcraw_value"]=''
+                                if self.unit_price==0:
+                                    tuition_plan["x_studio_fcraw"]=0
+                                if self.unit_price>0:
+                                    tuition_plan["x_studio_fcraw"]=1
 
 
   
