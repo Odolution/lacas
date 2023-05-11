@@ -93,7 +93,7 @@ class add_plan_line_wiz(models.TransientModel):
                         if self.product_id.x_studio_is_fcraw:
                             tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
                             
-                            lst_fc.append(i.product_id.name)
+                            lst_fc.append(self.product_id.name)
                             record["x_studio_fcraw_name"]=' |  '.join(lst_fc)
                             valst_fc=[]
                             total_fc=[]
