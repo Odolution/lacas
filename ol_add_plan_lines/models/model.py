@@ -61,35 +61,7 @@ class add_plan_line_wiz(models.TransientModel):
 
                         #if discounted product then add discount name and value 
                         if self.product_id.is_discount_type:
-                            tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
-                            if self.unit_price==0:
-                                tuition_plan["x_studio_have_discount_1"]=0
-                            if self.unit_price>0:
-                                tuition_plan["x_studio_have_discount_1"]=1
-                            if not self.product_id.x_studio_is_fcraw:
-                                lst.append(self.product_id.name)
-                                tuition_plan["x_studio_discount_name_1"]=' |  '.join(lst)
-                                valst=[]
-                                total=[]
-                                length=len(self.product_id.discount_ids)
-                                sum=0
-                                for dis in self.product_id.discount_ids:
-                                    if length!=0:
-                                    # length=len(dis)
-                                        val=int(dis.discount_value)
-                                        sum=val+sum
-                                div=sum/length
-                                valst.append(div)
-                                total = 0
-                                for num in valst:
-                                    total += num
-                                t=int(total)
-                                tot=str(t)
-                                if tot!='0':
-                                    tuition_plan["x_studio_discount_value_1"]=tot
-                                else:
-                                    tuition_plan["x_studio_discount_value_1"]="0"
-                        #fcraw discounted values 
+                             #fcraw discounted values 
                             if self.product_id.x_studio_is_fcraw:
                                 tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
                                 
@@ -119,7 +91,36 @@ class add_plan_line_wiz(models.TransientModel):
                                     tuition_plan["x_studio_fcraw"]=0
                                 if self.unit_price>0:
                                     tuition_plan["x_studio_fcraw"]=1
-
+                            else:
+                                tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
+                                if self.unit_price==0:
+                                    tuition_plan["x_studio_have_discount_1"]=0
+                                if self.unit_price>0:
+                                    tuition_plan["x_studio_have_discount_1"]=1
+                                if not self.product_id.x_studio_is_fcraw:
+                                    lst.append(self.product_id.name)
+                                    tuition_plan["x_studio_discount_name_1"]=' |  '.join(lst)
+                                    valst=[]
+                                    total=[]
+                                    length=len(self.product_id.discount_ids)
+                                    sum=0
+                                    for dis in self.product_id.discount_ids:
+                                        if length!=0:
+                                        # length=len(dis)
+                                            val=int(dis.discount_value)
+                                            sum=val+sum
+                                    div=sum/length
+                                    valst.append(div)
+                                    total = 0
+                                    for num in valst:
+                                        total += num
+                                    t=int(total)
+                                    tot=str(t)
+                                    if tot!='0':
+                                        tuition_plan["x_studio_discount_value_1"]=tot
+                                    else:
+                                        tuition_plan["x_studio_discount_value_1"]="0"
+                            
 
   
                         
@@ -142,17 +143,19 @@ class add_plan_line_wiz(models.TransientModel):
                                         ('name','in',names),
                                         ('tuition_plan_id','=',plan.id)])
                         if self.product_id.is_discount_type:
-                            tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
-                            if self.unit_price==0:
-                                tuition_plan["x_studio_have_discount_1"]=0
-                            if self.unit_price>0:
-                                tuition_plan["x_studio_have_discount_1"]=1
-                        if self.product_id.x_studio_is_fcraw:
-                            tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
-                            if self.unit_price==0:
-                                tuition_plan["x_studio_fcraw"]=0
-                            if self.unit_price>0:
-                                tuition_plan["x_studio_fcraw"]=1
+                            if self.product_id.x_studio_is_fcraw:
+                                tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
+                                if self.unit_price==0:
+                                    tuition_plan["x_studio_fcraw"]=0
+                                if self.unit_price>0:
+                                    tuition_plan["x_studio_fcraw"]=1
+                            else:
+                                tuition_plan=self.env['tuition.plan'].search([('id','=',plan.id)])
+                                if self.unit_price==0:
+                                    tuition_plan["x_studio_have_discount_1"]=0
+                                if self.unit_price>0:
+                                    tuition_plan["x_studio_have_discount_1"]=1
+                        
                         
                         linedata={
                                     'plan_id':plan.id,
