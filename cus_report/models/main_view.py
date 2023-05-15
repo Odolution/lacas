@@ -64,6 +64,13 @@ class inheritinvoices(models.Model):
         
     )
 
+    unpaid_std_ids = fields.Many2many(
+        comodel_name='account.move',
+        compute='_compute_unpaid_invoice_students',
+        string='UnPaid Invoice Ids Students',
+        
+    )
+
     due_day_text=fields.Char(string="Due Day",compute='_compute_remaining_days')
     due_day=fields.Integer(string="Due Day Num",compute='_compute_remaining_days')
     account_identifier=fields.Char(string="Account Identifier")
