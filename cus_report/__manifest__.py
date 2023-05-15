@@ -21,6 +21,7 @@
         'reports/admission_challan.xml',
         'reports/invoice_inheritance.xml',
         'reports/dues_assesment_sheet.xml',
+        'reports/fee_challan_student_wise.xml',
     ],
     "images": [],
     "auto_install": False,

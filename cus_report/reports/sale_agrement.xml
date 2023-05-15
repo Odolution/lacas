@@ -29,6 +29,16 @@
     
     />
 
+    <report
+            id="report_fee_challan_students_initiate"
+            model="account.move"
+            report_type="qweb-pdf"
+            string="Fee Challan Students Only"
+            name="cus_report.fee_challan_student_wise"
+            file="cus_report.fee_challan_student_wise"
+            paperformat="cus_report.report_post_view_paper"
+        />
+
    <report
             id="report_admission_challan"
             model="account.move"

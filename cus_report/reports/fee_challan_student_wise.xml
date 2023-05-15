@@ -1,0 +1,783 @@
+<odoo>
+  <data>   
+      <template id="cus_report.fee_challan_student_wise">
+        <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="x">
+                <t t-foreach="x.unpaid_std_ids" t-as="o">
+                <div class="row" style="font-size:0.5rem;">
+                  
+                 <div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
+                     <t t-if="x.due_day&gt;0">
+                      <div class="watermark" style="position:relative;">
+                      <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
+                      <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
+                      </div>        
+                       </div>            
+                   
+                  </t>
+      
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                   
+                  <tr style="height: 65.5px;">
+                  <td style="align-items: center; ">
+                              <img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo"/>
+                  </td>
+                  <td style="align-items: center;font-size: 10px;">
+                  <p style="text-align: center; "><strong>LACAS School Network</strong><br/> Through Alfalah Transact<br/> Only</p>
+                  </td>
+                  <td style=" ">
+                              <img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo"/>
+                  
+                  </td>
+                  </tr> 
+                  </tbody>
+                  </table>
+                  <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
+                  <div>
+                  
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                    <tr>
+                    <td style="text-align: left;color: grey;  width: 30%; font-size:11px;">Bill Number:</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.name"/></strong></td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: left;color: grey; font-size:11px; width: 30%;">Issue Date :</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.create_date.strftime('%d-%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: left; color: grey; font-size:11px; width: 30%;">Due Date :</td>
+                      <td><span style="background-color: yellow; width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/></strong></span></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                  <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+                  <div>
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                    <tr>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Student:</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.name"/></strong></td>
+                    </tr>
+                    <!--start-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Father Name:</td>
+                    <td style="width: 70%; font-size:11px;">
+                      <t t-foreach="o.student_ids" t-as="i">
+                        <t t-foreach="i.relationship_ids" t-as="d">
+                         <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                            <t t-if="d.relationship_type_id.name == 'Father'">
+                                  <strong><t t-esc="d.individual_id.name"/></strong>
+                            </t>
+                        
+                        <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                        </t>
+                      </t>
+                    </td>
+                    </tr>
+                    <!--end-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Roll No :</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.facts_udid"/></strong></td>
+                    </tr>
+                    <!--<tr style="height: 26.5px;">-->
+                    <!--<td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>-->
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>-->
+                    <!--</tr>-->
+                    <!--class next grade level-->
+                    <tr style="height: 23px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>
+                  
+                    <t t-foreach="o.student_ids" t-as="i">
+                    <t t-foreach="i.enrollment_state_ids" t-as="d">
+                     <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                     <t t-if="d.enrollment_status_id.name == 'Admission'">
+                       
+                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
+                    </t>
+                    <t t-else="">
+                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
+                    </t>
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                    </t>
+                    </t>
+                    </tr>
+                    <!--next grade level-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Branch :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.school_ids.name"/></strong></td>
+                    </tr>
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch:</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
+                    </tr>
+                     <tr t-if="o.journal_id.id != 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr t-if="o.journal_id.id == 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="x.bi_monthly_cycle"/></strong></td>
+                      
+                    </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                  <div>
+                  
+                                 <table class="table table-dark" style="border-collapse:collapse; width:100%;">
+                  <thead>
+                  <tr style="background-color: 878493; width: 100px;">
+                    <th style="text-align: left; width: 98px; font-size:13px;"><strong>Name</strong></th>
+                 
+                    <th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Subtotal</strong></th>
+                  </tr>
+                  </thead>
+                    <tbody>
+                      <t t-set="Fee" t-value="0"/>
+                      <t t-set="Charges" t-value="0"/>
+            
+                      <t t-foreach="o.invoice_line_ids" t-as="d">
+                        <t t-if=" not d.product_id.x_studio_adhoc">
+                            <t t-set="Fee" t-value="Fee+int(d.price_subtotal)"/>
+                          </t>
+                      </t>
+                             <tr style="border: 1px solid black;">
+                                <td style="text-align: left; border: 1px solid black; font-size:11px;">Fee</td>
+                                <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Fee"/></td>
+                            </tr>
+                     
+                      <t t-foreach="o.invoice_line_ids" t-as="d">
+                          <t t-if="d.product_id.x_studio_adhoc">
+                              <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
+                             <tr style="border: 1px solid black;">
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;"><t t-esc="d.product_id.name"/></td>
+                       
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="int(d.price_subtotal)"/></td>
+                      </tr>
+                          </t>
+                         
+                      </t>
+                     
+                     
+                     
+                    </tbody>
+                  </table>
+
+                  <table class="table table-dark" style="width:100%;">
+                    <thead>
+                    <tr style="width: 100px;">
+                    <th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">Total </th>
+                    <th style="text-align: right; width: 132.138px; font-size:13px; margin-right: 5%;"><t t-esc="int(o.amount_residual)"/></th>
+                    </tr>
+                    
+                    </thead>
+                    </table>
+
+                  <div style=" margin-left: 2%">
+                    <h4 style="font-size:11px;"><u><strong>Late Payment Fine Slab</strong></u></h4>
+                    <h4 style="font-size:11px;">Days After Due Date</h4>
+                  </div>
+                    
+                   
+                     
+                    
+                    <div>
+                    
+                    <table class="table table-dark" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+                    <thead>
+                      <tr>
+                        
+                        <th style="border: 1px solid grey;" scope="col">From</th>
+                        <th style="border: 1px solid grey;" scope="col">To</th>
+                        <th style="border: 1px solid grey;" scope="col">Rupess</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">1</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">10</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">100</td>
+                      </tr>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">11</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">20</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">300</td>
+                      </tr>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">21</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">31</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">500</td>
+                      </tr>
+                      <tr>
+                        
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <br/>
+                  <span style="margin-left: 5px; font-size: 10px; margin-top: 5px;"><strong>For every subsequent 10 days add Rs500</strong></span>
+                  <!--<h6 style="font-weight: bold; font-size: 12px; margin-left: 10px;">For every subsequent 10 days add Rs500</h6>-->
+                    
+                      <p style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 11px; color: grey;">
+                        In case of any query please contact the school office or the
+                  LACAS accounts department.
+                  The amount can be deposited through Cheque of Bank Alfalah or
+                  cash at any branch of Bank Alfalah except Alfalah Islamic
+                  Branch.<br/>
+                  On line payment through ALFA App and Debit/Credit card is also
+                  available as per details mentioned on LACAS website.
+                  Security is refundable only if one month’s advance notice is given
+                  in writing or one month’s advance fee is paid. Security is
+                  refundable within 6 months of withdrawal or leaving. For A level
+                  students, security is refundable after completion of A level.
+                      </p>
+                      </div>
+                    <br/>
+                    <table class="table " style="width:100%;">
+                      <tbody>
+                       <td>   
+                      <SPAN STYLE="text-decoration:overline; text-align: left;  font-size: 13px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>
+                    </td>
+                    <td>
+                      <SPAN STYLE="text-decoration:overline; text-align: right;  font-size: 13px; font-weight:bold">Sign. Depositor</SPAN> 
+                    </td>
+                    </tbody>    
+                    </table>
+                    
+                  </div>
+                  </div>
+                  
+                
+                  
+                  <!--2nd box-->
+                  <div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px;margin-right: 1%;">
+                      <t t-if="x.due_day&gt;0">
+                      <div class="watermark" style="position:relative;">
+                      <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
+                      <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
+                      </div>
+                       </div>
+                  </t>
+
+               
+
+                      
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                  <tr style="height: 65.5px;">
+                  <td style="align-items: center; ">
+                              <img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo"/>
+                  </td>
+                  <td style="align-items: center;font-size: 10px;">
+                  <p style="text-align: center; "><strong>LACAS School Network</strong><br/> Through Alfalah Transact<br/> Only</p>
+                  </td>
+                  <td style=" ">
+                              <img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo"/>
+                  
+                  </td>
+                  </tr> 
+                  </tbody>
+                  </table>
+                  <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
+                  <div>
+                  
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                    <tr>
+                    <td style="text-align: left;color: grey;  width: 30%; font-size:11px;">Bill Number:</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.name"/></strong></td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: left;color: grey; font-size:11px; width: 30%;">Issue Date :</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.create_date.strftime('%d-%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: left; color: grey; font-size:11px; width: 30%;">Due Date :</td>
+                      <td><span style="background-color: yellow; width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/></strong></span></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                  <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+                  <div>
+                  
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                    <tr>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Student:</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.name"/></strong></td>
+                    </tr>
+                    <!--start-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Father Name:</td>
+                    <td style="width: 70%; font-size:11px;">
+                      <t t-foreach="o.student_ids" t-as="i">
+                        <t t-foreach="i.relationship_ids" t-as="d">
+                         <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                            <t t-if="d.relationship_type_id.name == 'Father'">
+                                  <strong><t t-esc="d.individual_id.name"/></strong>
+                            </t>
+                        
+                        <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                        </t>
+                      </t>
+                    </td>
+                    </tr>
+                    <!--end-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Roll No :</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.facts_udid"/></strong></td>
+                    </tr>
+                    <!--<tr style="height: 26.5px;">-->
+                    <!--<td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>-->
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>-->
+                    <!--</tr>-->
+                    <!--class next grade level-->
+                   <tr style="height: 23px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>
+                  
+                    <t t-foreach="o.student_ids" t-as="i">
+                    <t t-foreach="i.enrollment_state_ids" t-as="d">
+                     <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                     <t t-if="d.enrollment_status_id.name == 'Admission'">
+                       
+                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
+                    </t>
+                    <t t-else="">
+                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
+                    </t>
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                    </t>
+                    </t>
+                    </tr>
+                    <!--next grade level-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Branch :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.school_ids.name"/></strong></td>
+                    </tr>
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
+                    </tr>
+                     <tr t-if="o.journal_id.id != 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr t-if="o.journal_id.id == 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="x.bi_monthly_cycle"/></strong></td>
+                      
+                    </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                  <div>
+                  
+                                 <table class="table table-dark" style="border-collapse:collapse; width:100%;">
+                  <thead>
+                  <tr style="background-color: 878493; width: 100px;">
+                    <th style="text-align: left; width: 98px; font-size:13px;"><strong>Name</strong></th>
+                    <!--<th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>-->
+                    <th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Subtotal</strong></th>
+                  </tr>
+                  </thead>
+                    <tbody>
+                      
+                     <t t-set="Fee" t-value="0"/>
+                      <t t-set="Charges" t-value="0"/>
+            
+                      <t t-foreach="o.invoice_line_ids" t-as="d">
+                        <t t-if=" not d.product_id.x_studio_adhoc">
+                            <t t-set="Fee" t-value="Fee+int(d.price_subtotal)"/>
+                          </t>
+                      </t>
+                             <tr style="border: 1px solid black;">
+                                <td style="text-align: left; border: 1px solid black; font-size:11px;">Fee</td>
+                                <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Fee"/></td>
+                            </tr>
+                     
+                      <t t-foreach="o.invoice_line_ids" t-as="d">
+                          <t t-if="d.product_id.x_studio_adhoc">
+                              <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
+                             <tr style="border: 1px solid black;">
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;"><t t-esc="d.product_id.name"/></td>
+                       
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="int(d.price_subtotal)"/></td>
+                      </tr>
+                          </t>
+                         
+                      </t>
+                     
+                     
+                    </tbody>
+                  </table>
+
+                  <table class="table table-dark" style="width:100%;">
+                    <thead>
+                    <tr style="width: 100px;">
+                    <th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">Total </th>
+                    <th style="text-align: right; width: 132.138px; font-size:13px; margin-right: 5%;"><t t-esc="int(o.amount_residual)"/></th>
+                    </tr>
+                    </thead>
+                    </table>
+
+                  <div style=" margin-left: 2%">
+                    <h4 style="font-size:11px;"><u><strong>Late Payment Fine Slab</strong></u></h4>
+                    <h4 style="font-size:11px;">Days After Due Date</h4>
+                  </div>
+                    
+                   
+                     
+                    
+                    <div>
+                    
+                    <table class="table table-dark" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+                    <thead>
+                      <tr>
+                        
+                        <th style="border: 1px solid grey;" scope="col">From</th>
+                        <th style="border: 1px solid grey;" scope="col">To</th>
+                        <th style="border: 1px solid grey;" scope="col">Rupess</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">1</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">10</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">100</td>
+                      </tr>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">11</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">20</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">300</td>
+                      </tr>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">21</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">31</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">500</td>
+                      </tr>
+                      <tr>
+                        
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <br/>
+                  <span style="margin-left: 5px; font-size: 10px; margin-top: 5px;"><strong>For every subsequent 10 days add Rs500</strong></span>
+                  <!--<h6 style="font-weight: bold; font-size: 12px; margin-left: 10px;">For every subsequent 10 days add Rs500</h6>-->
+                    
+                      <p style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 11px; color: grey;">
+                        In case of any query please contact the school office or the
+                  LACAS accounts department.
+                  The amount can be deposited through Cheque of Bank Alfalah or
+                  cash at any branch of Bank Alfalah except Alfalah Islamic
+                  Branch.<br/>
+                  On line payment through ALFA App and Debit/Credit card is also
+                  available as per details mentioned on LACAS website.
+                  Security is refundable only if one month’s advance notice is given
+                  in writing or one month’s advance fee is paid. Security is
+                  refundable within 6 months of withdrawal or leaving. For A level
+                  students, security is refundable after completion of A level.
+                      </p>
+                      </div>
+                    <br/>
+                    <table class="table " style="width:100%;">
+                      <tbody>
+                       <td>   
+                      <SPAN STYLE="text-decoration:overline; text-align: left;  font-size: 13px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>
+                    </td>
+                    <td>
+                      <SPAN STYLE="text-decoration:overline; text-align: right;  font-size: 13px; font-weight:bold">Sign. Depositor</SPAN> 
+                    </td>
+                    </tbody>    
+                    </table>
+                    
+                  </div>
+                  </div>
+                 
+                  <!--3rd box-->
+                <div class="column" style="float: left; border: 1px solid black; width: 32%;height:750px; margin-right: 1%;">
+                      <t t-if="x.due_day&gt;0">
+                      <div class="watermark" style="position:relative;">
+                      <div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
+                      <p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '"/>
+                      </div>
+                       </div>
+                  </t>
+
+               
+
+                      
+                      
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                  <tr style="height: 65.5px;">
+                  <td style="align-items: center; ">
+                              <img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo"/>
+                  </td>
+                  <td style="align-items: center;font-size: 10px;">
+                  <p style="text-align: center; "><strong>LACAS School Network</strong><br/> Through Alfalah Transact<br/> Only</p>
+                  </td>
+                  <td style=" ">
+                              <img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo"/>
+                  
+                  </td>
+                  </tr> 
+                  </tbody>
+                  </table>
+                  <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
+                  <div>
+                  
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                    <tr>
+                    <td style="text-align: left;color: grey;  width: 30%; font-size:11px;">Bill Number:</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.name"/></strong></td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: left;color: grey; font-size:11px; width: 30%;">Issue Date :</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.create_date.strftime('%d-%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: left; color: grey; font-size:11px; width: 30%;">Due Date :</td>
+                      <td><span style="background-color: yellow; width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/></strong></span></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                  <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+                  <div>
+                  
+                    <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                    <tr>
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Student:</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.name"/></strong></td>
+                    </tr>
+                    <!--start-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Father Name:</td>
+                    <td style="width: 70%; font-size:11px;">
+                      <t t-foreach="o.student_ids" t-as="i">
+                        <t t-foreach="i.relationship_ids" t-as="d">
+                         <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                            <t t-if="d.relationship_type_id.name == 'Father'">
+                                  <strong><t t-esc="d.individual_id.name"/></strong>
+                            </t>
+                        
+                        <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                        </t>
+                      </t>
+                    </td>
+                    </tr>
+                    <!--end-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Roll No :</td>
+                    <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.facts_udid"/></strong></td>
+                    </tr>
+                    <!--<tr style="height: 26.5px;">-->
+                    <!--<td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>-->
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>-->
+                    <!--</tr>-->
+                    <!--class next grade level-->
+                    <tr style="height: 23px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td>
+                  
+                    <t t-foreach="o.student_ids" t-as="i">
+                    <t t-foreach="i.enrollment_state_ids" t-as="d">
+                     <!--<t-if "d.type.name" == 'father'> t-as="d" -->
+                     <t t-if="d.enrollment_status_id.name == 'Admission'">
+                       
+                     <td style="width: 70%; font-size:11px;"><strong><t t-esc="d.next_grade_level_id.name"/></strong></td>
+                    </t>
+                    <t t-else="">
+                        <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td>
+                    </t>
+                    <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
+                    </t>
+                    </t>
+                    </tr>
+                    <!--next grade level-->
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Branch :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.school_ids.name"/></strong></td>
+                    </tr>
+                    <tr style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Batch :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.student_ids.x_studio_batchsession"/> </strong></td>
+                    </tr>
+                     <tr t-if="o.journal_id.id != 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="o.invoice_date.strftime('%b-%Y')"/></strong></td>
+                    </tr>
+                    <tr t-if="o.journal_id.id == 126" style="height: 18px;">
+                    <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Billing Month :</td>
+                      <td style="width: 70%; font-size:11px;"><strong><t t-esc="x.bi_monthly_cycle"/></strong></td>
+                      
+                    </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                  <div>
+                  
+                                 <table class="table table-dark" style="border-collapse:collapse; width:100%;">
+                  <thead>
+                  <tr style="background-color: 878493; width: 100px;">
+                    <th style="text-align: left; width: 98px; font-size:13px;"><strong>Name</strong></th>
+                    <!--<th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>-->
+                    <th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Subtotal</strong></th>
+                  </tr>
+                  </thead>
+                    <tbody>
+                      
+                  <t t-set="Fee" t-value="0"/>
+                      <t t-set="Charges" t-value="0"/>
+            
+                      <t t-foreach="o.invoice_line_ids" t-as="d">
+                        <t t-if=" not d.product_id.x_studio_adhoc">
+                            <t t-set="Fee" t-value="Fee+int(d.price_subtotal)"/>
+                          </t>
+                      </t>
+                             <tr style="border: 1px solid black;">
+                                <td style="text-align: left; border: 1px solid black; font-size:11px;">Fee</td>
+                                <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="Fee"/></td>
+                            </tr>
+                     
+                      <t t-foreach="o.invoice_line_ids" t-as="d">
+                          <t t-if="d.product_id.x_studio_adhoc">
+                              <t t-set="Charges" t-value="Charges+int(d.price_subtotal)"/>
+                             <tr style="border: 1px solid black;">
+                        <td style="text-align: left; border: 1px solid black; font-size:11px;"><t t-esc="d.product_id.name"/></td>
+                       
+                        <td style="text-align: right; border: 1px solid black; font-size:11px;"><t t-esc="int(d.price_subtotal)"/></td>
+                      </tr>
+                          </t>
+                         
+                      </t>
+                     
+                     
+                    </tbody>
+                  </table>
+
+                  <table class="table table-dark" style="width:100%;">
+                    <thead>
+                    <tr style="width: 100px;">
+                    <th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">Total </th>
+                    <th style="text-align: right; width: 132.138px; font-size:13px; margin-right: 5%;"><t t-esc="int(o.amount_residual)"/></th>
+                    </tr>
+                    </thead>
+                    </table>
+
+                  <div style=" margin-left: 2%">
+                    <h4 style="font-size:11px;"><u><strong>Late Payment Fine Slab</strong></u></h4>
+                    <h4 style="font-size:11px;">Days After Due Date</h4>
+                  </div>
+                    
+                   
+                     
+                    
+                    <div>
+                    
+                    <table class="table table-dark" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+                    <thead>
+                      <tr>
+                        
+                        <th style="border: 1px solid grey;" scope="col">From</th>
+                        <th style="border: 1px solid grey;" scope="col">To</th>
+                        <th style="border: 1px solid grey;" scope="col">Rupess</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">1</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">10</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">100</td>
+                      </tr>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">11</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">20</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">300</td>
+                      </tr>
+                      <tr>
+                        
+                        <td style="border: 1px solid grey; text-align: center;color: grey">21</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">31</td>
+                        <td style="border: 1px solid grey; text-align: center;color: grey">500</td>
+                      </tr>
+                      <tr>
+                        
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <br/>
+                  <span style="margin-left: 5px; font-size: 10px; margin-top: 5px;"><strong>For every subsequent 10 days add Rs500</strong></span>
+                  <!--<h6 style="font-weight: bold; font-size: 12px; margin-left: 10px;">For every subsequent 10 days add Rs500</h6>-->
+                    
+                      <p style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 11px; color: grey;">
+                        In case of any query please contact the school office or the
+                  LACAS accounts department.
+                  The amount can be deposited through Cheque of Bank Alfalah or
+                  cash at any branch of Bank Alfalah except Alfalah Islamic
+                  Branch.<br/>
+                  On line payment through ALFA App and Debit/Credit card is also
+                  available as per details mentioned on LACAS website.
+                  Security is refundable only if one month’s advance notice is given
+                  in writing or one month’s advance fee is paid. Security is
+                  refundable within 6 months of withdrawal or leaving. For A level
+                  students, security is refundable after completion of A level.
+                      </p>
+                      </div>
+                    <br/>
+                    <table class="table " style="width:100%;">
+                      <tbody>
+                       <td>   
+                      <SPAN STYLE="text-decoration:overline; text-align: left;  font-size: 13px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>
+                    </td>
+                    <td>
+                      <SPAN STYLE="text-decoration:overline; text-align: right;  font-size: 13px; font-weight:bold">Sign. Depositor</SPAN> 
+                    </td>
+                    </tbody>    
+                    </table>
+                    
+                  </div>
+                  </div>
+                 
+                  </div>  
+                  <div style="">
+                      <table class="table" style="width:100%; ">
+                        <tbody style="">
+                         <td style="padding-left: 22%;">   
+                            Student Copy
+                      </td>
+                      <td style="padding-right: 12%;">
+                        Office Copy 
+                      </td>
+                      <td style=""> 
+                        Bank Copy
+                      </td>
+                      
+                      </tbody>    
+                      </table>
+                      
+                    </div>
+                              
+               <p style="page-break-after:always;"/>
+              </t>
+               </t>
+          </t>    
+        </template>
+  
+  </data>
+</odoo>
