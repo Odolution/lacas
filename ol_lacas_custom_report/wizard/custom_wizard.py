@@ -129,8 +129,8 @@ class ReceivablesReportWizard(models.TransientModel):
         for inv in sorted_inv_ids:
             list_inv.append(inv.invoice_date)
 
-        first_date = sorted_inv_ids[0]
-        last_date = sorted_inv_ids[-1]
+        first_date = sorted_inv_ids[0].invoice_date
+        last_date = sorted_inv_ids[-1].invoice_date
 
         
         
