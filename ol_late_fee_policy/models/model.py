@@ -124,6 +124,7 @@ class ext_invoice(models.Model):
             charge=policy[key]
             numberOfdays=days[key]
             if key is "remaining":##If number of days are going beyond the defined slab, then add the given amount every 10 days. 
+                raise UserError(str(numberOfdays)+" : "+str(dif)+" : "+str(int(numberOfdays/dif)))
                 charges[key]=charge+(charge*int(numberOfdays/dif))
                
             else:
