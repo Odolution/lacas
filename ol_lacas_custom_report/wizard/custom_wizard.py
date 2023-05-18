@@ -118,6 +118,9 @@ class ReceivablesReportWizard(models.TransientModel):
     
     def action_print_report(self):
 
+        global first_date 
+        global last_date
+
         move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('x_studio_withdrawn_status','=','Y'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         # inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial'])])
@@ -126,9 +129,11 @@ class ReceivablesReportWizard(models.TransientModel):
         for inv in sorted_inv_ids:
             list_inv.append(inv.invoice_date)
 
-        first_date = min(list_inv)
-        last_dfirst_dateate = max(list_inv)
+        first_date = sorted_inv_ids[0]
+        last_date = sorted_inv_ids[-1]
 
+        
+        
         
         invoice_check = []
         final_lst = []
@@ -641,6 +646,8 @@ class ReceivablesReportWizard(models.TransientModel):
             
     
     def action_print_excel_report(self):
+        global first_date 
+        global last_date
         
 
         self.action_print_report()
