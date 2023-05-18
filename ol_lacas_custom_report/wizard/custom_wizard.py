@@ -119,8 +119,15 @@ class ReceivablesReportWizard(models.TransientModel):
     def action_print_report(self):
 
         move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('x_studio_withdrawn_status','=','Y'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        
+        # inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial'])])
+        sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
+        list_inv = []
+        for inv in sorted_inv_ids:
+            list_inv.append(inv.invoice_date)
+
+        first_date = min(list_inv)
+        last_dfirst_dateate = max(list_inv)
 
         
         invoice_check = []
@@ -687,11 +694,11 @@ class ReceivablesReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,25,26,"Withdrawn DT", red_style_title)
 
 
-            v_from_month=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%m')
-            v_from_year=datetime.strptime(str(self.date_from), "%Y-%m-%d").strftime('%y')
+            v_from_month=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%m')
+            v_from_year=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%y')
 
-            v_to_month=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%m')
-            v_to_year=datetime.strptime(str(self.date_to), "%Y-%m-%d").strftime('%y')
+            v_to_month=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%m')
+            v_to_year=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%y')
 
             months= {
                 1:['01','JAN-22',10,'22'],
