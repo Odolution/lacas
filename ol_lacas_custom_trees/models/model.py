@@ -29,7 +29,8 @@ class ext(models.Model):
     std_batch=fields.Char(string="Batch", related='student_ids_ol.x_studio_batchsession')
     #std_discount=fields.Char(string="Discount note")
     #std_reason=fields.Char(string="Concession Name")
-    std_fathername=fields.Char(string="Father Name", compute='_compute_father_name')
+    std_fathername=fields.Char(string="Father Name")
+    #std_fathername=fields.Char(string="Father Name", compute='_compute_father_name')
     std_contactno=fields.Char(string="Contact No.", related='student_ids_ol.mobile')
     adm_amount=fields.Char(string="Admission Amount")
     security_amount=fields.Char(string="Security Amount")
@@ -110,11 +111,11 @@ class ext(models.Model):
         domain = [('journal_id','in',[i.id for i in journals])]
         action['domain'] = domain
         return action  
-    def _compute_father_name(self):
-        for relation in self.student_ids.relationship_ids:
-          if relation.relationship_type_id.name == "Father":
-            self.std_fathername = relation.individual_id.name
-            break
+    # def _compute_father_name(self):
+    #     for relation in self.student_ids.relationship_ids:
+    #       if relation.relationship_type_id.name == "Father":
+    #         self.std_fathername = relation.individual_id.name
+    #         break
 
     def _compute_tuition(self):
         self.tuition=''
@@ -306,7 +307,7 @@ class ext(models.Model):
         self.std_batch=""
         #self.std_discount=""
         #self.std_reason=""
-        #self.std_fathername=""
+        self.std_fathername=""
         self.std_contactno=""
         self.adm_amount=""
         self.security_amount=""
@@ -362,7 +363,7 @@ class ext(models.Model):
             # self.std_reason=self.reject_reason.name
             self.std_batch=self.x_studio_batch.x_name
             # self.std_dob=self.student_ids.date_of_birth
-            #self.std_fathername=self.partner_id.name
+            self.std_fathername=self.partner_id.name
             #self.std_factsid=self.student_ids.facts_id
             self.std_contactno=self.partner_id.mobile
             self.bill_amount=int(self.amount_total)
