@@ -268,64 +268,64 @@ class ext(models.Model):
                 elif line.product_id.x_studio_code=='BIO':
                     self.biology=line.price_subtotal
             
-            wholename=""
-            if self.student_ids.homeroom:
-                wholename=self.student_ids.homeroom
-                splitted_name=wholename.split('-')
-                if len(splitted_name)>2:
-                    #self.class_name=splitted_name[0]+"-"+splitted_name[1]
-                    self.class_name=self.grade_level_ids.name
-                    self.section_name=splitted_name[2]
-                elif len(splitted_name)>1:
+        wholename=""
+        if self.student_ids.homeroom:
+            wholename=self.student_ids.homeroom
+            splitted_name=wholename.split('-')
+            if len(splitted_name)>2:
+                #self.class_name=splitted_name[0]+"-"+splitted_name[1]
+                self.class_name=self.grade_level_ids.name
+                self.section_name=splitted_name[2]
+            elif len(splitted_name)>1:
+                #self.class_name=splitted_name[0]
+                self.class_name=self.grade_level_ids.name
+                self.section_name=splitted_name[1]
+            elif len(splitted_name)>0:
+                
+                self.class_name=self.grade_level_ids.name
                     #self.class_name=splitted_name[0]
-                    self.class_name=self.grade_level_ids.name
-                    self.section_name=splitted_name[1]
-                elif len(splitted_name)>0:
-                    
-                    self.class_name=self.grade_level_ids.name
-                        #self.class_name=splitted_name[0]
+        else:
+            if self.grade_level_ids:
+                self.class_name=self.grade_level_ids.name
             else:
-                if self.grade_level_ids:
-                    self.class_name=self.grade_level_ids.name
-                else:
-                    if self.journal_id.id==119:
-                        for nxt_grade in self.student_ids.enrollment_state_ids:
-                            self.class_name=nxt_grade.next_grade_level_id.name
+                if self.journal_id.id==119:
+                    for nxt_grade in self.student_ids.enrollment_state_ids:
+                        self.class_name=nxt_grade.next_grade_level_id.name
 
-            wholedate=str(self.invoice_date)
-            splitted_name=wholedate.split('-')
-            if self.journal_id.id==125 :
-                if len(splitted_name)>2:
-                    month=splitted_name[1]
-                    wholeyear=splitted_name[0]
-                    year=wholeyear[2:4]
-                    if month =='01':
-                        self.bill_date="Jan"+"-"+year
-                    elif month =='02':
-                        self.bill_date="Feb"+"-"+year
-                    elif month =='03':
-                        self.bill_date="Mar"+"-"+year
-                    elif month =='04':
-                        self.bill_date="Apr"+"-"+year
-                    elif month =='05':
-                        self.bill_date="May"+"-"+year
-                    elif month =='06':
-                        self.bill_date="Jun"+"-"+year
-                    elif month =='07':
-                        self.bill_date="Jul"+"-"+year
-                    elif month =='08':
-                        self.bill_date="Aug"+"-"+year
-                    elif month =='09':
-                        self.bill_date="Sep"+"-"+year
-                    elif month =='10':
-                        self.bill_date="Oct"+"-"+year
-                    elif month =='11':
-                        self.bill_date="Nov"+"-"+year
-                    elif month =='12':
-                        self.bill_date="Dec"+"-"+year
-            
-            if self.journal_id.id==126:
-                self.bill_date=self.bi_monthly_cycle
+        wholedate=str(self.invoice_date)
+        splitted_name=wholedate.split('-')
+        if self.journal_id.id==125 :
+            if len(splitted_name)>2:
+                month=splitted_name[1]
+                wholeyear=splitted_name[0]
+                year=wholeyear[2:4]
+                if month =='01':
+                    self.bill_date="Jan"+"-"+year
+                elif month =='02':
+                    self.bill_date="Feb"+"-"+year
+                elif month =='03':
+                    self.bill_date="Mar"+"-"+year
+                elif month =='04':
+                    self.bill_date="Apr"+"-"+year
+                elif month =='05':
+                    self.bill_date="May"+"-"+year
+                elif month =='06':
+                    self.bill_date="Jun"+"-"+year
+                elif month =='07':
+                    self.bill_date="Jul"+"-"+year
+                elif month =='08':
+                    self.bill_date="Aug"+"-"+year
+                elif month =='09':
+                    self.bill_date="Sep"+"-"+year
+                elif month =='10':
+                    self.bill_date="Oct"+"-"+year
+                elif month =='11':
+                    self.bill_date="Nov"+"-"+year
+                elif month =='12':
+                    self.bill_date="Dec"+"-"+year
+        
+        if self.journal_id.id==126:
+            self.bill_date=self.bi_monthly_cycle
 
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
