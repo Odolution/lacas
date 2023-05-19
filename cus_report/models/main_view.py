@@ -70,6 +70,12 @@ class inheritinvoices(models.Model):
         string='UnPaid Invoice Ids Students',
         
     )
+    unpaid_std_inv_ids = fields.Many2many(
+        comodel_name='account.move',
+        compute='_compute_unpaid_inv_students',
+        string='UnPaid Students',
+        
+    )
 
     due_day_text=fields.Char(string="Due Day",compute='_compute_remaining_days')
     due_day=fields.Integer(string="Due Day Num",compute='_compute_remaining_days')
@@ -83,6 +89,11 @@ class inheritinvoices(models.Model):
     def _compute_unpaid_invoice_students(self):
         for std_rec in self:
             std_rec.unpaid_std_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("student_ids","=",std_rec.student_ids.id),("payment_state","=","not_paid")])       
+    def _compute_unpaid_inv_students(self):
+        self.unpaid_std_inv_ids=False
+        for rec in self:
+            if rec.x_student_id_cred:
+                rec.unpaid_std_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("student_ids","=",rec.x_student_id_cred.id),("payment_state","=","not_paid"),('journal_id','in',[125,126])])       
     
     def _compute_remaining_days(self):
        
