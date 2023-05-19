@@ -129,12 +129,11 @@ class ReceivablesReportWizard(models.TransientModel):
             if len(rec.unpaid_inv_ids) > 0 :
                 move_ids.append(rec)
 
-        raise UserError(str(move_ids_raw) + " : : " + str(move_ids))
 
         std_lst=[]
         for stud in move_ids:
             std_lst.append(stud.x_student_id_cred.id)
-        raise UserError(len(std_lst))
+     
 
             
         inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','in',std_lst)])
