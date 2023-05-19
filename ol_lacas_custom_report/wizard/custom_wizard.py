@@ -127,7 +127,9 @@ class ReceivablesReportWizard(models.TransientModel):
         
         for rec in move_ids_raw:
             if len(rec.unpaid_inv_ids) > 0 :
-                move_ids.append(rec)
+                for line in rec.unpaid_inv_ids:
+                    if line.state=='posted':
+                        move_ids.append(rec)
 
 
         std_lst=[]
