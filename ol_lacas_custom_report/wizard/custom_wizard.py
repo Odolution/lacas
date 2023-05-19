@@ -585,7 +585,7 @@ class ReceivablesReportWizard(models.TransientModel):
                 desired_dict = item
                 break
 
-        raise UserError(desired_dict)
+        raise UserError(str(desired_dict))
         
  
         lines=[]
