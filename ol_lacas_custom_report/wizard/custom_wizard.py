@@ -122,10 +122,14 @@ class ReceivablesReportWizard(models.TransientModel):
         global first_date 
         global last_date
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft'),('x_student_id_cred','=',92)])
-        # for stud in move_ids:
-            # student=stud.x_student_id_cred
-        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','=',92)])
+        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft'),('unpaid_inv_ids','!=',False)])
+        std_lst=[]
+        for stud in move_ids:
+            std_lst.append(stud.x_student_id_cred.name)
+        raise UserError(std_lst)
+
+            
+        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','in',std_lst)])
         sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
         first_date = sorted_inv_ids[0].invoice_date
         last_date = sorted_inv_ids[-1].invoice_date
