@@ -122,7 +122,15 @@ class ReceivablesReportWizard(models.TransientModel):
         global first_date 
         global last_date
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft'),('unpaid_inv_ids','!=',False)])
+        move_ids = []
+        move_ids_raw=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft')])
+        
+        for rec in move_ids_raw:
+            if len(rec.unpaid_inv_ids) > 0 :
+                move_ids.append(rec)
+
+        raise UserError(str(move_ids_raw) + " : : " + str(move_ids))
+
         std_lst=[]
         for stud in move_ids:
             std_lst.append(stud.x_student_id_cred.id)
