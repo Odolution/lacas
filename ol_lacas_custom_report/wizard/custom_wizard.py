@@ -393,8 +393,8 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
         # raise UserError(str(final_lst))
 
-        invoice_checks_2 = []
-        final_list_2 = []
+        # invoice_checks_2 = []
+        # final_list_2 = []
         temp_list_2 = []
         for value in inv_ids:
             
@@ -548,9 +548,9 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dct["dec_2"]           =   element["dec_2"]
             temp_dct["total_amount"]   =  element["total_amount"]
 
-            if element["name"] in invoice_checks_2:
+            if element["name"] in invoice_check:
             
-                index = invoice_checks_2.index(element["name"])
+                index = invoice_check.index(element["name"])
                 final_lst[index]["jan"]  +=    temp_dct["jan"]
                 final_lst[index]["feb"]  +=    temp_dct["feb"]  
                 final_lst[index]["mar"]  +=    temp_dct["mar"]  
