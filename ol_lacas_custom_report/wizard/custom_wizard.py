@@ -118,19 +118,20 @@ class ReceivablesReportWizard(models.TransientModel):
     
     def action_print_report(self):
 
+
         global first_date 
         global last_date
 
-        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),('x_studio_withdrawn_status','=','Y'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        # inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial'])])
-        sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
-        list_inv = []
-        for inv in sorted_inv_ids:
-            list_inv.append(inv.invoice_date)
+        move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft')])
+        for stud in move_ids:
+        student=stud.x_student_id_cred
+        if student.id==92:
+            inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','=',student.id)])
+            sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
+            first_date = sorted_inv_ids[0].invoice_date
+            last_date = sorted_inv_ids[-1].invoice_date
+            
 
-        first_date = sorted_inv_ids[0].invoice_date
-        last_date = sorted_inv_ids[-1].invoice_date
 
         
         
@@ -392,9 +393,9 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
         # raise UserError(str(final_lst))
 
-        # invoice_checks = []
-        final_list = []
-        temp_list = []
+        invoice_checks_2 = []
+        final_list_2 = []
+        temp_list_2 = []
         for value in inv_ids:
             
 
@@ -428,7 +429,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "total_amount":0
                     }
             
-            custom_dataa['name'] = value.x_student_id_cred.name 
+            custom_dataa['name'] = value.student_ids.name 
             if value.month_date == "January" and value.year_date=='22':
                 custom_dataa['jan'] = value.amount_residual
             elif value.month_date == "Feburary" and value.year_date=='22':
@@ -482,11 +483,11 @@ class ReceivablesReportWizard(models.TransientModel):
             custom_dataa['total_amount']=value.amount_residual
             
         
-            temp_list.append(custom_dataa)
+            temp_list_2.append(custom_dataa)
         
 
         
-        for element in temp_list:
+        for element in temp_list_2:
             temp_dct={
                         "name":'',
                         "jan": 0,
@@ -546,9 +547,9 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dct["dec_2"]           =   element["dec_2"]
             temp_dct["total_amount"]   =  element["total_amount"]
 
-            if element["name"] in invoice_check:
+            if element["name"] in invoice_checks_2:
             
-                index = invoice_check.index(element["name"])
+                index = invoice_checks_2.index(element["name"])
                 final_lst[index]["jan"]  +=    temp_dct["jan"]
                 final_lst[index]["feb"]  +=    temp_dct["feb"]  
                 final_lst[index]["mar"]  +=    temp_dct["mar"]  
