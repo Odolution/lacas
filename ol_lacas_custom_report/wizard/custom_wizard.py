@@ -124,13 +124,13 @@ class ReceivablesReportWizard(models.TransientModel):
 
         move_ids=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft')])
         for stud in move_ids:
-        student=stud.x_student_id_cred
-        if student.id==92:
-            inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','=',student.id)])
-            sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
-            first_date = sorted_inv_ids[0].invoice_date
-            last_date = sorted_inv_ids[-1].invoice_date
-            
+            student=stud.x_student_id_cred
+            if student.id==92:
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','=',student.id)])
+                sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
+                first_date = sorted_inv_ids[0].invoice_date
+                last_date = sorted_inv_ids[-1].invoice_date
+                
 
 
         
