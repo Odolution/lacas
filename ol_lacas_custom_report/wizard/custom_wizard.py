@@ -836,7 +836,8 @@ class ReceivablesReportWizard(models.TransientModel):
                         # lst.append([row_1,row_1,column,column+1])
                       
                         column+=2
-                    worksheet.write_merge(row,row,column,column+1,rec.total_amount,heading_style)
+                    if rec.total_amount != 0
+                        worksheet.write_merge(row,row,column,column+1,rec.total_amount,heading_style)
                       
                     row+=1
                     sn+=1
