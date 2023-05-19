@@ -18,6 +18,8 @@
     'data': [
         
         "views/view.xml",
+        "views/tab_fields.xml",
+        
     ],
     'demo': [
     ],
