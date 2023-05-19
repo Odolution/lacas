@@ -6,8 +6,8 @@ import json
 class ext(models.Model):
     _inherit="account.move"
    
-    #student_ids_ol=fields.Many2one('school.student', string="std ol", compute='_feild_students')
-    student_ids_ol=fields.Many2one('school.student', string="std ol")
+    student_ids_ol=fields.Many2one('school.student', string="std ol", compute='_feild_students')
+    #student_ids_ol=fields.Many2one('school.student', string="std ol")
     tuition=fields.Integer(string="Tuition Fee")
     club=fields.Integer(string="Club Charges")
     computer=fields.Integer(string="computer Charges")
@@ -77,12 +77,12 @@ class ext(models.Model):
     continuation=fields.Integer(string="Continuation")
 
 
-    # def _feild_students(self):
-    #     for rec_std in self:
-    #         if rec_std.student_ids:
-    #             rec_std.student_ids_ol=rec_std.student_ids.id
-    #         else:
-    #             rec_std.student_ids_ol=''
+    def _feild_students(self):
+        for rec_std in self:
+            if rec_std.student_ids:
+                rec_std.student_ids_ol=rec_std.student_ids.id
+            else:
+                rec_std.student_ids_ol=''
 
 
     # def _compute_UDID(self):
