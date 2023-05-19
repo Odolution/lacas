@@ -126,8 +126,8 @@ class ReceivablesReportWizard(models.TransientModel):
         move_ids_raw=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft')])
         
         for rec in move_ids_raw:
-            if len(rec.unpaid_inv_ids) > 0 :
-                for line in rec.unpaid_inv_ids:
+            if len(rec.unpaid_std_inv_ids) > 0 :
+                for line in rec.unpaid_std_inv_ids:
                     if line.state=='posted':
                         move_ids.append(rec)
 
