@@ -578,7 +578,14 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
 
-        raise UserError(str(final_lst))
+        desired_name = 'Fasih Ullah  Yasir'
+
+        for item in final_lst:
+            if item['name'] == desired_name:
+                desired_dict = item
+                break
+
+        raise UserError(desired_dict)
         
  
         lines=[]
