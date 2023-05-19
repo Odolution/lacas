@@ -144,7 +144,7 @@ class ReceivablesReportWizard(models.TransientModel):
             first_date = sorted_inv_ids[0].invoice_date
             last_date = sorted_inv_ids[-1].invoice_date
         else:
-            raise UserError("There are no receivable for the date from {} to {}").format(self.date_to,self.date_from)
+            raise UserError(str("There are no receivable for the date from {} to {}").format(self.date_to,self.date_from))
         
         
                 
