@@ -140,8 +140,13 @@ class ReceivablesReportWizard(models.TransientModel):
             
         inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','in',std_lst)])
         sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
-        first_date = sorted_inv_ids[0].invoice_date
-        last_date = sorted_inv_ids[-1].invoice_date
+        if sorted_inv_ids:
+            first_date = sorted_inv_ids[0].invoice_date
+            last_date = sorted_inv_ids[-1].invoice_date
+        else:
+            raise UserError("There are no receivable for the date from {} to {}").format(self.date_to,self.date_from)
+        
+        
                 
 
 
