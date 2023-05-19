@@ -484,6 +484,7 @@ class ReceivablesReportWizard(models.TransientModel):
             
         
             temp_list_2.append(custom_dataa)
+        raise UserError(temp_list_2)
         
 
         
