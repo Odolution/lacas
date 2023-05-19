@@ -90,9 +90,9 @@ class inheritinvoices(models.Model):
         for std_rec in self:
             std_rec.unpaid_std_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("student_ids","=",std_rec.student_ids.id),("payment_state","=","not_paid")])       
     def _compute_unpaid_inv_students(self):
-        self.unpaid_std_inv_ids=False
+        # self.unpaid_std_inv_ids=False
         for rec in self:
-            if rec.x_student_id_cred:
+            if rec.move_type=='out_refund':
                 rec.unpaid_std_ids=self.env['account.move'].search([("move_type","=","out_invoice"),("student_ids","=",rec.x_student_id_cred.id),("payment_state","=","not_paid"),('journal_id','in',[125,126])])       
     
     def _compute_remaining_days(self):
