@@ -484,7 +484,7 @@ class ReceivablesReportWizard(models.TransientModel):
             
         
             temp_list_2.append(custom_dataa)
-        raise UserError(str(temp_list_2))
+        # raise UserError(str(temp_list_2))
         
 
         
@@ -578,7 +578,7 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
 
-        # raise UserError(str(final_lst))
+        raise UserError(str(final_lst))
         
  
         lines=[]
