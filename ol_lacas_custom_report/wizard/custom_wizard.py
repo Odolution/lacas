@@ -123,7 +123,7 @@ class ReceivablesReportWizard(models.TransientModel):
         global last_date
 
         move_ids = []
-        move_ids_raw=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','draft')])
+        move_ids_raw=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         
         for rec in move_ids_raw:
             if len(rec.unpaid_std_inv_ids) > 0 :
