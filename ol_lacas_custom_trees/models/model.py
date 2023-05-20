@@ -85,24 +85,24 @@ class ext(models.Model):
                 rec_std.student_ids_ol=''
 
 
-    # def _compute_UDID(self):
+    def _compute_UDID(self):
 
-    #     self.student_code=""
-    #     for rec in self:
-    #         if rec.student_ids:
-    #                 rec.student_code=rec.student_ids.facts_udid
+        self.student_code=""
+        for rec in self:
+            if rec.student_ids:
+                    rec.student_code=rec.student_ids.facts_udid
 
-    # def _compute_facts_id(self):
-    #     for rec_id in self:
-    #         rec_id.std_factsid=""
-    #         if rec_id.student_ids:
-    #             rec_id.std_factsid=rec_id.student_ids.facts_id
+    def _compute_facts_id(self):
+        for rec_id in self:
+            rec_id.std_factsid=""
+            if rec_id.student_ids:
+                rec_id.std_factsid=rec_id.student_ids.facts_id
 
-    # def _compute_father_name(self):
-    #     for relation in self.student_ids.relationship_ids:
-    #       if relation.relationship_type_id.name == "Father":
-    #         self.std_fathername = relation.individual_id.name
-    #         break
+    def _compute_father_name(self):
+        for relation in self.student_ids.relationship_ids:
+          if relation.relationship_type_id.name == "Father":
+            self.std_fathername = relation.individual_id.name
+            break
     def _compute_net_amnt(self):
 
         if self.invoice_line_ids:
