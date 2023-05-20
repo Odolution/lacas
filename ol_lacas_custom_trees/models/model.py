@@ -99,14 +99,12 @@ class ext(models.Model):
                 rec_id.std_factsid=rec_id.student_ids.facts_id
 
     def _compute_father_name(self):
-        rec.std_fathername=""
         for rec in self:
-           
             for relation in rec.student_ids.relationship_ids:
                 if relation.relationship_type_id.name == "Father":
                     rec.std_fathername = relation.individual_id.name
                 else:
-                    rec.std_fathername = relation.individual_id.name
+                    rec.std_fathername = ""
 
                 
 
