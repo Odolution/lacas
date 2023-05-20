@@ -182,13 +182,13 @@
                 <field name="student_code"/>
                 <field name="std_factsid"/>
                 <field name="student_name"/>
-                <field name="std_fathername"/>
+                <!-- <field name="std_fathername"/>
                 <field name="class_name"/>
                 <field name="section_name"/>
-                <field name="campus"/>
+                <field name="campus"/> -->
                 <field name="std_batch"/>
                 <field name="bill_date"/>
-                <field name="challan_date"/>
+                <!-- <field name="challan_date"/>
                 <field name="due_date"/>
                 <field name="due_amount"/>
                 <field name="net_amount"/>
@@ -227,7 +227,7 @@
                 <field name="welcome"/>
                 <field name="workbook"/>
                 <field name="uniform"/>
-                <field name="continuation"/>
+                <field name="continuation"/> -->
 
                 <field name="company_currency_id" invisible="1"/>
                 <field name="to_check" optional="hide" widget="boolean_toggle"/>
