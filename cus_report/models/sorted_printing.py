@@ -15,17 +15,18 @@ class Sorted_cl(models.Model):
     # section_name = fields.Many2one('your.section.model', string='Section')
 
     
-    def get_sorted_records(records):
-        #records = self.search([])
-        sorted_records = sorted(records, key=lambda x: (x.challan_date, x.x_studio_current_branchschool.name))
-        return sorted_records
-
-    def generate_report(self):
+    def get_sorted_records(self):
         records = self.search([])
+        sorted_records = sorted(records, key=lambda x: (x.challan_date, x.x_studio_current_branchschool.name))
+        raise UserError(sorted_records)
+        #return sorted_records
 
-        # Sort the records
-        sorted_records = self.get_sorted_records(records)
+    # def generate_report(self):
+    #     records = self.search([])
 
-        # Pass the sorted records to the report generation method
-        report = env.ref('cus_report.fee_challan_student_wise').render_qweb_pdf(sorted_records)
-         # Do further processing or return the report as needed
+    #     # Sort the records
+    #     sorted_records = self.get_sorted_records(records)
+
+    #     # Pass the sorted records to the report generation method
+    #     report = env.ref('cus_report.fee_challan_student_wise').render_qweb_pdf(sorted_records)
+    #      # Do further processing or return the report as needed
