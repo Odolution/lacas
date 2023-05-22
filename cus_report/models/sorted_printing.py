@@ -20,7 +20,7 @@ class Sorted_cl(models.Model):
         sorted_records = sorted(records, key=lambda x: (x.challan_date, x.x_studio_current_branchschool.name))
         return sorted_records
 
-    def generate_report():
+    def generate_report(self):
         records = self.search([])
 
         # Sort the records
