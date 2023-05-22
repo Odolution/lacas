@@ -24,7 +24,7 @@ class Sorted_cl(models.Model):
         records = self.search([])
 
         # Sort the records
-        sorted_records = get_sorted_records(records)
+        sorted_records = self.get_sorted_records(records)
 
         # Pass the sorted records to the report generation method
         report = env.ref('cus_report.fee_challan_student_wise').render_qweb_pdf(sorted_records)
