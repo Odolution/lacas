@@ -16,9 +16,10 @@ class Sorted_cl(models.Model):
 
     
     def get_sorted_records(self):
-        records = self.search([])
-        sorted_records = sorted(records, key=lambda x: (x.challan_date, x.x_studio_current_branchschool.name))
-        raise UserError(sorted_records)
+        action=self.env.ref('cus_report.fee_challan_student_wise').report_action()
+        # records = self.search([])
+        # sorted_records = sorted(records, key=lambda x: (x.challan_date, x.x_studio_current_branchschool.name))
+        # raise UserError(sorted_records)
         #return sorted_records
 
     # def generate_report(self):
