@@ -51,7 +51,7 @@ class extwiz(models.TransientModel):
                 invoice=line.move_id
                 break
             if invoice!="":
-                invoice.apply_late_fee_policy()
+                invoice.apply_late_fee_policy(payment_date=wizard.payment_date)
         return super(extwiz,self).action_create_payments()
 
 
@@ -142,12 +142,12 @@ class ext_invoice(models.Model):
                 max=charges[key]
         return max        
     # @api.onchange('state')
-    def apply_late_fee_policy(self):
+    def apply_late_fee_policy(self,payment_date=None):
         #raise UserError(self._compute_amount())
 
         
         for invoice in self:
-            late_fee_charges=invoice.get_late_fee_charges(payment_date=invoice.ol_payment_date)
+            late_fee_charges=invoice.get_late_fee_charges(payment_date=payment_date)
             # raise UserError(late_fee_charges)
         
             #late_fee_charges=invoice._compute_late_fee()
