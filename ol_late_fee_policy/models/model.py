@@ -26,7 +26,8 @@ class extwiz(models.TransientModel):
                 break
             if invoice!="":
                 wizard.amount_late_fee_exclusive=wizard.amount
-                wizard.late_fee=invoice.late_fee_compute
+                wizard.late_fee=invoice.get_late_fee_charges(payment_date=wizard.payment_date)
+                
 
     def _compute_amount(self):
         super(extwiz,self)._compute_amount()
@@ -68,14 +69,20 @@ class ext_invoice(models.Model):
             self.late_fee_compute=0
         else:  
             self.late_fee_compute=self.get_late_fee_charges()
-    def get_late_fee_charges(self):
+            
+    def get_late_fee_charges(self,payment_date=None):
+        
+        
         invoice=self
         if invoice.journal_id==False:
             return 0    ## if no journal_id found, can't be sure if we should apply late fee or not. 
         if not invoice.journal_id.apply_late_fee_policy:
             return 0    ## if invoice is for admission challan, no late fee will be charged
         ##get todays date
-        nowdate=datetime.datetime.now().date()
+        if payment_date:
+            nowdate=payment_date
+        else:
+            nowdate=datetime.datetime.now().date()
         if nowdate<invoice.invoice_date_due:
             return 0    ##if due date has not exceeded, then latefee charges are zero. 
         ## get late fee slabs
@@ -93,7 +100,7 @@ class ext_invoice(models.Model):
         ##get total number of late days till now.
         Total_Late_Days=(nowdate-invoice.invoice_date_due).days
         ##calculate how much days each slab in policy gets. 
-        remaining_days=Total_Late_Days
+        remaining_days=Total_Late_Days 
         days={}
         previous_slab_days=0
         for current_slab_days in policy.keys():
@@ -112,12 +119,13 @@ class ext_invoice(models.Model):
             policy["remaining"]=charge
         
         ##calculate total charges for each slab.
-        charges={}
+        charges={}                   
         for key in days.keys():
             charge=policy[key]
             numberOfdays=days[key]
             if key is "remaining":##If number of days are going beyond the defined slab, then add the given amount every 10 days. 
-                charges[key]=charge+(charge*int(numberOfdays/dif))
+#                 raise UserError(str(numberOfdays)+" : "+str(dif)+" : "+str(int(numberOfdays/dif))+" : "+str(charge*(2+int(numberOfdays/dif)))))
+                charges[key]=charge*(2+int(numberOfdays/dif))
             else:
                 charges[key]=charge ## add the defined amount for this slab only. 
         
@@ -133,24 +141,35 @@ class ext_invoice(models.Model):
             if charges[key]>max:
                 max=charges[key]
         return max        
-
+    # @api.onchange('state')
     def apply_late_fee_policy(self):
+        #raise UserError(self._compute_amount())
+
         
         for invoice in self:
-            late_fee_charges=invoice.get_late_fee_charges()
+            late_fee_charges=invoice.get_late_fee_charges(payment_date=invoice.ol_payment_date)
+            # raise UserError(late_fee_charges)
+        
+            #late_fee_charges=invoice._compute_late_fee()
+            
             if late_fee_charges<=0:
                 return
             ##late fee calculations are complete. now to put these charges in to the invoice lines.
             ##reset invoice to draft to be able to insert the new line
             invoice.button_draft()
+            # raise UserError(late_fee_charges)
             ##find any pre existing line for late fee. 
+
             foundline=None
             for line in invoice.invoice_line_ids:
                 if line.product_id.name=="Late Fee":
+                    
                     foundline=line
                     break
             ##if line is found. adding all charges to it.
             if foundline is not None:
+                #--------------------------------------#
+                
                 foundline.price_unit=late_fee_charges
             else:   ##else creating new late fee line and adding charges there
                 latefee_product=self.env["product.product"].search([("name","=","Late Fee")])
