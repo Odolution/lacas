@@ -25,6 +25,16 @@
     </record>
 
 
+    <record id="ir_cron_scheduled_action_inv_lines" model="ir.cron">
+            <field name="name">Invoice lines trigger</field>
+            <field name="model_id" ref="model_my_scheduled_action"/>
+            <field name="state">code</field>
+            <field name="code">model._invoice_lines_onchange()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>   
+        </record>
+
+
 
 
     <record model="ir.actions.act_window" id="act_account_move_charges">
