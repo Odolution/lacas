@@ -59,7 +59,7 @@ class ext(models.Model):
     idcard=fields.Integer(string="ID Card")
     idcardfine=fields.Integer(string="ID Card Fine")
     latecoming=fields.Integer(string="Late Coming")
-    latefee=fields.Integer(string="Late Fee",_compute="_compute_late_fee_amnt")
+    latefee=fields.Integer(string="Late Fee", compute="_compute_late_fee_amnt")
     libfine=fields.Integer(string="Library Fine")
     mnf=fields.Integer(string="Miscellaneous & Fine")
     mobfine=fields.Integer(string="Mobile Fine")
