@@ -130,13 +130,15 @@ class ext(models.Model):
                 #if deduct:
                 deduct_tot=sum(deduct)
 
-                
-                amnt_after=abs(total-deduct_tot)
+                if deduct_tot>0:
+                    amnt_after=abs(total-deduct_tot)
+                    rec.net_amount=str(amnt_after)
                 #raise UserError(amnt_after)
-
-                nofloat=int(total)
-                nofloat_tot=int(amnt_after)
-                rec.net_amount=str(amnt_after)
+                else:
+                    nofloat=int(total)
+                    rec.net_amount=str(nofloat)
+                #nofloat_tot=int(amnt_after)
+                
 
 
 
