@@ -59,7 +59,7 @@ class ext(models.Model):
     idcard=fields.Integer(string="ID Card")
     idcardfine=fields.Integer(string="ID Card Fine")
     latecoming=fields.Integer(string="Late Coming")
-    latefee=fields.Integer(string="Late Fee")
+    latefee=fields.Integer(string="Late Fee",_compute="_compute_late_fee_amnt")
     libfine=fields.Integer(string="Library Fine")
     mnf=fields.Integer(string="Miscellaneous & Fine")
     mobfine=fields.Integer(string="Mobile Fine")
@@ -109,6 +109,17 @@ class ext(models.Model):
             #         rec.std_fathername = ""
 
                 
+    def _compute_late_fee_amnt(self):
+        for rec in self:
+            if rec.invoice_line_ids:
+                for line in rec.invoice_line_ids:
+                    if 'Late Fee' in line.product_id.name:
+                        rec.latefee=line.price_subtotal
+                    else:
+                        rec.latefee=0
+
+        
+
 
     def _compute_net_amnt(self):
         for rec in self:
@@ -198,7 +209,7 @@ class ext(models.Model):
                 rec_inv.idcard=0
                 rec_inv.idcardfine=0
                 rec_inv.latecoming=0
-                rec_inv.latefee=0
+                #rec_inv.latefee=0
                 rec_inv.libfine=0
                 rec_inv.mnf=0
                 rec_inv.mobfine=0
@@ -252,8 +263,8 @@ class ext(models.Model):
                         rec_inv.idcardfine=line.price_subtotal
                     elif 'Late Coming' in line.product_id.name:
                         rec_inv.latecoming=line.price_subtotal
-                    elif 'Late Fee' in line.product_id.name:
-                        rec_inv.latefee=line.price_subtotal
+                    # elif 'Late Fee' in line.product_id.name:
+                    #     rec_inv.latefee=line.price_subtotal
                     elif 'ID Card' in line.product_id.name:
                         rec_inv.idcard=line.price_subtotal
                     elif 'Gate Pass' in line.product_id.name:
