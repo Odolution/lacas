@@ -135,17 +135,15 @@ class ext(models.Model):
                         amt.append(line.price_total)
                     if 'Late Fee' in line.product_id.name:
                         late.append(line.price_total)
-                    if line.product_id.is_discount_type=True:
+                    if line.product_id.is_discount_type==True:
                         #if line.product_id.name!="Late Fee":
-                        abs_price=line.price_total
+                        abs_price=abs(line.price_total)
                         concession.append(abs_price)
 
 
                 #if amt:
                 total=sum(amt)
-                
                 total_consession=sum(concession)
-                #if deduct:
                 late_deduct_tot=sum(late)
 
                 if deduct_tot>0:
@@ -154,7 +152,7 @@ class ext(models.Model):
                 #raise UserError(amnt_after)
                 else:
                     amnt_total_wo_latefee=abs(total-total_consession)
-                    nofloat=int(total)
+                    #nofloat=int(total)
 
                     rec.net_amount=str(amnt_total_wo_latefee)
                 #nofloat_tot=int(amnt_after)
