@@ -110,19 +110,47 @@ class ext(models.Model):
 
                 
 
+    # def _compute_net_amnt(self):
+    #     for rec in self:
+    #         if rec.invoice_line_ids:
+    #             amt=[]
+    #             for line in rec.invoice_line_ids:
+    #                 # if line.product_id.name!="Late Fee":
+    #                 #     amt.append(line.price_total)
+    #                 if line.product_id.is_discount_type!=True:
+    #                     #if line.product_id.name!="Late Fee":
+    #                     amt.append(line.price_total)
+    #             total=sum(amt)
+    #             nofloat=int(total)
+    #             rec.net_amount=str(nofloat)
     def _compute_net_amnt(self):
         for rec in self:
             if rec.invoice_line_ids:
                 amt=[]
+                deduct=[]
                 for line in rec.invoice_line_ids:
                     # if line.product_id.name!="Late Fee":
                     #     amt.append(line.price_total)
                     if line.product_id.is_discount_type!=True:
                         #if line.product_id.name!="Late Fee":
                         amt.append(line.price_total)
+                    if 'Late Fee' in line.product_id.name:
+                        deduct.append(line.price_total)
+
+
+                #if amt:
                 total=sum(amt)
-                nofloat=int(total)
-                rec.net_amount=str(nofloat)
+                #if deduct:
+                deduct_tot=sum(deduct)
+
+                if deduct_tot>0:
+                    amnt_after=abs(total-deduct_tot)
+                    rec.net_amount=str(amnt_after)
+                #raise UserError(amnt_after)
+                else:
+                    nofloat=int(total)
+                    rec.net_amount=str(nofloat)
+                #nofloat_tot=int(amnt_after)
 
 
 
