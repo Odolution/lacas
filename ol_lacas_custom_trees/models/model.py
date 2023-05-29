@@ -124,10 +124,12 @@ class ext(models.Model):
                     if 'Late Fee' in line.product_id.name:
                         deduct.append(line.price_total)
 
+
+
                 deduct_tot=sum(deduct)
 
                 total=sum(amt)
-                amnt_after=amt-deduct_tot
+                amnt_after=abs(amt-deduct_tot)
 
                 nofloat=int(total)
                 nofloat_tot=int(amnt_after)
