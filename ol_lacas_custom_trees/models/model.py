@@ -132,6 +132,7 @@ class ext(models.Model):
 
                 
                 amnt_after=abs(amt-deduct_tot)
+                raise UserError(amnt_after)
 
                 nofloat=int(total)
                 nofloat_tot=int(amnt_after)
