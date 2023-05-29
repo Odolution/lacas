@@ -153,7 +153,7 @@ class ext(models.Model):
                 else:
                     amnt_total_wo_latefee=abs(total-total_consession)
                     #nofloat=int(total)
-                    raise UserError(amnt_total_wo_latefee)
+                    #raise UserError(amnt_total_wo_latefee)
 
                     rec.net_amount=str(amnt_total_wo_latefee)
                 #nofloat_tot=int(amnt_after)
