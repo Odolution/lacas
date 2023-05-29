@@ -125,15 +125,17 @@ class ext(models.Model):
                         deduct.append(line.price_total)
 
 
-
+                #if amt:
+                total=sum(amt)
+                #if deduct:
                 deduct_tot=sum(deduct)
 
-                total=sum(amt)
+                
                 amnt_after=abs(amt-deduct_tot)
 
                 nofloat=int(total)
                 nofloat_tot=int(amnt_after)
-                rec.net_amount=str(nofloat_tot)
+                rec.net_amount=str(amnt_after)
 
 
 
