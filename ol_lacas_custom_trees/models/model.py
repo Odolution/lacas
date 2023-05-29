@@ -114,15 +114,24 @@ class ext(models.Model):
         for rec in self:
             if rec.invoice_line_ids:
                 amt=[]
+                deduct=[]
                 for line in rec.invoice_line_ids:
                     # if line.product_id.name!="Late Fee":
                     #     amt.append(line.price_total)
                     if line.product_id.is_discount_type!=True:
                         #if line.product_id.name!="Late Fee":
                         amt.append(line.price_total)
+                    if 'Late Fee' in line.product_id.name:
+                        deduct.append(line.price_total)
+
+                deduct_tot=sum(deduct)
+
                 total=sum(amt)
+                amnt_after=amt-deduct_tot
+
                 nofloat=int(total)
-                rec.net_amount=str(nofloat)
+                nofloat_tot=int(amnt_after)
+                rec.net_amount=str(nofloat_tot)
 
 
 
