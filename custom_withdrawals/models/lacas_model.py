@@ -22,10 +22,9 @@ class academics_tab(models.Model):
         compute='_compute_refund_receive', string="Receivable/Refundable")
     
 
-    @api.onchange('x_student_id_cred','state')
+    @api.onchange('x_student_id_cred')
     def _student_reversal_onchange(self):
         for rec in self:
-
             rec.udid_cred_custom=""
             if rec.x_student_id_cred:
                 rec.udid_cred_custom=rec.x_student_id_cred.facts_udid
