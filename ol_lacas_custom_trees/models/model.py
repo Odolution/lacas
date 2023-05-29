@@ -59,7 +59,7 @@ class ext(models.Model):
     idcard=fields.Integer(string="ID Card")
     idcardfine=fields.Integer(string="ID Card Fine")
     latecoming=fields.Integer(string="Late Coming")
-    latefee=fields.Integer(string="Late Fee")
+    latefee=fields.Integer(string="Late Fee", compute="_compute_late_fee_amnt")
     libfine=fields.Integer(string="Library Fine")
     mnf=fields.Integer(string="Miscellaneous & Fine")
     mobfine=fields.Integer(string="Mobile Fine")
@@ -123,11 +123,24 @@ class ext(models.Model):
     #             total=sum(amt)
     #             nofloat=int(total)
     #             rec.net_amount=str(nofloat)
+
+    def _compute_late_fee_amnt(self):
+        
+        for rec in self:
+            rec.latefee=0
+            if rec.invoice_line_ids:
+                for line in rec.invoice_line_ids:
+                    if 'Late Fee' in line.product_id.name:
+                        rec.latefee=line.price_total
+                    # else:
+                    #     rec.latefee=0
+
     def _compute_net_amnt(self):
         for rec in self:
             if rec.invoice_line_ids:
                 amt=[]
-                deduct=[]
+                late=[]
+                concession=[]
                 for line in rec.invoice_line_ids:
                     # if line.product_id.name!="Late Fee":
                     #     amt.append(line.price_total)
@@ -135,22 +148,30 @@ class ext(models.Model):
                         #if line.product_id.name!="Late Fee":
                         amt.append(line.price_total)
                     if 'Late Fee' in line.product_id.name:
-                        deduct.append(line.price_total)
+                        late.append(line.price_total)
+                    if line.product_id.is_discount_type==True:
+                        #if line.product_id.name!="Late Fee":
+                        abs_price=abs(line.price_total)
+                        concession.append(abs_price)
 
 
                 #if amt:
                 total=sum(amt)
-                #if deduct:
-                deduct_tot=sum(deduct)
+                total_consession=sum(concession)
+                late_deduct_tot=sum(late)
 
-                if deduct_tot>0:
-                    amnt_after=abs(total-deduct_tot)
+                if late_deduct_tot>0:
+                    amnt_after=abs(total-late_deduct_tot-total_consession)
                     rec.net_amount=str(amnt_after)
                 #raise UserError(amnt_after)
                 else:
-                    nofloat=int(total)
-                    rec.net_amount=str(nofloat)
+                    amnt_total_wo_latefee=abs(total-total_consession)
+                    #nofloat=int(total)
+                    #raise UserError(amnt_total_wo_latefee)
+
+                    rec.net_amount=str(amnt_total_wo_latefee)
                 #nofloat_tot=int(amnt_after)
+                
 
 
 
