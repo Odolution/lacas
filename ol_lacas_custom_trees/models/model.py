@@ -125,7 +125,8 @@ class ext(models.Model):
         for rec in self:
             if rec.invoice_line_ids:
                 amt=[]
-                deduct=[]
+                late=[]
+                concession=[]
                 for line in rec.invoice_line_ids:
                     # if line.product_id.name!="Late Fee":
                     #     amt.append(line.price_total)
@@ -133,21 +134,29 @@ class ext(models.Model):
                         #if line.product_id.name!="Late Fee":
                         amt.append(line.price_total)
                     if 'Late Fee' in line.product_id.name:
-                        deduct.append(line.price_total)
+                        late.append(line.price_total)
+                    if line.product_id.is_discount_type=True:
+                        #if line.product_id.name!="Late Fee":
+                        abs_price=line.price_total
+                        concession.append(abs_price)
 
 
                 #if amt:
                 total=sum(amt)
+                
+                total_consession=sum(concession)
                 #if deduct:
-                deduct_tot=sum(deduct)
+                late_deduct_tot=sum(late)
 
                 if deduct_tot>0:
-                    amnt_after=abs(total-deduct_tot)
+                    amnt_after=abs(total-late_deduct_tot-total_consession)
                     rec.net_amount=str(amnt_after)
                 #raise UserError(amnt_after)
                 else:
+                    amnt_total_wo_latefee=abs(total-total_consession)
                     nofloat=int(total)
-                    rec.net_amount=str(nofloat)
+
+                    rec.net_amount=str(amnt_total_wo_latefee)
                 #nofloat_tot=int(amnt_after)
                 
 
