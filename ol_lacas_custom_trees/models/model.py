@@ -146,7 +146,7 @@ class ext(models.Model):
                 total_consession=sum(concession)
                 late_deduct_tot=sum(late)
 
-                if deduct_tot>0:
+                if late_deduct_tot>0:
                     amnt_after=abs(total-late_deduct_tot-total_consession)
                     rec.net_amount=str(amnt_after)
                 #raise UserError(amnt_after)
