@@ -94,11 +94,11 @@ class ext(models.Model):
             if rec.student_ids:
                     rec.student_code=rec.student_ids.facts_udid
 
-    # def _compute_facts_id(self):
-    #     for rec_id in self:
-    #         rec_id.std_factsid=""
-    #         if rec_id.student_ids:
-    #             rec_id.std_factsid=rec_id.student_ids.facts_id
+    def _compute_facts_id(self):
+        for rec_id in self:
+            rec_id.facts_id_std=""
+            if rec_id.student_ids:
+                rec_id.facts_id_std=rec_id.student_ids.facts_id
 
     def _compute_father_name(self):
         for rec in self:
