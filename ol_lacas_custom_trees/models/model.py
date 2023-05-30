@@ -39,7 +39,7 @@ class ext(models.Model):
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
     net_amount=fields.Char(string="Net Amount",compute="_compute_net_amnt")
-    std_factsid=fields.Char(string="Facts ID",related='student_ids_ol.facts_id')
+    std_factsid=fields.Integer(string="Facts ID",related='student_ids_ol.facts_id')
     #std_factsid=fields.Char(string="Facts ID")
     std_payment_date=fields.Char(string='Payment Date')
     std_tuition_plan=fields.Char(string="Tuition Plan")
