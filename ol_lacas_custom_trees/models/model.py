@@ -15,7 +15,7 @@ class ext(models.Model):
     utility=fields.Integer(string="utility Charges")
     student_code=fields.Char(string="UDID", compute="_compute_UDID")
     #student_code=fields.Char(string="UDID")
-    student_name=fields.Char(string="Name",related='student_ids_ol.name')
+    student_name=fields.Char(string="Name",related='student_ids_ol.name', store=True)
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
     campus=fields.Char(string="Campus")
