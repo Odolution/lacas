@@ -40,7 +40,7 @@ class reportbutton(http.Controller):
                 website=True)
 
     def download_catalogue(self, **kw):
-        # raise UserError("Download Function")
+        raise UserError(str(journal_id))
 
         record_id = kw['invoice_id']
         print(kw['invoice_id'])
