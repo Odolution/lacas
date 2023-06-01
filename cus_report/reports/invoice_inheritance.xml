@@ -4,8 +4,8 @@
 		<template id="inherit_product_forecast_report" inherit_id="account.report_invoice_document">
 			<xpath expr="//t[@t-call='web.external_layout']" position="replace">
         <t t-if="docs.journal_id.name == 'Admission Challan' ">
-          <t t-call="cus_report.admission_challan">
-          </t>
+          <t t-call="cus_report.admission_challan"/>
+        </t>
         <t t-else>
             <t t-call="web.basic_layout">
               <t t-call="web.html_container">
