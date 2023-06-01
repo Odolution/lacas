@@ -4,9 +4,9 @@
 		<template id="inherit_product_forecast_report" inherit_id="account.report_invoice_document">
 			<xpath expr="//t[@t-call='web.external_layout']" position="replace">
         <!-- When Journal ID is Admission Challan -->
-        <t t-if="docs.journal_id.name == 'Admission Challan' ">
+        <!-- <t t-if="docs.journal_id.name == 'Admission Challan' ">
           <t t-call="cus_report.admission_challan"/>
-        </t>
+        </t> -->
         <!-- When Journal ID is Bi Monthly -->
         <t t-if="docs.journal_id.name == 'Bi Monthly' ">
           <t t-call="cus_report.fee_challan_student_wise"/>
