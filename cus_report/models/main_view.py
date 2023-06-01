@@ -49,7 +49,12 @@ class reportbutton(http.Controller):
         of the corresponding product and
         downloads the catalogue in pdf format"""
 
-        pdf, _ = request.env.ref('cus_report.report_fee_challan_student_wise').sudo()._render_qweb_pdf(
+        # if journal_id.name in ['Monthly Bills', 'Bi Monthly', 'Admission Challan']:
+        #     report_template = 'cus_report.admission_challan'
+        # else:
+        #     report_template = 'cus_report.report_fee_challan_students_initiate'
+
+        pdf, _ = request.env.ref('cus_report.cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
             [int(record_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                           ('Content-Disposition', 'catalogue' + '.pdf;')]
