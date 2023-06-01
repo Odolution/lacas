@@ -54,7 +54,7 @@ class reportbutton(http.Controller):
         # else:
         #     report_template = 'cus_report.report_fee_challan_students_initiate'
 
-        pdf, _ = request.env.ref('cus_report.cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
+        pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
             [int(record_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                           ('Content-Disposition', 'catalogue' + '.pdf;')]
