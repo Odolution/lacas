@@ -16,9 +16,6 @@
 								<table class="table" style="width:100%;">
 									<tbody>
 										<tr style="height: 65.5px;">
-											<!-- <td style="align-items: center; "> -->
-											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
-											<!-- </td> -->
 											<td style="align-items: center; ">
 												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
@@ -1084,8 +1081,8 @@
 									<td style="">
 										Bank Copy
 									</td>
-                  <p style="page-break-after:always;" />
-						
+                  <!-- <p style="page-break-after:always;" />
+						 -->
 								</tbody>
 							</table>
 						</div>
