@@ -6,7 +6,14 @@
         <t t-if="docs.journal_id.name == 'Admission Challan' ">
           <t t-call="cus_report.admission_challan"/>
         </t>
-        
+        <!-- <t t-if="docs.journal_id.name == 'Bi Monthly' ">
+          <t t-call="cus_report.fee_challan_student_wise"/>
+        </t>
+        <t t-if="docs.journal_id.name == 'Monthly Bills' ">
+          <t t-call="cus_report.fee_challan_student_wise"/>
+        </t> -->
+
+
 			</xpath>
 		</template>
 	</data>
