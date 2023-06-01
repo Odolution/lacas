@@ -171,7 +171,7 @@
 														<t t-esc="o.student_ids.x_studio_batchsession" />
 													</strong>
 												</td>
-											</tr>
+									 		</tr>
 											<tr t-if="o.journal_id.id != 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
@@ -253,21 +253,8 @@
 												</th>
 											</tr>
 										</thead>
-									</table>
-									<div>
-										<div style=" margin-left: 2%">
-											<h4 style="font-size:11px;">
-												<u>
-													<strong>
-														Late Payment Fine Slab
-													</strong>
-												</u>
-											</h4>
-											<h4 style="font-size:11px;">
-												Days After Due Date
-											</h4>
-											<div>
-												<table class="table" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+
+										<table class="table" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
 													<thead>
 														<tr>
 															<th style="border: 1px solid grey;" scope="col">
@@ -319,6 +306,21 @@
 														</tr>
 													</tbody>
 												</table>
+									</table>
+									<div>
+										<div style=" margin-left: 2%">
+											<h4 style="font-size:11px;">
+												<u>
+													<strong>
+														Late Payment Fine Slab
+													</strong>
+												</u>
+											</h4>
+											<h4 style="font-size:11px;">
+												Days After Due Date
+											</h4>
+											<div>
+												
 												<br />
 												<span style="margin-left: 5px; font-size: 10px; margin-top: 5px;">
 													<strong>
