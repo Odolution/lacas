@@ -79,7 +79,7 @@ BANK ALFALAH LTD.<br/>
                     <t t-if="o.start_session">
                     <tr style="height: 26.5px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:13px;padding-left: 10px;">Session :</td>
-                      <td style="width: 70%; font-size:13px;"><strong><t t-esc="o.start_session.strftime('%Y')"/>-<t t-esc="o.end_session.strftime('%Y')"/> </strong></td>
+                      <!-- <td style="width: 70%; font-size:13px;"><strong><t t-esc="o.start_session.strftime('%Y')"/>-<t t-esc="o.end_session.strftime('%Y')"/> </strong></td> -->
                     </tr>
                   </t>
                     <tr style="height: 23px;">
@@ -230,7 +230,7 @@ BANK ALFALAH LTD.<br/>
                     </tr>
                     <tr style="height: 26.5px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:13px;padding-left: 10px;">Session :</td>
-                      <td style="width: 70%; font-size:13px;"><strong><t t-esc="o.start_session.strftime('%Y')"/>-<t t-esc="o.end_session.strftime('%Y')"/> </strong></td>
+                      <!-- <td style="width: 70%; font-size:13px;"><strong><t t-esc="o.start_session.strftime('%Y')"/>-<t t-esc="o.end_session.strftime('%Y')"/> </strong></td> -->
                     </tr>
                     <tr style="height: 23px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:13px;padding-left: 10px;">Billing Month :</td>
@@ -378,7 +378,7 @@ BANK ALFALAH LTD.<br/>
                     </tr>
                     <tr style="height: 26.5px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:13px;padding-left: 10px;">Session :</td>
-                      <td style="width: 70%; font-size:13px;"><strong><t t-esc="o.start_session.strftime('%Y')"/>-<t t-esc="o.end_session.strftime('%Y')"/> </strong></td>
+                      <!-- <td style="width: 70%; font-size:13px;"><strong><t t-esc="o.start_session.strftime('%Y')"/>-<t t-esc="o.end_session.strftime('%Y')"/> </strong></td> -->
                     </tr>
                     <tr style="height: 23px;">
                     <td style="text-align: left;color: grey; width: 30%; font-size:13px;padding-left: 10px;">Billing Month :</td>
