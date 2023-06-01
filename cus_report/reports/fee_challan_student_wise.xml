@@ -13,31 +13,32 @@
 										</div>
 									</div>
 								</t>
-								<!--
 								<table class="table" style="width:100%;">
-								<tbody>
-								<tr style="height: 65.5px;">
-								<td style="align-items: center; ">
-								<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
-								</td>
-								<td style="align-items: center;font-size: 10px;">
-								<p style="text-align: center; ">
-								<strong>
-								LACAS School Network
-								</strong>
-								<br />
-								Through Alfalah Transact
-								<br />
-								Only
-								</p>
-								</td>
-								<td style=" ">
-								<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
-								</td>
-								</tr>
-								</tbody>
+									<tbody>
+										<tr style="height: 65.5px;">
+											<!-- <td style="align-items: center; "> -->
+											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
+											<!-- </td> -->
+											<td style="align-items: center; ">
+												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
+											</td>
+											<td style="align-items: center;font-size: 10px;">
+												<p style="text-align: center; ">
+													<strong>
+														LACAS School Network
+													</strong>
+													<br />
+													Through Alfalah Transact
+													<br />
+													Only
+												</p>
+											</td>
+											<td style=" ">
+												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
+											</td>
+										</tr>
+									</tbody>
 								</table>
-								-->
 								<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
 								<div>
 									<table class="table" style="width:100%;">
@@ -171,7 +172,7 @@
 														<t t-esc="o.student_ids.x_studio_batchsession" />
 													</strong>
 												</td>
-									 		</tr>
+											</tr>
 											<tr t-if="o.journal_id.id != 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
@@ -253,104 +254,94 @@
 												</th>
 											</tr>
 										</thead>
-
-										<table class="table" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
-													<thead>
-														<tr>
-															<th style="border: 1px solid grey;" scope="col">
-																From
-															</th>
-															<th style="border: 1px solid grey;" scope="col">
-																To
-															</th>
-															<th style="border: 1px solid grey;" scope="col">
-																Rupess
-															</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																1
-															</td>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																10
-															</td>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																100
-															</td>
-														</tr>
-														<tr>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																11
-															</td>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																20
-															</td>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																300
-															</td>
-														</tr>
-														<tr>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																21
-															</td>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																31
-															</td>
-															<td style="border: 1px solid grey; text-align: center;color: grey">
-																500
-															</td>
-														</tr>
-														<tr>
-														</tr>
-													</tbody>
-												</table>
 									</table>
-									<div>
-										<div style=" margin-left: 2%">
-											<h4 style="font-size:11px;">
-												<u>
-													<strong>
-														Late Payment Fine Slab
-													</strong>
-												</u>
-											</h4>
-											<h4 style="font-size:11px;">
-												Days After Due Date
-											</h4>
-											<div>
-												
-												<br />
-												<span style="margin-left: 5px; font-size: 10px; margin-top: 5px;">
-													<strong>
-														For every subsequent 10 days add Rs500
-													</strong>
-												</span>
-												<!-- <h6 style="font-weight: bold; font-size: 12px; margin-left: 10px;">For every subsequent 10 days add Rs500</h6> -->
-												<p style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 11px; color: grey;">
-													In case of any query please contact the school office or the
-													LACAS accounts department.
-													The amount can be deposited through Cheque of Bank Alfalah or
-													cash at any branch of Bank Alfalah except Alfalah Islamic
-													Branch.
-													<br />
-													On line payment through ALFA App and Debit/Credit card is also
-													available as per details mentioned on LACAS website.
-													Security is refundable only if one month’s advance notice is given
-													in writing or one month’s advance fee is paid. Security is
-													refundable within 6 months of withdrawal or leaving. For A level
-													students, security is refundable after completion of A level.
-												</p>
-											</div>
-										</div>
+									<div style=" margin-left: 2%">
+										<h4 style="font-size:11px;">
+											<u>
+												<strong>
+													Late Payment Fine Slab
+												</strong>
+											</u>
+										</h4>
+										<h4 style="font-size:11px;">
+											Days After Due Date
+										</h4>
 									</div>
-									<br />
-									
-									<br />
-									<br />
-									<br />
-									<br />
+									<div>
+										<table class="table" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+											<thead>
+												<tr>
+													<th style="border: 1px solid grey;" scope="col">
+														From
+													</th>
+													<th style="border: 1px solid grey;" scope="col">
+														To
+													</th>
+													<th style="border: 1px solid grey;" scope="col">
+														Rupess
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														1
+													</td>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														10
+													</td>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														100
+													</td>
+												</tr>
+												<tr>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														11
+													</td>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														20
+													</td>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														300
+													</td>
+												</tr>
+												<tr>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														21
+													</td>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														31
+													</td>
+													<td style="border: 1px solid grey; text-align: center;color: grey">
+														500
+													</td>
+												</tr>
+												<tr>
+												</tr>
+											</tbody>
+										</table>
+										<br />
+										<span style="margin-left: 5px; font-size: 10px; margin-top: 5px;">
+											<strong>
+												For every subsequent 10 days add Rs500
+											</strong>
+										</span>
+										<!-- <h6 style="font-weight: bold; font-size: 12px; margin-left: 10px;">For every subsequent 10 days add Rs500</h6> -->
+										<p style="padding-inline: 10px; margin: 2px 10px 10px 10px;  font-size: 11px; color: grey;">
+											In case of any query please contact the school office or the
+											LACAS accounts department.
+											The amount can be deposited through Cheque of Bank Alfalah or
+											cash at any branch of Bank Alfalah except Alfalah Islamic
+											Branch.
+											<br />
+											On line payment through ALFA App and Debit/Credit card is also
+											available as per details mentioned on LACAS website.
+											Security is refundable only if one month’s advance notice is given
+											in writing or one month’s advance fee is paid. Security is
+											refundable within 6 months of withdrawal or leaving. For A level
+											students, security is refundable after completion of A level.
+										</p>
+									</div>
 									<br />
 									<table class="table" style="width:100%;">
 										<tbody>
@@ -377,31 +368,32 @@
 										</div>
 									</div>
 								</t>
-								<!--
 								<table class="table" style="width:100%;">
-								<tbody>
-								<tr style="height: 65.5px;">
-								<td style="align-items: center; ">
-								<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
-								</td>
-								<td style="align-items: center;font-size: 10px;">
-								<p style="text-align: center; ">
-								<strong>
-								LACAS School Network
-								</strong>
-								<br />
-								Through Alfalah Transact
-								<br />
-								Only
-								</p>
-								</td>
-								<td style=" ">
-								<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
-								</td>
-								</tr>
-								</tbody>
+									<tbody>
+										<tr style="height: 65.5px;">
+											<!-- <td style="align-items: center; "> -->
+											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
+											<!-- </td> -->
+											<td style="align-items: center; ">
+												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
+											</td>
+											<td style="align-items: center;font-size: 10px;">
+												<p style="text-align: center; ">
+													<strong>
+														LACAS School Network
+													</strong>
+													<br />
+													Through Alfalah Transact
+													<br />
+													Only
+												</p>
+											</td>
+											<td style=" ">
+												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
+											</td>
+										</tr>
+									</tbody>
 								</table>
-								-->
 								<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
 								<div>
 									<table class="table" style="width:100%;">
@@ -469,6 +461,7 @@
 																	<t t-esc="d.individual_id.name" />
 																</strong>
 															</t>
+															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
 														</t>
 													</t>
 												</td>
@@ -484,12 +477,18 @@
 													</strong>
 												</td>
 											</tr>
+											<!-- <tr style="height: 26.5px;"> -->
+											<!-- <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td> -->
+											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td> -->
+											<!-- </tr> -->
+											<!-- class next grade level -->
 											<tr style="height: 23px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
 												<t t-foreach="o.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
+														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
@@ -504,6 +503,7 @@
 																</strong>
 															</td>
 														</t>
+														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
 													</t>
 												</t>
 											</tr>
@@ -724,31 +724,32 @@
 										</div>
 									</div>
 								</t>
-								<!--
 								<table class="table" style="width:100%;">
-								<tbody>
-								<tr style="height: 65.5px;">
-								<td style="align-items: center; ">
-								<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
-								</td>
-								<td style="align-items: center;font-size: 10px;">
-								<p style="text-align: center; ">
-								<strong>
-								LACAS School Network
-								</strong>
-								<br />
-								Through Alfalah Transact
-								<br />
-								Only
-								</p>
-								</td>
-								<td style=" ">
-								<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
-								</td>
-								</tr>
-								</tbody>
+									<tbody>
+										<tr style="height: 65.5px;">
+											<!-- <td style="align-items: center; "> -->
+											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
+											<!-- </td> -->
+											<td style="align-items: center; ">
+												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
+											</td>
+											<td style="align-items: center;font-size: 10px;">
+												<p style="text-align: center; ">
+													<strong>
+														LACAS School Network
+													</strong>
+													<br />
+													Through Alfalah Transact
+													<br />
+													Only
+												</p>
+											</td>
+											<td style=" ">
+												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
+											</td>
+										</tr>
+									</tbody>
 								</table>
-								-->
 								<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
 								<div>
 									<table class="table" style="width:100%;">
@@ -1083,10 +1084,10 @@
 									<td style="">
 										Bank Copy
 									</td>
-									<!-- <p style="page-break-after:always;" /> -->
 								</tbody>
 							</table>
 						</div>
+						<p style="page-break-after:always;" />
 					</t>
 				</t>
 			</t>
