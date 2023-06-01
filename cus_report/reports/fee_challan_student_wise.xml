@@ -365,12 +365,9 @@
 										</div>
 									</div>
 								</t>
-								<table class="table" style="width:100%;">
+								<!-- <table class="table" style="width:100%;">
 									<tbody>
 										<tr style="height: 65.5px;">
-											<!-- <td style="align-items: center; "> -->
-											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
-											<!-- </td> -->
 											<td style="align-items: center; ">
 												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
@@ -390,7 +387,7 @@
 											</td>
 										</tr>
 									</tbody>
-								</table>
+								</table> -->
 								<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
 								<div>
 									<table class="table" style="width:100%;">
@@ -458,7 +455,6 @@
 																	<t t-esc="d.individual_id.name" />
 																</strong>
 															</t>
-															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
 														</t>
 													</t>
 												</td>
@@ -474,18 +470,12 @@
 													</strong>
 												</td>
 											</tr>
-											<!-- <tr style="height: 26.5px;"> -->
-											<!-- <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td> -->
-											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td> -->
-											<!-- </tr> -->
-											<!-- class next grade level -->
 											<tr style="height: 23px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
 												<t t-foreach="o.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
-														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
@@ -500,7 +490,6 @@
 																</strong>
 															</td>
 														</t>
-														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
 													</t>
 												</t>
 											</tr>
@@ -721,12 +710,9 @@
 										</div>
 									</div>
 								</t>
-								<table class="table" style="width:100%;">
+								<!-- <table class="table" style="width:100%;">
 									<tbody>
 										<tr style="height: 65.5px;">
-											<!-- <td style="align-items: center; "> -->
-											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
-											<!-- </td> -->
 											<td style="align-items: center; ">
 												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
@@ -746,7 +732,7 @@
 											</td>
 										</tr>
 									</tbody>
-								</table>
+								</table> -->
 								<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
 								<div>
 									<table class="table" style="width:100%;">
