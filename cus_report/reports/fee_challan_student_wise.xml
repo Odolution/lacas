@@ -16,7 +16,7 @@
                    
                   </t>
       
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                    
                   <tr style="height: 65.5px;">
@@ -39,7 +39,7 @@
                   <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
                   <div>
                   
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                     <tr>
                     <td style="text-align: left;color: grey;  width: 30%; font-size:11px;">Bill Number:</td>
@@ -58,7 +58,7 @@
                   </div>
                   <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
                   <div>
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                     <tr>
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Student:</td>
@@ -130,7 +130,7 @@
                   </div>
                   <div>
                   
-                                 <table class="table table-dark" style="border-collapse:collapse; width:100%;">
+                                 <table class="table" style="border-collapse:collapse; width:100%;">
                   <thead>
                   <tr style="background-color: 878493; width: 100px;">
                     <th style="text-align: left; width: 98px; font-size:13px;"><strong>Name</strong></th>
@@ -169,7 +169,7 @@
                     </tbody>
                   </table>
 
-                  <table class="table table-dark" style="width:100%;">
+                  <table class="table" style="width:100%;">
                     <thead>
                     <tr style="width: 100px;">
                     <th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">Total </th>
@@ -189,7 +189,7 @@
                     
                     <div>
                     
-                    <table class="table table-dark" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+                    <table class="table" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
                     <thead>
                       <tr>
                         
@@ -242,7 +242,7 @@
                       </p>
                       </div>
                     <br/>
-                    <table class="table " style="width:100%;">
+                    <table class="table" style="width:100%;">
                       <tbody>
                        <td>   
                       <SPAN STYLE="text-decoration:overline; text-align: left;  font-size: 13px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>
@@ -271,7 +271,7 @@
                
 
                       
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                   <tr style="height: 65.5px;">
                   <!--<td style="align-items: center; ">-->
@@ -293,7 +293,7 @@
                   <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
                   <div>
                   
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                     <tr>
                     <td style="text-align: left;color: grey;  width: 30%; font-size:11px;">Bill Number:</td>
@@ -313,7 +313,7 @@
                   <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
                   <div>
                   
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                     <tr>
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Student:</td>
@@ -385,7 +385,7 @@
                   </div>
                   <div>
                   
-                                 <table class="table table-dark" style="border-collapse:collapse; width:100%;">
+                                 <table class="table" style="border-collapse:collapse; width:100%;">
                   <thead>
                   <tr style="background-color: 878493; width: 100px;">
                     <th style="text-align: left; width: 98px; font-size:13px;"><strong>Name</strong></th>
@@ -424,7 +424,7 @@
                     </tbody>
                   </table>
 
-                  <table class="table table-dark" style="width:100%;">
+                  <table class="table" style="width:100%;">
                     <thead>
                     <tr style="width: 100px;">
                     <th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">Total </th>
@@ -443,7 +443,7 @@
                     
                     <div>
                     
-                    <table class="table table-dark" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+                    <table class="table" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
                     <thead>
                       <tr>
                         
@@ -496,7 +496,7 @@
                       </p>
                       </div>
                     <br/>
-                    <table class="table " style="width:100%;">
+                    <table class="table" style="width:100%;">
                       <tbody>
                        <td>   
                       <SPAN STYLE="text-decoration:overline; text-align: left;  font-size: 13px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>
@@ -524,7 +524,7 @@
 
                       
                       
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                   <tr style="height: 65.5px;">
                   <!--<td style="align-items: center; ">-->
@@ -546,7 +546,7 @@
                   <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
                   <div>
                   
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                     <tr>
                     <td style="text-align: left;color: grey;  width: 30%; font-size:11px;">Bill Number:</td>
@@ -566,7 +566,7 @@
                   <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
                   <div>
                   
-                    <table class="table table-dark" style="width:100%;">
+                    <table class="table" style="width:100%;">
                     <tbody>
                     <tr>
                     <td style="text-align: left;color: grey; width: 30%; font-size:11px;">Student:</td>
@@ -638,7 +638,7 @@
                   </div>
                   <div>
                   
-                                 <table class="table table-dark" style="border-collapse:collapse; width:100%;">
+                                 <table class="table" style="border-collapse:collapse; width:100%;">
                   <thead>
                   <tr style="background-color: 878493; width: 100px;">
                     <th style="text-align: left; width: 98px; font-size:13px;"><strong>Name</strong></th>
@@ -677,7 +677,7 @@
                     </tbody>
                   </table>
 
-                  <table class="table table-dark" style="width:100%;">
+                  <table class="table" style="width:100%;">
                     <thead>
                     <tr style="width: 100px;">
                     <th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">Total </th>
@@ -696,7 +696,7 @@
                     
                     <div>
                     
-                    <table class="table table-dark" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
+                    <table class="table" style="text-align: center; font-size:11px; margin-left: 5%; border-collapse:collapse; width:90%;">
                     <thead>
                       <tr>
                         
@@ -749,7 +749,7 @@
                       </p>
                       </div>
                     <br/>
-                    <table class="table " style="width:100%;">
+                    <table class="table" style="width:100%;">
                       <tbody>
                        <td>   
                       <SPAN STYLE="text-decoration:overline; text-align: left;  font-size: 13px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>
