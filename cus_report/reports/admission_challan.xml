@@ -590,6 +590,7 @@
 												<br />
 												Payable at any Branch of BAFL Except Bank AlFalah Islamic
 											</p>
+                      
 										</td>
 										<td style=" ">
 											<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="80" class="float-left" alt="Logo" />
