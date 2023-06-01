@@ -1072,7 +1072,6 @@
 								</div>
 							</div>
 						</div>
-						<p style="page-break-after:always;" />
 						<div style="">
 							<table class="table" style="width:100%; ">
 								<tbody style="">
@@ -1085,6 +1084,8 @@
 									<td style="">
 										Bank Copy
 									</td>
+                  <p style="page-break-after:always;" />
+						
 								</tbody>
 							</table>
 						</div>
