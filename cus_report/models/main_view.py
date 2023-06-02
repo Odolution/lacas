@@ -49,7 +49,7 @@ class reportbutton(http.Controller):
         downloads the catalogue in pdf format"""
 
         # Raising 
-        raise UserError(str(self.journal_id.name)
+        raise UserError(kw['invoice_id'])
             
 
 
