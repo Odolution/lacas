@@ -45,7 +45,9 @@ class reportbutton(http.Controller):
         env = http.request.env
         model_obj = env['account.move']  # Replace 'your.model' with the actual model name
 
-        record_id = kw.get('record_id')  # Assuming you have a record ID in the URL parameters
+        record_id = kw['invoice_id']
+        
+        # record_id = kw.get('record_id')  # Assuming you have a record ID in the URL parameters
 
 
         try:
