@@ -49,17 +49,13 @@ class reportbutton(http.Controller):
         downloads the catalogue in pdf format"""
 
 
-        move = self.env['account.move'].browse(int(record_id))
-        record_name = move.name
+        journal_id = self.env['account.move'].browse(int(record_id)).journal_id
 
-        raise UserError(f"The record name is: {record_name}")
-        # journal_id = self.env['account.invoice'].browse(int(record_id)).journal_id
+        if str(journal_id.name) in ['Monthly Bills', 'Bi Monthly']:
+            # report_template = 'cus_report.admission_challan'
 
-        # if str(journal_id.name) in ['Monthly Bills', 'Bi Monthly']:
-        #     report_template = 'cus_report.admission_challan'
-
-        # elif str(journal_id.name) in ['Admission']:
-        #     report_template = 'cus_report.report_fee_challan_students_initiate'
+        elif str(journal_id.name) in ['Admission']:
+            # report_template = 'cus_report.report_fee_challan_students_initiate'
 
         # pdf, _ = request.env.ref(report_template).sudo()._render_qweb_pdf(
         #     [int(record_id)])
