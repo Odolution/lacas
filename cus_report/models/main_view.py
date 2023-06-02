@@ -40,7 +40,7 @@ class reportbutton(http.Controller):
 
     def download_catalogue(self, **kw):
         
-# avc
+        # abc
         record_id = kw['invoice_id']
         print(kw['invoice_id'])
         """In this function we are calling the report template
