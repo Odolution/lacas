@@ -51,18 +51,18 @@ class reportbutton(http.Controller):
 
         journal_id = self.env['account.invoice'].browse(int(record_id)).journal_id
 
-        if str(journal_id.name) in ['Monthly Bills', 'Bi Monthly']:
-            report_template = 'cus_report.admission_challan'
+        # if str(journal_id.name) in ['Monthly Bills', 'Bi Monthly']:
+        #     report_template = 'cus_report.admission_challan'
 
-        elif str(journal_id.name) in ['Admission']:
-            report_template = 'cus_report.report_fee_challan_students_initiate'
+        # elif str(journal_id.name) in ['Admission']:
+        #     report_template = 'cus_report.report_fee_challan_students_initiate'
 
-        pdf, _ = request.env.ref(report_template).sudo()._render_qweb_pdf(
-            [int(record_id)])
-
-
-        # pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
+        # pdf, _ = request.env.ref(report_template).sudo()._render_qweb_pdf(
         #     [int(record_id)])
+
+
+        pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
+            [int(record_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                           ('Content-Disposition', 'catalogue' + '.pdf;')]
         return request.make_response(pdf, headers=pdfhttpheaders)
