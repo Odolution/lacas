@@ -45,7 +45,7 @@ class reportbutton(http.Controller):
         
 
 
-        record_id = kw['invoice_id']['journal_id']
+        record_id = kw['partner_id']
         print(kw['invoice_id'])
         raise UserError(str(record_id))
 
