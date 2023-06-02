@@ -68,7 +68,7 @@ class reportbutton(http.Controller):
         of the corresponding product and
         downloads the catalogue in pdf format"""
 
-        move = self.env['account.move'].browse(int(record_id))
+        move = self.env['account.move'].browse()
         raise UserError(str(move))
         record_fields = move.read()[0]
 
