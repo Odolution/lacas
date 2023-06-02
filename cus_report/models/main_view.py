@@ -46,13 +46,6 @@ class reportbutton(http.Controller):
         """In this function we are calling the report template
         of the corresponding product and
         downloads the catalogue in pdf format"""
-
-        # Raising 
-        # raise UserError(record_id.name)
-            
-
-
-
         pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
             [int(record_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
