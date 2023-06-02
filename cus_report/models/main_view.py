@@ -42,35 +42,35 @@ class reportbutton(http.Controller):
         
         
 
-        env = http.request.env
-        # model_obj = env['account.move']  # Replace 'your.model' with the actual model name
-
-        record_id = kw['journal_id']
-        
-        # record_id = kw.get('record_id')  # Assuming you have a record ID in the URL parameters
-
-
-        try:
-            record = model_obj.browse(int(record_id))
-            field_value = record.journal_id  # Replace 'field_name' with the actual field name
-            raise UserError(str(field_value))
-
-        except:
-            raise UserError("Error occurred while fetching the field value")
-
-
+        # env = http.request.env
+        # # model_obj = env['account.move']  # Replace 'your.model' with the actual model name
 
         # record_id = kw['invoice_id']
-        # print(kw['invoice_id'])
-        # # raise UserError(str(record_fields))
+        
+        # # record_id = kw.get('record_id')  # Assuming you have a record ID in the URL parameters
 
-        # """In this function we are calling the report template
-        # of the corresponding product and
-        # downloads the catalogue in pdf format"""
 
-        # move = self.env['account.move'].browse(int(record_id))
-        # raise UserError(str(move))
-        # record_fields = move.read()[0]
+        # try:
+        #     record = model_obj.browse(int(record_id))
+        #     field_value = record.journal_id  # Replace 'field_name' with the actual field name
+        #     raise UserError(str(field_value))
+
+        # except:
+        #     raise UserError("Error occurred while fetching the field value")
+
+
+
+        record_id = kw['invoice_id']
+        print(kw['invoice_id'])
+        # raise UserError(str(record_fields))
+
+        """In this function we are calling the report template
+        of the corresponding product and
+        downloads the catalogue in pdf format"""
+
+        move = self.env['account.move'].browse(int(record_id))
+        raise UserError(str(move))
+        record_fields = move.read()[0]
 
         # raise UserError(str(kw))
         pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
