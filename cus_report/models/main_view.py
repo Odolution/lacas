@@ -40,7 +40,6 @@ class reportbutton(http.Controller):
                 website=True)
 
     def download_catalogue(self, **kw):
-        raise UserError(str(self.journal_id))
         
 
         record_id = kw['invoice_id']
@@ -48,6 +47,8 @@ class reportbutton(http.Controller):
         """In this function we are calling the report template
         of the corresponding product and
         downloads the catalogue in pdf format"""
+        journal_id = self.env['account.move'].browse(int(record_id)).journal_id
+        raise UserError(str(journal_id))
 
         # journal_id = self.env['account.invoice'].browse(int(record_id)).journal_id
 
