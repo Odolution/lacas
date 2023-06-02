@@ -51,13 +51,13 @@ class reportbutton(http.Controller):
         downloads the catalogue in pdf format"""
 
         if (str(journal_id_fetched) == "Admission Challan"):
-            raise UserError("Inside Admission Challan")
+            # raise UserError("Inside Admission Challan")
 
             pdf, _ = request.env.ref('cus_report.report_admission_challan').sudo()._render_qweb_pdf(
             [int(record_id)])
 
         else:
-            raise UserError("Inside Monthly Challan")
+            # raise UserError("Inside Monthly Challan")
             pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
             [int(record_id)])
 
