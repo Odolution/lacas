@@ -47,7 +47,7 @@ class reportbutton(http.Controller):
 
         record_id = kw['invoice_id']
         print(kw['invoice_id'])
-        invoice = self.env['account.move'].search([('id', '=', int(kw['invoice_id']))])
+        invoice = http.request.env['account.move'].search([('id', '=', int(kw['invoice_id']))])
         # invoice.journal_id
         raise UserError(str(invoice))
 
