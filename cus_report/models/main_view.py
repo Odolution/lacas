@@ -44,7 +44,7 @@ class reportbutton(http.Controller):
         print(kw['invoice_id'])
         invoice = http.request.env['account.move'].search([('id', '=', int(kw['invoice_id']))])
         journal_id_fetched = invoice.journal_id
-        raise UserError(str(journal_id.name))
+        raise UserError(str(journal_id_fetched.name))
 
         """In this function we are calling the report template
         of the corresponding product and
