@@ -52,9 +52,11 @@ class reportbutton(http.Controller):
         journal_id = self.env['account.move'].browse(int(record_id)).journal_id
 
         if str(journal_id.name) in ['Monthly Bills', 'Bi Monthly']:
+            raise UserError("Inside Monthly Bills")
             # report_template = 'cus_report.admission_challan'
 
         elif str(journal_id.name) in ['Admission']:
+            raise UserError("Inside Monthly Bills")
             # report_template = 'cus_report.report_fee_challan_students_initiate'
 
         # pdf, _ = request.env.ref(report_template).sudo()._render_qweb_pdf(
