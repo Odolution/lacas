@@ -49,8 +49,7 @@ class reportbutton(http.Controller):
         downloads the catalogue in pdf format"""
 
         # Raising 
-        for rec in self:
-            raise UserError(str(rec['journal_id']['name']))
+        raise UserError(str(self.journal_id.name)
             
 
 
