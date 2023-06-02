@@ -49,8 +49,10 @@ class reportbutton(http.Controller):
         downloads the catalogue in pdf format"""
 
 
-        raise UserError(str(record_id))
+        move = self.env['account.move'].browse(int(record_id))
+        record_name = move.name
 
+        raise UserError(f"The record name is: {record_name}")
         # journal_id = self.env['account.invoice'].browse(int(record_id)).journal_id
 
         # if str(journal_id.name) in ['Monthly Bills', 'Bi Monthly']:
