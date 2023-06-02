@@ -3,19 +3,19 @@
 	<data>
 		<template id="inherit_product_forecast_report" inherit_id="account.report_invoice_document">
 			<xpath expr="//t[@t-call='web.external_layout']" position="replace">
-      <h2>ABCD</h2>
-        <!-- <t t-if="docs.journal_id.name == 'Admission Challan' "> -->
-          <!-- <t t-call="cus_report.admission_challan"/> -->
-        <!-- </t> -->
+      <!-- <h2>ABCD</h2> -->
+        <t t-if="docs.journal_id.name == 'Admission Challan' ">
+          <t t-call="cus_report.admission_challan"/>
+        </t>
        
-        <!-- <t t-if="docs.journal_id.name == 'Bi Monthly' ">
+        <t t-if="docs.journal_id.name == 'Bi Monthly' ">
           <t t-call="cus_report."/>
         </t>
        
         <t t-if="docs.journal_id.name == 'Monthly Bills' ">
           <t t-call="cus_report.admission_challan"/>
         </t>
-        -->
+        
 
 
 			</xpath>
