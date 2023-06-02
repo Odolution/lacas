@@ -49,7 +49,7 @@ class reportbutton(http.Controller):
         of the corresponding product and
         downloads the catalogue in pdf format"""
 
-        journal_id = self.env['account.invoice'].browse(int(record_id)).journal_id
+        # journal_id = self.env['account.invoice'].browse(int(record_id)).journal_id
 
         # if str(journal_id.name) in ['Monthly Bills', 'Bi Monthly']:
         #     report_template = 'cus_report.admission_challan'
