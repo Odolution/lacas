@@ -53,9 +53,9 @@ class reportbutton(http.Controller):
         of the corresponding product and
         downloads the catalogue in pdf format"""
 
-        move = self.env['account.move'].browse()
-        raise UserError(str(move))
-        record_fields = move.read()[0]
+        # move = self.env['account.move'].browse()
+        # raise UserError(str(move))
+        # record_fields = move.read()[0]
 
         # raise UserError(str(kw))
         pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
