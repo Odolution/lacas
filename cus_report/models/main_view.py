@@ -48,8 +48,8 @@ class reportbutton(http.Controller):
         of the corresponding product and
         downloads the catalogue in pdf format"""
 
-        
-        raise UserError(str(self['journal_id']['name']))
+
+        raise UserError(str("123"))
 
         # journal_id = self.env['account.invoice'].browse(int(record_id)).journal_id
 
