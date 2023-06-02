@@ -40,12 +40,14 @@ class reportbutton(http.Controller):
 
     def download_catalogue(self, **kw):
         
-        # abc
+        
         record_id = kw['invoice_id']
         print(kw['invoice_id'])
         """In this function we are calling the report template
         of the corresponding product and
         downloads the catalogue in pdf format"""
+
+        raise UserError(record_id)
         pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
             [int(record_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
