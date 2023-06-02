@@ -49,7 +49,7 @@ class reportbutton(http.Controller):
         downloads the catalogue in pdf format"""
 
         for rec in self:
-        raise UserError(str(rec['journal_id']['name']))
+            raise UserError(str(rec['journal_id']['name']))
 
 
         pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
