@@ -43,20 +43,28 @@ class reportbutton(http.Controller):
         record_id = kw['invoice_id']
         print(kw['invoice_id'])
         invoice = http.request.env['account.move'].search([('id', '=', int(kw['invoice_id']))])
-        journal_id = invoice.journal_id
+        journal_id_fetched = invoice.journal_id
         # raise UserError(str(journal_id.name))
 
         """In this function we are calling the report template
         of the corresponding product and
         downloads the catalogue in pdf format"""
 
+        if (str(journal_id_fetched) == "Admission Challan"):
+            pdf, _ = request.env.ref('cus_report.report_admission_challan').sudo()._render_qweb_pdf(
+            [int(record_id)])
+
+        else:
+            pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
+            [int(record_id)])
+
         # move = self.env['account.move'].browse()
         # raise UserError(str(move))
         # record_fields = move.read()[0]
 
         # raise UserError(str(kw))
-        pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
-            [int(record_id)])
+        # pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
+        #     [int(record_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                           ('Content-Disposition', 'catalogue' + '.pdf;')]
         return request.make_response(pdf, headers=pdfhttpheaders)
