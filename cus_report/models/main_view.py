@@ -32,7 +32,6 @@ from datetime import datetime
 
 class inheritincompany(models.Model):
     _inherit = 'res.company'
-
     image = fields.Image(string='Bank Image')
     
 class reportbutton(http.Controller):
@@ -49,7 +48,7 @@ class reportbutton(http.Controller):
         downloads the catalogue in pdf format"""
 
         # Raising 
-        raise UserError(record_id.name)
+        # raise UserError(record_id.name)
             
 
 
