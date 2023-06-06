@@ -46,19 +46,18 @@ class RecoveryReportWizard(models.TransientModel):
     from_date = fields.Date(string='From')
     to_date = fields.Date(string='To')
     all_branch=fields.Boolean(string=" Select All Branches")
-    one_branch=fields.Many2one('school.program', string= 'Select any one branch')
+    one_branch=fields.Many2one('school.school', string= 'Select any one branch')
 
     account_recovery_report_line=fields.Many2many('account.recovery.report.move.line', string='Account report Line')
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
 
     def _branch_constrains(self):
 
-        if self.all_branch==True and self.one_branch!=False:
-            raise ValidationError(_('Sorry, You Must select one option...'))
+        if self.all_branch and self.one_branch:
+            raise ValidationError(_('Sorry, You Must select only one option.'))
              
-
-        elif self.one_branch!=False and self.all_branch==True:
-            raise ValidationError(_('Sorry, You Must select one option...'))
+        elif not self.one_branch and not self.all_branch:
+            raise ValidationError(_('Sorry, You Must select atleast one option.'))
 
         if not self.to_date or not self.from_date:
             raise ValidationError(_('Please Select Billing Month...'))
