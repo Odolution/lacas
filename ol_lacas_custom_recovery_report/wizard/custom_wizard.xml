@@ -1,7 +1,5 @@
 <odoo>
 
-
-
 <record model="ir.ui.view" id="view_report_recovery">
         <field name="name">recovery.report.wizard.form</field>
         <field name="model" >recovery.report.wizard</field>
@@ -11,15 +9,24 @@
             <form string="Print Recovery of students">
             <group>
              <field name="all_branch"/>
-             <field name="one_branch" widget="selection"/>
+             <field name="one_branch" widget="selection" attrs="{'readonly':[('all_branch','=',True)]}"/>
             
              </group>
-
+<!-- 
               <group>
 
                 <field name="selected_month" widget="many2many_tags"/>
+
           
-             </group>
+             </group> -->
+              <group>
+                <group>
+                    <field name="from_date"/>
+                </group>
+                <group>
+                    <field name="to_date"/>
+                </group>
+              </group>
 
                <!-- <notebook>
                             <page id="receivable_invoice_tab"

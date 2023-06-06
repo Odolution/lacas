@@ -2,6 +2,9 @@
 from odoo import models, api, fields, _
 # from odoo.exceptions import UserError
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
+import json
+
 import xlsxwriter
 _
 from odoo.exceptions import ValidationError
@@ -39,25 +42,50 @@ class RecoveryReportWizard(models.TransientModel):
     _name="recovery.report.wizard"
     _description='Print Recovery Wizard'
 
-    selected_month= fields.Many2many('billing.month', string='Select Month')
+    # selected_month= fields.Many2many('billing.month', string='Select Month')
+    from_date = fields.Date(string='From')
+    to_date = fields.Date(string='To')
     all_branch=fields.Boolean(string=" Select All Branches")
-    one_branch=fields.Many2one('school.program', string= 'Select any one branch')
+    one_branch=fields.Many2one('school.school', string= 'Select any one branch')
 
     account_recovery_report_line=fields.Many2many('account.recovery.report.move.line', string='Account report Line')
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
 
     def _branch_constrains(self):
-      
 
-        if self.all_branch==True and self.one_branch!=False:
-                raise ValidationError(_('Sorry, You Must select one option...'))
+        if self.all_branch and self.one_branch:
+            raise ValidationError(_('Sorry, You Must select only one option.'))
              
+        elif not self.one_branch and not self.all_branch:
+            raise ValidationError(_('Sorry, You Must select atleast one option.'))
 
-        elif self.one_branch!=False and self.all_branch==True:
-                raise ValidationError(_('Sorry, You Must select one option...'))
+        if not self.to_date or not self.from_date:
+            raise ValidationError(_('Please Select the both dates.'))
 
-        if not self.selected_month:
-            raise ValidationError(_('Please Select Billing Month...'))
+    def list_months(self):
+        next_month = self.to_date + relativedelta(months=1)
+        first_day_of_next_month = next_month.replace(day=1)
+
+        # Subtract one day from the first day of the next month to get the last day of the current month
+        last_day_of_month = first_day_of_next_month - relativedelta(days=1)
+
+
+        # Initialize the result list
+        covered_months = []
+
+        # Iterate over each month within the duration
+        current_month = self.from_date
+        while current_month <= last_day_of_month:
+            # Format the month as "Mon-YY" (e.g., Feb-22)
+            month_str = current_month.strftime("%b-%y")
+
+            # Add the formatted month to the result list
+            covered_months.append(month_str)
+
+            # Move to the next month
+            current_month += relativedelta(months=1)
+        
+        return covered_months
 
         
 
@@ -65,129 +93,71 @@ class RecoveryReportWizard(models.TransientModel):
     
     def action_print_report(self):
         lines=[]
-     
-        if self.all_branch:
-            for month in self.selected_month:
-                bill_month=month.name
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('bill_date','=',month.name)])
-                
 
-                
-                stud_lst=[]
-                month_issuance=0
-                month_recovery=0
-                perc=0
-               
-                
-
+        selected_month = self.list_months()
+        for month in selected_month:
+            if self.all_branch==True:
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+            else:
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             
-                for rec in inv_ids:
-                    # bill_month=rec.bill_date
+            stud_lst=[]
+            month_issuance=0
+            month_due_amount=0
+            month_recovery=0
+            perc=0
+        
+            for rec in inv_ids:
+                invoice_month = rec.invoice_date.strftime("%b-%y")
+                if invoice_month==month:
                     if rec.student_name not in stud_lst:
                         stud_lst.append(rec.student_name)
                 
-                    
-                    if rec.payment_state=='not_paid':
-                        month_issuance=month_issuance+rec.due_amount
+                    month_issuance=month_issuance+rec.amount_total
 
-                    
                     if rec.payment_state=='paid':
-                        if rec.bill_amount:
-                            month_recovery=month_recovery+int(rec.bill_amount)
-                    
-                nostd=len(stud_lst)    
-                unpaids=month_issuance
-                paids=month_recovery
-                if unpaids !=0 :
-                    number=(paids/unpaids)*100
-                    perc = round(number, 2)  
-
-
-
-                mvl=self.env['account.recovery.report.move.line'].create({
-                                    
-                                    "billing_cycle":bill_month,
-                                    "total_issuance":unpaids,
-                                    "no_of_std":nostd,
-                                    "total_recovery":paids,
-                                    "recovery_percentage":str(perc)+'%',
-                                    
-
-
-                        })
-                lines.append(mvl.id)
-
-
-                self.write({
-                    "account_recovery_report_line":[(6,0,lines)]
-                })  
-
-        else:
-           
-            selected_campus=self.one_branch.name
-           
-            lines=[]
-            for month in self.selected_month:
-                bill_month=month.name
-            
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('bill_date','=',month.name),('campus','=',selected_campus)])
+                        month_recovery = month_recovery+rec.amount_total
                 
-
-                
-                stud_lst=[]
-                month_issuance=0
-                month_recovery=0
-                perc=0
-
-                # bill_month=self.selected_month
-                for rec in inv_ids:
-                    # bill_month=rec.bill_date
-                    if rec.student_name not in stud_lst:
-                        stud_lst.append(rec.student_name)
-                
-                    
-                    if rec.payment_state=='not_paid':
-                        month_issuance=month_issuance+rec.amount_residual
-                    
-                    if rec.payment_state=='paid':
-                        if rec.bill_amount:
-                            month_recovery=month_recovery+int(rec.bill_amount)
-                nostd=len(stud_lst)    
-                unpaids=month_issuance
-                paids=month_recovery
-                if unpaids !=0 :
-                    number=(paids/unpaids)*100
-                    perc = round(number, 2)  
+            nostd=len(stud_lst)   
+            if month_issuance !=0 :
+                number=(month_recovery/month_issuance)*100
+                perc = round(number, 2)  
 
 
 
-                mvl=self.env['account.recovery.report.move.line'].create({
-                                    
-                                    "billing_cycle":bill_month,
-                                    "total_issuance":unpaids,
-                                    "no_of_std":nostd,
-                                    "total_recovery":paids,
-                                    "recovery_percentage":str(perc)+'%',
-                                    
+            mvl=self.env['account.recovery.report.move.line'].create({
+                                
+                                "billing_cycle":month,
+                                "total_issuance":month_issuance,
+                                "no_of_std":nostd,
+                                "total_recovery":month_recovery,
+                                "recovery_percentage":str(perc)+'%',
+                                
 
 
-                        })
-                lines.append(mvl.id)
+                    })
+            lines.append(mvl.id)
 
 
-                self.write({
-                    "account_recovery_report_line":[(6,0,lines)]
-                })  
-
+            self.write({
+                "account_recovery_report_line":[(6,0,lines)]
+            })
 
 
     def action_print_excel_recovery_report(self):
+        
+        self._branch_constrains()
       
         self.action_print_report()
         if xlwt:
+            branch=""
+            if self.all_branch:
+                branch="All Branches"
+            else:
+                branch=self.one_branch.name
 
             
-            filename = 'Recovery Report.xls'
+            filename = str(branch)+"-"+str(self.from_date)+"-"+str(self.to_date)+".xls"
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
@@ -253,37 +223,3 @@ class RecoveryReportWizard(models.TransientModel):
             
         else:
             raise Warning (""" You Don't have xlwt library.\n Please install it by executing this command :  sudo pip3 install xlwt""")
-        
-
-   
-                
-
-           
-
-
-
-
-
-
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
