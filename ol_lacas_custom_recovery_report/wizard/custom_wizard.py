@@ -86,7 +86,7 @@ class RecoveryReportWizard(models.TransientModel):
             covered_months.append(month_str)
 
             # Move to the next month
-            current_month += timedelta(days=31)
+            current_month += relativedelta(months=1)
         
         return covered_months
 
