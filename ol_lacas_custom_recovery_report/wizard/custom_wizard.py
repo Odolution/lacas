@@ -1,8 +1,9 @@
 
 from odoo import models, api, fields, _
 # from odoo.exceptions import UserError
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import json
 
 import xlsxwriter
 _
@@ -118,6 +119,8 @@ class RecoveryReportWizard(models.TransientModel):
                         stud_lst.append(rec.student_name)
                 
                     
+                    dict_amount_total = json.loads(rec.tax_totals_json)
+                    raise UserError(dict_amount_total)
                     if rec.payment_state=='not_paid':
                         month_issuance=month_issuance+rec.due_amount
 
