@@ -131,7 +131,7 @@ class RecoveryReportWizard(models.TransientModel):
                 nostd=len(stud_lst)    
                 # unpaids=month_issuance
                 month_recovery=month_issuance-month_recovery
-                if unpaids !=0 :
+                if month_issuance !=0 :
                     number=(month_recovery/month_issuance)*100
                     perc = round(number, 2)  
 
