@@ -171,6 +171,7 @@ class RecoveryReportWizard(models.TransientModel):
                 perc=0
 
                 # bill_month=self.selected_month
+                
                 for rec in inv_ids:
                     # bill_month=rec.bill_date
                     if rec.student_name not in stud_lst:
