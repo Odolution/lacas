@@ -60,7 +60,7 @@ class RecoveryReportWizard(models.TransientModel):
             raise ValidationError(_('Sorry, You Must select atleast one option.'))
 
         if not self.to_date or not self.from_date:
-            raise ValidationError(_('Please Select Billing Month...'))
+            raise ValidationError(_('Please Select the both dates.'))
 
     def list_months(self):
         # from_date = datetime.strptime(self.from_date, "%Y-%m-%d")
@@ -104,7 +104,7 @@ class RecoveryReportWizard(models.TransientModel):
             if self.all_branch==True:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted')])
             else:
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch)])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch.id)])
             
             stud_lst=[]
             month_issuance=0
