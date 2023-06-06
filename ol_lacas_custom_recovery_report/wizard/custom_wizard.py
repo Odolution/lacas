@@ -97,15 +97,13 @@ class RecoveryReportWizard(models.TransientModel):
     def action_print_report(self):
         lines=[]
 
-        # selected_month = self.list_months()
+        selected_month = self.list_months()
         # raise UserError(selected_month)
      
         if self.all_branch:
-            for month in self.selected_month:
-                bill_month=month.name
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('bill_date','=',month.name)])
-                
-
+            for month in selected_month:
+                # bill_month=month.name
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('bill_date','=',month)])
                 
                 stud_lst=[]
                 month_issuance=0
@@ -161,10 +159,10 @@ class RecoveryReportWizard(models.TransientModel):
             selected_campus=self.one_branch.name
            
             lines=[]
-            for month in self.selected_month:
-                bill_month=month.name
+            for month in selected_month:
+                # bill_month=month.name
             
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('bill_date','=',month.name),('campus','=',selected_campus)])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('bill_date','=',month),('campus','=',selected_campus)])
                 
 
                 
