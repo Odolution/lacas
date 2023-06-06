@@ -62,15 +62,15 @@ class RecoveryReportWizard(models.TransientModel):
             raise ValidationError(_('Please Select Billing Month...'))
 
     def list_months(self):
-        from_date = datetime.strptime(self.from_date, "%Y-%m-%d")
-        to_date = datetime.strptime(self.to_date, "%Y-%m-%d")
+        # from_date = datetime.strptime(self.from_date, "%Y-%m-%d")
+        # to_date = datetime.strptime(self.to_date, "%Y-%m-%d")
 
         # Initialize the result list
         covered_months = []
 
         # Iterate over each month within the duration
-        current_month = from_date
-        while current_month <= to_date:
+        current_month = self.from_date
+        while current_month <= self.to_date:
             # Format the month as "Mon-YY" (e.g., Feb-22)
             month_str = current_month.strftime("%b-%y")
 
