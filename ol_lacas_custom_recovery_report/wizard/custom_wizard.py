@@ -1,7 +1,7 @@
 
 from odoo import models, api, fields, _
 # from odoo.exceptions import UserError
-from datetime import datetime
+from datetime import datetime, timedelta
 import xlsxwriter
 _
 from odoo.exceptions import ValidationError
@@ -61,13 +61,36 @@ class RecoveryReportWizard(models.TransientModel):
         if not self.selected_month:
             raise ValidationError(_('Please Select Billing Month...'))
 
+    def list_months(self):
+        from_date = datetime.strptime(self.from_date, "%Y-%m-%d")
+        to_date = datetime.strptime(self.to_date, "%Y-%m-%d")
+
+        # Initialize the result list
+        covered_months = []
+
+        # Iterate over each month within the duration
+        current_month = from_date
+        while current_month <= to_date:
+            # Format the month as "Mon-YY" (e.g., Feb-22)
+            month_str = current_month.strftime("%b-%y")
+
+            # Add the formatted month to the result list
+            covered_months.append(month_str)
+
+            # Move to the next month
+            current_month += timedelta(days=31)
+        
+        return covered_months
+
         
 
   
     
     def action_print_report(self):
         lines=[]
-        # raise UserError(self.selected_month)
+
+        selected_month = list_months()
+        raise UserError(selected_month)
      
         if self.all_branch:
             for month in self.selected_month:
