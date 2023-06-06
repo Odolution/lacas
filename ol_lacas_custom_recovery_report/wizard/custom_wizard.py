@@ -2,6 +2,8 @@
 from odoo import models, api, fields, _
 # from odoo.exceptions import UserError
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+
 import xlsxwriter
 _
 from odoo.exceptions import ValidationError
@@ -64,6 +66,14 @@ class RecoveryReportWizard(models.TransientModel):
     def list_months(self):
         # from_date = datetime.strptime(self.from_date, "%Y-%m-%d")
         # to_date = datetime.strptime(self.to_date, "%Y-%m-%d")
+        next_month = date + relativedelta(months=1)
+        first_day_of_next_month = next_month.replace(day=1)
+
+        # Subtract one day from the first day of the next month to get the last day of the current month
+        last_day_of_month = first_day_of_next_month - relativedelta(days=1)
+
+        raise UserError(last_day_of_month)
+
 
         # Initialize the result list
         covered_months = []
