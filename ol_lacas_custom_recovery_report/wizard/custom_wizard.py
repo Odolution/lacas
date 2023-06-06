@@ -219,12 +219,12 @@ class RecoveryReportWizard(models.TransientModel):
         if xlwt:
             branch=""
             if self.all_branch:
-                branch="All Branhces"
+                branch="All Branches"
             else:
                 branch=self.one_branch.name
 
             
-            filename = str(branch)+"-"+str(self.from_date)+"-"+str(self.to_date)
+            filename = str(branch)+"-"+str(self.from_date)+"-"+str(self.to_date)+".xls"
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
