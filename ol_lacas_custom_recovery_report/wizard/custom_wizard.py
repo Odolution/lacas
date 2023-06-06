@@ -66,7 +66,7 @@ class RecoveryReportWizard(models.TransientModel):
     def list_months(self):
         # from_date = datetime.strptime(self.from_date, "%Y-%m-%d")
         # to_date = datetime.strptime(self.to_date, "%Y-%m-%d")
-        next_month = date + relativedelta(months=1)
+        next_month = self.to_date + relativedelta(months=1)
         first_day_of_next_month = next_month.replace(day=1)
 
         # Subtract one day from the first day of the next month to get the last day of the current month
