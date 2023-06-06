@@ -4,7 +4,7 @@
 {
     'name': 'Lacas Recovery report',
 
-    "author": "Nadia | Odolution",
+    "author": "Nadia | Anas Bin Ateeq | Odolution",
     'version': '0.1',
     'category': 'Invoice Customization',
     'sequence': 95,

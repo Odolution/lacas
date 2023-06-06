@@ -67,6 +67,7 @@ class RecoveryReportWizard(models.TransientModel):
     
     def action_print_report(self):
         lines=[]
+        raise UserError(self.selected_month)
      
         if self.all_branch:
             for month in self.selected_month:
