@@ -72,15 +72,13 @@ class RecoveryReportWizard(models.TransientModel):
         # Subtract one day from the first day of the next month to get the last day of the current month
         last_day_of_month = first_day_of_next_month - relativedelta(days=1)
 
-        raise UserError(last_day_of_month)
-
 
         # Initialize the result list
         covered_months = []
 
         # Iterate over each month within the duration
         current_month = self.from_date
-        while current_month <= self.to_date:
+        while current_month <= last_day_of_month:
             # Format the month as "Mon-YY" (e.g., Feb-22)
             month_str = current_month.strftime("%b-%y")
 
