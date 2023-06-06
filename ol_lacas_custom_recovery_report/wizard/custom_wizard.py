@@ -40,6 +40,8 @@ class RecoveryReportWizard(models.TransientModel):
     _description='Print Recovery Wizard'
 
     selected_month= fields.Many2many('billing.month', string='Select Month')
+    from_date = fields.Date(string='From')
+    to_date = fields.Date(string='To')
     all_branch=fields.Boolean(string=" Select All Branches")
     one_branch=fields.Many2one('school.program', string= 'Select any one branch')
 

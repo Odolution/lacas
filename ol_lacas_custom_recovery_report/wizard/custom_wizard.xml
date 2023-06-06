@@ -18,8 +18,17 @@
               <group>
 
                 <field name="selected_month" widget="many2many_tags"/>
+
           
              </group>
+              <group>
+                <group>
+                    <field name="from_date"/>
+                </group>
+                <group>
+                    <field name="to_date"/>
+                </group>
+              </group>
 
                <!-- <notebook>
                             <page id="receivable_invoice_tab"
