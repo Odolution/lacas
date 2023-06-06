@@ -51,7 +51,6 @@ class RecoveryReportWizard(models.TransientModel):
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
 
     def _branch_constrains(self):
-      
 
         if self.all_branch==True and self.one_branch!=False:
                 raise ValidationError(_('Sorry, You Must select one option...'))
@@ -120,7 +119,8 @@ class RecoveryReportWizard(models.TransientModel):
                 
                     
                     if rec.payment_state=='not_paid':
-                        month_issuance=month_issuance+rec.due_amount
+                        # month_issuance=month_issuance+rec.due_amount
+                        month_issuance=month_issuance+rec.tax_totals_json
 
                     
                     if rec.payment_state=='paid':
