@@ -107,6 +107,7 @@ class RecoveryReportWizard(models.TransientModel):
                 
                 stud_lst=[]
                 month_issuance=0
+                month_due_amount=0
                 month_recovery=0
                 perc=0
                
@@ -124,15 +125,14 @@ class RecoveryReportWizard(models.TransientModel):
                     month_issuance=month_issuance+dict_tax_totals_json['amount_total']
 
                     
-                    if rec.payment_state=='paid':
-                        if rec.bill_amount:
-                            month_recovery=month_recovery+int(rec.bill_amount)
+                    if rec.payment_state=='not_paid':
+                        month_due_amount=month_due_amount+int(rec.amount_residual)
                     
                 nostd=len(stud_lst)    
-                unpaids=month_issuance
-                paids=month_recovery
+                # unpaids=month_issuance
+                month_recovery=month_issuance-month_recovery
                 if unpaids !=0 :
-                    number=(paids/unpaids)*100
+                    number=(month_recovery/month_issuance)*100
                     perc = round(number, 2)  
 
 
@@ -140,9 +140,9 @@ class RecoveryReportWizard(models.TransientModel):
                 mvl=self.env['account.recovery.report.move.line'].create({
                                     
                                     "billing_cycle":bill_month,
-                                    "total_issuance":unpaids,
+                                    "total_issuance":month_issuance,
                                     "no_of_std":nostd,
-                                    "total_recovery":paids,
+                                    "total_recovery":month_recovery,
                                     "recovery_percentage":str(perc)+'%',
                                     
 
