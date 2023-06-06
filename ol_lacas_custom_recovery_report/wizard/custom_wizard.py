@@ -161,7 +161,7 @@ class RecoveryReportWizard(models.TransientModel):
             for month in selected_month:
                 bill_month=month
             
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('bill_date','=',month),('campus','=',self.one_branch)])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('bill_date','=',month),('campus','=',self.one_branch.name)])
                 
 
                 
