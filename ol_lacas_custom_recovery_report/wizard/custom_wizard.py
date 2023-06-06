@@ -102,18 +102,15 @@ class RecoveryReportWizard(models.TransientModel):
         # if self.all_branch:
         for month in selected_month:
             if self.all_branch==True:
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted')])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             else:
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch.id)])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             
             stud_lst=[]
             month_issuance=0
             month_due_amount=0
             month_recovery=0
             perc=0
-            
-            
-
         
             for rec in inv_ids:
                 invoice_month = rec.invoice_date.strftime("%b-%y")
@@ -220,9 +217,14 @@ class RecoveryReportWizard(models.TransientModel):
       
         self.action_print_report()
         if xlwt:
+            branch=""
+            if self.all_branch:
+                branch="All Branhces"
+            else:
+                branch=self.one_branch.name
 
             
-            filename = 'Recovery Report.xls'
+            filename = str(branch)+"-"+str(self.from_date)+"-"+str(self.to_date)
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
