@@ -102,7 +102,7 @@ class RecoveryReportWizard(models.TransientModel):
      
         if self.all_branch:
             for month in selected_month:
-                # bill_month=month.name
+                bill_month=month
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('bill_date','=',month)])
                 
                 stud_lst=[]
@@ -160,7 +160,7 @@ class RecoveryReportWizard(models.TransientModel):
            
             lines=[]
             for month in selected_month:
-                # bill_month=month.name
+                bill_month=month
             
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('bill_date','=',month),('campus','=',selected_campus)])
                 
