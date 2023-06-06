@@ -104,9 +104,9 @@ class RecoveryReportWizard(models.TransientModel):
         for month in selected_month:
             bill_month=month
             if self.all_branch:
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('bill_date','=',month)])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted')])
             else:
-                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('bill_date','=',month),('x_studio_current_branchschool','=',self.one_branch.name)])
+                inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch.name)])
             
             stud_lst=[]
             month_issuance=0
@@ -118,22 +118,20 @@ class RecoveryReportWizard(models.TransientModel):
 
         
             for rec in inv_ids:
+                invoice_month = rec.invoice_date.strftime("%b-%y")
                 # bill_month=rec.bill_date
-                if rec.student_name not in stud_lst:
-                    stud_lst.append(rec.student_name)
-            
+                if invoice_month==month:
+                    if rec.student_name not in stud_lst:
+                        stud_lst.append(rec.student_name)
                 
-                dict_tax_totals_json = json.loads(rec.tax_totals_json)
-                # raise UserError(str(rec.student_name) + "---"  + str(bill_month)+ "---" + str(dict_amount_total['amount_total']))
-                month_issuance=month_issuance+rec.amount_total
+                    month_issuance=month_issuance+rec.amount_total
 
+                    if rec.payment_state=='paid':
+                        month_recovery = month_recovery+rec.amount_total
                 
-                if rec.payment_state=='not_paid':
-                    month_due_amount=month_due_amount+int(rec.amount_residual)
-                
-            nostd=len(stud_lst)    
+            nostd=len(stud_lst)   
             # unpaids=month_issuance
-            month_recovery=month_issuance-month_due_amount
+            # month_recovery=month_issuance-month_due_amount
             if month_issuance !=0 :
                 number=(month_recovery/month_issuance)*100
                 perc = round(number, 2)  
@@ -142,7 +140,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             mvl=self.env['account.recovery.report.move.line'].create({
                                 
-                                "billing_cycle":bill_month,
+                                "billing_cycle":month,
                                 "total_issuance":month_issuance,
                                 "no_of_std":nostd,
                                 "total_recovery":month_recovery,
