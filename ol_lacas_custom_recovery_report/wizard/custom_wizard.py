@@ -119,10 +119,9 @@ class RecoveryReportWizard(models.TransientModel):
                         stud_lst.append(rec.student_name)
                 
                     
-                    dict_amount_total = json.loads(rec.tax_totals_json)
-                    raise UserError(str(rec.student_name) + "---"  + str(bill_month)+ "---" + str(dict_amount_total['amount_total']))
-                    if rec.payment_state=='not_paid':
-                        month_issuance=month_issuance+rec.due_amount
+                    dict_tax_totals_json = json.loads(rec.tax_totals_json)
+                    # raise UserError(str(rec.student_name) + "---"  + str(bill_month)+ "---" + str(dict_amount_total['amount_total']))
+                    month_issuance=month_issuance+dict_tax_totals_json['amount_total']
 
                     
                     if rec.payment_state=='paid':
