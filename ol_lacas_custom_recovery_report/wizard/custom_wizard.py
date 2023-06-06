@@ -54,11 +54,11 @@ class RecoveryReportWizard(models.TransientModel):
     def _branch_constrains(self):
 
         if self.all_branch==True and self.one_branch!=False:
-                raise ValidationError(_('Sorry, You Must select one option...'))
+            raise ValidationError(_('Sorry, You Must select one option...'))
              
 
         elif self.one_branch!=False and self.all_branch==True:
-                raise ValidationError(_('Sorry, You Must select one option...'))
+            raise ValidationError(_('Sorry, You Must select one option...'))
 
         if not self.selected_month:
             raise ValidationError(_('Please Select Billing Month...'))
@@ -102,8 +102,7 @@ class RecoveryReportWizard(models.TransientModel):
      
         # if self.all_branch:
         for month in selected_month:
-            bill_month=month
-            if self.all_branch:
+            if self.all_branch==True:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted')])
             else:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch.name)])
@@ -217,6 +216,8 @@ class RecoveryReportWizard(models.TransientModel):
 
 
     def action_print_excel_recovery_report(self):
+        
+        self._branch_constrains()
       
         self.action_print_report()
         if xlwt:
