@@ -61,13 +61,6 @@ class reportbutton(http.Controller):
             pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
             [int(record_id)])
 
-        # move = self.env['account.move'].browse()
-        # raise UserError(str(move))
-        # record_fields = move.read()[0]
-
-        # raise UserError(str(kw))
-        # pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
-        #     [int(record_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                           ('Content-Disposition', 'catalogue' + '.pdf;')]
         return request.make_response(pdf, headers=pdfhttpheaders)
