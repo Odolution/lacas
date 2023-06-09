@@ -39,7 +39,37 @@ class reportbutton(http.Controller):
     @http.route('/attachment/download/<int:invoice_id>', methods=['POST', 'GET'], csrf=False, type='http', auth="user",
                 website=True)
 
+
+    # Below is the download Button which was created to distinguish Admission challan, Monthly and Bi Monthly Challans in another branch
     def download_catalogue(self, **kw):
+       
+        record_id = kw['invoice_id']
+        print(kw['invoice_id'])
+        invoice = http.request.env['account.move'].search([('id', '=', int(kw['invoice_id']))])
+        journal_id_fetched = invoice.journal_id.name
+        # raise UserError(str(journal_id_fetched.name))
+
+        """In this function we are calling the report template
+        of the corresponding product and
+        downloads the catalogue in pdf format"""
+
+        if (str(journal_id_fetched) == "Admission Challan"):
+            # raise UserError("Inside Admission Challan")
+
+            pdf, _ = request.env.ref('cus_report.report_admission_challan').sudo()._render_qweb_pdf(
+            [int(record_id)])
+
+        else:
+            # raise UserError("Inside Monthly Challan")
+            pdf, _ = request.env.ref('cus_report.report_fee_challan_students_initiate').sudo()._render_qweb_pdf(
+            [int(record_id)])
+
+        pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
+                          ('Content-Disposition', 'catalogue' + '.pdf;')]
+        return request.make_response(pdf, headers=pdfhttpheaders)
+
+    # Below is the original button of this own branc
+    # def download_catalogue(self, **kw):
 
         record_id = kw['invoice_id']
         print(kw['invoice_id'])
