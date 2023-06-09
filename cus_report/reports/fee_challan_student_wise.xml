@@ -2,14 +2,14 @@
 	<data>
 		<template id="cus_report.fee_challan_student_wise">
 			<t t-call="web.html_container">
-				<t t-foreach="docs" t-as="o">
-					<t t-foreach="o.unpaid_std_ids" t-as="o">
+				<t t-foreach="docs" t-as="x">
+					<t t-foreach="x.unpaid_std_ids" t-as="x">
 						<div class="row" style="font-size:0.5rem;">
 							<div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
-								<t t-if="o.due_day&gt;0">
+								<t t-if="x.due_day&gt;0">
 									<div class="watermark" style="position:relative;">
 										<div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
-											<p t-field="o.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '" />
+											<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '" />
 										</div>
 									</div>
 								</t>
@@ -17,10 +17,10 @@
 									<tbody>
 										<tr style="height: 65.5px;">
 											<!-- <td style="align-items: center; "> -->
-											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
+											<!-- <img t-if="x.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
 											<!-- </td> -->
 											<td style="align-items: center; ">
-												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
+												<img t-if="x.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
 											<td style="align-items: center;font-size: 10px;">
 												<p style="text-align: center; ">
@@ -34,7 +34,7 @@
 												</p>
 											</td>
 											<td style=" ">
-												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
+												<img t-if="x.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
 										</tr>
 									</tbody>
@@ -49,7 +49,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.name" />
+														<t t-esc="x.name" />
 													</strong>
 												</td>
 											</tr>
@@ -59,7 +59,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.create_date.strftime('%d-%b-%Y')" />
+														<t t-esc="x.create_date.strftime('%d-%b-%Y')" />
 													</strong>
 												</td>
 											</tr>
@@ -70,7 +70,7 @@
 												<td>
 													<span style="background-color: yellow; width: 70%; font-size:11px;">
 														<strong>
-															<t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
+															<t t-esc="x.invoice_date_due.strftime('%d-%b-%Y')" />
 														</strong>
 													</span>
 												</td>
@@ -88,7 +88,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.name" />
+														<t t-esc="x.student_ids.name" />
 													</strong>
 												</td>
 											</tr>
@@ -98,7 +98,7 @@
 													Father Name:
 												</td>
 												<td style="width: 70%; font-size:11px;">
-													<t t-foreach="o.student_ids" t-as="i">
+													<t t-foreach="x.student_ids" t-as="i">
 														<t t-foreach="i.relationship_ids" t-as="d">
 															<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 															<t t-if="d.relationship_type_id.name == 'Father'">
@@ -106,7 +106,7 @@
 																	<t t-esc="d.individual_id.name" />
 																</strong>
 															</t>
-															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
+															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.family_id.name"/></strong></td> -->
 														</t>
 													</t>
 												</td>
@@ -118,20 +118,20 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.facts_udid" />
+														<t t-esc="x.student_ids.facts_udid" />
 													</strong>
 												</td>
 											</tr>
 											<!-- <tr style="height: 26.5px;"> -->
 											<!-- <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td> -->
-											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td> -->
+											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.grade_level_ids.name"/></strong></td> -->
 											<!-- </tr> -->
 											<!-- class next grade level -->
 											<tr style="height: 23px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
-												<t t-foreach="o.student_ids" t-as="i">
+												<t t-foreach="x.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
 														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
@@ -144,11 +144,11 @@
 														<t t-else="">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
-																	<t t-esc="o.student_ids.homeroom" />
+																	<t t-esc="x.student_ids.homeroom" />
 																</strong>
 															</td>
 														</t>
-														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
+														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.family_id.name"/></strong></td> -->
 													</t>
 												</t>
 											</tr>
@@ -159,7 +159,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.x_last_school_id.name" />
+														<t t-esc="x.student_ids.x_last_school_id.name" />
 													</strong>
 												</td>
 											</tr>
@@ -169,27 +169,27 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.x_studio_batchsession" />
+														<t t-esc="x.student_ids.x_studio_batchsession" />
 													</strong>
 												</td>
 											</tr>
-											<tr t-if="o.journal_id.id != 126" style="height: 18px;">
+											<tr t-if="x.journal_id.id != 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.invoice_date.strftime('%b-%Y')" />
+														<t t-esc="x.invoice_date.strftime('%b-%Y')" />
 													</strong>
 												</td>
 											</tr>
-											<tr t-if="o.journal_id.id == 126" style="height: 18px;">
+											<tr t-if="x.journal_id.id == 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.bi_monthly_cycle" />
+														<t t-esc="x.bi_monthly_cycle" />
 													</strong>
 												</td>
 											</tr>
@@ -215,7 +215,7 @@
 										<tbody>
 											<t t-set="Fee" t-value="0" />
 											<t t-set="Charges" t-value="0" />
-											<t t-foreach="o.invoice_line_ids" t-as="d">
+											<t t-foreach="x.invoice_line_ids" t-as="d">
 												<t t-if=" not d.product_id.x_studio_adhoc">
 													<t t-set="Fee" t-value="Fee+int(d.price_subtotal)" />
 												</t>
@@ -228,7 +228,7 @@
 													<t t-esc="Fee" />
 												</td>
 											</tr>
-											<t t-foreach="o.invoice_line_ids" t-as="d">
+											<t t-foreach="x.invoice_line_ids" t-as="d">
 												<t t-if="d.product_id.x_studio_adhoc">
 													<t t-set="Charges" t-value="Charges+int(d.price_subtotal)" />
 													<tr style="border: 1px solid black;">
@@ -361,10 +361,10 @@
 							</div>
 							<!-- 2nd box -->
 							<div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px;margin-right: 1%;">
-								<t t-if="o.due_day&gt;0">
+								<t t-if="x.due_day&gt;0">
 									<div class="watermark" style="position:relative;">
 										<div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
-											<p t-field="o.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '" />
+											<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '" />
 										</div>
 									</div>
 								</t>
@@ -372,10 +372,10 @@
 									<tbody>
 										<tr style="height: 65.5px;">
 											<!-- <td style="align-items: center; "> -->
-											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
+											<!-- <img t-if="x.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
 											<!-- </td> -->
 											<td style="align-items: center; ">
-												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
+												<img t-if="x.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
 											<td style="align-items: center;font-size: 10px;">
 												<p style="text-align: center; ">
@@ -389,7 +389,7 @@
 												</p>
 											</td>
 											<td style=" ">
-												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
+												<img t-if="x.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
 										</tr>
 									</tbody>
@@ -404,7 +404,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.name" />
+														<t t-esc="x.name" />
 													</strong>
 												</td>
 											</tr>
@@ -414,7 +414,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.create_date.strftime('%d-%b-%Y')" />
+														<t t-esc="x.create_date.strftime('%d-%b-%Y')" />
 													</strong>
 												</td>
 											</tr>
@@ -425,7 +425,7 @@
 												<td>
 													<span style="background-color: yellow; width: 70%; font-size:11px;">
 														<strong>
-															<t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
+															<t t-esc="x.invoice_date_due.strftime('%d-%b-%Y')" />
 														</strong>
 													</span>
 												</td>
@@ -443,7 +443,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.name" />
+														<t t-esc="x.student_ids.name" />
 													</strong>
 												</td>
 											</tr>
@@ -453,7 +453,7 @@
 													Father Name:
 												</td>
 												<td style="width: 70%; font-size:11px;">
-													<t t-foreach="o.student_ids" t-as="i">
+													<t t-foreach="x.student_ids" t-as="i">
 														<t t-foreach="i.relationship_ids" t-as="d">
 															<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 															<t t-if="d.relationship_type_id.name == 'Father'">
@@ -461,7 +461,7 @@
 																	<t t-esc="d.individual_id.name" />
 																</strong>
 															</t>
-															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
+															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.family_id.name"/></strong></td> -->
 														</t>
 													</t>
 												</td>
@@ -473,20 +473,20 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.facts_udid" />
+														<t t-esc="x.student_ids.facts_udid" />
 													</strong>
 												</td>
 											</tr>
 											<!-- <tr style="height: 26.5px;"> -->
 											<!-- <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td> -->
-											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td> -->
+											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.grade_level_ids.name"/></strong></td> -->
 											<!-- </tr> -->
 											<!-- class next grade level -->
 											<tr style="height: 23px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
-												<t t-foreach="o.student_ids" t-as="i">
+												<t t-foreach="x.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
 														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
@@ -499,11 +499,11 @@
 														<t t-else="">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
-																	<t t-esc="o.student_ids.homeroom" />
+																	<t t-esc="x.student_ids.homeroom" />
 																</strong>
 															</td>
 														</t>
-														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
+														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.family_id.name"/></strong></td> -->
 													</t>
 												</t>
 											</tr>
@@ -514,7 +514,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.x_last_school_id.name" />
+														<t t-esc="x.student_ids.x_last_school_id.name" />
 													</strong>
 												</td>
 											</tr>
@@ -524,27 +524,27 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.x_studio_batchsession" />
+														<t t-esc="x.student_ids.x_studio_batchsession" />
 													</strong>
 												</td>
 											</tr>
-											<tr t-if="o.journal_id.id != 126" style="height: 18px;">
+											<tr t-if="x.journal_id.id != 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.invoice_date.strftime('%b-%Y')" />
+														<t t-esc="x.invoice_date.strftime('%b-%Y')" />
 													</strong>
 												</td>
 											</tr>
-											<tr t-if="o.journal_id.id == 126" style="height: 18px;">
+											<tr t-if="x.journal_id.id == 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.bi_monthly_cycle" />
+														<t t-esc="x.bi_monthly_cycle" />
 													</strong>
 												</td>
 											</tr>
@@ -571,7 +571,7 @@
 										<tbody>
 											<t t-set="Fee" t-value="0" />
 											<t t-set="Charges" t-value="0" />
-											<t t-foreach="o.invoice_line_ids" t-as="d">
+											<t t-foreach="x.invoice_line_ids" t-as="d">
 												<t t-if=" not d.product_id.x_studio_adhoc">
 													<t t-set="Fee" t-value="Fee+int(d.price_subtotal)" />
 												</t>
@@ -584,7 +584,7 @@
 													<t t-esc="Fee" />
 												</td>
 											</tr>
-											<t t-foreach="o.invoice_line_ids" t-as="d">
+											<t t-foreach="x.invoice_line_ids" t-as="d">
 												<t t-if="d.product_id.x_studio_adhoc">
 													<t t-set="Charges" t-value="Charges+int(d.price_subtotal)" />
 													<tr style="border: 1px solid black;">
@@ -717,10 +717,10 @@
 							</div>
 							<!-- 3rd box -->
 							<div class="column" style="float: left; border: 1px solid black; width: 32%;height:750px; margin-right: 1%;">
-								<t t-if="o.due_day&gt;0">
+								<t t-if="x.due_day&gt;0">
 									<div class="watermark" style="position:relative;">
 										<div class="watermark_inner" style="text-align:center; display:flex;justify-content: center; position:absolute; left: 0px;top: 0px; height: 100%;  width: 100%;opacity:0.20;font-size:4em ;">
-											<p t-field="o.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '" />
+											<p t-field="x.due_day_text" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px;  text-transform: uppercase;font-weight: bold; '" />
 										</div>
 									</div>
 								</t>
@@ -728,10 +728,10 @@
 									<tbody>
 										<tr style="height: 65.5px;">
 											<!-- <td style="align-items: center; "> -->
-											<!-- <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
+											<!-- <img t-if="x.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="100" class="float-left" alt="Logo"/> -->
 											<!-- </td> -->
 											<td style="align-items: center; ">
-												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
+												<img t-if="x.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
 											<td style="align-items: center;font-size: 10px;">
 												<p style="text-align: center; ">
@@ -745,7 +745,7 @@
 												</p>
 											</td>
 											<td style=" ">
-												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
+												<img t-if="x.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
 										</tr>
 									</tbody>
@@ -760,7 +760,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.name" />
+														<t t-esc="x.name" />
 													</strong>
 												</td>
 											</tr>
@@ -770,7 +770,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.create_date.strftime('%d-%b-%Y')" />
+														<t t-esc="x.create_date.strftime('%d-%b-%Y')" />
 													</strong>
 												</td>
 											</tr>
@@ -781,7 +781,7 @@
 												<td>
 													<span style="background-color: yellow; width: 70%; font-size:11px;">
 														<strong>
-															<t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')" />
+															<t t-esc="x.invoice_date_due.strftime('%d-%b-%Y')" />
 														</strong>
 													</span>
 												</td>
@@ -799,7 +799,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.name" />
+														<t t-esc="x.student_ids.name" />
 													</strong>
 												</td>
 											</tr>
@@ -809,7 +809,7 @@
 													Father Name:
 												</td>
 												<td style="width: 70%; font-size:11px;">
-													<t t-foreach="o.student_ids" t-as="i">
+													<t t-foreach="x.student_ids" t-as="i">
 														<t t-foreach="i.relationship_ids" t-as="d">
 															<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 															<t t-if="d.relationship_type_id.name == 'Father'">
@@ -817,7 +817,7 @@
 																	<t t-esc="d.individual_id.name" />
 																</strong>
 															</t>
-															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
+															<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.family_id.name"/></strong></td> -->
 														</t>
 													</t>
 												</td>
@@ -829,20 +829,20 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.facts_udid" />
+														<t t-esc="x.student_ids.facts_udid" />
 													</strong>
 												</td>
 											</tr>
 											<!-- <tr style="height: 26.5px;"> -->
 											<!-- <td style="text-align: left;color: grey; width: 30%; font-size:13px;">Class :</td> -->
-											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.grade_level_ids.name"/></strong></td> -->
+											<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.grade_level_ids.name"/></strong></td> -->
 											<!-- </tr> -->
 											<!-- class next grade level -->
 											<tr style="height: 23px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
-												<t t-foreach="o.student_ids" t-as="i">
+												<t t-foreach="x.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
 														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
@@ -855,11 +855,11 @@
 														<t t-else="">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
-																	<t t-esc="o.student_ids.homeroom" />
+																	<t t-esc="x.student_ids.homeroom" />
 																</strong>
 															</td>
 														</t>
-														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
+														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="x.family_id.name"/></strong></td> -->
 													</t>
 												</t>
 											</tr>
@@ -870,7 +870,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.x_last_school_id.name" />
+														<t t-esc="x.student_ids.x_last_school_id.name" />
 													</strong>
 												</td>
 											</tr>
@@ -880,27 +880,27 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.student_ids.x_studio_batchsession" />
+														<t t-esc="x.student_ids.x_studio_batchsession" />
 													</strong>
 												</td>
 											</tr>
-											<tr t-if="o.journal_id.id != 126" style="height: 18px;">
+											<tr t-if="x.journal_id.id != 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.invoice_date.strftime('%b-%Y')" />
+														<t t-esc="x.invoice_date.strftime('%b-%Y')" />
 													</strong>
 												</td>
 											</tr>
-											<tr t-if="o.journal_id.id == 126" style="height: 18px;">
+											<tr t-if="x.journal_id.id == 126" style="height: 18px;">
 												<td style="text-align: left;color: grey; width: 30%; font-size:11px;">
 													Billing Month :
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="o.bi_monthly_cycle" />
+														<t t-esc="x.bi_monthly_cycle" />
 													</strong>
 												</td>
 											</tr>
@@ -927,7 +927,7 @@
 										<tbody>
 											<t t-set="Fee" t-value="0" />
 											<t t-set="Charges" t-value="0" />
-											<t t-foreach="o.invoice_line_ids" t-as="d">
+											<t t-foreach="x.invoice_line_ids" t-as="d">
 												<t t-if=" not d.product_id.x_studio_adhoc">
 													<t t-set="Fee" t-value="Fee+int(d.price_subtotal)" />
 												</t>
@@ -940,7 +940,7 @@
 													<t t-esc="Fee" />
 												</td>
 											</tr>
-											<t t-foreach="o.invoice_line_ids" t-as="d">
+											<t t-foreach="x.invoice_line_ids" t-as="d">
 												<t t-if="d.product_id.x_studio_adhoc">
 													<t t-set="Charges" t-value="Charges+int(d.price_subtotal)" />
 													<tr style="border: 1px solid black;">
