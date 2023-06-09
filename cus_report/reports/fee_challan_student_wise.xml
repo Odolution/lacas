@@ -3,8 +3,8 @@
 	<t t-call="web.html_container">
 		<t t-foreach="docs" t-as="x">
 			<t t-foreach="x.unpaid_std_ids" t-as="o">
-				<div class="page" style="page-break-after: always;">
-					<div class="row" style="font-size:0.5rem; page-break-after: always;">
+				
+					<div class="row">
 						<div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
 							<t t-if="x.due_day&gt;0">
 								<div class="watermark" style="position:relative;">
@@ -376,7 +376,7 @@
 						</table>
 						<!-- <p style="page-break-after:always;"/> -->
 					</div>
-				</div>
+				
 			</t>
 		</t>
 	</t>
