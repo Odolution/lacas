@@ -135,10 +135,10 @@
 														Session :
 													</td>
 													<td style="width: 70%; font-size:13px;">
-														<strong>
-															<t t-esc="o.start_session.strftime('%Y')" />
+														<strong>123..
+															<!-- <t t-esc="o.start_session.strftime('%Y')" /> -->
 															-
-															<t t-esc="o.end_session.strftime('%Y')" />
+															<!-- <t t-esc="o.end_session.strftime('%Y')" /> -->
 														</strong>
 													</td>
 												</tr>
@@ -379,10 +379,10 @@
 													Session :
 												</td>
 												<td style="width: 70%; font-size:13px;">
-													<strong>
-														<t t-esc="o.start_session.strftime('%Y')" />
+													<strong>456...
+														<!-- <t t-esc="o.start_session.strftime('%Y')" /> -->
 														-
-														<t t-esc="o.end_session.strftime('%Y')" />
+														<!-- <t t-esc="o.end_session.strftime('%Y')" /> -->
 													</strong>
 												</td>
 											</tr>
@@ -622,10 +622,10 @@
 													Session :
 												</td>
 												<td style="width: 70%; font-size:13px;">
-													<strong>
-														<t t-esc="o.start_session.strftime('%Y')" />
+													<strong> 789..
+														<!-- <t t-esc="o.start_session.strftime('%Y')" /> -->
 														-
-														<t t-esc="o.end_session.strftime('%Y')" />
+														<!-- <t t-esc="o.end_session.strftime('%Y')" /> -->
 													</strong>
 												</td>
 											</tr>
