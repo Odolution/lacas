@@ -18,7 +18,7 @@
 											<td style="align-items: left; ">
 												<img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="120" class="float-left" alt="Logo" />
 											</td>
-											<td style="align-items: center;font-size: 10px;position: fixed;center: 0px; text-align: center; ">
+											<td style="align-items: center;font-size: 10px;position: fixed;right: 50px; text-align: center; ">
 												<p >
 													<strong style="font-size: 15px;">
 														LACAS School Network
