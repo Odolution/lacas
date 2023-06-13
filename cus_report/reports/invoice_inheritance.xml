@@ -4,6 +4,7 @@
 		<template id="inherit_product_forecast_report" inherit_id="account.report_invoice_document">
 			<xpath expr="//t[@t-call='web.external_layout']" position="replace">
 				<t t-call="web.basic_layout">
+				<!-- This is Portal View -->
 					<t t-call="web.html_container">
 						<t t-foreach="docs" t-as="o">
 						 	<t t-if="o.journal_id.name == 'Monthly Bills'">
@@ -254,8 +255,10 @@
 									</strong>
 								</div>
 							</div>
+
+							<!-- Commenting out other boxes for better visibility on Portal -->
 							<!-- 2nd box -->
-							<div class="column" style="float: left; border: 1px solid black; width: 32%;  height: 95%; margin-right: 1%;">
+							<!-- <div class="column" style="float: left; border: 1px solid black; width: 32%;  height: 95%; margin-right: 1%;"> -->
 								<table style="width:100%;">
 									<tbody>
 										<tr style="height: 65.5px;">
@@ -496,9 +499,9 @@
 										Office Copy
 									</strong>
 								</div>
-							</div>
+							<!-- </div> -->
 							<!-- 3rd box -->
-							<div class="column" style="float: left; border: 1px solid black; width: 32%;  height: 95%; margin-right: 0%;">
+							<!-- <div class="column" style="float: left; border: 1px solid black; width: 32%;  height: 95%; margin-right: 0%;"> -->
 								<table style="width:100%;">
 									<tbody>
 										<tr style="height: 65.5px;">
@@ -739,7 +742,7 @@
 										Bank Copy
 									</strong>
 								</div>
-							</div>
+							<!-- </div> -->
 						</t>
 					</t>
 				</t>
