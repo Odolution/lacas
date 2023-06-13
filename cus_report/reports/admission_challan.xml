@@ -10,7 +10,7 @@
 									<p t-field="o.state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '" />
 								</div>
 							</t>
-							<table class="table table-dark" style="width:100%;">
+							<table class="table" style="width:100%;">
 								<tbody>
 									<tr style="height: 65.5px;">
 										<td style="align-items: center; ">
@@ -37,9 +37,9 @@
 									</tr>
 								</tbody>
 							</table>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
+							<hr style="height: 1px; border-width: 0; color: black; background-color: white;" />
 							<div>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<tbody>
 										<tr>
 											<td style="text-align: left;color: grey;  width: 30%; font-size:13px;">
@@ -78,7 +78,7 @@
 							</div>
 							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<tbody>
 										<tr>
 											<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
@@ -190,7 +190,7 @@
 								</table>
 							</div>
 							<div>
-								<table class="table table-dark" style="border-collapse:collapse; width:100%;">
+								<table class="table" style="border-collapse:collapse; width:100%;">
 									<thead>
 										<tr style="background-color: 878493; width: 100px;">
 											<th style="text-align: left; width: 98px; font-size:13px;">
@@ -220,7 +220,7 @@
 										</t>
 									</tbody>
 								</table>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<thead>
 										<tr style="width: 100px;">
 											<th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">
@@ -257,7 +257,7 @@
 								</div>
 								<br />
 								<br />
-								<table class="table " style="width:100%; padding-top: 7%;">
+								<table class="table" style="width:100%; padding-top: 7%;">
 									<tbody>
 										<td style="width:50%">
 											<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
@@ -290,7 +290,7 @@
 									<p t-field="o.state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '" />
 								</div>
 							</t>
-							<table class="table table-dark" style="width:100%;">
+							<table class="table" style="width:100%;">
 								<tbody>
 									<tr style="height: 65.5px;">
 										<td style="align-items: center; ">
@@ -317,9 +317,9 @@
 									</tr>
 								</tbody>
 							</table>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
+							<hr style="height: 1px; border-width: 0; color: black; background-color: white;" />
 							<div>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<tbody>
 										<tr>
 											<td style="text-align: left;color: grey;  width: 30%; font-size:13px;">
@@ -358,7 +358,7 @@
 							</div>
 							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<tbody>
 										<tr>
 											<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
@@ -470,7 +470,7 @@
 								</table>
 							</div>
 							<div>
-								<table class="table table-dark" style="border-collapse:collapse; width:100%;">
+								<table class="table" style="border-collapse:collapse; width:100%;">
 									<thead>
 										<tr style="background-color: 878493; width: 100px;">
 											<th style="text-align: left; width: 98px; font-size:13px;">
@@ -500,7 +500,7 @@
 										</t>
 									</tbody>
 								</table>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<thead>
 										<tr style="width: 100px;">
 											<th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">
@@ -537,7 +537,7 @@
 								</div>
 								<br />
 								<br />
-								<table class="table " style="width:100%; padding-top: 7%;">
+								<table class="table" style="width:100%; padding-top: 7%;">
 									<tbody>
 										<td style="width:50%">
 											<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
@@ -570,7 +570,7 @@
 									<p t-field="o.state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '" />
 								</div>
 							</t>
-							<table class="table table-dark" style="width:100%;">
+							<table class="table" style="width:100%;">
 								<tbody>
 									<tr style="height: 65.5px;">
 										<td style="align-items: center; ">
@@ -590,6 +590,7 @@
 												<br />
 												Payable at any Branch of BAFL Except Bank AlFalah Islamic
 											</p>
+                      
 										</td>
 										<td style=" ">
 											<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="80" class="float-left" alt="Logo" />
@@ -597,9 +598,9 @@
 									</tr>
 								</tbody>
 							</table>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
+							<hr style="height: 1px; border-width: 0; color: black; background-color: white;" />
 							<div>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<tbody>
 										<tr>
 											<td style="text-align: left;color: grey;  width: 30%; font-size:13px;">
@@ -638,7 +639,7 @@
 							</div>
 							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<tbody>
 										<tr>
 											<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
@@ -750,7 +751,7 @@
 								</table>
 							</div>
 							<div>
-								<table class="table table-dark" style="border-collapse:collapse; width:100%;">
+								<table class="table" style="border-collapse:collapse; width:100%;">
 									<thead>
 										<tr style="background-color: 878493; width: 100px;">
 											<th style="text-align: left; width: 98px; font-size:13px;">
@@ -780,7 +781,7 @@
 										</t>
 									</tbody>
 								</table>
-								<table class="table table-dark" style="width:100%;">
+								<table class="table" style="width:100%;">
 									<thead>
 										<tr style="width: 100px;">
 											<th style="text-align: left; width: 98px; font-size:13px; margin-left: 5%;">
@@ -817,7 +818,7 @@
 								</div>
 								<br />
 								<br />
-								<table class="table " style="width:100%; padding-top: 7%;">
+								<table class="table" style="width:100%; padding-top: 7%;">
 									<tbody>
 										<td style="width:50%">
 											<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
