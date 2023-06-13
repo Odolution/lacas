@@ -18,7 +18,7 @@
 											<td style="align-items: center; ">
 												<img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="50" width="80" class="float-left" alt="Logo" />
 											</td>
-											<td style="align-items: center;font-size: 10px;position: fixed;left: 50px;">
+											<td style="align-items: center;font-size: 10px;position: fixed;center: 50px;">
 												<p style="text-align: center; ">
 													<strong style="font-size: 15px;">
 														LACAS School Network
@@ -250,9 +250,9 @@
 											</td>
 										</tbody>
 									</table>
-									<strong style="font-size: 15px;padding-left:100px;color: grey;">
+									<!-- <strong style="font-size: 15px;padding-left:100px;color: grey;">
 										Student Copy
-									</strong>
+									</strong> -->
 								</div>
 							</div>
 						</t>
