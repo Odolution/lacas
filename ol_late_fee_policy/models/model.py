@@ -44,15 +44,17 @@ class extwiz(models.TransientModel):
             payment.amount_late_fee_exclusive=payment.amount - payment.late_fee
         return payments
     
-    def action_create_payments(self):
+    def (self):
         for wizard in self:
-            invoice=""
+            invoice = ""
             for line in wizard.line_ids:
-                invoice=line.move_id
+                invoice = line.move_id
                 break
-            if invoice!="":
+            if invoice:
                 invoice.apply_late_fee_policy(payment_date=wizard.payment_date)
-        return super(extwiz,self).action_create_payments()
+                invoice.assert_balanced()  # Add this line to check the balance of the invoice
+            
+        return super(extwiz, self).()
 
 
 class ext_journal(models.Model):
