@@ -51,9 +51,9 @@ class extwiz(models.TransientModel):
                 invoice=line.move_id
                 break
             if invoice!="":
-                invoice.with_context(check_move_validity=False).apply_late_fee_policy(payment_date=wizard.payment_date)
-                invoice.assert_balanced() 
-                invoice.exclude_from_invoice_tab = False 
+                invoice.apply_late_fee_policy(payment_date=wizard.payment_date)
+                # invoice.assert_balanced() 
+                # invoice.exclude_from_invoice_tab = False 
         return super(extwiz,self).action_create_payments()
 
 
