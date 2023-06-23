@@ -261,7 +261,7 @@ class ext(models.Model):
                         rec_inv.library=line.price_subtotal
                     elif 'Utility' in line.product_id.name:
                         rec_inv.utility=line.price_subtotal
-                    elif 'Admission' in line.product_id.name:
+                    elif 'Admission Fee' in line.product_id.name:
                         adm_amount=int(line.price_subtotal)
                         rec_inv.adm_amount=str(adm_amount)
                     elif 'Security' in line.product_id.name:
