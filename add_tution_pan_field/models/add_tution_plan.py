@@ -5,7 +5,7 @@ import datetime
 
 
 class tution_add_tution_plan_wiz(models.TransientModel):
-    _name='tuition.add_tution_plan_wiz'
+    _name='tuition.add.tution.plan.wiz'
 
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     # tution_template_id = fields.Many2one('tution.template', string='Tution Template')
