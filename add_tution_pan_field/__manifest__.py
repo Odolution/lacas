@@ -11,6 +11,7 @@
     "depends": [
         'sale',
         
+        
         # 'account_accountant',
         # 'account'
         # 'account_accountant',
