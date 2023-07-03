@@ -7,4 +7,8 @@ import datetime
 class AddTutionplan(models.Model):
     _name='add.tution.plan'
 
+    plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
+    
+
+
 
