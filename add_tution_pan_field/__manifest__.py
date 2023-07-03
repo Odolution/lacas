@@ -19,7 +19,7 @@
 
     "data": [
         'views/add_tution_plan.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
 
         # 'reports/sale_agrement.xml',
         # 'reports/fee_challan.xml',
