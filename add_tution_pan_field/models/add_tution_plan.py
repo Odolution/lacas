@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 
 
 class add_tution_plan_wiz(models.TransientModel):
-    _name='add.tution.plan.wiz'
+    _name='tution.add_tution_plan_wiz'
 
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     # tution_template_id = fields.Many2one('tution.template', string='Tution Template')
