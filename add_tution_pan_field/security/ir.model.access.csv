@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_add_tution_plan_wiz,access.add.tution.plan.wiz,add_tution_pan_field.model_tuition_add_tution_plan_wiz,,1,1,1,1
+access_add_tution_plan_wiz,access.add.tution.plan.wiz,add_tution_pan_field.model_add_tution_plan_wiz,,1,1,1,1
