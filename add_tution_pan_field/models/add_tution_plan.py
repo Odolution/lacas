@@ -4,7 +4,7 @@ import json
 import datetime
 
 
-# class AddTutionplan(models.Model):
-#     _name='add.tution.plan'
+class AddTutionplan(models.Model):
+    _name='add.tution.plan'
 
 
