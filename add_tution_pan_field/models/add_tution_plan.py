@@ -4,8 +4,8 @@ import json
 import datetime
 
 
-class AddTutionplan(models.Model):
-    _name='add.tution.plan'
+class add_tution_plan_wiz(models.TransientModel):
+    _name='tuition.add_tution_plan_wiz'
 
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
     
