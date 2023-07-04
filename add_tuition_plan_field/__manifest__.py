@@ -19,7 +19,7 @@
     'sequence': -100,
 
     "data": [
-        'views/add_tution_plan.xml',
+        'views/view.xml',
         'security/ir.model.access.csv',
 
         
