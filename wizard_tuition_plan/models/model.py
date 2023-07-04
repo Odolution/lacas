@@ -1,4 +1,7 @@
 from odoo import models, api, fields
+from odoo.exceptions import UserError
+import json
+import datetime
 
 
 class wizard_tuition_plan(models.TransientModel):
@@ -9,17 +12,17 @@ class wizard_tuition_plan(models.TransientModel):
 
     
     def apply(self):
-        raise UserError("error")
+        # raise UserError("error")
     #     for lines in plan_ids:
     
     
-    # @api.onchange('tuition_template_id')
-    # def onchange_tuition_template_id(self):
-    #     if self.tuition_template_id:
-    #         # raise UserError("same")
-    #         self.plan_ids = self.tuition_template_id.plan_ids
-    #     else:
-    #         self.plan_ids = False
+        @api.onchange('tuition_template_id')
+        def onchange_tuition_template_id(self):
+            if self.tuition_template_id:
+                # raise UserError("same")
+                self.plan_ids = self.tuition_template_id.plan_ids
+            else:
+                self.plan_ids = False
 
     
     
