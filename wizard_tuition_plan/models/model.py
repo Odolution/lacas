@@ -12,13 +12,19 @@ class wizard_tuition_plan(models.TransientModel):
 
     
     def apply(self):
+        for t-plan in self.plan_ids:
+            for p in t-plan.line_ids:
+                if p.tuition_template_id == self.tuition_template_id:
+                    raise UserError("already exist in plan")
+
         # raise UserError("error")
-        for lines in plan_ids:
-            for line in tuition_template_id:
-                if lines != line:
-                    lines == line
-                else:
-                    continue
+        # for lines in plan_ids:
+        #     for line in tuition_template_id:
+        #         if lines != line:
+        #             lines == line
+        #         else:
+        #             continue
+
     
     
         # @api.onchange('tuition_template_id')
