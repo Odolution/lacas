@@ -9,7 +9,7 @@ class wizard_tuition_plan(models.TransientModel):
 
     
     def apply(self):
-        raise UserError("fff")
+        raise UserError("error")
     #     for lines in plan_ids:
     
     
