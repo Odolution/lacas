@@ -265,8 +265,12 @@ class ext(models.Model):
                         adm_amount=int(line.price_subtotal)
                         rec_inv.adm_amount=str(adm_amount)
                     elif 'Security' in line.product_id.name and not line.product_id.is_discount_type:
-                        security_amount=int(line.price_subtotal)
-                        rec_inv.security_amount=str(security_amount)
+                        security_amount_charge=int(line.price_subtotal)
+
+                    elif 'Security' in line.product_id.name and line.product_id.is_discount_type:
+                        discount_security=int(line.price_subtotal)
+                        calculated_security=security_amount_charge-discount_security
+                        rec_inv.security_amount=str(calculated_security)
 
                     elif 'Class Photo' in line.product_id.name:
                         rec_inv.classphoto=line.price_subtotal
