@@ -30,7 +30,7 @@ class wizard_tuition_plan(models.TransientModel):
                                 'name':line.name,
                                 # Add other field values as needed
                             })
-                        # t_plan.line_ids += new_line
+                        t_plan.line_ids += new_line
                  
 
          
