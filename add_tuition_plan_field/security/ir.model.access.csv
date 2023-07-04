@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_tuition_add_tuition_plan_wiz,tuition.add_tuition_plan_wiz,model_tuition_add_tuition_plan_wiz,,1,1,1,1
