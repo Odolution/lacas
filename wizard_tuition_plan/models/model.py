@@ -12,11 +12,11 @@ class wizard_tuition_plan(models.TransientModel):
 
     
     def apply(self):
-        if self.tuition_template_id:
-            tuition_lines=tuition_template_id.line_ids
+        
+        tuition_lines=tuition_template_id.line_ids
 
         for t_plan in self.plan_ids:
-            for lines in  in t_plan.line_ids:
+            for lines in t_plan.line_ids:
                 for line in tuition_lines:
                     if lines.product_id==line.product_id:
                         raise UserError(lines.product_id.name)
