@@ -261,9 +261,17 @@ class ext(models.Model):
                         rec_inv.library=line.price_subtotal
                     elif 'Utility' in line.product_id.name:
                         rec_inv.utility=line.price_subtotal
-                    elif 'Admission Fee' in line.product_id.name:
-                        adm_amount=int(line.price_subtotal)
-                        rec_inv.adm_amount=str(adm_amount)
+
+                    elif 'Admission' in line.product_id.name and not line.product_id.is_discount_type:
+                        adm_amount_charge=int(line.price_subtotal)
+
+                    elif 'Admission' in line.product_id.name and line.product_id.is_discount_type:
+                        disc_adm_amount=int(line.price_subtotal)
+                        calculated_adm=adm_amount_charge+disc_adm_amount
+                        rec_inv.adm_amount=str(calculated_adm)
+
+
+
                     elif 'Security' in line.product_id.name and not line.product_id.is_discount_type:
                         security_amount_charge=int(line.price_subtotal)
 
