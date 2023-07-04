@@ -19,30 +19,20 @@ class wizard_tuition_plan(models.TransientModel):
             for lines in t_plan.line_ids:
                 for line in tuition_lines:
                     if lines.product_id==line.product_id:
-                        raise UserError(lines.product_id.name)
-                # if self.tuition_template_id:
+                        if lines.price_unit!=line.price_unit:
+                            lines.price_unit=line.price_unit
+                    else:
+                        new_line = self.env['tuition.plan.line'].new({
+                                'product_id': line.product_id,
+                                'plan_id': t_plan.id,
+                                'curreny_id':1,
+                                'name':line.name,
+                                # Add other field values as needed
+                            })
+                        t_plan.line_ids += new_line
+                 
 
-                # # if p.tuition_template_id == self.tuition_template_id:
-                # #     raise UserError("already exist in plan")
-
-
-        # raise UserError("error")
-        # for lines in plan_ids:
-        #     for line in tuition_template_id:
-        #         if lines != line:
-        #             lines == line
-        #         else:
-        #             continue
-
-    
-    
-        # @api.onchange('tuition_template_id')
-        # def onchange_tuition_template_id(self):
-        #     if self.tuition_template_id:
-        #         # raise UserError("same")
-        #         self.plan_ids = self.tuition_template_id.plan_ids
-        #     else:
-        #         self.plan_ids = False
+         
 
     
     
