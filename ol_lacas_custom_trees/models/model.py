@@ -264,16 +264,20 @@ class ext(models.Model):
 
                     elif 'Admission' in line.product_id.name and not line.product_id.is_discount_type:
                         adm_amount_charge=int(line.price_subtotal)
+                        rec_inv.adm_amount=str(adm_amount_charge)
 
                     elif 'Admission' in line.product_id.name and line.product_id.is_discount_type:
                         disc_adm_amount=int(line.price_subtotal)
                         calculated_adm=adm_amount_charge+disc_adm_amount
                         rec_inv.adm_amount=str(calculated_adm)
+                        
 
 
 
                     elif 'Security' in line.product_id.name and not line.product_id.is_discount_type:
                         security_amount_charge=int(line.price_subtotal)
+                        rec_inv.security_amount=str(security_amount_charge)
+
 
                     elif 'Security' in line.product_id.name and line.product_id.is_discount_type:
                         discount_security=int(line.price_subtotal)
