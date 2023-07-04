@@ -13,7 +13,7 @@ class wizard_tuition_plan(models.TransientModel):
     
     def apply(self):
         
-        tuition_lines=tuition_template_id.line_ids
+        tuition_lines=self.tuition_template_id.line_ids
 
         for t_plan in self.plan_ids:
             for lines in t_plan.line_ids:
