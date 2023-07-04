@@ -20,8 +20,8 @@
 
 
                     <footer>
-                        <!-- <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
-                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/> -->
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
                     </footer>
                 </form>
             </field>
