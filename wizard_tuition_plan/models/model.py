@@ -22,7 +22,7 @@ class wizard_tuition_plan(models.TransientModel):
                         if lines.unit_price!=line.unit_price:
                             lines.unit_price=line.unit_price
                     else:
-                        t_plan= self.env['tution.plan'].browse(line_ids)
+                        t_plan= self.env['tuition.plan'].browse(line_ids)
                         new_line = self.env['tuition.plan.line'].new({
                                 'product_id': line.product_id,
                                 'plan_id': t_plan.id,
