@@ -47,6 +47,7 @@ class wizard_tuition_plan(models.TransientModel):
         tuition_lines = self.tuition_template_id.line_ids
 
         for t_plan in self.plan_ids:
+            t_plan.tuition_template_id=self.tuition_template_id
             added_product_ids = set(t_plan.line_ids.mapped('product_id.id'))
 
             for line in tuition_lines:
