@@ -12,17 +12,22 @@ class wizard_tuition_plan(models.TransientModel):
 
     
     def apply(self):
-        raise UserError("error")
-    #     for lines in plan_ids:
+        # raise UserError("error")
+        for lines in plan_ids:
+            for line in tuition_template_id:
+                if lines != line:
+                    lines == line
+                else:
+                    continue
     
     
-        @api.onchange('tuition_template_id')
-        def onchange_tuition_template_id(self):
-            if self.tuition_template_id:
-                # raise UserError("same")
-                self.plan_ids = self.tuition_template_id.plan_ids
-            else:
-                self.plan_ids = False
+        # @api.onchange('tuition_template_id')
+        # def onchange_tuition_template_id(self):
+        #     if self.tuition_template_id:
+        #         # raise UserError("same")
+        #         self.plan_ids = self.tuition_template_id.plan_ids
+        #     else:
+        #         self.plan_ids = False
 
     
     
