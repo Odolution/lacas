@@ -269,7 +269,7 @@ class ext(models.Model):
 
                     elif 'Security' in line.product_id.name and line.product_id.is_discount_type:
                         discount_security=int(line.price_subtotal)
-                        calculated_security=security_amount_charge-discount_security
+                        calculated_security=security_amount_charge+discount_security
                         rec_inv.security_amount=str(calculated_security)
 
                     elif 'Class Photo' in line.product_id.name:
