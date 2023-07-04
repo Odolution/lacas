@@ -63,6 +63,11 @@ class wizard_tuition_plan(models.TransientModel):
                         'plan_id': t_plan.id,
                         'currency_id': 1,
                         'name': line.name,
+                        'quantity': 1,
+                        'discount': line.discount.id,
+                        'price_total': line.price_total.id,
+                        'installment':line.installment_ids.id,
+                        'account': line.account_id.id,
                         # Add other field values as needed
                     })
                     added_product_ids.add(line.product_id.id)
