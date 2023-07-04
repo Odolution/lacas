@@ -264,7 +264,7 @@ class ext(models.Model):
                     elif 'Admission Fee' in line.product_id.name:
                         adm_amount=int(line.price_subtotal)
                         rec_inv.adm_amount=str(adm_amount)
-                    elif 'Security' in line.product_id.name and is_discount_type not in line.product_id:
+                    elif 'Security' in line.product_id.name and not is_discount_type in line.product_id:
                         security_amount=int(line.price_subtotal)
                         rec_inv.security_amount=str(security_amount)
 
