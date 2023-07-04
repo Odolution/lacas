@@ -23,7 +23,7 @@ class wizard_tuition_plan(models.TransientModel):
             for lines in t_plan.line_ids:
                 for line in tuition_lines:
                     if lines.product_id==line.product_id:
-                        continue
+                        break
                         if lines.unit_price!=line.unit_price:
                             lines.unit_price=line.unit_price
                     else:
