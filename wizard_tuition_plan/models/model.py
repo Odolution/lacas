@@ -5,6 +5,6 @@ class wizard_tuition_plan(models.TransientModel):
     _name='tuition.wizard_tuition_plan'
 
     plan_ids = fields.Many2many('tuition.plan', string='tuition_plan')
-    tuition_template_id = fields.Many2one('tuition_template', string='Tuition Template')
+    # tuition_template_id = fields.Many2one('tuition_template', string='Tuition Template')
 
     

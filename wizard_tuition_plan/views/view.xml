@@ -8,7 +8,7 @@
 
                         <group>
                             <field name="plan_ids"/>
-                            <field name="tuition_template_id"/>
+                            <!-- <field name="tuition_template_id"/> -->
                             <!-- <field name="operation" widget="radio"/>
                             <field name="installment_names" required="1" widget="many2many_tags"/>
                             <field name="product_id" required="1" />
