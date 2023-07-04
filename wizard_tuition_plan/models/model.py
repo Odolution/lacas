@@ -50,24 +50,28 @@ class wizard_tuition_plan(models.TransientModel):
             t_plan.tuition_template_id=self.tuition_template_id
             added_product_ids = set(t_plan.line_ids.mapped('product_id.id'))
 
-            for line in tuition_lines:
-                if line.product_id.id in added_product_ids:
-                    continue
+            for lines in t_plan.line_ids:
+                for line in tuition_lines:
+                    if lines.product_id==line.product_id:
+                        if lines.unit_price!=line.unit_price:
+                            lines.unit_price=line.unit_price
+                    else:
+                        # t_plan= self.env['tuition.plan'].browse(t_plan.id)
+                        new_line = self.env['tuition.plan.line'].new({
+                                'product_id': line.product_id,
+                                'plan_id': t_plan.id,
+                                'currency_id':1,
+                                'name':line.name,
+                                # Add other field values as needed
+                            })
+                        t_plan.line_ids += new_line
+            
+        
 
-                existing_line = t_plan.line_ids.filtered(lambda l: l.product_id == line.product_id)
-                if existing_line:
-                    if existing_line.unit_price != line.unit_price:
-                        existing_line.unit_price = line.unit_price
-                else:
-                    new_line = self.env['tuition.plan.line'].create({
-                        'product_id': line.product_id.id,
-                        'plan_id': t_plan.id,
-                        'currency_id': 1,
-                        'name': line.name,
-                        # Add other field values as needed
-                    })
-                    added_product_ids.add(line.product_id.id)
-
+    # @api.onchange('tuition_template_id')
+    # def _onchange_tuition_template_id(self):
+    #     self.line_ids=self.tuition_template_id.line_ids
+        
 
          
 
