@@ -16,6 +16,9 @@ class wizard_tuition_plan(models.TransientModel):
         tuition_lines=self.tuition_template_id.line_ids
 
         for t_plan in self.plan_ids:
+            if self.tuition_template_id:
+                t_plan.tuition_template_id=self.tuition_template_id
+
             for lines in t_plan.line_ids:
                 for line in tuition_lines:
                     if lines.product_id==line.product_id:
@@ -31,7 +34,13 @@ class wizard_tuition_plan(models.TransientModel):
                                 # Add other field values as needed
                             })
                         t_plan.line_ids += new_line
-                 
+
+
+    # @api.onchange('tuition_template_id')
+    # def _onchange_tuition_template_id(self):
+    #     self.line_ids=self.tuition_template_id.line_ids
+        
+
 
          
 
