@@ -25,7 +25,7 @@ class wizard_tuition_plan(models.TransientModel):
                         new_line = self.env['tuition.plan.line'].new({
                                 'product_id': line.product_id,
                                 'plan_id': t_plan.id,
-                                'curreny_id':1,
+                                'currency_id':1,
                                 'name':line.name,
                                 # Add other field values as needed
                             })
