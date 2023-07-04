@@ -8,7 +8,8 @@ class wizard_tuition_plan(models.TransientModel):
     tuition_template_id = fields.Many2one('tuition.template', string='Tuition Template')
 
     
-    # def apply(self):
+    def apply(self):
+        raise UserError("fff")
     #     for lines in plan_ids:
     
     
