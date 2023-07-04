@@ -16,12 +16,14 @@ class wizard_tuition_plan(models.TransientModel):
         tuition_lines=self.tuition_template_id.line_ids
 
         for t_plan in self.plan_ids:
+            # onchange function
             if self.tuition_template_id:
                 t_plan.tuition_template_id=self.tuition_template_id
 
             for lines in t_plan.line_ids:
                 for line in tuition_lines:
                     if lines.product_id==line.product_id:
+                        continue
                         if lines.unit_price!=line.unit_price:
                             lines.unit_price=line.unit_price
                     else:
