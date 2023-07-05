@@ -46,9 +46,11 @@ class wizard_tuition_plan(models.TransientModel):
 
     def apply(self):
         tuition_lines = self.tuition_template_id.line_ids
+
         price = {}
         for line in self.tuition_template_id.line_ids:
             price[line.name] = line.unit_price
+
         for t_plan in self.plan_ids:
              # onchange function
             if self.tuition_template_id:
@@ -79,7 +81,8 @@ class wizard_tuition_plan(models.TransientModel):
                         # 'discount': line.discount,
                         'unit_price': price.get(line.name),
                         # 'installment_ids':line.installment_ids.name,
-                        'account_id': line.account_id.id,
+                        'account_id': line.product_id.property_account_income_id.id,
+                        # 'account_id': line.account_id.id,
                         # Add other field values as needed
 
                         
