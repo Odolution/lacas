@@ -103,7 +103,7 @@ class wizard_tuition_plan(models.TransientModel):
                         # 'discount': line.discount,
                         'unit_price': price.get(line.name),
                         # 'installment_ids':t_plan.installment,
-                        'installment_ids': installment.get(month.name),
+                        'installment_ids': installment.get(line.name),
 
 
                         'account_id': line.product_id.property_account_income_id.id,
