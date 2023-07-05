@@ -53,7 +53,7 @@ class wizard_tuition_plan(models.TransientModel):
 
         installment={}
         for month in self.tuition_template_id.installment_ids:
-            installment[month.name]=month.installment_ids.id
+            installment[month.name]=month.installment_ids
             # list.append(line.installment_ids.id)
 
         # installment = []
