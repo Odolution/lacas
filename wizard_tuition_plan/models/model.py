@@ -46,7 +46,9 @@ class wizard_tuition_plan(models.TransientModel):
 
     def apply(self):
         tuition_lines = self.tuition_template_id.line_ids
-
+        price = {}
+        for line in self.tuition_template_id.line_ids:
+            price[line.name] = line.unit_price
         for t_plan in self.plan_ids:
              # onchange function
             if self.tuition_template_id:
@@ -56,7 +58,6 @@ class wizard_tuition_plan(models.TransientModel):
 
             lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             lines_to_remove.unlink()
-
             for line in tuition_lines:
                 # if line.product_id.id in added_product_ids:
                 #     continue
@@ -66,6 +67,9 @@ class wizard_tuition_plan(models.TransientModel):
                     if existing_line.unit_price != line.unit_price:
                         existing_line.unit_price = line.unit_price
                 else:
+                    # price = price_dct.get(line.name)
+                    # if not price:
+                    #     line.product_id.list_price
                     new_line = self.env['tuition.plan.line'].create({
                         'product_id': line.product_id.id,
                         'plan_id': t_plan.id,
@@ -73,7 +77,7 @@ class wizard_tuition_plan(models.TransientModel):
                         'name': line.name,
                         'quantity': line.quantity,
                         # 'discount': line.discount,
-                        'unit_price': line.product_id.list_price,
+                        'unit_price': price.get(line.name),
                         # 'installment_ids':line.installment_ids.name,
                         'account_id': line.account_id.id,
                         # Add other field values as needed
