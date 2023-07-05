@@ -37,6 +37,7 @@ import datetime
 #                             })
 #                         t_plan.line_ids += new_line
 
+
 class wizard_tuition_plan(models.TransientModel):
     _name = 'tuition.wizard_tuition_plan'
 
