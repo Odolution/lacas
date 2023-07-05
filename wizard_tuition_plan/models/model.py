@@ -49,7 +49,7 @@ class wizard_tuition_plan(models.TransientModel):
 
         for t_plan in self.plan_ids:
              # onchange function
-           if self.tuition_template_id:
+            if self.tuition_template_id:
                 t_plan.tuition_template_id=self.tuition_template_id
 
             added_product_ids = set(t_plan.line_ids.mapped('product_id.id'))
