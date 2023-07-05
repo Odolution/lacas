@@ -54,7 +54,7 @@ class wizard_tuition_plan(models.TransientModel):
 
             added_product_ids = set(t_plan.line_ids.mapped('product_id.id'))
 
-            lines_to_remove = t_plan.filtered(lambda l1: l1.x_studio_have_discount_1 == 0)
+            lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             lines_to_remove.unlink()
 
             for line in tuition_lines:
