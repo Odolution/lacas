@@ -57,19 +57,24 @@ class wizard_tuition_plan(models.TransientModel):
         for line in self.tuition_template_id.line_ids:
             price[line.name] = line.unit_price
 
+        months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-        installment={}
-        for line in self.tuition_template_id.line_ids:
-            months = []
-            for month in line.installment_ids:
-                months.append(month)
-            installment['line.name'] = months
+        installment_ids = self.env['tuition.installment'].search([('month', 'in', months)])
+        installment_ids = installment_ids.ids
+
+        # installment={}
+        # for line in self.tuition_template_id.line_ids:
+        #     months = []
+        #     for month in line.installment_ids:
+        #         months.append(month)
+        #     installment['line.name'] = months
             # list.append(line.installment_ids.id)
 
         # installment = []
-
         # for month in self.tuition_template_id.installment_ids:
         #     installment.append(month.name)
+
+
 
         for t_plan in self.plan_ids:
              # onchange function
@@ -103,7 +108,11 @@ class wizard_tuition_plan(models.TransientModel):
                         # 'discount': line.discount,
                         'unit_price': price.get(line.name),
                         # 'installment_ids':t_plan.installment,
-                        'installment_ids': installment.get(line.name),
+
+                        'installment_ids':t_plan.installment_ids,
+                        
+                        # 'installment_ids':t_plan.installment,
+                        # 'installment_ids': installment.get(line.name),
 
 
                         'account_id': line.product_id.property_account_income_id.id,
