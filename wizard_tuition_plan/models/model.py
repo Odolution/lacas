@@ -52,8 +52,8 @@ class wizard_tuition_plan(models.TransientModel):
             price[line.name] = line.unit_price
 
         installment={}
-        for line in self.tuition_template_id.line_ids:
-            installment[line.name]=line.installment_ids.id
+        for month in self.tuition_template_id.installment_ids:
+            installment[month.name]=month.installment_ids.id
             # list.append(line.installment_ids.id)
 
         for t_plan in self.plan_ids:
@@ -88,7 +88,7 @@ class wizard_tuition_plan(models.TransientModel):
                         # 'discount': line.discount,
                         'unit_price': price.get(line.name),
                         # 'installment_ids':t_plan.installment_ids.id,
-                        'installment_ids': installment.get(line.name),
+                        'installment_ids': installment.get(month.name),
 
 
                         'account_id': line.product_id.property_account_income_id.id,
