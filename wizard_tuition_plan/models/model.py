@@ -52,14 +52,14 @@ class wizard_tuition_plan(models.TransientModel):
             if self.tuition_template_id:
                 t_plan.tuition_template_id=self.tuition_template_id
 
-            added_product_ids = set(t_plan.line_ids.mapped('product_id.id'))
+            # added_product_ids = set(t_plan.line_ids.mapped('product_id.id'))
 
             lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             lines_to_remove.unlink()
 
             for line in tuition_lines:
-                if line.product_id.id in added_product_ids:
-                    continue
+                # if line.product_id.id in added_product_ids:
+                #     continue
 
                 existing_line = t_plan.line_ids.filtered(lambda l: l.product_id == line.product_id)
                 if existing_line:
@@ -80,7 +80,7 @@ class wizard_tuition_plan(models.TransientModel):
 
                         
                     })
-                    added_product_ids.add(line.product_id.id)
+                    # added_product_ids.add(line.product_id.id)
          
 
     
