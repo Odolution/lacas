@@ -51,6 +51,11 @@ class wizard_tuition_plan(models.TransientModel):
         for line in self.tuition_template_id.line_ids:
             price[line.name] = line.unit_price
 
+        installment={}
+        for line in self.tuition_template_id.line_ids:
+            installment[line.name]=line.installment_ids.id
+            # list.append(line.installment_ids.id)
+
         for t_plan in self.plan_ids:
              # onchange function
             if self.tuition_template_id:
@@ -60,6 +65,7 @@ class wizard_tuition_plan(models.TransientModel):
 
             lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             lines_to_remove.unlink()
+
             for line in tuition_lines:
                 # if line.product_id.id in added_product_ids:
                 #     continue
@@ -72,6 +78,7 @@ class wizard_tuition_plan(models.TransientModel):
                     # price = price_dct.get(line.name)
                     # if not price:
                     #     line.product_id.list_price
+                    
                     new_line = self.env['tuition.plan.line'].create({
                         'product_id': line.product_id.id,
                         'plan_id': t_plan.id,
@@ -80,7 +87,10 @@ class wizard_tuition_plan(models.TransientModel):
                         'quantity': line.quantity,
                         # 'discount': line.discount,
                         'unit_price': price.get(line.name),
-                        # 'installment_ids':line.installment_ids.name,
+                        # 'installment_ids':t_plan.installment_ids.id,
+                        'installment_ids': installment.get(line.name),
+
+
                         'account_id': line.product_id.property_account_income_id.id,
                         # 'account_id': line.account_id.id,
                         # Add other field values as needed
