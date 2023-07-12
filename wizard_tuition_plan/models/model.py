@@ -91,9 +91,9 @@ class wizard_tuition_plan(models.TransientModel):
             lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             lines_to_remove.unlink()
 
-            # if t_plan.student_grade_level_ids.name == "XI":
-            #     specialization_charges_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.x_studio_code != False)
-            #     specialization_charges_remove.unlink()
+            if t_plan.student_grade_level_ids.name == "XI":
+                specialization_charges_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.x_studio_code != False)
+                specialization_charges_remove.unlink()
 
             
             # specialization_charges = t_plan.line_ids.product_id.x_studio_code
