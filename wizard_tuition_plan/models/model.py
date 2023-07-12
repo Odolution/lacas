@@ -2,6 +2,8 @@ from odoo import models, api, fields
 from odoo.exceptions import UserError
 import json
 import datetime
+import calendar
+
 
 
 # class wizard_tuition_plan(models.TransientModel):
@@ -74,6 +76,9 @@ class wizard_tuition_plan(models.TransientModel):
         # for month in self.tuition_template_id.installment_ids:
         #     installment.append(month.name)
 
+        # if x_studio_grade_level == "XI":
+        # if school.grade.level.
+        #     product_id.x_studio_code == 0
 
 
         for t_plan in self.plan_ids:
@@ -86,6 +91,16 @@ class wizard_tuition_plan(models.TransientModel):
             lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             lines_to_remove.unlink()
 
+            # specialization_charges_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.x_studio_code == 1)
+            # lines_to_remove.unlink()
+
+            
+            specialization_charges = t_plan.line_ids.product_id.x_studio_code:
+            if student_grade_level_ids.name == "XI":
+                len(specialization_charges)
+                if len(specialization_charges)>0:
+                    t_plan.line_ids.product_id.x_studio_code = ""
+            
             for line in tuition_lines:
                 # if line.product_id.id in added_product_ids:
                 #     continue
@@ -121,12 +136,13 @@ class wizard_tuition_plan(models.TransientModel):
 
                         
                     })
+<<<<<<< HEAD
+                    # added_product_ids.add(line.product_id.id)
+=======
                     # added_product_ids.add(line.product_id.id)
          
+>>>>>>> 7e799866ff91296ecff5d528653c3ae51dcf33f2
 
-    
-    
-    
     def default_get(self, fields_list):
         # OVERRIDE
         res = super().default_get(fields_list)
