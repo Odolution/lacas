@@ -95,7 +95,7 @@ class wizard_tuition_plan(models.TransientModel):
             # lines_to_remove.unlink()
 
             
-            specialization_charges = t_plan.line_ids.product_id.x_studio_code:
+            specialization_charges = t_plan.line_ids.product_id.x_studio_code
             if student_grade_level_ids.name == "XI":
                 len(specialization_charges)
                 if len(specialization_charges)>0:
