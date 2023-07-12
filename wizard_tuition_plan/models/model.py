@@ -96,12 +96,12 @@ class wizard_tuition_plan(models.TransientModel):
                 # raise UserError(specialization_charges_remove)
                 # for charge in specialization_charges_remove:
                 #     charge.unlink()
-                to_deleted = []
+                # to_deleted = []
                 for line in t_plan.line_ids:
                     if line.product_id.x_studio_code != '':
-                        to_deleted.append(line)
+                        line.unlink()
                 
-                to_deleted.unlink()
+                # to_deleted.unlink()
 
             
             # specialization_charges = t_plan.line_ids.product_id.x_studio_code
