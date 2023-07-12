@@ -136,12 +136,7 @@ class wizard_tuition_plan(models.TransientModel):
 
                         
                     })
-<<<<<<< HEAD
                     # added_product_ids.add(line.product_id.id)
-=======
-                    # added_product_ids.add(line.product_id.id)
-         
->>>>>>> 7e799866ff91296ecff5d528653c3ae51dcf33f2
 
     def default_get(self, fields_list):
         # OVERRIDE
