@@ -91,7 +91,7 @@ class wizard_tuition_plan(models.TransientModel):
             if t_plan.student_grade_level_ids.name == "XI":
                 # raise UserError(t_plan.student_grade_level_ids.name)
                 specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code != " ")
-                # raise UserError(specialization_charges_remove)
+                raise UserError(specialization_charges_remove.product_id.name)
                 specialization_charges_remove.unlink()
                 # for charge in specialization_charges_remove:
                     # charge.unlink()
@@ -104,9 +104,9 @@ class wizard_tuition_plan(models.TransientModel):
 
             
             # specialization_charges = t_plan.line_ids.product_id.x_studio_code
-            # if student_grade_level_ids.name == "XI":
-            #     len(specialization_charges)
-            #     if len(specialization_charges)>0:
+            # a =  len(specialization_charges)
+            # if t_plan.student_grade_level_ids.name == "XI":
+            #     if a>0:
             #         t_plan.line_ids.product_id.x_studio_code = ""
             
             for line in tuition_lines:
