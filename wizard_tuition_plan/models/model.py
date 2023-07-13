@@ -49,12 +49,6 @@ class wizard_tuition_plan(models.TransientModel):
     def apply(self):
         tuition_lines = self.tuition_template_id.line_ids
 
-        # installment = []
-
-        # for month in self.tuition_template_id.installment_ids:
-        #     installment.append(month)
-
-
         price = {}
         for line in self.tuition_template_id.line_ids:
             price[line.name] = line.unit_price
@@ -64,55 +58,22 @@ class wizard_tuition_plan(models.TransientModel):
         installment_ids = self.env['tuition.installment'].search([('month', 'in', months)])
         installment_ids = installment_ids.ids
 
-        # installment={}
-        # for line in self.tuition_template_id.line_ids:
-        #     months = []
-        #     for month in line.installment_ids:
-        #         months.append(month)
-        #     installment['line.name'] = months
-            # list.append(line.installment_ids.id)
-
-        # installment = []
-        # for month in self.tuition_template_id.installment_ids:
-        #     installment.append(month.name)
 
         for t_plan in self.plan_ids:
              # onchange function
             if self.tuition_template_id:
                 t_plan.tuition_template_id=self.tuition_template_id
 
-            # added_product_ids = set(t_plan.line_ids.mapped('product_id.id'))
-
             lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             lines_to_remove.unlink()
-
-
-            
             if t_plan.student_grade_level_ids.name == "XI":
                 # raise UserError(t_plan.student_grade_level_ids.name)
-                specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code != " ")
+                specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code and l2.product_id.x_studio_code.strip())
                 raise UserError(specialization_charges_remove.product_id.name)
                 specialization_charges_remove.unlink()
-                # for charge in specialization_charges_remove:
-                    # charge.unlink()
-                # to_deleted = []
-                # for line in t_plan.line_ids:
-                #     if line.product_id.x_studio_code != '':
-                #         line.unlink()
-                
-                # to_deleted.unlink()
-
-            
-            # specialization_charges = t_plan.line_ids.product_id.x_studio_code
-            # a =  len(specialization_charges)
-            # if t_plan.student_grade_level_ids.name == "XI":
-            #     if a>0:
-            #         t_plan.line_ids.product_id.x_studio_code = ""
-            
+          
             for line in tuition_lines:
-                # if line.product_id.id in added_product_ids:
-                #     continue
-
+            
                 existing_line = t_plan.line_ids.filtered(lambda l: l.product_id == line.product_id)
                 if existing_line:
                     if existing_line.unit_price != line.unit_price:
