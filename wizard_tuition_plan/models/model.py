@@ -72,7 +72,7 @@ class wizard_tuition_plan(models.TransientModel):
                 # raise UserError(t_plan.student_grade_level_ids.name)
                 # specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code and l2.product_id.x_studio_code.strip())
                 specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'])
-                raise UserError(specialization_charges_remove.product_id.name)
+                # raise UserError(specialization_charges_remove.product_id.name)
                 specialization_charges_remove.unlink()
           
             for line in tuition_lines:
