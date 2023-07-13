@@ -64,16 +64,21 @@ class wizard_tuition_plan(models.TransientModel):
             if self.tuition_template_id:
                 t_plan.tuition_template_id=self.tuition_template_id
 
-            if t_plan.student_grade_level_ids.name == "XI":
-                # raise UserError(t_plan.student_grade_level_ids.name)
-                # specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code and l2.product_id.x_studio_code.strip())
-                specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'])
-                # raise UserError(specialization_charges_remove.product_id.name)
-                specialization_charges_remove.unlink()
-                
+            # if t_plan.student_grade_level_ids.name == "XI":
+            #     # raise UserError(t_plan.student_grade_level_ids.name)
+            #     # specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code and l2.product_id.x_studio_code.strip())
+            #     specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'])
+            #     # raise UserError(specialization_charges_remove.product_id.name)
+            #     specialization_charges_remove.unlink()
+
             lines_to_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.is_discount_type == 0)
             if lines_to_remove:
                 lines_to_remove.unlink()
+
+            if t_plan.student_grade_level_ids.name == "XI":
+                for line in t_plan.line_ids:
+                    if line.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY']:
+                        line.unlink()
 
             
             for line in tuition_lines:
