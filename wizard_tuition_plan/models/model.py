@@ -76,11 +76,6 @@ class wizard_tuition_plan(models.TransientModel):
         # for month in self.tuition_template_id.installment_ids:
         #     installment.append(month.name)
 
-        # if x_studio_grade_level == "XI":
-        # if school.grade.level.
-        #     product_id.x_studio_code == 0
-
-
         for t_plan in self.plan_ids:
              # onchange function
             if self.tuition_template_id:
@@ -92,14 +87,15 @@ class wizard_tuition_plan(models.TransientModel):
             lines_to_remove.unlink()
 
             if t_plan.student_grade_level_ids.name == "XI":
-                # specialization_charges_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.x_studio_code != '')
-                # raise UserError(specialization_charges_remove)
+                specialization_charges_remove = t_plan.line_ids.filtered(lambda l1: l1.product_id.x_studio_code != '')
+                raise UserError(specialization_charges_remove)
+                specialization_charges_remove.unlink()
                 # for charge in specialization_charges_remove:
-                #     charge.unlink()
+                    # charge.unlink()
                 # to_deleted = []
-                for line in t_plan.line_ids:
-                    if line.product_id.x_studio_code != '':
-                        line.unlink()
+                # for line in t_plan.line_ids:
+                #     if line.product_id.x_studio_code != '':
+                #         line.unlink()
                 
                 # to_deleted.unlink()
 
