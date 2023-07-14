@@ -77,7 +77,7 @@ class wizard_tuition_plan(models.TransientModel):
 
             if t_plan.student_grade_level_ids.name == "XI":
                 for line in t_plan.line_ids:
-                    raise UserError(line)
+                    # raise UserError(line)
                     if line.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY']:
                         line.unlink()
 

@@ -7,7 +7,7 @@
                 <form string="Wizard Tuition Plan">
 
                         <group>
-                            <field name="plan_ids"/>
+                            <field name="plan_ids" invisible='1'/>
                             <field name="tuition_template_id" required="1"/>
                             <!-- <field name="operation" widget="radio"/>
                             <field name="installment_names" required="1" widget="many2many_tags"/>
