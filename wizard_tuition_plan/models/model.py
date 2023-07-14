@@ -77,7 +77,7 @@ class wizard_tuition_plan(models.TransientModel):
                 lines_to_remove = t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'] or l.product_id.is_discount_type == 0)
                 lines_to_remove.unlink()
             else:
-                non_discount_lines_to_remove =t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code == '' and l.product_id.is_discount_type == 0)
+                non_discount_lines_to_remove =t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code not in ['ART', 'BIO', 'CHM', 'COM', 'PHY']  and l.product_id.is_discount_type == 0)
                 non_discount_lines_to_remove.unlink()
 
                 # raise UserError("do not unlink")
