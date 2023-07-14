@@ -79,7 +79,8 @@ class wizard_tuition_plan(models.TransientModel):
                 specialization_charges_remove = t_plan.line_ids.filtered(lambda l2: l2.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'])
                 specialization_charges_remove.unlink()
             else:
-                raise UserError("do not unlink")
+                print('pass')
+                # raise UserError("do not unlink")
 
             # if t_plan.student_grade_level_ids.name == "XI":
             #     for line in t_plan.line_ids:
