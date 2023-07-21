@@ -6,7 +6,7 @@ class academics_tab(models.Model):
     _inherit = 'account.move'
     facts_id_cred_custom = fields.Char(string='Facts Id')
 
-    udid_cred_custom = fields.Char(string='UDID')
+    udid_cred_custom = fields.Char(string='UDID',compute='_student_compute_udid')
     acadamic_status = fields.Char( string='Status')
 
     rollno_cred_custom = fields.Char(string='Roll No')
@@ -22,8 +22,8 @@ class academics_tab(models.Model):
         compute='_compute_refund_receive', string="Receivable/Refundable")
     
 
-    @api.onchange('x_student_id_cred')
-    def _student_reversal_onchange(self):
+    # @api.onchange('x_student_id_cred')
+    def _student_compute_udid(self):
         for rec in self:
             rec.udid_cred_custom=""
             if rec.x_student_id_cred:
