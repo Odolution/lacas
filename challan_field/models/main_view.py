@@ -30,8 +30,23 @@ class account_fields(models.Model):
     other_refunds_lv=fields.Integer("Other Refunds")
     
 
-    class_name = fields.Char(string='Class')
-    section_name = fields.Char(string='Section')
+    class_name = fields.Char(string='Class',compute='_student_compute_class')
+    section_name = fields.Char(string='Section',compute='_student_compute_class')
+
+    def _student_compute_class(self):
+      if self.x_student_id_cred:
+        wholename=""
+        if self.x_student_id_cred.homeroom:
+          wholename=self.x_student_id_cred.homeroom
+          splitted_name=wholename.split('-')
+          if len(splitted_name)>2:
+            self.class_name=splitted_name[0]+"-"+splitted_name[1]
+            self.section_name=splitted_name[2]
+          elif len(splitted_name)>1:
+            self.class_name=splitted_name[0]
+            self.section_name=splitted_name[1]
+          elif len(splitted_name)>0:
+            self.class_name=splitted_name[0]
     @api.onchange('x_student_id_cred',"student_ids")
     def _student_onchange(self):
       self.class_name=""
