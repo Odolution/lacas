@@ -34,19 +34,22 @@ class account_fields(models.Model):
     section_name = fields.Char(string='Section',compute='_student_compute_class')
 
     def _student_compute_class(self):
-      if self.x_student_id_cred:
-        wholename=""
-        if self.x_student_id_cred.homeroom:
-          wholename=self.x_student_id_cred.homeroom
-          splitted_name=wholename.split('-')
-          if len(splitted_name)>2:
-            self.class_name=splitted_name[0]+"-"+splitted_name[1]
-            self.section_name=splitted_name[2]
-          elif len(splitted_name)>1:
-            self.class_name=splitted_name[0]
-            self.section_name=splitted_name[1]
-          elif len(splitted_name)>0:
-            self.class_name=splitted_name[0]
+      self.class_name=""
+      self.section_name=""
+      for rec in self:
+        if rec.x_student_id_cred:
+          wholename=""
+          if rec.x_student_id_cred.homeroom:
+            wholename=rec.x_student_id_cred.homeroom
+            splitted_name=wholename.split('-')
+            if len(splitted_name)>2:
+              rec.class_name=splitted_name[0]+"-"+splitted_name[1]
+              rec.section_name=splitted_name[2]
+            elif len(splitted_name)>1:
+              rec.class_name=splitted_name[0]
+              rec.section_name=splitted_name[1]
+            elif len(splitted_name)>0:
+              rec.class_name=splitted_name[0]
     @api.onchange('x_student_id_cred',"student_ids")
     def _student_onchange(self):
       self.class_name=""
