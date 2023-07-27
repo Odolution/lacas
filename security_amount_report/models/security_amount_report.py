@@ -63,7 +63,8 @@ class SecurityAmountReport(models.Model):
                 worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
 
             
-            account_move_object = self.env['account.move'].search([])
+            # account_move_object = self.env['account.move'].search([])
+            account_move_object = self.env['school.student'].search([])
 
             row = 11
             serial_number = 1
