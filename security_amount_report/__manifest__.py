@@ -15,7 +15,7 @@
     ],
 
     "data": [
-        'views/menu_item.xml',
+        # 'views/menu_item.xml',
         'security/ir.model.access.csv',
         # 'reports/sale_agrement_template.xml',
         # 'reports/admission_challan.xml',
