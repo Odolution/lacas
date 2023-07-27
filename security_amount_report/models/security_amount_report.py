@@ -65,47 +65,10 @@ class SecurityAmountReport(models.Model):
                 worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
 
             
+            account_move_object = self.env['account.move'].search([])
 
-                
-            # Adding Start Date, End Date
-            # worksheet.write_merge(5, 6, 6, 7, "START DATE",style=style_title)
-            # worksheet.write_merge(7, 8, 6, 7, "END DATE", style=style_title)
-            # worksheet.write_merge(5, 6, 8, 9, formatted_start_date,style=style_title)
-            # worksheet.write_merge(7, 8, 8, 9, formatted_end_date, style=style_title)
 
-            
-            # Get field names dynamically
-            # field_names = self.env['utilisation.report.lines'].fields_get().keys()
-
-            # column_width = 3  # Number of columns each field should span
-            
-            # So using Static/Hard-coded Approach
-            # field_names = ['EMPLOYEES', 'WORKING HOURS', 'ATTENDANCE HOURS', 'HOURS WORKED', 'HOURS LOST', 'OVERTIME HOURS', 'TIME UTILISATION %']
-            # for col, field_name in enumerate(field_names):
-            #     worksheet.write(4, col, field_name, style=heading_style)
-            
-                
-            # worksheet.write_merge(5, 6, 1, 2, "START DATE",style=style_title)
-            
-            # Write field names
-            # Below is dynamic approach, If we use this, The technical names of the fields for example `worked_hours` will be printed in the Header
-            # field_names = ['EMPLOYEES', 'ATTENDANCE HOURS', 'HOURS WORKED', 'HOURS LOST', 'TIME UTILISATION %']
-
-            # for col, field_name in enumerate(field_names):
-            #     worksheet.write_merge(10, 10, col, col+1, field_name, style=style_title)
-            
-            # row = 11
-            # for record in self.line_ids:
-            #     employee_name = record.employee_id.name
-            #     worksheet.write_merge(row, row, 0, 1, employee_name)
-            # field_names = ['EMPLOYEES', 'ATTENDANCE HOURS', 'HOURS WORKED', 'HOURS LOST', 'TIME UTILISATION %']
-
-            # for col, field_name in enumerate(field_names):
-            #     worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
-
-            # row = 11
-
-            for record in self.student_ids:
+            for record in account_move_object.student_ids:
                 serial_number = 1
                 worksheet.write_merge(row, row, 0, 1, serial_number)
             # for record in self.partner_id:
