@@ -110,6 +110,7 @@ class SecurityAmountReport(models.Model):
         # worksheet.write(row, 1, record.working_hours)
             fp = io.BytesIO()
             workbook.save(fp)
+            
 
             export_id = self.env['sale.day.book.report.excel'].create({'excel_file': base64.encodestring(fp.getvalue()), 'file_name': filename})
             res = {
