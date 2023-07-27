@@ -4,8 +4,8 @@
         <field name="name">security.amount.report</field>
         <field name="model">security.amount.report</field>
         <field name="arch" type="xml">
-            <form string="Report Utilisation">
-                <field name="is_get_records_button_clicked" invisible="1" />
+            <form string="Security Amount Report">
+                <!-- <field name="is_get_records_button_clicked" invisible="1" /> -->
                 <footer>
                     <!-- <button name="get_report_records" string="Get Records" type="object" class="btn-primary" /> -->
                     <button name="print_xlsx" string="Download Excel Report" type="object" class="btn-primary" attrs="{'invisible': [('is_get_records_button_clicked', '=', False)]}" />
