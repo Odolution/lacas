@@ -11,7 +11,7 @@ from datetime import datetime
 
 
 class SecurityAmountReport(models.Model):
-    _inherit = 'res.company'
+    _name = "security.amount.report"
 
                 
                
