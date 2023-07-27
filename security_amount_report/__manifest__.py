@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # Part of Softhealer Technologies.
 {
-    "name": "Challan",
+    "name": "CUSTOM SECURITY AMOUNT REPORT",
 
-    "author": "Cognative",
-    "category": "CRM",
+    "author": "Odolution",
+    "category": "Reporting",
 
     "license": "OPL-1",
 
