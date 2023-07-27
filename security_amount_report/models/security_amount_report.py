@@ -105,7 +105,7 @@ class SecurityAmountReport(models.Model):
 
             # row = 11
 
-            for record in self.partner_id:
+            for record in self.student_ids:
                 serial_number = 1
                 worksheet.write_merge(row, row, 0, 1, serial_number)
             # for record in self.partner_id:
@@ -126,7 +126,7 @@ class SecurityAmountReport(models.Model):
             #     # worksheet.write(row, 8, "{:.2f}%".format(record.utilisation_percentage))
             #     worksheet.write_merge(row, row, 8, 9, "{:.2f}%".format(record.utilisation_percentage))
                 
-                row += 1
+                serial_number += 1
 
             #     # worksheet.write(row, 0, employee_name)
             #     # worksheet.write(row, 1, record.custom_attendance_string)
