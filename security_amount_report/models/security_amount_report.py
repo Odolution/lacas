@@ -58,6 +58,12 @@ class SecurityAmountReport(models.Model):
             # raise UserError(self.custom_start_date)
             # worksheet.write_merge(0, 1, 0, 9,"ZUMA LIFT SERVICE INC. ",style=style_title)
             worksheet.write_merge(2, 3, 0, 9, "SECURITY AMOUNT REPORT", style=style_title)
+
+            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'GENDER', 'SECURITY']
+
+            for col, field_name in enumerate(field_names):
+                worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
+
             
             
             # Adding Start Date, End Date
