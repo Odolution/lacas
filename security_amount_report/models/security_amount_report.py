@@ -105,6 +105,7 @@ class SecurityAmountReport(models.Model):
             #     worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
 
             # row = 11
+            
             serial_number = 1
             for record in self.partner_id:
                 worksheet.write_merge(row, row, 0, 1, serial_number)
