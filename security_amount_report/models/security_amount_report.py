@@ -16,4 +16,13 @@ class SecurityAmountReport(models.Model):
                 
                
 
+# For Excel Report Download Button 
+class sale_day_book_report_excel(models.TransientModel):
+    _name = "sale.day.book.report.excel"
+    _description = "Sale Day Book Report Excel"
     
+    
+    excel_file = fields.Binary('Excel Report For Security Amount')
+    file_name = fields.Char('Excel File', size=64)
+
+
