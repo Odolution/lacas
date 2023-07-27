@@ -8,7 +8,7 @@
                 <!-- <field name="is_get_records_button_clicked" invisible="1" /> -->
                 <footer>
                     <!-- <button name="get_report_records" string="Get Records" type="object" class="btn-primary" /> -->
-                    <button name="print_xlsx" string="Download Excel Report" type="object" class="btn-primary" attrs="{'invisible': [('is_get_records_button_clicked', '=', False)]}" />
+                    <button name="print_xlsx" string="Download Excel Report" type="object" class="btn-primary" />
                     <!-- <button name="print_pdf" string="Download PDF Report" type="object" class="btn-primary" attrs="{'invisible': [('is_get_records_button_clicked', '=', False)]}" /> -->
                 </footer>
                 <!-- <sheet>
