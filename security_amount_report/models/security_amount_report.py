@@ -65,7 +65,9 @@ class SecurityAmountReport(models.Model):
                 worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
 
             
-            
+            for record in self.partner_id:
+
+                
             # Adding Start Date, End Date
             # worksheet.write_merge(5, 6, 6, 7, "START DATE",style=style_title)
             # worksheet.write_merge(7, 8, 6, 7, "END DATE", style=style_title)
@@ -103,7 +105,10 @@ class SecurityAmountReport(models.Model):
             #     worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
 
             # row = 11
-            # for record in self.line_ids:
+            serial_number = 1
+            for record in self.partner_id:
+                worksheet.write_merge(row, row, 0, 1, serial_number)
+                serial_number+=1
             #     # Increment the column for each field
             #     col = 2
             #     employee_name = record.employee_id.name
