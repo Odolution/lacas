@@ -55,8 +55,6 @@ class SecurityAmountReport(models.Model):
             
             # First two numbers are Rows, Last Two Numbers are Columns
             
-            # raise UserError(self.custom_start_date)
-            # worksheet.write_merge(0, 1, 0, 9,"ZUMA LIFT SERVICE INC. ",style=style_title)
             worksheet.write_merge(2, 3, 0, 9, "SECURITY AMOUNT REPORT", style=style_title)
 
             field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'GENDER', 'SECURITY']
@@ -97,7 +95,7 @@ class SecurityAmountReport(models.Model):
             #     # worksheet.write(row, 3, record.custom_hours_lost_string)
             #     # worksheet.write(row, 5, record.overtime_hour)
             #     # worksheet.write(row, 4, "{:.2f}%".format(record.utilisation_percentage))
-            #     # row += 1            
+                row += 1            
             
         # worksheet.write(row, 1, record.working_hours)
             fp = io.BytesIO()
