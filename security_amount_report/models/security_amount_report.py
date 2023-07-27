@@ -69,7 +69,7 @@ class SecurityAmountReport(models.Model):
             serial_number = 1
             for record in account_move_object.student_ids:
                 worksheet.write_merge(row, row, 0, 1, serial_number)
-                worksheet.write_merge(row, row, 0, 1, account_move_object.x_student_id_cred)
+                worksheet.write_merge(row, row, 0, 1, account_move_object.x_student_id_cred.name)
                 # worksheet.write_merge(row, row, 0, 1, account_move_object.partner_id.name)
                 # worksheet.write_merge(row, row, 0, 1, account_move_object.udid_cred_custom)
                 # worksheet.write_merge(row, row, 0, 1, serial_number)
