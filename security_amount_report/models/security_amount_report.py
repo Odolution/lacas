@@ -57,7 +57,7 @@ class SecurityAmountReport(models.Model):
             
             worksheet.write_merge(2, 3, 0, 9, "SECURITY AMOUNT REPORT", style=style_title)
 
-            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'GENDER', 'SECURITY']
+            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'GENDER', 'SECURITY']
 
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
@@ -66,8 +66,18 @@ class SecurityAmountReport(models.Model):
             account_move_object = self.env['account.move'].search([])
 
             row = 11
+            serial_number = 1
             for record in account_move_object.student_ids:
-                serial_number = 1
+                worksheet.write_merge(row, row, 0, 1, serial_number)
+                worksheet.write_merge(row, row, 0, 1, account_move_object.x_student_id_cred)
+                worksheet.write_merge(row, row, 0, 1, account_move_object.partner_id.name)
+                worksheet.write_merge(row, row, 0, 1, account_move_object.udid_cred_custom)
+                worksheet.write_merge(row, row, 0, 1, serial_number)
+                worksheet.write_merge(row, row, 0, 1, serial_number)
+                worksheet.write_merge(row, row, 0, 1, serial_number)
+                worksheet.write_merge(row, row, 0, 1, serial_number)
+                worksheet.write_merge(row, row, 0, 1, serial_number)
+                worksheet.write_merge(row, row, 0, 1, serial_number)
                 worksheet.write_merge(row, row, 0, 1, serial_number)
             # for record in self.partner_id:
             #     serial_number+=1
