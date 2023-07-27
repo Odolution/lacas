@@ -8,6 +8,9 @@ from odoo.exceptions import UserError
 from odoo import http
 from odoo.http import request
 from datetime import datetime 
+import io
+import base64
+import xlwt
 
 
 class SecurityAmountReport(models.Model):
