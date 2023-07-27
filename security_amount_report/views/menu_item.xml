@@ -28,6 +28,6 @@
         </form>
         </field>
     </record>
-    <menuitem id="menu_security_amount_report" name="Security Amount Report" action="view_sale_book_day_excel" parent="account.menu_finance_reports" sequence="20" />
+    <menuitem id="menu_security_amount_report" name="Security Amount Report" action="action_security_amount_report" parent="account.menu_finance_reports" sequence="20" />
 
 </odoo>
