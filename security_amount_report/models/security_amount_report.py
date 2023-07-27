@@ -13,6 +13,139 @@ from datetime import datetime
 class SecurityAmountReport(models.Model):
     _name = "security.amount.report"
 
+    def print_xlsx(self):
+        if xlwt:
+            # start_date_string = str(self.custom_start_date)
+            # end_date_string = str(self.custom_end_date) 
+            # def format_date(date_string):
+            #     date = datetime.strptime(date_string, '%Y-%m-%d')
+            #     formatted_date = date.strftime('%m/%d/%Y')
+            #     return formatted_date
+            # formatted_start_date = format_date(start_date_string)
+            # formatted_end_date = format_date(end_date_string)
+            
+            
+            # names_of_employees = []
+            # for value in self.employee_names:
+                # names_of_employees.append(value.name)
+            
+            report_name = 'Security Amount Report'
+            filename = 'Security Amount Report.xls'
+            
+            # One sheet by partner
+            workbook = xlwt.Workbook()
+            # sheet = workbook.add_sheet(report_name[:31])
+            worksheet = workbook.add_sheet('Security Amount Report')
+            style_title = xlwt.easyxf(
+            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+
+            grand_heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour light_blue;'
+                              'font: colour white, bold True;')
+
+            heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour black;'
+                              'font: colour white, bold True;')
+            
+            
+            
+            
+            date_format = xlwt.XFStyle()
+            
+            # First two numbers are Rows, Last Two Numbers are Columns
+            
+            # raise UserError(self.custom_start_date)
+            # worksheet.write_merge(0, 1, 0, 9,"ZUMA LIFT SERVICE INC. ",style=style_title)
+            worksheet.write_merge(2, 3, 0, 9, "SECURITY AMOUNT REPORT", style=style_title)
+            
+            
+            # Adding Start Date, End Date
+            # worksheet.write_merge(5, 6, 6, 7, "START DATE",style=style_title)
+            # worksheet.write_merge(7, 8, 6, 7, "END DATE", style=style_title)
+            # worksheet.write_merge(5, 6, 8, 9, formatted_start_date,style=style_title)
+            # worksheet.write_merge(7, 8, 8, 9, formatted_end_date, style=style_title)
+
+            
+            # Get field names dynamically
+            # field_names = self.env['utilisation.report.lines'].fields_get().keys()
+
+            # column_width = 3  # Number of columns each field should span
+            
+            # So using Static/Hard-coded Approach
+            # field_names = ['EMPLOYEES', 'WORKING HOURS', 'ATTENDANCE HOURS', 'HOURS WORKED', 'HOURS LOST', 'OVERTIME HOURS', 'TIME UTILISATION %']
+            # for col, field_name in enumerate(field_names):
+            #     worksheet.write(4, col, field_name, style=heading_style)
+            
+                
+            # worksheet.write_merge(5, 6, 1, 2, "START DATE",style=style_title)
+            
+            # Write field names
+            # Below is dynamic approach, If we use this, The technical names of the fields for example `worked_hours` will be printed in the Header
+            # field_names = ['EMPLOYEES', 'ATTENDANCE HOURS', 'HOURS WORKED', 'HOURS LOST', 'TIME UTILISATION %']
+
+            # for col, field_name in enumerate(field_names):
+            #     worksheet.write_merge(10, 10, col, col+1, field_name, style=style_title)
+            
+            # row = 11
+            # for record in self.line_ids:
+            #     employee_name = record.employee_id.name
+            #     worksheet.write_merge(row, row, 0, 1, employee_name)
+            # field_names = ['EMPLOYEES', 'ATTENDANCE HOURS', 'HOURS WORKED', 'HOURS LOST', 'TIME UTILISATION %']
+
+            # for col, field_name in enumerate(field_names):
+            #     worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
+
+            # row = 11
+            # for record in self.line_ids:
+            #     # Increment the column for each field
+            #     col = 2
+            #     employee_name = record.employee_id.name
+            #     worksheet.write_merge(row, row, 0, 1, employee_name)
+            #     # worksheet.write(row, col, record.custom_attendance_value)
+            #     worksheet.write_merge(row, row, 2, 3, record.custom_attendance_string)
+                
+            #     # worksheet.write(row, 4, record.custom_hours_worked_string)
+            #     worksheet.write_merge(row, row, 4, 5, record.custom_hours_worked_string)
+                
+            #     # worksheet.write(row, 6, record.custom_hours_lost_string)
+            #     worksheet.write_merge(row, row, 6, 7, record.custom_hours_lost_string)
+                
+            #     # worksheet.write(row, 8, "{:.2f}%".format(record.utilisation_percentage))
+            #     worksheet.write_merge(row, row, 8, 9, "{:.2f}%".format(record.utilisation_percentage))
+                
+            #     row += 1
+
+            #     # worksheet.write(row, 0, employee_name)
+            #     # worksheet.write(row, 1, record.custom_attendance_string)
+            #     # worksheet.write(row, 2, record.custom_hours_worked_string)
+            #     # worksheet.write(row, 3, record.custom_hours_lost_string)
+            #     # worksheet.write(row, 5, record.overtime_hour)
+            #     # worksheet.write(row, 4, "{:.2f}%".format(record.utilisation_percentage))
+            #     # row += 1            
+            
+        # worksheet.write(row, 1, record.working_hours)
+            fp = io.BytesIO()
+            workbook.save(fp)
+
+            export_id = self.env['sale.day.book.report.excel'].create({'excel_file': base64.encodestring(fp.getvalue()), 'file_name': filename})
+            res = {
+                    'view_mode': 'form',
+                    'res_id': export_id.id,
+                    'res_model': 'sale.day.book.report.excel',
+                    'type': 'ir.actions.act_window',
+                    'target':'new'
+                }
+            return res
+            
+        else:
+            raise Warning (""" You Don't have xlwt library.\n Please install it by executing this command :  sudo pip3 install xlwt""")
+        
+
+                
+        
+        # raise UserError(record_set) # It will print IDs of all the records.
+    
+        # raise UserError(record_set)
+    
+
                 
                
 
