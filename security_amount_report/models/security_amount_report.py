@@ -64,7 +64,10 @@ class SecurityAmountReport(models.Model):
 
             
             # account_move_object = self.env['account.move'].search([])
-            account_move_object = self.env['account.move'].search([])
+            domain = [('move_type', '=', 'out_refund')]
+            # searching with filter that move_type is of out_refund type which is of Reversal
+            account_move_object = self.env['account.move'].search(domain)
+            raise UserError(str(account_move_object))
 
             row = 11
             serial_number = 1
