@@ -64,7 +64,7 @@ class SecurityAmountReport(models.Model):
 
             
             # account_move_object = self.env['account.move'].search([])
-            account_move_object = self.env['school.student'].search([])
+            account_move_object = self.env['account.move'].search([])
 
             row = 11
             serial_number = 1
