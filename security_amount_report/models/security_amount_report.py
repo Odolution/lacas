@@ -70,7 +70,7 @@ class SecurityAmountReport(models.Model):
 
             domain = [('move_type', '=', 'out_refund')]
             # searching with filter that move_type is of out_refund type which is of Reversal
-            all_account_move_objects = env['account.move'].search(domain)
+            all_account_move_objects = self.env['account.move'].search(domain)
             row = 11
             serial_number = 1
             
