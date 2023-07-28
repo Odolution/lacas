@@ -55,7 +55,7 @@ class SecurityAmountReport(models.Model):
             
             # First two numbers are Rows, Last Two Numbers are Columns
             
-            worksheet.write_merge(2, 3, 0, 9, "SECURITY AMOUNT REPORT", style=style_title)
+            worksheet.write_merge(6, 7, 5, 14, "SECURITY AMOUNT REPORT", style=style_title)
 
             field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
 
