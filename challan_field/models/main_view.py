@@ -28,10 +28,12 @@ class account_fields(models.Model):
     father_facts_id=fields.Char('Father Facts ID')
     security_amnt_lv=fields.Integer("Secuirity Amount")
     other_refunds_lv=fields.Integer("Other Refunds")
+    class_name=fields.Char(string='Class')
+    section_name = fields.Char(string='Section')
     
 
-    class_name = fields.Char(string='Class',compute='_student_compute_class')
-    section_name = fields.Char(string='Section',compute='_student_compute_class')
+    # class_name = fields.Char(string='Class',compute='_student_compute_class')
+    # section_name = fields.Char(string='Section',compute='_student_compute_class')
 
     def _student_compute_class(self):
       self.class_name=""
