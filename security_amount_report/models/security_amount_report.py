@@ -64,14 +64,33 @@ class SecurityAmountReport(models.Model):
 
             
             # account_move_object = self.env['account.move'].search([])
+            # domain = [('move_type', '=', 'out_refund')]
+            # searching with filter that move_type is of out_refund type which is of Reversal
+            # account_move_object = self.env['account.move'].search(domain)
+
             domain = [('move_type', '=', 'out_refund')]
             # searching with filter that move_type is of out_refund type which is of Reversal
-            account_move_object = self.env['account.move'].search(domain)
-            raise UserError(str(account_move_object))
-
+            all_account_move_objects = env['account.move'].search(domain)
             row = 11
             serial_number = 1
-            for record in account_move_object.student_ids:
+            
+            for individual_object in all_account_move_objects:
+                for line in individual_object.invoice_line_ids:
+                    if line.name == "Security":
+                        worksheet.write_merge(row, row, 0, 1, serial_number)
+                        worksheet.write_merge(row, row, 0, 1, individual_object.x_student_id_cred.name)
+                        
+                        serial_number += 1
+                        row+=1
+                        # raise UserError(line.name)
+                    else:
+                        pass
+                        # raise UserError("No Security Found")
+                        # raise UserError(str(account_move_object))
+
+            # row = 11
+            # serial_number = 1
+            # for record in account_move_object.student_ids:
                 worksheet.write_merge(row, row, 0, 1, serial_number)
                 worksheet.write_merge(row, row, 0, 1, record.x_student_id_cred.name)
                 # worksheet.write_merge(row, row, 0, 1, account_move_object.partner_id.name)
@@ -101,7 +120,7 @@ class SecurityAmountReport(models.Model):
             #     # worksheet.write(row, 8, "{:.2f}%".format(record.utilisation_percentage))
             #     worksheet.write_merge(row, row, 8, 9, "{:.2f}%".format(record.utilisation_percentage))
                 
-                serial_number += 1
+                # serial_number += 1
 
             #     # worksheet.write(row, 0, employee_name)
             #     # worksheet.write(row, 1, record.custom_attendance_string)
@@ -109,7 +128,7 @@ class SecurityAmountReport(models.Model):
             #     # worksheet.write(row, 3, record.custom_hours_lost_string)
             #     # worksheet.write(row, 5, record.overtime_hour)
             #     # worksheet.write(row, 4, "{:.2f}%".format(record.utilisation_percentage))
-                row += 1            
+                # row += 1            
             
         # worksheet.write(row, 1, record.working_hours)
             fp = io.BytesIO()

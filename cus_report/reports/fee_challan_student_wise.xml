@@ -3,6 +3,7 @@
 		<template id="cus_report.fee_challan_student_wise">
 			<t t-call="web.html_container">
 				<t t-foreach="docs" t-as="x">
+				
 					<t t-foreach="x.unpaid_std_ids" t-as="o">
 						<div class="row" style="font-size:0.5rem;">
 							<div class="column" style="float: left; border: 1px solid black; width: 32%;  height:750px; margin-right: 1%;">
@@ -1088,10 +1089,10 @@
     						<p style="page-break-after:always;" />
 							</table>
 						</div>
-            <!-- visibility: hidden; to avoid a blank page to appear in the end -->
-            <div style="page-break-after: always; visibility: hidden;"></div>
-            <!-- <br></br>
-            <br></br> -->
+						<!-- visibility: hidden; to avoid a blank page to appear in the end -->
+						<div style="page-break-after: always; visibility: hidden;"></div>
+						<!-- <br></br>
+						<br></br> -->
 					</t>
 				</t>
 			</t>
