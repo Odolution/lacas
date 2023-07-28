@@ -76,6 +76,7 @@ class ext(models.Model):
     uniform=fields.Integer(string="Uniform Fine")
     continuation=fields.Integer(string="Continuation")
     Holiday_homework=fields.Integer(string="Holiday Homework")
+    Technology_Charges= fields.Integer(string="Technology Charges")
 
 
     def _feild_students(self):
@@ -248,6 +249,7 @@ class ext(models.Model):
                 rec_inv.continuation=0
                 rec_inv.adm_amount=""
                 rec_inv.Holiday_homework=0
+                rec_inv.Technology_Charges=0
 
 
                 for line in rec_inv.invoice_line_ids:
@@ -336,6 +338,8 @@ class ext(models.Model):
                         rec_inv.libfine=line.price_subtotal
                     elif 'Holiday Homework' in line.product_id.name:
                         rec_inv.Holiday_homework=line.price_subtotal
+                    elif 'Technology Charge' in line.product_id.name:
+                        rec_inv.Technology_Charges=line.price_subtotal
                     elif line.product_id.x_studio_code=='ART':
                         rec_inv.art=line.price_subtotal
                     elif line.product_id.x_studio_code=='COM':

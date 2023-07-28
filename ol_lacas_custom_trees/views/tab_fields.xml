@@ -51,6 +51,7 @@
                             <field name="welcome"/>
                             <field name="workbook"/>
                             <field name="Holiday_homework"/>
+                            <field name="Technology_Charges"/>
                             <field name="uniform"/>
                             <field name="continuation"/>
                             <!-- <field name="due_amount"/> -->
