@@ -73,13 +73,13 @@ class SecurityAmountReport(models.Model):
             all_account_move_objects = self.env['account.move'].search(domain)
             row = 11
             serial_number = 1
-            
+
             
             for individual_object in all_account_move_objects:
                 for line in individual_object.invoice_line_ids:
                     if line.name == "Security":
                         worksheet.write_merge(row, row, 0, 1, serial_number)
-                        worksheet.write_merge(row, row, 0, 1, individual_object.x_student_id_cred.name)
+                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
                         
                         serial_number += 1
                         row+=1
