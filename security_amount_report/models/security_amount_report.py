@@ -74,6 +74,7 @@ class SecurityAmountReport(models.Model):
             row = 11
             serial_number = 1
             
+            
             for individual_object in all_account_move_objects:
                 for line in individual_object.invoice_line_ids:
                     if line.name == "Security":
