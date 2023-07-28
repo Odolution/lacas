@@ -121,7 +121,7 @@ class SecurityAmountReport(models.Model):
                             worksheet.write_merge(row, row, 16, 17, "N/A")
 
                         if individual_object.security_amount_lv:
-                            worksheet.write_merge(row, row, 18, 19, individual_object.security_amount_lv)
+                            worksheet.write_merge(row, row, 18, 19, individual_object.security_amnt_lv)
                         else:
                             worksheet.write_merge(row, row, 18, 19, "N/A")
 
