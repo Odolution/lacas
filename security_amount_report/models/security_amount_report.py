@@ -116,7 +116,7 @@ class SecurityAmountReport(models.Model):
                             worksheet.write_merge(row, row, 14, 15, "N/A")
 
                         if individual_object.x_studio_admission_date:
-                            worksheet.write_merge(row, row, 16, 17, datetime.date(individual_object.x_studio_admission_date))
+                            worksheet.write_merge(row, row, 16, 17, str(individual_object.x_studio_admission_date))
                         else:
                             worksheet.write_merge(row, row, 16, 17, "N/A")
 
