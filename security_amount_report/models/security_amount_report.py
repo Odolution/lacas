@@ -57,7 +57,7 @@ class SecurityAmountReport(models.Model):
             
             worksheet.write_merge(2, 3, 0, 9, "SECURITY AMOUNT REPORT", style=style_title)
 
-            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'GENDER', 'SECURITY']
+            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
 
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
@@ -116,7 +116,7 @@ class SecurityAmountReport(models.Model):
                             worksheet.write_merge(row, row, 14, 15, "N/A")
 
                         if individual_object.x_studio_admission_date:
-                            worksheet.write_merge(row, row, 16, 17, individual_object.x_studio_admission_date)
+                            worksheet.write_merge(row, row, 16, 17, datetime.date(individual_object.x_studio_admission_date))
                         else:
                             worksheet.write_merge(row, row, 16, 17, "N/A")
 
