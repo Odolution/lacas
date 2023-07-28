@@ -79,16 +79,52 @@ class SecurityAmountReport(models.Model):
                 for line in individual_object.invoice_line_ids:
                     if line.product_id.name == "Security":
                         worksheet.write_merge(row, row, 0, 1, serial_number)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
-                        worksheet.write_merge(row, row, 4, 5, individual_object.partner_id.name)
-                        worksheet.write_merge(row, row, 6, 7, individual_object.udid_cred_custom)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.class_name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.section_name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_school_id_cred.name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_studio_withdrawn_status)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_studio_admission_date)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.security_amount_lv)
+
+                        if line.product_id.name == "Security":
+                            worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
+                        else:
+                            worksheet.write_merge(row, row, 2, 3, "N/A")
+
+                        if individual_object.partner_id.name:
+                            worksheet.write_merge(row, row, 4, 5, individual_object.partner_id.name)
+                        else:
+                            worksheet.write_merge(row, row, 4, 5, "N/A")
+
+                        if individual_object.udid_cred_custom:
+                            worksheet.write_merge(row, row, 6, 7, individual_object.udid_cred_custom)
+                        else:
+                            worksheet.write_merge(row, row, 6, 7, "N/A")
                         
+                        if individual_object.class_name:
+                            worksheet.write_merge(row, row, 8, 9, individual_object.class_name)
+                        else:
+                            worksheet.write_merge(row, row, 8, 9, "N/A")
+
+                        if individual_object.section_name:
+                            worksheet.write_merge(row, row, 10, 11, individual_object.section_name)
+                        else:
+                            worksheet.write_merge(row, row, 10, 11, "N/A")
+
+                        if individual_object.x_school_id_cred.name:
+                            worksheet.write_merge(row, row, 12, 13, individual_object.x_school_id_cred.name)
+                        else:
+                            worksheet.write_merge(row, row, 12, 13, "N/A")
+
+                        if individual_object.x_studio_withdrawn_status:
+                            worksheet.write_merge(row, row, 14, 15, individual_object.x_studio_withdrawn_status)
+                        else:
+                            worksheet.write_merge(row, row, 14, 15, "N/A")
+
+                        if individual_object.x_studio_admission_date:
+                            worksheet.write_merge(row, row, 16, 17, individual_object.x_studio_admission_date)
+                        else:
+                            worksheet.write_merge(row, row, 16, 17, "N/A")
+
+                        if individual_object.security_amount_lv:
+                            worksheet.write_merge(row, row, 18, 19, individual_object.security_amount_lv)
+                        else:
+                            worksheet.write_merge(row, row, 18, 19, "N/A")
+
                         serial_number += 1
                         row+=1
                         # raise UserError(line.name)
