@@ -80,12 +80,14 @@ class SecurityAmountReport(models.Model):
                     if line.product_id.name == "Security":
                         worksheet.write_merge(row, row, 0, 1, serial_number)
                         worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
-                        worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
+                        worksheet.write_merge(row, row, 4, 5, individual_object.partner_id.name)
+                        worksheet.write_merge(row, row, 6, 7, individual_object.udid_cred_custom)
+                        worksheet.write_merge(row, row, 2, 3, individual_object.class_name)
+                        worksheet.write_merge(row, row, 2, 3, individual_object.section_name)
+                        worksheet.write_merge(row, row, 2, 3, individual_object.x_school_id_cred.name)
+                        worksheet.write_merge(row, row, 2, 3, individual_object.x_studio_withdrawn_status)
+                        worksheet.write_merge(row, row, 2, 3, individual_object.x_studio_admission_date)
+                        worksheet.write_merge(row, row, 2, 3, individual_object.security_amount_lv)
                         
                         serial_number += 1
                         row+=1
