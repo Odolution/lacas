@@ -141,6 +141,15 @@ class account_fields(models.Model):
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                     rec['name']=new_no
                     rec['x_studio_previous_class']=record.student_ids.grade_level_ids.name
+                    wholename=""
+                    if record.student_ids.homeroom:
+                      wholename=record.student_ids.homeroom
+                      splitted_name=wholename.split('-')
+                      if len(splitted_name)>2:
+                        rec['x_studio_previous_section']=splitted_name[2]
+                      elif len(splitted_name)>1:
+                        rec['x_studio_previous_section']=splitted_name[1]
+
                   if record.journal_id.id == 126:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('bi_monthly')
                     rec['name']=new_no
