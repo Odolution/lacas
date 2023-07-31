@@ -102,7 +102,7 @@ class inheritinvoices(models.Model):
             rec.due_day=0
             rec.due_day_text=""
             if rec.invoice_date_due:
-                d1 = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d")
+                d1 = datetime.strptime(str(rec.invoice_date), "%Y-%m-%d")
                 d2 = datetime.strptime(str(rec.invoice_date_due), "%Y-%m-%d")
                 delta = d1 - d2
                 rec["due_day"]=delta.days
