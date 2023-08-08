@@ -47,7 +47,7 @@ class SecurityAmountReport(models.Model):
             field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
 
             for col, field_name in enumerate(field_names):
-                worksheet.write_merge(1, 1, col*1, col*1, field_name, style=style_title)
+                worksheet.write_merge(0, 0, col*1, col*1, field_name, style=style_title)
 
             
             # account_move_object = self.env['account.move'].search([])
@@ -58,7 +58,7 @@ class SecurityAmountReport(models.Model):
             domain = [('move_type', '=', 'out_refund')]
             # searching with filter that move_type is of out_refund type which is of Reversal
             all_account_move_objects = self.env['account.move'].search(domain)
-            row = 11
+            row = 1
             serial_number = 1
 
             
@@ -68,49 +68,49 @@ class SecurityAmountReport(models.Model):
                         worksheet.write_merge(row, row, 0, 0, serial_number)
 
                         if line.product_id.name == "Security":
-                            worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
+                            worksheet.write_merge(row, row, 2, 2, individual_object.x_student_id_cred.name)
                         else:
-                            worksheet.write_merge(row, row, 2, 3, "N/A")
+                            worksheet.write_merge(row, row, 2, 2, "N/A")
 
                         if individual_object.partner_id.name:
-                            worksheet.write_merge(row, row, 4, 5, individual_object.partner_id.name)
+                            worksheet.write_merge(row, row, 3, 3, individual_object.partner_id.name)
                         else:
-                            worksheet.write_merge(row, row, 4, 5, "N/A")
+                            worksheet.write_merge(row, row, 3, 3, "N/A")
 
                         if individual_object.udid_cred_custom:
-                            worksheet.write_merge(row, row, 6, 7, individual_object.udid_cred_custom)
+                            worksheet.write_merge(row, row, 4, 4, individual_object.udid_cred_custom)
                         else:
-                            worksheet.write_merge(row, row, 6, 7, "N/A")
+                            worksheet.write_merge(row, row, 4, 4, "N/A")
                         
                         if individual_object.class_name:
-                            worksheet.write_merge(row, row, 8, 9, individual_object.class_name)
+                            worksheet.write_merge(row, row, 5, 5, individual_object.class_name)
                         else:
-                            worksheet.write_merge(row, row, 8, 9, "N/A")
+                            worksheet.write_merge(row, row, 5, 5, "N/A")
 
                         if individual_object.section_name:
-                            worksheet.write_merge(row, row, 10, 11, individual_object.section_name)
+                            worksheet.write_merge(row, row, 6, 6, individual_object.section_name)
                         else:
-                            worksheet.write_merge(row, row, 10, 11, "N/A")
+                            worksheet.write_merge(row, row, 7, 7, "N/A")
 
                         if individual_object.x_school_id_cred.name:
-                            worksheet.write_merge(row, row, 12, 13, individual_object.x_school_id_cred.name)
+                            worksheet.write_merge(row, row, 8, 8, individual_object.x_school_id_cred.name)
                         else:
-                            worksheet.write_merge(row, row, 12, 13, "N/A")
+                            worksheet.write_merge(row, row, 8, 8, "N/A")
 
                         if individual_object.x_studio_withdrawn_status:
-                            worksheet.write_merge(row, row, 14, 15, individual_object.x_studio_withdrawn_status)
+                            worksheet.write_merge(row, row, 9, 9, individual_object.x_studio_withdrawn_status)
                         else:
-                            worksheet.write_merge(row, row, 14, 15, "N/A")
+                            worksheet.write_merge(row, row, 9, 9, "N/A")
 
                         if individual_object.x_studio_admission_date:
-                            worksheet.write_merge(row, row, 16, 17, str(individual_object.x_studio_admission_date))
+                            worksheet.write_merge(row, row, 10, 10, str(individual_object.x_studio_admission_date))
                         else:
-                            worksheet.write_merge(row, row, 16, 17, "N/A")
+                            worksheet.write_merge(row, row, 10, 10, "N/A")
 
                         if individual_object.security_amnt_lv:
-                            worksheet.write_merge(row, row, 18, 19, individual_object.security_amnt_lv)
+                            worksheet.write_merge(row, row, 11, 11, individual_object.security_amnt_lv)
                         else:
-                            worksheet.write_merge(row, row, 18, 19, "N/A")
+                            worksheet.write_merge(row, row, 11, 11, "N/A")
 
                         serial_number += 1
                         row+=1
