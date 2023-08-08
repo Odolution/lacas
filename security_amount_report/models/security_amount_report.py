@@ -18,19 +18,6 @@ class SecurityAmountReport(models.Model):
 
     def print_xlsx(self):
         if xlwt:
-            # start_date_string = str(self.custom_start_date)
-            # end_date_string = str(self.custom_end_date) 
-            # def format_date(date_string):
-            #     date = datetime.strptime(date_string, '%Y-%m-%d')
-            #     formatted_date = date.strftime('%m/%d/%Y')
-            #     return formatted_date
-            # formatted_start_date = format_date(start_date_string)
-            # formatted_end_date = format_date(end_date_string)
-            
-            
-            # names_of_employees = []
-            # for value in self.employee_names:
-                # names_of_employees.append(value.name)
             
             report_name = 'Security Amount Report'
             filename = 'Security Amount Report.xls'
@@ -60,7 +47,7 @@ class SecurityAmountReport(models.Model):
             field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
 
             for col, field_name in enumerate(field_names):
-                worksheet.write_merge(1, 1, col*1, col*1+1, field_name, style=style_title)
+                worksheet.write_merge(1, 1, col*1, col*1, field_name, style=style_title)
 
             
             # account_move_object = self.env['account.move'].search([])
