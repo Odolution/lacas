@@ -65,52 +65,53 @@ class SecurityAmountReport(models.Model):
             for individual_object in all_account_move_objects:
                 for line in individual_object.invoice_line_ids:
                     if line.product_id.name == "Security":
-                        worksheet.write_merge(row, row, 0, 0, serial_number)
+                        worksheet.write(row, 0, serial_number)
 
                         if line.product_id.name == "Security":
-                            worksheet.write_merge(row, row, 1, 1, individual_object.x_student_id_cred.name)
+                            # worksheet.write_merge(row, row, 1, 1, individual_object.x_student_id_cred.name)
+                            worksheet.write(row, 1, individual_object.x_student_id_cred.name)
                         else:
-                            worksheet.write_merge(row, row, 1, 1, "N/A")
+                            worksheet.write(row, 1, "N/A")
 
                         if individual_object.partner_id.name:
-                            worksheet.write_merge(row, row, 2, 2, individual_object.partner_id.name)
+                            worksheet.write(row, 2, individual_object.partner_id.name)
                         else:
-                            worksheet.write_merge(row, row, 2, 2, "N/A")
+                            worksheet.write(row, 2, "N/A")
 
                         if individual_object.udid_cred_custom:
-                            worksheet.write_merge(row, row, 3, 3, individual_object.udid_cred_custom)
+                            worksheet.write(row, 3, individual_object.udid_cred_custom)
                         else:
-                            worksheet.write_merge(row, row, 3, 3, "N/A")
+                            worksheet.write(row, 3, "N/A")
                         
                         if individual_object.class_name:
-                            worksheet.write_merge(row, row, 4, 4, individual_object.class_name)
+                            worksheet.write(row, 4, individual_object.class_name)
                         else:
-                            worksheet.write_merge(row, row, 4, 4, "N/A")
+                            worksheet.write(row, 4, "N/A")
 
                         if individual_object.section_name:
-                            worksheet.write_merge(row, row, 5, 5, individual_object.section_name)
+                            worksheet.write(row, 5, individual_object.section_name)
                         else:
-                            worksheet.write_merge(row, row, 5, 5, "N/A")
+                            worksheet.write(row, 5, "N/A")
 
                         if individual_object.x_school_id_cred.name:
-                            worksheet.write_merge(row, row, 7, 7, individual_object.x_school_id_cred.name)
+                            worksheet.write(row, 7, individual_object.x_school_id_cred.name)
                         else:
-                            worksheet.write_merge(row, row, 7, 7, "N/A")
+                            worksheet.write(row, 7, "N/A")
 
                         if individual_object.x_studio_withdrawn_status:
-                            worksheet.write_merge(row, row, 8, 8, individual_object.x_studio_withdrawn_status)
+                            worksheet.write(row, 8, individual_object.x_studio_withdrawn_status)
                         else:
-                            worksheet.write_merge(row, row, 8, 8, "N/A")
+                            worksheet.write(row, 8, "N/A")
 
                         if individual_object.x_studio_admission_date:
-                            worksheet.write_merge(row, row, 9, 9, str(individual_object.x_studio_admission_date))
+                            worksheet.write(row, 9, str(individual_object.x_studio_admission_date))
                         else:
-                            worksheet.write_merge(row, row, 9, 9, "N/A")
+                            worksheet.write(row, 9, "N/A")
 
                         if individual_object.security_amnt_lv:
-                            worksheet.write_merge(row, row, 10, 10, individual_object.security_amnt_lv)
+                            worksheet.write(row, 10, individual_object.security_amnt_lv)
                         else:
-                            worksheet.write_merge(row, row, 10, 10, "N/A")
+                            worksheet.write(row, 10, "N/A")
 
                         serial_number += 1
                         row+=1
