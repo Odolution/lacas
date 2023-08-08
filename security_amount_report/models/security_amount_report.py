@@ -60,7 +60,7 @@ class SecurityAmountReport(models.Model):
             field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
 
             for col, field_name in enumerate(field_names):
-                worksheet.write_merge(10, 10, col*2, col*2+1, field_name, style=style_title)
+                worksheet.write_merge(1, 1, col*1, col*1+1, field_name, style=style_title)
 
             
             # account_move_object = self.env['account.move'].search([])
@@ -78,7 +78,7 @@ class SecurityAmountReport(models.Model):
             for individual_object in all_account_move_objects:
                 for line in individual_object.invoice_line_ids:
                     if line.product_id.name == "Security":
-                        worksheet.write_merge(row, row, 0, 1, serial_number)
+                        worksheet.write_merge(row, row, 0, 0, serial_number)
 
                         if line.product_id.name == "Security":
                             worksheet.write_merge(row, row, 2, 3, individual_object.x_student_id_cred.name)
