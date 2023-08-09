@@ -94,24 +94,24 @@ class SecurityAmountReport(models.Model):
                             worksheet.write(row, 5, "N/A")
 
                         if individual_object.x_school_id_cred.name:
-                            worksheet.write(row, 7, individual_object.x_school_id_cred.name)
+                            worksheet.write(row, 6, individual_object.x_school_id_cred.name)
+                        else:
+                            worksheet.write(row, 6, "N/A")
+
+                        if individual_object.x_studio_withdrawn_status:
+                            worksheet.write(row, 7, individual_object.x_studio_withdrawn_status)
                         else:
                             worksheet.write(row, 7, "N/A")
 
-                        if individual_object.x_studio_withdrawn_status:
-                            worksheet.write(row, 8, individual_object.x_studio_withdrawn_status)
+                        if individual_object.x_studio_admission_date:
+                            worksheet.write(row, 8, str(individual_object.x_studio_admission_date))
                         else:
                             worksheet.write(row, 8, "N/A")
 
-                        if individual_object.x_studio_admission_date:
-                            worksheet.write(row, 9, str(individual_object.x_studio_admission_date))
+                        if individual_object.security_amnt_lv:
+                            worksheet.write(row, 9, individual_object.security_amnt_lv)
                         else:
                             worksheet.write(row, 9, "N/A")
-
-                        if individual_object.security_amnt_lv:
-                            worksheet.write(row, 10, individual_object.security_amnt_lv)
-                        else:
-                            worksheet.write(row, 10, "N/A")
 
                         serial_number += 1
                         row+=1
