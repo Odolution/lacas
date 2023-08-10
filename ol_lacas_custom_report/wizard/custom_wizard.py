@@ -121,10 +121,11 @@ class ReceivablesReportWizard(models.TransientModel):
 
   
     
-  def action_print_report(self):
-    
+    def action_print_report(self):
+        
 
-    
+
+        
         global first_date
         global last_date
 
@@ -167,8 +168,11 @@ class ReceivablesReportWizard(models.TransientModel):
 
             
             
-                
-            
+                    
+                    
+
+
+    
         
         invoice_check = []
         final_lst = []
