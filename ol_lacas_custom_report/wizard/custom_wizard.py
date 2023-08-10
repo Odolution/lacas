@@ -122,7 +122,7 @@ class ReceivablesReportWizard(models.TransientModel):
   
     
     def action_print_report(self):
-        
+
 
 
         
@@ -178,7 +178,7 @@ class ReceivablesReportWizard(models.TransientModel):
         final_lst = []
         temp_lst = []
        
-        for value in move_ids:
+        for value in move_ids_raw:
             
 
             custom_data = {
