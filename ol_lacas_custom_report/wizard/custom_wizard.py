@@ -75,6 +75,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
     date_from=fields.Date(string="Date From")
     date_to=fields.Date(string="Date To")
+    std_type=fields.Selection([('enrolled','Enrolled Student'),('graduated','Graduated')],string="Student Category")
 
     account_report_line=fields.Many2many('account.report.move.line', string='Account report Line')
     groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
@@ -117,39 +118,50 @@ class ReceivablesReportWizard(models.TransientModel):
   
     
     def action_print_report(self):
-
-
-        global first_date 
+    
+        global first_date
         global last_date
 
-        move_ids = []
-        move_ids_raw=self.env['account.move'].search([('move_type','=','out_refund'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        
+        domain = [
+            ('move_type', '=', 'out_refund'),
+            ('state', '=', 'posted'),
+            ('invoice_date', '>=', self.date_from),
+            ('invoice_date', '<=', self.date_to),
+        ]
+
+        if self.std_type == 'enrolled':
+            domain.append(('x_student_id_cred.x_last_enrollment_status_id.name', '=', 'Enrolled'))
+        elif self.std_type == 'graduated':
+            domain.append(('x_student_id_cred.x_last_enrollment_status_id.name', '=', 'Graduated'))
+
+        move_ids_raw = self.env['account.move'].search(domain)
+
+        std_lst = []
         for rec in move_ids_raw:
-            if len(rec.unpaid_std_inv_ids) > 0 :
+            if len(rec.unpaid_std_inv_ids) > 0:
                 for line in rec.unpaid_std_inv_ids:
-                    if line.state=='posted':
-                        move_ids.append(rec)
+                    if line.state == 'posted':
+                        std_lst.append(rec.x_student_id_cred.id)
 
+        domain_2 = [
+            ('move_type', '=', 'out_invoice'),
+            ('state', '=', 'posted'),
+            ('payment_state', 'in', ['not_paid', 'partial']),
+            ('student_ids', 'in', std_lst),
+        ]
 
-        std_lst=[]
-        for stud in move_ids:
-            std_lst.append(stud.x_student_id_cred.id)
-     
-
-            
-        inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('payment_state','in',['not_paid','partial']),('student_ids','in',std_lst)])
+        inv_ids = self.env['account.move'].search(domain_2)
         sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
+
         if sorted_inv_ids:
             first_date = sorted_inv_ids[0].invoice_date
             last_date = sorted_inv_ids[-1].invoice_date
         else:
-            raise UserError(str("There are no receivable for the date from {} to {}").format(self.date_from,self.date_to))
-        
-        
+            raise UserError(str("There are no receivables for the date from {} to {}").format(self.date_from, self.date_to))
+
+            
+            
                 
-
-
         
         
         
@@ -157,7 +169,7 @@ class ReceivablesReportWizard(models.TransientModel):
         final_lst = []
         temp_lst = []
        
-        for value in move_ids:
+        for value in move_ids_raw:
             
 
             custom_data = {
