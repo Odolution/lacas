@@ -151,9 +151,9 @@ class ReceivablesReportWizard(models.TransientModel):
         ]
 
         if self.std_type == 'enrolled':
-            domain.append(('x_student_id_cred.x_last_enrollment_status_id.name', '=', 'Enrolled'))
+            move_ids_raw.append(('x_studio_enrolled_cred.name', '=', 'Enrolled'))
         elif self.std_type == 'graduated':
-            domain.append(('x_student_id_cred.x_last_enrollment_status_id.name', '=', 'Graduate'))
+            move_ids_raw.append(('x_studio_enrolled_cred.name', '=', 'Graduate'))
 
         inv_ids = self.env['account.move'].search(domain)
         sorted_inv_ids = sorted(inv_ids, key=lambda inv: inv.invoice_date.strftime("%Y-%m"))
