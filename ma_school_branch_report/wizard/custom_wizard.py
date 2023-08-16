@@ -41,8 +41,7 @@ class RecoveryReportWizard(models.TransientModel):
 
     
     def action_print_excel_school_branch_report(self):
-        global first_date 
-        global last_date
+        
         
 
         # self.action_print_report()
@@ -88,8 +87,8 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,8,9,"'%' age of Recovery",style=yellow_style_title)
 
 
-            v_from_month=datetime.strptime(str(from_date), "%Y-%m-%d").strftime('%m')
-            v_from_year=datetime.strptime(str(from_date), "%Y-%m-%d").strftime('%y')
+            v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
+            v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
 
             v_to_month=datetime.strptime(str(to_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(to_date), "%Y-%m-%d").strftime('%y')
