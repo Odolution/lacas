@@ -92,7 +92,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
-            raise UserError(str(v_from_month)+" "+str(v_from_year)+" "+str(v_to_month)+" "+str(v_to_year))
+            # raise UserError(str(v_from_month)+" "+str(v_from_year)+" "+str(v_to_month)+" "+str(v_to_year))
             months= {
                 1:['01','JAN-22',10,'22'],
                 2:['02','FEB-22',20,'22'],
