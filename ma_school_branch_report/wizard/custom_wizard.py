@@ -22,13 +22,11 @@ except ImportError:
 
 
 class AccountMoveReport(models.TransientModel):
-    _name = 'account.report.move.line'
+    _name = 'account.student.report.move.line'
     
     record_id=fields.Char('ID')
     branch_name=fields.Integer('Roll No')
-    full_roll_no=fields.Integer('Roll No')
-    student_batch=fields.Char('Batch')
-    student_branch=fields.Char('Branch')
+    
 
 class RecoveryReportWizard(models.TransientModel):
     _name="school.branch.report.wizard"
@@ -40,7 +38,7 @@ class RecoveryReportWizard(models.TransientModel):
     all_branch=fields.Boolean(string=" Select All Branches")
     one_branch=fields.Many2one('school.school', string= 'Select any one branch')
     
-    account_report_line=fields.Many2many('account.report.move.line', string='Account report Line')
+    account_report_line=fields.Many2many('account.student.report.move.line', string='Account report Line')
 
 
     
