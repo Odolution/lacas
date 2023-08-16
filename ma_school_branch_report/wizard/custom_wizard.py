@@ -80,11 +80,11 @@ class RecoveryReportWizard(models.TransientModel):
             
             
 
-            worksheet.write_merge(2,3,0,3,"Current Branch/School", style=red_style_title)
-            worksheet.write_merge(2,3,4,5,"Billing month Jul-23",style=red_style_title)
-            worksheet.write_merge(2,3,6,7,"App Date",style=red_style_title)
-            worksheet.write_merge(2,3,8,9,"Branch Wise Recovery",style=red_style_title)
-            worksheet.write_merge(2,3,10,11,"'%' age of Recovery",style=yellow_style_title)
+            worksheet.write_merge(0,1,0,3,"Current Branch/School", style=red_style_title)
+            worksheet.write_merge(0,1,4,5,"Billing month Jul-23",style=red_style_title)
+            worksheet.write_merge(0,1,6,7,"App Date",style=red_style_title)
+            worksheet.write_merge(0,1,8,9,"Branch Wise Recovery",style=red_style_title)
+            worksheet.write_merge(0,1,10,11,"'%' age of Recovery",style=yellow_style_title)
 
 
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
