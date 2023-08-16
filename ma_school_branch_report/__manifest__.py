@@ -18,7 +18,7 @@
     'data': [
         
         # "views/view.xml",
-        # "wizard/custom_wizard.xml",
+        "wizard/custom_wizard.xml",
         # "report/receivable_details.xml",
         # "report/report_button.xml",
         # "security/ir.model.access.csv",
