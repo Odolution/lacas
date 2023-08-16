@@ -34,12 +34,12 @@ class RecoveryReportWizard(models.TransientModel):
 
 
 
-     def action_print_excel_school_branch_report(self):
+    def action_print_excel_school_branch_report(self):
         self.action_print_report()
         if xlwt:
 
             
-            filename = 'Recovery Report.xls'
+            filename = 'School Branch Report.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
@@ -77,31 +77,31 @@ class RecoveryReportWizard(models.TransientModel):
      
       
 
-            row=2
-            for rec in self.account_recovery_report_line:
-                if rec:
+            # row=2
+            # for rec in self.account_recovery_report_line:
+            #     if rec:
             
-                    worksheet.write_merge(row,row,0,0,rec.billing_cycle, style=style_title)
-                    worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
-                    worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
-                    worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
-                    worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
+            #         worksheet.write_merge(row,row,0,0,rec.billing_cycle, style=style_title)
+            #         worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
+            #         worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
+            #         worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
+            #         worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
-                    row+=1
+            #         row+=1
                   
 
-            fp = io.BytesIO()
-            workbook.save(fp)
+            # fp = io.BytesIO()
+            # workbook.save(fp)
 
-            export_id = self.env['sale.day.book.report.excel'].create({'excel_file': base64.encodestring(fp.getvalue()), 'file_name': filename})
-            res = {
-                    'view_mode': 'form',
-                    'res_id': export_id.id,
-                    'res_model': 'sale.day.book.report.excel',
-                    'type': 'ir.actions.act_window',
-                    'target':'new'
-                }
-            return res
+            # export_id = self.env['sale.day.book.report.excel'].create({'excel_file': base64.encodestring(fp.getvalue()), 'file_name': filename})
+            # res = {
+            #         'view_mode': 'form',
+            #         'res_id': export_id.id,
+            #         'res_model': 'sale.day.book.report.excel',
+            #         'type': 'ir.actions.act_window',
+            #         'target':'new'
+            #     }
+            # return res
             
         else:
             raise Warning (""" You Don't have xlwt library.\n Please install it by executing this command :  sudo pip3 install xlwt""")
