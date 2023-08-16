@@ -22,7 +22,7 @@ except ImportError:
 
 
 class AccountMoveReport(models.TransientModel):
-    _name = 'account.student.report.move.line'
+    _name = 'account.student.report.line'
     
     record_id=fields.Char('ID')
     branch_name=fields.Integer('Roll No')
@@ -36,7 +36,7 @@ class RecoveryReportWizard(models.TransientModel):
     from_date = fields.Date(string='From')
     to_date = fields.Date(string='To')
     
-    account_report_line=fields.Many2many('account.student.report.move.line', string='Account report Line')
+    account_report_line=fields.Many2many('account.student.report.line', string='Account report Line')
 
 
     
@@ -159,17 +159,8 @@ class RecoveryReportWizard(models.TransientModel):
 
                     worksheet.write(row,0,sn)
                     worksheet.write_merge(row,row,1,3,rec.record_id,heading_style)
-                    worksheet.write_merge(row,row,4,5,rec.app_date,heading_style)
-                    worksheet.write_merge(row,row,6,7,rec.roll_no,heading_style)
-                    worksheet.write_merge(row,row,8,9,rec.full_roll_no,heading_style)
-                    worksheet.write_merge(row,row,10,11,rec.name,heading_style)
-                    worksheet.write_merge(row,row,12,13,rec.student_batch,heading_style)
-                    worksheet.write_merge(row,row,14,16,rec.student_branch,heading_style)
-                    worksheet.write_merge(row,row,17,18,rec.student_class,heading_style)
-                    worksheet.write_merge(row,row,19,20,rec.withdrawn_status,heading_style)
-                    worksheet.write_merge(row,row,21,22,rec.leaving_reason,heading_style)
-                    worksheet.write_merge(row,row,23,24,rec.remarks,heading_style)
-                    worksheet.write_merge(row,row,25,26,rec.withdrawn_date,heading_style)
+                    worksheet.write_merge(row,row,4,5,rec.branch_name,heading_style)
+                   
 
                     data_month= {
                         1:['01','JAN-22',rec.jan,'22'],
