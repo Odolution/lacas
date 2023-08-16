@@ -49,7 +49,7 @@ class RecoveryReportWizard(models.TransientModel):
         for rec in school_ids_raw:
             school_ids.append(rec)
 
-        for item in school_ids:
+        for item in range(len(school_ids)):
             mvl=self.env['student.report.line'].create({
                                         
                 "branch_name":item.name,
