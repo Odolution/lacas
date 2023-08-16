@@ -31,3 +31,8 @@ class RecoveryReportWizard(models.TransientModel):
     to_date = fields.Date(string='To')
     all_branch=fields.Boolean(string=" Select All Branches")
     one_branch=fields.Many2one('school.school', string= 'Select any one branch')
+
+
+
+     def action_print_excel_school_branch_report(self):
+        return
