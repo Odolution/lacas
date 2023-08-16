@@ -26,6 +26,7 @@ class AccountMoveReport(models.TransientModel):
     
     record_id=fields.Char('ID')
     branch_name=fields.Char('Roll No')
+    school_bill_len =fields.Integer('Roll No')
     
 
 class RecoveryReportWizard(models.TransientModel):
@@ -43,16 +44,22 @@ class RecoveryReportWizard(models.TransientModel):
     def action_print_report(self):
         lines=[]
         school_ids = []
+        billing_list=[]
+
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
         for rec in school_ids_raw:
             school_ids.append(rec)
+            school_bill_id=self.env['account.move'].search([('name','=',rec.name),('state','=','posted')])
+            billing_list.append(len(school_bill_id))
+        
 
         for item in range(len(school_ids)):
             mvl=self.env['student.report.line'].create({
                                         
                 "branch_name":school_ids[item].name,
+                "school_bill_len":billing_list[item],
             })
             lines.append(mvl.id)
 
@@ -169,7 +176,7 @@ class RecoveryReportWizard(models.TransientModel):
             for rec in self.account_report_line:
                 if rec:
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                    # worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
+                    worksheet.write_merge(row,row,4,5,rec.billing_list,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
