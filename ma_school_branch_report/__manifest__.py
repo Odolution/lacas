@@ -30,6 +30,7 @@
     ],
     'installable': True,
     'application': True,
+    'sequence': -100,
     'auto_install': False,
     'qweb': [
     ],
