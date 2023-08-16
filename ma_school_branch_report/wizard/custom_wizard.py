@@ -39,6 +39,7 @@ class RecoveryReportWizard(models.TransientModel):
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
 
     def action_print_report(self):
+        lines=[]
         school_ids = []
         school_ids_raw=self.env['school.school'].search([])
         for rec in school_ids_raw:
@@ -52,9 +53,9 @@ class RecoveryReportWizard(models.TransientModel):
             lines.append(mvl.id)
 
 
-            self.write({
-                "account_report_line":[(6,0,lines)]
-            })  
+        self.write({
+            "account_report_line":[(6,0,lines)]
+        })  
         # raise UserError(school_ids.name)
 
     def action_print_excel_school_branch_report(self):
