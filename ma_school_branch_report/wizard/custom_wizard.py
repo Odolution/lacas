@@ -50,7 +50,7 @@ class RecoveryReportWizard(models.TransientModel):
         if xlwt:
 
             
-            filename = 'RECEIVABLE OF WITHDRAWAL STUDENTS.xls'
+            filename = 'Students Branch Report.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
