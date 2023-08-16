@@ -21,7 +21,7 @@
         "wizard/custom_wizard.xml",
         # "report/receivable_details.xml",
         # "report/report_button.xml",
-        # "security/ir.model.access.csv",
+        "security/ir.model.access.csv",
 
         
 
