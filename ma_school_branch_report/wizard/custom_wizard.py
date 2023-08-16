@@ -51,8 +51,8 @@ class RecoveryReportWizard(models.TransientModel):
 
         for rec in school_ids_raw:
             school_ids.append(rec)
-            school_bill_id=self.env['account.move'].search([('name','=',rec.name),('state','=','posted')])
-            raise UserError(len(school_bill_id))
+            school_bill_id=self.env['account.move'].search([('school_ids','=',rec.name),('state','=','posted')])
+            raise UserError(school_bill_id.name)
             billing_list.append(len(school_bill_id))
         
 
