@@ -7,24 +7,23 @@
         <field name="arch" type="xml">
         
             <form string="Print School Branch Report">
-            <!-- <group>
-             <field name="all_branch"/>
-             <field name="one_branch" widget="selection" attrs="{'readonly':[('all_branch','=',True)]}"/>
             
-             </group> -->
-<!-- 
-              <group>
+              <group string="Select Invoice Date">
 
-                <field name="selected_month" widget="many2many_tags"/>
-
-          
-             </group> -->
-              <group>
                 <group>
                     <field name="from_date"/>
                 </group>
                 <group>
                     <field name="to_date"/>
+                </group>
+              </group>
+
+              <group string="Select Payment Date">
+                <group>
+                    <field name="from_date_pay"/>
+                </group>
+                <group>
+                    <field name="to_date_pay"/>
                 </group>
               </group>
 

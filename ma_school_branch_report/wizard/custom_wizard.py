@@ -35,6 +35,8 @@ class RecoveryReportWizard(models.TransientModel):
     
     from_date = fields.Date(string='From')
     to_date = fields.Date(string='To')
+    from_date_pay = fields.Date(string='From')
+    to_date_pay = fields.Date(string='To')
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
 
