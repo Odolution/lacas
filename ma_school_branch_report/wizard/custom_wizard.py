@@ -77,7 +77,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             
             style_title = xlwt.easyxf(
-            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+            " align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
@@ -164,7 +164,7 @@ class RecoveryReportWizard(models.TransientModel):
             row=2
             for rec in self.account_report_line:
                 if rec:
-                    worksheet.write_merge(row,row,0,0,rec.branch_name, style=style_title)
+                    worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     # worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
