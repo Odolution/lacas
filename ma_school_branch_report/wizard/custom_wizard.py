@@ -38,13 +38,19 @@ class RecoveryReportWizard(models.TransientModel):
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
 
+    def action_print_report(self):
+        school_ids = []
+        school_ids_raw=self.env['school.school'].search([])
+        for rec in school_ids_raw:
+            school_ids.append(rec)
+        
+        raise UserError(school_ids)
 
-    
     def action_print_excel_school_branch_report(self):
         
         
 
-        # self.action_print_report()
+        self.action_print_report()
         
         
         if xlwt:
