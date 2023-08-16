@@ -1,0 +1,65 @@
+<odoo>
+
+<record model="ir.ui.view" id="view_report_school_branch">
+        <field name="name">school.branch.report.wizard.form</field>
+        <field name="model" >school.branch.report.wizard</field>
+      
+        <field name="arch" type="xml">
+        
+            <form string="Print School Branch Report">
+            <group>
+             <field name="all_branch"/>
+             <field name="one_branch" widget="selection" attrs="{'readonly':[('all_branch','=',True)]}"/>
+            
+             </group>
+<!-- 
+              <group>
+
+                <field name="selected_month" widget="many2many_tags"/>
+
+          
+             </group> -->
+              <group>
+                <group>
+                    <field name="from_date"/>
+                </group>
+                <group>
+                    <field name="to_date"/>
+                </group>
+              </group>
+
+             
+             <footer>
+                <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
+                <!-- <button name="action_print_excel_recovery_report" type="object" string="Print Excel" class="btn-primary" /> -->
+                <!-- <button name="action_polulate" type="object" string="Populate" /> -->
+                
+                 <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+            </form>
+            </field>      
+    </record>
+
+     <record id="action_account_print_school_branch_report" model="ir.actions.act_window">
+            <field name="name">Recoveries</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.branch.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_school_branch"/>
+            <field name="target">new</field>
+        </record>
+
+    <menuitem id="menu_school_branch_of_student" 
+                name="School Branch of Students" 
+                parent="account.menu_finance_reports" 
+                sequence="6"/>
+    <menuitem id="menu_action_school_branch_report" 
+                name="School Branch Report" 
+                action="action_account_print_school_branch_report" 
+                parent="menu_school_branch_of_student"/>
+
+ 
+
+ 
+
+</odoo> 
