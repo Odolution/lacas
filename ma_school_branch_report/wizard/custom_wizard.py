@@ -26,7 +26,7 @@ class RecoveryReportWizard(models.TransientModel):
     _name="school.branch.report.wizard"
     _description='Print Recovery Wizard'
 
-    # selected_month= fields.Many2many('billing.month', string='Select Month')
+    selected_month= fields.Many2many('billing.month', string='Select Month')
     from_date = fields.Date(string='From')
     to_date = fields.Date(string='To')
     all_branch=fields.Boolean(string=" Select All Branches")
@@ -150,7 +150,7 @@ class RecoveryReportWizard(models.TransientModel):
                 })  
 
     def action_print_excel_school_branch_report(self):
-        self.action_print_report()
+        # self.action_print_report()
         if xlwt:
 
             
