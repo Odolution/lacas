@@ -25,7 +25,7 @@ class AccountMoveReport(models.TransientModel):
     _name = 'student.report.line'
     
     record_id=fields.Char('ID')
-    branch_name=fields.Integer('Roll No')
+    branch_name=fields.Char('Roll No')
     
 
 class RecoveryReportWizard(models.TransientModel):
