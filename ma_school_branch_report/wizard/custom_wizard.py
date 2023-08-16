@@ -47,16 +47,14 @@ class RecoveryReportWizard(models.TransientModel):
         for item in school_ids:
             mvl=self.env['student.report.line'].create({
                                         
-                            "school_name":item.name,
+                "school_name":item.name,
+            })
+            lines.append(mvl.id)
 
 
-                            })
-                    lines.append(mvl.id)
-
-
-                    self.write({
-                        "account_report_line":[(6,0,lines)]
-                    })  
+            self.write({
+                "account_report_line":[(6,0,lines)]
+            })  
         # raise UserError(school_ids.name)
 
     def action_print_excel_school_branch_report(self):
@@ -165,7 +163,6 @@ class RecoveryReportWizard(models.TransientModel):
             row=2
             for rec in self.account_report_line:
                 if rec:
-            
                     worksheet.write_merge(row,row,0,0,rec.school_name, style=style_title)
                     # worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
