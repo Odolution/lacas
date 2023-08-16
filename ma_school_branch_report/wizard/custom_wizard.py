@@ -22,7 +22,7 @@ except ImportError:
 
 
 class AccountMoveReport(models.TransientModel):
-    _name = 'account.student.report.line'
+    _name = 'student.report.line'
     
     record_id=fields.Char('ID')
     branch_name=fields.Integer('Roll No')
@@ -36,7 +36,7 @@ class RecoveryReportWizard(models.TransientModel):
     from_date = fields.Date(string='From')
     to_date = fields.Date(string='To')
     
-    account_report_line=fields.Many2many('account.student.report.line', string='Account report Line')
+    account_report_line=fields.Many2many('student.report.line', string='Account report Line')
 
 
     
