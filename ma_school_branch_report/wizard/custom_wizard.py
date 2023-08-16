@@ -88,11 +88,11 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,8,9,"'%' age of Recovery",style=yellow_style_title)
 
 
-            v_from_month=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%m')
-            v_from_year=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%y')
+            v_from_month=datetime.strptime(str(from_date), "%Y-%m-%d").strftime('%m')
+            v_from_year=datetime.strptime(str(from_date), "%Y-%m-%d").strftime('%y')
 
-            v_to_month=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%m')
-            v_to_year=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%y')
+            v_to_month=datetime.strptime(str(to_date), "%Y-%m-%d").strftime('%m')
+            v_to_year=datetime.strptime(str(to_date), "%Y-%m-%d").strftime('%y')
             raise UserError(str(v_from_month)+" "+str(v_from_year)+" "+str(v_to_month)+" "+str(v_to_year))
             months= {
                 1:['01','JAN-22',10,'22'],
