@@ -47,7 +47,7 @@ class RecoveryReportWizard(models.TransientModel):
         for item in school_ids:
             mvl=self.env['student.report.line'].create({
                                         
-                "school_name":item.name,
+                "branch_name":item.name,
             })
             lines.append(mvl.id)
 
@@ -163,7 +163,7 @@ class RecoveryReportWizard(models.TransientModel):
             row=2
             for rec in self.account_report_line:
                 if rec:
-                    worksheet.write_merge(row,row,0,0,rec.school_name, style=style_title)
+                    worksheet.write_merge(row,row,0,0,rec.branch_name, style=style_title)
                     # worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
