@@ -7,11 +7,11 @@
         <field name="arch" type="xml">
         
             <form string="Print School Branch Report">
-            <group>
+            <!-- <group>
              <field name="all_branch"/>
              <field name="one_branch" widget="selection" attrs="{'readonly':[('all_branch','=',True)]}"/>
             
-             </group>
+             </group> -->
 <!-- 
               <group>
 
