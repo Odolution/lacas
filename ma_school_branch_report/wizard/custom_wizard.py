@@ -285,8 +285,8 @@ class RecoveryReportWizard(models.TransientModel):
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
                         else:
-                            row+=1
                             worksheet.write_merge(row,row,col,col+1,group_total, style=red_style_title)
+                            row+=1
                             group_name_list.clear()
                             group_total=0
                             group_name_list.append(rec.branch_name)
