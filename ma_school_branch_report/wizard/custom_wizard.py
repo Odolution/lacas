@@ -234,7 +234,7 @@ class RecoveryReportWizard(models.TransientModel):
                             #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         col+=3
 
-                    worksheet.write_merge(row,row,13,14,rec.school_bill_len,style=style_title)
+                    worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
