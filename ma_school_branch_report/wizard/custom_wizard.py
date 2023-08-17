@@ -41,33 +41,6 @@ class RecoveryReportWizard(models.TransientModel):
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
 
-    months= {
-                1:['01','JAN-22',10,'22'],
-                2:['02','FEB-22',20,'22'],
-                3:['03','MAR-22',30,'22'],
-                4:['04','APR-22',40,'22'],
-                5:['05','MAY-22',50,'22'],
-                6:['06','JUN-22',60,'22'],
-                7:['07','JUL-22',70,'22'],
-                8:['08','AUG-22',80,'22'],
-                9:['09','SEP-22',90,'22'],
-                10:['10','OCT-22',100,'22'],
-                11:['11','NOV-22',110,'22'],
-                12:['12','DEC-22',120,'22'],
-                13:['01','JAN-23',130,'23'],
-                14:['02','FEB-23',140,'23'],
-                15:['03','MAR-23',150,'23'],
-                16:['04','APR-23',160,'23'],
-                17:['05','MAY-23',170,'23'],
-                18:['06','JUN-23',180,'23'],
-                19:['07','JUL-23',190,'23'],
-                20:['08','AUG-23',200,'23'],
-                21:['09','SEP-23',200,'23'],
-                22:['10','OCT-23',200,'23'],
-                23:['11','NOV-23',200,'23'],
-                24:['12','DEC-23',200,'23'],
-                }
-                
     def action_print_report(self):
         lines=[]
         school_ids = []
@@ -161,7 +134,32 @@ class RecoveryReportWizard(models.TransientModel):
             v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
             # raise UserError(str(v_from_month)+" "+str(v_from_year)+" "+str(v_to_month)+" "+str(v_to_year))
-            
+            months= {
+                1:['01','JAN-22',10,'22'],
+                2:['02','FEB-22',20,'22'],
+                3:['03','MAR-22',30,'22'],
+                4:['04','APR-22',40,'22'],
+                5:['05','MAY-22',50,'22'],
+                6:['06','JUN-22',60,'22'],
+                7:['07','JUL-22',70,'22'],
+                8:['08','AUG-22',80,'22'],
+                9:['09','SEP-22',90,'22'],
+                10:['10','OCT-22',100,'22'],
+                11:['11','NOV-22',110,'22'],
+                12:['12','DEC-22',120,'22'],
+                13:['01','JAN-23',130,'23'],
+                14:['02','FEB-23',140,'23'],
+                15:['03','MAR-23',150,'23'],
+                16:['04','APR-23',160,'23'],
+                17:['05','MAY-23',170,'23'],
+                18:['06','JUN-23',180,'23'],
+                19:['07','JUL-23',190,'23'],
+                20:['08','AUG-23',200,'23'],
+                21:['09','SEP-23',200,'23'],
+                22:['10','OCT-23',200,'23'],
+                23:['11','NOV-23',200,'23'],
+                24:['12','DEC-23',200,'23'],
+                }
             range_start = 0
             range_stop = 0
             # raise UserError(v_to)
@@ -185,6 +183,7 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(0,1,col,col+2,'Billing month'+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
+            col-=3    
             worksheet.write_merge(0,1,col,col+1,"Total",style=red_style_title)
             worksheet.write_merge(0,1,col+2,col+4,"Branch Wise Recovery",style=red_style_title)
             worksheet.write_merge(0,1,col+5,col+6,"'%' age of Recovery",style=yellow_style_title)
