@@ -73,7 +73,7 @@ class RecoveryReportWizard(models.TransientModel):
                 # Check if the invoice date is within the specified range
                 if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
                     # Create a key using the month and year
-                    month_key = f"{year_in_invoice}-{month_in_invoice}"
+                    month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
                     
                     # Increment the count for the corresponding month
                     if month_key in billing_counts:
