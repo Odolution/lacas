@@ -45,30 +45,35 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         school_ids = []
         billing_list=[]
+        billing_dict = {}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
-        v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
-        v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
-
-        v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
-        v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
+        
 
         for rec in school_ids_raw:
             school_ids.append(rec)
             # raise UserError(rec.program_ids)
             lst=[]
             school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
-            for rec in school_bill_id:
-                month_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%m')
-                year_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
+            for bill_rec in school_bill_ids:
+                invoice_date = bill_rec.invoice_date
+                month_in_invoice = invoice_date.strftime('%m')
+                year_in_invoice = invoice_date.strftime('%y')
                 
-                if month_in_invoice==v_from_month:
-                    lst.append(school_bill_id)
-            billing_list.append(len(lst))
-            
-            # raise UserError(months)
+                # Check if the invoice date is within the specified range
+                if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
+                    # Create a key using the month and year
+                    month_key = f"{year_in_invoice}-{month_in_invoice}"
+                    
+                    # Add the billing record to the corresponding month's list
+                    if month_key in billing_dict:
+                        billing_dict[month_key].append(bill_rec)
+                    else:
+                        billing_dict[month_key] = [bill_rec]
+                    
+            raise UserError(billing_dict)
         
 
         for item in range(len(school_ids)):
