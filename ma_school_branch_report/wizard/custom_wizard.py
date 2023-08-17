@@ -45,7 +45,6 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         school_ids = []
         billing_list=[]
-        billing_counts = {}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -59,36 +58,17 @@ class RecoveryReportWizard(models.TransientModel):
         for rec in school_ids_raw:
             school_ids.append(rec)
             # raise UserError(rec.program_ids)
-           
-            school_bill_ids = self.env['account.move'].search([
-                ('program_ids', 'in', rec.program_ids.ids),
-                ('state', '=', 'posted')
-            ])
-            billing_list.append(len(school_bill_ids))
-            
-            for bill_rec in school_bill_ids:
-                invoice_date = bill_rec.invoice_date
-                month_in_invoice = invoice_date.strftime('%m')
-                year_in_invoice = invoice_date.strftime('%y')
+            lst=[]
+            school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
+            for rec in school_bill_id:
+                month_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%m')
+                year_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
                 
-                # Check if the invoice date is within the specified range
-                if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
-                    # Create a key using the month and year
-                    month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
-                    
-                    # Increment the count for the corresponding month
-                    if month_key in billing_counts:
-                        billing_counts[month_key] += 1
-                    else:
-                        billing_counts[month_key] = 1
-            # raise UserError(billing_counts)
-        # message = "Billing information:\n\n"
-        # for month_key, count in billing_counts.items():
-        #     # month_key format: 'yy-mm'
-        #     message += f"Month: {month_key}, Number of bills: {count}\n"
+                if month_in_invoice==v_from_month:
+                    lst.append(school_bill_id)
+            billing_list.append(len(lst))
             
-        # # Raise a UserError with the summarized message
-        # raise UserError(message)
+            # raise UserError(months)
         
 
         for item in range(len(school_ids)):
