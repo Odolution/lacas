@@ -200,7 +200,7 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(str(range_start)+" "+str(range_stop))
       
             for i in range(range_start,range_stop+1):
-                raise UserError(months[i][0]+" "+months[i][1])
+                raise UserError(months[i][0]+" "+months[i][3])
                 worksheet.write_merge(0,1,col,col+2,'Billing month'+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
