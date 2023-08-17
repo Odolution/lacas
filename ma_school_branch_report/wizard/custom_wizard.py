@@ -50,7 +50,11 @@ class RecoveryReportWizard(models.TransientModel):
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
-        
+        v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
+        v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
+
+        v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
+        v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
 
         for rec in school_ids_raw:
             school_ids.append(rec)
