@@ -59,9 +59,13 @@ class RecoveryReportWizard(models.TransientModel):
         for rec in school_ids_raw:
             school_ids.append(rec)
             # raise UserError(rec.program_ids)
-            lst=[]
-            school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
-            for bill_rec in school_bill_id:
+           
+            school_bill_ids = self.env['account.move'].search([
+                ('program_ids', 'in', school_rec.program_ids.ids),
+                ('state', '=', 'posted')
+            ])
+            
+            for bill_rec in school_bill_ids:
                 invoice_date = bill_rec.invoice_date
                 month_in_invoice = invoice_date.strftime('%m')
                 year_in_invoice = invoice_date.strftime('%y')
@@ -71,13 +75,17 @@ class RecoveryReportWizard(models.TransientModel):
                     # Create a key using the month and year
                     month_key = f"{year_in_invoice}-{month_in_invoice}"
                     
-                    # Add the billing record to the corresponding month's list
-                    if month_key in billing_dict:
-                        billing_dict[month_key].append(bill_rec)
+                    # Increment the count for the corresponding month
+                    if month_key in billing_counts:
+                        billing_counts[month_key] += 1
                     else:
-                        billing_dict[month_key] = [bill_rec]
-                    
-            raise UserError(billing_dict)
+                        billing_counts[month_key] = 1
+
+        # Now, billing_counts contains the count of bills for each month
+        for month_key, count in billing_counts.items():
+            # month_key format: 'yy-mm'
+            message = f"Number of bills in {month_key}: {count}"
+            raise UserError(message)
         
 
         for item in range(len(school_ids)):
