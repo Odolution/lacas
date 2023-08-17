@@ -85,7 +85,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             for year in range(int(v_from_year), int(v_to_year) + 1):
                 for month in range(int(v_from_month), int(v_to_month) + 1):
-                    month_key = f"{school_name}-{str(year)[-2:]}-{month:02}"
+                    month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
                     if month_key not in billing_counts:
                         billing_counts[month_key] = 0
            
