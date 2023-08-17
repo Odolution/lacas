@@ -80,7 +80,7 @@ class RecoveryReportWizard(models.TransientModel):
                     
                     # Increment the count for the corresponding month
                     if bill_rec.payment_state =="paid":
-                        raise UserError(bill_rec.reference)
+                        raise UserError(bill_rec.payment_reference)
                     if month_key in billing_counts:
                         billing_counts[month_key] += bill_rec.amount_total_signed
                         total_count += bill_rec.amount_total_signed
