@@ -57,7 +57,7 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(rec.program_ids)
             lst=[]
             school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
-            for bill_rec in school_bill_ids:
+            for bill_rec in school_bill_id:
                 invoice_date = bill_rec.invoice_date
                 month_in_invoice = invoice_date.strftime('%m')
                 year_in_invoice = invoice_date.strftime('%y')
