@@ -91,7 +91,7 @@ class RecoveryReportWizard(models.TransientModel):
                             payment_date = bill_rec.ol_payment_date
                             month_in_payment = payment_date.strftime('%m')
                             year_in_payment = payment_date.strftime('%y')
-                            
+
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                                 total_count_paid += bill_rec.amount_total_signed
 
@@ -232,7 +232,7 @@ class RecoveryReportWizard(models.TransientModel):
       
             for i in range(range_start,range_stop+1):
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(0,1,col,col+2,'Billing month'+months[i][1],red_style_title)
+                worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
              
@@ -268,7 +268,8 @@ class RecoveryReportWizard(models.TransientModel):
                         worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
                     else:
                         worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
-
+                    
+                    raise UserError(rec.branch_name[:2])
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
