@@ -243,6 +243,7 @@ class RecoveryReportWizard(models.TransientModel):
             
                 # print('col:',months[i][1], 'data:',months[i][2])
             group_total=0
+            group_recovery=0
             group_name_list=[]
             row=2
             for rec in self.account_report_line:
@@ -250,6 +251,7 @@ class RecoveryReportWizard(models.TransientModel):
                     if len(group_name_list)==0:
                         group_name_list.append(rec.branch_name)
                         group_total+=rec.school_bill_len
+                        group_recovery+=rec.billing_list_paid
                         # raise UserError(str(group_name_list)+"==="+str(group_total))
                     else:
                         main_string = group_name_list[0]
@@ -261,15 +263,21 @@ class RecoveryReportWizard(models.TransientModel):
                         if substring == new_substring:
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
+                            group_recovery+=rec.billing_list_paid
+
                         else:
                             worksheet.write_merge(row,row,col,col+1,group_total, style=red_style_title)
+                            worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=red_style_title)
                             # raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
                             row+=1
                             
                             group_name_list.clear()
                             group_total=0
+                            group_recovery=0
+
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
+                            group_recovery+=rec.billing_list_paid
                             
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
