@@ -273,7 +273,7 @@ class RecoveryReportWizard(models.TransientModel):
                     if len(group_name_list)==0:
                         group_name_list.append(rec.branch_name)
                         group_total+=rec.school_bill_len
-                        raise UserError(str(group_name_list)+"==="+str(group_total))
+                        # raise UserError(str(group_name_list)+"==="+str(group_total))
                     else:
                         main_string = group_name_list[0]
                         substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
