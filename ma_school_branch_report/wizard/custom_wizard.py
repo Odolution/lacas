@@ -61,7 +61,7 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(rec.program_ids)
            
             school_bill_ids = self.env['account.move'].search([
-                ('program_ids', 'in', school_rec.program_ids.ids),
+                ('program_ids', 'in', rec.program_ids.ids),
                 ('state', '=', 'posted')
             ])
             
