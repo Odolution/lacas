@@ -67,7 +67,8 @@ class RecoveryReportWizard(models.TransientModel):
                 if month_in_invoice==v_from_month:
                     lst.append(school_bill_id)
             billing_list.append(len(lst))
-            # raise UserError(len(billing_list))
+            
+            raise UserError(months))
         
 
         for item in range(len(school_ids)):
