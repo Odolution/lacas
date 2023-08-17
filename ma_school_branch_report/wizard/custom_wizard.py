@@ -93,11 +93,11 @@ class RecoveryReportWizard(models.TransientModel):
             billing_list_paid.append(total_count_paid)
             billing_list.append(total_count)
 
-            for year in range(int(v_from_year), int(v_to_year) + 1):
-                for month in range(int(v_from_month), int(v_to_month) + 1):
-                    month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
-                    if month_key not in billing_counts:
-                        billing_counts[month_key] = 0
+            # for year in range(int(v_from_year), int(v_to_year) + 1):
+            #     for month in range(int(v_from_month), int(v_to_month) + 1):
+            #         month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
+            #         if month_key not in billing_counts:
+            #             billing_counts[month_key] = 0
            
             # raise UserError(billing_counts)
 
@@ -237,12 +237,16 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
                     for i in range(range_start,range_stop+1):
+                        check=True
                         new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                                check=False
                             # else:
                             #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
+                        if check:
+                            worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         col+=3
 
                     worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
