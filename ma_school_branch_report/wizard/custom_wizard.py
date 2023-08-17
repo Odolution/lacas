@@ -268,7 +268,7 @@ class RecoveryReportWizard(models.TransientModel):
                         else:
                             worksheet.write_merge(row,row,col,col+1,group_total, style=red_style_title)
                             worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=red_style_title)
-                            if group_recovery>0 and rec.group_recovery>0:
+                            if group_recovery>0 and group_recovery>0:
                                 total_per_new =(group_recovery/group_total)*100
                                 worksheet.write_merge(row,row,col+5,col+6,str(round(total_per_new, 4))+' %',style=style_title)
                             else:
