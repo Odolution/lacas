@@ -65,8 +65,8 @@ class RecoveryReportWizard(models.TransientModel):
                 ('program_ids', 'in', rec.program_ids.ids),
                 ('state', '=', 'posted')
             ])
-            billing_list.append(len(school_bill_ids))
             
+            total_count=0
             for bill_rec in school_bill_ids:
                 invoice_date = bill_rec.invoice_date
                 month_in_invoice = invoice_date.strftime('%m')
@@ -80,9 +80,12 @@ class RecoveryReportWizard(models.TransientModel):
                     # Increment the count for the corresponding month
                     if month_key in billing_counts:
                         billing_counts[month_key] += bill_rec.amount_total_signed
+                        total_count += bill_rec.amount_total_signed
                     else:
                         billing_counts[month_key] = bill_rec.amount_total_signed
+                        total_count += bill_rec.amount_total_signed
 
+            billing_list.append(total_count)
             for year in range(int(v_from_year), int(v_to_year) + 1):
                 for month in range(int(v_from_month), int(v_to_month) + 1):
                     month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
