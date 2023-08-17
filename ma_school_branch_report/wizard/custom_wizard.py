@@ -270,7 +270,7 @@ class RecoveryReportWizard(models.TransientModel):
                     else:
                         worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
                     
-                    if len(group_name_list)<0:
+                    if len(group_name_list)==0:
                         group_name_list.append(rec.branch_name)
                         group_total+=rec.school_bill_len
                          raise UserError(str(group_name_list)+"==="+str(group_total))
