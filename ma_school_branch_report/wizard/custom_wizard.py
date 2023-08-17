@@ -27,6 +27,7 @@ class AccountMoveReport(models.TransientModel):
     record_id=fields.Char('ID')
     branch_name=fields.Char('Roll No')
     school_bill_len =fields.Integer('Roll No')
+    billing_list_paid =fields.Integer('Roll No')
     
 
 class RecoveryReportWizard(models.TransientModel):
@@ -68,6 +69,7 @@ class RecoveryReportWizard(models.TransientModel):
             ])
             
             total_count=0
+            total_count_paid=0
             for bill_rec in school_bill_ids:
                 invoice_date = bill_rec.invoice_date
                 month_in_invoice = invoice_date.strftime('%m')
@@ -78,9 +80,9 @@ class RecoveryReportWizard(models.TransientModel):
                     # Create a key using the month and year
                     month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
                     
-                    # Increment the count for the corresponding month
                     if bill_rec.payment_state =="paid":
-                        raise UserError(bill_rec.payment_reference)
+                        total_count_paid += bill_rec.amount_total_signed
+
                     if month_key in billing_counts:
                         billing_counts[month_key] += bill_rec.amount_total_signed
                         total_count += bill_rec.amount_total_signed
@@ -88,7 +90,9 @@ class RecoveryReportWizard(models.TransientModel):
                         billing_counts[month_key] = bill_rec.amount_total_signed
                         total_count += bill_rec.amount_total_signed
 
+            billing_list_paid.append(total_count_paid)
             billing_list.append(total_count)
+
             for year in range(int(v_from_year), int(v_to_year) + 1):
                 for month in range(int(v_from_month), int(v_to_month) + 1):
                     month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
@@ -111,6 +115,7 @@ class RecoveryReportWizard(models.TransientModel):
                                         
                 "branch_name":school_ids[item].name,
                 "school_bill_len":billing_list[item],
+                "billing_list_paid":billing_list_paid[item],
             })
             lines.append(mvl.id)
 
@@ -241,6 +246,7 @@ class RecoveryReportWizard(models.TransientModel):
                         col+=3
 
                     worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
+                    worksheet.write_merge(row,row,col+2,col+3,rec.billing_list_paid,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
