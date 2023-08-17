@@ -68,7 +68,7 @@ class RecoveryReportWizard(models.TransientModel):
                     lst.append(school_bill_id)
             billing_list.append(len(lst))
             
-            raise UserError(months))
+            raise UserError(months)
         
 
         for item in range(len(school_ids)):
