@@ -49,13 +49,25 @@ class RecoveryReportWizard(models.TransientModel):
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
+        v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
+        v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
+
+        v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
+        v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
+
         for rec in school_ids_raw:
             school_ids.append(rec)
-            # raise UserError(rec.name)
             # raise UserError(rec.program_ids)
-            school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
-
-            billing_list.append(len(school_bill_id))
+        
+        school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
+        for rec in school_bill_id:
+            month_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%m')
+            year_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
+            
+            if month_in_invoice==v_from_month:
+                
+                billing_list.append(school_bill_id))
+            raise UserError(billing_list)
         
 
         for item in range(len(school_ids)):
@@ -120,7 +132,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
-            raise UserError(str(v_from_month)+" "+str(v_from_year)+" "+str(v_to_month)+" "+str(v_to_year))
+            # raise UserError(str(v_from_month)+" "+str(v_from_year)+" "+str(v_to_month)+" "+str(v_to_year))
             months= {
                 1:['01','JAN-22',10,'22'],
                 2:['02','FEB-22',20,'22'],
