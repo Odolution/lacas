@@ -45,6 +45,7 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         school_ids = []
         billing_list=[]
+        billing_counts = {}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -58,17 +59,36 @@ class RecoveryReportWizard(models.TransientModel):
         for rec in school_ids_raw:
             school_ids.append(rec)
             # raise UserError(rec.program_ids)
-            lst=[]
-            school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
-            for rec in school_bill_id:
-                month_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%m')
-                year_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
-                
-                if month_in_invoice==v_from_month:
-                    lst.append(school_bill_id)
-            billing_list.append(len(lst))
+           
+            school_bill_ids = self.env['account.move'].search([
+                ('program_ids', 'in', rec.program_ids.ids),
+                ('state', '=', 'posted')
+            ])
+            billing_list.append(len(school_bill_ids))
             
-            # raise UserError(months)
+            for bill_rec in school_bill_ids:
+                invoice_date = bill_rec.invoice_date
+                month_in_invoice = invoice_date.strftime('%m')
+                year_in_invoice = invoice_date.strftime('%y')
+                
+                # Check if the invoice date is within the specified range
+                if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
+                    # Create a key using the month and year
+                    month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
+                    
+                    # Increment the count for the corresponding month
+                    if month_key in billing_counts:
+                        billing_counts[month_key] += 1
+                    else:
+                        billing_counts[month_key] = 1
+            # raise UserError(billing_counts)
+        # message = "Billing information:\n\n"
+        # for month_key, count in billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
+            
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
         
 
         for item in range(len(school_ids)):
@@ -99,7 +119,7 @@ class RecoveryReportWizard(models.TransientModel):
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
-            worksheet = workbook.add_sheet('Students Branch Report')
+            worksheet = workbook.add_sheet('Receivables of Withdrawl Std')
             
 
             
@@ -120,8 +140,14 @@ class RecoveryReportWizard(models.TransientModel):
             date_format = xlwt.XFStyle()
             date_format.num_format_str = 'dd/mm/yyyy'
 
+            # worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
+            # worksheet.write_merge(0, 1, 6, 11, "RECEIVABLE OF WITHDRAWAL STUDENTS", style=style_title)
+            
+            
+
            
-        
+
+
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
             v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
 
@@ -154,7 +180,6 @@ class RecoveryReportWizard(models.TransientModel):
                 23:['11','NOV-23',200,'23'],
                 24:['12','DEC-23',200,'23'],
                 }
-
             range_start = 0
             range_stop = 0
             # raise UserError(v_to)
@@ -178,7 +203,7 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(0,1,col,col+2,'Billing month'+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
-              
+             
             worksheet.write_merge(0,1,col,col+1,"Total",style=red_style_title)
             worksheet.write_merge(0,1,col+2,col+4,"Branch Wise Recovery",style=red_style_title)
             worksheet.write_merge(0,1,col+5,col+6,"'%' age of Recovery",style=yellow_style_title)
