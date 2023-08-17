@@ -170,7 +170,7 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(0,1,col,col+2,'Billing month'+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
-            worksheet.write_merge(0,1,col,col+1,"App Date",style=red_style_title)
+            worksheet.write_merge(0,1,col,col+1,"Total",style=red_style_title)
             worksheet.write_merge(0,1,col+2,col+4,"Branch Wise Recovery",style=red_style_title)
             worksheet.write_merge(0,1,col+5,col+6,"'%' age of Recovery",style=yellow_style_title)
             # worksheet.write_merge(2,3,col,col+1,"Total", lime_style_title)   
@@ -181,7 +181,8 @@ class RecoveryReportWizard(models.TransientModel):
             for rec in self.account_report_line:
                 if rec:
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                    worksheet.write_merge(row,row,4,5,rec.school_bill_len,style=style_title)
+                    
+                    worksheet.write_merge(row,row,10,11,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
