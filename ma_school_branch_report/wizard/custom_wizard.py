@@ -82,14 +82,22 @@ class RecoveryReportWizard(models.TransientModel):
                         billing_counts[month_key] += bill_rec.amount_total_signed
                     else:
                         billing_counts[month_key] = bill_rec.amount_total_signed
+
+            for year in range(int(v_from_year), int(v_to_year) + 1):
+                for month in range(int(v_from_month), int(v_to_month) + 1):
+                    month_key = f"{school_name}-{str(year)[-2:]}-{month:02}"
+                    if month_key not in billing_counts:
+                        billing_counts[month_key] = 0
+           
             # raise UserError(billing_counts)
-        # message = "Billing information:\n\n"
-        # for month_key, count in billing_counts.items():
-        #     # month_key format: 'yy-mm'
-        #     message += f"Month: {month_key}, Number of bills: {count}\n"
+
+        message = "Billing information:\n\n"
+        for month_key, count in billing_counts.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # # Raise a UserError with the summarized message
-        # raise UserError(message)
+        # Raise a UserError with the summarized message
+        raise UserError(message)
         
 
         for item in range(len(school_ids)):
@@ -222,8 +230,8 @@ class RecoveryReportWizard(models.TransientModel):
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                            else:
-                                worksheet.write_merge(row,row,col,col+2,0,style=style_title)
+                            # else:
+                            #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         col+=3
 
                     worksheet.write_merge(row,row,13,14,rec.school_bill_len,style=style_title)
