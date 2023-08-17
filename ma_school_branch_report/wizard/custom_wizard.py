@@ -286,7 +286,7 @@ class RecoveryReportWizard(models.TransientModel):
                             group_total+=rec.school_bill_len
                         else:
                             row+=1
-                            worksheet.write_merge(row,row,col-5,col-6,group_total, style=red_style_title)
+                            worksheet.write_merge(row,row,2,5,group_total, style=red_style_title)
                             group_name_list.clear()
                             group_total=0
 
