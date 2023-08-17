@@ -45,6 +45,7 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         school_ids = []
         billing_list=[]
+        global billing_counts
         billing_counts = {}
 
         school_ids_raw=self.env['school.school'].search([])
@@ -113,8 +114,14 @@ class RecoveryReportWizard(models.TransientModel):
         
         
         if xlwt:
-
-            
+            global billing_counts
+            message = "Billing information:\n\n"
+            for month_key, count in billing_counts.items():
+                # month_key format: 'yy-mm'
+                message += f"Month: {month_key}, Number of bills: {count}\n"
+                
+            # Raise a UserError with the summarized message
+            raise UserError(message)
             filename = 'Students Branch Report.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
