@@ -268,7 +268,9 @@ class RecoveryReportWizard(models.TransientModel):
                         worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
                     else:
                         worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
-                    substring = rec.branch_name.split(' ')[0] + ' ' + main_string.split(' ')[1]
+                    
+                    main_string = rec.branch_name
+                    substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
                     raise UserError(substring)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
