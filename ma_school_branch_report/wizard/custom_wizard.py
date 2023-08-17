@@ -80,12 +80,14 @@ class RecoveryReportWizard(models.TransientModel):
                         billing_counts[month_key] += 1
                     else:
                         billing_counts[month_key] = 1
-            raise UserError(billing_counts)
-        # Now, billing_counts contains the count of bills for each month
-        # for month_key, count in billing_counts.items():
-        #     # month_key format: 'yy-mm'
-        #     message = f"Number of bills in {month_key}: {count}"
-            # raise UserError(message)
+            # raise UserError(billing_counts)
+        message = "Billing information:\n\n"
+        for month_key, count in billing_counts.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
+            
+        # Raise a UserError with the summarized message
+        raise UserError(message)
         
 
         for item in range(len(school_ids)):
