@@ -270,21 +270,22 @@ class RecoveryReportWizard(models.TransientModel):
                     else:
                         worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
                     
-                    # if len(group_name_list)==0:
-                    #     group_name_list.append(rec.branch_name)
-                    #     group_total+=rec.school_bill_len
-                    #     # raise UserError(str(group_name_list)+"==="+str(group_total))
-                    # else:
-                    #     main_string = group_name_list[0]
-                    #     substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
+                    if len(group_name_list)==0:
+                        group_name_list.append(rec.branch_name)
+                        group_total+=rec.school_bill_len
+                        # raise UserError(str(group_name_list)+"==="+str(group_total))
+                    else:
+                        main_string = group_name_list[0]
+                        substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
 
-                    #     new_string = rec.branch_name
-                    #     new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
-                    #     if main_string == new_substring:
-                    #         group_name_list.append(rec.branch_name)
-                    #         group_total+=rec.school_bill_len
-                    #     else:
-                    #         raise UserError(str(group_name_list)+"==="+str(group_total))
+                        new_string = rec.branch_name
+                        new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
+                        # raise UserError(str(group_name_list)+"==="+str(group_total))
+                        if substring == new_substring:
+                            group_name_list.append(rec.branch_name)
+                            group_total+=rec.school_bill_len
+                        else:
+                            raise UserError(str(group_name_list)+"==="+str(group_total))
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
