@@ -90,7 +90,8 @@ class RecoveryReportWizard(models.TransientModel):
                         if bill_rec.ol_payment_date:
                             payment_date = bill_rec.ol_payment_date
                             month_in_payment = payment_date.strftime('%m')
-                            year_in_payment = payment_date.strftime('%y')=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+                            year_in_payment = payment_date.strftime('%y')
+                            
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                                 total_count_paid += bill_rec.amount_total_signed
 
