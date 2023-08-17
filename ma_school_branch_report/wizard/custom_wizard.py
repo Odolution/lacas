@@ -45,6 +45,7 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         school_ids = []
         billing_list=[]
+        billing_list_paid=[]
         global billing_counts
         billing_counts = {}
 
@@ -78,6 +79,8 @@ class RecoveryReportWizard(models.TransientModel):
                     month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
                     
                     # Increment the count for the corresponding month
+                    if bill_rec.payment_state =="paid":
+                        raise UserError(bill_rec.reference)
                     if month_key in billing_counts:
                         billing_counts[month_key] += bill_rec.amount_total_signed
                         total_count += bill_rec.amount_total_signed
