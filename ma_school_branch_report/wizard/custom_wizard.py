@@ -200,7 +200,7 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(str(range_start)+" "+str(range_stop))
       
             for i in range(range_start,range_stop+1):
-      
+                raise UserError(months[i][0]+" "+months[i][1])
                 worksheet.write_merge(0,1,col,col+2,'Billing month'+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
@@ -216,21 +216,23 @@ class RecoveryReportWizard(models.TransientModel):
             for rec in self.account_report_line:
                 if rec:
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                    
+                    for month_key, count in billing_counts.items():
+
+                        worksheet.write_merge(row,row,4,5,count,style=style_title)
                     worksheet.write_merge(row,row,13,14,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
-            message = "Billing information:\n\n"
-            for month_key, count in billing_counts.items():
-                # month_key format: 'yy-mm'
-                # worksheet.write_merge(row,row,13,14,count,style=style_title)
-                message += f"Month: {month_key}, Number of bills: {count}\n"
+            # message = "Billing information:\n\n"
+            # for month_key, count in billing_counts.items():
+            #     # month_key format: 'yy-mm'
+            #     # worksheet.write_merge(row,row,13,14,count,style=style_title)
+            #     message += f"Month: {month_key}, Number of bills: {count}\n"
                 
-            # Raise a UserError with the summarized message
-            raise UserError(message)
+            # # Raise a UserError with the summarized message
+            # raise UserError(message)
 
             fp = io.BytesIO()
             workbook.save(fp)
