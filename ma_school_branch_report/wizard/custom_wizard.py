@@ -86,8 +86,9 @@ class RecoveryReportWizard(models.TransientModel):
                     if bill_rec.payment_state =="paid":
                         # pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
                         # pay_from_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
-                        raise UserError(bill_rec.id)
-                        total_count_paid += bill_rec.amount_total_signed
+                        if bill_rec.ol_payment_date:
+                            raise UserError(bill_rec.id)
+                            total_count_paid += bill_rec.amount_total_signed
 
                     if month_key in billing_counts:
                         billing_counts[month_key] += bill_rec.amount_total_signed
