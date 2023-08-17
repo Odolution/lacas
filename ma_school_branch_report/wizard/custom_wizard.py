@@ -286,6 +286,7 @@ class RecoveryReportWizard(models.TransientModel):
                             group_total+=rec.school_bill_len
                         else:
                             worksheet.write_merge(row+1,row+1,col,col+1,group_total, style=red_style_title)
+                            raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
                             row+=1
                             group_name_list.clear()
                             group_total=0
