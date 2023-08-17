@@ -223,10 +223,10 @@ class RecoveryReportWizard(models.TransientModel):
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
-            # message = "Billing information:\n\n"
+            message = "Billing information:\n\n"
             for month_key, count in billing_counts.items():
                 # month_key format: 'yy-mm'
-                worksheet.write_merge(row,row,13,14,count,style=style_title)
+                # worksheet.write_merge(row,row,13,14,count,style=style_title)
                 message += f"Month: {month_key}, Number of bills: {count}\n"
                 
             # Raise a UserError with the summarized message
