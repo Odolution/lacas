@@ -289,9 +289,9 @@ class RecoveryReportWizard(models.TransientModel):
                             worksheet.write_merge(row,row,col,col+1,group_total, style=red_style_title)
                             group_name_list.clear()
                             group_total=0
-                            raise UserError(str(group_name_list)+"==="+str(group_total))
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
+                            raise UserError(str(group_name_list)+"==="+str(group_total))
                             # raise UserError(str(group_name_list)+"==="+str(group_total))
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
