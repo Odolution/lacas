@@ -221,9 +221,9 @@ class RecoveryReportWizard(models.TransientModel):
                         new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
-                                worksheet.write_merge(row,row,col,col+1,count,style=style_title)
-                        col+=2        
-                        
+                                worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                        col+=3
+
                     worksheet.write_merge(row,row,13,14,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
