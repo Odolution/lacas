@@ -75,7 +75,7 @@ class RecoveryReportWizard(models.TransientModel):
                 # Check if the invoice date is within the specified range
                 if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
                     # Create a key using the month and year
-                    month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
+                    month_key = f"{year_in_invoice}-{month_in_invoice}"
                     
                     # Increment the count for the corresponding month
                     if month_key in billing_counts:
@@ -115,13 +115,7 @@ class RecoveryReportWizard(models.TransientModel):
         
         if xlwt:
             global billing_counts
-            message = "Billing information:\n\n"
-            for month_key, count in billing_counts.items():
-                # month_key format: 'yy-mm'
-                message += f"Month: {month_key}, Number of bills: {count}\n"
-                
-            # Raise a UserError with the summarized message
-            raise UserError(message)
+            
             filename = 'Students Branch Report.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
@@ -229,7 +223,14 @@ class RecoveryReportWizard(models.TransientModel):
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
-                  
+            # message = "Billing information:\n\n"
+            for month_key, count in billing_counts.items():
+                # month_key format: 'yy-mm'
+                worksheet.write_merge(row,row,13,14,count,style=style_title)
+                message += f"Month: {month_key}, Number of bills: {count}\n"
+                
+            # Raise a UserError with the summarized message
+            raise UserError(message)
 
             fp = io.BytesIO()
             workbook.save(fp)
