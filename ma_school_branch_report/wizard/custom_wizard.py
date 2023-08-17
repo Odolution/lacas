@@ -79,9 +79,9 @@ class RecoveryReportWizard(models.TransientModel):
                     
                     # Increment the count for the corresponding month
                     if month_key in billing_counts:
-                        billing_counts[month_key] += 1
+                        billing_counts[month_key] += bill_rec.amount_total_signed
                     else:
-                        billing_counts[month_key] = 1
+                        billing_counts[month_key] = bill_rec.amount_total_signed
             # raise UserError(billing_counts)
         # message = "Billing information:\n\n"
         # for month_key, count in billing_counts.items():
