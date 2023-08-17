@@ -251,7 +251,7 @@ class RecoveryReportWizard(models.TransientModel):
                         total_per =(rec.billing_list_paid/rec.school_bill_len)*100
                         worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
                     else:
-                        worksheet.write_merge(row,row,col+5,col+6,+'0 %',style=style_title)
+                        worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
 
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
