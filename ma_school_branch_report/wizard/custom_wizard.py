@@ -218,9 +218,10 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
                     for i in range(range_start,range_stop+1):
-                        month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
-                        raise UserError(month_key)
-                        worksheet.write_merge(row,row,col,col+1,billing_counts[month_key],style=style_title)
+                        new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                        for month_key, count in billing_counts.items():
+                            if new_month_key==month_key:
+                                worksheet.write_merge(row,row,col,col+1,billing_counts[month_key],style=style_title)
                         col+=2        
                     worksheet.write_merge(row,row,13,14,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
