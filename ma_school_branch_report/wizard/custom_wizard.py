@@ -58,15 +58,15 @@ class RecoveryReportWizard(models.TransientModel):
         for rec in school_ids_raw:
             school_ids.append(rec)
             # raise UserError(rec.program_ids)
-        
+            lst=[]
             school_bill_id = self.env['account.move'].search([('program_ids', 'in', rec.program_ids.ids), ('state', '=', 'posted')])
             for rec in school_bill_id:
                 month_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%m')
                 year_in_invoice=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
                 
                 if month_in_invoice==v_from_month:
-                    
-                    billing_list.append(school_bill_id)
+                    lst.append(school_bill_id)
+            billing_list.append(len(lst))
             # raise UserError(len(billing_list))
         
 
