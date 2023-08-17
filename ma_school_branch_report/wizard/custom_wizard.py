@@ -210,13 +210,6 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(2,3,col,col+1,"Total", lime_style_title)   
             
                 # print('col:',months[i][1], 'data:',months[i][2])
-            message = "Billing information:\n\n"
-            for month_key, count in billing_counts.items():
-                # month_key format: 'yy-mm'
-                message += f"Month: {month_key}, Number of bills: {count}\n"
-                
-            # Raise a UserError with the summarized message
-            raise UserError(message)
             
             row=2
             for rec in self.account_report_line:
@@ -224,7 +217,9 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     
                     worksheet.write_merge(row,row,13,14,rec.school_bill_len,style=style_title)
-                    
+                    # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
+                    # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
+                    # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
                   
