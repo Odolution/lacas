@@ -59,8 +59,8 @@ class RecoveryReportWizard(models.TransientModel):
         v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
         v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
 
-        pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
-        pay_from_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+        # pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
+        # pay_from_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
         for rec in school_ids_raw:
             school_ids.append(rec)
@@ -86,7 +86,7 @@ class RecoveryReportWizard(models.TransientModel):
                     if bill_rec.payment_state =="paid":
                         # pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
                         # pay_from_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
-                        raise UserError(bill_rec.ol_payment_date)
+                        raise UserError(bill_rec.payment_state)
                         total_count_paid += bill_rec.amount_total_signed
 
                     if month_key in billing_counts:
