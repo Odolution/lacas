@@ -222,6 +222,8 @@ class RecoveryReportWizard(models.TransientModel):
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                            else:
+                                worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         col+=3
 
                     worksheet.write_merge(row,row,13,14,rec.school_bill_len,style=style_title)
