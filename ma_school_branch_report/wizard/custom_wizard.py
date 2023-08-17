@@ -45,7 +45,7 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         school_ids = []
         billing_list=[]
-        billing_dict = {}
+        billing_counts = {}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
