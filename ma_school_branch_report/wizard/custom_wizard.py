@@ -99,7 +99,7 @@ class RecoveryReportWizard(models.TransientModel):
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
-            worksheet = workbook.add_sheet('Receivables of Withdrawl Std')
+            worksheet = workbook.add_sheet('Students Branch Report')
             
 
             
