@@ -242,7 +242,8 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(2,3,col,col+1,"Total", lime_style_title)   
             
                 # print('col:',months[i][1], 'data:',months[i][2])
-            
+            group_total=0
+            group_name_list=[]
             row=2
             for rec in self.account_report_line:
                 if rec:
@@ -269,9 +270,20 @@ class RecoveryReportWizard(models.TransientModel):
                     else:
                         worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
                     
-                    main_string = rec.branch_name
-                    substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
-                    raise UserError(substring)
+                    if len(group_name_list)<0:
+                        group_name_list.append(rec.branch_name)
+                        group_total+=rec.school_bill_len
+                    else:
+                        main_string = group_name_list[0]
+                        substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
+
+                        new_string = rec.branch_name
+                        new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
+                        if main_string == new_substring:
+                            group_name_list.append(rec.branch_name)
+                            group_total+=rec.school_bill_len
+                        else:
+                            raise UserError(str(group_name_list)+"==="+str(group_total))
                     # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
                     # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
