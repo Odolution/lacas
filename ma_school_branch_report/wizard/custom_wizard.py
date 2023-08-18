@@ -306,7 +306,7 @@ class RecoveryReportWizard(models.TransientModel):
                             col=4
                             for i in range(range_start,range_stop+1):
 
-                                search_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}
+                                search_key = f"-{months[i][3]}-{months[i][0]}"
                                 key_exists = any(search_key in key for key in months_total_dict)
 
                                 if key_exists:
