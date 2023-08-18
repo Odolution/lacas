@@ -320,9 +320,9 @@ class RecoveryReportWizard(models.TransientModel):
                                             col+=3
                                             count1+=1
                                             
-                                    else:
-                                        worksheet.write_merge(row,row,col,col+2,0, style=yellow_style_title)
-                                        col+=3
+                                if count1<=0:
+                                    worksheet.write_merge(row,row,col,col+2,0, style=yellow_style_title)
+                                    col+=3
                                     
                                     
 
