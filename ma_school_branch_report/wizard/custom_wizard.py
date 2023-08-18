@@ -323,8 +323,8 @@ class RecoveryReportWizard(models.TransientModel):
                                         result = split_parts[0]
                                         if substring == result:
                                             worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                                            break
                                             col+=3
+                                            break
                                     else:
                                         worksheet.write_merge(row,row,col,col+2,0, style=yellow_style_title)
                                         col+=3
