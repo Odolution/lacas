@@ -300,12 +300,19 @@ class RecoveryReportWizard(models.TransientModel):
                             # raise UserError(message)
                             col=4
                             for month_key, count in months_total_dict.items():
+                                check=True
                                 original_string = month_key
                                 split_parts = original_string.split('-')
                                 result = split_parts[0]
                                 if substring == result:
                                     worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                     col+=3
+                                    check=False
+                            
+                            if check:
+                                worksheet.write_merge(row,row,col,col+2,0,style=style_title)
+                                col+=3
+
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
                             worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
                             worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
@@ -343,8 +350,7 @@ class RecoveryReportWizard(models.TransientModel):
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
                                 check=False
-                            # else:
-                            #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
+                            
                         if check:
                             worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         col+=3
