@@ -378,7 +378,7 @@ class RecoveryReportWizard(models.TransientModel):
             col=4
             for i in range(range_start,range_stop+1):
                 # check=True
-                total
+                total=0
                 test_year_month = f"{months[i][3]}-{months[i][0]}"
                 for month_key, count in months_total_dict.items():
                     input_string = month_key
