@@ -245,6 +245,7 @@ class RecoveryReportWizard(models.TransientModel):
             group_total=0
             final_total=0
             group_recovery=0
+            final_recovery=0
             group_name_list=[]
             row=2
             for rec in self.account_report_line:
@@ -279,14 +280,16 @@ class RecoveryReportWizard(models.TransientModel):
                             #  raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
                             row+=1
                             final_total+=group_total
+                            final_recovery+=group_recovery
                             group_name_list.clear()
                             group_total=0
                             group_recovery=0
-                            
+
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
                             
+
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
                     for i in range(range_start,range_stop+1):
@@ -318,7 +321,12 @@ class RecoveryReportWizard(models.TransientModel):
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
+            worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
             worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
+            worksheet.write_merge(row,row,col+2,col+4,final_recovery, style=yellow_style_title)
+            if final_total>0 and final_recovery>0:
+                final_total_per =(final_recovery/final_total)*100
+                worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
             
             # message = "Billing information:\n\n"
             # for month_key, count in billing_counts.items():
