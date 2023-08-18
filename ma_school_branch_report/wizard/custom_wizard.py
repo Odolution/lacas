@@ -252,9 +252,7 @@ class RecoveryReportWizard(models.TransientModel):
             col=4
             for rec in self.account_report_line:
                 if rec:
-                    main_string = group_name_list[0]
-                    substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
-
+                   
                     new_string = rec.branch_name
                     new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
 
@@ -262,15 +260,18 @@ class RecoveryReportWizard(models.TransientModel):
                         group_name_list.append(rec.branch_name)
                         group_total+=rec.school_bill_len
                         group_recovery+=rec.billing_list_paid
+
                         for i in range(range_start,range_stop+1):
                             row_month_total=0
                             new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                             for month_key, count in billing_counts.items():
                                 if new_month_key==month_key:
-                                    month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                    month_key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                     row_month_total=months_total_dict[month_key]+count
                                     months_total_dict.update({month_key: row_month_total})
                     else:
+                        main_string = group_name_list[0]
+                        substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
                         # raise UserError(str(group_name_list)+"==="+str(group_total))
                         if substring == new_substring:
                             group_name_list.append(rec.branch_name)
@@ -282,7 +283,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                 for month_key, count in billing_counts.items():
                                     if new_month_key==month_key:
-                                        month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                        month_key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                         row_month_total=months_total_dict[month_key]+count
                                         months_total_dict.update({month_key: row_month_total})
 
@@ -311,7 +312,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                 for month_key, count in billing_counts.items():
                                     if new_month_key==month_key:
-                                        month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                        month_key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                         row_month_total=months_total_dict[month_key]+count
                                         months_total_dict.update({month_key: row_month_total})
                             
