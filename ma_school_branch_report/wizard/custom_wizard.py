@@ -338,12 +338,12 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
                     for i in range(range_start,range_stop+1):
-                        check=True
+                        # check=True
                         new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                                check=False
+                                # check=False
                             # else:
                             #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         # if check:
@@ -373,8 +373,18 @@ class RecoveryReportWizard(models.TransientModel):
                 
             # # Raise a UserError with the summarized message
             # raise UserError(message)
-           
             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+
+            col=4
+            for i in range(range_start,range_stop+1):
+                # check=True
+                new_month_key = f"{months[i][3]}-{months[i][0]}"
+                for month_key, count in months_total_dict.items():
+                    raise UserError(str(month_key)+" "+str(new_month_key))
+                    if new_month_key==month_key:
+                        worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                col+=3
+            
             worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
             worksheet.write_merge(row,row,col+2,col+4,final_recovery, style=yellow_style_title)
             if final_total>0 and final_recovery>0:
