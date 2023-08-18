@@ -288,24 +288,24 @@ class RecoveryReportWizard(models.TransientModel):
                                         months_total_dict.update({key: row_month_total})
 
                         else:
-                            message = "Billing information:\n\n"
+                            # message = "Billing information:\n\n"
+                            # for month_key, count in months_total_dict.items():
+                            #     # month_key format: 'yy-mm'
+                            #     original_string = month_key
+                            #     split_parts = original_string.split('-')
+                            #     result = split_parts[0]
+                            #     message += f"Month: {result}, Number of bills: {count}\n"
+                                
+                            # # Raise a UserError with the summarized message
+                            # raise UserError(message)
+                            col=4
                             for month_key, count in months_total_dict.items():
-                                # month_key format: 'yy-mm'
                                 original_string = month_key
                                 split_parts = original_string.split('-')
                                 result = split_parts[0]
-                                message += f"Month: {result}, Number of bills: {count}\n"
-                                
-                            # Raise a UserError with the summarized message
-                            raise UserError(message)
-                            # col=4
-                            # for month_key, count in months_total_dict.items():
-                            #     sub_string = month_key
-                            #     check_string = sub_string.split(' ')[0] + ' ' + sub_string.split(' ')[1]
-                            #     # raise UserError(str(group_name_list)+"==="+str(group_total))
-                            #     if substring == check_string:
-                            #         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                            #         col+=3
+                                if substring == result:
+                                    worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                    col+=3
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
                             worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
                             worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
