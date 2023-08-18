@@ -315,10 +315,10 @@ class RecoveryReportWizard(models.TransientModel):
                                 for i in range(range_start,range_stop+1):
                                     input_string = month_key
                                     parts = input_string.split("-")
-                                    search_key = f"-{parts[1]}-{parts[2]}"
+                                    search_key = f"{new_substring}-{parts[1]}-{parts[2]}"
                                     key_exists = any(search_key in key for key in months_total_dict)
 
-                                    if key_exists:
+                                    if key_exists and count<=0:
                                         original_string = month_key
                                         split_parts = original_string.split('-')
                                         result = split_parts[0]
@@ -326,6 +326,7 @@ class RecoveryReportWizard(models.TransientModel):
                                             worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                             col+=3
                                             count+=1
+                                            
                                     else:
                                         worksheet.write_merge(row,row,col,col+2,0, style=yellow_style_title)
                                         col+=3
