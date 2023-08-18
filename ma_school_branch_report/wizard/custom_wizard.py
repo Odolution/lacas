@@ -320,7 +320,7 @@ class RecoveryReportWizard(models.TransientModel):
                                             col+=3
                                 else:
                                     worksheet.write_merge(row,row,col,col+2,0, style=yellow_style_title)
-                                        col+=3
+                                    col+=3
                                     
                                     
 
