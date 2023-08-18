@@ -265,6 +265,7 @@ class RecoveryReportWizard(models.TransientModel):
                         if substring == new_substring:
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
+                            final_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
 
                         else:
