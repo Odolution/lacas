@@ -266,9 +266,9 @@ class RecoveryReportWizard(models.TransientModel):
                             new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                             for month_key, count in billing_counts.items():
                                 if new_month_key==month_key:
-                                    month_key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                    row_month_total=months_total_dict[month_key]+count
-                                    months_total_dict.update({month_key: row_month_total})
+                                    key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                    row_month_total= months_total_dict.get(key, 0)+count
+                                    months_total_dict.update({key: row_month_total})
                     else:
                         main_string = group_name_list[0]
                         substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
@@ -283,9 +283,9 @@ class RecoveryReportWizard(models.TransientModel):
                                 new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                 for month_key, count in billing_counts.items():
                                     if new_month_key==month_key:
-                                        month_key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                        row_month_total=months_total_dict[month_key]+count
-                                        months_total_dict.update({month_key: row_month_total})
+                                        key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                        row_month_total= months_total_dict.get(key, 0)+count
+                                        months_total_dict.update({key: row_month_total})
 
                         else:
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
@@ -312,9 +312,9 @@ class RecoveryReportWizard(models.TransientModel):
                                 new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                 for month_key, count in billing_counts.items():
                                     if new_month_key==month_key:
-                                        month_key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                        row_month_total=months_total_dict[month_key]+count
-                                        months_total_dict.update({month_key: row_month_total})
+                                        key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                        row_month_total= months_total_dict.get(key, 0)+count
+                                        months_total_dict.update({key: row_month_total})
                             
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
