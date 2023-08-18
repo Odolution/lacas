@@ -313,7 +313,7 @@ class RecoveryReportWizard(models.TransientModel):
                             for month_key, count in months_total_dict.items():
                                 count=0
                                 for i in range(range_start,range_stop+1):
-                                    search_key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                    search_key = f"{substring}-{months[i][3]}-{months[i][0]}"
                                     key_exists = any(search_key in key for key in months_total_dict)
 
                                     if key_exists:
