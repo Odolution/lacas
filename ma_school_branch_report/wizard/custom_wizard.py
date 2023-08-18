@@ -378,6 +378,7 @@ class RecoveryReportWizard(models.TransientModel):
             col=4
             for i in range(range_start,range_stop+1):
                 # check=True
+                total
                 test_year_month = f"{months[i][3]}-{months[i][0]}"
                 for month_key, count in months_total_dict.items():
                     input_string = month_key
@@ -385,7 +386,9 @@ class RecoveryReportWizard(models.TransientModel):
                     result = f"{parts[1]}-{parts[2]}"
                     # raise UserError(str(month_key)+" "+str(new_month_key))
                     if test_year_month==result:
-                        worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                        total+=count
+
+                worksheet.write_merge(row,row,col,col+2,total,style=style_title)
                 col+=3
             
             worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
