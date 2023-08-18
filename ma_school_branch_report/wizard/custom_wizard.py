@@ -290,21 +290,29 @@ class RecoveryReportWizard(models.TransientModel):
                             group_recovery+=rec.billing_list_paid
                             
 
+        # for month_key, count in billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     
+            
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                    message = "Billing information:\n\n"
                     col=4
                     for i in range(range_start,range_stop+1):
                         check=True
                         new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
-                                worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                                # worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                                message += f"Month: {month_key}, Number of bills: {count}\n"
                                 check=False
                             # else:
                             #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         if check:
                             worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         col+=3
-
+                    raise UserError(message)
                     worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
                     worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
                     if rec.school_bill_len>0 and rec.billing_list_paid>0:
