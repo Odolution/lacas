@@ -243,6 +243,7 @@ class RecoveryReportWizard(models.TransientModel):
             
                 # print('col:',months[i][1], 'data:',months[i][2])
             group_total=0
+            final_total=0
             group_recovery=0
             group_name_list=[]
             row=2
@@ -251,6 +252,7 @@ class RecoveryReportWizard(models.TransientModel):
                     if len(group_name_list)==0:
                         group_name_list.append(rec.branch_name)
                         group_total+=rec.school_bill_len
+                        final_total+=rec.school_bill_len
                         group_recovery+=rec.billing_list_paid
                         # raise UserError(str(group_name_list)+"==="+str(group_total))
                     else:
@@ -315,6 +317,8 @@ class RecoveryReportWizard(models.TransientModel):
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
+            worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
+            
             # message = "Billing information:\n\n"
             # for month_key, count in billing_counts.items():
             #     # month_key format: 'yy-mm'
