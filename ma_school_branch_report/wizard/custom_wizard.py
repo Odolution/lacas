@@ -159,7 +159,7 @@ class RecoveryReportWizard(models.TransientModel):
             " align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;'
+            yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour green;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour lime;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
@@ -238,7 +238,7 @@ class RecoveryReportWizard(models.TransientModel):
              
             worksheet.write_merge(0,1,col,col+1,"Total",style=red_style_title)
             worksheet.write_merge(0,1,col+2,col+4,"Branch Wise Recovery",style=red_style_title)
-            worksheet.write_merge(0,1,col+5,col+6,"'%' age of Recovery",style=yellow_style_title)
+            worksheet.write_merge(0,1,col+5,col+6,"'%' age of Recovery",style=red_style_title)
             # worksheet.write_merge(2,3,col,col+1,"Total", lime_style_title)   
             
                 # print('col:',months[i][1], 'data:',months[i][2])
@@ -272,9 +272,9 @@ class RecoveryReportWizard(models.TransientModel):
                                     months_total_dict.update({key: row_month_total})
                                     check=False
                         
-                            if check:
-                                key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                months_total_dict.update({key: 0})
+                            # if check:
+                            #     key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                            #     months_total_dict.update({key: 0})
 
                     else:
                         main_string = group_name_list[0]
@@ -296,9 +296,9 @@ class RecoveryReportWizard(models.TransientModel):
                                         months_total_dict.update({key: row_month_total})
                                         check=False
                             
-                                if check:
-                                    key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                    months_total_dict.update({key: 0})
+                            # if check:
+                            #     key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                            #     months_total_dict.update({key: 0})
 
                         else:
                             # message = "Billing information:\n\n"
@@ -352,9 +352,9 @@ class RecoveryReportWizard(models.TransientModel):
                                         months_total_dict.update({key: row_month_total})
                                         check=False
                             
-                                if check:
-                                    key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                    months_total_dict.update({key: 0})
+                                # if check:
+                                #     key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                #     months_total_dict.update({key: 0})
 
                     # Print row data
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
