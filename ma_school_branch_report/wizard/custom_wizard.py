@@ -348,7 +348,7 @@ class RecoveryReportWizard(models.TransientModel):
                             #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
                         # if check:
                         #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
-                        # col+=3
+                        col+=3
                     # raise UserError(message)
                     worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
                     worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
