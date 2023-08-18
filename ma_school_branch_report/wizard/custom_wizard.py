@@ -388,7 +388,7 @@ class RecoveryReportWizard(models.TransientModel):
                     if test_year_month==result:
                         total+=count
 
-                worksheet.write_merge(row,row,col,col+2,total,style=style_title)
+                worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
                 col+=3
             
             worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
