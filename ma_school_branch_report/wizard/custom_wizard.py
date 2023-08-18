@@ -291,7 +291,9 @@ class RecoveryReportWizard(models.TransientModel):
                             message = "Billing information:\n\n"
                             for month_key, count in months_total_dict.items():
                                 # month_key format: 'yy-mm'
-                                message += f"Month: {month_key}, Number of bills: {count}\n"
+                                sub_string = month_key
+                                check_string = sub_string.split(' ')[0] + ' ' + sub_string.split(' ')[1]
+                                message += f"Month: {check_string}, Number of bills: {count}\n"
                                 
                             # Raise a UserError with the summarized message
                             raise UserError(message)
