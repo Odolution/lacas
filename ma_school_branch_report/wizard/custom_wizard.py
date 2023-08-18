@@ -32,7 +32,7 @@ class AccountMoveReport(models.TransientModel):
 
 class RecoveryReportWizard(models.TransientModel):
     _name="school.branch.report.wizard"
-    _description='Print Recovery Wizard'
+    _description='Print school Branch Wizard'
 
     
     from_date = fields.Date(string='From')
@@ -41,6 +41,35 @@ class RecoveryReportWizard(models.TransientModel):
     to_date_pay = fields.Date(string='To')
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
+    
+    def _date_constrains(self):
+        if not self.to_date or not self.from_date:
+            raise UserError("Sorry, you must enter both dates..")
+        
+        
+        if not self.from_date and not self.to_date :
+            raise UserError("Sorry, you must enter dates..")
+        
+        else:
+
+            from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
+            to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
+            # raise UserError(from_year)
+
+            if self.to_date < self.from_date:
+                # raise UserError(datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y'))
+
+                raise ValidationError(_('Sorry, End Date Must be greater Than Start Date...'))
+
+            if from_year and to_year :
+
+                if  from_year < '22' or from_year >'23':
+                    raise UserError("Sorry, Year must be between 2022-2023..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+
+                elif to_year <"22" or to_year >"23":
+                    raise UserError("Sorry, Year must be between 2022-2023..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
 
     def action_print_report(self):
         lines=[]
@@ -151,7 +180,7 @@ class RecoveryReportWizard(models.TransientModel):
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
-            worksheet = workbook.add_sheet('Receivables of Withdrawl Std')
+            worksheet = workbook.add_sheet('Students Branch Std')
             
 
             
