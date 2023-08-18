@@ -252,7 +252,7 @@ class RecoveryReportWizard(models.TransientModel):
                     if len(group_name_list)==0:
                         group_name_list.append(rec.branch_name)
                         group_total+=rec.school_bill_len
-                        final_total+=rec.school_bill_len
+                        # final_total+=rec.school_bill_len
                         group_recovery+=rec.billing_list_paid
                         # raise UserError(str(group_name_list)+"==="+str(group_total))
                     else:
@@ -265,7 +265,7 @@ class RecoveryReportWizard(models.TransientModel):
                         if substring == new_substring:
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
-                            final_total+=rec.school_bill_len
+                            # final_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
 
                         else:
@@ -278,14 +278,13 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(row,row,col+5,col+6,'0 %',style=yellow_style_title)
                             #  raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
                             row+=1
-                            
+                            final_total+=group_total
                             group_name_list.clear()
                             group_total=0
                             group_recovery=0
-
+                            
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
-                            final_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
                             
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
