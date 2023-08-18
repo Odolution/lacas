@@ -272,9 +272,9 @@ class RecoveryReportWizard(models.TransientModel):
                                     months_total_dict.update({key: row_month_total})
                                     check=False
                         
-                            if check:
-                                key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                months_total_dict.update({key: 0})
+                            # if check:
+                            #     key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                            #     months_total_dict.update({key: 0})
 
                     else:
                         main_string = group_name_list[0]
@@ -296,9 +296,9 @@ class RecoveryReportWizard(models.TransientModel):
                                         months_total_dict.update({key: row_month_total})
                                         check=False
                             
-                                if check:
-                                    key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                    months_total_dict.update({key: 0})
+                                # if check:
+                                #     key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                #     months_total_dict.update({key: 0})
 
                         else:
                             # message = "Billing information:\n\n"
@@ -352,9 +352,9 @@ class RecoveryReportWizard(models.TransientModel):
                                         months_total_dict.update({key: row_month_total})
                                         check=False
                             
-                                if check:
-                                    key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                    months_total_dict.update({key: 0})
+                                # if check:
+                                #     key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                #     months_total_dict.update({key: 0})
 
                     # Print row data
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
