@@ -247,28 +247,44 @@ class RecoveryReportWizard(models.TransientModel):
             group_recovery=0
             final_recovery=0
             group_name_list=[]
+            months_total_dict={}
             row=2
             col=4
             for rec in self.account_report_line:
                 if rec:
+                    main_string = group_name_list[0]
+                    substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
+
+                    new_string = rec.branch_name
+                    new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
+
                     if len(group_name_list)==0:
                         group_name_list.append(rec.branch_name)
                         group_total+=rec.school_bill_len
                         group_recovery+=rec.billing_list_paid
-                        
+                        for i in range(range_start,range_stop+1):
+                            row_month_total=0
+                            new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                            for month_key, count in billing_counts.items():
+                                if new_month_key==month_key:
+                                    month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                    row_month_total=months_total_dict[month_key]+count
+                                    months_total_dict.update({month_key: row_month_total})
                     else:
-                        main_string = group_name_list[0]
-                        substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
-
-                        new_string = rec.branch_name
-                        new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
                         # raise UserError(str(group_name_list)+"==="+str(group_total))
                         if substring == new_substring:
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
                             # final_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
-
+                            for i in range(range_start,range_stop+1):
+                            row_month_total=0
+                            new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                            for month_key, count in billing_counts.items():
+                                if new_month_key==month_key:
+                                    month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                    row_month_total=months_total_dict[month_key]+count
+                                    months_total_dict.update({month_key: row_month_total})
 
                         else:
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
@@ -290,6 +306,14 @@ class RecoveryReportWizard(models.TransientModel):
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
+                            for i in range(range_start,range_stop+1):
+                            row_month_total=0
+                            new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                            for month_key, count in billing_counts.items():
+                                if new_month_key==month_key:
+                                    month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                    row_month_total=months_total_dict[month_key]+count
+                                    months_total_dict.update({month_key: row_month_total})
                             
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
@@ -322,6 +346,7 @@ class RecoveryReportWizard(models.TransientModel):
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
+            raise UserError(months_total_dict)
             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
             worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
             worksheet.write_merge(row,row,col+2,col+4,final_recovery, style=yellow_style_title)
