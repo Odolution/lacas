@@ -278,13 +278,13 @@ class RecoveryReportWizard(models.TransientModel):
                             # final_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
                             for i in range(range_start,range_stop+1):
-                            row_month_total=0
-                            new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
-                            for month_key, count in billing_counts.items():
-                                if new_month_key==month_key:
-                                    month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
-                                    row_month_total=months_total_dict[month_key]+count
-                                    months_total_dict.update({month_key: row_month_total})
+                                row_month_total=0
+                                new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                for month_key, count in billing_counts.items():
+                                    if new_month_key==month_key:
+                                        month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                        row_month_total=months_total_dict[month_key]+count
+                                        months_total_dict.update({month_key: row_month_total})
 
                         else:
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
@@ -307,13 +307,13 @@ class RecoveryReportWizard(models.TransientModel):
                             group_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
                             for i in range(range_start,range_stop+1):
-                            row_month_total=0
-                            new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
-                            for month_key, count in billing_counts.items():
-                                if new_month_key==month_key:
-                                    month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
-                                    row_month_total=months_total_dict[month_key]+count
-                                    months_total_dict.update({month_key: row_month_total})
+                                row_month_total=0
+                                new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                for month_key, count in billing_counts.items():
+                                    if new_month_key==month_key:
+                                        month_key = f"{substring}-{months[i][3]}-{months[i][0]}"
+                                        row_month_total=months_total_dict[month_key]+count
+                                        months_total_dict.update({month_key: row_month_total})
                             
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
