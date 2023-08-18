@@ -318,7 +318,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     search_key = f"{new_substring}-{parts[1]}-{parts[2]}"
                                     key_exists = any(search_key in key for key in months_total_dict)
 
-                                    if key_exists and count<=0:
+                                    if key_exists:
                                         original_string = month_key
                                         split_parts = original_string.split('-')
                                         result = split_parts[0]
