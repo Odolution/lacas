@@ -304,14 +304,9 @@ class RecoveryReportWizard(models.TransientModel):
                             # # Raise a UserError with the summarized message
                             # raise UserError(message)
                             col=4
-                            # for i in range(range_start,range_stop+1):
-
-                            # search_key = f"-{months[range_start][3]}-{months[i][0]}"
-                            # key_exists = any(search_key in key for key in months_total_dict)
-
-                            # if key_exists:
-                            for month_key, count in months_total_dict.items():
-                                count=0
+                            
+                            for month_key, count_val in months_total_dict.items():
+                                count1=0
                                 for i in range(range_start,range_stop+1):
                                     search_key = f"{substring}-{months[i][3]}-{months[i][0]}"
                                     key_exists = any(search_key in key for key in months_total_dict)
@@ -320,10 +315,10 @@ class RecoveryReportWizard(models.TransientModel):
                                         original_string = month_key
                                         split_parts = original_string.split('-')
                                         result = split_parts[0]
-                                        if substring == result and count==0:
-                                            worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                        if substring == result and count1==0:
+                                            worksheet.write_merge(row,row,col,col+2,count_val, style=yellow_style_title)
                                             col+=3
-                                            count+=1
+                                            count1+=1
                                             
                                     else:
                                         worksheet.write_merge(row,row,col,col+2,0, style=yellow_style_title)
