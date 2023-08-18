@@ -159,7 +159,7 @@ class RecoveryReportWizard(models.TransientModel):
             " align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour green;'
+            yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour light_green;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             lime_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour lime;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
