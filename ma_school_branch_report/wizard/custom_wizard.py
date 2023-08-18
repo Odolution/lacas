@@ -252,7 +252,7 @@ class RecoveryReportWizard(models.TransientModel):
             col=4
             for rec in self.account_report_line:
                 if rec:
-                   
+                #    Total
                     new_string = rec.branch_name
                     new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
 
@@ -288,6 +288,14 @@ class RecoveryReportWizard(models.TransientModel):
                                         months_total_dict.update({key: row_month_total})
 
                         else:
+                            colm=4
+                            for month_key, count in months_total_dict.items():
+                                sub_string = month_key
+                                check_string = sub_string.split(' ')[0] + ' ' + sub_string.split(' ')[1]
+                                # raise UserError(str(group_name_list)+"==="+str(group_total))
+                                if substring == check_string:
+                                    worksheet.write_merge(row,row,colm,colm+2,count, style=yellow_style_title)
+                                    colm+=3
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
                             worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
                             worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
@@ -315,7 +323,7 @@ class RecoveryReportWizard(models.TransientModel):
                                         key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                         row_month_total= months_total_dict.get(key, 0)+count
                                         months_total_dict.update({key: row_month_total})
-                            
+                    # Print row data
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
                     for i in range(range_start,range_stop+1):
@@ -347,13 +355,13 @@ class RecoveryReportWizard(models.TransientModel):
                     # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
-            message = "Billing information:\n\n"
-            for month_key, count in months_total_dict.items():
-                # month_key format: 'yy-mm'
-                message += f"Month: {month_key}, Number of bills: {count}\n"
+            # message = "Billing information:\n\n"
+            # for month_key, count in months_total_dict.items():
+            #     # month_key format: 'yy-mm'
+            #     message += f"Month: {month_key}, Number of bills: {count}\n"
                 
-            # Raise a UserError with the summarized message
-            raise UserError(message)
+            # # Raise a UserError with the summarized message
+            # raise UserError(message)
             # raise UserError(months_total_dict)
             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
             worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
