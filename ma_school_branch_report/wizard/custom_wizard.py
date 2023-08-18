@@ -306,7 +306,6 @@ class RecoveryReportWizard(models.TransientModel):
                             col=4
                             
                             for month_key, count_val in months_total_dict.items():
-                              
                                 original_string = month_key
                                 split_parts = original_string.split('-')
                                 result = split_parts[0]
