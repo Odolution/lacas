@@ -70,6 +70,34 @@ class RecoveryReportWizard(models.TransientModel):
                 elif to_year <"22" or to_year >"23":
                     raise UserError("Sorry, Year must be between 2022-2023..")
                     raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+        
+        if not self.to_date_pay or not self.from_date_pay:
+            raise UserError("Sorry, you must enter both dates..")
+        
+        
+        if not self.from_date_pay and not self.to_date_pay :
+            raise UserError("Sorry, you must enter dates..")
+        
+        else:
+
+            from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
+            to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+            # raise UserError(from_year)
+
+            if self.to_date_pay < self.from_date_pay:
+                # raise UserError(datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y'))
+
+                raise ValidationError(_('Sorry, End Date Must be greater Than Start Date...'))
+
+            if from_year and to_year :
+
+                if  from_year < '22' or from_year >'23':
+                    raise UserError("Sorry, Year must be between 2022-2023..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+
+                elif to_year <"22" or to_year >"23":
+                    raise UserError("Sorry, Year must be between 2022-2023..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
 
     def action_print_report(self):
         lines=[]
