@@ -100,7 +100,7 @@ class RecoveryReportWizard(models.TransientModel):
                     raise UserError("Sorry, Invalid year range..")
                     raise ValidationError(_('Sorry, Invalid year range...'))
 
-                elif pay_from_month < from_month or pay_to_month > to_month:
+                elif pay_from_month < from_month:
                     raise UserError("Sorry, Invalid month range..")
                     raise ValidationError(_('Sorry, Invalid month range...'))
 
