@@ -44,7 +44,7 @@ class RecoveryReportWizard(models.TransientModel):
     
     def _date_constrains(self):
         if not self.to_date or not self.from_date:
-            raise UserError("Sorry, you must enter both dates..")
+            raise UserError("Sorry, you must enter all dates..")
         
         
         if not self.from_date and not self.to_date :
@@ -72,7 +72,7 @@ class RecoveryReportWizard(models.TransientModel):
                     raise ValidationError(_('Sorry, Year must be 2022-2023...'))
         
         if not self.to_date_pay or not self.from_date_pay:
-            raise UserError("Sorry, you must enter both dates..")
+            raise UserError("Sorry, you must enter all dates..")
         
         
         if not self.from_date_pay and not self.to_date_pay :
@@ -80,8 +80,8 @@ class RecoveryReportWizard(models.TransientModel):
         
         else:
 
-            from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
-            to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+            pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
+            pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
             # raise UserError(from_year)
 
             if self.to_date_pay < self.from_date_pay:
@@ -91,13 +91,13 @@ class RecoveryReportWizard(models.TransientModel):
 
             if from_year and to_year :
 
-                if  from_year < '22' or from_year >'23':
-                    raise UserError("Sorry, Year must be between 2022-2023..")
-                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+                if  pay_from_year < from_year or pay_from_year >to_year:
+                    raise UserError("Sorry, Invalid year range..")
+                    raise ValidationError(_('Sorry, Invalid year range...'))
 
-                elif to_year <"22" or to_year >"23":
-                    raise UserError("Sorry, Year must be between 2022-2023..")
-                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+                # elif pay_to_year <"22" or pay_to_year >"23":
+                #     raise UserError("Sorry, Year must be between 2022-2023..")
+                #     raise ValidationError(_('Sorry, Year must be 2022-2023...'))
 
     def action_print_report(self):
         lines=[]
