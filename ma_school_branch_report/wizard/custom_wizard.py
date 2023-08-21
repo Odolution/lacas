@@ -127,11 +127,12 @@ class RecoveryReportWizard(models.TransientModel):
         pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
         pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
-        for year in range(int(v_from_year), int(v_to_year) + 1):
-            for month in range(int(v_from_month), int(v_to_month) + 1):
-                month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
-                if month_key not in billing_counts:
-                    billing_counts[month_key] = 0
+        for rec in school_ids_raw:
+            for year in range(int(v_from_year), int(v_to_year) + 1):
+                for month in range(int(v_from_month), int(v_to_month) + 1):
+                    month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
+                    if month_key not in billing_counts:
+                        billing_counts[month_key] = 0
 
         for rec in school_ids_raw:
             school_ids.append(rec)
