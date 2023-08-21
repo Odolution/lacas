@@ -167,11 +167,14 @@ class RecoveryReportWizard(models.TransientModel):
             billing_list_paid.append(total_count_paid)
             billing_list.append(total_count)
 
-            for year in range(int(v_from_year), int(v_to_year) + 1):
-                for month in range(int(v_from_month), int(v_to_month) + 1):
-                    month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
-                    if month_key not in billing_counts:
-                        billing_counts[month_key] = 0
+            all_month_keys = [
+                f"{rec.name}-{str(year)[-2:]}-{month:02}"
+                for year in range(int(v_from_year), int(v_to_year) + 1)
+                for month in range(int(v_from_month), int(v_to_month) + 1)
+            ]
+
+            # Initialize billing_counts dictionary with all month keys and initial value 0
+            billing_counts = {month_key: 0 for month_key in all_month_keys}
            
             # raise UserError(billing_counts)
 
