@@ -96,7 +96,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             if from_year and to_year :
 
-                if  pay_from_year < from_year or pay_to_year > to_year:
+                if  pay_from_year < from_year or pay_to_year > '23':
                     raise UserError("Sorry, Invalid year range..")
                     raise ValidationError(_('Sorry, Invalid year range...'))
 
