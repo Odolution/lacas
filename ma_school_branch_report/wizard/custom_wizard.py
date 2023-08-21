@@ -54,6 +54,8 @@ class RecoveryReportWizard(models.TransientModel):
 
             from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
             to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
+            from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
+            to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
             # raise UserError(from_year)
 
             if self.to_date < self.from_date:
@@ -82,6 +84,9 @@ class RecoveryReportWizard(models.TransientModel):
 
             pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
             pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+
+            pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
+            pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
             # raise UserError(from_year)
 
             if self.to_date_pay < self.from_date_pay:
@@ -91,13 +96,13 @@ class RecoveryReportWizard(models.TransientModel):
 
             if from_year and to_year :
 
-                if  pay_from_year < from_year or pay_from_year >to_year:
+                if  pay_from_year < from_year or pay_to_year > to_year:
                     raise UserError("Sorry, Invalid year range..")
                     raise ValidationError(_('Sorry, Invalid year range...'))
 
-                # elif pay_to_year <"22" or pay_to_year >"23":
-                #     raise UserError("Sorry, Year must be between 2022-2023..")
-                #     raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+                elif pay_from_month < from_month or pay_to_month > to_month:
+                    raise UserError("Sorry, Invalid month range..")
+                    raise ValidationError(_('Sorry, Invalid month range...'))
 
     def action_print_report(self):
         lines=[]
