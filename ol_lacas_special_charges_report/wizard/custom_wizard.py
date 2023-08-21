@@ -81,65 +81,63 @@ class SiblingsReportWizard(models.TransientModel):
         # price=0
         # remarks=''
 
+        # if tuition_plan.x_studio_enrollment_statetuition_plans.name == "Enrolled":
         if self.all_batch:
             for rec in tuition_plan:
-                if rec.line_ids:
-                    for line in rec.line_ids:
-                        if line.product_id.x_studio_code:
-                            roll_no=rec.student_id.facts_udid
-                            f_name=rec.student_id.first_name
-                            m_name=rec.student_id.middle_name
-                            l_name=rec.student_id.last_name
-                            specialization=line.product_id.name
-                            price=line.unit_price
-                            splitted_name=specialization.split(' ')
-                            if len(splitted_name)>2:
-                                program=splitted_name[0]+" "+splitted_name[1]
-                            if rec.student_id.homeroom:
-                                wholename=rec.student_id.homeroom
-                                splitted_name=wholename.split('-')
+                # Adding Enrolled Condition, which will fetch only those students which are currently enrolled in the system
+                if rec.x_studio_enrollment_statetuition_plans.name == "Enrolled":
+                    if rec.line_ids:
+                        for line in rec.line_ids:
+                            if line.product_id.x_studio_code:
+                                roll_no=rec.student_id.facts_udid
+                                f_name=rec.student_id.first_name
+                                m_name=rec.student_id.middle_name
+                                l_name=rec.student_id.last_name
+                                specialization=line.product_id.name
+                                price=line.unit_price
+                                splitted_name=specialization.split(' ')
                                 if len(splitted_name)>2:
-                                    classs=splitted_name[0]+"-"+splitted_name[1]
-                                    sec=splitted_name[2]
-                                elif len(splitted_name)>1:
-                                    classs=splitted_name[0]
-                                    sec=splitted_name[1]
-                                elif len(splitted_name)>0:
+                                    program=splitted_name[0]+" "+splitted_name[1]
+                                if rec.student_id.homeroom:
+                                    wholename=rec.student_id.homeroom
+                                    splitted_name=wholename.split('-')
+                                    if len(splitted_name)>2:
+                                        classs=splitted_name[0]+"-"+splitted_name[1]
+                                        sec=splitted_name[2]
+                                    elif len(splitted_name)>1:
                                         classs=splitted_name[0]
-                            if rec.student_id.school_ids:
-                                if rec.student_id.enrollment_history_ids:
-                                    enroll_history=rec.student_id.enrollment_history_ids
-                                    lst=[]
-                                    for linez in enroll_history:
-                                        lst.append(linez.program_id.name)
-                                    dept=lst[0]
-            
-
-                            mvl=self.env['account.charges.report.move.line'].create({
-                                    
-                                    "std_roll_no":roll_no,
-                                    "std_f_name":f_name,
-                                    "std_m_name":m_name,
-                                    "std_l_name":l_name,
-                                    "special_charges":specialization,
-                                    "department":dept,
-                                    "program_name":program,
-                                    "amount_charged":price,
-                                    "academic_level":classs,
-                                    "section_std":sec,
-                                    "remarks_std":'',
-
-
-
-                                        
-
-                        })
-                            lines.append(mvl.id)
-                            
-
+                                        sec=splitted_name[1]
+                                    elif len(splitted_name)>0:
+                                            classs=splitted_name[0]
+                                if rec.student_id.school_ids:
+                                    if rec.student_id.enrollment_history_ids:
+                                        enroll_history=rec.student_id.enrollment_history_ids
+                                        lst=[]
+                                        for linez in enroll_history:
+                                            lst.append(linez.program_id.name)
+                                        dept=lst[0]
                 
 
-                            
+                                mvl=self.env['account.charges.report.move.line'].create({
+                                        
+                                        "std_roll_no":roll_no,
+                                        "std_f_name":f_name,
+                                        "std_m_name":m_name,
+                                        "std_l_name":l_name,
+                                        "special_charges":specialization,
+                                        "department":dept,
+                                        "program_name":program,
+                                        "amount_charged":price,
+                                        "academic_level":classs,
+                                        "section_std":sec,
+                                        "remarks_std":'',
+
+
+
+                                            
+
+                            })
+                                lines.append(mvl.id)
             
             self.write({
                 "account_charges_report_line":[(6,0,lines)]
@@ -149,8 +147,7 @@ class SiblingsReportWizard(models.TransientModel):
             if self.one_batch=='old_batch':
                 old_batch_val=dict(self._fields['one_batch'].selection).get(self.one_batch)
                 for rec in tuition_plan:
-                    if rec.student_id.x_studio_batchsession==old_batch_val:
-                      
+                    if rec.x_studio_enrollment_statetuition_plans.name == "Enrolled":
                         if rec.line_ids:
                             for line in rec.line_ids:
                                 if line.product_id.x_studio_code:
@@ -212,59 +209,60 @@ class SiblingsReportWizard(models.TransientModel):
             elif self.one_batch=='new_batch':
                 new_batch_val=dict(self._fields['one_batch'].selection).get(self.one_batch)
                 for rec in tuition_plan:
-                    if rec.student_id.x_studio_batchsession==new_batch_val:
-                        if rec.line_ids:
-                            for line in rec.line_ids:
-                                if line.product_id.x_studio_code:
-                                    roll_no=rec.student_id.facts_udid
-                                    f_name=rec.student_id.first_name
-                                    m_name=rec.student_id.middle_name
-                                    l_name=rec.student_id.last_name
-                                    specialization=line.product_id.name
-                                    price=line.unit_price
-                                    splitted_name=specialization.split(' ')
-                                    if len(splitted_name)>2:
-                                        program=splitted_name[0]+" "+splitted_name[1]
-                                    if rec.student_id.homeroom:
-                                        wholename=rec.student_id.homeroom
-                                        splitted_name=wholename.split('-')
+                    if rec.x_studio_enrollment_statetuition_plans.name == "Enrolled":
+                        if rec.student_id.x_studio_batchsession==new_batch_val:
+                            if rec.line_ids:
+                                for line in rec.line_ids:
+                                    if line.product_id.x_studio_code:
+                                        roll_no=rec.student_id.facts_udid
+                                        f_name=rec.student_id.first_name
+                                        m_name=rec.student_id.middle_name
+                                        l_name=rec.student_id.last_name
+                                        specialization=line.product_id.name
+                                        price=line.unit_price
+                                        splitted_name=specialization.split(' ')
                                         if len(splitted_name)>2:
-                                            classs=splitted_name[0]+"-"+splitted_name[1]
-                                            sec=splitted_name[2]
-                                        elif len(splitted_name)>1:
-                                            classs=splitted_name[0]
-                                            sec=splitted_name[1]
-                                        elif len(splitted_name)>0:
+                                            program=splitted_name[0]+" "+splitted_name[1]
+                                        if rec.student_id.homeroom:
+                                            wholename=rec.student_id.homeroom
+                                            splitted_name=wholename.split('-')
+                                            if len(splitted_name)>2:
+                                                classs=splitted_name[0]+"-"+splitted_name[1]
+                                                sec=splitted_name[2]
+                                            elif len(splitted_name)>1:
                                                 classs=splitted_name[0]
-                                    if rec.student_id.school_ids:
-                                        if rec.student_id.enrollment_history_ids:
-                                            enroll_history=rec.student_id.enrollment_history_ids
-                                            lst=[]
-                                            for linez in enroll_history:
-                                                lst.append(linez.program_id.name)
-                                            dept=lst[0]
-                    
+                                                sec=splitted_name[1]
+                                            elif len(splitted_name)>0:
+                                                    classs=splitted_name[0]
+                                        if rec.student_id.school_ids:
+                                            if rec.student_id.enrollment_history_ids:
+                                                enroll_history=rec.student_id.enrollment_history_ids
+                                                lst=[]
+                                                for linez in enroll_history:
+                                                    lst.append(linez.program_id.name)
+                                                dept=lst[0]
+                        
 
-                                    mvl=self.env['account.charges.report.move.line'].create({
-                                            
-                                            "std_roll_no":roll_no,
-                                            "std_f_name":f_name,
-                                            "std_m_name":m_name,
-                                            "std_l_name":l_name,
-                                            "special_charges":specialization,
-                                            "department":dept,
-                                            "program_name":program,
-                                            "amount_charged":price,
-                                            "academic_level":classs,
-                                            "section_std":sec,
-                                            "remarks_std":'',
-
-
-
+                                        mvl=self.env['account.charges.report.move.line'].create({
                                                 
+                                                "std_roll_no":roll_no,
+                                                "std_f_name":f_name,
+                                                "std_m_name":m_name,
+                                                "std_l_name":l_name,
+                                                "special_charges":specialization,
+                                                "department":dept,
+                                                "program_name":program,
+                                                "amount_charged":price,
+                                                "academic_level":classs,
+                                                "section_std":sec,
+                                                "remarks_std":'',
 
-                                })
-                                    lines.append(mvl.id)
+
+
+                                                    
+
+                                    })
+                                        lines.append(mvl.id)
                 self.write({
                 "account_charges_report_line":[(6,0,lines)]
             })
@@ -378,7 +376,6 @@ class SiblingsReportWizard(models.TransientModel):
                 
 
            
-
 
 
 
