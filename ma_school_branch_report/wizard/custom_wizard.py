@@ -95,8 +95,10 @@ class RecoveryReportWizard(models.TransientModel):
                 raise ValidationError(_('Sorry, End Date Must be greater Than Start Date...'))
 
             if from_year and to_year :
-
-                if  pay_from_year < from_year or pay_to_year > '23':
+                if  pay_from_year > '23' or pay_to_year > '23':
+                    raise UserError("Sorry, Year must be between 2022-2023..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+                elif  pay_from_year < from_year:
                     raise UserError("Sorry, Invalid year range..")
                     raise ValidationError(_('Sorry, Invalid year range...'))
 
