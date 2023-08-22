@@ -49,11 +49,11 @@
         </record>
 
     <menuitem id="menu_school_branch_of_student" 
-                name="School Branch of Students" 
+                name="Branch Recovery Report " 
                 parent="account.menu_finance_reports" 
                 sequence="6"/>
     <menuitem id="menu_action_school_branch_report" 
-                name="School Branch Report" 
+                name="Branch Wise Recovery Report" 
                 action="action_account_print_school_branch_report" 
                 parent="menu_school_branch_of_student"/>
 
