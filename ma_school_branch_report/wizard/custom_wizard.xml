@@ -40,7 +40,7 @@
     </record>
 
      <record id="action_account_print_school_branch_report" model="ir.actions.act_window">
-            <field name="name">School Branch Report</field>
+            <field name="name">Branch Wise Recovery Report</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">school.branch.report.wizard</field>
             <field name="view_mode">form</field>
