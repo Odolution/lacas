@@ -26,8 +26,8 @@ class AccountMoveReport(models.TransientModel):
     
     record_id=fields.Char('ID')
     branch_name=fields.Char('name')
-    school_bill_len =fields.Float('')
-    billing_list_paid =fields.Float('Roll No')
+    school_bill_len =fields.Float('Total')
+    billing_list_paid =fields.Float('Paid')
     
 
 class RecoveryReportWizard(models.TransientModel):
