@@ -25,9 +25,9 @@ class AccountMoveReport(models.TransientModel):
     _name = 'student.report.line'
     
     record_id=fields.Char('ID')
-    branch_name=fields.Char('Roll No')
-    school_bill_len =fields.Integer('Roll No')
-    billing_list_paid =fields.Integer('Roll No')
+    branch_name=fields.Char('name')
+    school_bill_len =fields.Float('')
+    billing_list_paid =fields.Float('Roll No')
     
 
 class RecoveryReportWizard(models.TransientModel):
@@ -155,14 +155,14 @@ class RecoveryReportWizard(models.TransientModel):
                             year_in_payment = payment_date.strftime('%y')
 
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                total_count_paid += bill_rec.amount_total_signed
+                                total_count_paid += float(bill_rec.net_amount)
 
                     if month_key in billing_counts:
-                        billing_counts[month_key] += bill_rec.amount_total_signed
-                        total_count += bill_rec.amount_total_signed
+                        billing_counts[month_key] += float(bill_rec.net_amount)
+                        total_count += float(bill_rec.net_amount)
                     else:
-                        billing_counts[month_key] = bill_rec.amount_total_signed
-                        total_count += bill_rec.amount_total_signed
+                        billing_counts[month_key] = float(bill_rec.net_amount)
+                        total_count += float(bill_rec.net_amount)
 
             billing_list_paid.append(total_count_paid)
             billing_list.append(total_count)
