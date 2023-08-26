@@ -25,12 +25,13 @@ class credit_notes_fields(models.Model):
                 relativedelta(months=1)
 
     def _next_month_date(self):
-        if self.move_type=='out_invoice' and self.journal_id.id==126:
-            if self.create_date:
-                if self.invoice_date:
-                    self.next_month_Date = self.invoice_date + relativedelta(months=1)
-        else:
-            self.next_month_Date=self.create_date
+        for rec in self:
+            if rec.move_type=='out_invoice' and rec.journal_id.id==126:
+                if rec.create_date:
+                    if rec.invoice_date:
+                        rec.next_month_Date = rec.invoice_date + relativedelta(months=1)
+            else:
+                rec.next_month_Date=rec.create_date
 
 
     def _get_next_month(self):
@@ -66,7 +67,8 @@ class credit_notes_fields(models.Model):
                     rec['next_month']='January'
     
     def _get_bi_monthly_cycle(self):
-        self.bi_monthly_cycle=self.month_date+"-"+self.next_month
+        for rec in self:
+            rec.bi_monthly_cycle=rec.month_date+"-"+rec.next_month
 
 
 # class report_sale_preview(models.Model):
