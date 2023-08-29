@@ -13,8 +13,12 @@ class ext(models.Model):
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="Utility AC/Generator Charges")
+    
+    //Added by Anas Bin Ateeq
     oxford=fields.Monetary(string="Oxford E Mate Charges")
     utility_charges=fields.Monetary(string="Utility Charges")
+    ////////////////////////////////////////////////////////
+
     student_code=fields.Char(string="UDID", compute="_compute_UDID")
     #student_code=fields.Char(string="UDID")
     student_name=fields.Char(string="Name",related='student_ids_ol.name')
@@ -265,6 +269,10 @@ class ext(models.Model):
                         rec_inv.library=line.price_subtotal
                     elif 'Utility' in line.product_id.name:
                         rec_inv.utility=line.price_subtotal
+                    elif 'Utility Charges' in line.product_id.name:
+                        rec_inv.utility_charges=line.price_subtotal
+                    elif 'OXFORD E Mate' in line.product_id.name:
+                        rec_inv.oxford=line.price_subtotal
 
                     elif 'Admission' in line.product_id.name and not line.product_id.is_discount_type:
                         adm_amount_charge=int(line.price_subtotal)
