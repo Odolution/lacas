@@ -17,6 +17,8 @@
                             <field name="computer"/>
                             <field name="library"/>
                             <field name="utility"/>
+                            <field name="utility_charges"/>
+                            <field name="oxford"/>
                             <field name="art"/>
                             <field name="biology"/>
                             <field name="chemistry"/>
