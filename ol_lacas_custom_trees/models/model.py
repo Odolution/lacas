@@ -14,10 +14,10 @@ class ext(models.Model):
     library=fields.Integer(string="library Charges")
     utility=fields.Integer(string="Utility AC/Generator Charges")
     
-    //Added by Anas Bin Ateeq
+    # Added by Anas Bin Ateeq
     oxford=fields.Monetary(string="Oxford E Mate Charges")
     utility_charges=fields.Monetary(string="Utility Charges")
-    ////////////////////////////////////////////////////////
+    #########################################################
 
     student_code=fields.Char(string="UDID", compute="_compute_UDID")
     #student_code=fields.Char(string="UDID")
