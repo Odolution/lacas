@@ -223,6 +223,8 @@ class ext(models.Model):
                 rec_inv.computer=0
                 rec_inv.library=0
                 rec_inv.utility=0
+                rec_inv.utility_charges=0
+                rec_inv.oxford=0
                 rec_inv.art=0
                 rec_inv.biology=0
                 rec_inv.chemistry=0
