@@ -408,7 +408,7 @@ class ext(models.Model):
                         rec_inv.bill_date="Dec"+"-"+year
             
             if rec_inv.journal_id.id==126:
-                rec_inv.bill_date=rec_inv.bi_monthly_cycle
+                rec_inv.bill_date=rec_inv.bi_monthly_cycle+"-"+rec_inv.invoice_date.strftime('%y')
 
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
@@ -550,7 +550,7 @@ class ext(models.Model):
                         self.bill_date="Dec"+"-"+year
             
             if self.journal_id.id==126:
-                self.bill_date=self.bi_monthly_cycle
+                self.bill_date=self.bi_monthly_cycle+"-"+rec_inv.invoice_date.strftime('%y')
            
                 
     
