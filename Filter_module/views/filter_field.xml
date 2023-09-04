@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
 
             <xpath expr="//search[1]/field[@name='name'][2]" position="attributes">
-                <field name="name" string="FACTS ID" filter_domain="[('std_factsid', 'ilike', self)]"/>
+                 <attribute name="filter_domain">[('std_factsid','ilike',self)]</attribute>
             </xpath>
         </field>
     </record>
