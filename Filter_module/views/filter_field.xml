@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="filter_field_inherit" model="ir.ui.view">
+    <!-- <record id="filter_field_inherit" model="ir.ui.view">
         <field name="name">filter.field.inherit</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_account_invoice_filter" />
@@ -11,6 +11,6 @@
                  <attribute name="filter_domain">[('total_amount','<',2000)]</attribute>
             </xpath>
         </field>
-    </record>
+    </record> -->
 
 </odoo>
