@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="account.view_account_invoice_filter" />
         <field name="arch" type="xml">
 
-            <xpath expr="//search[1]/field[@name='std_factsid']" position="attributes">
+            <xpath expr="//field[@name='name']" position="attributes">
                  <attribute name="filter_domain">[('std_factsid','ilike',self)]</attribute>
             </xpath>
         </field>
