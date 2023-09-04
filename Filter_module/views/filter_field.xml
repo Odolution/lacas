@@ -4,7 +4,7 @@
     <record id="filter_field_inherit" model="ir.ui.view">
             <field name="name">filter.field.inherit</field>
             <field name="model">account.move</field>
-            <field name="inherit_id" ref="account.view_account_invoice_filter" />
+            <field name="inherit_id" ref="ol_lacas_custom_trees.account_move_tree_monthlyBill" />
             <field name="arch" type="xml">
 
                 <xpath expr="//field[@name='std_factsid']">
