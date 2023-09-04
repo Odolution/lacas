@@ -4,11 +4,11 @@
     <record id="filter_field_inherit" model="ir.ui.view">
         <field name="name">filter.field.inherit</field>
         <field name="model">account.move</field>
-        <field name="inherit_id" ref="ol_lacas_custom_trees.account_move_tree_monthlyBill" />
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='std_factsid']">
-                 <filter name="filter_name" domain="[('std_factsid','ilike',self)]"/>
+            <xpath expr="//search[1]/field[@name='std_factsid']" position="attributes">
+                 <attribute name="filter_domain">[('std_factsid','ilike',self)]</attribute>
             </xpath>
         </field>
     </record>
