@@ -39,8 +39,8 @@ class ext(models.Model):
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
     net_amount=fields.Char(string="Net Amount",compute="_compute_net_amnt")
-    std_factsid=fields.Char(string="Facts ID",compute="_compute_facts_id")
-    #std_factsid=fields.Char(string="Facts ID")
+    std_factsid2=fields.Char(string="Facts ID",compute="_compute_facts_id")
+    std_factsid=fields.Char(string="Facts ID")
     std_payment_date=fields.Char(string='Payment Date')
     std_tuition_plan=fields.Char(string="Tuition Plan")
     std_tuition_plan_state=fields.Char(string="Tuition Plan State")
@@ -95,10 +95,12 @@ class ext(models.Model):
                     rec.student_code=rec.student_ids.facts_udid
 
     def _compute_facts_id(self):
-        self.std_factsid=""
+        self.std_factsid2=""
         for rec_id in self:
             if rec_id.student_ids:
+                rec_id.std_factsid2=rec_id.student_ids.facts_id
                 rec_id.std_factsid=rec_id.student_ids.facts_id
+
 
     def _compute_father_name(self):
         for rec in self:
