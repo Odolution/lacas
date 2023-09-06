@@ -35,7 +35,7 @@ class SchoolStudent(models.Model):
             'Facts-Api-Key': ''
         } 
         # api_key = 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuIhXl6zCq8G/1abw2CTbjMnyQCEygm1dQE+p1fYauQRJ2/34/RKM5maKAUi6lhn3A='
-        students = self.env['school.student'].search([('homeroom', '=', False)])
+        students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
