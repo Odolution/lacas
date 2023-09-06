@@ -124,7 +124,7 @@ class RecoveryReportWizard(models.TransientModel):
                 perc = round(number, 2)  
 
             a = ""
-            for index in range(0, len(selected_month), 2):
+            for index in range(0, len(selected_month)):
                 record = selected_month[index]
                 month, year = record.split('-')
                 
