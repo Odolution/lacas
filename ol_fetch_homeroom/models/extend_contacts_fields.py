@@ -39,7 +39,7 @@ class SchoolStudent(models.Model):
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
-            grade_level = std.grade_level_ids.name
+            grade_level = std.grade_level_ids[0].name
             if grade_level:
                 url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
                 response = requests.request("GET", url, headers=headers).json()
