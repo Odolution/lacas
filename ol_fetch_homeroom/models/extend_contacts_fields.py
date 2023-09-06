@@ -39,17 +39,18 @@ class SchoolStudent(models.Model):
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
-            grade_level = std.grade_level_ids[0].name
-            if grade_level:
-                url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
-                response = requests.request("GET", url, headers=headers).json()
-                for record in response['results']:
-                    class_id = record.get('classId')
-                    url = f"https://api.factsmgt.com/Classes/v2?filters=classId=={class_id}"
-                    response = requests.request("GET", url, headers=headers).json()['results']
-                    if len(response) > 0:
-                        section = response[0].get('section')
-                        if section:
-                            homeroom = grade_level + '-' + section
-                            std.homeroom = homeroom
-                            break
+            if len(std.grade_level_ids) >= 1:
+                grade_level = std.grade_level_ids[0].name
+                if grade_level:
+                    url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
+                    response = requests.request("GET", url, headers=headers).json()
+                    for record in response['results']:
+                        class_id = record.get('classId')
+                        url = f"https://api.factsmgt.com/Classes/v2?filters=classId=={class_id}"
+                        response = requests.request("GET", url, headers=headers).json()['results']
+                        if len(response) > 0:
+                            section = response[0].get('section')
+                            if section:
+                                homeroom = grade_level + '-' + section
+                                std.homeroom = homeroom
+                                break
