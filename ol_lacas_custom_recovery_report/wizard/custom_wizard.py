@@ -95,6 +95,7 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
 
         selected_month = self.list_months()
+        raise UserError(selected_month)
         for month in selected_month:
             if self.all_branch==True:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
