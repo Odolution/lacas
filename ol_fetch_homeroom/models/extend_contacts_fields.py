@@ -52,3 +52,4 @@ class SchoolStudent(models.Model):
                     if section:
                         homeroom = grade_level + '-' + section
                         std.homeroom = homeroom
+                        break
