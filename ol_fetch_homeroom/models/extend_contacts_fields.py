@@ -42,13 +42,13 @@ class SchoolStudent(models.Model):
             grade_level = std.grade_level_ids.name
             if grade_level:
                 url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
-                response = requests.request("GET", url, headers=self.headers).json()
+                response = requests.request("GET", url, headers=headers).json()
                 for record in response['results']:
                     class_id = record.get('classId')
                     url = f"https://api.factsmgt.com/Classes/v2?filters=classId=={class_id}"
-                    response = requests.request("GET", url, headers=self.headers).json()['results']
+                    response = requests.request("GET", url, headers=headers).json()['results']
                     section = response.get('section')
-                    homeroom = grade_level + '-' + section
+                    #homeroom = grade_level + '-' + section
                     if section:
                         homeroom = grade_level + '-' + section
                         std.homeroom = homeroom
