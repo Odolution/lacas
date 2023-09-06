@@ -47,9 +47,9 @@ class SchoolStudent(models.Model):
                     class_id = record.get('classId')
                     url = f"https://api.factsmgt.com/Classes/v2?filters=classId=={class_id}"
                     response = requests.request("GET", url, headers=headers).json()['results']
-                    section = response.get('section')
-                    #homeroom = grade_level + '-' + section
-                    if section:
-                        homeroom = grade_level + '-' + section
-                        std.homeroom = homeroom
-                        break
+                    if len(response) > 0:
+                        section = response[0].get('section')
+                        if section:
+                            homeroom = grade_level + '-' + section
+                            std.homeroom = homeroom
+                            break
