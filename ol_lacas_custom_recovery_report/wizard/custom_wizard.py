@@ -95,7 +95,8 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
 
         selected_month = self.list_months()
-        raise UserError(selected_month)
+
+        # raise UserError(selected_month)
         for month in selected_month:
             if self.all_branch==True:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
@@ -124,8 +125,16 @@ class RecoveryReportWizard(models.TransientModel):
                 number=(month_recovery/month_issuance)*100
                 perc = round(number, 2)  
 
+            a = ""
+            for index in range(0, len(selected_month), 2):
+                record = selected_month[index]
+                month, year = record.split('-')
+                
+                # if rec.bi_monthly_cycle == "June-July":
+                    a += month +"\n"
+            raise UserError(a)
 
-
+            
             mvl=self.env['account.recovery.report.move.line'].create({
                                 
                                 "billing_cycle":month,
