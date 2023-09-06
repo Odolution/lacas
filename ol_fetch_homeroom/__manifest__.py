@@ -5,7 +5,7 @@
   'sequence': -100,
   'summary' : 'Lacas Homeroom',
   'description' : """Fetch Homeroom""",
-  'depends':  ['	edoob'],
+  'depends':  ['contacts'],
   'data':  [],
   'demo':[],
   'application':  True,
