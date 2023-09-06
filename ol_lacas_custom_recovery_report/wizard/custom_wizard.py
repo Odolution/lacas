@@ -125,14 +125,14 @@ class RecoveryReportWizard(models.TransientModel):
                 number=(month_recovery/month_issuance)*100
                 perc = round(number, 2)  
 
-            a = ""
-            for index in range(0, len(selected_month), 2):
-                record = selected_month[index]
-                month, year = record.split('-')
+            # a = ""
+            # for index in range(0, len(selected_month), 2):
+            #     record = selected_month[index]
+            #     month, year = record.split('-')
                 
-                # if rec.bi_monthly_cycle == "June-July":
-                a += month +"\n"
-            raise UserError(a)
+            #     # if rec.bi_monthly_cycle == "June-July":
+            #     a += month +"\n"
+            # raise UserError(a)
 
             
             mvl=self.env['account.recovery.report.move.line'].create({
