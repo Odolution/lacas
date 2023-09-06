@@ -4,6 +4,8 @@ from odoo.exceptions import UserError
 import json
 import datetime
 
+
+
 class custom_discount_model(models.Model):
     _name = "product.cdiscount"
     product_id = fields.Many2one('product.product', string='Charge on')
