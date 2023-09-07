@@ -60,7 +60,7 @@ class SchoolStudent(models.Model):
             url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={mother_cnic_id}"
             response = requests.request("GET", url, headers=headers).json()
             if response.get('results') and len(response.get('results')) > 0:
-                std.x_studio_mother_cnic = rresponse.get('results')[0]['data']
+                std.x_studio_mother_cnic = response.get('results')[0]['data']
 
             # Grade Level
             url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={grade_level_id}"
