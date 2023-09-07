@@ -155,7 +155,7 @@ class RecoveryReportWizard(models.TransientModel):
                         month_start , month_end, and_year = rec.bill_date.split('-')
                         condition2 = month_dict.get(month_start.capitalize()) +"-"+month_dict.get(month_end.capitalize())+"-"+and_year
 
-                        if condition1 == rec.bill_date:
+                        if condition1 == condition2:
                             # raise UserError(str(condition1)+"   "+str(rec.bill_date))
                             if rec.bill_date not in scan_data_list:
                                 scan_data_list.append(rec.bill_date)
