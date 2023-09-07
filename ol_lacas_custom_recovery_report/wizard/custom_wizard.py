@@ -131,7 +131,6 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(len(for_by_month_inv_ids))
             scan_data_list = [] 
             a = ""
-            month_issuance2=[]
             month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
             months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
             
@@ -146,6 +145,8 @@ class RecoveryReportWizard(models.TransientModel):
             
             for i in range(start, end):
                 for j in range(start, end):
+                    month_issuance2=0
+
                     for rec in for_by_month_inv_ids:
                         # a += str(rec.bill_date)+"\n"
                         month_start , month_end, and_year = rec.bill_date.split('-')
@@ -157,8 +158,10 @@ class RecoveryReportWizard(models.TransientModel):
 
                             month_issuance2=month_issuance2+rec.amount_total
                             
-                            raise UserError(str(condition1)+"   "+str(condition2))
-                    raise UserError(month_issuance2)
+                            # raise UserError(str(condition1)+"   "+str(condition2))
+                    a+=str(month_issuance2)+"\n"
+                
+            raise UserError(month_issuance2)
                 # if rec.bi_monthly_cycle == "June-July":
                 
             raise UserError(a)
