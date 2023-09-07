@@ -37,6 +37,15 @@ class AccountMoveReport(models.TransientModel):
     total_recovery=fields.Integer('Recovery')
     recovery_percentage=fields.Char('Percentage of Recovery on Amount')
 
+class ByAccountMoveReport(models.TransientModel):
+    _name = 'by.account.recovery.report.move.line'
+    
+    billing_cycle=fields.Char('Billing Cycle')
+    total_issuance=fields.Integer('Total Billing (Bills Issuance)')
+    no_of_std=fields.Integer('#No of Students')
+    total_recovery=fields.Integer('Recovery')
+    recovery_percentage=fields.Char('Percentage of Recovery on Amount')
+
 
 class RecoveryReportWizard(models.TransientModel):
     _name="recovery.report.wizard"
@@ -49,6 +58,7 @@ class RecoveryReportWizard(models.TransientModel):
     one_branch=fields.Many2one('school.school', string= 'Select any one branch')
 
     account_recovery_report_line=fields.Many2many('account.recovery.report.move.line', string='Account report Line')
+    by_account_recovery_report_line=fields.Many2many('by.account.recovery.report.move.line', string='Account report Line for By Monthly')
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
 
     def _branch_constrains(self):
@@ -93,8 +103,10 @@ class RecoveryReportWizard(models.TransientModel):
     
     def action_print_report(self):
         lines=[]
+        new_lines=[]
 
         selected_month = self.list_months()
+        # raise UserError(selected_month)
         for month in selected_month:
             if self.all_branch==True:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
@@ -121,9 +133,7 @@ class RecoveryReportWizard(models.TransientModel):
             nostd=len(stud_lst)   
             if month_issuance !=0 :
                 number=(month_recovery/month_issuance)*100
-                perc = round(number, 2)  
-
-
+                perc = round(number, 2)             
 
             mvl=self.env['account.recovery.report.move.line'].create({
                                 
@@ -143,6 +153,100 @@ class RecoveryReportWizard(models.TransientModel):
                 "account_recovery_report_line":[(6,0,lines)]
             })
 
+
+        # lst = ["Sep-22","Oct-22", "Nov-22", "Dec-22", "Jan-23", "Feb-23", "Mar-23"]
+
+        combinations = []
+
+        # Separate the list into sublists for each year
+        yearly_lists = {}
+        for item in selected_month:
+            month, year = item.split("-")
+            if year not in yearly_lists:
+                yearly_lists[year] = []
+            yearly_lists[year].append(month)
+
+        # Create combinations of all two-month pairs within the same year
+        for year, months in yearly_lists.items():
+            for i in range(len(months) - 1):
+                for j in range(i + 1, len(months)):
+                    combinations.append(f"{months[i]}-{months[j]}-{year}")
+
+        
+        if self.all_branch==True:
+            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',126),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+        else:
+            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+        
+        # raise UserError(len(for_by_month_inv_ids))
+         
+        total_list = [] 
+        # a = ""
+        month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
+        months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        # short_month_names = [month[:3] for month in months_list]
+
+        date_str = selected_month[0]
+        month, year = date_str.split('-')
+        start = month_dict.get(month.capitalize())
+
+        date_str = selected_month[len(selected_month)-1]
+        month_last, year_last = date_str.split('-')
+        end = month_dict.get(month_last.capitalize())
+        # raise UserError(str(start)+" "+str(end))
+        
+        for item in combinations:
+        
+            scan_data_list = []
+            by_month_issuance=0
+            by_month_recovery=0
+            by_perc=0
+
+            for rec in for_by_month_inv_ids:
+                # a += str(rec.bill_date)+"\n"
+                month_start1 , month_end1, and_year1 = item.split('-')
+                condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
+
+                month_start , month_end, and_year = rec.bill_date.split('-')
+                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
+
+                if condition1 == condition2:
+                    # raise UserError(str(condition1)+"   "+str(rec.bill_date))
+                    if rec.x_studio_udid_monthly_bills not in scan_data_list:
+                        scan_data_list.append(rec.x_studio_udid_monthly_bills)
+        
+                    by_month_issuance += float(rec.net_amount)
+
+                    if rec.payment_state=='paid':
+                        by_month_recovery += float(rec.net_amount)
+
+            if by_month_issuance!=0:
+                by_nostd=len(scan_data_list)   
+                if by_month_issuance !=0 :
+                    by_number=(by_month_recovery/by_month_issuance)*100
+                    by_perc = round(by_number, 2)
+                
+                # short_month = short_month_names[i]+"-"+short_month_names[j]+"-"+year_last
+                
+                by_line=self.env['by.account.recovery.report.move.line'].create({        
+                            "billing_cycle":item,
+                            "total_issuance":by_month_issuance,
+                            "no_of_std":by_nostd,
+                            "total_recovery":by_month_recovery,
+                            "recovery_percentage":str(by_perc)+'%',
+                })
+                new_lines.append(by_line.id)
+
+
+                self.write({
+                    "by_account_recovery_report_line":[(6,0,new_lines)]
+                })
+            # a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
+        
+    # raise UserError(month_issuance2)
+        # if rec.bi_monthly_cycle == "June-July":
+        
+    # raise UserError(a)
 
     def action_print_excel_recovery_report(self):
         
@@ -187,11 +291,11 @@ class RecoveryReportWizard(models.TransientModel):
             
             
 
-            worksheet.write_merge(0,1,0,0,"Billing Cycle.", style=red_style_title)
-            worksheet.write_merge(0,1,1,1,"Total Billing (Bills Issuance)",style=red_style_title)
-            worksheet.write_merge(0,1,2,2,"No of Std",style=red_style_title)
-            worksheet.write_merge(0,1,3,3,"Recovery",style=red_style_title)
-            worksheet.write_merge(0,1,4,4,"Percentage of Recovery on Amount",style=red_style_title)
+            worksheet.write_merge(0,1,0,2,"Billing Cycle.", style=red_style_title)
+            worksheet.write_merge(0,1,3,5,"Total Billing (Bills Issuance)",style=red_style_title)
+            worksheet.write_merge(0,1,6,8,"No of Std",style=red_style_title)
+            worksheet.write_merge(0,1,9,11,"Recovery",style=red_style_title)
+            worksheet.write_merge(0,1,12,15,"Percentage of Recovery on Amount",style=red_style_title)
      
       
 
@@ -199,11 +303,22 @@ class RecoveryReportWizard(models.TransientModel):
             for rec in self.account_recovery_report_line:
                 if rec:
             
-                    worksheet.write_merge(row,row,0,0,rec.billing_cycle, style=style_title)
-                    worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
-                    worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
-                    worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
-                    worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
+                    worksheet.write_merge(row,row,0,2,rec.billing_cycle, style=style_title)
+                    worksheet.write_merge(row,row,3,5,rec.total_issuance,style=style_title)
+                    worksheet.write_merge(row,row,6,8,rec.no_of_std,style=style_title)
+                    worksheet.write_merge(row,row,9,11,rec.total_recovery,style=style_title)
+                    worksheet.write_merge(row,row,12,15,rec.recovery_percentage,style=style_title)
+   
+                    row+=1
+            
+            for rec in self.by_account_recovery_report_line:
+                if rec:
+            
+                    worksheet.write_merge(row,row,0,2,rec.billing_cycle, style=style_title)
+                    worksheet.write_merge(row,row,3,5,rec.total_issuance,style=style_title)
+                    worksheet.write_merge(row,row,6,8,rec.no_of_std,style=style_title)
+                    worksheet.write_merge(row,row,9,11,rec.total_recovery,style=style_title)
+                    worksheet.write_merge(row,row,12,15,rec.recovery_percentage,style=style_title)
    
                     row+=1
                   
