@@ -215,10 +215,10 @@ class RecoveryReportWizard(models.TransientModel):
                     if rec.x_studio_udid_monthly_bills not in scan_data_list:
                         scan_data_list.append(rec.x_studio_udid_monthly_bills)
         
-                    by_month_issuance += float(rec.net_amount)
+                    by_month_issuance += float(rec.amount_total)
 
                     if rec.payment_state=='paid':
-                        by_month_recovery += float(rec.net_amount)
+                        by_month_recovery += float(rec.amount_total)
 
             if by_month_issuance!=0:
                 by_nostd=len(scan_data_list)   
