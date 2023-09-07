@@ -7,7 +7,7 @@ import ast
 class SchoolStudent(models.Model):
     _inherit = "school.student"
 
-    def get_user_defined_fields_data(self):
+    def get_user_defined_fields_data(self, students):
         school_name_key = {
                 "LACAS Burki A Level":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU=",
                 "LACAS Burki Boys":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvlFxL8JZDP8b8yHRK/zLqt00IjeqpiNMsinE6yLyZbpp0itPr5auIhwYsRcAWgS2Y=",
@@ -45,7 +45,7 @@ class SchoolStudent(models.Model):
         mother_cnic_id = 219
         father_cnic_id = 220
 
-        students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+        # students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
