@@ -126,9 +126,9 @@ class RecoveryReportWizard(models.TransientModel):
             a = ""
             months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
             for index in range(0, len(selected_month)):
-                for i in months_list:
-                    for j in months_list:
-                        a += i +"-"+j+"\n"
+                for i in range(0, len(selected_month)):
+                    for j in range(0, len(selected_month)):
+                        a += months_list[i] +"-"+months_list[j]+"\n"
                 
                 # if rec.bi_monthly_cycle == "June-July":
                 
