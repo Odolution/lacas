@@ -132,7 +132,7 @@ class RecoveryReportWizard(models.TransientModel):
                 
                 # if rec.bi_monthly_cycle == "June-July":
                 a += month +"-"+month1+"\n"
-            # raise UserError(a)
+            raise UserError(a)
 
             mvl=self.env['account.recovery.report.move.line'].create({
                                 
