@@ -163,7 +163,8 @@ class RecoveryReportWizard(models.TransientModel):
         # a = ""
         month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
         months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        
+        short_month_names = [month[:3] for month in months_list]
+
         date_str = selected_month[0]
         month, year = date_str.split('-')
         start = month_dict.get(month.capitalize())
@@ -173,8 +174,8 @@ class RecoveryReportWizard(models.TransientModel):
         end = month_dict.get(month_last.capitalize())
         # raise UserError(str(start)+" "+str(end))
         
-        for i in range(start, end):
-            for j in range(start, end):
+        for i in range(start-1, end):
+            for j in range(start-1, end):
                 scan_data_list = []
                 by_month_issuance=0
                 by_month_recovery=0
@@ -196,25 +197,28 @@ class RecoveryReportWizard(models.TransientModel):
 
                         if rec.payment_state=='paid':
                             by_month_recovery += float(rec.net_amount)
-                
-                by_nostd=len(scan_data_list)   
-                if by_month_issuance !=0 :
-                    by_number=(by_month_recovery/by_month_issuance)*100
-                    by_perc = round(by_number, 2)
 
-                by_line=self.env['by.account.recovery.report.move.line'].create({        
-                            "billing_cycle":condition1,
-                            "total_issuance":by_month_issuance,
-                            "no_of_std":by_nostd,
-                            "total_recovery":by_month_recovery,
-                            "recovery_percentage":str(by_perc)+'%',
-                })
-                new_lines.append(by_line.id)
+                if by_month_issuance!=0:
+                    by_nostd=len(scan_data_list)   
+                    if by_month_issuance !=0 :
+                        by_number=(by_month_recovery/by_month_issuance)*100
+                        by_perc = round(by_number, 2)
+                    
+                    short_month = short_month_names[i]+"-"+short_month_names[j]+"-"+year_last
+                    
+                    by_line=self.env['by.account.recovery.report.move.line'].create({        
+                                "billing_cycle":short_month,
+                                "total_issuance":by_month_issuance,
+                                "no_of_std":by_nostd,
+                                "total_recovery":by_month_recovery,
+                                "recovery_percentage":str(by_perc)+'%',
+                    })
+                    new_lines.append(by_line.id)
 
 
-                self.write({
-                    "by_account_recovery_report_line":[(6,0,new_lines)]
-                })
+                    self.write({
+                        "by_account_recovery_report_line":[(6,0,new_lines)]
+                    })
                 # a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
             
         # raise UserError(month_issuance2)
@@ -284,7 +288,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
-
+            row+=2
             for rec in self.by_account_recovery_report_line:
                 if rec:
             
