@@ -209,7 +209,8 @@ class RecoveryReportWizard(models.TransientModel):
 
                 try:
                     month_start, month_end, and_year = rec.bill_date.split('-')
-                except ValueError:
+                
+                
                 condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
 
                 if condition1 == condition2:
