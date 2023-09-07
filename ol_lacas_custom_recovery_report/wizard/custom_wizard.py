@@ -204,15 +204,11 @@ class RecoveryReportWizard(models.TransientModel):
 
             for rec in for_by_month_inv_ids:
                 # a += str(rec.bill_date)+"\n"
-                # raise UserError(rec.bill_date)
                 month_start1 , month_end1, and_year1 = item.split('-')
-                condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))
+                condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
 
-                to_year=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
-                month_end=rec.bill_date.split('-')[1]             
-                month_start=rec.bill_date.split('-')[0]                
-                
-                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))
+                month_start , month_end, and_year = rec.bill_date.split('-')
+                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
 
                 if condition1 == condition2:
                     # raise UserError(str(condition1)+"   "+str(rec.bill_date))
@@ -231,9 +227,9 @@ class RecoveryReportWizard(models.TransientModel):
                     by_perc = round(by_number, 2)
                 
                 # short_month = short_month_names[i]+"-"+short_month_names[j]+"-"+year_last
-                name_view = str(item.split('-')[0])+"-"+ str(item.split('-')[1])
+                
                 by_line=self.env['by.account.recovery.report.move.line'].create({        
-                            "billing_cycle":name_view,
+                            "billing_cycle":item,
                             "total_issuance":by_month_issuance,
                             "no_of_std":by_nostd,
                             "total_recovery":by_month_recovery,
@@ -250,7 +246,7 @@ class RecoveryReportWizard(models.TransientModel):
     # raise UserError(month_issuance2)
         # if rec.bi_monthly_cycle == "June-July":
         
-        # raise UserError(a)
+    # raise UserError(a)
 
     def action_print_excel_recovery_report(self):
         
