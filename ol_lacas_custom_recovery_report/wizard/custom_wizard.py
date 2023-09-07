@@ -100,10 +100,6 @@ class RecoveryReportWizard(models.TransientModel):
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',125),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             else:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
-            if self.all_branch==True:
-                for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',126),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
-            else:
-                for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             
             stud_lst=[]
             month_issuance=0
@@ -127,6 +123,12 @@ class RecoveryReportWizard(models.TransientModel):
                 number=(month_recovery/month_issuance)*100
                 perc = round(number, 2)  
             
+            if self.all_branch==True:
+                for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',126),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+            else:
+                for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+            
+
             a = ""
             month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
             months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -134,7 +136,7 @@ class RecoveryReportWizard(models.TransientModel):
             for i in range(0, len(selected_month)):
                 for j in range(0, len(selected_month)):
                     for rec in for_by_month_inv_ids:
-                        a += str(rec.bi_monthly_cycle)+"\n"
+                        a += str(rec.bill_date)+"\n"
                     # a += months_list[i] +"-"+months_list[j]+"\n"
                 
                 # if rec.bi_monthly_cycle == "June-July":
