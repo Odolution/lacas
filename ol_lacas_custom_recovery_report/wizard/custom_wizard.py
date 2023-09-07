@@ -179,7 +179,7 @@ class RecoveryReportWizard(models.TransientModel):
                 by_month_issuance=0
                 by_month_recovery=0
                 by_perc=0
-                
+
                 for rec in for_by_month_inv_ids:
                     # a += str(rec.bill_date)+"\n"
                     condition1 = str(month_dict.get(months_list[i].capitalize()))+"-"+str(month_dict.get(months_list[j].capitalize()))+"-"+year_last
@@ -198,7 +198,7 @@ class RecoveryReportWizard(models.TransientModel):
                             by_month_recovery += float(rec.net_amount)
                 
                 by_nostd=len(scan_data_list)   
-                if month_issuance !=0 :
+                if by_month_issuance !=0 :
                     by_number=(by_month_recovery/by_month_issuance)*100
                     by_perc = round(by_number, 2)
 
