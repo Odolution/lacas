@@ -45,11 +45,11 @@ class SchoolStudent(models.Model):
         mother_cnic_id = 219
         father_cnic_id = 220
 
-        students = self.env['school.student'].search([('homeroom', '=', False)])
+        students = self.env['school.student'].search([('homeroom', '=', False), ('id', '=', 2)])
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
-            
+
             # Father CNIC
             url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={father_cnic_id}"
             response = requests.request("GET", url, headers=headers).json()
