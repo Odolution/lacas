@@ -40,7 +40,7 @@ class ext(models.Model):
     bill_amount=fields.Char(string="Bill Amount")
     net_amount=fields.Char(string="Net Amount",compute="_compute_net_amnt")
     std_factsid=fields.Char(string="Facts ID",compute="_compute_facts_id")
-    # std_factsid=fields.Char(string="Facts ID")
+    std_factsid2=fields.Char(string="Facts ID")
     std_payment_date=fields.Char(string='Payment Date')
     std_tuition_plan=fields.Char(string="Tuition Plan")
     std_tuition_plan_state=fields.Char(string="Tuition Plan State")
