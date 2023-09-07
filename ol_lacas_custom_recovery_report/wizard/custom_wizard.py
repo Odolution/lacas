@@ -151,8 +151,11 @@ class RecoveryReportWizard(models.TransientModel):
                         condition1 = months_list[i] +"-"+months_list[j]
                         condition2 = month_start +"-"+month_end
                         if condition1 == condition2:
-                            raise UserError(str(condition1)+"   "+str(condition2))
-                
+                            if rec.condition2 not in scan_data_list["url"]:
+                                scan_data_list.append(rec.x_studio_udid_monthly_bills)
+                            month_issuance2=month_issuance2+rec.amount_total
+                            # raise UserError(str(condition1)+"   "+str(condition2))
+                    raise UserError(month_issuance2)
                 # if rec.bi_monthly_cycle == "June-July":
                 
             raise UserError(a)
