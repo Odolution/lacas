@@ -99,7 +99,7 @@ class ext(models.Model):
         for rec_id in self:
             if rec_id.student_ids:
                 rec_id.std_factsid=rec_id.student_ids.facts_id
-                # rec_id.std_factsid=rec_id.student_ids.facts_id
+                rec_id.std_factsid2=rec_id.student_ids.facts_id
 
     def _compute_father_name(self):
         for rec in self:
