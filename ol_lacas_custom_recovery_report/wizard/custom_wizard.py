@@ -149,13 +149,14 @@ class RecoveryReportWizard(models.TransientModel):
 
                     for rec in for_by_month_inv_ids:
                         # a += str(rec.bill_date)+"\n"
-                        month_start , month_end, and_year = rec.bill_date.split('-')
-                        condition1 = months_list[i] +"-"+months_list[j]
-                        condition2 = month_start +"-"+month_end
-                        if condition1 == condition2:
-                            if rec.x_studio_udid_monthly_bills not in scan_data_list:
-                                scan_data_list.append(rec.x_studio_udid_monthly_bills)
+                        condition1 = months_list[i] +"-"+months_list[j]+"-"+year_last
 
+                        month_start , month_end, and_year = rec.bill_date.split('-')
+                        condition2 = month_start +"-"+month_end+"-"+and_year
+                        if condition1 == condition2:
+                            if rec.bill_date not in scan_data_list:
+                                scan_data_list.append(rec.bill_date)
+                            
                             month_issuance2 += float(rec.net_amount)
                             
                             # raise UserError(str(condition1)+"   "+str(condition2))
