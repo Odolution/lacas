@@ -310,7 +310,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,12,15,rec.recovery_percentage,style=style_title)
    
                     row+=1
-            row+=2
+            
             for rec in self.by_account_recovery_report_line:
                 if rec:
             
