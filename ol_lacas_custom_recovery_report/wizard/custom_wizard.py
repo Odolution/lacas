@@ -209,8 +209,9 @@ class RecoveryReportWizard(models.TransientModel):
                 condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
 
                 to_year=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
-                parts=rec.bill_date.split('-')                
-                month_start, month_end = parts
+                month_end=rec.bill_date.split('-')[0]             
+                month_start=rec.bill_date.split('-')[1]             
+                
                 
                 
                 condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+to_year
