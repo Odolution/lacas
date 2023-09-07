@@ -99,6 +99,9 @@ class SchoolStudent(models.Model):
                                 homeroom = grade_level + '-' + section
                                 std.homeroom = homeroom
                                 break
+            grade_level_id = 320
+            mother_cnic_id = 219
+            father_cnic_id = 220
             
             # Father CNIC
             url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={father_cnic_id}"
