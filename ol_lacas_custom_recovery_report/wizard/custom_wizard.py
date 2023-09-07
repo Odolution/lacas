@@ -37,6 +37,15 @@ class AccountMoveReport(models.TransientModel):
     total_recovery=fields.Integer('Recovery')
     recovery_percentage=fields.Char('Percentage of Recovery on Amount')
 
+class ByAccountMoveReport(models.TransientModel):
+    _name = 'by.account.recovery.report.move.line'
+    
+    billing_cycle=fields.Char('Billing Cycle')
+    total_issuance=fields.Integer('Total Billing (Bills Issuance)')
+    no_of_std=fields.Integer('#No of Students')
+    total_recovery=fields.Integer('Recovery')
+    recovery_percentage=fields.Char('Percentage of Recovery on Amount')
+
 
 class RecoveryReportWizard(models.TransientModel):
     _name="recovery.report.wizard"
@@ -49,6 +58,7 @@ class RecoveryReportWizard(models.TransientModel):
     one_branch=fields.Many2one('school.school', string= 'Select any one branch')
 
     account_recovery_report_line=fields.Many2many('account.recovery.report.move.line', string='Account report Line')
+    by_account_recovery_report_line=fields.Many2many('by.account.recovery.report.move.line', string='Account report Line for By Monthly')
     # groups_ids = fields.Many2many('aging.invoice.group', string='Groups')
 
     def _branch_constrains(self):
@@ -165,7 +175,12 @@ class RecoveryReportWizard(models.TransientModel):
 
                             if rec.payment_state=='paid':
                                 by_month_recovery += float(rec.net_amount)
-                            
+                        
+                        by_nostd=len(stud_lst)   
+                        # if month_issuance !=0 :
+                        #     number=(month_recovery/month_issuance)*100
+                        #     perc = round(number, 2)
+
                     a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
                 
             # raise UserError(month_issuance2)
