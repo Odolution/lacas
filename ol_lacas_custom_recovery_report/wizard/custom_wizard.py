@@ -153,6 +153,26 @@ class RecoveryReportWizard(models.TransientModel):
                 "account_recovery_report_line":[(6,0,lines)]
             })
 
+
+        # lst = ["Sep-22","Oct-22", "Nov-22", "Dec-22", "Jan-23", "Feb-23", "Mar-23"]
+
+        combinations = []
+
+        # Separate the list into sublists for each year
+        yearly_lists = {}
+        for item in selected_month:
+            month, year = item.split("-")
+            if year not in yearly_lists:
+                yearly_lists[year] = []
+            yearly_lists[year].append(month)
+
+        # Create combinations of all two-month pairs within the same year
+        for year, months in yearly_lists.items():
+            for i in range(len(months) - 1):
+                for j in range(i + 1, len(months)):
+                    combinations.append(f"{months[i]}-{months[j]}-{year}")
+
+        
         if self.all_branch==True:
             for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',126),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
         else:
@@ -175,57 +195,58 @@ class RecoveryReportWizard(models.TransientModel):
         end = month_dict.get(month_last.capitalize())
         # raise UserError(str(start)+" "+str(end))
         
-        for i in range(start-1, end):
-            for j in range(start-1, end):
-                scan_data_list = []
-                by_month_issuance=0
-                by_month_recovery=0
-                by_perc=0
+        for item in combinations:
+        
+            scan_data_list = []
+            by_month_issuance=0
+            by_month_recovery=0
+            by_perc=0
 
-                for rec in for_by_month_inv_ids:
-                    # a += str(rec.bill_date)+"\n"
-                    condition1 = str(month_dict.get(months_list[i].capitalize()))+"-"+str(month_dict.get(months_list[j].capitalize()))+"-"+year_last
+            for rec in for_by_month_inv_ids:
+                # a += str(rec.bill_date)+"\n"
+                month_start1 , month_end1, and_year1 = item.split('-')
+                condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
 
-                    month_start , month_end, and_year = rec.bill_date.split('-')
-                    condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
+                month_start , month_end, and_year = rec.bill_date.split('-')
+                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
 
-                    if condition1 == condition2:
-                        # raise UserError(str(condition1)+"   "+str(rec.bill_date))
-                        if rec.x_studio_udid_monthly_bills not in scan_data_list:
-                            scan_data_list.append(rec.x_studio_udid_monthly_bills)
-            
-                        by_month_issuance += float(rec.net_amount)
+                if condition1 == condition2:
+                    # raise UserError(str(condition1)+"   "+str(rec.bill_date))
+                    if rec.x_studio_udid_monthly_bills not in scan_data_list:
+                        scan_data_list.append(rec.x_studio_udid_monthly_bills)
+        
+                    by_month_issuance += float(rec.net_amount)
 
-                        if rec.payment_state=='paid':
-                            by_month_recovery += float(rec.net_amount)
+                    if rec.payment_state=='paid':
+                        by_month_recovery += float(rec.net_amount)
 
-                if by_month_issuance!=0:
-                    by_nostd=len(scan_data_list)   
-                    if by_month_issuance !=0 :
-                        by_number=(by_month_recovery/by_month_issuance)*100
-                        by_perc = round(by_number, 2)
-                    
-                    short_month = short_month_names[i]+"-"+short_month_names[j]+"-"+year_last
-                    
-                    by_line=self.env['by.account.recovery.report.move.line'].create({        
-                                "billing_cycle":short_month,
-                                "total_issuance":by_month_issuance,
-                                "no_of_std":by_nostd,
-                                "total_recovery":by_month_recovery,
-                                "recovery_percentage":str(by_perc)+'%',
-                    })
-                    new_lines.append(by_line.id)
+            if by_month_issuance!=0:
+                by_nostd=len(scan_data_list)   
+                if by_month_issuance !=0 :
+                    by_number=(by_month_recovery/by_month_issuance)*100
+                    by_perc = round(by_number, 2)
+                
+                short_month = short_month_names[i]+"-"+short_month_names[j]+"-"+year_last
+                
+                by_line=self.env['by.account.recovery.report.move.line'].create({        
+                            "billing_cycle":short_month,
+                            "total_issuance":by_month_issuance,
+                            "no_of_std":by_nostd,
+                            "total_recovery":by_month_recovery,
+                            "recovery_percentage":str(by_perc)+'%',
+                })
+                new_lines.append(by_line.id)
 
 
-                    self.write({
-                        "by_account_recovery_report_line":[(6,0,new_lines)]
-                    })
-                # a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
-            
-        # raise UserError(month_issuance2)
-            # if rec.bi_monthly_cycle == "June-July":
-            
-        # raise UserError(a)
+                self.write({
+                    "by_account_recovery_report_line":[(6,0,new_lines)]
+                })
+            # a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
+        
+    # raise UserError(month_issuance2)
+        # if rec.bi_monthly_cycle == "June-July":
+        
+    # raise UserError(a)
 
     def action_print_excel_recovery_report(self):
         
