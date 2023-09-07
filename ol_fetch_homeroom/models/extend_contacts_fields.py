@@ -82,7 +82,6 @@ class SchoolStudent(models.Model):
         if timeline == 'daily':
             students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         else:
-            raise UserError('test')
             students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         
         for std in students:
