@@ -269,11 +269,11 @@ class RecoveryReportWizard(models.TransientModel):
             
             
 
-            worksheet.write_merge(0,1,0,0,"Billing Cycle.", style=red_style_title)
-            worksheet.write_merge(0,1,1,1,"Total Billing (Bills Issuance)",style=red_style_title)
-            worksheet.write_merge(0,1,2,2,"No of Std",style=red_style_title)
-            worksheet.write_merge(0,1,3,3,"Recovery",style=red_style_title)
-            worksheet.write_merge(0,1,4,4,"Percentage of Recovery on Amount",style=red_style_title)
+            worksheet.write_merge(0,1,0,2,"Billing Cycle.", style=red_style_title)
+            worksheet.write_merge(0,1,3,5,"Total Billing (Bills Issuance)",style=red_style_title)
+            worksheet.write_merge(0,1,6,8,"No of Std",style=red_style_title)
+            worksheet.write_merge(0,1,9,11,"Recovery",style=red_style_title)
+            worksheet.write_merge(0,1,12,14,"Percentage of Recovery on Amount",style=red_style_title)
      
       
 
