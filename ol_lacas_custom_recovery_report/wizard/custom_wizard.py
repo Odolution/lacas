@@ -281,22 +281,22 @@ class RecoveryReportWizard(models.TransientModel):
             for rec in self.account_recovery_report_line:
                 if rec:
             
-                    worksheet.write_merge(row,row,0,0,rec.billing_cycle, style=style_title)
-                    worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
-                    worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
-                    worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
-                    worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
+                    worksheet.write_merge(row,row,0,2,rec.billing_cycle, style=style_title)
+                    worksheet.write_merge(row,row,3,5,rec.total_issuance,style=style_title)
+                    worksheet.write_merge(row,row,6,8,rec.no_of_std,style=style_title)
+                    worksheet.write_merge(row,row,9,11,rec.total_recovery,style=style_title)
+                    worksheet.write_merge(row,row,12,14,rec.recovery_percentage,style=style_title)
    
                     row+=1
             row+=2
             for rec in self.by_account_recovery_report_line:
                 if rec:
             
-                    worksheet.write_merge(row,row,0,0,rec.billing_cycle, style=style_title)
-                    worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
-                    worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
-                    worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
-                    worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
+                    worksheet.write_merge(row,row,0,2,rec.billing_cycle, style=style_title)
+                    worksheet.write_merge(row,row,3,5,rec.total_issuance,style=style_title)
+                    worksheet.write_merge(row,row,6,8,rec.no_of_std,style=style_title)
+                    worksheet.write_merge(row,row,9,11,rec.total_recovery,style=style_title)
+                    worksheet.write_merge(row,row,12,14,rec.recovery_percentage,style=style_title)
    
                     row+=1
                   
