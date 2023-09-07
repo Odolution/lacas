@@ -130,7 +130,7 @@ class RecoveryReportWizard(models.TransientModel):
             for i in range(0, len(selected_month)):
                 for j in range(0, len(selected_month)):
                     for rec in inv_ids:
-                    a += str(rec)\n"
+                        a += str(rec)\n"
                     # a += months_list[i] +"-"+months_list[j]+"\n"
                 
                 # if rec.bi_monthly_cycle == "June-July":
