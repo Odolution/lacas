@@ -109,7 +109,6 @@ class RecoveryReportWizard(models.TransientModel):
         
             for rec in inv_ids:
                 invoice_month = rec.invoice_date.strftime("%b-%y")
-                raise UserError(invoice_month)
                 if invoice_month==month:
                     if rec.x_studio_udid_monthly_bills not in stud_lst:
                         stud_lst.append(rec.x_studio_udid_monthly_bills)
