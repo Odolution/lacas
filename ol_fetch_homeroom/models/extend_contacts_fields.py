@@ -96,7 +96,7 @@ class SchoolStudent(models.Model):
                         url = f"https://api.factsmgt.com/Classes/v2?filters=classId=={class_id}"
                         response = requests.request("GET", url, headers=headers).json()['results']
                         if len(response) > 0:
-                            section = response[0].get('section')
+                            section = response[-1].get('section')
                             if section:
                                 homeroom = grade_level + '-' + section
                                 std.homeroom = homeroom
