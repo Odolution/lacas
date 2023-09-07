@@ -133,11 +133,20 @@ class RecoveryReportWizard(models.TransientModel):
             month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
             months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
             
+            date_str = selected_month[0]
+            month, year = date_str.split('-')
+            start = month_dict.get(month.capitalize())
+
+            date_str = selected_month[len(selected_month)]
+            month_last, year_last = date_str.split('-')
+            end = month_dict.get(month_last.capitalize())
+            raise UserError(str(start)+" "+str(end))
+            
             for i in range(0, len(selected_month)):
                 for j in range(0, len(selected_month)):
-                    for rec in for_by_month_inv_ids:
-                        a += str(rec.bill_date)+"\n"
-                    # a += months_list[i] +"-"+months_list[j]+"\n"
+                    # for rec in for_by_month_inv_ids:
+                        # a += str(rec.bill_date)+"\n"
+                    a += months_list[i] +"-"+months_list[j]+"\n"
                 
                 # if rec.bi_monthly_cycle == "June-July":
                 
