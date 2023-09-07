@@ -207,8 +207,8 @@ class RecoveryReportWizard(models.TransientModel):
                 month_start1 , month_end1, and_year1 = item.split('-')
                 condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
 
-                try:
-                    month_start, month_end, and_year = rec.bill_date.split('-')
+                
+                month_start, month_end, and_year = rec.bill_date.split('-')
                 
                 
                 condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
