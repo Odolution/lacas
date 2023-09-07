@@ -103,6 +103,7 @@ class RecoveryReportWizard(models.TransientModel):
     
     def action_print_report(self):
         lines=[]
+        new_lines=[]
 
         selected_month = self.list_months()
         for month in selected_month:
@@ -159,7 +160,7 @@ class RecoveryReportWizard(models.TransientModel):
         # raise UserError(len(for_by_month_inv_ids))
         scan_data_list = [] 
         total_list = [] 
-        a = ""
+        # a = ""
         month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
         months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         
@@ -193,18 +194,31 @@ class RecoveryReportWizard(models.TransientModel):
 
                         if rec.payment_state=='paid':
                             by_month_recovery += float(rec.net_amount)
-                    
-                    by_nostd=len(stud_lst)   
-                    # if month_issuance !=0 :
-                    #     number=(month_recovery/month_issuance)*100
-                    #     perc = round(number, 2)
+                
+                by_nostd=len(stud_lst)   
+                if month_issuance !=0 :
+                    by_number=(by_month_recovery/by_month_issuance)*100
+                    by_perc = round(by_number, 2)
 
-                a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
+                by_line=self.env['by.account.recovery.report.move.line'].create({        
+                            "billing_cycle":condition1,
+                            "total_issuance":by_month_issuance,
+                            "no_of_std":by_nostd,
+                            "total_recovery":by_month_recovery,
+                            "recovery_percentage":str(by_perc)+'%',
+                })
+                new_lines.append(by_line.id)
+
+
+                self.write({
+                    "by_account_recovery_report_line":[(6,0,new_lines)]
+                })
+                # a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
             
         # raise UserError(month_issuance2)
             # if rec.bi_monthly_cycle == "June-July":
             
-        raise UserError(a)
+        # raise UserError(a)
 
     def action_print_excel_recovery_report(self):
         
@@ -259,6 +273,17 @@ class RecoveryReportWizard(models.TransientModel):
 
             row=2
             for rec in self.account_recovery_report_line:
+                if rec:
+            
+                    worksheet.write_merge(row,row,0,0,rec.billing_cycle, style=style_title)
+                    worksheet.write_merge(row,row,1,1,rec.total_issuance,style=style_title)
+                    worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
+                    worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
+                    worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
+   
+                    row+=1
+                    
+            for rec in self.by_account_recovery_report_line:
                 if rec:
             
                     worksheet.write_merge(row,row,0,0,rec.billing_cycle, style=style_title)
