@@ -148,8 +148,8 @@ class RecoveryReportWizard(models.TransientModel):
                     for rec in for_by_month_inv_ids:
                         # a += str(rec.bill_date)+"\n"
                         month_start , month_end, and_year = rec.bill_date.split('-')
-                        condition1 += months_list[i] +"-"+months_list[j]
-                        condition2 += month_start +"-"+month_end
+                        condition1 = months_list[i] +"-"+months_list[j]
+                        condition2 = month_start +"-"+month_end
                         if condition1 == condition2:
                             raise UserError(str(condition1)+"   "+str(condition2))
                 
