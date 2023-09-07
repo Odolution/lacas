@@ -158,7 +158,7 @@ class RecoveryReportWizard(models.TransientModel):
             for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
         
         # raise UserError(len(for_by_month_inv_ids))
-        scan_data_list = [] 
+         
         total_list = [] 
         # a = ""
         month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
@@ -175,9 +175,11 @@ class RecoveryReportWizard(models.TransientModel):
         
         for i in range(start, end):
             for j in range(start, end):
+                scan_data_list = []
                 by_month_issuance=0
                 by_month_recovery=0
-
+                by_perc=0
+                
                 for rec in for_by_month_inv_ids:
                     # a += str(rec.bill_date)+"\n"
                     condition1 = str(month_dict.get(months_list[i].capitalize()))+"-"+str(month_dict.get(months_list[j].capitalize()))+"-"+year_last
@@ -195,7 +197,7 @@ class RecoveryReportWizard(models.TransientModel):
                         if rec.payment_state=='paid':
                             by_month_recovery += float(rec.net_amount)
                 
-                by_nostd=len(stud_lst)   
+                by_nostd=len(scan_data_list)   
                 if month_issuance !=0 :
                     by_number=(by_month_recovery/by_month_issuance)*100
                     by_perc = round(by_number, 2)
@@ -282,7 +284,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
    
                     row+=1
-                    
+
             for rec in self.by_account_recovery_report_line:
                 if rec:
             
