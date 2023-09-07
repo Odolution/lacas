@@ -131,62 +131,7 @@ class RecoveryReportWizard(models.TransientModel):
             nostd=len(stud_lst)   
             if month_issuance !=0 :
                 number=(month_recovery/month_issuance)*100
-                perc = round(number, 2)  
-            
-            if self.all_branch==True:
-                for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',126),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
-            else:
-                for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
-            
-            # raise UserError(len(for_by_month_inv_ids))
-            scan_data_list = [] 
-            total_list = [] 
-            a = ""
-            month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
-            months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-            
-            date_str = selected_month[0]
-            month, year = date_str.split('-')
-            start = month_dict.get(month.capitalize())
-
-            date_str = selected_month[len(selected_month)-1]
-            month_last, year_last = date_str.split('-')
-            end = month_dict.get(month_last.capitalize())
-            # raise UserError(str(start)+" "+str(end))
-            
-            for i in range(start, end):
-                for j in range(start, end):
-                    by_month_issuance=0
-                    by_month_recovery=0
-
-                    for rec in for_by_month_inv_ids:
-                        # a += str(rec.bill_date)+"\n"
-                        condition1 = str(month_dict.get(months_list[i].capitalize()))+"-"+str(month_dict.get(months_list[j].capitalize()))+"-"+year_last
-
-                        month_start , month_end, and_year = rec.bill_date.split('-')
-                        condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
-
-                        if condition1 == condition2:
-                            # raise UserError(str(condition1)+"   "+str(rec.bill_date))
-                            if rec.x_studio_udid_monthly_bills not in scan_data_list:
-                                scan_data_list.append(rec.x_studio_udid_monthly_bills)
-                
-                            by_month_issuance += float(rec.net_amount)
-
-                            if rec.payment_state=='paid':
-                                by_month_recovery += float(rec.net_amount)
-                        
-                        by_nostd=len(stud_lst)   
-                        # if month_issuance !=0 :
-                        #     number=(month_recovery/month_issuance)*100
-                        #     perc = round(number, 2)
-
-                    a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
-                
-            # raise UserError(month_issuance2)
-                # if rec.bi_monthly_cycle == "June-July":
-                
-            raise UserError(a)
+                perc = round(number, 2)             
 
             mvl=self.env['account.recovery.report.move.line'].create({
                                 
@@ -206,6 +151,60 @@ class RecoveryReportWizard(models.TransientModel):
                 "account_recovery_report_line":[(6,0,lines)]
             })
 
+        if self.all_branch==True:
+            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',126),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+        else:
+            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+        
+        # raise UserError(len(for_by_month_inv_ids))
+        scan_data_list = [] 
+        total_list = [] 
+        a = ""
+        month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
+        months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        
+        date_str = selected_month[0]
+        month, year = date_str.split('-')
+        start = month_dict.get(month.capitalize())
+
+        date_str = selected_month[len(selected_month)-1]
+        month_last, year_last = date_str.split('-')
+        end = month_dict.get(month_last.capitalize())
+        # raise UserError(str(start)+" "+str(end))
+        
+        for i in range(start, end):
+            for j in range(start, end):
+                by_month_issuance=0
+                by_month_recovery=0
+
+                for rec in for_by_month_inv_ids:
+                    # a += str(rec.bill_date)+"\n"
+                    condition1 = str(month_dict.get(months_list[i].capitalize()))+"-"+str(month_dict.get(months_list[j].capitalize()))+"-"+year_last
+
+                    month_start , month_end, and_year = rec.bill_date.split('-')
+                    condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year
+
+                    if condition1 == condition2:
+                        # raise UserError(str(condition1)+"   "+str(rec.bill_date))
+                        if rec.x_studio_udid_monthly_bills not in scan_data_list:
+                            scan_data_list.append(rec.x_studio_udid_monthly_bills)
+            
+                        by_month_issuance += float(rec.net_amount)
+
+                        if rec.payment_state=='paid':
+                            by_month_recovery += float(rec.net_amount)
+                    
+                    by_nostd=len(stud_lst)   
+                    # if month_issuance !=0 :
+                    #     number=(month_recovery/month_issuance)*100
+                    #     perc = round(number, 2)
+
+                a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
+            
+        # raise UserError(month_issuance2)
+            # if rec.bi_monthly_cycle == "June-July":
+            
+        raise UserError(a)
 
     def action_print_excel_recovery_report(self):
         
