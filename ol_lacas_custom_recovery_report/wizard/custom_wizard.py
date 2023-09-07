@@ -146,7 +146,8 @@ class RecoveryReportWizard(models.TransientModel):
             
             for i in range(start, end):
                 for j in range(start, end):
-                    month_issuance2=0
+                    by_month_issuance=0
+                    by_month_recovery=0
 
                     for rec in for_by_month_inv_ids:
                         # a += str(rec.bill_date)+"\n"
@@ -157,12 +158,15 @@ class RecoveryReportWizard(models.TransientModel):
 
                         if condition1 == condition2:
                             # raise UserError(str(condition1)+"   "+str(rec.bill_date))
-                            if rec.bill_date not in scan_data_list:
-                                scan_data_list.append(rec.bill_date)
+                            if rec.x_studio_udid_monthly_bills not in scan_data_list:
+                                scan_data_list.append(rec.x_studio_udid_monthly_bills)
+                
+                            by_month_issuance += float(rec.net_amount)
+
+                            if rec.payment_state=='paid':
+                                by_month_recovery += float(rec.net_amount)
                             
-                            month_issuance2 += float(rec.net_amount)
-                            
-                    a+=condition1+" : "+str(month_issuance2)+"\n"
+                    a+=condition1+" : "+str(month_issuance2)+"  =="+by_month_recovery\n"
                 
             # raise UserError(month_issuance2)
                 # if rec.bi_monthly_cycle == "June-July":
