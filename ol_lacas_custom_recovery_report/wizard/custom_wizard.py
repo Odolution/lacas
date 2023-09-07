@@ -156,7 +156,7 @@ class RecoveryReportWizard(models.TransientModel):
                             if rec.x_studio_udid_monthly_bills not in scan_data_list:
                                 scan_data_list.append(rec.x_studio_udid_monthly_bills)
 
-                            month_issuance2=month_issuance2+rec.amount_total
+                            month_issuance2 += float(rec.net_amount)
                             
                             # raise UserError(str(condition1)+"   "+str(condition2))
                     a+=str(month_issuance2)+"\n"
