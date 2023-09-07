@@ -184,7 +184,7 @@ class RecoveryReportWizard(models.TransientModel):
         # a = ""
         month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
         months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        short_month_names = [month[:3] for month in months_list]
+        # short_month_names = [month[:3] for month in months_list]
 
         date_str = selected_month[0]
         month, year = date_str.split('-')
@@ -295,7 +295,7 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,3,5,"Total Billing (Bills Issuance)",style=red_style_title)
             worksheet.write_merge(0,1,6,8,"No of Std",style=red_style_title)
             worksheet.write_merge(0,1,9,11,"Recovery",style=red_style_title)
-            worksheet.write_merge(0,1,12,14,"Percentage of Recovery on Amount",style=red_style_title)
+            worksheet.write_merge(0,1,12,15,"Percentage of Recovery on Amount",style=red_style_title)
      
       
 
@@ -307,7 +307,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,3,5,rec.total_issuance,style=style_title)
                     worksheet.write_merge(row,row,6,8,rec.no_of_std,style=style_title)
                     worksheet.write_merge(row,row,9,11,rec.total_recovery,style=style_title)
-                    worksheet.write_merge(row,row,12,14,rec.recovery_percentage,style=style_title)
+                    worksheet.write_merge(row,row,12,15,rec.recovery_percentage,style=style_title)
    
                     row+=1
             row+=2
@@ -318,7 +318,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,3,5,rec.total_issuance,style=style_title)
                     worksheet.write_merge(row,row,6,8,rec.no_of_std,style=style_title)
                     worksheet.write_merge(row,row,9,11,rec.total_recovery,style=style_title)
-                    worksheet.write_merge(row,row,12,14,rec.recovery_percentage,style=style_title)
+                    worksheet.write_merge(row,row,12,15,rec.recovery_percentage,style=style_title)
    
                     row+=1
                   
