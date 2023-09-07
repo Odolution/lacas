@@ -82,7 +82,8 @@ class SchoolStudent(models.Model):
         if timeline == 'daily':
             students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         else:
-            students = self.env['school.student'].search([('homeroom', '=', False)])
+            raise UserError('test')
+            students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
