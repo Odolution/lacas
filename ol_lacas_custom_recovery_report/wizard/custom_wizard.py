@@ -166,7 +166,7 @@ class RecoveryReportWizard(models.TransientModel):
                             if rec.payment_state=='paid':
                                 by_month_recovery += float(rec.net_amount)
                             
-                    a+=condition1+" : "+str(by_month_issuance)+"  =="+by_month_recovery+"\n"
+                    a+=condition1+" : "+str(by_month_issuance)+"  =="+str(by_month_recovery)+"\n"
                 
             # raise UserError(month_issuance2)
                 # if rec.bi_monthly_cycle == "June-July":
