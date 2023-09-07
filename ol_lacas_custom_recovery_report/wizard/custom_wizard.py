@@ -206,15 +206,13 @@ class RecoveryReportWizard(models.TransientModel):
                 # a += str(rec.bill_date)+"\n"
                 # raise UserError(rec.bill_date)
                 month_start1 , month_end1, and_year1 = item.split('-')
-                condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
+                condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))
 
                 to_year=datetime.strptime(str(rec.invoice_date), "%Y-%m-%d").strftime('%y')
                 month_end=rec.bill_date.split('-')[0]             
-                month_start=rec.bill_date.split('-')[1]             
+                month_start=rec.bill_date.split('-')[1]                
                 
-                
-                
-                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+to_year
+                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))
 
                 if condition1 == condition2:
                     # raise UserError(str(condition1)+"   "+str(rec.bill_date))
