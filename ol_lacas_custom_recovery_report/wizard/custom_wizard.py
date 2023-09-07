@@ -226,10 +226,10 @@ class RecoveryReportWizard(models.TransientModel):
                     by_number=(by_month_recovery/by_month_issuance)*100
                     by_perc = round(by_number, 2)
                 
-                short_month = short_month_names[i]+"-"+short_month_names[j]+"-"+year_last
+                # short_month = short_month_names[i]+"-"+short_month_names[j]+"-"+year_last
                 
                 by_line=self.env['by.account.recovery.report.move.line'].create({        
-                            "billing_cycle":short_month,
+                            "billing_cycle":item,
                             "total_issuance":by_month_issuance,
                             "no_of_std":by_nostd,
                             "total_recovery":by_month_recovery,
