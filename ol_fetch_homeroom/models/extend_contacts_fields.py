@@ -7,43 +7,41 @@ import ast
 class SchoolStudent(models.Model):
     _inherit = "school.student"
 
-    def get_user_defined_fields_data(self, students):
-        headers = {
-            'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
-            'Facts-Api-Key': ''
-        } 
+    # def get_user_defined_fields_data(self, students):
+    #     headers = {
+    #         'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
+    #         'Facts-Api-Key': ''
+    #     } 
 
 
-        grade_level_id = 320
-        mother_cnic_id = 219
-        father_cnic_id = 220
+    #     grade_level_id = 320
+    #     mother_cnic_id = 219
+    #     father_cnic_id = 220
 
-        # students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-        for std in students:
-            api_key = school_name_key.get(std.x_last_school_id.name)
-            headers['Facts-Api-Key'] = api_key
+    #     # students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+    #     for std in students:
+    #         api_key = school_name_key.get(std.x_last_school_id.name)
+    #         headers['Facts-Api-Key'] = api_key
 
-            # Father CNIC
-            url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={father_cnic_id}"
-            response = requests.request("GET", url, headers=headers).json()
-            if response.get('results') and len(response.get('results')) > 0:
-                std.x_studio_father_cnic = response.get('results')[0]['data']
+    #         # Father CNIC
+    #         url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={father_cnic_id}"
+    #         response = requests.request("GET", url, headers=headers).json()
+    #         if response.get('results') and len(response.get('results')) > 0:
+    #             std.x_studio_father_cnic = response.get('results')[0]['data']
             
-            # Mother CNIC
-            url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={mother_cnic_id}"
-            response = requests.request("GET", url, headers=headers).json()
-            if response.get('results') and len(response.get('results')) > 0:
-                std.x_studio_mother_cnic = response.get('results')[0]['data']
+    #         # Mother CNIC
+    #         url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={mother_cnic_id}"
+    #         response = requests.request("GET", url, headers=headers).json()
+    #         if response.get('results') and len(response.get('results')) > 0:
+    #             std.x_studio_mother_cnic = response.get('results')[0]['data']
 
-            # Grade Level
-            url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={grade_level_id}"
-            response = requests.request("GET", url, headers=headers).json()
-            if response.get('results') and len(response.get('results')) > 0:
-                std.x_studio_grade_level = response.get('results')[0]['data']
+    #         # Grade Level
+    #         url = f"https://api.factsmgt.com/UserDefinedData?Page=1&api-version=1&filters=linkedId=={std.facts_id},fieldId=={grade_level_id}"
+    #         response = requests.request("GET", url, headers=headers).json()
+    #         if response.get('results') and len(response.get('results')) > 0:
+    #             std.x_studio_grade_level = response.get('results')[0]['data']
 
         
-
-
     def get_homeroom_and_custom_defined_fields(self, timeline='daily'):
         school_name_key = {
                 "LACAS Burki A Level":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU=",
