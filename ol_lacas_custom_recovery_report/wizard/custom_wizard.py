@@ -109,6 +109,7 @@ class RecoveryReportWizard(models.TransientModel):
         
             for rec in inv_ids:
                 invoice_month = rec.invoice_date.strftime("%b-%y")
+                raise UserError(invoice_month)
                 if invoice_month==month:
                     if rec.x_studio_udid_monthly_bills not in stud_lst:
                         stud_lst.append(rec.x_studio_udid_monthly_bills)
@@ -125,10 +126,10 @@ class RecoveryReportWizard(models.TransientModel):
             
             a = ""
             months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-            for index in range(0, len(selected_month)):
-                for i in range(0, len(selected_month)):
-                    for j in range(0, len(selected_month)):
-                        a += months_list[i] +"-"+months_list[j]+"\n"
+            
+            for i in range(0, len(selected_month)):
+                for j in range(0, len(selected_month)):
+                    a += months_list[i] +"-"+months_list[j]+"\n"
                 
                 # if rec.bi_monthly_cycle == "June-July":
                 
