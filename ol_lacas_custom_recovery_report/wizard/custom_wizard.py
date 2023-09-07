@@ -128,7 +128,8 @@ class RecoveryReportWizard(models.TransientModel):
             else:
                 for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             
-            raise UserError(len(for_by_month_inv_ids))
+            # raise UserError(len(for_by_month_inv_ids))
+            scan_data_list = [] 
             a = ""
             month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
             months_list = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -141,12 +142,16 @@ class RecoveryReportWizard(models.TransientModel):
             month_last, year_last = date_str.split('-')
             end = month_dict.get(month_last.capitalize())
             # raise UserError(str(start)+" "+str(end))
-
+            
             for i in range(start, end):
                 for j in range(start, end):
-                    # for rec in for_by_month_inv_ids:
+                    for rec in for_by_month_inv_ids:
                         # a += str(rec.bill_date)+"\n"
-                    a += months_list[i] +"-"+months_list[j]+"\n"
+                        month_start , month_end, and_year = rec.bill_date.split('-')
+                        condition1 += months_list[i] +"-"+months_list[j]
+                        condition2 += month_start +"-"+month_end
+                        if condition1 == condition2:
+                            raise UserError(str(condition1)+"   "+str(condition2))
                 
                 # if rec.bi_monthly_cycle == "June-July":
                 
