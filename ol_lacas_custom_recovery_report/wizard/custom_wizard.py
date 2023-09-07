@@ -204,6 +204,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             for rec in for_by_month_inv_ids:
                 # a += str(rec.bill_date)+"\n"
+                raise UserError(rec.bill_date)
                 month_start1 , month_end1, and_year1 = item.split('-')
                 condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
 
@@ -249,7 +250,7 @@ class RecoveryReportWizard(models.TransientModel):
     # raise UserError(month_issuance2)
         # if rec.bi_monthly_cycle == "June-July":
         
-    # raise UserError(a)
+        # raise UserError(a)
 
     def action_print_excel_recovery_report(self):
         
