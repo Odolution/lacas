@@ -45,7 +45,7 @@ class SchoolStudent(models.Model):
         mother_cnic_id = 219
         father_cnic_id = 220
 
-        students = self.env['school.student'].search([('homeroom', '=', False)])
+        students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
