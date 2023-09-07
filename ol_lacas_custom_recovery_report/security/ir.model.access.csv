@@ -4,3 +4,4 @@ access.aging.invoice.group,access_aging_invoice_group,ol_lacas_custom_report.mod
 access.account.recovery.report.move.line,access_account_recovey_report_move_line,ol_lacas_custom_recovery_report.model_account_recovery_report_move_line,base.group_user,1,1,1,1
 access.billing.month,access_billing_month,ol_lacas_custom_recovery_report.model_billing_month,base.group_user,1,1,1,1
 
+access.by.account.recovery.report.move.line,access_by_account_recovey_report_move_line,ol_lacas_custom_recovery_report.model_by_account_recovery_report_move_line,base.group_user,1,1,1,1
