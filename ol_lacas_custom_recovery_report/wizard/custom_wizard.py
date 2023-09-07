@@ -156,13 +156,13 @@ class RecoveryReportWizard(models.TransientModel):
                         # condition2 = month_start +"-"+month_end+"-"+and_year
 
                         if condition1 == rec.bill_date:
-                            raise UserError(str(condition1)+"   "+str(rec.bill_date))
+                            # raise UserError(str(condition1)+"   "+str(rec.bill_date))
                             if rec.bill_date not in scan_data_list:
                                 scan_data_list.append(rec.bill_date)
                             
                             month_issuance2 += float(rec.net_amount)
                             
-                    a+=str(month_issuance2)+"\n"
+                    a+=condition1+" : "+str(month_issuance2)+"\n"
                 
             # raise UserError(month_issuance2)
                 # if rec.bi_monthly_cycle == "June-July":
