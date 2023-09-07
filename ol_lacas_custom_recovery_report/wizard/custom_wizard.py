@@ -128,7 +128,7 @@ class RecoveryReportWizard(models.TransientModel):
                 record = selected_month[index]
                 month, year = record.split('-')
                 record1 = selected_month[index+1]
-                month1, year1 = record.split('-')
+                month1, year1 = record1.split('-')
                 
                 # if rec.bi_monthly_cycle == "June-July":
                 a += month +"-"+month1+"\n"
