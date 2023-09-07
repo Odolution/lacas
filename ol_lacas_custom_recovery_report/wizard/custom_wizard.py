@@ -161,7 +161,7 @@ class RecoveryReportWizard(models.TransientModel):
                             # raise UserError(str(condition1)+"   "+str(condition2))
                     a+=str(month_issuance2)+"\n"
                 
-            raise UserError(month_issuance2)
+            # raise UserError(month_issuance2)
                 # if rec.bi_monthly_cycle == "June-July":
                 
             raise UserError(a)
