@@ -429,45 +429,28 @@ class RecoveryReportWizard(models.TransientModel):
                                             key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                             row_month_total= months_total_dict.get(key, 0)+count
                                             months_total_dict.update({key: row_month_total})
-                    # Print row data
-                    worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                    col=4
-                    for i in range(range_start,range_stop+1):
-                        # check=True
-                        new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
-                        for month_key, count in billing_counts.items():
-                            if new_month_key==month_key:
-                                worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                                # check=False
-                            # else:
-                            #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
-                        # if check:
-                        #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
-                        col+=3
-                    # raise UserError(message)
-                    worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
-                    worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
-                    if rec.school_bill_len>0 and rec.billing_list_paid>0:
-                        total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                        worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
-                    else:
-                        worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
                     
-                    
-                            # raise UserError(str(group_name_list)+"==="+str(group_total))
-                            # raise UserError(str(group_name_list)+"==="+str(group_total))
-                    # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
-                    # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
-                    # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
-   
-                    row+=1
-            # message = "Billing information:\n\n"
-            # for month_key, count in months_total_dict.items():
-            #     # month_key format: 'yy-mm'
-            #     message += f"Month: {month_key}, Number of bills: {count}\n"
-                
-            # # Raise a UserError with the summarized message
-            # raise UserError(message)
+                        # Print row data
+                        worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                        col=4
+                        for i in range(range_start,range_stop+1):
+                            # check=True
+                            new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                            for month_key, count in billing_counts.items():
+                                if new_month_key==month_key:
+                                    worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                                
+                            col+=3
+                        worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
+                        worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
+                        if rec.school_bill_len>0 and rec.billing_list_paid>0:
+                            total_per =(rec.billing_list_paid/rec.school_bill_len)*100
+                            worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
+                        else:
+                            worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
+                        row+=1
+         
+        #  final total row
             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
 
             col=4
