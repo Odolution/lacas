@@ -77,7 +77,8 @@ class invoice_ext(models.Model):
                     if jl.account_id.name=="Receivable from Customers":
                         recievable_line=jl
                     else:
-                        total_debit_except_recievable+=jl.debit
+                        if not jl.product_id.is_discount_type:
+                            total_debit_except_recievable+=jl.debit
                     if jl.product_id.is_discount_type:
                         amount=lineDiscounts.get(jl.name,None)
                         if amount is None:
