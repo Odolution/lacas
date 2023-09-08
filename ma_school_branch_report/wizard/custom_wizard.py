@@ -139,6 +139,7 @@ class RecoveryReportWizard(models.TransientModel):
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',125)
             ])
+            
             if rec.name in ("Milestone Model Town (Matric)"):
                 select_new="Milestone Model Town Senior Campus"
             else:
