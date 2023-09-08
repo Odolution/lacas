@@ -379,6 +379,26 @@ class RecoveryReportWizard(models.TransientModel):
                             group_recovery=0
 
                             if rec.branch_name=="LACAS Johar Town A Level":
+                                # Print row data
+                                worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                                col=4
+                                for i in range(range_start,range_stop+1):
+                                    # check=True
+                                    new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                    for month_key, count in billing_counts.items():
+                                        if new_month_key==month_key:
+                                            worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                                        
+                                    col+=3
+                                worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
+                                worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
+                                if rec.school_bill_len>0 and rec.billing_list_paid>0:
+                                    total_per =(rec.billing_list_paid/rec.school_bill_len)*100
+                                    worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
+                                else:
+                                    worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
+                                row+=1
+
                                 group_name_list.append(rec.branch_name)
                                 group_total+=rec.school_bill_len
                                 # final_total+=rec.school_bill_len
@@ -415,6 +435,9 @@ class RecoveryReportWizard(models.TransientModel):
                                 group_name_list.clear()
                                 group_total=0
                                 group_recovery=0
+
+                                
+                                continue
                                 # raise UserError("LACAS Johar Town A Level")
                             else:
 
@@ -430,25 +453,25 @@ class RecoveryReportWizard(models.TransientModel):
                                             row_month_total= months_total_dict.get(key, 0)+count
                                             months_total_dict.update({key: row_month_total})
                     
-                        # Print row data
-                        worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                        col=4
-                        for i in range(range_start,range_stop+1):
-                            # check=True
-                            new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
-                            for month_key, count in billing_counts.items():
-                                if new_month_key==month_key:
-                                    worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                                
-                            col+=3
-                        worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
-                        worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
-                        if rec.school_bill_len>0 and rec.billing_list_paid>0:
-                            total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                            worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
-                        else:
-                            worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
-                        row+=1
+                    # Print row data
+                    worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                    col=4
+                    for i in range(range_start,range_stop+1):
+                        # check=True
+                        new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                        for month_key, count in billing_counts.items():
+                            if new_month_key==month_key:
+                                worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                             
+                        col+=3
+                    worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
+                    worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
+                    if rec.school_bill_len>0 and rec.billing_list_paid>0:
+                        total_per =(rec.billing_list_paid/rec.school_bill_len)*100
+                        worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
+                    else:
+                        worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
+                    row+=1
          
         #  final total row
             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
