@@ -378,7 +378,7 @@ class RecoveryReportWizard(models.TransientModel):
                             group_total=0
                             group_recovery=0
 
-                            if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town Senior Campus"):
+                            if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town (Matric)"):
                                 # Print row data
                                 worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                                 col=4
