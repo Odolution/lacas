@@ -128,6 +128,9 @@ class RecoveryReportWizard(models.TransientModel):
         pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
         for rec in school_ids_raw:
+            if rec.name=="Milestone Model Town (Matric)":
+                continue
+
             school_ids.append(rec)
             # raise UserError(rec)
            
@@ -378,7 +381,7 @@ class RecoveryReportWizard(models.TransientModel):
                             group_total=0
                             group_recovery=0
 
-                            if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town (Matric)"):
+                            if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town Campus"):
                                 # Print row data
                                 worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                                 col=4
