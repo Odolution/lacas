@@ -156,14 +156,14 @@ class RecoveryReportWizard(models.TransientModel):
                             year_in_payment = payment_date.strftime('%y')
 
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                total_count_paid += float(bill_rec.net_amount)
+                                total_count_paid += float(bill_rec.amount_total)
 
                     if month_key in billing_counts:
-                        billing_counts[month_key] += float(bill_rec.net_amount)
-                        total_count += float(bill_rec.net_amount)
+                        billing_counts[month_key] += float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
                     else:
-                        billing_counts[month_key] = float(bill_rec.net_amount)
-                        total_count += float(bill_rec.net_amount)
+                        billing_counts[month_key] = float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
 
             billing_list_paid.append(total_count_paid)
             billing_list.append(total_count)
