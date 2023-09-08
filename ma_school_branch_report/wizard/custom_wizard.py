@@ -139,7 +139,7 @@ class RecoveryReportWizard(models.TransientModel):
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',125)
             ])
-            
+
             if rec.name in ("Milestone Model Town (Matric)"):
                 select_new="Milestone Model Town Senior Campus"
             else:
@@ -194,12 +194,14 @@ class RecoveryReportWizard(models.TransientModel):
         
 
         for item in range(len(school_ids)):
-            name_view=school_ids[item].name
+            name_view = school_ids[item].name
+            billing_view = billing_list[name_view]
+            billing_paid_view = billing_list_paid[name_view]
             mvl=self.env['student.report.line'].create({
                                         
                 "branch_name":name_view,
-                "school_bill_len":billing_list[name_view],
-                "billing_list_paid":billing_list_paid[name_view],
+                "school_bill_len":billing_view,
+                "billing_list_paid":billing_paid_view,
             })
             lines.append(mvl.id)
 
