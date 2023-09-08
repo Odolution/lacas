@@ -4,6 +4,9 @@ from odoo.exceptions import UserError
 import json
 import datetime
 
+
+
+
 class custom_discount_model(models.Model):
     _name = "product.cdiscount"
     product_id = fields.Many2one('product.product', string='Charge on')
@@ -68,20 +71,24 @@ class invoice_ext(models.Model):
                 discount_line=False
                 recievable_line=False
                 total_credit=0
+                total_debit_except_recievable=0
                 for jl in rec.line_ids:
                     total_credit+=jl.credit
                     if jl.account_id.name=="Receivable from Customers":
                         recievable_line=jl
+                    else:
+                        if not jl.product_id.is_discount_type:
+                            total_debit_except_recievable+=jl.debit
                     if jl.product_id.is_discount_type:
                         amount=lineDiscounts.get(jl.name,None)
                         if amount is None:
                             raise UserError("invalid discount name in journal lines : \""+jl.name+"\". Discount invoice line and discount journal line should have save name."+str(lineDiscounts))
                         # raise UserError("test : "+str(lineDiscounts)+" "+str(invoice_total_discount))
-                        jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
+                        # jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
+                customer_recievable_amount = total_credit-invoice_total_discount-total_debit_except_recievable
+                rec.remarks=str([customer_recievable_amount,total_credit,invoice_total_discount,total_debit_except_recievable])
+                
 
-                customer_recievable_amount = total_credit-invoice_total_discount
-                # raise UserError(customer_recievable_amount)
-
-                # recievable_line.with_context(check_move_validity=False).write({"debit":customer_recievable_amount,"credit":0})
+                recievable_line.with_context(check_move_validity=False).write({"debit":customer_recievable_amount,"credit":0})
 
 
