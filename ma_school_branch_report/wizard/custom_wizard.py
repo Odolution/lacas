@@ -391,7 +391,7 @@ class RecoveryReportWizard(models.TransientModel):
                                             key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                             row_month_total= months_total_dict.get(key, 0)+count
                                             months_total_dict.update({key: row_month_total})
-                                
+                                col=4
                                 for month_key, count in months_total_dict.items():
                                     original_string = month_key
                                     split_parts = original_string.split('-')
