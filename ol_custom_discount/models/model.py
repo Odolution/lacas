@@ -85,7 +85,7 @@ class invoice_ext(models.Model):
                         jl.with_context(check_move_validity=False).write({"debit":amount,"credit":0})
 
                 customer_recievable_amount = total_credit-invoice_total_discount-total_debit_except_recievable
-                # raise UserError(customer_recievable_amount)
+                raise UserError(customer_recievable_amount)
 
 
                 # recievable_line.with_context(check_move_validity=False).write({"debit":customer_recievable_amount,"credit":0})
