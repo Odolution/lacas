@@ -107,8 +107,8 @@ class RecoveryReportWizard(models.TransientModel):
     def action_print_report(self):
         lines=[]
         school_ids = []
-        billing_list=[]
-        billing_list_paid=[]
+        billing_list={}
+        billing_list_paid={}
         global billing_counts
         billing_counts = {}
 
@@ -128,18 +128,22 @@ class RecoveryReportWizard(models.TransientModel):
         pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
         for rec in school_ids_raw:
-            if rec.name=="Milestone Model Town (Matric)":
-                continue
+            # if rec.name=="Milestone Model Town (Matric)":
+            #     continue
 
             school_ids.append(rec)
-            # raise UserError(rec)
+            # raise UserError(rec) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
            
             school_bill_ids = self.env['account.move'].search([
                 ('x_studio_previous_branch', '=', rec.name),
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',125)
             ])
-            
+            if rec.name in ("Milestone Model Town (Matric)"):
+                select_new="Milestone Model Town (Matric)"
+            else:
+                select_new=rec.name
+
             total_count=0
             total_count_paid=0
             for bill_rec in school_bill_ids:
@@ -150,7 +154,7 @@ class RecoveryReportWizard(models.TransientModel):
                 # Check if the invoice date is within the specified range
                 if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
                     # Create a key using the month and year
-                    month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
+                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
                     
                     if bill_rec.payment_state =="paid":
                         if bill_rec.ol_payment_date:
@@ -168,12 +172,12 @@ class RecoveryReportWizard(models.TransientModel):
                         billing_counts[month_key] = float(bill_rec.amount_total)
                         total_count += float(bill_rec.amount_total)
 
-            billing_list_paid.append(total_count_paid)
-            billing_list.append(total_count)
+            billing_list_paid[select_new] = total_count_paid
+            billing_list[select_new] = total_count
 
             for year in range(int(v_from_year), int(v_to_year) + 1):
                 for month in range(int(v_from_month), int(v_to_month) + 1):
-                    month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
+                    month_key = f"{select_new}-{str(year)[-2:]}-{month:02}"
                     if month_key not in billing_counts:
                         billing_counts[month_key] = 0
            
@@ -189,11 +193,12 @@ class RecoveryReportWizard(models.TransientModel):
         
 
         for item in range(len(school_ids)):
+            name_view=school_ids[item].name
             mvl=self.env['student.report.line'].create({
                                         
-                "branch_name":school_ids[item].name,
-                "school_bill_len":billing_list[item],
-                "billing_list_paid":billing_list_paid[item],
+                "branch_name":name_view,
+                "school_bill_len":billing_list[name_view],
+                "billing_list_paid":billing_list_paid[name_view],
             })
             lines.append(mvl.id)
 
