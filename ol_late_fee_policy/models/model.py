@@ -188,21 +188,6 @@ class ext_invoice(models.Model):
                     "name":latefee_product.name,
                     "price_unit":late_fee_charges
                 }
-                recievable_line=False
-                total_credit=0
-                total_debit_except_recievable=0
-                for jl in invoice.line_ids:
-                    total_credit+=jl.credit
-                    if jl.account_id.name=="Receivable from Customers":
-                        recievable_line=jl
-                    else:
-                        total_debit_except_recievable+=jl.debit
-                    
-                customer_recievable_amount = total_credit+late_fee_charges-total_debit_except_recievable
-                # raise UserError(customer_recievable_amount)
-
-
-                recievable_line.with_context(check_move_validity=False).write({"debit":customer_recievable_amount,"credit":0})
                 invoice.invoice_line_ids=[(0,0,data)]
             invoice.action_post()
 
