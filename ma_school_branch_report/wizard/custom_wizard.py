@@ -128,10 +128,9 @@ class RecoveryReportWizard(models.TransientModel):
         pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
         for rec in school_ids_raw:
-            # if rec.name=="Milestone Model Town (Matric)":
+            if rec.name !="Milestone Model Town (Matric)":
             #     continue
-
-            school_ids.append(rec)
+                school_ids.append(rec)
             # raise UserError(rec) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
            
             school_bill_ids = self.env['account.move'].search([
