@@ -336,8 +336,8 @@ class RecoveryReportWizard(models.TransientModel):
                         main_string = group_name_list[0]
                         substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
                         # raise UserError(str(group_name_list)+"==="+str(group_total))
-                        col=4
-                        if rec.branch_name=="LACAS Johar Town A Level":
+                        
+                        if substring == new_substring:
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
                             # final_total+=rec.school_bill_len
@@ -347,17 +347,20 @@ class RecoveryReportWizard(models.TransientModel):
                                 new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                 for month_key, count in billing_counts.items():
                                     if new_month_key==month_key:
-                                        key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                        key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                         row_month_total= months_total_dict.get(key, 0)+count
                                         months_total_dict.update({key: row_month_total})
+
+                        else:
                             
+                            col=4
                             for month_key, count in months_total_dict.items():
                                 original_string = month_key
                                 split_parts = original_string.split('-')
                                 result = split_parts[0]
-                                # if substring == result:
-                                worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                                col+=3
+                                if substring == result:
+                                    worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                    col+=3
                                     
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
                             worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
@@ -374,10 +377,8 @@ class RecoveryReportWizard(models.TransientModel):
                             group_name_list.clear()
                             group_total=0
                             group_recovery=0
-                            # raise UserError("LACAS Johar Town A Level")
-                        else:
-                        
-                            if substring == new_substring:
+
+                            if rec.branch_name=="LACAS Johar Town A Level":
                                 group_name_list.append(rec.branch_name)
                                 group_total+=rec.school_bill_len
                                 # final_total+=rec.school_bill_len
@@ -387,11 +388,10 @@ class RecoveryReportWizard(models.TransientModel):
                                     new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                     for month_key, count in billing_counts.items():
                                         if new_month_key==month_key:
-                                            key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                            key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                             row_month_total= months_total_dict.get(key, 0)+count
                                             months_total_dict.update({key: row_month_total})
-
-                            else:
+                                
                                 for month_key, count in months_total_dict.items():
                                     original_string = month_key
                                     split_parts = original_string.split('-')
@@ -415,6 +415,8 @@ class RecoveryReportWizard(models.TransientModel):
                                 group_name_list.clear()
                                 group_total=0
                                 group_recovery=0
+                                # raise UserError("LACAS Johar Town A Level")
+                            else:
 
                                 group_name_list.append(rec.branch_name)
                                 group_total+=rec.school_bill_len
@@ -427,9 +429,6 @@ class RecoveryReportWizard(models.TransientModel):
                                             key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                             row_month_total= months_total_dict.get(key, 0)+count
                                             months_total_dict.update({key: row_month_total})
-                    
-                    
-                    
                     # Print row data
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
