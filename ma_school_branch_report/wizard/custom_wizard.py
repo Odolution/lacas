@@ -9,7 +9,7 @@ import xlsxwriter
 _
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
-
+import calendar
 
 import base64
 
@@ -105,6 +105,13 @@ class RecoveryReportWizard(models.TransientModel):
                     raise UserError("Sorry, Invalid month range..")
                     raise ValidationError(_('Sorry, Invalid month range...'))
 
+    
+
+    def get_month_abbreviation(month):
+        """Convert a full month name to its abbreviation."""
+        month_abbr = {v.lower(): k for k, v in enumerate(calendar.month_abbr)}
+        return month_abbr.get(month.lower(), month)
+
     def list_months(self):
         next_month = self.to_date + relativedelta(months=1)
         first_day_of_next_month = next_month.replace(day=1)
@@ -134,10 +141,11 @@ class RecoveryReportWizard(models.TransientModel):
         selected_month = self.list_months()
 
         by_sort_by_monthly_list = self.env['account.move'].search([
-                # ('x_studio_previous_branch', '=', rec.name),
-                ('state', '=', 'posted'),
-                ('move_type','=','out_invoice'),('journal_id','=',126)
-            ])
+            # ('x_studio_previous_branch', '=', rec.name),
+            ('state', '=', 'posted'),
+            ('move_type', '=', 'out_invoice'),
+            ('journal_id', '=', 126)
+        ])
 
         combinations = []
 
@@ -155,9 +163,16 @@ class RecoveryReportWizard(models.TransientModel):
                 for j in range(i + 1, len(months)):
                     combination = f"{months[i]}-{months[j]}-{year}"
                     # Check if the combination exists in by_sort_by_monthly_list.bill_date
-                    if any(combination in invoice.bill_date for invoice in by_sort_by_monthly_list):
+                    if any(
+                        any(
+                            combination in invoice.bill_date
+                            or get_month_abbreviation(months[i]) in invoice.bill_date
+                            or get_month_abbreviation(months[j]) in invoice.bill_date
+                            for invoice in by_sort_by_monthly_list
+                        )
+                    ):
                         combinations.append(combination)
-        
+
         raise UserError(combinations)
 
     def action_print_report(self):
