@@ -170,16 +170,16 @@ class RecoveryReportWizard(models.TransientModel):
                 # raise UserError(invoice.bill_date)
                 try:
                     month_start , month_end, and_year = invoice.bill_date.split('-')
+                    condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
+                    # raise UserError(str(condition1)+"==="+str(condition2))
+                    if condition1 == condition2:
+                        if combination not in combinations:
+                            final_combinations.append(combination)
+
                 except ValueError:
                     # Handle the case where invoice.bill_date doesn't have the expected format
                     continue
                     
-                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
-                # raise UserError(str(condition1)+"==="+str(condition2))
-                if condition1 == condition2:
-                    if combination not in combinations:
-                        final_combinations.append(combination)
-
         raise UserError(final_combinations)
 
     def action_print_report(self):
