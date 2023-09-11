@@ -192,18 +192,18 @@ class RecoveryReportWizard(models.TransientModel):
 
     def action_print_report(self):
 
-        select_by_monthly_list=self.by_monthly_calculation()
-        raise UserError(select_by_monthly_list)
-
         lines=[]
         school_ids = []
         billing_list={}
         billing_list_paid={}
         by_monthly_billing_list={}
         by_monthly_billing_list_paid={}
-        global billing_counts , by_monthly_billing_counts
+        global billing_counts , by_monthly_billing_counts ,select_by_monthly_list
         billing_counts = {}
         by_monthly_billing_counts = {}
+
+
+        select_by_monthly_list=self.by_monthly_calculation()
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
