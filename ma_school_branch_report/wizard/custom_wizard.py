@@ -42,11 +42,6 @@ class RecoveryReportWizard(models.TransientModel):
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
     
-    def by_monthly_calculation(self):
-        raise UserError("By===========")
-
-
-
 
     def _date_constrains(self):
         if not self.to_date or not self.from_date:
@@ -109,6 +104,14 @@ class RecoveryReportWizard(models.TransientModel):
                 elif pay_from_month < from_month:
                     raise UserError("Sorry, Invalid month range..")
                     raise ValidationError(_('Sorry, Invalid month range...'))
+
+    def by_monthly_calculation(self):
+        by_sort_by_monthly_list = self.env['account.move'].search([
+                # ('x_studio_previous_branch', '=', rec.name),
+                ('state', '=', 'posted'),
+                ('move_type','=','out_invoice'),('journal_id','=',126)
+            ])
+        raise UserError(by_sort_by_monthly_list.bill_date)
 
     def action_print_report(self):
 
