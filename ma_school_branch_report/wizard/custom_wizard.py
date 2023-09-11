@@ -159,14 +159,15 @@ class RecoveryReportWizard(models.TransientModel):
                 for j in range(i + 1, len(months)):
                     combination = f"{months[i]}-{months[j]}-{year}"
                     # Check if the combination exists in by_sort_by_monthly_list.bill_date
-                    if any(
-                        combination.lower() in invoice.bill_date.lower() or
-                        month_dict.get(combination.split('-')[0].capitalize()) in month_dict.get(invoice.bill_date.split('-')[0].capitalize()) and
-                        month_dict.get(combination.split('-')[1].capitalize()) in month_dict.get(invoice.bill_date.split('-')[1].capitalize())
-                        month_dict.get(combination.split('-')[2].capitalize()) in month_dict.get(invoice.bill_date.split('-')[2].capitalize())
-                        for invoice in by_sort_by_monthly_list
-                    ):
-                        combinations.append(combination)
+                    month_start1 , month_end1, and_year1 = combination.split('-')
+                    condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
+
+                    for invoice in by_sort_by_monthly_list:
+                        month_start , month_end, and_year = invoice.bill_date.split('-')
+                        condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
+                        if condition1 == condition2:
+                            if month_key not in combinations:
+                                combinations.append(combination)
 
         raise UserError(combinations)
 
