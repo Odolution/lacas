@@ -179,7 +179,7 @@ class RecoveryReportWizard(models.TransientModel):
                     # raise UserError(str(condition1)+"==="+str(condition1))
                     if condition1 == condition2:
                         if invoice.bill_date not in final_combinations:
-                            final_combinations.append(invoice.bill_date)
+                            final_combinations.append(item)
 
         raise UserError(final_combinations)
 
