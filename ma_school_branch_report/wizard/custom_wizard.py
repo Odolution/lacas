@@ -217,7 +217,7 @@ class RecoveryReportWizard(models.TransientModel):
 
         for rec in school_ids_raw:
             by_school_bill_ids = self.env['account.move'].search([
-                ('x_studio_previous_branch', '=', rec.name),
+                # ('x_studio_previous_branch', '=', rec.name),
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',126)
             ])
