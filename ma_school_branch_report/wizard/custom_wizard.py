@@ -180,6 +180,12 @@ class RecoveryReportWizard(models.TransientModel):
                     if condition1 == condition2:
                         if invoice.bill_date not in final_combinations:
                             final_combinations.append(item)
+            
+        for i in final_combinations:
+            for j in final_combinations:
+                if i == j:
+                    raise UserError(str(i)+"  "+str(j))
+        
 
         raise UserError(final_combinations)
 
