@@ -180,14 +180,15 @@ class RecoveryReportWizard(models.TransientModel):
                     if condition1 == condition2:
                         if invoice.bill_date not in final_combinations:
                             final_combinations.append(item)
-            
-        # for i in final_combinations:
-        #     for j in final_combinations:
-        #         if i == j:
-        #             raise UserError(str(i)+"  "+str(j))
         
+        # Create a new list to store unique items
+        unique_final_combinations_list = []
 
-        raise UserError(final_combinations)
+        for item in final_combinations:
+            if item not in unique_final_combinations_list:
+                unique_final_combinations_list.append(item)
+
+        raise UserError(unique_final_combinations_list)
 
     def action_print_report(self):
 
