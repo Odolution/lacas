@@ -171,7 +171,7 @@ class RecoveryReportWizard(models.TransientModel):
                 condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
                 # raise UserError(str(condition1)+"==="+str(condition1))
                 if condition1 == condition2:
-                        combinations.append(invoice.bill_date)
+                    combinations.append(invoice.bill_date)
 
         raise UserError(combinations)
 
