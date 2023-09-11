@@ -187,12 +187,13 @@ class RecoveryReportWizard(models.TransientModel):
         for item in final_combinations:
             if item not in unique_final_combinations_list:
                 unique_final_combinations_list.append(item)
-
-        raise UserError(unique_final_combinations_list)
+        return unique_final_combinations_list
+        # raise UserError(unique_final_combinations_list)
 
     def action_print_report(self):
 
-        self.by_monthly_calculation()
+        select_by_monthly_list=self.by_monthly_calculation()
+        raise UserError(select_by_monthly_list)
 
         lines=[]
         school_ids = []
