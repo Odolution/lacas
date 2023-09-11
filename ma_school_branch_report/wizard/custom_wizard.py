@@ -145,6 +145,7 @@ class RecoveryReportWizard(models.TransientModel):
         ])
 
         combinations = []
+        final_combinations = []
 
         # Separate the list into sublists for each year
         yearly_lists = {}
@@ -171,9 +172,9 @@ class RecoveryReportWizard(models.TransientModel):
                 condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
                 # raise UserError(str(condition1)+"==="+str(condition1))
                 if condition1 == condition2:
-                    combinations.append(invoice.bill_date)
+                    final_combinations.append(invoice.bill_date)
 
-        raise UserError(combinations)
+        raise UserError(final_combinations)
 
     def action_print_report(self):
 
