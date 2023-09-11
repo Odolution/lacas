@@ -168,7 +168,12 @@ class RecoveryReportWizard(models.TransientModel):
 
             for invoice in by_sort_by_monthly_list:
                 # raise UserError(invoice.bill_date)
-                month_start , month_end, and_year = invoice.bill_date.split('-')
+                try:
+                    month_start , month_end, and_year = invoice.bill_date.split('-')
+                except ValueError:
+                    # Handle the case where invoice.bill_date doesn't have the expected format
+                    continue
+                    
                 condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
                 # raise UserError(str(condition1)+"==="+str(condition2))
                 if condition1 == condition2:
