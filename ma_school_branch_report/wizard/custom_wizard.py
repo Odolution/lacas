@@ -138,8 +138,24 @@ class RecoveryReportWizard(models.TransientModel):
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',126)
             ])
+
+        combinations = []
+
+        # Separate the list into sublists for each year
+        yearly_lists = {}
+        for item in selected_month:
+            month, year = item.split("-")
+            if year not in yearly_lists:
+                yearly_lists[year] = []
+            yearly_lists[year].append(month)
+
+        # Create combinations of all two-month pairs within the same year
+        for year, months in yearly_lists.items():
+            for i in range(len(months) - 1):
+                for j in range(i + 1, len(months)):
+                    combinations.append(f"{months[i]}-{months[j]}-{year}")
         
-        raise UserError(selected_month)
+        raise UserError(combinations)
 
     def action_print_report(self):
 
