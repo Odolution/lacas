@@ -159,17 +159,19 @@ class RecoveryReportWizard(models.TransientModel):
             for i in range(len(months) - 1):
                 for j in range(i + 1, len(months)):
                     combination = f"{months[i]}-{months[j]}-{year}"
-                    # Check if the combination exists in by_sort_by_monthly_list.bill_date
-                    month_start1 , month_end1, and_year1 = combination.split('-')
-                    condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
+                    combinations.append(combination)
 
-                    for invoice in by_sort_by_monthly_list:
-                        # raise UserError(invoice.bill_date)
-                        month_start , month_end, and_year = invoice.bill_date.split('-')
-                        condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
-                        if condition1 == condition2:
-                            if combination not in combinations:
-                                combinations.append(combination)
+        for item in combinations:
+            month_start1 , month_end1, and_year1 = item.split('-')
+            condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
+
+            for invoice in by_sort_by_monthly_list:
+                # raise UserError(invoice.bill_date)
+                month_start , month_end, and_year = invoice.bill_date.split('-')
+                condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
+                if condition1 == condition2:
+                    if combination not in combinations:
+                        combinations.append(combination)
 
         raise UserError(combinations)
 
