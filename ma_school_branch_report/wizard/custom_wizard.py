@@ -107,7 +107,7 @@ class RecoveryReportWizard(models.TransientModel):
 
     
 
-    def get_month_abbreviation(month):
+    def get_month_abbreviation(month,year):
         """Convert a full month name to its abbreviation."""
         month_abbr = {v.lower(): k for k, v in enumerate(calendar.month_abbr)}
         return month_abbr.get(month.lower(), month)
@@ -166,8 +166,8 @@ class RecoveryReportWizard(models.TransientModel):
                     if any(
                         any(
                             combination in invoice.bill_date
-                            or self.get_month_abbreviation(months[i]) in invoice.bill_date
-                            or self.get_month_abbreviation(months[j]) in invoice.bill_date
+                            or self.get_month_abbreviation(months[i],year) in invoice.bill_date
+                            or self.get_month_abbreviation(months[j],year) in invoice.bill_date
                             for invoice in by_sort_by_monthly_list
                         )
                     ):
