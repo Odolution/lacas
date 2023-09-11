@@ -166,8 +166,8 @@ class RecoveryReportWizard(models.TransientModel):
                     if any(
                         any(
                             combination in invoice.bill_date
-                            or get_month_abbreviation(months[i]) in invoice.bill_date
-                            or get_month_abbreviation(months[j]) in invoice.bill_date
+                            or self.get_month_abbreviation(months[i]) in invoice.bill_date
+                            or self.get_month_abbreviation(months[j]) in invoice.bill_date
                             for invoice in by_sort_by_monthly_list
                         )
                     ):
