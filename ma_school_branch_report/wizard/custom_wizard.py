@@ -42,6 +42,12 @@ class RecoveryReportWizard(models.TransientModel):
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
     
+    def by_monthly_calculation(self):
+        raise UserError("By===========")
+
+
+
+
     def _date_constrains(self):
         if not self.to_date or not self.from_date:
             raise UserError("Sorry, you must enter all dates..")
@@ -105,6 +111,9 @@ class RecoveryReportWizard(models.TransientModel):
                     raise ValidationError(_('Sorry, Invalid month range...'))
 
     def action_print_report(self):
+
+        self.by_monthly_calculation()
+
         lines=[]
         school_ids = []
         billing_list={}
