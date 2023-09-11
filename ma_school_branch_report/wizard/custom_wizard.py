@@ -153,7 +153,10 @@ class RecoveryReportWizard(models.TransientModel):
         for year, months in yearly_lists.items():
             for i in range(len(months) - 1):
                 for j in range(i + 1, len(months)):
-                    combinations.append(f"{months[i]}-{months[j]}-{year}")
+                    combination = f"{months[i]}-{months[j]}-{year}"
+                    # Check if the combination exists in by_sort_by_monthly_list.bill_date
+                    if any(combination in invoice.bill_date for invoice in by_sort_by_monthly_list):
+                        combinations.append(combination)
         
         raise UserError(combinations)
 
@@ -315,13 +318,13 @@ class RecoveryReportWizard(models.TransientModel):
             by_monthly_billing_list[select_new] = total_count
 
 
-        message = "by Billing information:\n\n"
-        for month_key, count in by_monthly_billing_counts.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message = "by Billing information:\n\n"
+        # for month_key, count in by_monthly_billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # Raise a UserError with the summarized message
-        raise UserError(message)
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
 
 
     def action_print_excel_school_branch_report(self):
