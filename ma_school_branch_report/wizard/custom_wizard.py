@@ -105,13 +105,41 @@ class RecoveryReportWizard(models.TransientModel):
                     raise UserError("Sorry, Invalid month range..")
                     raise ValidationError(_('Sorry, Invalid month range...'))
 
+    def list_months(self):
+        next_month = self.to_date + relativedelta(months=1)
+        first_day_of_next_month = next_month.replace(day=1)
+
+        # Subtract one day from the first day of the next month to get the last day of the current month
+        last_day_of_month = first_day_of_next_month - relativedelta(days=1)
+
+
+        # Initialize the result list
+        covered_months = []
+
+        # Iterate over each month within the duration
+        current_month = self.from_date
+        while current_month <= last_day_of_month:
+            # Format the month as "Mon-YY" (e.g., Feb-22)
+            month_str = current_month.strftime("%b-%y")
+
+            # Add the formatted month to the result list
+            covered_months.append(month_str)
+
+            # Move to the next month
+            current_month += relativedelta(months=1)
+        
+        return covered_months
+
     def by_monthly_calculation(self):
+        selected_month = self.list_months()
+
         by_sort_by_monthly_list = self.env['account.move'].search([
                 # ('x_studio_previous_branch', '=', rec.name),
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',126)
             ])
-        raise UserError(by_sort_by_monthly_list.bill_date)
+        
+        raise UserError(selected_month)
 
     def action_print_report(self):
 
