@@ -105,12 +105,6 @@ class RecoveryReportWizard(models.TransientModel):
                     raise UserError("Sorry, Invalid month range..")
                     raise ValidationError(_('Sorry, Invalid month range...'))
 
-    
-
-    def get_month_abbreviation(month,year):
-        """Convert a full month name to its abbreviation."""
-        month_abbr = {v.lower(): k for k, v in enumerate(calendar.month_abbr)}
-        return month_abbr.get(month.lower(), month)
 
     def list_months(self):
         next_month = self.to_date + relativedelta(months=1)
@@ -138,8 +132,10 @@ class RecoveryReportWizard(models.TransientModel):
         return covered_months
 
     def by_monthly_calculation(self):
+        
         selected_month = self.list_months()
-
+        month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
+        
         by_sort_by_monthly_list = self.env['account.move'].search([
             # ('x_studio_previous_branch', '=', rec.name),
             ('state', '=', 'posted'),
@@ -164,12 +160,11 @@ class RecoveryReportWizard(models.TransientModel):
                     combination = f"{months[i]}-{months[j]}-{year}"
                     # Check if the combination exists in by_sort_by_monthly_list.bill_date
                     if any(
-                        any(
-                            combination in invoice.bill_date
-                            or self.get_month_abbreviation(months[i],year) in invoice.bill_date
-                            or self.get_month_abbreviation(months[j],year) in invoice.bill_date
-                            for invoice in by_sort_by_monthly_list
-                        )
+                        combination.lower() in invoice.bill_date.lower() or
+                        month_dict.get(combination.split('-')[0].capitalize()) in month_dict.get(invoice.bill_date.split('-')[0].capitalize()) and
+                        month_dict.get(combination.split('-')[1].capitalize()) in month_dict.get(invoice.bill_date.split('-')[1].capitalize())
+                        month_dict.get(combination.split('-')[2].capitalize()) in month_dict.get(invoice.bill_date.split('-')[2].capitalize())
+                        for invoice in by_sort_by_monthly_list
                     ):
                         combinations.append(combination)
 
