@@ -145,6 +145,7 @@ class RecoveryReportWizard(models.TransientModel):
         ])
 
         combinations = []
+        final_combinations = []
 
         # Separate the list into sublists for each year
         yearly_lists = {}
@@ -172,9 +173,9 @@ class RecoveryReportWizard(models.TransientModel):
                 # raise UserError(str(condition1)+"==="+str(condition2))
                 if condition1 == condition2:
                     if combination not in combinations:
-                        combinations.append(combination)
+                        final_combinations.append(combination)
 
-        raise UserError(combinations)
+        raise UserError(final_combinations)
 
     def action_print_report(self):
 
