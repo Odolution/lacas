@@ -109,8 +109,11 @@ class RecoveryReportWizard(models.TransientModel):
         school_ids = []
         billing_list={}
         billing_list_paid={}
-        global billing_counts
+        by_monthly_billing_list={}
+        by_monthly_billing_list_paid={}
+        global billing_counts , by_monthly_billing_counts
         billing_counts = {}
+        by_monthly_billing_counts = {}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -209,6 +212,61 @@ class RecoveryReportWizard(models.TransientModel):
             "account_report_line":[(6,0,lines)]
         })  
         # raise UserError(school_ids.name)
+
+        # Bi Monthly==============================
+
+        for rec in school_ids_raw:
+            by_school_bill_ids = self.env['account.move'].search([
+                ('x_studio_previous_branch', '=', rec.name),
+                ('state', '=', 'posted'),
+                ('move_type','=','out_invoice'),('journal_id','=',126)
+            ])
+
+        if rec.name in ("Milestone Model Town (Matric)"):
+                select_new="Milestone Model Town Senior Campus"
+            else:
+                select_new=rec.name
+
+            total_count=0
+            total_count_paid=0
+            for bill_rec in by_school_bill_ids:
+                invoice_date = bill_rec.invoice_date
+                month_in_invoice = invoice_date.strftime('%m')
+                year_in_invoice = invoice_date.strftime('%y')
+                
+                # Check if the invoice date is within the specified range
+                if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
+                    # Create a key using the month and year
+                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
+                    
+                    if bill_rec.payment_state =="paid":
+                        if bill_rec.ol_payment_date:
+                            payment_date = bill_rec.ol_payment_date
+                            month_in_payment = payment_date.strftime('%m')
+                            year_in_payment = payment_date.strftime('%y')
+
+                            if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                                total_count_paid += float(bill_rec.amount_total)
+
+                    if month_key in by_monthly_billing_counts:
+                        by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
+                    else:
+                        by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
+
+            by_monthly_billing_list_paid[select_new] = total_count_paid
+            by_monthly_billing_list[select_new] = total_count
+
+
+        message = "by Billing information:\n\n"
+        for month_key, count in by_monthly_billing_counts.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
+            
+        # Raise a UserError with the summarized message
+        raise UserError(message)
+
 
     def action_print_excel_school_branch_report(self):
         
