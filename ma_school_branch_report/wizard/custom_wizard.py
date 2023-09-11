@@ -141,6 +141,7 @@ class RecoveryReportWizard(models.TransientModel):
             ('state', '=', 'posted'),
             ('move_type', '=', 'out_invoice'),
             ('journal_id', '=', 126)
+            ("payment_state","=","paid")
         ])
 
         combinations = []
