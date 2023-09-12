@@ -62,7 +62,7 @@ class SecurityAmountReport(models.Model):
             all_students = self.env['school.student'].search([])
             student_ids = [student.id for student in all_students]
 
-
+            raise UserError(student_ids)
             # Create a set to store the unique student ids
             unique_student_ids = set()
 
