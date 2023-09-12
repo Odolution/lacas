@@ -128,9 +128,8 @@ class ext(models.Model):
     #             rec.net_amount=str(nofloat)
 
     def _compute_late_fee_amnt(self):
-        
+        self.latefee=0
         for rec in self:
-            rec.latefee=0
             if rec.invoice_line_ids:
                 for line in rec.invoice_line_ids:
                     if 'Late Fee' in line.product_id.name:
