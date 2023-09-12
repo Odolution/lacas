@@ -60,6 +60,7 @@ class SecurityAmountReport(models.Model):
             # Step 1: Search for students in school.student using facts_id
             
             all_students = self.env['school.student'].search([])
+            student_ids = [student.id for student in all_students]
 
 
             # Create a set to store the unique student ids
