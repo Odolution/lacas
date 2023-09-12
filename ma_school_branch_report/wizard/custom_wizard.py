@@ -321,7 +321,7 @@ class RecoveryReportWizard(models.TransientModel):
             total_count=0
             total_count_paid=0
             for month_in_list in select_by_monthly_list:
-                month_start1 , month_end1, and_year1 = item.split('-')
+                month_start1 , month_end1, and_year1 = month_in_list.split('-')
                 condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
 
                 for bill_rec in by_school_bill_ids:
