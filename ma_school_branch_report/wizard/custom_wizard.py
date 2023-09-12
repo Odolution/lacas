@@ -9,7 +9,7 @@ import xlsxwriter
 _
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
-
+import calendar
 
 import base64
 
@@ -42,6 +42,7 @@ class RecoveryReportWizard(models.TransientModel):
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
     
+
     def _date_constrains(self):
         if not self.to_date or not self.from_date:
             raise UserError("Sorry, you must enter all dates..")
@@ -104,13 +105,106 @@ class RecoveryReportWizard(models.TransientModel):
                     raise UserError("Sorry, Invalid month range..")
                     raise ValidationError(_('Sorry, Invalid month range...'))
 
+
+    def list_months(self):
+        next_month = self.to_date + relativedelta(months=1)
+        first_day_of_next_month = next_month.replace(day=1)
+
+        # Subtract one day from the first day of the next month to get the last day of the current month
+        last_day_of_month = first_day_of_next_month - relativedelta(days=1)
+
+
+        # Initialize the result list
+        covered_months = []
+
+        # Iterate over each month within the duration
+        current_month = self.from_date
+        while current_month <= last_day_of_month:
+            # Format the month as "Mon-YY" (e.g., Feb-22)
+            month_str = current_month.strftime("%b-%y")
+
+            # Add the formatted month to the result list
+            covered_months.append(month_str)
+
+            # Move to the next month
+            current_month += relativedelta(months=1)
+        
+        return covered_months
+
+    def by_monthly_calculation(self):
+        
+        selected_month = self.list_months()
+        month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
+        
+        by_sort_by_monthly_list = self.env['account.move'].search([
+            # ('x_studio_previous_branch', '=', rec.name),
+            ('state', '=', 'posted'),
+            ('move_type', '=', 'out_invoice'),
+            ('journal_id', '=', 126),
+            
+        ])
+
+        combinations = []
+        final_combinations = []
+
+        # Separate the list into sublists for each year
+        yearly_lists = {}
+        for item in selected_month:
+            month, year = item.split("-")
+            if year not in yearly_lists:
+                yearly_lists[year] = []
+            yearly_lists[year].append(month)
+
+        # Create combinations of all two-month pairs within the same year
+        for year, months in yearly_lists.items():
+            for i in range(len(months) - 1):
+                for j in range(i + 1, len(months)):
+                    combination = f"{months[i]}-{months[j]}-{year}"
+                    combinations.append(combination)
+
+        for item in combinations:
+            month_start1 , month_end1, and_year1 = item.split('-')
+            condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
+
+            for invoice in by_sort_by_monthly_list:
+                # raise UserError(invoice.bill_date)
+                if not invoice.bill_date:
+                    continue
+                
+                # Split the bill_date into parts and check the format
+                date_parts = invoice.bill_date.split('-')
+                if len(date_parts) == 3:
+                    month_start , month_end, and_year = invoice.bill_date.split('-')
+                    condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
+                    # raise UserError(str(condition1)+"==="+str(condition1))
+                    if condition1 == condition2:
+                        if invoice.bill_date not in final_combinations:
+                            final_combinations.append(item)
+        
+        # Create a new list to store unique items
+        unique_final_combinations_list = []
+
+        for item in final_combinations:
+            if item not in unique_final_combinations_list:
+                unique_final_combinations_list.append(item)
+        return unique_final_combinations_list
+        # raise UserError(unique_final_combinations_list)
+
     def action_print_report(self):
+
         lines=[]
         school_ids = []
-        billing_list=[]
-        billing_list_paid=[]
-        global billing_counts
+        billing_list={}
+        billing_list_paid={}
+        by_monthly_billing_list={}
+        by_monthly_billing_list_paid={}
+        global billing_counts , by_monthly_billing_counts ,select_by_monthly_list
         billing_counts = {}
+        by_monthly_billing_counts = {}
+
+
+        select_by_monthly_list=self.by_monthly_calculation()
+        raise UserError(select_by_monthly_list)
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -128,14 +222,22 @@ class RecoveryReportWizard(models.TransientModel):
         pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
         for rec in school_ids_raw:
-            school_ids.append(rec)
-            # raise UserError(rec.program_ids)
+            if rec.name !="Milestone Model Town (Matric)":
+            #     continue
+                school_ids.append(rec)
+            # raise UserError(rec) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
            
             school_bill_ids = self.env['account.move'].search([
-                ('program_ids', 'in', rec.program_ids.ids),
-                ('state', '=', 'posted')
+                ('x_studio_previous_branch', '=', rec.name),
+                ('state', '=', 'posted'),
+                ('move_type','=','out_invoice'),('journal_id','=',125)
             ])
-            
+
+            if rec.name in ("Milestone Model Town (Matric)"):
+                select_new="Milestone Model Town Senior Campus"
+            else:
+                select_new=rec.name
+
             total_count=0
             total_count_paid=0
             for bill_rec in school_bill_ids:
@@ -146,7 +248,7 @@ class RecoveryReportWizard(models.TransientModel):
                 # Check if the invoice date is within the specified range
                 if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
                     # Create a key using the month and year
-                    month_key = f"{rec.name}-{year_in_invoice}-{month_in_invoice}"
+                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
                     
                     if bill_rec.payment_state =="paid":
                         if bill_rec.ol_payment_date:
@@ -155,21 +257,21 @@ class RecoveryReportWizard(models.TransientModel):
                             year_in_payment = payment_date.strftime('%y')
 
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                total_count_paid += float(bill_rec.net_amount)
+                                total_count_paid += float(bill_rec.amount_total)
 
                     if month_key in billing_counts:
-                        billing_counts[month_key] += float(bill_rec.net_amount)
-                        total_count += float(bill_rec.net_amount)
+                        billing_counts[month_key] += float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
                     else:
-                        billing_counts[month_key] = float(bill_rec.net_amount)
-                        total_count += float(bill_rec.net_amount)
+                        billing_counts[month_key] = float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
 
-            billing_list_paid.append(total_count_paid)
-            billing_list.append(total_count)
+            billing_list_paid[select_new] = total_count_paid
+            billing_list[select_new] = total_count
 
             for year in range(int(v_from_year), int(v_to_year) + 1):
                 for month in range(int(v_from_month), int(v_to_month) + 1):
-                    month_key = f"{rec.name}-{str(year)[-2:]}-{month:02}"
+                    month_key = f"{select_new}-{str(year)[-2:]}-{month:02}"
                     if month_key not in billing_counts:
                         billing_counts[month_key] = 0
            
@@ -185,11 +287,14 @@ class RecoveryReportWizard(models.TransientModel):
         
 
         for item in range(len(school_ids)):
+            name_view = school_ids[item].name
+            billing_view = billing_list[name_view]
+            billing_paid_view = billing_list_paid[name_view]
             mvl=self.env['student.report.line'].create({
                                         
-                "branch_name":school_ids[item].name,
-                "school_bill_len":billing_list[item],
-                "billing_list_paid":billing_list_paid[item],
+                "branch_name":name_view,
+                "school_bill_len":billing_view,
+                "billing_list_paid":billing_paid_view,
             })
             lines.append(mvl.id)
 
@@ -198,6 +303,61 @@ class RecoveryReportWizard(models.TransientModel):
             "account_report_line":[(6,0,lines)]
         })  
         # raise UserError(school_ids.name)
+
+        # Bi Monthly==============================
+
+        for rec in school_ids_raw:
+            by_school_bill_ids = self.env['account.move'].search([
+                # ('x_studio_previous_branch', '=', rec.name),
+                ('state', '=', 'posted'),
+                ('move_type','=','out_invoice'),('journal_id','=',126)
+            ])
+            # raise UserError(by_school_bill_ids)
+            if rec.name in ("Milestone Model Town (Matric)"):
+                select_new="Milestone Model Town Senior Campus"
+            else:
+                select_new=rec.name
+
+            total_count=0
+            total_count_paid=0
+            for bill_rec in by_school_bill_ids:
+                invoice_date = bill_rec.invoice_date
+                month_in_invoice = invoice_date.strftime('%m')
+                year_in_invoice = invoice_date.strftime('%y')
+                
+                # Check if the invoice date is within the specified range
+                if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
+                    # Create a key using the month and year
+                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
+                    
+                    if bill_rec.payment_state =="paid":
+                        if bill_rec.ol_payment_date:
+                            payment_date = bill_rec.ol_payment_date
+                            month_in_payment = payment_date.strftime('%m')
+                            year_in_payment = payment_date.strftime('%y')
+
+                            if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                                total_count_paid += float(bill_rec.amount_total)
+
+                    if month_key in by_monthly_billing_counts:
+                        by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
+                    else:
+                        by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
+                        total_count += float(bill_rec.amount_total)
+
+            by_monthly_billing_list_paid[select_new] = total_count_paid
+            by_monthly_billing_list[select_new] = total_count
+
+
+        # message = "by Billing information:\n\n"
+        # for month_key, count in by_monthly_billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
+            
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
+
 
     def action_print_excel_school_branch_report(self):
         
@@ -335,6 +495,7 @@ class RecoveryReportWizard(models.TransientModel):
                         main_string = group_name_list[0]
                         substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
                         # raise UserError(str(group_name_list)+"==="+str(group_total))
+                        
                         if substring == new_substring:
                             group_name_list.append(rec.branch_name)
                             group_total+=rec.school_bill_len
@@ -350,16 +511,7 @@ class RecoveryReportWizard(models.TransientModel):
                                         months_total_dict.update({key: row_month_total})
 
                         else:
-                            # message = "Billing information:\n\n"
-                            # for month_key, count in months_total_dict.items():
-                            #     # month_key format: 'yy-mm'
-                            #     original_string = month_key
-                            #     split_parts = original_string.split('-')
-                            #     result = split_parts[0]
-                            #     message += f"Month: {result}, Number of bills: {count}\n"
-                                
-                            # # Raise a UserError with the summarized message
-                            # raise UserError(message)
+                            
                             col=4
                             for month_key, count in months_total_dict.items():
                                 original_string = month_key
@@ -385,17 +537,81 @@ class RecoveryReportWizard(models.TransientModel):
                             group_total=0
                             group_recovery=0
 
-                            group_name_list.append(rec.branch_name)
-                            group_total+=rec.school_bill_len
-                            group_recovery+=rec.billing_list_paid
-                            for i in range(range_start,range_stop+1):
-                                row_month_total=0
-                                new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
-                                for month_key, count in billing_counts.items():
-                                    if new_month_key==month_key:
-                                        key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
-                                        row_month_total= months_total_dict.get(key, 0)+count
-                                        months_total_dict.update({key: row_month_total})
+                            if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town Campus"):
+                                # Print row data
+                                worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                                col=4
+                                for i in range(range_start,range_stop+1):
+                                    # check=True
+                                    new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                    for month_key, count in billing_counts.items():
+                                        if new_month_key==month_key:
+                                            worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                                        
+                                    col+=3
+                                worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
+                                worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
+                                if rec.school_bill_len>0 and rec.billing_list_paid>0:
+                                    total_per =(rec.billing_list_paid/rec.school_bill_len)*100
+                                    worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
+                                else:
+                                    worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
+                                row+=1
+
+                                group_name_list.append(rec.branch_name)
+                                group_total+=rec.school_bill_len
+                                # final_total+=rec.school_bill_len
+                                group_recovery+=rec.billing_list_paid
+                                for i in range(range_start,range_stop+1):
+                                    row_month_total=0
+                                    new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                    for month_key, count in billing_counts.items():
+                                        if new_month_key==month_key:
+                                            key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                            row_month_total= months_total_dict.get(key, 0)+count
+                                            months_total_dict.update({key: row_month_total})
+                                col=4
+                                for month_key, count in months_total_dict.items():
+                                    original_string = month_key
+                                    split_parts = original_string.split('-')
+                                    result = split_parts[0]
+                                    if rec.branch_name == result:
+                                        worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                        col+=3
+                                        
+                                worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+                                worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
+                                worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
+                                if group_recovery>0 and group_recovery>0:
+                                    total_per_new =(group_recovery/group_total)*100
+                                    worksheet.write_merge(row,row,col+5,col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                else:
+                                    worksheet.write_merge(row,row,col+5,col+6,'0 %',style=yellow_style_title)
+                                #  raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
+                                row+=1
+                                final_total+=group_total
+                                final_recovery+=group_recovery
+                                group_name_list.clear()
+                                group_total=0
+                                group_recovery=0
+
+                                
+                                continue
+                                # raise UserError("LACAS Johar Town A Level")
+                            else:
+
+                                group_name_list.append(rec.branch_name)
+                                group_total+=rec.school_bill_len
+                                group_recovery+=rec.billing_list_paid
+                                for i in range(range_start,range_stop+1):
+                                    row_month_total=0
+                                    new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
+                                    for month_key, count in billing_counts.items():
+                                        if new_month_key==month_key:
+                                            key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
+                                            row_month_total= months_total_dict.get(key, 0)+count
+                                            months_total_dict.update({key: row_month_total})
+                    
                     # Print row data
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     col=4
@@ -405,13 +621,8 @@ class RecoveryReportWizard(models.TransientModel):
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                                # check=False
-                            # else:
-                            #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
-                        # if check:
-                        #     worksheet.write_merge(row,row,col,col+2,0,style=style_title)
+                             
                         col+=3
-                    # raise UserError(message)
                     worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
                     worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
                     if rec.school_bill_len>0 and rec.billing_list_paid>0:
@@ -419,22 +630,9 @@ class RecoveryReportWizard(models.TransientModel):
                         worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
                     else:
                         worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
-                    
-                    
-                            # raise UserError(str(group_name_list)+"==="+str(group_total))
-                            # raise UserError(str(group_name_list)+"==="+str(group_total))
-                    # worksheet.write_merge(row,row,2,2,rec.no_of_std,style=style_title)
-                    # worksheet.write_merge(row,row,3,3,rec.total_recovery,style=style_title)
-                    # worksheet.write_merge(row,row,4,4,rec.recovery_percentage,style=style_title)
-   
                     row+=1
-            # message = "Billing information:\n\n"
-            # for month_key, count in months_total_dict.items():
-            #     # month_key format: 'yy-mm'
-            #     message += f"Month: {month_key}, Number of bills: {count}\n"
-                
-            # # Raise a UserError with the summarized message
-            # raise UserError(message)
+         
+        #  final total row
             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
 
             col=4
