@@ -87,19 +87,19 @@ class SecurityAmountReport(models.Model):
             domain = [('student_ids', 'in', all_student_ids)]
             all_account_move_objects = self.env['account.move'].search(domain)
 
+        
             # Step 4: Write the results in an Excel file
             row = 1
             serial_number = 1
 
-            for student_object in all_account_move_objects: 
-                flag=False
+            for student_object in all_account_move_objects:
+                raise UserError(student_object.student_ids) 
                 for std_id in student_object.student_ids:
                     if std_id.id in unique_student_ids:
                         flag=True
         
                         break
                 if flag == True:
-                    raise UserError("Hello")
                     # Student found in either out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
                     worksheet.write(row, 1, student_object.name if student_object.name else "N/A")
