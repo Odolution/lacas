@@ -736,7 +736,7 @@ class RecoveryReportWizard(models.TransientModel):
                         for month_in_list in select_by_monthly_list:
                             row_month_total=0
                             new_month_key = f"{rec.branch_name}-{month_in_list}"
-                            for month_key, count in billing_counts.items():
+                            for month_key, count in by_monthly_billing_counts.items():
                                 if new_month_key==month_key:
                                     key = f"{new_substring}-{month_in_list}"
                                     row_month_total= months_total_dict.get(key, 0)+count
@@ -754,7 +754,7 @@ class RecoveryReportWizard(models.TransientModel):
                             for month_in_list in select_by_monthly_list:
                                 row_month_total=0
                                 new_month_key = f"{rec.branch_name}-{month_in_list}"
-                                for month_key, count in billing_counts.items():
+                                for month_key, count in by_monthly_billing_counts.items():
                                     if new_month_key==month_key:
                                         key = f"{new_substring}-{month_in_list}"
                                         row_month_total= months_total_dict.get(key, 0)+count
@@ -794,7 +794,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 for month_in_list in select_by_monthly_list:
                                     # check=True
                                     new_month_key = f"{rec.branch_name}-{month_in_list}"
-                                    for month_key, count in billing_counts.items():
+                                    for month_key, count in by_monthly_billing_counts.items():
                                         if new_month_key==month_key:
                                             worksheet.write_merge(row,row,new_col,new_col+2,count,style=style_title)
                                         
@@ -815,7 +815,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 for month_in_list in select_by_monthly_list:
                                     row_month_total=0
                                     new_month_key = f"{rec.branch_name}-{month_in_list}"
-                                    for month_key, count in billing_counts.items():
+                                    for month_key, count in by_monthly_billing_counts.items():
                                         if new_month_key==month_key:
                                             key = f"{rec.branch_name}-{month_in_list}"
                                             row_month_total= months_total_dict.get(key, 0)+count
@@ -856,7 +856,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 for i in select_by_monthly_list:
                                     row_month_total=0
                                     new_month_key = f"{rec.branch_name}-{month_in_list}}"
-                                    for month_key, count in billing_counts.items():
+                                    for month_key, count in by_monthly_billing_counts.items():
                                         if new_month_key==month_key:
                                             key = f"{new_substring}-{month_in_list}"
                                             row_month_total= months_total_dict.get(key, 0)+count
@@ -868,7 +868,7 @@ class RecoveryReportWizard(models.TransientModel):
                     for month_in_list in select_by_monthly_list:
                         # check=True
                         new_month_key = f"{rec.branch_name}-{month_in_list}"
-                        for month_key, count in billing_counts.items():
+                        for month_key, count in by_monthly_billing_counts.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,new_col,new_col+2,count,style=style_title)
                              
