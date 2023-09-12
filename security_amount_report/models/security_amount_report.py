@@ -93,13 +93,34 @@ class SecurityAmountReport(models.Model):
                     # Student found in either out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
                     worksheet.write(row, 1, student.name if student.name else "N/A")
+                    worksheet.write(row, 2, student.partner_id.name if student.partner_id else "N/A")
+                    worksheet.write(row, 3, student.udid_cred_custom if student.udid_cred_custom else "N/A")
+                    worksheet.write(row, 4, student.class_name if student.class_name else "N/A")
+                    worksheet.write(row, 5, student.section_name if student.section_name else "N/A")
+                    worksheet.write(row, 6, student.x_school_id_cred.name if student.x_school_id_cred else "N/A")
+                    worksheet.write(row, 7, student.x_studio_withdrawn_status if student.x_studio_withdrawn_status else "N/A")
+                    worksheet.write(row, 8, str(student.x_studio_admission_date) if student.x_studio_admission_date else "N/A")
+                    for line in student.invoice_line_ids:
+                        if line.product_id.name=="Security":
+                            worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
+
                     # Add more fields as needed
                     serial_number += 1
                     row += 1
                 else:
                     # Student not found in out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
-                    worksheet.write(row, 1, "N/A")
+                    worksheet.write(row, 1, student.name if student.name else "N/A")
+                    worksheet.write(row, 2, student.partner_id.name if student.partner_id else "N/A")
+                    worksheet.write(row, 3, student.udid_cred_custom if student.udid_cred_custom else "N/A")
+                    worksheet.write(row, 4, student.class_name if student.class_name else "N/A")
+                    worksheet.write(row, 5, student.section_name if student.section_name else "N/A")
+                    worksheet.write(row, 6, student.x_school_id_cred.name if student.x_school_id_cred else "N/A")
+                    worksheet.write(row, 7, student.x_studio_withdrawn_status if student.x_studio_withdrawn_status else "N/A")
+                    worksheet.write(row, 8, str(student.x_studio_admission_date) if student.x_studio_admission_date else "N/A")
+                    worksheet.write(row, 9, "N/A")
+                    
+                    
                     # Add more fields as needed
                     serial_number += 1
                     row += 1
