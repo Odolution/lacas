@@ -131,9 +131,11 @@ class ext(models.Model):
         self.latefee=0
         for rec in self:
             if rec.invoice_line_ids:
+
                 for line in rec.invoice_line_ids:
-                    if 'Late Fee' in line.product_id.name:
-                        rec.latefee=line.price_total
+                    if line.product_id:
+                        if 'Late Fee' in line.product_id.name:
+                            rec.latefee=line.price_total
                     # else:
                     #     rec.latefee=0
 
