@@ -94,10 +94,12 @@ class SecurityAmountReport(models.Model):
             for student_object in all_account_move_objects: 
                 flag=False
                 for std_id in student_object.student_ids:
-                    if std_id in unique_student_ids:
+                    if std_id.id in unique_student_ids:
                         flag=True
+        
                         break
                 if flag == True:
+                    raise UserError("Hello")
                     # Student found in either out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
                     worksheet.write(row, 1, student_object.name if student_object.name else "N/A")
