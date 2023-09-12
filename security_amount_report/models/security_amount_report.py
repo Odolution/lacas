@@ -60,35 +60,29 @@ class SecurityAmountReport(models.Model):
             # Step 1: Search for students in school.student using facts_id
             
             all_students = self.env['school.student'].search([])
-            student_ids = [student.id for student in all_students]
+            all_student_ids = [student.id for student in all_students]
 
             # raise UserError(student_ids)
             # Create a set to store the unique student ids
             unique_student_ids = set()
 
             # Step 2: Search for students in out_invoice (Admission Challan) with product_id==Security
-            invoice_domain = [('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan'),('student_ids','in',student_ids)]
+            invoice_domain = [('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan'),('student_ids','in',all_student_ids)]
             all_invoice_objects = self.env['account.move'].search(invoice_domain)
+
+            
+
+            # Step 3: Search for students in out_refund (Reversal) with product_id==Security
+            refund_domain = [('move_type', '=', 'out_refund'),('student_ids','in',all_student_ids)]
+            all_refund_objects = self.env['account.move'].search(refund_domain)
 
             # Add unique student ids to the set if product_id==Security
             for line in all_invoice_objects.invoice_line_ids:
                 if line.product_id.name == "Security":
-                    unique_student_ids.add(all_invoice_objects.student_ids)
+                    unique_student_ids.add(all_refund_objects.student_ids)
             
             raise UserError(unique_student_ids)
 
-
-            # Step 3: Search for students in out_refund (Reversal) with product_id==Security
-            refund_domain = [('move_type', '=', 'out_refund')]
-            all_refund_objects = self.env['account.move'].search(refund_domain)
-
-            # Add unique student ids to the set if product_id==Security
-            for individual_object in all_refund_objects:
-                for line in individual_object.invoice_line_ids:
-                    if line.product_id.name == "Security" and individual_object.x_student_id_cred:
-                        unique_student_ids.add(individual_object.x_student_id_cred.id)
-            
-            
             domain = [('std_factsid', 'in', list(unique_student_ids))]
             all_account_move_objects = self.env['account.move'].search(domain)
 
