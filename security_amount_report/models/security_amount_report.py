@@ -55,71 +55,101 @@ class SecurityAmountReport(models.Model):
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
 
-            domain = [('move_type', '=', 'out_refund')]
-            # searching with filter that move_type is of out_refund type which is of Reversal
+
+            # Define the search domain with "or" between move_type and "and" between move_type and journal_id
+            domain = ['|', ('move_type', '=', 'out_invoice'), ('move_type', '=', 'out_refund'), ('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan')]
+
+            # Search for records matching the combined domain
             all_account_move_objects = self.env['account.move'].search(domain)
+
             row = 1
             serial_number = 1
 
-            
+            # Process the records based on move_type and journal_id
             for individual_object in all_account_move_objects:
                 for line in individual_object.invoice_line_ids:
                     if line.product_id.name == "Security":
                         worksheet.write(row, 0, serial_number)
-
-                        if line.product_id.name == "Security":
-                            # worksheet.write_merge(row, row, 1, 1, individual_object.x_student_id_cred.name)
-                            worksheet.write(row, 1, individual_object.x_student_id_cred.name)
-                        else:
-                            worksheet.write(row, 1, "N/A")
-
-                        if individual_object.partner_id.name:
-                            worksheet.write(row, 2, individual_object.partner_id.name)
-                        else:
-                            worksheet.write(row, 2, "N/A")
-
-                        if individual_object.udid_cred_custom:
-                            worksheet.write(row, 3, individual_object.udid_cred_custom)
-                        else:
-                            worksheet.write(row, 3, "N/A")
-                        
-                        if individual_object.class_name:
-                            worksheet.write(row, 4, individual_object.class_name)
-                        else:
-                            worksheet.write(row, 4, "N/A")
-
-                        if individual_object.section_name:
-                            worksheet.write(row, 5, individual_object.section_name)
-                        else:
-                            worksheet.write(row, 5, "N/A")
-
-                        if individual_object.x_school_id_cred.name:
-                            worksheet.write(row, 6, individual_object.x_school_id_cred.name)
-                        else:
-                            worksheet.write(row, 6, "N/A")
-
-                        if individual_object.x_studio_withdrawn_status:
-                            worksheet.write(row, 7, individual_object.x_studio_withdrawn_status)
-                        else:
-                            worksheet.write(row, 7, "N/A")
-
-                        if individual_object.x_studio_admission_date:
-                            worksheet.write(row, 8, str(individual_object.x_studio_admission_date))
-                        else:
-                            worksheet.write(row, 8, "N/A")
-
-                        if line.price_total:
-                            worksheet.write(row, 9, line.price_total)
-                        elif line.price_total==0:
-                            worksheet.write(row, 9, 0)
-                        else:
-                            worksheet.write(row, 9, "N/A")
-
+                        worksheet.write(row, 1, individual_object.x_student_id_cred.name if individual_object.x_student_id_cred else "N/A")
+                        worksheet.write(row, 2, individual_object.partner_id.name if individual_object.partner_id else "N/A")
+                        worksheet.write(row, 3, individual_object.udid_cred_custom if individual_object.udid_cred_custom else "N/A")
+                        worksheet.write(row, 4, individual_object.class_name if individual_object.class_name else "N/A")
+                        worksheet.write(row, 5, individual_object.section_name if individual_object.section_name else "N/A")
+                        worksheet.write(row, 6, individual_object.x_school_id_cred.name if individual_object.x_school_id_cred else "N/A")
+                        worksheet.write(row, 7, individual_object.x_studio_withdrawn_status if individual_object.x_studio_withdrawn_status else "N/A")
+                        worksheet.write(row, 8, str(individual_object.x_studio_admission_date) if individual_object.x_studio_admission_date else "N/A")
+                        worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
                         serial_number += 1
-                        row+=1
-                        # raise UserError(line.name)
+                        row += 1
                     else:
                         pass
+
+
+            # domain = [('move_type', '=', 'out_refund')]
+            # # searching with filter that move_type is of out_refund type which is of Reversal
+            # all_account_move_objects = self.env['account.move'].search(domain)
+            # row = 1
+            # serial_number = 1
+
+            
+            # for individual_object in all_account_move_objects:
+            #     for line in individual_object.invoice_line_ids:
+            #         if line.product_id.name == "Security":
+            #             worksheet.write(row, 0, serial_number)
+
+            #             if line.product_id.name == "Security":
+            #                 # worksheet.write_merge(row, row, 1, 1, individual_object.x_student_id_cred.name)
+            #                 worksheet.write(row, 1, individual_object.x_student_id_cred.name)
+            #             else:
+            #                 worksheet.write(row, 1, "N/A")
+
+            #             if individual_object.partner_id.name:
+            #                 worksheet.write(row, 2, individual_object.partner_id.name)
+            #             else:
+            #                 worksheet.write(row, 2, "N/A")
+
+            #             if individual_object.udid_cred_custom:
+            #                 worksheet.write(row, 3, individual_object.udid_cred_custom)
+            #             else:
+            #                 worksheet.write(row, 3, "N/A")
+                        
+            #             if individual_object.class_name:
+            #                 worksheet.write(row, 4, individual_object.class_name)
+            #             else:
+            #                 worksheet.write(row, 4, "N/A")
+
+            #             if individual_object.section_name:
+            #                 worksheet.write(row, 5, individual_object.section_name)
+            #             else:
+            #                 worksheet.write(row, 5, "N/A")
+
+            #             if individual_object.x_school_id_cred.name:
+            #                 worksheet.write(row, 6, individual_object.x_school_id_cred.name)
+            #             else:
+            #                 worksheet.write(row, 6, "N/A")
+
+            #             if individual_object.x_studio_withdrawn_status:
+            #                 worksheet.write(row, 7, individual_object.x_studio_withdrawn_status)
+            #             else:
+            #                 worksheet.write(row, 7, "N/A")
+
+            #             if individual_object.x_studio_admission_date:
+            #                 worksheet.write(row, 8, str(individual_object.x_studio_admission_date))
+            #             else:
+            #                 worksheet.write(row, 8, "N/A")
+
+            #             if line.price_total:
+            #                 worksheet.write(row, 9, line.price_total)
+            #             elif line.price_total==0:
+            #                 worksheet.write(row, 9, 0)
+            #             else:
+            #                 worksheet.write(row, 9, "N/A")
+
+            #             serial_number += 1
+            #             row+=1
+            #             # raise UserError(line.name)
+            #         else:
+            #             pass
                         # raise UserError("No Security Found")
                         # raise UserError(str(account_move_object))
 
