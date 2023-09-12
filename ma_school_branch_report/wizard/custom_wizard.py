@@ -855,7 +855,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 group_recovery+=rec.billing_list_paid
                                 for i in select_by_monthly_list:
                                     row_month_total=0
-                                    new_month_key = f"{rec.branch_name}-{month_in_list}}"
+                                    new_month_key = f"{rec.branch_name}-{month_in_list}"
                                     for month_key, count in by_monthly_billing_counts.items():
                                         if new_month_key==month_key:
                                             key = f"{new_substring}-{month_in_list}"
