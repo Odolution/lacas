@@ -30,7 +30,7 @@ class AccountMoveReport(models.TransientModel):
     billing_list_paid =fields.Float('Paid')
 
 class ByMonthlyAccountMoveReport(models.TransientModel):
-    _name = 'student.by.Monthly.report.line'
+    _name = 'student.bi.monthly.report.line'
     
     record_id=fields.Char('ID')
     branch_name=fields.Char('name')
