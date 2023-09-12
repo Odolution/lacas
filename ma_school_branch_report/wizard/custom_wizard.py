@@ -328,9 +328,9 @@ class RecoveryReportWizard(models.TransientModel):
                     if not bill_rec.bill_date:
                         continue
                
-                    date_parts = invoice.bill_date.split('-')
+                    date_parts = bill_rec.bill_date.split('-')
                     if len(date_parts) == 3:
-                        month_start , month_end, and_year = bill_rec.bill_date.split('-')
+                        month_start , month_end, and_year = date_parts
                         condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
                     
                         if condition1==condition2:
