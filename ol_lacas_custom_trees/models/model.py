@@ -153,6 +153,9 @@ class ext(models.Model):
                         amt.append(line.price_total)
                     if 'Late Fee' in line.product_id.name:
                         late.append(line.price_total)
+                    else:
+                        late.append(0)
+
                     if line.product_id.is_discount_type==True:
                         #if line.product_id.name!="Late Fee":
                         abs_price=abs(line.price_total)
