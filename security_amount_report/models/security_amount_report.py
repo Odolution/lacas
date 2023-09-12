@@ -56,33 +56,83 @@ class SecurityAmountReport(models.Model):
             # account_move_object = self.env['account.move'].search(domain)
 
 
-            # Define the search domain with "or" between move_type and "and" between move_type and journal_id
-            domain = ['|', ('move_type', '=', 'out_invoice'), ('move_type', '=', 'out_refund'), ('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan')]
 
-            # Search for records matching the combined domain
-            all_account_move_objects = self.env['account.move'].search(domain)
+            # Step 1: Search for students in school.student using facts_id
+            student_domain = [('facts_id', '!=', False)]
+            all_students = self.env['school.student'].search(student_domain)
 
+            # Create a set to store the unique student ids
+            unique_student_ids = set()
+
+            # Step 2: Search for students in out_invoice (Admission Challan) with product_id==Security
+            invoice_domain = [('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan')]
+            all_invoice_objects = self.env['account.move'].search(invoice_domain)
+
+            # Add unique student ids to the set if product_id==Security
+            for individual_object in all_invoice_objects:
+                for line in individual_object.invoice_line_ids:
+                    if line.product_id.name == "Security" and individual_object.x_student_id_cred:
+                        unique_student_ids.add(individual_object.x_student_id_cred.id)
+
+            # Step 3: Search for students in out_refund (Reversal) with product_id==Security
+            refund_domain = [('move_type', '=', 'out_refund')]
+            all_refund_objects = self.env['account.move'].search(refund_domain)
+
+            # Add unique student ids to the set if product_id==Security
+            for individual_object in all_refund_objects:
+                for line in individual_object.invoice_line_ids:
+                    if line.product_id.name == "Security" and individual_object.x_student_id_cred:
+                        unique_student_ids.add(individual_object.x_student_id_cred.id)
+
+            # Step 4: Write the results in an Excel file
             row = 1
             serial_number = 1
 
-            # Process the records based on move_type and journal_id
-            for individual_object in all_account_move_objects:
-                for line in individual_object.invoice_line_ids:
-                    if line.product_id.name == "Security":
-                        worksheet.write(row, 0, serial_number)
-                        worksheet.write(row, 1, individual_object.x_student_id_cred.name if individual_object.x_student_id_cred else "N/A")
-                        worksheet.write(row, 2, individual_object.partner_id.name if individual_object.partner_id else "N/A")
-                        worksheet.write(row, 3, individual_object.udid_cred_custom if individual_object.udid_cred_custom else "N/A")
-                        worksheet.write(row, 4, individual_object.class_name if individual_object.class_name else "N/A")
-                        worksheet.write(row, 5, individual_object.section_name if individual_object.section_name else "N/A")
-                        worksheet.write(row, 6, individual_object.x_school_id_cred.name if individual_object.x_school_id_cred else "N/A")
-                        worksheet.write(row, 7, individual_object.x_studio_withdrawn_status if individual_object.x_studio_withdrawn_status else "N/A")
-                        worksheet.write(row, 8, str(individual_object.x_studio_admission_date) if individual_object.x_studio_admission_date else "N/A")
-                        worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
-                        serial_number += 1
-                        row += 1
-                    else:
-                        pass
+            for student in all_students:
+                if student.id in unique_student_ids:
+                    # Student found in either out_invoice or out_refund with product_id==Security
+                    worksheet.write(row, 0, serial_number)
+                    worksheet.write(row, 1, student.name if student.name else "N/A")
+                    # Add more fields as needed
+                    serial_number += 1
+                    row += 1
+                else:
+                    # Student not found in out_invoice or out_refund with product_id==Security
+                    worksheet.write(row, 0, serial_number)
+                    worksheet.write(row, 1, "N/A")
+                    # Add more fields as needed
+                    serial_number += 1
+                    row += 1
+
+
+
+            # Define the search domain with "or" between move_type and "and" between move_type and journal_id
+            # domain = ['|', ('move_type', '=', 'out_invoice'), ('move_type', '=', 'out_refund'), ('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan')]
+
+            # # Search for records matching the combined domain
+            # all_account_move_objects = self.env['account.move'].search(domain)
+
+            # row = 1
+            # serial_number = 1
+
+            # # Process the records based on move_type and journal_id
+            # for individual_object in all_account_move_objects:
+            #     for line in individual_object.invoice_line_ids:
+            #         if line.product_id.name == "Security":
+            #             worksheet.write(row, 0, serial_number)
+            #             worksheet.write(row, 1, individual_object.x_student_id_cred.name if individual_object.x_student_id_cred else "N/A")
+            #             worksheet.write(row, 2, individual_object.partner_id.name if individual_object.partner_id else "N/A")
+            #             worksheet.write(row, 3, individual_object.udid_cred_custom if individual_object.udid_cred_custom else "N/A")
+            #             worksheet.write(row, 4, individual_object.class_name if individual_object.class_name else "N/A")
+            #             worksheet.write(row, 5, individual_object.section_name if individual_object.section_name else "N/A")
+            #             worksheet.write(row, 6, individual_object.x_school_id_cred.name if individual_object.x_school_id_cred else "N/A")
+            #             worksheet.write(row, 7, individual_object.x_studio_withdrawn_status if individual_object.x_studio_withdrawn_status else "N/A")
+            #             worksheet.write(row, 8, str(individual_object.x_studio_admission_date) if individual_object.x_studio_admission_date else "N/A")
+            #             worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
+            #             serial_number += 1
+            #             row += 1
+            #         else:
+            #             pass
 
 
             # domain = [('move_type', '=', 'out_refund')]
