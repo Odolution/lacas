@@ -49,7 +49,7 @@ class RecoveryReportWizard(models.TransientModel):
     to_date_pay = fields.Date(string='To')
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
-    by_account_report_line=fields.Many2many('student.by.Monthly.report.line', string='Account by Monthly report Line')
+    by_account_report_line=fields.Many2many('student.bi.monthly.report.line', string='Account by Monthly report Line')
     
 
     def _date_constrains(self):
@@ -363,6 +363,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 total_count += float(bill_rec.amount_total)
                 if month_key not in by_monthly_billing_counts:
                     by_monthly_billing_counts[month_key]=0
+
                 by_monthly_billing_list_paid[select_new] = total_count_paid
                 by_monthly_billing_list[select_new] = total_count
 
