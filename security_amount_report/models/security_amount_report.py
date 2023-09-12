@@ -108,10 +108,9 @@ class SecurityAmountReport(models.Model):
                         else:
                             worksheet.write(row, 8, "N/A")
 
-                        if line.price_total:
-                            worksheet.write(row, 9, line.price_total)
-                        elif line.price_total==0:
-                            worksheet.write(row, 9, 0)
+                         
+                        if individual_object.security_amnt_lv:
+                            worksheet.write(row, 9, individual_object.security_amnt_lv)
                         else:
                             worksheet.write(row, 9, "N/A")
 
