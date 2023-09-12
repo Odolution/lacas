@@ -702,7 +702,7 @@ class RecoveryReportWizard(models.TransientModel):
             # # Raise a UserError with the summarized message
             # raise UserError(message)
             new_col=col+6
-            raise UserError(new_col)
+            # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
                 worksheet.write_merge(0,1,new_col,new_col+2,'Bi Monthly '+month_in_list,red_style_title)
