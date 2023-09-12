@@ -105,8 +105,8 @@ class SecurityAmountReport(models.Model):
                 if flag == True:
                     # Student found in either out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
-                    worksheet.write(row, 1, student_object.name if student_object.name else "N/A")
-                    worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id else "N/A")
+                    worksheet.write(row, 1, student_object.x_student_id_cred.name if student_object.x_student_id_cred.name else "N/A")
+                    worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id.name else "N/A")
                     worksheet.write(row, 3, student_object.udid_cred_custom if student_object.udid_cred_custom else "N/A")
                     worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
@@ -115,13 +115,18 @@ class SecurityAmountReport(models.Model):
                     worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
                     for line in student_object.invoice_line_ids:
                         if line.product_id.name=="Security":
-                            worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
-                    
+                            # worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
+                            if line.price_total:
+                                worksheet.write(row, 9, line.price_total)
+                            elif line.price_total==0:
+                                worksheet.write(row, 9, 0)
+                            else:
+                                worksheet.write(row, 9, "N/A")
                 else:
                     # Student not found in out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
-                    worksheet.write(row, 1, student_object.name if student_object.name else "N/A")
-                    worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id else "N/A")
+                    worksheet.write(row, 1, student_object.x_student_id_cred.name if student_object.x_student_id_cred.name else "N/A")
+                    worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id.name else "N/A")
                     worksheet.write(row, 3, student_object.udid_cred_custom if student_object.udid_cred_custom else "N/A")
                     worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
