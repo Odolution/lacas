@@ -84,7 +84,11 @@ class SecurityAmountReport(models.Model):
                     if line.product_id.name == "Security" and individual_object.x_student_id_cred:
                         unique_student_ids.add(individual_object.x_student_id_cred.id)
             
-            raise UserError(unique_student_ids)
+            
+            domain = [('std_factsid', 'in', unique_student_ids)]
+            all_account_move_objects = self.env['account.move'].search(domain)
+
+            raise UserError(all_account_move_objects)
 
             # Step 4: Write the results in an Excel file
             # row = 1
