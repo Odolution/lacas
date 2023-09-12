@@ -132,7 +132,7 @@ class RecoveryReportWizard(models.TransientModel):
         return covered_months
 
     def by_monthly_calculation(self):
-        
+        global month_dict 
         selected_month = self.list_months()
         month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
         
@@ -198,7 +198,7 @@ class RecoveryReportWizard(models.TransientModel):
         billing_list_paid={}
         by_monthly_billing_list={}
         by_monthly_billing_list_paid={}
-        global billing_counts , by_monthly_billing_counts ,select_by_monthly_list
+        global billing_counts , by_monthly_billing_counts ,select_by_monthly_list,month_dict
         billing_counts = {}
         by_monthly_billing_counts = {}
 
@@ -321,27 +321,38 @@ class RecoveryReportWizard(models.TransientModel):
             total_count=0
             total_count_paid=0
             for month_in_list in select_by_monthly_list:
+                month_start1 , month_end1, and_year1 = item.split('-')
+                condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
+
                 for bill_rec in by_school_bill_ids:
-                    if bill_rec.bill_date==month_in_list:
-                        # raise UserError(bill_rec.bill_date)
-                        # Create a key using the month and year
-                        month_key = f"{select_new}-{month_in_list}"
-                        
-                        # if bill_rec.payment_state =="paid":
-                        #     if bill_rec.ol_payment_date:
-                        #         payment_date = bill_rec.ol_payment_date
-                        #         month_in_payment = payment_date.strftime('%m')
-                        #         year_in_payment = payment_date.strftime('%y')
+                    if not bill_rec.bill_date:
+                        continue
+               
+                    date_parts = invoice.bill_date.split('-')
+                    if len(date_parts) == 3:
+                        month_start , month_end, and_year = bill_rec.bill_date.split('-')
+                        condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
+                    
+                        if condition1==condition2:
+                            # raise UserError(bill_rec.bill_date)
+                            # Create a key using the month and year
+                            month_key = f"{select_new}-{month_in_list}"
+                            
+                            # if bill_rec.payment_state =="paid":
+                            #     if bill_rec.ol_payment_date:
+                            #         payment_date = bill_rec.ol_payment_date
+                            #         month_in_payment = payment_date.strftime('%m')
+                            #         year_in_payment = payment_date.strftime('%y')
 
-                        #         if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                        #             total_count_paid += float(bill_rec.amount_total)
+                            #         if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                            #             total_count_paid += float(bill_rec.amount_total)
 
-                        if month_key in by_monthly_billing_counts:
-                            by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
-                            total_count += float(bill_rec.amount_total)
-                        else:
-                            by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
-                            total_count += float(bill_rec.amount_total)
+                            if month_key in by_monthly_billing_counts:
+                                by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
+                                total_count += float(bill_rec.amount_total)
+                            else:
+                                by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
+                                total_count += float(bill_rec.amount_total)
 
                 # by_monthly_billing_list_paid[select_new] = total_count_paid
                 # by_monthly_billing_list[select_new] = total_count
