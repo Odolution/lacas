@@ -204,7 +204,7 @@ class RecoveryReportWizard(models.TransientModel):
 
 
         select_by_monthly_list=self.by_monthly_calculation()
-        raise UserError(select_by_monthly_list)
+        # raise UserError(select_by_monthly_list)
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -308,7 +308,7 @@ class RecoveryReportWizard(models.TransientModel):
 
         for rec in school_ids_raw:
             by_school_bill_ids = self.env['account.move'].search([
-                # ('x_studio_previous_branch', '=', rec.name),
+                ('x_studio_previous_branch', '=', rec.name),
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',126)
             ])
@@ -350,13 +350,13 @@ class RecoveryReportWizard(models.TransientModel):
             by_monthly_billing_list[select_new] = total_count
 
 
-        # message = "by Billing information:\n\n"
-        # for month_key, count in by_monthly_billing_counts.items():
-        #     # month_key format: 'yy-mm'
-        #     message += f"Month: {month_key}, Number of bills: {count}\n"
+        message = "by Billing information:\n\n"
+        for month_key, count in by_monthly_billing_counts.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # # Raise a UserError with the summarized message
-        # raise UserError(message)
+        # Raise a UserError with the summarized message
+        raise UserError(message)
 
 
     def action_print_excel_school_branch_report(self):
