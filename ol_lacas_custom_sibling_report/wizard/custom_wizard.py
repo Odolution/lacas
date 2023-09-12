@@ -100,7 +100,8 @@ class SiblingsReportWizard(models.TransientModel):
 
                 enrolled_students = rec.student_ids.filtered(lambda student: student.x_last_enrollment_status_id.name == 'Enrolled' and len(student.grade_level_ids) == 1)
 
-                if len(enrolled_students) > 1 :
+                if len(enrolled_students) == 1 :
+                    
                     tot_child = len(enrolled_students)
                     parent_code = rec.facts_id
                     enrolled_students.sorted(key=lambda students: (students.grade_level_ids.x_studio_class, students.grade_level_ids.sequence))
