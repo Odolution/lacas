@@ -323,7 +323,9 @@ class RecoveryReportWizard(models.TransientModel):
             for month_in_list in select_by_monthly_list:
                 month_start1 , month_end1, and_year1 = month_in_list.split('-')
                 condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
-
+                
+                month_key = f"{select_new}-{month_in_list}"
+                
                 for bill_rec in by_school_bill_ids:
                     if not bill_rec.bill_date:
                         continue
@@ -336,7 +338,6 @@ class RecoveryReportWizard(models.TransientModel):
                         if condition1==condition2:
                             # raise UserError(bill_rec.bill_date)
                             # Create a key using the month and year
-                            month_key = f"{select_new}-{month_in_list}"
                             
                             # if bill_rec.payment_state =="paid":
                             #     if bill_rec.ol_payment_date:
@@ -353,7 +354,8 @@ class RecoveryReportWizard(models.TransientModel):
                             else:
                                 by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
                                 total_count += float(bill_rec.amount_total)
-
+                if month_key in by_monthly_billing_counts:
+                    by_monthly_billing_counts[month_key]=0
                 # by_monthly_billing_list_paid[select_new] = total_count_paid
                 # by_monthly_billing_list[select_new] = total_count
 
