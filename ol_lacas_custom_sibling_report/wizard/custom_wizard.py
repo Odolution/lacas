@@ -98,17 +98,17 @@ class SiblingsReportWizard(models.TransientModel):
                 m_name = ''
                 m_ph = ''
 
-                enrolled_students = rec.student_ids.filtered(lambda student: student.x_last_enrollment_status_id.name == 'Enrolled')
+                enrolled_students = rec.student_ids.filtered(lambda students: students.x_last_enrollment_status_id.name == 'Enrolled')
 
                 if len(enrolled_students) > 1:
                     tot_child = len(enrolled_students)
                     parent_code = rec.facts_id
-                    enrolled_students.sorted(key=lambda student: (student.grade_level_ids.x_studio_class, student.grade_level_ids.sequence))
-                    for student in enrolled_students:
-                        roll_no = student.facts_udid
-                        name = student.name
-                        phone = student.phone
-                        street = student.street
+                    enrolled_students.sorted(key=lambda students: (students.grade_level_ids.x_studio_class, students.grade_level_ids.sequence))
+                    for students in enrolled_students:
+                        roll_no = students.facts_udid
+                        name = students.name
+                        phone = students.phone
+                        street = students.street
                         if students.homeroom:
                             wholename = students.homeroom
                             splitted_name = wholename.split('-')
