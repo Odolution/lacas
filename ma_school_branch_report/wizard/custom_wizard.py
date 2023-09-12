@@ -701,7 +701,7 @@ class RecoveryReportWizard(models.TransientModel):
                 
             # # Raise a UserError with the summarized message
             # raise UserError(message)
-            new_col=col
+            new_col=col+6
             raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
