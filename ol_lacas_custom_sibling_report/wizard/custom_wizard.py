@@ -98,7 +98,7 @@ class SiblingsReportWizard(models.TransientModel):
                 m_name = ''
                 m_ph = ''
 
-               enrolled_students = rec.student_ids.filtered(lambda student: student.x_last_enrollment_status_id.name == 'Enrolled' and len(student.grade_level_ids) == 1)
+                enrolled_students = rec.student_ids.filtered(lambda student: student.x_last_enrollment_status_id.name == 'Enrolled' and len(student.grade_level_ids) == 1)
 
                 if len(enrolled_students) > 1 :
                     tot_child = len(enrolled_students)
