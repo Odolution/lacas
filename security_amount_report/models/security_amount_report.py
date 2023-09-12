@@ -67,7 +67,7 @@ class SecurityAmountReport(models.Model):
             unique_student_ids = set()
 
             # Step 2: Search for students in out_invoice (Admission Challan) with product_id==Security
-            invoice_domain = [('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan'),('student_ids','in',list(all_students))]
+            invoice_domain = [('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan'),('student_ids','in',student_ids)]
             all_invoice_objects = self.env['account.move'].search(invoice_domain)
 
             raise UserError(all_invoice_objects)
