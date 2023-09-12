@@ -28,6 +28,14 @@ class AccountMoveReport(models.TransientModel):
     branch_name=fields.Char('name')
     school_bill_len =fields.Float('Total')
     billing_list_paid =fields.Float('Paid')
+
+class ByMonthlyAccountMoveReport(models.TransientModel):
+    _name = 'student.by.Monthly.report.line'
+    
+    record_id=fields.Char('ID')
+    branch_name=fields.Char('name')
+    school_bill_len =fields.Float('Total')
+    billing_list_paid =fields.Float('Paid')
     
 
 class RecoveryReportWizard(models.TransientModel):
@@ -41,6 +49,7 @@ class RecoveryReportWizard(models.TransientModel):
     to_date_pay = fields.Date(string='To')
     
     account_report_line=fields.Many2many('student.report.line', string='Account report Line')
+    by_account_report_line=fields.Many2many('student.by.Monthly.report.line', string='Account by Monthly report Line')
     
 
     def _date_constrains(self):
@@ -193,6 +202,7 @@ class RecoveryReportWizard(models.TransientModel):
     def action_print_report(self):
 
         lines=[]
+        by_lines=[]
         school_ids = []
         billing_list={}
         billing_list_paid={}
@@ -336,17 +346,14 @@ class RecoveryReportWizard(models.TransientModel):
                         condition2 = str(month_dict.get(month_start.capitalize())) +"-"+str(month_dict.get(month_end.capitalize()))+"-"+and_year 
                     
                         if condition1==condition2:
-                            # raise UserError(bill_rec.bill_date)
-                            # Create a key using the month and year
-                            
-                            # if bill_rec.payment_state =="paid":
-                            #     if bill_rec.ol_payment_date:
-                            #         payment_date = bill_rec.ol_payment_date
-                            #         month_in_payment = payment_date.strftime('%m')
-                            #         year_in_payment = payment_date.strftime('%y')
+                            if bill_rec.payment_state =="paid":
+                                if bill_rec.ol_payment_date:
+                                    payment_date = bill_rec.ol_payment_date
+                                    month_in_payment = payment_date.strftime('%m')
+                                    year_in_payment = payment_date.strftime('%y')
 
-                            #         if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                            #             total_count_paid += float(bill_rec.amount_total)
+                                    if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                                        total_count_paid += float(bill_rec.amount_total)
 
                             if month_key in by_monthly_billing_counts:
                                 by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
@@ -356,17 +363,34 @@ class RecoveryReportWizard(models.TransientModel):
                                 total_count += float(bill_rec.amount_total)
                 if month_key not in by_monthly_billing_counts:
                     by_monthly_billing_counts[month_key]=0
-                # by_monthly_billing_list_paid[select_new] = total_count_paid
-                # by_monthly_billing_list[select_new] = total_count
+                by_monthly_billing_list_paid[select_new] = total_count_paid
+                by_monthly_billing_list[select_new] = total_count
+
+        for item in range(len(school_ids)):
+
+            name_view = school_ids[item].name
+            billing_view = by_monthly_billing_list[name_view]
+            billing_paid_view = by_monthly_billing_list_paid[name_view]
+
+            mvl=self.env['student.by.Monthly.report.line'].create({
+                "branch_name":name_view,
+                "school_bill_len":billing_view,
+                "billing_list_paid":billing_paid_view,
+            })
+            by_lines.append(mvl.id)
 
 
-        message = "by Billing information:\n\n"
-        for month_key, count in by_monthly_billing_counts.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        self.write({
+            "by_account_report_line":[(6,0,by_lines)]
+        })  
+
+        # message = "by Billing information:\n\n"
+        # for month_key, count in by_monthly_billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # Raise a UserError with the summarized message
-        raise UserError(message)
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
 
 
     def action_print_excel_school_branch_report(self):
@@ -377,7 +401,7 @@ class RecoveryReportWizard(models.TransientModel):
         
         
         if xlwt:
-            global billing_counts
+            global billing_counts ,by_monthly_billing_counts
             
             filename = 'Students Branch Report.xls'
             # One sheet by partner
@@ -667,14 +691,14 @@ class RecoveryReportWizard(models.TransientModel):
                 final_total_per =(final_recovery/final_total)*100
                 worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
             
-            # message = "Billing information:\n\n"
-            # for month_key, count in billing_counts.items():
-            #     # month_key format: 'yy-mm'
-            #     # worksheet.write_merge(row,row,13,14,count,style=style_title)
-            #     message += f"Month: {month_key}, Number of bills: {count}\n"
+            message = "Billing information:\n\n"
+            for month_key, count in by_monthly_billing_counts.items():
+                # month_key format: 'yy-mm'
+                # worksheet.write_merge(row,row,13,14,count,style=style_title)
+                message += f"Month: {month_key}, Number of bills: {count}\n"
                 
-            # # Raise a UserError with the summarized message
-            # raise UserError(message)
+            # Raise a UserError with the summarized message
+            raise UserError(message)
 
             fp = io.BytesIO()
             workbook.save(fp)
