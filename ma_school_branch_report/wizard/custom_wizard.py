@@ -322,19 +322,19 @@ class RecoveryReportWizard(models.TransientModel):
             total_count_paid=0
             for month_in_list in select_by_monthly_list:
                 for bill_rec in by_school_bill_ids:
-                    if bill_rec.bill_date=="August-September-23":
-                        raise UserError(bill_rec.bill_date)
+                    if bill_rec.bill_date==month_in_list:
+                        # raise UserError(bill_rec.bill_date)
                         # Create a key using the month and year
-                        month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
+                        month_key = f"{select_new}-{month_in_list}"
                         
-                        if bill_rec.payment_state =="paid":
-                            if bill_rec.ol_payment_date:
-                                payment_date = bill_rec.ol_payment_date
-                                month_in_payment = payment_date.strftime('%m')
-                                year_in_payment = payment_date.strftime('%y')
+                        # if bill_rec.payment_state =="paid":
+                        #     if bill_rec.ol_payment_date:
+                        #         payment_date = bill_rec.ol_payment_date
+                        #         month_in_payment = payment_date.strftime('%m')
+                        #         year_in_payment = payment_date.strftime('%y')
 
-                                if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                    total_count_paid += float(bill_rec.amount_total)
+                        #         if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                        #             total_count_paid += float(bill_rec.amount_total)
 
                         if month_key in by_monthly_billing_counts:
                             by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
@@ -343,8 +343,8 @@ class RecoveryReportWizard(models.TransientModel):
                             by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
                             total_count += float(bill_rec.amount_total)
 
-                by_monthly_billing_list_paid[select_new] = total_count_paid
-                by_monthly_billing_list[select_new] = total_count
+                # by_monthly_billing_list_paid[select_new] = total_count_paid
+                # by_monthly_billing_list[select_new] = total_count
 
 
         message = "by Billing information:\n\n"
