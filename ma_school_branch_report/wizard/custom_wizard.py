@@ -354,7 +354,7 @@ class RecoveryReportWizard(models.TransientModel):
                             else:
                                 by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
                                 total_count += float(bill_rec.amount_total)
-                if month_key in by_monthly_billing_counts:
+                if month_key not in by_monthly_billing_counts:
                     by_monthly_billing_counts[month_key]=0
                 # by_monthly_billing_list_paid[select_new] = total_count_paid
                 # by_monthly_billing_list[select_new] = total_count
