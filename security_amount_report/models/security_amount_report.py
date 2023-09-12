@@ -87,7 +87,7 @@ class SecurityAmountReport(models.Model):
             domain = [('student_ids', 'in', all_student_ids)]
             all_account_move_objects = self.env['account.move'].search(domain)
 
-            Step 4: Write the results in an Excel file
+            # Step 4: Write the results in an Excel file
             row = 1
             serial_number = 1
 
