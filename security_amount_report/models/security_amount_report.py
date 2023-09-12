@@ -93,7 +93,7 @@ class SecurityAmountReport(models.Model):
             serial_number = 1
 
             for student_object in all_account_move_objects:
-                raise UserError(student_object.student_ids) 
+                raise UserError(student_object.student_ids[0].id) 
                 for std_id in student_object.student_ids:
                     if std_id.id in unique_student_ids:
                         flag=True
