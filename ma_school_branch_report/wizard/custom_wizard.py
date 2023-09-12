@@ -372,7 +372,7 @@ class RecoveryReportWizard(models.TransientModel):
             billing_view = by_monthly_billing_list[name_view]
             billing_paid_view = by_monthly_billing_list_paid[name_view]
 
-            mvl=self.env['student.by.Monthly.report.line'].create({
+            mvl=self.env['student.bi.monthly.report.line'].create({
                 "branch_name":name_view,
                 "school_bill_len":billing_view,
                 "billing_list_paid":billing_paid_view,
