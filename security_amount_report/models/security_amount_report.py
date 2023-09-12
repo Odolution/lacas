@@ -83,53 +83,46 @@ class SecurityAmountReport(models.Model):
                 if line.product_id.name == "Security":
                     unique_student_ids.add(all_refund_objects.student_ids)
             
-            raise UserError(unique_student_ids)
 
-            domain = [('std_factsid', 'in', list(unique_student_ids))]
+            domain = [('student_ids', 'in', all_student_ids)]
             all_account_move_objects = self.env['account.move'].search(domain)
 
-            raise UserError(all_account_move_objects)
+            Step 4: Write the results in an Excel file
+            row = 1
+            serial_number = 1
 
-            # Step 4: Write the results in an Excel file
-            # row = 1
-            # serial_number = 1
-
-            # for student in all_students:
-            #     if student.id in unique_student_ids:
-            #         student_invoice = all_invoice_objects.filtered(lambda move: move.x_student_id_cred.id == student.id)
-            #         if student_invoice:
-            #             # Student found in either out_invoice or out_refund with product_id==Security
-            #             worksheet.write(row, 0, serial_number)
-            #             worksheet.write(row, 1, student_invoice.name if student_invoice.name else "N/A")
-            #             worksheet.write(row, 2, student_invoice.partner_id.name if student_invoice.partner_id else "N/A")
-            #             worksheet.write(row, 3, student_invoice.udid_cred_custom if student_invoice.udid_cred_custom else "N/A")
-            #             worksheet.write(row, 4, student_invoice.class_name if student_invoice.class_name else "N/A")
-            #             worksheet.write(row, 5, student_invoice.section_name if student_invoice.section_name else "N/A")
-            #             worksheet.write(row, 6, student_invoice.x_school_id_cred.name if student_invoice.x_school_id_cred else "N/A")
-            #             worksheet.write(row, 7, student_invoice.x_studio_withdrawn_status if student_invoice.x_studio_withdrawn_status else "N/A")
-            #             worksheet.write(row, 8, str(student_invoice.x_studio_admission_date) if student_invoice.x_studio_admission_date else "N/A")
-            #             for line in student_invoice.invoice_line_ids:
-            #                 if line.product_id.name=="Security":
-            #                     worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
+            for student_object in all_account_move_objects:
+                if student_object.student_ids in unique_student_ids:
+                    # Student found in either out_invoice or out_refund with product_id==Security
+                    worksheet.write(row, 0, serial_number)
+                    worksheet.write(row, 1, student_object.name if student_object.name else "N/A")
+                    worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id else "N/A")
+                    worksheet.write(row, 3, student_object.udid_cred_custom if student_object.udid_cred_custom else "N/A")
+                    worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
+                    worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
+                    worksheet.write(row, 6, student_object.x_school_id_cred.name if student_object.x_school_id_cred else "N/A")
+                    worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
+                    worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
+                    for line in student_object.invoice_line_ids:
+                        if line.product_id.name=="Security":
+                            worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
                     
-            #         else:
-            #             student_refund = all_refund_objects.filtered(lambda move: move.x_student_id_cred.id == student.id)
-            #             if student_refund:
-            #                 # Student not found in out_invoice or out_refund with product_id==Security
-            #                 worksheet.write(row, 0, serial_number)
-            #                 worksheet.write(row, 1, student_refund.name if student_refund.name else "N/A")
-            #                 worksheet.write(row, 2, student_refund.partner_id.name if student_refund.partner_id else "N/A")
-            #                 worksheet.write(row, 3, student_refund.udid_cred_custom if student_refund.udid_cred_custom else "N/A")
-            #                 worksheet.write(row, 4, student_refund.class_name if student_refund.class_name else "N/A")
-            #                 worksheet.write(row, 5, student_refund.section_name if student_refund.section_name else "N/A")
-            #                 worksheet.write(row, 6, student_refund.x_school_id_cred.name if student_refund.x_school_id_cred else "N/A")
-            #                 worksheet.write(row, 7, student_refund.x_studio_withdrawn_status if student_refund.x_studio_withdrawn_status else "N/A")
-            #                 worksheet.write(row, 8, str(student_refund.x_studio_admission_date) if student_refund.x_studio_admission_date else "N/A")
-            #                 worksheet.write(row, 9, "N/A")
+                else:
+                    # Student not found in out_invoice or out_refund with product_id==Security
+                    worksheet.write(row, 0, serial_number)
+                    worksheet.write(row, 1, student_object.name if student_object.name else "N/A")
+                    worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id else "N/A")
+                    worksheet.write(row, 3, student_object.udid_cred_custom if student_object.udid_cred_custom else "N/A")
+                    worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
+                    worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
+                    worksheet.write(row, 6, student_object.x_school_id_cred.name if student_object.x_school_id_cred else "N/A")
+                    worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
+                    worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
+                    worksheet.write(row, 9, "N/A")
 
-            #         # Add more fields as needed
-            #         serial_number += 1
-            #         row += 1
+                # Add more fields as needed
+                serial_number += 1
+                row += 1
             #     else:
             #         # Student not found in out_invoice or out_refund with product_id==Security
             #         worksheet.write(row, 0, serial_number)
