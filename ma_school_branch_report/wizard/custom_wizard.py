@@ -693,14 +693,15 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
            
  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
-            message = "Billing information:\n\n"
-            for month_key, count in by_monthly_billing_counts.items():
-                # month_key format: 'yy-mm'
-                # worksheet.write_merge(row,row,13,14,count,style=style_title)
-                message += f"Month: {month_key}, Number of bills: {count}\n"
+            # message = "Billing information:\n\n"
+            # for month_key, count in by_monthly_billing_counts.items():
+            #     # month_key format: 'yy-mm'
+            #     # worksheet.write_merge(row,row,13,14,count,style=style_title)
+            #     message += f"Month: {month_key}, Number of bills: {count}\n"
                 
-            # Raise a UserError with the summarized message
-            raise UserError(message)
+            # # Raise a UserError with the summarized message
+            # raise UserError(message)
+
             new_col=col+8
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
@@ -712,6 +713,174 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,new_col,new_col+1,"Total",style=red_style_title)
             worksheet.write_merge(0,1,new_col+2,new_col+4,"Branch Wise Recovery",style=red_style_title)
             worksheet.write_merge(0,1,new_col+5,new_col+6,"'%' age of Recovery",style=yellow_style_title)
+
+            group_total=0
+            final_total=0
+            group_recovery=0
+            final_recovery=0
+            group_name_list=[]
+            months_total_dict={}
+            row=2
+            new_col=col+8
+            for rec in self.by_account_report_line:
+                if rec:
+                #    Total
+                    new_string = rec.branch_name
+                    new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
+
+                    if len(group_name_list)==0:
+                        group_name_list.append(rec.branch_name)
+                        group_total+=rec.school_bill_len
+                        group_recovery+=rec.billing_list_paid
+
+                        for month_in_list in select_by_monthly_list:
+                            row_month_total=0
+                            new_month_key = f"{rec.branch_name}-{month_in_list}"
+                            for month_key, count in billing_counts.items():
+                                if new_month_key==month_key:
+                                    key = f"{new_substring}-{month_in_list}"
+                                    row_month_total= months_total_dict.get(key, 0)+count
+                                    months_total_dict.update({key: row_month_total})
+                    else:
+                        main_string = group_name_list[0]
+                        substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
+                        # raise UserError(str(group_name_list)+"==="+str(group_total))
+                        
+                        if substring == new_substring:
+                            group_name_list.append(rec.branch_name)
+                            group_total+=rec.school_bill_len
+                            # final_total+=rec.school_bill_len
+                            group_recovery+=rec.billing_list_paid
+                            for month_in_list in select_by_monthly_list:
+                                row_month_total=0
+                                new_month_key = f"{rec.branch_name}-{month_in_list}"
+                                for month_key, count in billing_counts.items():
+                                    if new_month_key==month_key:
+                                        key = f"{new_substring}-{month_in_list}"
+                                        row_month_total= months_total_dict.get(key, 0)+count
+                                        months_total_dict.update({key: row_month_total})
+
+                        else:
+                            
+                            new_col=col+8
+                            for month_key, count in months_total_dict.items():
+                                original_string = month_key
+                                split_parts = original_string.split('-')
+                                result = split_parts[0]
+                                if substring == result:
+                                    worksheet.write_merge(row,row,new_col,new_col+2,count, style=yellow_style_title)
+                                    new_col+=3
+                                    
+                            worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+                            worksheet.write_merge(row,row,new_col,new_col+1,group_total, style=yellow_style_title)
+                            worksheet.write_merge(row,row,new_col+2,new_col+4,group_recovery, style=yellow_style_title)
+                            if group_recovery>0 and group_recovery>0:
+                                total_per_new =(group_recovery/group_total)*100
+                                worksheet.write_merge(row,row,new_col+5,new_col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                            else:
+                                worksheet.write_merge(row,row,new_col+5,new_col+6,'0 %',style=yellow_style_title)
+                            #  raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
+                            row+=1
+                            final_total+=group_total
+                            final_recovery+=group_recovery
+                            group_name_list.clear()
+                            group_total=0
+                            group_recovery=0
+
+                            if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town Campus"):
+                                # Print row data
+                                worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                                new_col=col+8
+                                for month_in_list in select_by_monthly_list:
+                                    # check=True
+                                    new_month_key = f"{rec.branch_name}-{month_in_list}"
+                                    for month_key, count in billing_counts.items():
+                                        if new_month_key==month_key:
+                                            worksheet.write_merge(row,row,new_col,new_col+2,count,style=style_title)
+                                        
+                                    new_col+=3
+                                worksheet.write_merge(row,row,new_col,new_col+1,rec.school_bill_len,style=style_title)
+                                worksheet.write_merge(row,row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
+                                if rec.school_bill_len>0 and rec.billing_list_paid>0:
+                                    total_per =(rec.billing_list_paid/rec.school_bill_len)*100
+                                    worksheet.write_merge(row,row,new_col+5,new_col+6,str(round(total_per, 4))+' %',style=style_title)
+                                else:
+                                    worksheet.write_merge(row,row,new_col+5,new_col+6,'0 %',style=style_title)
+                                row+=1
+
+                                group_name_list.append(rec.branch_name)
+                                group_total+=rec.school_bill_len
+                                # final_total+=rec.school_bill_len
+                                group_recovery+=rec.billing_list_paid
+                                for month_in_list in select_by_monthly_list:
+                                    row_month_total=0
+                                    new_month_key = f"{rec.branch_name}-{month_in_list}"
+                                    for month_key, count in billing_counts.items():
+                                        if new_month_key==month_key:
+                                            key = f"{rec.branch_name}-{month_in_list}"
+                                            row_month_total= months_total_dict.get(key, 0)+count
+                                            months_total_dict.update({key: row_month_total})
+                                new_col=col+8
+                                for month_key, count in months_total_dict.items():
+                                    original_string = month_key
+                                    split_parts = original_string.split('-')
+                                    result = split_parts[0]
+                                    if rec.branch_name == result:
+                                        worksheet.write_merge(row,row,new_col,new_col+2,count, style=yellow_style_title)
+                                        new_col+=3
+                                        
+                                worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+                                worksheet.write_merge(row,row,new_col,new_col+1,group_total, style=yellow_style_title)
+                                worksheet.write_merge(row,row,new_col+2,new_col+4,group_recovery, style=yellow_style_title)
+                                if group_recovery>0 and group_recovery>0:
+                                    total_per_new =(group_recovery/group_total)*100
+                                    worksheet.write_merge(row,row,new_col+5,new_col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                else:
+                                    worksheet.write_merge(row,row,new_col+5,new_col+6,'0 %',style=yellow_style_title)
+                                #  raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
+                                row+=1
+                                final_total+=group_total
+                                final_recovery+=group_recovery
+                                group_name_list.clear()
+                                group_total=0
+                                group_recovery=0
+
+                                
+                                continue
+                                # raise UserError("LACAS Johar Town A Level")
+                            else:
+
+                                group_name_list.append(rec.branch_name)
+                                group_total+=rec.school_bill_len
+                                group_recovery+=rec.billing_list_paid
+                                for i in select_by_monthly_list:
+                                    row_month_total=0
+                                    new_month_key = f"{rec.branch_name}-{month_in_list}}"
+                                    for month_key, count in billing_counts.items():
+                                        if new_month_key==month_key:
+                                            key = f"{new_substring}-{month_in_list}"
+                                            row_month_total= months_total_dict.get(key, 0)+count
+                                            months_total_dict.update({key: row_month_total})
+                    
+                    # Print row data
+                    worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                    new_col=col+8
+                    for month_in_list in select_by_monthly_list:
+                        # check=True
+                        new_month_key = f"{rec.branch_name}-{month_in_list}"
+                        for month_key, count in billing_counts.items():
+                            if new_month_key==month_key:
+                                worksheet.write_merge(row,row,new_col,new_col+2,count,style=style_title)
+                             
+                        new_col+=3
+                    worksheet.write_merge(row,row,new_col,new_col+1,rec.school_bill_len,style=style_title)
+                    worksheet.write_merge(row,row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
+                    if rec.school_bill_len>0 and rec.billing_list_paid>0:
+                        total_per =(rec.billing_list_paid/rec.school_bill_len)*100
+                        worksheet.write_merge(row,row,new_col+5,new_col+6,str(round(total_per, 4))+' %',style=style_title)
+                    else:
+                        worksheet.write_merge(row,row,new_col+5,new_col+6,'0 %',style=style_title)
+                    row+=1
 
             fp = io.BytesIO()
             workbook.save(fp)
