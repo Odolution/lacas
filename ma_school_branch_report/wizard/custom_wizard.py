@@ -242,8 +242,8 @@ class RecoveryReportWizard(models.TransientModel):
             total_count_paid=0
             for month_in_list in select_by_monthly_list:
                 for bill_rec in school_bill_ids:
-                    raise UserError(bill_rec.bill_date)
-                    if bill_rec.bill_date:
+                    if bill_rec.bill_date =="August-September-23":
+                        raise UserError(bill_rec.bill_date)
                    # Create a key using the month and year
                         month_key = f"{select_new}-{month_in_list}"
                         
