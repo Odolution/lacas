@@ -69,7 +69,9 @@ class SecurityAmountReport(models.Model):
             # Step 2: Search for students in out_invoice (Admission Challan) with product_id==Security
             invoice_domain = [('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan'),('student_ids','in',all_student_ids)]
             all_invoice_objects = self.env['account.move'].search(invoice_domain)
-
+            for line in all_invoice_objects.invoice_line_ids:
+                if line.product_id.name == "Security":
+                    unique_student_ids.add(all_invoice_objects.student_ids)
             
 
             # Step 3: Search for students in out_refund (Reversal) with product_id==Security
@@ -77,7 +79,7 @@ class SecurityAmountReport(models.Model):
             all_refund_objects = self.env['account.move'].search(refund_domain)
 
             # Add unique student ids to the set if product_id==Security
-            for line in all_invoice_objects.invoice_line_ids:
+            for line in all_refund_objects.invoice_line_ids:
                 if line.product_id.name == "Security":
                     unique_student_ids.add(all_refund_objects.student_ids)
             
