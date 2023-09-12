@@ -693,14 +693,14 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
            
  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
-            # message = "Billing information:\n\n"
-            # for month_key, count in by_monthly_billing_counts.items():
-            #     # month_key format: 'yy-mm'
-            #     # worksheet.write_merge(row,row,13,14,count,style=style_title)
-            #     message += f"Month: {month_key}, Number of bills: {count}\n"
+            message = "Billing information:\n\n"
+            for month_key, count in by_monthly_billing_counts.items():
+                # month_key format: 'yy-mm'
+                # worksheet.write_merge(row,row,13,14,count,style=style_title)
+                message += f"Month: {month_key}, Number of bills: {count}\n"
                 
-            # # Raise a UserError with the summarized message
-            # raise UserError(message)
+            # Raise a UserError with the summarized message
+            raise UserError(message)
             new_col=col+8
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
