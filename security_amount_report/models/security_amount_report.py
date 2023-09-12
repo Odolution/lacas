@@ -85,7 +85,7 @@ class SecurityAmountReport(models.Model):
                         unique_student_ids.add(individual_object.x_student_id_cred.id)
             
             
-            domain = [('std_factsid', 'in', unique_student_ids)]
+            domain = [('std_factsid', 'in', list(unique_student_ids))]
             all_account_move_objects = self.env['account.move'].search(domain)
 
             raise UserError(all_account_move_objects)
