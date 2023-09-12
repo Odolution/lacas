@@ -690,7 +690,8 @@ class RecoveryReportWizard(models.TransientModel):
             if final_total>0 and final_recovery>0:
                 final_total_per =(final_recovery/final_total)*100
                 worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
-            
+           
+ # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
             message = "Billing information:\n\n"
             for month_key, count in by_monthly_billing_counts.items():
                 # month_key format: 'yy-mm'
