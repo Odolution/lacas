@@ -73,6 +73,7 @@ class SecurityAmountReport(models.Model):
                 if line.product_id.name == "Security":
                     unique_student_ids.add(all_invoice_objects.student_ids)
             
+            
 
             # Step 3: Search for students in out_refund (Reversal) with product_id==Security
             refund_domain = [('move_type', '=', 'out_refund'),('student_ids','in',all_student_ids)]
@@ -83,6 +84,7 @@ class SecurityAmountReport(models.Model):
                 if line.product_id.name == "Security":
                     unique_student_ids.add(all_refund_objects.student_ids)
             
+            raise UserError(list(unique_student_ids))
 
             domain = [('student_ids', 'in', all_student_ids)]
             all_account_move_objects = self.env['account.move'].search(domain)
@@ -98,7 +100,6 @@ class SecurityAmountReport(models.Model):
                 for std_id in student_object.student_ids:
                     if std_id.id in list(unique_student_ids):
                         flag=True
-                        raise UserError("Done")
                         break
                 if flag == True:
                     # Student found in either out_invoice or out_refund with product_id==Security
