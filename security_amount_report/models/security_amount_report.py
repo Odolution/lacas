@@ -73,8 +73,6 @@ class SecurityAmountReport(models.Model):
                 if line.product_id.name == "Security":
                     for student in all_invoice_objects.student_ids:
                         unique_student_ids.add(student.id)
-
-            raise UserError(list(unique_student_ids))
             
             
 
@@ -85,9 +83,9 @@ class SecurityAmountReport(models.Model):
             # Add unique student ids to the set if product_id==Security
             for line in all_refund_objects.invoice_line_ids:
                 if line.product_id.name == "Security":
-                    unique_student_ids.add(all_refund_objects.student_ids)
+                    for student in all_invoice_objects.student_ids:
+                        unique_student_ids.add(student.id)
             
-            raise UserError(list(unique_student_ids))
 
             domain = [('student_ids', 'in', all_student_ids)]
             all_account_move_objects = self.env['account.move'].search(domain)
