@@ -72,7 +72,7 @@ class SecurityAmountReport(models.Model):
 
             raise UserError(all_invoice_objects)
 
-            # Add unique student ids to the set if product_id==Security
+            # Add unique student ids to the set if product_id==Securit
             for student in all_students:
                 if student.id in all_invoice_objects.students_id:
                     for line in individual_object.invoice_line_ids:
