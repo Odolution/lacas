@@ -720,13 +720,13 @@ class RecoveryReportWizard(models.TransientModel):
             final_recovery=0
             group_name_list=[]
             months_total_dict={}
-            row=2
+            row=3
             new_col=col+8
             for rec in self.by_account_report_line:
                 if rec:
                 #    Total
-                    new_string = rec.branch_name
-                    new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
+                    # new_string = rec.branch_name
+                    # new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
 
                     # if len(group_name_list)==0:
                     #     group_name_list.append(rec.branch_name)
