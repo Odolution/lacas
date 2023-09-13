@@ -898,7 +898,7 @@ class RecoveryReportWizard(models.TransientModel):
                 for month_key, count in new_months_total_dict.items():
                     input_string = month_key
                     parts = input_string.split("-")
-                    result = f"{parts[1]}"
+                    result = f"{parts[1:]}"
                     raise UserError(str(month_key)+" "+str(test_year_month))
                     if test_year_month==result:
                         total+=count
