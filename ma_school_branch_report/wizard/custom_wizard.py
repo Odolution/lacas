@@ -725,9 +725,9 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,new_col+5,new_col+6,"'%' age of Recovery",style=yellow_style_title)
 
             group_total=0
-            # final_total=0
+            final_total=0
             group_recovery=0
-            # final_recovery=0
+            final_recovery=0
             new_group_name_list=[]
             new_months_total_dict={}
 
