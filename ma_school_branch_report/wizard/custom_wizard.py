@@ -720,7 +720,7 @@ class RecoveryReportWizard(models.TransientModel):
             final_recovery=0
             group_name_list=[]
             months_total_dict={}
-            row=3
+            new_row=2
             new_col=col+8
             for rec in self.by_account_report_line:
                 if rec:
@@ -863,7 +863,7 @@ class RecoveryReportWizard(models.TransientModel):
                     #                         months_total_dict.update({key: row_month_total})
                     
                     # Print row data
-                    worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
+                    # worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     new_col=col+8
 
                     for month_in_list in select_by_monthly_list:
@@ -871,10 +871,10 @@ class RecoveryReportWizard(models.TransientModel):
                         new_month_key = f"{rec.branch_name}-{month_in_list}"
                         for month_key, count in by_monthly_billing_counts.items():
                             if new_month_key==month_key:
-                                worksheet.write_merge(row,row,new_col,new_col+2,count,style=style_title)
+                                worksheet.write_merge(new_row,new_row,new_col,new_col+2,count,style=style_title)
                              
                         new_col+=3
-                    row+=1
+                    new_row+=1
                     # worksheet.write_merge(row,row,new_col,new_col+1,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
                     # if rec.school_bill_len>0 and rec.billing_list_paid>0:
