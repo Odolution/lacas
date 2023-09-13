@@ -891,14 +891,14 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
 
             new_col=col+8
-            for i in range(range_start,range_stop+1):
+            for month_in_list in select_by_monthly_list:
                 # check=True
                 total=0
-                test_year_month = f"{months[i][3]}-{months[i][0]}"
-                for month_key, count in months_total_dict.items():
+                test_year_month = f"{month_in_list}"
+                for month_key, count in new_months_total_dict.items():
                     input_string = month_key
                     parts = input_string.split("-")
-                    result = f"{parts[1]}-{parts[2]}"
+                    result = f"{parts[1]}}"
                     # raise UserError(str(month_key)+" "+str(new_month_key))
                     if test_year_month==result:
                         total+=count
