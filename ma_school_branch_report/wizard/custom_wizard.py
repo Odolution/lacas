@@ -874,6 +874,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(row,row,new_col,new_col+2,count,style=style_title)
                              
                         new_col+=3
+                    row+=1
                     # worksheet.write_merge(row,row,new_col,new_col+1,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
                     # if rec.school_bill_len>0 and rec.billing_list_paid>0:
