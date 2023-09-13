@@ -112,7 +112,7 @@ class SecurityAmountReport(models.Model):
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
                     worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
                     worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
-                    worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
+                    worksheet.write(row, 8, str(student_object.student_ids.enrolled_date) if student_object.student_ids.enrolled_date else "N/A")
                     if len(student_object.invoice_line_ids)==0 or student_object.invoice_line_ids is None:
                         worksheet.write(row, 9, 0)
                     else:
@@ -134,7 +134,7 @@ class SecurityAmountReport(models.Model):
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
                     worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
                     worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
-                    worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
+                    worksheet.write(row, 8, str(student_object.student_ids.enrolled_date) if student_object.student_ids.enrolled_date else "N/A")
                     worksheet.write(row, 9, "N/A")
 
                 # Add more fields as needed
