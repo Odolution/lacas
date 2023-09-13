@@ -250,15 +250,16 @@ class RecoveryReportWizard(models.TransientModel):
 
             total_count=0
             total_count_paid=0
+            month_key=""
             for bill_rec in school_bill_ids:
                 invoice_date = bill_rec.invoice_date
                 month_in_invoice = invoice_date.strftime('%m')
                 year_in_invoice = invoice_date.strftime('%y')
                 
+                month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
                 # Check if the invoice date is within the specified range
                 if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
                     # Create a key using the month and year
-                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
                     
                     if bill_rec.payment_state =="paid":
                         if bill_rec.ol_payment_date:
@@ -278,12 +279,13 @@ class RecoveryReportWizard(models.TransientModel):
 
             billing_list_paid[select_new] = total_count_paid
             billing_list[select_new] = total_count
-
-            for year in range(int(v_from_year), int(v_to_year) + 1):
-                for month in range(int(v_from_month), int(v_to_month) + 1):
-                    month_key = f"{select_new}-{str(year)[-2:]}-{month:02}"
-                    if month_key not in billing_counts:
-                        billing_counts[month_key] = 0
+            if month_key not in billing_counts:
+                    billing_counts[month_key]=0
+            # for year in range(int(v_from_year), int(v_to_year) + 1):
+            #     for month in range(int(v_from_month), int(v_to_month) + 1):
+            #         month_key = f"{select_new}-{str(year)[-2:]}-{month:02}"
+            #         if month_key not in billing_counts:
+            #             billing_counts[month_key] = 0
            
             # raise UserError(billing_counts)
 
