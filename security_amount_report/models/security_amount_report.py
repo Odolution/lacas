@@ -113,12 +113,16 @@ class SecurityAmountReport(models.Model):
                     worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
                     worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
                     worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
-                    for line in student_object.invoice_line_ids:
-                        if line.product_id.name=="Security":
-                            if line.price_total:
-                                worksheet.write(row, 9, line.price_total)
-                            else:
-                                worksheet.write(row, 9, 0)
+                    if len(student_object.invoice_line_ids)==0 or student_object.invoice_line_ids is None:
+                        worksheet.write(row, 9, 0)
+                    else:
+                        for line in student_object.invoice_line_ids:
+                            if line.product_id.name=="Security":
+
+                                if line.price_total:
+                                    worksheet.write(row, 9, line.price_total)
+                                else:
+                                    worksheet.write(row, 9, 0)
                             
                 else:
                     # Student not found in out_invoice or out_refund with product_id==Security
