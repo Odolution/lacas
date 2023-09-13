@@ -865,6 +865,7 @@ class RecoveryReportWizard(models.TransientModel):
                     # Print row data
                     worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
                     new_col=col+8
+
                     for month_in_list in select_by_monthly_list:
                         # check=True
                         new_month_key = f"{rec.branch_name}-{month_in_list}"
@@ -873,14 +874,14 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(row,row,new_col,new_col+2,count,style=style_title)
                              
                         new_col+=3
-                    worksheet.write_merge(row,row,new_col,new_col+1,rec.school_bill_len,style=style_title)
-                    worksheet.write_merge(row,row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
-                    if rec.school_bill_len>0 and rec.billing_list_paid>0:
-                        total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                        worksheet.write_merge(row,row,new_col+5,new_col+6,str(round(total_per, 4))+' %',style=style_title)
-                    else:
-                        worksheet.write_merge(row,row,new_col+5,new_col+6,'0 %',style=style_title)
-                    row+=1
+                    # worksheet.write_merge(row,row,new_col,new_col+1,rec.school_bill_len,style=style_title)
+                    # worksheet.write_merge(row,row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
+                    # if rec.school_bill_len>0 and rec.billing_list_paid>0:
+                    #     total_per =(rec.billing_list_paid/rec.school_bill_len)*100
+                    #     worksheet.write_merge(row,row,new_col+5,new_col+6,str(round(total_per, 4))+' %',style=style_title)
+                    # else:
+                    #     worksheet.write_merge(row,row,new_col+5,new_col+6,'0 %',style=style_title)
+                    # row+=1
 
             fp = io.BytesIO()
             workbook.save(fp)
