@@ -117,8 +117,8 @@ class SecurityAmountReport(models.Model):
                         if line.product_id.name=="Security":
                             if line.price_total:
                                 worksheet.write(row, 9, line.price_total)
-                            # else:
-                            #     worksheet.write(row, 9, 0)
+                            else:
+                                worksheet.write(row, 9, 0)
                             
                 else:
                     # Student not found in out_invoice or out_refund with product_id==Security
