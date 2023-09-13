@@ -774,9 +774,9 @@ class RecoveryReportWizard(models.TransientModel):
                                     worksheet.write_merge(new_row,new_row,new_col,new_col+2,count, style=yellow_style_title)
                                     new_col+=3
                                     
-                            worksheet.write_merge(new_row,new_row,0,3,"Total", style=yellow_style_title)
-                            worksheet.write_merge(new_row,new_row,new_col,new_col+1,group_total, style=yellow_style_title)
-                            worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,group_recovery, style=yellow_style_title)
+                            # worksheet.write_merge(new_row,new_row,0,3,"Total", style=yellow_style_title)
+                            # worksheet.write_merge(new_row,new_row,new_col,new_col+1,group_total, style=yellow_style_title)
+                            # worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,group_recovery, style=yellow_style_title)
                             if group_recovery>0 and group_recovery>0:
                                 total_per_new =(group_recovery/group_total)*100
                                 worksheet.write_merge(new_row,new_row,new_col+5,new_col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
@@ -792,7 +792,7 @@ class RecoveryReportWizard(models.TransientModel):
 
                             if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town Campus"):
                                 # Print new_row data
-                                worksheet.write_merge(new_row,new_row,0,3,rec.branch_name, style=style_title)
+                                # worksheet.write_merge(new_row,new_row,0,3,rec.branch_name, style=style_title)
                                 new_col=col+8
                                 for month_in_list in select_by_monthly_list:
                                     # check=True
