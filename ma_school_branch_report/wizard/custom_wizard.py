@@ -556,7 +556,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                     col+=3
                                     
-                            # worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+                            worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
                             # worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
                             # worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
                             # if group_recovery>0 and group_recovery>0:
@@ -614,7 +614,7 @@ class RecoveryReportWizard(models.TransientModel):
                                         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                         col+=3
                                         
-                                # worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+                                worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
                                 # worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
                                 # worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
                                 # if group_recovery>0 and group_recovery>0:
@@ -722,7 +722,7 @@ class RecoveryReportWizard(models.TransientModel):
             new_months_total_dict={}
 
             new_row=2
-            new_col=col+8
+            new_col=col
 
             for rec in self.by_account_report_line:
                 if rec:
