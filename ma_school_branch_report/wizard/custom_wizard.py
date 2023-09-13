@@ -793,7 +793,7 @@ class RecoveryReportWizard(models.TransientModel):
                             if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town Campus"):
                                 # Print new_row data
                                 # worksheet.write_merge(new_row,new_row,0,3,rec.branch_name, style=style_title)
-                                new_col=col+8
+                                new_col=col
                                 for month_in_list in select_by_monthly_list:
                                     # check=True
                                     new_month_key = f"{rec.branch_name}-{month_in_list}"
