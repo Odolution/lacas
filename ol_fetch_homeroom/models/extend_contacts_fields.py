@@ -42,7 +42,7 @@ class SchoolStudent(models.Model):
     #             std.x_studio_grade_level = response.get('results')[0]['data']
 
         
-    def get_homeroom_and_custom_defined_fields(self, timeline='daily'):
+    def get_homeroom_and_custom_defined_fields(self, timeline='daily', student_id=None):
         school_name_key = {
                 "LACAS Burki A Level":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU=",
                 "LACAS Burki Boys":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvlFxL8JZDP8b8yHRK/zLqt00IjeqpiNMsinE6yLyZbpp0itPr5auIhwYsRcAWgS2Y=",
@@ -77,11 +77,13 @@ class SchoolStudent(models.Model):
             'Facts-Api-Key': ''
         } 
         # api_key = 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuIhXl6zCq8G/1abw2CTbjMnyQCEygm1dQE+p1fYauQRJ2/34/RKM5maKAUi6lhn3A='
-        if timeline == 'daily':
-            students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+        if not student_id:
+            if timeline == 'daily':
+                students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+            else:
+                students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         else:
-            students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-        
+                students = self.env['school.student'].search([('id', '=', student_id)])
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
