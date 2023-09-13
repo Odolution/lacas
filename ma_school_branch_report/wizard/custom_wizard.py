@@ -904,7 +904,7 @@ class RecoveryReportWizard(models.TransientModel):
                         total+=count
 
                 worksheet.write_merge(new_row,new_row,new_col,new_col+2,total,style=yellow_style_title)
-                col+=3
+                new_col+=3
             
             worksheet.write_merge(new_row,new_row,new_col,new_col+1,final_total, style=yellow_style_title)
             worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,final_recovery, style=yellow_style_title)
