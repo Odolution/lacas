@@ -887,6 +887,33 @@ class RecoveryReportWizard(models.TransientModel):
                         worksheet.write_merge(new_row,new_row,new_col+5,new_col+6,'0 %',style=style_title)
                     new_row+=1
 
+            # final total row
+            # worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+
+            new_col=col+8
+            for i in range(range_start,range_stop+1):
+                # check=True
+                total=0
+                test_year_month = f"{months[i][3]}-{months[i][0]}"
+                for month_key, count in months_total_dict.items():
+                    input_string = month_key
+                    parts = input_string.split("-")
+                    result = f"{parts[1]}-{parts[2]}"
+                    # raise UserError(str(month_key)+" "+str(new_month_key))
+                    if test_year_month==result:
+                        total+=count
+
+                worksheet.write_merge(new_row,new_row,new_col,new_col+2,total,style=yellow_style_title)
+                col+=3
+            
+            worksheet.write_merge(new_row,new_row,new_col,new_col+1,final_total, style=yellow_style_title)
+            worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,final_recovery, style=yellow_style_title)
+            if final_total>0 and final_recovery>0:
+                final_total_per =(final_recovery/final_total)*100
+                worksheet.write_merge(new_row,new_row,new_col+5,new_col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
+                           
+
+
             fp = io.BytesIO()
             workbook.save(fp)
 
