@@ -726,7 +726,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             for rec in self.by_account_report_line:
                 if rec:
-                   Total
+                #    Total
                     new_string = rec.branch_name
                     new_substring = new_string.split(' ')[0] + ' ' + new_string.split(' ')[1]
 
