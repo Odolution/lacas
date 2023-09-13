@@ -742,7 +742,7 @@ class RecoveryReportWizard(models.TransientModel):
 
                     if len(new_group_name_list)==0:
                         new_group_name_list.append(rec.branch_name)
-                        group_total+=rec.school_bill_len
+                        group_total+=(rec.school_bill_len+months_row_total_dict.get(rec.branch_name))
                         group_recovery+=rec.billing_list_paid
 
                         for month_in_list in select_by_monthly_list:
@@ -760,7 +760,7 @@ class RecoveryReportWizard(models.TransientModel):
                         
                         if substring == new_substring:
                             new_group_name_list.append(rec.branch_name)
-                            group_total+=rec.school_bill_len
+                            group_total+=(rec.school_bill_len+months_row_total_dict.get(rec.branch_name))
                             # final_total+=rec.school_bill_len
                             group_recovery+=rec.billing_list_paid
                             for month_in_list in select_by_monthly_list:
@@ -824,7 +824,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 new_row+=1
 
                                 new_group_name_list.append(rec.branch_name)
-                                group_total+=rec.school_bill_len
+                                group_total+=both_total
                                 # final_total+=rec.school_bill_len
                                 group_recovery+=rec.billing_list_paid
                                 for month_in_list in select_by_monthly_list:
@@ -866,7 +866,7 @@ class RecoveryReportWizard(models.TransientModel):
                             else:
 
                                 new_group_name_list.append(rec.branch_name)
-                                group_total+=rec.school_bill_len
+                                group_total+=(rec.school_bill_len+months_row_total_dict.get(rec.branch_name))
                                 group_recovery+=rec.billing_list_paid
                                 for month_in_list in select_by_monthly_list:
                                     row_month_total=0
