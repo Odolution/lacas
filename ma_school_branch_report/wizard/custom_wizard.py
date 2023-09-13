@@ -702,7 +702,7 @@ class RecoveryReportWizard(models.TransientModel):
             # # Raise a UserError with the summarized message
             # raise UserError(message)
 
-            new_col=col+8
+            new_col=col
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
@@ -764,7 +764,7 @@ class RecoveryReportWizard(models.TransientModel):
 
                         else:
                             
-                            new_col=col+8
+                            new_col=col
                             for month_key, count in new_months_total_dict.items():
                                 original_string = month_key
                                 split_parts = original_string.split('-')
@@ -823,7 +823,7 @@ class RecoveryReportWizard(models.TransientModel):
                                             key = f"{rec.branch_name}-{month_in_list}"
                                             row_month_total= new_months_total_dict.get(key, 0)+count
                                             new_months_total_dict.update({key: row_month_total})
-                                new_col=col+8
+                                new_col=col
                                 for month_key, count in new_months_total_dict.items():
                                     original_string = month_key
                                     split_parts = original_string.split('-')
@@ -867,7 +867,7 @@ class RecoveryReportWizard(models.TransientModel):
                     
                     # Print row data
                     # worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                    new_col=col+8
+                    new_col=col
 
                     for month_in_list in select_by_monthly_list:
                         # check=True
@@ -890,7 +890,7 @@ class RecoveryReportWizard(models.TransientModel):
             # final total row
             # worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
 
-            new_col=col+8
+            new_col=col
             for month_in_list in select_by_monthly_list:
                 # check=True
                 total=0
