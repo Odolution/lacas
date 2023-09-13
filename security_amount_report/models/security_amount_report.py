@@ -107,34 +107,78 @@ class SecurityAmountReport(models.Model):
                     worksheet.write(row, 0, serial_number)
                     worksheet.write(row, 1, student_object.student_ids.name if student_object.student_ids.name else "N/A")
                     worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id.name else "N/A")
-                    worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
+                    # worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
+                    if student_object.student_code:
+                        worksheet.write(row, 3, student_object.student_code)
+                    elif student_object.udid_cred_custom:
+                        worksheet.write(row, 3, student_object.udid_cred_custom)
+                    else:
+                        worksheet.write(row, 3, "N/A")
+
                     worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
-                    worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
-                    worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
-                    worksheet.write(row, 8, str(student_object.student_ids.enrollment_state_ids[0].enrolled_date) if student_object.student_ids.enrollment_state_ids[0].enrolled_date else "N/A")
-                    if len(student_object.invoice_line_ids)==0 or student_object.invoice_line_ids is None:
-                        worksheet.write(row, 9, 0)
+                    # worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
+                    
+                    if student_object.std_current_branch:
+                        worksheet.write(row, 6, student_object.std_current_branch)
+                    elif student_object.x_school_id_cred.name:
+                        worksheet.write(row, 6, student_object.x_school_id_cred.name)
                     else:
-                        for line in student_object.invoice_line_ids:
-                            if line.product_id.name=="Security":
+                        worksheet.write(row, 6, "N/A")
+                    
+                    worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
+                    
+                    if student_object.challan_date:
+                        worksheet.write(row, 8, str(student_object.challan_date))
+                    elif student_object.student_ids.enrollment_state_ids[0].enrolled_date:
+                        worksheet.write(row, 8, str(student_object.student_ids.enrollment_state_ids[0].enrolled_date))
+                    else:
+                        worksheet.write(row, 8, "N/A")
 
-                                if line.price_total:
-                                    worksheet.write(row, 9, line.price_total)
-                                else:
-                                    worksheet.write(row, 9, 0)
+                    for line in student_object.invoice_line_ids:
+                        if line.product_id.name=="Security":
+                            if line.price_total:
+                                worksheet.write(row, 9, line.price_total)
+                            else:
+                                worksheet.write(row, 9, 0)
                             
                 else:
                     # Student not found in out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
                     worksheet.write(row, 1, student_object.student_ids.name if student_object.student_ids.name else "N/A")
                     worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id.name else "N/A")
-                    worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
+                    # worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
+                    
+                    if student_object.student_code:
+                        worksheet.write(row, 3, student_object.student_code)
+                    elif student_object.udid_cred_custom:
+                        worksheet.write(row, 3, student_object.udid_cred_custom)
+                    else:
+                        worksheet.write(row, 3, "N/A")
+
                     worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
-                    worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
+                    # worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
+                    
+                    if student_object.std_current_branch:
+                        worksheet.write(row, 6, student_object.std_current_branch)
+                    elif student_object.x_school_id_cred.name:
+                        worksheet.write(row, 6, student_object.x_school_id_cred.name)
+                    else:
+                        worksheet.write(row, 6, "N/A")
+
+
+
                     worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
-                    worksheet.write(row, 8, str(student_object.student_ids.enrollment_state_ids[0].enrolled_date) if student_object.student_ids.enrollment_state_ids[0].enrolled_date else "N/A")
+                    # worksheet.write(row, 8, str(student_object.student_ids.enrollment_state_ids[0].enrolled_date) if student_object.student_ids.enrollment_state_ids[0].enrolled_date else "N/A")
+                    
+                    if student_object.challan_date:
+                        worksheet.write(row, 8, str(student_object.challan_date))
+                    elif student_object.student_ids.enrollment_state_ids[0].enrolled_date:
+                        worksheet.write(row, 8, str(student_object.student_ids.enrollment_state_ids[0].enrolled_date))
+                    else:
+                        worksheet.write(row, 8, "N/A")
+
                     worksheet.write(row, 9, "N/A")
 
                 # Add more fields as needed
