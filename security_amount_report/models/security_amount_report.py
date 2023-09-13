@@ -105,12 +105,12 @@ class SecurityAmountReport(models.Model):
                 if flag == True:
                     # Student found in either out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
-                    worksheet.write(row, 1, student_object.x_student_id_cred.name if student_object.x_student_id_cred.name else "N/A")
+                    worksheet.write(row, 1, student_object.student_ids.name if student_object.student_ids.name else "N/A")
                     worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id.name else "N/A")
-                    worksheet.write(row, 3, student_object.udid_cred_custom if student_object.udid_cred_custom else "N/A")
+                    worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
                     worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
-                    worksheet.write(row, 6, student_object.x_school_id_cred.name if student_object.x_school_id_cred else "N/A")
+                    worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
                     worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
                     worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
                     for line in student_object.invoice_line_ids:
@@ -125,12 +125,12 @@ class SecurityAmountReport(models.Model):
                 else:
                     # Student not found in out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
-                    worksheet.write(row, 1, student_object.x_student_id_cred.name if student_object.x_student_id_cred.name else "N/A")
+                    worksheet.write(row, 1, student_object.student_ids.name if student_object.student_ids.name else "N/A")
                     worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id.name else "N/A")
-                    worksheet.write(row, 3, student_object.udid_cred_custom if student_object.udid_cred_custom else "N/A")
+                    worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
                     worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
                     worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
-                    worksheet.write(row, 6, student_object.x_school_id_cred.name if student_object.x_school_id_cred else "N/A")
+                    worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
                     worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
                     worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
                     worksheet.write(row, 9, "N/A")
