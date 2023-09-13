@@ -505,6 +505,7 @@ class RecoveryReportWizard(models.TransientModel):
             final_recovery=0
             group_name_list=[]
             months_total_dict={}
+            months_row_total_dict={}
             row=2
             col=4
             for rec in self.account_report_line:
@@ -584,6 +585,9 @@ class RecoveryReportWizard(models.TransientModel):
                                             worksheet.write_merge(row,row,col,col+2,count,style=style_title)
                                         
                                     col+=3
+                                
+                                # add 
+                                months_row_total_dict.update({rec.branch_name:rec.school_bill_len })
                                 # worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
                                 # worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
                                 # if rec.school_bill_len>0 and rec.billing_list_paid>0:
@@ -658,6 +662,9 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
                              
                         col+=3
+                    
+                    # add 
+                    months_row_total_dict.update({rec.branch_name:rec.school_bill_len })
                     # worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
                     # worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
                     # if rec.school_bill_len>0 and rec.billing_list_paid>0:
@@ -693,14 +700,14 @@ class RecoveryReportWizard(models.TransientModel):
             #     worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
            
  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
-            # message = "Billing information:\n\n"
-            # for month_key, count in by_monthly_billing_counts.items():
-            #     # month_key format: 'yy-mm'
-            #     # worksheet.write_merge(row,row,13,14,count,style=style_title)
-            #     message += f"Month: {month_key}, Number of bills: {count}\n"
+            message = "Billing information:\n\n"
+            for month_key, count in months_row_total_dict.items():
+                # month_key format: 'yy-mm'
+                # worksheet.write_merge(row,row,13,14,count,style=style_title)
+                message += f"Month: {month_key}, Number of bills: {count}\n"
                 
-            # # Raise a UserError with the summarized message
-            # raise UserError(message)
+            # Raise a UserError with the summarized message
+            raise UserError(message)
 
             new_col=col
             # raise UserError(new_col)
