@@ -115,13 +115,11 @@ class SecurityAmountReport(models.Model):
                     worksheet.write(row, 8, str(student_object.x_studio_admission_date) if student_object.x_studio_admission_date else "N/A")
                     for line in student_object.invoice_line_ids:
                         if line.product_id.name=="Security":
-                            # worksheet.write(row, 9, line.price_total if line.price_total or line.price_total==0 else "N/A")
                             if line.price_total:
                                 worksheet.write(row, 9, line.price_total)
-                            elif line.price_total==0:
-                                worksheet.write(row, 9, 0)
-                            else:
-                                worksheet.write(row, 9, "N/A")
+                            # else:
+                            #     worksheet.write(row, 9, 0)
+                            
                 else:
                     # Student not found in out_invoice or out_refund with product_id==Security
                     worksheet.write(row, 0, serial_number)
