@@ -815,7 +815,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 both_total=rec.school_bill_len+months_row_total_dict.get(rec.branch_name)
                                 both_total_paid=rec.billing_list_paid+months_row_paid_dict.get(rec.branch_name)
                                 worksheet.write_merge(new_row,new_row,new_col,new_col+1,both_total,style=style_title)
-                                worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
+                                worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,both_total_paid,style=style_title)
                                 if both_total>0 and both_total_paid>0:
                                     total_per =(both_total_paid/both_total)*100
                                     worksheet.write_merge(new_row,new_row,new_col+5,new_col+6,str(round(total_per, 4))+' %',style=style_title)
@@ -893,7 +893,7 @@ class RecoveryReportWizard(models.TransientModel):
                     both_total=rec.school_bill_len+months_row_total_dict.get(rec.branch_name)
                     both_total_paid=rec.billing_list_paid+months_row_paid_dict.get(rec.branch_name)
                     worksheet.write_merge(new_row,new_row,new_col,new_col+1,both_total,style=style_title)
-                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,rec.billing_list_paid,style=style_title)
+                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,both_total_paid,style=style_title)
                     if both_total>0 and both_total_paid>0:
                         total_per =(both_total_paid/both_total)*100
                         worksheet.write_merge(new_row,new_row,new_col+5,new_col+6,str(round(total_per, 4))+' %',style=style_title)
