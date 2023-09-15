@@ -55,7 +55,20 @@ class SecurityAmountReport(models.Model):
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
 
+            security_account= self.env['account.account'].search(['code','=','6612485'])
+            raise UserError(security_account)
+            journal_items=self.env['account.move.line'].search([])
+            for item in journal_items:
+                if item.name== 'Admission Challan':
+                    journal_name_id=item.id
 
+            all_students = self.env['school.student'].search([])
+            #all_student_ids = [student.id for student in all_students]
+            for student in all_students:
+
+
+
+#huzaifa
 
             # Step 1: Search for students in school.student using facts_id
             
@@ -190,6 +203,8 @@ class SecurityAmountReport(models.Model):
                 # Add more fields as needed
                 serial_number += 1
                 row += 1
+
+#huzaifa
             #     else:
             #         # Student not found in out_invoice or out_refund with product_id==Security
             #         worksheet.write(row, 0, serial_number)
