@@ -64,7 +64,7 @@ class SecurityAmountReport(models.Model):
 
             all_students = self.env['school.student'].search([])
             #all_student_ids = [student.id for student in all_students]
-            for student in all_students:
+
 
 
 
