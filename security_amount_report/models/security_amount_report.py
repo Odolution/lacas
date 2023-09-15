@@ -67,12 +67,14 @@ class SecurityAmountReport(models.Model):
             unique_student_ids = set()
 
             journal_items=self.env['account.journal'].search([])
+            journal_name_id=0
             for item in journal_items:
                 if item.name== 'Admission Challan':
-                    raise UserError(item.id)
-                    
+                    journal_name_id=item.id
+
             # Step 2: Search for students in out_invoice (Admission Challan) with product_id==Security
             invoice_domain = [('move_type', '=', 'out_invoice'), ('journal_id', '=', 'Admission Challan'),('student_ids','in',all_student_ids)]
+            raise UserError(len(invoice_domain))
             all_invoice_objects = self.env['account.move'].search(invoice_domain)
             for line in all_invoice_objects.invoice_line_ids:
                 if line.product_id.name == "Security":
