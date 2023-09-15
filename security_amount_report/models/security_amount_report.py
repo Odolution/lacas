@@ -56,8 +56,8 @@ class SecurityAmountReport(models.Model):
             # account_move_object = self.env['account.move'].search(domain)
 
             security_account= self.env['account.account'].search([('code','=','6612485')])
-            raise UserError(security_account)
-            journal_items=self.env['account.move.line'].search([])
+            journal_items=self.env['account.move.line'].search([('account.id','=',security_account.id)])
+            raise UserError(journal_items)
             for item in journal_items:
                 if item.name== 'Admission Challan':
                     journal_name_id=item.id
