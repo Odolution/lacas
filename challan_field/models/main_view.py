@@ -145,11 +145,10 @@ class account_fields(models.Model):
                     rec['name']=new_no
                     #raise UserError(str(record.name))
                     record['payment_reference']=str(record.name)
-                    for recs in record.line_ids:
-                      recs['name'] = new_no
+                    
                     #raise UserError(rec.new_no)  
                     
-                   
+                  
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
@@ -161,6 +160,8 @@ class account_fields(models.Model):
                         record['x_studio_previous_section']=splitted_name[2]
                       elif len(splitted_name)>1:
                         record['x_studio_previous_section']=splitted_name[1]
+                    for recs in record.line_ids:
+                      recs['name'] = new_no
 
                   if record.journal_id.id == 126:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('bi_monthly')
@@ -178,7 +179,7 @@ class account_fields(models.Model):
                         record['x_studio_previous_section']=splitted_name[2]
                       elif len(splitted_name)>1:
                         record['x_studio_previous_section']=splitted_name[1]
-                    
+                  
                   #record.name = new_no
                   if record.journal_id.id == 124:
                     new_no = record.env['ir.sequence'].next_by_code('charges_reversal')
@@ -186,9 +187,9 @@ class account_fields(models.Model):
                     record.payment_reference = new_no  
                     #record.name = new_no
                     
-                  for rec in record.line_ids:
-                    #raise UserError(rec.new_no)  
-                    rec['name'] = new_no
+                  # for rec in record.line_ids:
+                  #   #raise UserError(rec.new_no)  
+                  #   rec['name'] = new_no
                     #record.payment_reference = new_no
                     
               if record.move_type == 'out_refund':
