@@ -142,7 +142,7 @@ class account_fields(models.Model):
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                     rec['name']=new_no
                     #raise UserError(str(record.name))
-                    rec['payment_reference']=str(record.name)
+                    record['payment_reference']=str(record.name)
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
