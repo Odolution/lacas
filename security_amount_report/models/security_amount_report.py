@@ -58,21 +58,22 @@ class SecurityAmountReport(models.Model):
             #security_account= self.env['account.account'].search([('code','=','6612485')])
             journal_items=self.env['account.move.line'].search([('account_id.code','=','6612485')])
             for item in journal_items:
-                if item.debit != 0:
-                    security_amount= item.debit
-                else:
-                    security_amount= item.credit
+                # if item.debit != 0:
+                #     security_amount= item.debit
+                # else:
+                #     security_amount= item.credit
                 student=item.move_id.student_ids[0]
-                unique_students[student.facts_udid]={'student_info':student,'security_amount':security_amount}
-                raise UserError(unique_students[student.facts_udid]['security_amount']) 
-                
+                unique_students[student.facts_udid]=item               
 
 
                             # Step 4: Write the results in an Excel file
             row = 1
             serial_number = 1
-
-            for code,student_data in unique_students:
+            lst=[]
+            for code,item in unique_students:
+                student_date=item.move_id.student_ids[0]
+                lst.append([code,student_data.name,student_data.partner_id.name,student_data.x_studio_withdrawn_status])
+                raise UserError(lst)
                 # Student found in either out_invoice or out_refund with product_id==Security
                 worksheet.write(row, 0, serial_number)
                 worksheet.write(row, 1, student_data.name if stu.name else "N/A")
