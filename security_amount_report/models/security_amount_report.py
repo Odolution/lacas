@@ -64,7 +64,7 @@ class SecurityAmountReport(models.Model):
                     security_amount= item.credit
                 student=item.move_id.student_ids[0]
                 unique_students[student.facts_udid]={'student_info':student,'security_amount':security_amount}
-                raise UserError(unique_students) 
+                raise UserError(unique_students[student.facts_udid]['security_amount']) 
                 
 
 
@@ -72,10 +72,10 @@ class SecurityAmountReport(models.Model):
             row = 1
             serial_number = 1
 
-            for stu in unique_students:
+            for code,student_data in unique_students:
                 # Student found in either out_invoice or out_refund with product_id==Security
                 worksheet.write(row, 0, serial_number)
-                worksheet.write(row, 1, stu.name if stu.name else "N/A")
+                worksheet.write(row, 1, student_data.name if stu.name else "N/A")
                 worksheet.write(row, 2, stu.partner_id.name if student_object.partner_id.name else "N/A")
                 # worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
                 if student_object.student_code:
