@@ -141,7 +141,7 @@ class account_fields(models.Model):
                   if record.journal_id.id == 125:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                     rec['name']=new_no
-                    rec['payment_reference']=rec.name
+                    rec['payment_reference']=record.name
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
