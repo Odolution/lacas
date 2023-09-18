@@ -62,7 +62,7 @@ class SecurityAmountReport(models.Model):
                 #     security_amount= item.debit
                 # else:
                 #     security_amount= item.credit
-                student=item.move_id.student_ids
+                students=item.move_id.student_ids
                 for stu in students:
                     unique_students[stu.facts_udid]=item               
 
