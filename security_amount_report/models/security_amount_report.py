@@ -55,8 +55,8 @@ class SecurityAmountReport(models.Model):
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
             unique_students={}
-            security_account= self.env['account.account'].search([('code','=','6612485')])
-            journal_items=self.env['account.move.line'].search([('account.id','=',security_account.id)])
+            #security_account= self.env['account.account'].search([('code','=','6612485')])
+            journal_items=self.env['account.move.line'].search([('account_id.code','=','6612485')])
             for item in journal_items:
                 if item.debit != 0:
                     security_amount= item.debit
@@ -77,7 +77,7 @@ class SecurityAmountReport(models.Model):
                 # Student found in either out_invoice or out_refund with product_id==Security
                 worksheet.write(row, 0, serial_number)
                 worksheet.write(row, 1, stu.name if stu.name else "N/A")
-                worksheet.write(row, 2, student_object.partner_id.name if student_object.partner_id.name else "N/A")
+                worksheet.write(row, 2, stu.partner_id.name if student_object.partner_id.name else "N/A")
                 # worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
                 if student_object.student_code:
                     worksheet.write(row, 3, student_object.student_code)
