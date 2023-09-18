@@ -63,6 +63,7 @@ class SecurityAmountReport(models.Model):
                 # else:
                 #     security_amount= item.credit
                 student=item.move_id.student_ids[0]
+                raise UserError(student.facts_udid)
                 unique_students[student.facts_udid]=item               
 
 
