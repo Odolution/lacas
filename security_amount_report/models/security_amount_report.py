@@ -73,7 +73,11 @@ class SecurityAmountReport(models.Model):
             lst=[]
             for stu_id,item in unique_students.items():
                 student_data=self.env['school.student'].search([('id','=',stu_id)])
-                lst.append([student_data.facts_udid,student_data.name,student_data.partner_id.name,student_data.x_studio_withdrawn_status])
+                if item.debit != 0:
+                    security_amount= item.debit
+                else:
+                    security_amount= item.credit
+                lst.append([student_data.name,student_data.partner_id.name,student_data.facts_udid,item.move_id.class_name,item.move_id.section_name,security_amount])
                 raise UserError(lst)
                 # Student found in either out_invoice or out_refund with product_id==Security
                 worksheet.write(row, 0, serial_number)
