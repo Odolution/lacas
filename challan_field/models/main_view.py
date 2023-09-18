@@ -161,7 +161,7 @@ class account_fields(models.Model):
                       elif len(splitted_name)>1:
                         record['x_studio_previous_section']=splitted_name[1]
                     for recs in record.line_ids:
-                      recs['name'] = new_no
+                      recs['name'] = record.name
 
                   if record.journal_id.id == 126:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('bi_monthly')
