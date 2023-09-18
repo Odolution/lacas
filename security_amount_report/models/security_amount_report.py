@@ -65,7 +65,7 @@ class SecurityAmountReport(models.Model):
                 student=item.move_id.student_ids[0]
                 student['security_amount']=security_amount
                 unique_students[student.facts_udid]=student
-                raise UserError(unique_students)
+                raise UserError(unique_students) 
                 
 
 
