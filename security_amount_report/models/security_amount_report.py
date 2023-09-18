@@ -54,13 +54,19 @@ class SecurityAmountReport(models.Model):
             # domain = [('move_type', '=', 'out_refund')]
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
-
+            unique_students={}
             security_account= self.env['account.account'].search([('code','=','6612485')])
             journal_items=self.env['account.move.line'].search([('account.id','=',security_account.id)])
-            raise UserError(journal_items)
             for item in journal_items:
-                if item.name== 'Admission Challan':
-                    journal_name_id=item.id
+                if item.debit != 0:
+                    security_amount= item.debit
+                else:
+                    security_amount= item.credit
+                student=item.x_student_id_cred
+                student['security_amount']=security_amount
+                unique_students[student.facts_udid]=student
+                raise UserError(unique_students)
+                
 
             all_students = self.env['school.student'].search([])
             #all_student_ids = [student.id for student in all_students]
