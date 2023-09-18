@@ -137,11 +137,11 @@ class account_fields(models.Model):
                   if record.journal_id.id == 119:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
                     rec['name']=new_no
-                    record['payment_reference']=new_no
+                    record['payment_reference']=record.name
                   if record.journal_id.id == 125:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                     rec['name']=new_no
-                    record['payment_reference']=new_no
+                    record['payment_reference']=record.name
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
@@ -157,6 +157,7 @@ class account_fields(models.Model):
                   if record.journal_id.id == 126:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('bi_monthly')
                     rec['name']=new_no
+                    record['payment_reference']=record.name
                     record['payment_reference']=new_no
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
