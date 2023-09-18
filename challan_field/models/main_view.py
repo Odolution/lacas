@@ -145,8 +145,11 @@ class account_fields(models.Model):
                     rec['name']=new_no
                     #raise UserError(str(record.name))
                     record['payment_reference']=str(record.name)
-                    for line in record.line_ids:
-                      line['name'] = new_no
+                    for recs in record.line_ids:
+                      recs['name'] = new_no
+                    #raise UserError(rec.new_no)  
+                    
+                   
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
@@ -163,7 +166,7 @@ class account_fields(models.Model):
                     new_no = school_code + record.env['ir.sequence'].next_by_code('bi_monthly')
                     rec['name']=new_no
                     record['payment_reference']=str(record.name)
-                    record['payment_reference']=new_no
+                   # record['payment_reference']=new_no
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
