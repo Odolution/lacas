@@ -49,19 +49,9 @@ class SecurityAmountReport(models.Model):
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(0, 0, col*1, col*1, field_name, style=style_title)
 
-            
-            # account_move_object = self.env['account.move'].search([])
-            # domain = [('move_type', '=', 'out_refund')]
-            # searching with filter that move_type is of out_refund type which is of Reversal
-            # account_move_object = self.env['account.move'].search(domain)
             unique_students={}
-            #security_account= self.env['account.account'].search([('code','=','6612485')])
             journal_items=self.env['account.move.line'].search([('account_id.code','=','6612485')])
             for item in journal_items:
-                # if item.debit != 0:
-                #     security_amount= item.debit
-                # else:
-                #     security_amount= item.credit
                 students=item.move_id.student_ids
                 for stu in students:
                     unique_students[stu.id]=item               
@@ -77,48 +67,45 @@ class SecurityAmountReport(models.Model):
                     security_amount= item.debit
                 else:
                     security_amount= item.credit
-                lst.append([student_data.name,student_data.partner_id.name,student_data.facts_udid,item.move_id.class_name,item.move_id.section_name,security_amount])
-                raise UserError(lst)
-                # Student found in either out_invoice or out_refund with product_id==Security
+                lst.append([student_data.name,item.partner_id.name,student_data.facts_udid,item.move_id.class_name,item.move_id.section_name,item.move_id.invoice_date,security_amount])
                 worksheet.write(row, 0, serial_number)
-                worksheet.write(row, 1, student_data.name if stu.name else "N/A")
-                worksheet.write(row, 2, stu.partner_id.name if student_object.partner_id.name else "N/A")
+                worksheet.write(row, 1, student_data.name if student_data.name else "N/A")
+                worksheet.write(row, 2, item.partner_id.name if item.partner_id.name else "N/A")
+                worksheet.write(row, 3, student_data.facts_udid if student_data.facts_udid else "N/A")
+
                 # worksheet.write(row, 3, student_object.student_code if student_object.student_code else "N/A")
-                if student_object.student_code:
-                    worksheet.write(row, 3, student_object.student_code)
-                elif student_object.udid_cred_custom:
-                    worksheet.write(row, 3, student_object.udid_cred_custom)
-                else:
-                    worksheet.write(row, 3, "N/A")
+                # if student_object.student_code:
+                #     worksheet.write(row, 3, student_object.student_code)
+                # elif student_object.udid_cred_custom:
+                #     worksheet.write(row, 3, student_object.udid_cred_custom)
+                # else:
+                #     worksheet.write(row, 3, "N/A")
 
-                worksheet.write(row, 4, student_object.class_name if student_object.class_name else "N/A")
-                worksheet.write(row, 5, student_object.section_name if student_object.section_name else "N/A")
-                # worksheet.write(row, 6, student_object.std_current_branch if student_object.std_current_branch else "N/A")
+                worksheet.write(row, 4, item.move_id.class_name if item.move_id.class_name else "N/A")
+                worksheet.write(row, 5, item.move_id.section_name if item.move_id.section_name else "N/A")
+                worksheet.write(row, 6, item.move_id.std_current_branch if item.move_id.std_current_branch else "N/A")
                 
-                if student_object.std_current_branch:
-                    worksheet.write(row, 6, student_object.std_current_branch)
-                elif student_object.x_school_id_cred.name:
-                    worksheet.write(row, 6, student_object.x_school_id_cred.name)
-                else:
-                    worksheet.write(row, 6, "N/A")
+                # if student_object.std_current_branch:
+                #     worksheet.write(row, 6, student_object.std_current_branch)
+                # elif student_object.x_school_id_cred.name:
+                #     worksheet.write(row, 6, student_object.x_school_id_cred.name)
+                # else:
+                #     worksheet.write(row, 6, "N/A")
                 
-                worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
-                
-                if student_object.challan_date:
-                    worksheet.write(row, 8, str(student_object.challan_date))
-                elif student_object.student_ids.enrollment_state_ids[0].enrolled_date:
-                    worksheet.write(row, 8, str(student_object.student_ids.enrollment_state_ids[0].enrolled_date))
-                else:
-                    worksheet.write(row, 8, "N/A")
+                #worksheet.write(row, 7, student_object.x_studio_withdrawn_status if student_object.x_studio_withdrawn_status else "N/A")
 
-                for line in student_object.invoice_line_ids:
-                    if line.product_id.name=="Security":
-                        if line.price_total:
-                            worksheet.write(row, 9, line.price_total)
-                        else:
-                            worksheet.write(row, 9, 0)
+                worksheet.write(row, 8, str(item.move_id.invoice_date) if item.move_id.invoice_date else "N/A")
+                
+                # if student_object.challan_date:
+                #     worksheet.write(row, 8, str(student_object.challan_date))
+                # elif student_object.student_ids.enrollment_state_ids[0].enrolled_date:
+                #     worksheet.write(row, 8, str(student_object.student_ids.enrollment_state_ids[0].enrolled_date))
+                # else:
+                #     worksheet.write(row, 8, "N/A")
 
-                # Add more fields as needed
+                worksheet.write(row, 9, security_amount if security_amount else "N/A")
+
+
                 serial_number += 1
                 row += 1
                 
