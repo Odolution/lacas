@@ -138,9 +138,13 @@ class account_fields(models.Model):
                     new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
                     rec['name']=new_no
                     record['payment_reference']=str(record.name)
+                    for rec in record.line_ids:
+                      rec['name'] = new_no
                   if record.journal_id.id == 125:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                     rec['name']=new_no
+                    for rec in record.line_ids:
+                      rec['name'] = new_no
                     #raise UserError(str(record.name))
                     record['payment_reference']=str(record.name)
                     record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
