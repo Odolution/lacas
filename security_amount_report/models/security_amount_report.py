@@ -64,16 +64,16 @@ class SecurityAmountReport(models.Model):
                 #     security_amount= item.credit
                 students=item.move_id.student_ids
                 for stu in students:
-                    unique_students[stu.facts_udid]=item               
+                    unique_students[stu.id]=item               
 
 
                             # Step 4: Write the results in an Excel file
             row = 1
             serial_number = 1
             lst=[]
-            for code,item in unique_students.items():
-                student_date=item.move_id.student_ids[0]
-                lst.append([code,student_data.name,student_data.partner_id.name,student_data.x_studio_withdrawn_status])
+            for stu_id,item in unique_students.items():
+                student_data=self.env['school.student'].search([('id','=',stu_id)])
+                lst.append([student_data.facts_udid,student_data.name,student_data.partner_id.name,student_data.x_studio_withdrawn_status])
                 raise UserError(lst)
                 # Student found in either out_invoice or out_refund with product_id==Security
                 worksheet.write(row, 0, serial_number)
