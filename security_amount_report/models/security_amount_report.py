@@ -26,9 +26,8 @@ class SecurityAmountReport(models.Model):
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
             worksheet = workbook.add_sheet('Security Amount Report')
-            column_width = 30 * 256
             style_title = xlwt.easyxf(
-            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin; f'width {column_width}'")
+            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
 
             grand_heading_style = xlwt.easyxf('pattern: pattern solid, fore_colour light_blue;'
                               'font: colour white, bold True;')
@@ -49,6 +48,7 @@ class SecurityAmountReport(models.Model):
 
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(0, 0, col*1, col*1, field_name, style=style_title)
+                worksheet.col(col).width= 30 * 256
 
             unique_students={}
             journal_items=self.env['account.move.line'].search([('account_id.code','=','6612485')])
