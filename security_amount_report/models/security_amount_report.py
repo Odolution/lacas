@@ -71,7 +71,7 @@ class SecurityAmountReport(models.Model):
             row = 1
             serial_number = 1
             lst=[]
-            for code,item in unique_students:
+            for code,item in unique_students.items():
                 student_date=item.move_id.student_ids[0]
                 lst.append([code,student_data.name,student_data.partner_id.name,student_data.x_studio_withdrawn_status])
                 raise UserError(lst)
