@@ -79,7 +79,7 @@ class SchoolStudent(models.Model):
         # api_key = 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuIhXl6zCq8G/1abw2CTbjMnyQCEygm1dQE+p1fYauQRJ2/34/RKM5maKAUi6lhn3A='
         if not student_id:
             if timeline == 'daily':
-                students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+                students = self.env['school.student'].search([('x_studio_batch_proceed', '=', False), ('homeroom', '=', False), ('x_last_enrollment_status_id.name', 'in', ['Enrolled', 'Admission'])], limit=10)
             else:
                 students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         else:
@@ -124,3 +124,4 @@ class SchoolStudent(models.Model):
             response = requests.request("GET", url, headers=headers).json()
             if response.get('results') and len(response.get('results')) > 0:
                 std.x_studio_grade_level = response.get('results')[0].get('data')
+            std.x_studio_batch_proceed = True
