@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_school_branch_report_wizard,access.school.branch.report.wizard,model_school_branch_report_wizard,,1,1,1,0
 access_student_report_line,access.student.report.line,model_student_report_line,,1,1,1,0
+access_student_bi_monthly_report_line,access.student.bi.monthly.report.line,model_student_bi_monthly_report_line,,1,1,1,0
