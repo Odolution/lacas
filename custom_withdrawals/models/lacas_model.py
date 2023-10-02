@@ -32,18 +32,20 @@ class academics_tab(models.Model):
     def _compute_notice_fee(self):
         # if self.move_type == "out_refund":
         for rec in self:
+            rec.notice_fee_withdrawal = 0
+            rec.x_studio_withdrawn_status = 'N'  
+            
             if rec.x_studio_charges:
                 total_custom = 0
                 for inv_line in rec.x_studio_charges.invoice_line_ids:
                     total_custom = inv_line.price_subtotal+total_custom
                 rec.notice_fee_withdrawal = total_custom
-            else:
-                rec.notice_fee_withdrawal = 0
-            
+          
+                
             if rec.payment_state == 'paid':
                 rec.x_studio_withdrawn_status = 'Y'
-            else:
-                rec.x_studio_withdrawn_status = 'N'                                                                                                                                                
+            
+                                                                                                                                                              
 
 
     def _compute_total_amount(self):
