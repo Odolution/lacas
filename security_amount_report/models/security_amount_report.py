@@ -65,8 +65,8 @@ class SecurityAmountReport(models.Model):
                     if line.product_id.name == "Security":
                         worksheet.write(row, 0, serial_number)
 
-                        if line.product_id.name == "Security":
-                            worksheet.write(row, 1, admission.x_student_id_cred.name)
+                        if student.name:
+                            worksheet.write(row, 1, student.name)
                         else:
                             worksheet.write(row, 1, "N/A")
 
@@ -75,8 +75,8 @@ class SecurityAmountReport(models.Model):
                         else:
                             worksheet.write(row, 2, "N/A")
 
-                        if admission.udid_cred_custom:
-                            worksheet.write(row, 3, admission.udid_cred_custom)
+                        if student.facts_udid:
+                            worksheet.write(row, 3, student.facts_udid)
                         else:
                             worksheet.write(row, 3, "N/A")
                         
@@ -90,8 +90,8 @@ class SecurityAmountReport(models.Model):
                         else:
                             worksheet.write(row, 5, "N/A")
 
-                        if admission.x_school_id_cred.name:
-                            worksheet.write(row, 6, admission.x_school_id_cred.name)
+                        if student.x_last_school_id.name:
+                            worksheet.write(row, 6, student.x_last_school_id.name)
                         else:
                             worksheet.write(row, 6, "N/A")
 
