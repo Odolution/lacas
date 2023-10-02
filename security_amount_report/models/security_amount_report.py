@@ -55,116 +55,73 @@ class SecurityAmountReport(models.Model):
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
 
-            domain = [('move_type', '=', 'out_refund')]
-            # searching with filter that move_type is of out_refund type which is of Reversal
-            all_account_move_objects = self.env['account.move'].search(domain)
+            admission_domain = [('move_type', '=', 'out_invoice')]
+            admissions = self.env['account.move'].search(admission_domain)
             row = 1
             serial_number = 1
 
             
-            for individual_object in all_account_move_objects:
-                for line in individual_object.invoice_line_ids:
+            for admission_object in admissions:
+                related_reversal = self.env['account.move'].search([('x_student_id_cred.name','=',admission_object.x_student_id_cred.name),
+                                                                    ('partner_id.name','=',admission_object.partner_id.name),
+                                                                    ('std_factsid','=',admission_object.std_factsid)
+                                                                    ],limit=1)
+                for line in admission_object.invoice_line_ids:
                     if line.product_id.name == "Security":
                         worksheet.write(row, 0, serial_number)
 
                         if line.product_id.name == "Security":
-                            # worksheet.write_merge(row, row, 1, 1, individual_object.x_student_id_cred.name)
-                            worksheet.write(row, 1, individual_object.x_student_id_cred.name)
+                            # worksheet.write_merge(row, row, 1, 1, admission_object.x_student_id_cred.name)
+                            worksheet.write(row, 1, admission_object.x_student_id_cred.name)
                         else:
                             worksheet.write(row, 1, "N/A")
 
-                        if individual_object.partner_id.name:
-                            worksheet.write(row, 2, individual_object.partner_id.name)
+                        if admission_object.partner_id.name:
+                            worksheet.write(row, 2, admission_object.partner_id.name)
                         else:
                             worksheet.write(row, 2, "N/A")
 
-                        if individual_object.udid_cred_custom:
-                            worksheet.write(row, 3, individual_object.udid_cred_custom)
+                        if admission_object.udid_cred_custom:
+                            worksheet.write(row, 3, admission_object.udid_cred_custom)
                         else:
                             worksheet.write(row, 3, "N/A")
                         
-                        if individual_object.class_name:
-                            worksheet.write(row, 4, individual_object.class_name)
+                        if admission_object.class_name:
+                            worksheet.write(row, 4, admission_object.class_name)
                         else:
                             worksheet.write(row, 4, "N/A")
 
-                        if individual_object.section_name:
-                            worksheet.write(row, 5, individual_object.section_name)
+                        if admission_object.section_name:
+                            worksheet.write(row, 5, admission_object.section_name)
                         else:
                             worksheet.write(row, 5, "N/A")
 
-                        if individual_object.x_school_id_cred.name:
-                            worksheet.write(row, 6, individual_object.x_school_id_cred.name)
+                        if admission_object.x_school_id_cred.name:
+                            worksheet.write(row, 6, admission_object.x_school_id_cred.name)
                         else:
                             worksheet.write(row, 6, "N/A")
 
-                        if individual_object.x_studio_withdrawn_status:
-                            worksheet.write(row, 7, individual_object.x_studio_withdrawn_status)
+                        if admission_object.x_studio_withdrawn_status:
+                            worksheet.write(row, 7, admission_object.x_studio_withdrawn_status)
                         else:
                             worksheet.write(row, 7, "N/A")
 
-                        if individual_object.x_studio_admission_date:
-                            worksheet.write(row, 8, str(individual_object.x_studio_admission_date))
+                        if admission_object.x_studio_admission_date:
+                            worksheet.write(row, 8, str(admission_object.x_studio_admission_date))
                         else:
                             worksheet.write(row, 8, "N/A")
-
                          
-                        if individual_object.security_amnt_lv:
-                            worksheet.write(row, 9, individual_object.security_amnt_lv)
+                        if admission_object.security_amnt_lv:
+                            worksheet.write(row, 9, admission_object.security_amnt_lv)
+                        elif related_reversal.security_amnt_lv:
+                            worksheet.write(row, 9, related_reversal.security_amnt_lv)
                         else:
                             worksheet.write(row, 9, "N/A")
 
                         serial_number += 1
                         row+=1
-                        # raise UserError(line.name)
                     else:
                         pass
-                        # raise UserError("No Security Found")
-                        # raise UserError(str(account_move_object))
-
-            # row = 11
-            # serial_number = 1
-            # for record in account_move_object.student_ids:
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, record.x_student_id_cred.name)
-                # worksheet.write_merge(row, row, 0, 1, account_move_object.partner_id.name)
-                # worksheet.write_merge(row, row, 0, 1, account_move_object.udid_cred_custom)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-            # for record in self.partner_id:
-            #     serial_number+=1
-            #     # Increment the column for each field
-            #     col = 2
-            #     employee_name = record.employee_id.name
-            #     worksheet.write_merge(row, row, 0, 1, employee_name)
-            #     # worksheet.write(row, col, record.custom_attendance_value)
-            #     worksheet.write_merge(row, row, 2, 3, record.custom_attendance_string)
-                
-            #     # worksheet.write(row, 4, record.custom_hours_worked_string)
-            #     worksheet.write_merge(row, row, 4, 5, record.custom_hours_worked_string)
-                
-            #     # worksheet.write(row, 6, record.custom_hours_lost_string)
-            #     worksheet.write_merge(row, row, 6, 7, record.custom_hours_lost_string)
-                
-            #     # worksheet.write(row, 8, "{:.2f}%".format(record.utilisation_percentage))
-            #     worksheet.write_merge(row, row, 8, 9, "{:.2f}%".format(record.utilisation_percentage))
-                
-                # serial_number += 1
-
-            #     # worksheet.write(row, 0, employee_name)
-            #     # worksheet.write(row, 1, record.custom_attendance_string)
-            #     # worksheet.write(row, 2, record.custom_hours_worked_string)
-            #     # worksheet.write(row, 3, record.custom_hours_lost_string)
-            #     # worksheet.write(row, 5, record.overtime_hour)
-            #     # worksheet.write(row, 4, "{:.2f}%".format(record.utilisation_percentage))
-                # row += 1            
-            
-        # worksheet.write(row, 1, record.working_hours)
             fp = io.BytesIO()
             workbook.save(fp)
 
