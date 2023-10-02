@@ -62,8 +62,7 @@ class SecurityAmountReport(models.Model):
 
             
             for admission_object in admissions:
-                related_reversal = self.env['account.move'].search([('x_student_id_cred.name','=',admission_object.x_student_id_cred.name),
-                                                                    ('partner_id.name','=',admission_object.partner_id.name),
+                related_reversal = self.env['account.move'].search([
                                                                     ('std_factsid','=',admission_object.std_factsid)
                                                                     ],limit=1)
                 for line in admission_object.invoice_line_ids:
