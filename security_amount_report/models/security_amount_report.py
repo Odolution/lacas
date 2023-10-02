@@ -54,66 +54,61 @@ class SecurityAmountReport(models.Model):
             # domain = [('move_type', '=', 'out_refund')]
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
-
-            admission_domain = [('move_type', '=', 'out_invoice')]
-            admissions = self.env['account.move'].search(admission_domain)
+            
             row = 1
             serial_number = 1
-
-            
-            for admission_object in admissions:
-                related_reversal = self.env['account.move'].search([
-                                                                    ('std_factsid','=',admission_object.std_factsid)
-                                                                    ],limit=1)
-                for line in admission_object.invoice_line_ids:
+            enrolled_students = self.env['school.student'].search('enrollment_status_ids.id','=', 2)
+            for student in enrolled_students:
+                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("std_factsid","=","facts_id")], limit=1)
+                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ("std_factsid","=","facts_id")], limit=1)
+                for line in admission.invoice_line_ids:
                     if line.product_id.name == "Security":
                         worksheet.write(row, 0, serial_number)
 
                         if line.product_id.name == "Security":
-                            # worksheet.write_merge(row, row, 1, 1, admission_object.x_student_id_cred.name)
-                            worksheet.write(row, 1, admission_object.x_student_id_cred.name)
+                            worksheet.write(row, 1, admission.x_student_id_cred.name)
                         else:
                             worksheet.write(row, 1, "N/A")
 
-                        if admission_object.partner_id.name:
-                            worksheet.write(row, 2, admission_object.partner_id.name)
+                        if admission.partner_id.name:
+                            worksheet.write(row, 2, admission.partner_id.name)
                         else:
                             worksheet.write(row, 2, "N/A")
 
-                        if admission_object.udid_cred_custom:
-                            worksheet.write(row, 3, admission_object.udid_cred_custom)
+                        if admission.udid_cred_custom:
+                            worksheet.write(row, 3, admission.udid_cred_custom)
                         else:
                             worksheet.write(row, 3, "N/A")
                         
-                        if admission_object.class_name:
-                            worksheet.write(row, 4, admission_object.class_name)
+                        if admission.class_name:
+                            worksheet.write(row, 4, admission.class_name)
                         else:
                             worksheet.write(row, 4, "N/A")
 
-                        if admission_object.section_name:
-                            worksheet.write(row, 5, admission_object.section_name)
+                        if admission.section_name:
+                            worksheet.write(row, 5, admission.section_name)
                         else:
                             worksheet.write(row, 5, "N/A")
 
-                        if admission_object.x_school_id_cred.name:
-                            worksheet.write(row, 6, admission_object.x_school_id_cred.name)
+                        if admission.x_school_id_cred.name:
+                            worksheet.write(row, 6, admission.x_school_id_cred.name)
                         else:
                             worksheet.write(row, 6, "N/A")
 
-                        if admission_object.x_studio_withdrawn_status:
-                            worksheet.write(row, 7, admission_object.x_studio_withdrawn_status)
+                        if admission.x_studio_withdrawn_status:
+                            worksheet.write(row, 7, admission.x_studio_withdrawn_status)
                         else:
                             worksheet.write(row, 7, "N/A")
 
-                        if admission_object.x_studio_admission_date:
-                            worksheet.write(row, 8, str(admission_object.x_studio_admission_date))
+                        if admission.x_studio_admission_date:
+                            worksheet.write(row, 8, str(admission.x_studio_admission_date))
                         else:
                             worksheet.write(row, 8, "N/A")
                          
-                        if admission_object.security_amnt_lv:
-                            worksheet.write(row, 9, admission_object.security_amnt_lv)
-                        elif related_reversal.security_amnt_lv:
-                            worksheet.write(row, 9, related_reversal.security_amnt_lv)
+                        if admission.security_amnt_lv:
+                            worksheet.write(row, 9, admission.security_amnt_lv)
+                        elif reversal.security_amnt_lv:
+                            worksheet.write(row, 9, reversal.security_amnt_lv)
                         else:
                             worksheet.write(row, 9, "N/A")
 
