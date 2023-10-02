@@ -106,6 +106,8 @@ class SecurityAmountReport(models.Model):
 
                         if admission.x_studio_admission_date:
                             worksheet.write(row, 8, str(admission.x_studio_admission_date))
+                        elif reversal.x_studio_admission_date:
+                            worksheet.write(row, 7, reversal.x_studio_admission_date)
                         else:
                             worksheet.write(row, 8, "N/A")
                          
