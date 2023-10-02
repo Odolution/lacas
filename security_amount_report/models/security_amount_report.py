@@ -59,8 +59,8 @@ class SecurityAmountReport(models.Model):
             serial_number = 1
             enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
             for student in enrolled_students:
-                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("std_factsid","=","facts_id")], limit=1)
-                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ("std_factsid","=","facts_id")], limit=1)
+                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("std_factsid","=",student.facts_id)], limit=1)
+                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ("std_factsid","=",student.facts_id)], limit=1)
                 for line in admission.invoice_line_ids:
                     if line.product_id.name == "Security":
                         worksheet.write(row, 0, serial_number)
