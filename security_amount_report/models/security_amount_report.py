@@ -109,10 +109,10 @@ class SecurityAmountReport(models.Model):
                         else:
                             worksheet.write(row, 8, "N/A")
                          
-                        if admission.security_amnt_lv:
-                            worksheet.write(row, 9, admission.security_amnt_lv)
-                        elif reversal.security_amnt_lv:
-                            worksheet.write(row, 9, reversal.security_amnt_lv)
+                        if line.price_total:
+                            worksheet.write(row, 9, line.price_total)
+                        elif "Security" in rev_line.name for rev_line in reversal.invoice_line_ids:
+                            worksheet.write(row, 9, rev_line.price_total)
                         else:
                             worksheet.write(row, 9, "N/A")
 
