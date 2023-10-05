@@ -322,7 +322,7 @@ class RecoveryReportWizard(models.TransientModel):
                 ('state', '=', 'posted'),
                 ('move_type','=','out_invoice'),('journal_id','=',126)
             ])
-            raise UserError(str(rec.name)+" "+str(by_school_bill_ids))
+            # raise UserError(str(rec.name)+" "+str(by_school_bill_ids))
             if rec.name in ("Milestone Model Town (Matric)"):
                 select_new="Milestone Model Town Senior Campus"
             else:
@@ -366,10 +366,13 @@ class RecoveryReportWizard(models.TransientModel):
 
                 by_monthly_billing_list_paid[select_new] = total_count_paid
                 by_monthly_billing_list[select_new] = total_count
+        
+        raise UserError(" "+str(by_monthly_billing_list))
 
         for item in range(len(school_ids)):
 
             name_view = school_ids[item].name
+            
             billing_view = by_monthly_billing_list[name_view]
             billing_paid_view = by_monthly_billing_list_paid[name_view]
 
