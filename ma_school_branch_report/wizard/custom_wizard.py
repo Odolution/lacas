@@ -712,12 +712,12 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
                 col+=3
             
-            if select_by_monthly_list:
-                worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
-                worksheet.write_merge(row,row,col+2,col+4,final_recovery, style=yellow_style_title)
-                if final_total>0 and final_recovery>0:
-                    final_total_per =(final_recovery/final_total)*100
-                    worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
+            # if select_by_monthly_list:
+            #     worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
+            #     worksheet.write_merge(row,row,col+2,col+4,final_recovery, style=yellow_style_title)
+            #     if final_total>0 and final_recovery>0:
+            #         final_total_per =(final_recovery/final_total)*100
+            #         worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
            
  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
 
