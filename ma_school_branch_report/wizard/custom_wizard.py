@@ -214,7 +214,7 @@ class RecoveryReportWizard(models.TransientModel):
 
 
         select_by_monthly_list=self.by_monthly_calculation()
-        # raise UserError(select_by_monthly_list)
+        raise UserError(select_by_monthly_list)
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
