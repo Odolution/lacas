@@ -214,7 +214,7 @@ class RecoveryReportWizard(models.TransientModel):
 
 
         select_by_monthly_list=self.by_monthly_calculation()
-        raise UserError(select_by_monthly_list)
+        # raise UserError(select_by_monthly_list)
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -367,26 +367,29 @@ class RecoveryReportWizard(models.TransientModel):
                 by_monthly_billing_list_paid[select_new] = total_count_paid
                 by_monthly_billing_list[select_new] = total_count
         
-        raise UserError(" "+str(by_monthly_billing_list))
+        # raise UserError(" "+str(by_monthly_billing_list))
 
-        for item in range(len(school_ids)):
+        if select_by_monthly_list:
+            for item in range(len(school_ids)):
 
-            name_view = school_ids[item].name
-            
-            billing_view = by_monthly_billing_list[name_view]
-            billing_paid_view = by_monthly_billing_list_paid[name_view]
-
-            mvl2=self.env['student.bi.monthly.report.line'].create({
-                "branch_name":name_view,
-                "school_bill_len":billing_view,
-                "billing_list_paid":billing_paid_view,
-            })
-            by_lines.append(mvl2.id)
+                name_view = school_ids[item].name
 
 
-        self.write({
-            "by_account_report_line":[(6,0,by_lines)]
-        })  
+                
+                billing_view = by_monthly_billing_list[name_view]
+                billing_paid_view = by_monthly_billing_list_paid[name_view]
+
+                mvl2=self.env['student.bi.monthly.report.line'].create({
+                    "branch_name":name_view,
+                    "school_bill_len":billing_view,
+                    "billing_list_paid":billing_paid_view,
+                })
+                by_lines.append(mvl2.id)
+
+
+            self.write({
+                "by_account_report_line":[(6,0,by_lines)]
+            })  
 
         # message = "by Billing information:\n\n"
         # for month_key, count in by_monthly_billing_counts.items():
@@ -706,6 +709,7 @@ class RecoveryReportWizard(models.TransientModel):
             #     worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
            
  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
+ 
             # message = "Billing information:\n\n"
             # for month_key, count in months_row_paid_dict.items():
             #     # month_key format: 'yy-mm'
