@@ -355,7 +355,7 @@ class ext(models.Model):
                         rec_inv.libfine=line.price_subtotal
                     elif 'Holiday Homework' in line.product_id.name:
                         rec_inv.Holiday_homework=line.price_subtotal
-                    elif 'Technology Charge' in line.product_id.name:
+                    elif 'Technology Charges' in line.product_id.name:
                         rec_inv.Technology_Charges=line.price_subtotal
                     elif line.product_id.x_studio_code=='ART':
                         rec_inv.art=line.price_subtotal
