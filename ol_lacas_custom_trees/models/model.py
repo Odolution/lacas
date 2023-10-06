@@ -350,7 +350,7 @@ class ext(models.Model):
                         rec_inv.Holiday_homework=line.price_subtotal
                     elif 'Technology Charges' in line.product_id.name:
                         rec_inv.Technology_Charges=line.price_subtotal
-                    elif line.product_id.id==640:
+                    elif line.product_id.id==436:
                         rec_inv.utility_charges=line.price_subtotal
                     elif 'OXFORD' in line.product_id.name:
                         rec_inv.oxford=line.price_subtotal
