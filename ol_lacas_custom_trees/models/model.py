@@ -12,7 +12,7 @@ class ext(models.Model):
     club=fields.Integer(string="Club Charges")
     computer=fields.Integer(string="computer Charges")
     library=fields.Integer(string="library Charges")
-    utility=fields.Integer(string="utility Charges")
+    utility=fields.Integer(string="Utility AC/Generator")
     student_code=fields.Char(string="UDID", compute="_compute_UDID")
     #student_code=fields.Char(string="UDID")
     student_name=fields.Char(string="Name",related='student_ids_ol.name')
@@ -274,7 +274,7 @@ class ext(models.Model):
                         rec_inv.computer=line.price_subtotal
                     elif 'Library' in line.product_id.name:
                         rec_inv.library=line.price_subtotal
-                    elif 'Utility' in line.product_id.name:
+                    elif 'AC/Generator' in line.product_id.name:
                         rec_inv.utility=line.price_subtotal
                     
 
@@ -350,7 +350,7 @@ class ext(models.Model):
                         rec_inv.Holiday_homework=line.price_subtotal
                     elif 'Technology Charges' in line.product_id.name:
                         rec_inv.Technology_Charges=line.price_subtotal
-                    elif line.product_id.id==436:
+                    elif 'Utility' in line.product_id.name:
                         rec_inv.utility_charges=line.price_subtotal
                     elif 'OXFORD' in line.product_id.name:
                         rec_inv.oxford=line.price_subtotal
