@@ -276,10 +276,7 @@ class ext(models.Model):
                         rec_inv.library=line.price_subtotal
                     elif 'Utility' in line.product_id.name:
                         rec_inv.utility=line.price_subtotal
-                    elif 'Utility Charges' in line.product_id.name:
-                        rec_inv.utility_charges=line.price_subtotal
-                    elif 'OXFORD E Mate' in line.product_id.name:
-                        rec_inv.oxford=line.price_subtotal
+                    
 
                     elif 'Admission' in line.product_id.name and not line.product_id.is_discount_type:
                         adm_amount_charge=int(line.price_subtotal)
@@ -290,13 +287,9 @@ class ext(models.Model):
                         calculated_adm=adm_amount_charge+disc_adm_amount
                         rec_inv.adm_amount=str(calculated_adm)
                         
-
-
-
                     elif 'Security' in line.product_id.name and not line.product_id.is_discount_type:
                         security_amount_charge=int(line.price_subtotal)
                         rec_inv.security_amount=str(security_amount_charge)
-
 
                     elif 'Security' in line.product_id.name and line.product_id.is_discount_type:
                         discount_security=int(line.price_subtotal)
@@ -357,6 +350,10 @@ class ext(models.Model):
                         rec_inv.Holiday_homework=line.price_subtotal
                     elif 'Technology Charges' in line.product_id.name:
                         rec_inv.Technology_Charges=line.price_subtotal
+                    elif 'Utility Charges' in line.product_id.name:
+                        rec_inv.utility_charges=line.price_subtotal
+                    elif 'OXFORD' in line.product_id.name:
+                        rec_inv.oxford=line.price_subtotal
                     elif line.product_id.x_studio_code=='ART':
                         rec_inv.art=line.price_subtotal
                     elif line.product_id.x_studio_code=='COM':
