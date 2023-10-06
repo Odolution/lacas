@@ -79,8 +79,8 @@ class ext(models.Model):
     Technology_Charges= fields.Integer(string="Technology Charges")
 
     # Added by Anas Bin Ateeq
-    oxford=fields.Monetary(string="Oxford E Mate Charges")
-    utility_charges=fields.Monetary(string="Utility Charges")
+    # oxford=fields.Monetary(string="Oxford E Mate Charges")
+    # utility_charges=fields.Monetary(string="Utility Charges")
     #########################################################
 
 
@@ -261,8 +261,8 @@ class ext(models.Model):
                 rec_inv.adm_amount=""
                 rec_inv.Holiday_homework=0
                 rec_inv.Technology_Charges=0
-                rec_inv.utility_charges=0
-                rec_inv.oxford=0
+                # rec_inv.utility_charges=0
+                # rec_inv.oxford=0
 
 
                 for line in rec_inv.invoice_line_ids:
@@ -276,10 +276,10 @@ class ext(models.Model):
                         rec_inv.library=line.price_subtotal
                     elif 'Utility' in line.product_id.name:
                         rec_inv.utility=line.price_subtotal
-                    elif 'Utility Charges' in line.product_id.name:
-                        rec_inv.utility_charges=line.price_subtotal
-                    elif 'OXFORD E Mate' in line.product_id.name:
-                        rec_inv.oxford=line.price_subtotal
+                    # elif 'Utility Charges' in line.product_id.name:
+                    #     rec_inv.utility_charges=line.price_subtotal
+                    # elif 'OXFORD E Mate' in line.product_id.name:
+                    #     rec_inv.oxford=line.price_subtotal
 
                     elif 'Admission' in line.product_id.name and not line.product_id.is_discount_type:
                         adm_amount_charge=int(line.price_subtotal)
