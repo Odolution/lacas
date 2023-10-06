@@ -79,8 +79,8 @@ class ext(models.Model):
     Technology_Charges= fields.Integer(string="Technology Charges")
 
     # Added by Anas Bin Ateeq
-    oxford=fields.Monetary(string="Oxford E Mate Charges")
-    utility_charges=fields.Monetary(string="Utility Charges")
+    oxford=fields.Integer(string="Oxford E Mate Charges")
+    utility_charges=fields.Integer(string="Utility Charges")
     #########################################################
 
 
