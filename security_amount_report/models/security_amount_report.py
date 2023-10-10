@@ -91,8 +91,9 @@ class SecurityAmountReport(models.Model):
                             student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
                             if student:
                                 homeroom = student.homeroom
-                                vals = homeroom.split('-')
-                                worksheet.write(row, 5, vals[1])
+                                if homeroom:
+                                    vals = homeroom.split('-')
+                                    worksheet.write(row, 5, vals[1])
                         else:
                             worksheet.write(row, 5, "N/A")
 
