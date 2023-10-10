@@ -86,10 +86,7 @@ class SecurityAmountReport(models.Model):
                             worksheet.write(row, 4, "N/A")
                             
                         if admission.student_ids:
-                            ID = admission.student_ids.id
-                        elif reversal.student_ids:
-                            ID = reversal.student_ids.id
-                            student = self.env['school.student'].search([('id','=',ID)])
+                            student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
                             if student:
                                 homeroom = student.homeroom
                                 if homeroom != False:
@@ -97,7 +94,15 @@ class SecurityAmountReport(models.Model):
                                     if vals[-1].isalpha():
                                         worksheet.write(row, 5, vals[-1])
                                     else:
-                                        worksheet.write(row, 5, "N/A")
+                                        student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
+                                        if student:
+                                            homeroom = student.homeroom
+                                            if homeroom != False:
+                                                vals = homeroom.split('-')
+                                                if vals[-1].isalpha():
+                                                    worksheet.write(row, 5, vals[-1])
+                                                else:
+                                                    worksheet.write(row, 5, "N/A")
                         else:
                             worksheet.write(row, 5, "N/A")
 
