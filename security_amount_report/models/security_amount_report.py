@@ -93,7 +93,7 @@ class SecurityAmountReport(models.Model):
                                 homeroom = student.homeroom
                                 if homeroom != False and vals[1] != '':
                                     vals = homeroom.split('-')
-                                    worksheet.write(row, 5, vals[1])
+                                    worksheet.write(row, 5, vals[-1])
                         else:
                             worksheet.write(row, 5, "N/A")
 
