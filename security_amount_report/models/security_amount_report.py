@@ -54,117 +54,92 @@ class SecurityAmountReport(models.Model):
             # domain = [('move_type', '=', 'out_refund')]
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
-
-            domain = [('move_type', '=', 'out_refund')]
-            # searching with filter that move_type is of out_refund type which is of Reversal
-            all_account_move_objects = self.env['account.move'].search(domain)
+            
             row = 1
             serial_number = 1
-
-            
-            for individual_object in all_account_move_objects:
-                for line in individual_object.invoice_line_ids:
+            enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
+            for student in enrolled_students:
+                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("std_factsid","=",student.facts_id)], limit=1)
+                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ('state','=','posted'),("std_factsid","=",student.facts_id)], limit=1)
+                for line in admission.invoice_line_ids:
                     if line.product_id.name == "Security":
                         worksheet.write(row, 0, serial_number)
 
-                        if line.product_id.name == "Security":
-                            # worksheet.write_merge(row, row, 1, 1, individual_object.x_student_id_cred.name)
-                            worksheet.write(row, 1, individual_object.x_student_id_cred.name)
+                        if student.name:
+                            worksheet.write(row, 1, student.name)
                         else:
                             worksheet.write(row, 1, "N/A")
 
-                        if individual_object.partner_id.name:
-                            worksheet.write(row, 2, individual_object.partner_id.name)
+                        if admission.partner_id.name:
+                            worksheet.write(row, 2, admission.partner_id.name)
                         else:
                             worksheet.write(row, 2, "N/A")
 
-                        if individual_object.udid_cred_custom:
-                            worksheet.write(row, 3, individual_object.udid_cred_custom)
+                        if student.facts_udid:
+                            worksheet.write(row, 3, student.facts_udid)
                         else:
                             worksheet.write(row, 3, "N/A")
                         
-                        if individual_object.class_name:
-                            worksheet.write(row, 4, individual_object.class_name)
+                        if admission.class_name:
+                            worksheet.write(row, 4, admission.class_name)
                         else:
                             worksheet.write(row, 4, "N/A")
-
-                        if individual_object.section_name:
-                            worksheet.write(row, 5, individual_object.section_name)
+                            
+                        if admission.student_ids:
+                            student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
+                            if student:
+                                homeroom = student.homeroom
+                                if homeroom != False:
+                                    vals = homeroom.split('-')
+                                    if vals[-1].isalpha():
+                                        worksheet.write(row, 5, vals[-1])
+                                    else:
+                                        student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
+                                        if student:
+                                            homeroom = student.homeroom
+                                            if homeroom != False:
+                                                vals = homeroom.split('-')
+                                                if vals[-1].isalpha():
+                                                    worksheet.write(row, 5, vals[-1])
+                                                else:
+                                                    worksheet.write(row, 5, "N/A")
                         else:
                             worksheet.write(row, 5, "N/A")
 
-                        if individual_object.x_school_id_cred.name:
-                            worksheet.write(row, 6, individual_object.x_school_id_cred.name)
+                        if student.x_last_school_id.name:
+                            worksheet.write(row, 6, student.x_last_school_id.name)
                         else:
                             worksheet.write(row, 6, "N/A")
 
-                        if individual_object.x_studio_withdrawn_status:
-                            worksheet.write(row, 7, individual_object.x_studio_withdrawn_status)
+                        if admission.x_studio_withdrawn_status:
+                            worksheet.write(row, 7, admission.x_studio_withdrawn_status)
+                            
+                        elif reversal.x_studio_withdrawn_status:
+                            worksheet.write(row, 7, reversal.x_studio_withdrawn_status)
+                            
                         else:
                             worksheet.write(row, 7, "N/A")
 
-                        if individual_object.x_studio_admission_date:
-                            worksheet.write(row, 8, str(individual_object.x_studio_admission_date))
+                        if admission.invoice_date:
+                            worksheet.write(row, 8, str(admission.invoice_date))
                         else:
                             worksheet.write(row, 8, "N/A")
-
                          
-                        if individual_object.security_amnt_lv:
-                            worksheet.write(row, 9, individual_object.security_amnt_lv)
+                        if line.product_id.name == "Security":
+                            worksheet.write(row, 9, line.price_total)
+                        elif line.product_id.name != "Security":
+                            for rev_line in reversal.invoice_line_ids:
+                                if rev_line.name == 'Security':
+                                    worksheet.write(row, 9, rev_line.price_total)
+                                else:
+                                    worksheet.write(row, 9, "N/A")
                         else:
                             worksheet.write(row, 9, "N/A")
 
                         serial_number += 1
                         row+=1
-                        # raise UserError(line.name)
                     else:
                         pass
-                        # raise UserError("No Security Found")
-                        # raise UserError(str(account_move_object))
-
-            # row = 11
-            # serial_number = 1
-            # for record in account_move_object.student_ids:
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, record.x_student_id_cred.name)
-                # worksheet.write_merge(row, row, 0, 1, account_move_object.partner_id.name)
-                # worksheet.write_merge(row, row, 0, 1, account_move_object.udid_cred_custom)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-                # worksheet.write_merge(row, row, 0, 1, serial_number)
-            # for record in self.partner_id:
-            #     serial_number+=1
-            #     # Increment the column for each field
-            #     col = 2
-            #     employee_name = record.employee_id.name
-            #     worksheet.write_merge(row, row, 0, 1, employee_name)
-            #     # worksheet.write(row, col, record.custom_attendance_value)
-            #     worksheet.write_merge(row, row, 2, 3, record.custom_attendance_string)
-                
-            #     # worksheet.write(row, 4, record.custom_hours_worked_string)
-            #     worksheet.write_merge(row, row, 4, 5, record.custom_hours_worked_string)
-                
-            #     # worksheet.write(row, 6, record.custom_hours_lost_string)
-            #     worksheet.write_merge(row, row, 6, 7, record.custom_hours_lost_string)
-                
-            #     # worksheet.write(row, 8, "{:.2f}%".format(record.utilisation_percentage))
-            #     worksheet.write_merge(row, row, 8, 9, "{:.2f}%".format(record.utilisation_percentage))
-                
-                # serial_number += 1
-
-            #     # worksheet.write(row, 0, employee_name)
-            #     # worksheet.write(row, 1, record.custom_attendance_string)
-            #     # worksheet.write(row, 2, record.custom_hours_worked_string)
-            #     # worksheet.write(row, 3, record.custom_hours_lost_string)
-            #     # worksheet.write(row, 5, record.overtime_hour)
-            #     # worksheet.write(row, 4, "{:.2f}%".format(record.utilisation_percentage))
-                # row += 1            
-            
-        # worksheet.write(row, 1, record.working_hours)
             fp = io.BytesIO()
             workbook.save(fp)
 
@@ -201,5 +176,3 @@ class sale_day_book_report_excel(models.TransientModel):
     
     excel_file = fields.Binary('Excel Report For Security Amount')
     file_name = fields.Char('Excel File', size=64)
-
-
