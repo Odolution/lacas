@@ -107,7 +107,7 @@ class SecurityAmountReport(models.Model):
                         else:
                             worksheet.write(row, 5, "N/A")
 
-                        if student.x_last_school_id:
+                        if student.id != False and student.x_last_school_id != False:
                             worksheet.write(row, 6, student.x_last_school_id.name)
                         else:
                             lst=str(student)
