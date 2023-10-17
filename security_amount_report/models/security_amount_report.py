@@ -81,7 +81,9 @@ class SecurityAmountReport(models.Model):
                         else:
                             worksheet.write(row, 3, "N/A")
                         
-                        if admission.class_name:
+                        if student.x_studio_grade_level:
+                            worksheet.write(row, 4, student.x_studio_grade_level)
+                        elif admission.class_name:
                             worksheet.write(row, 4, admission.class_name)
                         else:
                             worksheet.write(row, 4, "N/A")
