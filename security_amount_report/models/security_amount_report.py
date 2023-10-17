@@ -111,8 +111,8 @@ class SecurityAmountReport(models.Model):
                             if student.x_last_school_id :
                                 worksheet.write(row, 6, student.x_last_school_id.name)
                         else:
-                            lst=str(student)
-                            raise UserError(lst)
+                            if student.id=='11522':
+                                raise UserError(student.name)
                             worksheet.write(row, 6, "N/A")
 
                         if admission.x_studio_withdrawn_status:
