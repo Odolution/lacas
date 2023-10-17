@@ -109,7 +109,8 @@ class SecurityAmountReport(models.Model):
                         if student.x_last_school_id:
                             worksheet.write(row, 6, student.x_last_school_id.name)
                         else:
-                            raise UserError(student.x_last_school_id.name)
+                            lst=[student.x_last_school_id.name, student.name]
+                            raise UserError(lst)
                             worksheet.write(row, 6, "N/A")
 
                         if admission.x_studio_withdrawn_status:
