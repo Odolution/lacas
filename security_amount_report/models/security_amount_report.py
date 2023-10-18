@@ -132,11 +132,11 @@ class SecurityAmountReport(models.Model):
                         else:
                             worksheet.write(row, 8, "N/A")
                          
-                        if line.product_id.name == "Security":
+                        if line.account_id.name == 'Security Fee':
                             worksheet.write(row, 9, line.price_total)
-                        elif line.product_id.name != "Security":
+                        if line.account_id.name != 'Security Fee':
                             for rev_line in reversal.invoice_line_ids:
-                                if rev_line.name == 'Security':
+                                if rev_line.account_id.name == 'Security Fee':
                                     worksheet.write(row, 9, rev_line.price_total)
                                 else:
                                     worksheet.write(row, 9, "N/A")
