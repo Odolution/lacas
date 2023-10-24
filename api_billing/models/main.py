@@ -126,7 +126,6 @@ class Billing(http.Controller):
                 move_ids= request.env['account.move'].sudo().search([('name', '=','0'+str(voucher_id)),('state', '=', 'posted')],limit=1)
 
             if not move_ids:
-                # return Response("No ", content_type='text/html')
             
                 return Response(json.dumps({
                     "Status": {
@@ -158,10 +157,14 @@ class Billing(http.Controller):
             obj["currency"]="PKR" 
             obj["accountIdentifier"]=str(mov["account_identifier"]) if "account_identifier" in mov else None
             obj["applicantMobileNo"]=mov['x_studio_contact_no'] if "x_studio_contact_no" in mov else None
-            obj["amount_after_due_date"]=mov['amount_after_due_date'] if "amount_after_due_date" in mov else None
-            obj["voucher_status"]=mov['payment_state'] if "payment_state" in mov else None
-            obj["billed_date"]=str(mov['invoice_date']) if "invoice_date" in mov else None
-            obj["date_due"]=str(mov['invoice_date_due']) if "invoice_date_due" in mov else None
+            obj["Amount_after_DueDate"]=mov['amount_after_due_date'] if "amount_after_due_date" in mov else None
+            voucher_status= mov['payment_state'] if "payment_state" in mov else None
+            if voucher_status=='paid':
+                voucher_code= 'P'
+            else:
+                voucher_code= 'U'
+            obj["Voucher_Status"]=voucher_status
+            obj["billedDate"]=str(mov['invoice_date']) if "invoice_date" in mov else None
 
             obj["DynamicMembers"]={}
 
@@ -203,8 +206,6 @@ class Billing(http.Controller):
             obj["applicantId"]=str(ths_student["facts_id"])
             obj["billedDate"]=str(mov["invoice_date"])
             ##extract father name
-
-            # partner=models.execute_kw(db, uid, password, 'res.partner', 'read', [mov['partner_id']])
             obj["Student_Father_Name"]=mov['partner_id']['name']
             #end test
             return Response(json.dumps({
@@ -225,11 +226,7 @@ class Billing(http.Controller):
                     }
                 }),content_type="application/json", status=200)
 
-            # return Response(json.dumps(obj), content_type="application/json")
 
-            # response = Response("Hello, World!", content_type='text/html')
-            # return response
-        
         except Exception as e:
             return Response(json.dumps({
                     "Status": {
@@ -596,7 +593,7 @@ class Billing(http.Controller):
 
                     },
 
-                    "Data": {"requestId":'Test'},
+                    "Data": {"requestId":dict(data)},
 
                     "Navigation": {
 
