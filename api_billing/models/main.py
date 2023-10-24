@@ -593,7 +593,7 @@ class Billing(http.Controller):
 
                     },
 
-                    "Data": {"requestId":dict(create_payment.read())},
+                    "Data": {"requestId":str(create_payment.read())},
 
                     "Navigation": {
 
