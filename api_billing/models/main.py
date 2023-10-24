@@ -165,29 +165,28 @@ class Billing(http.Controller):
 
             obj["DynamicMembers"]={}
 
-            # return Response(json.dumps(obj), content_type="application/json")
 
             #to test ,it's my local that's why comment
 
-            # student=False
+            student=False
 
-            # if not mov["student_ids"]:
-            #     student= request.env['school.student'].sudo().search([('id', 'in',[mov['x_student_id_cred'][0]])],limit=1)
-            #     # student= models.execute_kw(db, uid, password, 'school.student', 'read', [mov['x_student_id_cred'][0]])
-            # else:
-            #     student= request.env['school.student'].sudo().search([('id', 'in',[mov["student_ids"]])],limit=1)
-            #     # student=models.execute_kw(db, uid, password, 'school.student', 'read', [mov["student_ids"]])
+            if not mov["student_ids"]:
+                student= request.env['school.student'].sudo().search([('id', 'in',[mov['x_student_id_cred'][0]])],limit=1)
+                # student= models.execute_kw(db, uid, password, 'school.student', 'read', [mov['x_student_id_cred'][0]])
+            else:
+                student= request.env['school.student'].sudo().search([('id', 'in',[mov["student_ids"]])],limit=1)
+                # student=models.execute_kw(db, uid, password, 'school.student', 'read', [mov["student_ids"]])
 
-            # if not student:
-            #     return Response(json.dumps({'status': 'Error',"message": "Validation Error : Provided billId has no student tagged. This voucher cannot be payed.","code":204}),content_type="application/json", status=200)
-            # ths_student=student
-            # obj["applicantName"]=str(ths_student["name"])
-            # obj["applicantId"]=str(ths_student["facts_id"])
-            # obj["billedDate"]=str(mov["invoice_date"])
-            # ##extract father name
+            if not student:
+                return Response(json.dumps({'status': 'Error',"message": "Validation Error : Provided billId has no student tagged. This voucher cannot be payed.","code":204}),content_type="application/json", status=200)
+            ths_student=student
+            obj["applicantName"]=str(ths_student["name"])
+            obj["applicantId"]=str(ths_student["facts_id"])
+            obj["billedDate"]=str(mov["invoice_date"])
+            ##extract father name
 
-            # # partner=models.execute_kw(db, uid, password, 'res.partner', 'read', [mov['partner_id']])
-            # obj["Student_Father_Name"]=mov['partner_id'][1]
+            # partner=models.execute_kw(db, uid, password, 'res.partner', 'read', [mov['partner_id']])
+            obj["Student_Father_Name"]=mov['partner_id'][1]
             #end test
             return Response(json.dumps({
                     "Status": {
