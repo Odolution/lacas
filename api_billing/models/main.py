@@ -164,7 +164,7 @@ class Billing(http.Controller):
                 voucher_code= 'P'
             else:
                 voucher_code= 'U'
-            obj["Voucher_Status"]=voucher_status
+            obj["Voucher_Status"]=voucher_code
             obj["billedDate"]=str(mov['invoice_date']) if "invoice_date" in mov else None
 
             obj["DynamicMembers"]={}
