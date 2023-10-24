@@ -555,8 +555,7 @@ class Billing(http.Controller):
 
         update_data = request.env['account.move'].browse(int(move_ids['id']))
         update_data.write({
-                            'x_studio_account_identifier':params["accountIdentifier"],
-                            # 'account_identifier':params["accountIdentifier"],
+                            'account_identifier':params["accountIdentifier"],
 
                                 })
 
