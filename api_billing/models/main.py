@@ -153,7 +153,7 @@ class Billing(http.Controller):
             obj={}
             obj["billId"]=str(mov["name"]) 
             obj["dueDate"]=str(mov["invoice_date_due"]) if "invoice_date_due" in mov else None
-            obj["dueAmount"]=str(mov["amount_residual"]) 
+            obj["Amount"]=str(mov["amount_residual"]) 
             obj["currency"]="PKR" 
             obj["accountIdentifier"]=str(mov["account_identifier"]) if "account_identifier" in mov else None
             obj["applicantMobileNo"]=mov['x_studio_contact_no'] if "x_studio_contact_no" in mov else None
