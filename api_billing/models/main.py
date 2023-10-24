@@ -186,7 +186,7 @@ class Billing(http.Controller):
             ##extract father name
 
             # partner=models.execute_kw(db, uid, password, 'res.partner', 'read', [mov['partner_id']])
-            obj["Student_Father_Name"]=mov['partner_id'][1]
+            obj["Student_Father_Name"]=mov['partner_id']['name']
             #end test
             return Response(json.dumps({
                     "Status": {
