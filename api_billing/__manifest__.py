@@ -9,7 +9,6 @@
     'description': """""",
     'depends': ['account','api_user'],
     'data': [
-        'static/src/config/config.json',
     ],
     'demo': [],
     'application': True,
