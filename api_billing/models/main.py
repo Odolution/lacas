@@ -157,17 +157,6 @@ class Billing(http.Controller):
             obj["currency"]="PKR" 
             obj["accountIdentifier"]=str(mov["account_identifier"]) if "account_identifier" in mov else None
             obj["applicantMobileNo"]=mov['x_studio_contact_no'] if "x_studio_contact_no" in mov else None
-            late_fee= move_ids.get_late_fee_charges()
-            obj["Amount_after_DueDate"]=move_ids['amount_residual']+late_fee
-            voucher_status= mov['payment_state'] if "payment_state" in mov else None
-            if voucher_status=='paid':
-                voucher_code= 'P'
-            else:
-                voucher_code= 'U'
-            obj["Voucher_Status"]=voucher_code
-            obj["billedDate"]=str(mov['invoice_date']) if "invoice_date" in mov else None
-
-            obj["DynamicMembers"]={}
 
 
             student=False
@@ -187,7 +176,16 @@ class Billing(http.Controller):
             obj["billedDate"]=str(mov["invoice_date"])
             ##extract father name
             obj["Student_Father_Name"]=mov['partner_id']['name']
-            #end test
+
+            late_fee= move_ids.get_late_fee_charges()
+            obj["Amount_after_DueDate"]=move_ids['amount_residual']+late_fee
+            voucher_status= mov['payment_state'] if "payment_state" in mov else None
+            if voucher_status=='paid':
+                voucher_code= 'P'
+            else:
+                voucher_code= 'U'
+            obj["Voucher_Status"]=voucher_code
+            obj["billedDate"]=str(mov['invoice_date']) if "invoice_date" in mov else None
             return Response(json.dumps({
                     "Status": {
                                     "StatusCode": 200,
@@ -573,7 +571,7 @@ class Billing(http.Controller):
 
                     },
 
-                    "Data": {"requestId":str(create_payment)},
+                    "Data": {"requestId":create_payment['id']},
 
                     "Navigation": {
 
