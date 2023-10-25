@@ -247,7 +247,7 @@ class Billing(http.Controller):
 
 
 
-    @http.route(['/mark_voucher_as_payed'], type='json', auth='user', methods=['POST'])
+    @http.route(['/mark_voucher_as_payed'], type='http', auth='user', methods=['POST'])
     def mark_voucher_as_payed(self,**post_data):
 
         ##validate Authentication by checking API key.
@@ -262,7 +262,7 @@ class Billing(http.Controller):
             is_invalid_auth=True
             
         if is_invalid_auth:
-            return json.dumps({
+            return Response(json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -294,7 +294,7 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                })
+                }), content_type="application/json", status=5000)
 
 
         verify_token= request.env['api.users'].sudo().search([('token', '=',auth[7:])],limit=1)
