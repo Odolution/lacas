@@ -186,6 +186,8 @@ class Billing(http.Controller):
                 voucher_code= 'U'
             obj["Voucher_Status"]=voucher_code
             obj["billedDate"]=str(mov['invoice_date']) if "invoice_date" in mov else None
+            
+            #end test
             return Response(json.dumps({
                     "Status": {
                                     "StatusCode": 200,
