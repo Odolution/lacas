@@ -150,7 +150,7 @@ class SecurityAmountReport(models.Model):
 
                         serial_number += 1
                         row+=1
-                    done.append(student)
+                        done.append(student)
                     else:
                         # pass
                         for line in reversal.invoice_line_ids:
@@ -234,7 +234,7 @@ class SecurityAmountReport(models.Model):
         
                                 serial_number += 1
                                 row+=1
-                            done.append(student)
+                                done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
 
