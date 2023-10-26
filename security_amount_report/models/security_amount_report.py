@@ -164,7 +164,7 @@ class SecurityAmountReport(models.Model):
                                     worksheet.write(row, 1, "N/A")
         
                                 if admission.partner_id.name:
-                                    worksheet.write(row, 2, admission.partner_id.name)
+                                    worksheet.write(row, 2, reversal.partner_id.name)
                                 else:
                                     worksheet.write(row, 2, "N/A")
         
@@ -219,8 +219,8 @@ class SecurityAmountReport(models.Model):
                                 else:
                                     worksheet.write(row, 7, "N/A")
         
-                                if admission.invoice_date:
-                                    worksheet.write(row, 8, str(admission.invoice_date))
+                                if reversal.invoice_date:
+                                    worksheet.write(row, 8, str(reversal.invoice_date))
                                 else:
                                     worksheet.write(row, 8, "N/A")
                                  
