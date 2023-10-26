@@ -60,11 +60,16 @@ class SecurityAmountReport(models.Model):
             enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
             # raise UserError(enrolled_students)
             for student in enrolled_students:
-                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("student_ids","=",student.id)], limit=1)
+                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("student_ids","=",student.id)])
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ('state','=','draft'),("x_student_id_cred","=",student.id)], limit=1)
-                for line in admission.invoice_line_ids:
-                    if line.account_id.name == 'Security Fee':
-                        worksheet.write(row, 0, serial_number)
+                # for line in admission.invoice_line_ids:
+                #     if line.account_id.name == 'Security Fee':
+                #         worksheet.write(row, 0, serial_number)
+
+                for adm in admission:
+                    for l in adm.invoice_line_ids:
+                        if l.account_id.name == 'Security Fee':
+                            worksheet.write(row, 0, serial_number)
 
                         if student.name:
                             worksheet.write(row, 1, student.name)
