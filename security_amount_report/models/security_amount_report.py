@@ -69,7 +69,7 @@ class SecurityAmountReport(models.Model):
 
                 for adm in admission:
                     for line in adm.invoice_line_ids:
-                        if line.account_id.name == 'Security Fee':
+                        if line.account_id.name == 'Security Fee' and student not in done:
                             worksheet.write(row, 0, serial_number)
 
                         if student.name:
