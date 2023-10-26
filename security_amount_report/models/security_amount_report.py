@@ -163,7 +163,7 @@ class SecurityAmountReport(models.Model):
                                 else:
                                     worksheet.write(row, 1, "N/A")
         
-                                if admission.partner_id.name:
+                                if reversal.partner_id.name:
                                     worksheet.write(row, 2, reversal.partner_id.name)
                                 else:
                                     worksheet.write(row, 2, "N/A")
@@ -175,14 +175,18 @@ class SecurityAmountReport(models.Model):
                                 
                                 if student.grade_level_ids:
                                     worksheet.write(row, 4, student.grade_level_ids.name)
-                                elif admission.class_name:
-                                    worksheet.write(row, 4, admission.class_name)
+                                # elif admission.class_name:
+                                #     worksheet.write(row, 4, admission.class_name)
+                                elif reversal.class_name:
+                                    worksheet.write(row, 4, reversal.class_name)
                                 else:
                                     worksheet.write(row, 4, "N/A")
                                 if student.homeroom:
                                     worksheet.write(row, 5, student.homeroom)
-                                elif admission.student_ids:
-                                    student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
+                                # elif admission.student_ids:
+                                #     student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
+                                elif reversal.student_ids:
+                                    student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
                                     if student:
                                         homeroom = student.homeroom
                                         if homeroom != False:
@@ -205,13 +209,17 @@ class SecurityAmountReport(models.Model):
                                 if student.id :
                                     if student.x_last_school_id :
                                         worksheet.write(row, 6, student.x_last_school_id.name)
-                                elif admission.std_current_branch:
-                                    worksheet.write(row, 6, admission.std_current_branch)
+                                # elif admission.std_current_branch:
+                                #     worksheet.write(row, 6, admission.std_current_branch)
+                                elif reversal.std_current_branch:
+                                    worksheet.write(row, 6, reversal.std_current_branch)
                                 else:
                                     worksheet.write(row, 6, "N/A")
         
-                                if admission.x_studio_withdrawn_status:
-                                    worksheet.write(row, 7, admission.x_studio_withdrawn_status)
+                                # if admission.x_studio_withdrawn_status:
+                                #     worksheet.write(row, 7, admission.x_studio_withdrawn_status)
+                                if reversal.x_studio_withdrawn_status:
+                                    worksheet.write(row, 7, reversal.x_studio_withdrawn_status)
                                     
                                 elif reversal.x_studio_withdrawn_status:
                                     worksheet.write(row, 7, reversal.x_studio_withdrawn_status)
