@@ -59,12 +59,12 @@ class SecurityAmountReport(models.Model):
             serial_number = 1
             enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
             # raise UserError(enrolled_students)
-            done=[]
+            # done=[]
             for student in enrolled_students:
                 admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("student_ids","=",student.id)], limit=1)
-                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ('state','=','draft'),("x_student_id_cred","=",student.id)], limit=1)
+                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ('state','=','posted'),("x_student_id_cred","=",student.id)], limit=1)
                 for line in admission.invoice_line_ids:
-                    if line.account_id.name == 'Security Fee' and student not in done:
+                    if line.account_id.name == 'Security Fee':
                         worksheet.write(row, 0, serial_number)
 
                 # for adm in admission:
@@ -150,11 +150,11 @@ class SecurityAmountReport(models.Model):
 
                         serial_number += 1
                         row+=1
-                        done.append(student)
+                        # done.append(student)
                     else:
                         # pass
                         for line in reversal.invoice_line_ids:
-                            if line.account_id.name == 'Security Fee' and student not in done:
+                            if line.account_id.name == 'Security Fee':
                                 worksheet.write(row, 0, serial_number)
                                 if student.name:
                                     worksheet.write(row, 1, student.name)
@@ -234,7 +234,7 @@ class SecurityAmountReport(models.Model):
         
                                 serial_number += 1
                                 row+=1
-                                done.append(student)
+                                # done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
 
