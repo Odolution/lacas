@@ -154,7 +154,7 @@ class SecurityAmountReport(models.Model):
                     else:
                         # pass
                         for line in reversal.invoice_line_ids:
-                            if line.account_id.name == 'Security Fee':
+                            if line.account_id.name == 'Security Fee' and student not in done:
                                 worksheet.write(row, 0, serial_number)
                                 if student.name:
                                     worksheet.write(row, 1, student.name)
