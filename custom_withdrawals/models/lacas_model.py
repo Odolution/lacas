@@ -30,29 +30,56 @@ class academics_tab(models.Model):
                 rec.udid_cred_custom=rec.x_student_id_cred.facts_udid
     
     def _compute_notice_fee(self):
+        def _compute_notice_fee(self):
+            for rec in self:
+                rec.notice_fee_withdrawal = 0
+                rec.x_studio_withdrawn_status = 'N'  
+
+                if rec.journal_id and rec.journal_id.id == 120:  # Check if journal_id is not None and matches the expected value
+                    if rec.x_studio_charges:
+                        total_custom = 0
+                        for inv_line in rec.x_studio_charges.invoice_line_ids:
+                            total_custom = inv_line.price_subtotal + total_custom
+                        rec.notice_fee_withdrawal = total_custom
+                    else:
+                        rec.notice_fee_withdrawal = 0
+                        
+                    if rec.payment_state == 'paid':
+                        rec.x_studio_withdrawn_status = 'Y'
+                else:
+                    reversal = rec.env['account.move'].search([
+                        ("move_type", "=", "out_refund"),
+                        ("x_student_id_cred", "=", rec.student_ids.id) if rec.student_ids else False  # Check if student_ids is not None before accessing id
+                    ])
+                    if reversal:
+                        for rev in reversal:
+                            rec.x_studio_withdrawn_status = rev.x_studio_withdrawn_status
+                    else:
+                        rec.x_studio_withdrawn_status = 'N'
+
         # if self.move_type == "out_refund":
-        for rec in self:
-            rec.notice_fee_withdrawal = 0
-            rec.x_studio_withdrawn_status = 'N'  
-            if rec.journal_id==120:
-                if rec.x_studio_charges:
-                    total_custom = 0
-                    for inv_line in rec.x_studio_charges.invoice_line_ids:
-                        total_custom = inv_line.price_subtotal+total_custom
-                    rec.notice_fee_withdrawal = total_custom
-                else:
-                    rec.notice_fee_withdrawal = 0
+        # for rec in self:
+        #     rec.notice_fee_withdrawal = 0
+        #     rec.x_studio_withdrawn_status = 'N'  
+        #     if rec.journal_id==120:
+        #         if rec.x_studio_charges:
+        #             total_custom = 0
+        #             for inv_line in rec.x_studio_charges.invoice_line_ids:
+        #                 total_custom = inv_line.price_subtotal+total_custom
+        #             rec.notice_fee_withdrawal = total_custom
+        #         else:
+        #             rec.notice_fee_withdrawal = 0
                             
-                if rec.payment_state == 'paid':
-                    rec.x_studio_withdrawn_status = 'Y'
-            else:
-                #str_facts_id=str(rec.student_ids.facts_id)
-                reversal=rec.env['account.move'].search([(("move_type","=","out_refund"),("x_student_id_cred","=",rec.student_ids.id))])
-                if reversal:
-                    for rev in reversal:
-                        rec.x_studio_withdrawn_status = rev.x_studio_withdrawn_status
-                else:
-                    rec.x_studio_withdrawn_status = 'N'
+        #         if rec.payment_state == 'paid':
+        #             rec.x_studio_withdrawn_status = 'Y'
+        #     else:
+        #         #str_facts_id=str(rec.student_ids.facts_id)
+        #         reversal=rec.env['account.move'].search([(("move_type","=","out_refund"),("x_student_id_cred","=",rec.student_ids.id))])
+        #         if reversal:
+        #             for rev in reversal:
+        #                 rec.x_studio_withdrawn_status = rev.x_studio_withdrawn_status
+        #         else:
+        #             rec.x_studio_withdrawn_status = 'N'
 
 
                 
