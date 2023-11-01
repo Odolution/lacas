@@ -49,6 +49,7 @@ class academics_tab(models.Model):
                 #str_facts_id=str(rec.student_ids.facts_id)
                 reversal=rec.env['account.move'].search([("move_type","=","out_refund"),("x_student_id_cred","=",rec.student_ids.id)])
                 if reversal:
+                    raise UserError("check")
                     for rev in reversal:
                         rec.x_studio_withdrawn_status = rev.x_studio_withdrawn_status
                 else:
