@@ -34,17 +34,19 @@ class academics_tab(models.Model):
         for rec in self:
             rec.notice_fee_withdrawal = 0
             rec.x_studio_withdrawn_status = 'N'  
-            #if rec.journal_id==120:
-            if rec.x_studio_charges:
-                total_custom = 0
-                for inv_line in rec.x_studio_charges.invoice_line_ids:
-                    total_custom = inv_line.price_subtotal+total_custom
-                rec.notice_fee_withdrawal = total_custom
-                        
-            if rec.payment_state == 'paid':
-                rec.x_studio_withdrawn_status = 'Y'
+            if rec.journal_id==120:
+                if rec.x_studio_charges:
+                    total_custom = 0
+                    for inv_line in rec.x_studio_charges.invoice_line_ids:
+                        total_custom = inv_line.price_subtotal+total_custom
+                    rec.notice_fee_withdrawal = total_custom
+                else:
+                    rec.notice_fee_withdrawal = 0
+                            
+                if rec.payment_state == 'paid':
+                    rec.x_studio_withdrawn_status = 'Y'
             else:
-                str_facts_id=str(rec.student_ids.facts_id)
+                #str_facts_id=str(rec.student_ids.facts_id)
                 reversal=rec.env['account.move'].search([(("move_type","=","out_refund"),("x_student_id_cred","=",rec.student_ids.id))])
                 if reversal:
                     for rev in reversal:
