@@ -43,14 +43,14 @@ class academics_tab(models.Model):
                         
             if rec.payment_state == 'paid':
                 rec.x_studio_withdrawn_status = 'Y'
-            # else:
-            #     str_facts_id=str(rec.student_ids.facts_id)
-            #     reversal=rec.env['account.move'].search([(("move_type","=","out_refund"),("facts_id_cred_custom","=",str_facts_id))])
-            #     if reversal:
-            #         for rev in reversal:
-            #             rec.x_studio_withdrawn_status = rev.x_studio_withdrawn_status
-            #     else:
-            #         rec.x_studio_withdrawn_status = 'N'
+            else:
+                str_facts_id=str(rec.student_ids.facts_id)
+                reversal=rec.env['account.move'].search([(("move_type","=","out_refund"),("x_student_id_cred","=",rec.student_ids.id))])
+                if reversal:
+                    for rev in reversal:
+                        rec.x_studio_withdrawn_status = rev.x_studio_withdrawn_status
+                else:
+                    rec.x_studio_withdrawn_status = 'N'
 
 
                 
