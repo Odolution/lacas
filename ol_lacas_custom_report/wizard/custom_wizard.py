@@ -136,7 +136,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
         move_ids_raw = self.env['account.move'].search(domain)
 
-        raise UserError(domain)
+        # raise UserError(domain)
 
         std_lst = []
         for rec in move_ids_raw:
