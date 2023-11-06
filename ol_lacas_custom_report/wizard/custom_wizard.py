@@ -621,6 +621,7 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["nov_2"]  +=    temp_dct["nov_2"]
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
+
         # desired_dict={}
 
         # desired_name = ''+'\n'
@@ -683,6 +684,12 @@ class ReceivablesReportWizard(models.TransientModel):
                 lines.append(mvl.id)
            
         
+        desired_name = ''+'\n'
+        
+        for item in final_lst:
+            desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+
+        raise UserError(str(desired_name))
        
 
         self.write({
