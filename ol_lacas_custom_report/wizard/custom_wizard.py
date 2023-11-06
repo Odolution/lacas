@@ -170,6 +170,8 @@ class ReceivablesReportWizard(models.TransientModel):
         invoice_check = []
         final_lst = []
         temp_lst = []
+
+        a=""
        
         for value in move_ids_raw:
             
@@ -214,6 +216,8 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
+            if value. =="124959":
+                 a=a+str(value.name)+"===="+str(move.amount_total)+"\n"
             custom_data['name'] = value.x_student_id_cred.name if value.x_student_id_cred.name else ''
             custom_data['record_id'] = value.name 
             custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else 0
@@ -302,6 +306,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             temp_lst.append(custom_data)
 
+        raise UserError(a)
 
         for element in temp_lst:
             temp_dict={
@@ -608,15 +613,15 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["nov_2"]  +=    temp_dct["nov_2"]
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
+        # desired_dict={}
+        # desired_name = 'Fasih Ullah  Yasir'
 
-        desired_name = 'Fasih Ullah  Yasir'
+        # for item in final_lst:
+        #     if item['name'] == desired_name:
+        #         desired_dict = item
+        #         break
 
-        for item in final_lst:
-            if item['name'] == desired_name:
-                desired_dict = item
-                break
-
-        raise UserError(str(desired_dict))
+        # raise UserError(str(desired_dict))
         
  
         lines=[]
