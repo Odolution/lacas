@@ -216,8 +216,9 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
+                    
             if value.x_studio_udid_monthly_bills =="124959":
-                 a=a+str(value.name)+"===="+str(move.amount_total)+"\n"
+                a=a+str(value.name)+"===="+str(move.amount_total)+"\n"
 
 
             custom_data['name'] = value.x_student_id_cred.name if value.x_student_id_cred.name else ''
