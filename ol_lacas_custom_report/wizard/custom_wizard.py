@@ -127,6 +127,7 @@ class ReceivablesReportWizard(models.TransientModel):
             ('state', '=', 'posted'),
             ('invoice_date', '>=', self.date_from),
             ('invoice_date', '<=', self.date_to),
+            ('x_studio_udid_monthly_bills', '=', '124959')
         ]
 
         if self.std_type == 'enrolled':
@@ -174,6 +175,7 @@ class ReceivablesReportWizard(models.TransientModel):
         a=""
        
         for value in move_ids_raw:
+
             
 
             custom_data = {
@@ -216,11 +218,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-            raise UserError("Test")
-            if value.x_studio_udid_monthly_bills == "124959":
-                raise UserError(value.x_studio_udid_monthly_bills)
-                a=a+str(value.name)+"===="+str(move.amount_total)+"\n"
-
+           
 
             custom_data['name'] = value.x_student_id_cred.name if value.x_student_id_cred.name else ''
             custom_data['record_id'] = value.name 
@@ -310,7 +308,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             temp_lst.append(custom_data)
 
-        raise UserError(a)
+
 
         for element in temp_lst:
             temp_dict={
