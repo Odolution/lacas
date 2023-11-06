@@ -471,7 +471,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-                    
+
             # raise UserError((value.student_id.facts_udid) )
             custom_dataa['full_roll_no'] = value.student_ids.facts_udid 
             if value.month_date == "January" and value.year_date=='22':
@@ -623,12 +623,12 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
         # desired_dict={}
 
-        desired_name = ''+'\n'
+        # desired_name = ''+'\n'
         
-        for item in temp_list_2:
-            desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+        # for item in temp_list_2:
+        #     desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
 
-        raise UserError(str(desired_name))
+        # raise UserError(str(desired_name))
         
  
         lines=[]
