@@ -136,6 +136,8 @@ class ReceivablesReportWizard(models.TransientModel):
 
         move_ids_raw = self.env['account.move'].search(domain)
 
+        raise UserError('Test')
+
         std_lst = []
         for rec in move_ids_raw:
             if len(rec.unpaid_std_inv_ids) > 0:
