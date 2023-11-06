@@ -395,7 +395,7 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dict["total_amount"]   =  element["total_amount"]
 
             if element["name"] not in invoice_check:
-                        invoice_check.append(element["name"])
+                        invoice_check.append(element["full_roll_no"])
                         final_lst.append(temp_dict)
             
             
@@ -595,6 +595,7 @@ class ReceivablesReportWizard(models.TransientModel):
             if element["full_roll_no"] in invoice_check:
             
                 index = invoice_check.index(element["full_roll_no"])
+                # raise UserError(index)
                 final_lst[index]["jan"]  +=    temp_dct["jan"]
                 final_lst[index]["feb"]  +=    temp_dct["feb"]  
                 final_lst[index]["mar"]  +=    temp_dct["mar"]  
