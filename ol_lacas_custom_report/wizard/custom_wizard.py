@@ -150,7 +150,7 @@ class ReceivablesReportWizard(models.TransientModel):
             ('state', '=', 'posted'),
             ('payment_state', 'in', ['not_paid', 'partial']),
             ('student_ids', 'in', std_lst),
-             ('std_factsid', '=', '30306')
+            
         ]
 
         inv_ids = self.env['account.move'].search(domain_2)
