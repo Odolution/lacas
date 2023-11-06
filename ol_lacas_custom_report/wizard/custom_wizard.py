@@ -672,7 +672,11 @@ class ReceivablesReportWizard(models.TransientModel):
                 lines.append(mvl.id)
            
         
-        
+        desired_name = ''+'\n'
+        for rec in self.account_report_line:
+            desired_name += str(rec.full_roll_no)+"========"+str(rec.total_amount)+'\n'
+
+        raise UserError(str(desired_name))
 
         self.write({
             "account_report_line":[(6,0,lines)]
@@ -694,10 +698,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
         self.action_print_report()
         
-        for rec in self.account_report_line:
-            desired_name = str(rec.full_roll_no)+"========"+str(rec.total_amount)+'\n'
-
-        raise UserError(str(desired_name))
+       
 
         
         if xlwt:
@@ -810,8 +811,6 @@ class ReceivablesReportWizard(models.TransientModel):
             row = 4
             sn=1
 
-            desired_name = ''+'\n'
-        
            
             for rec in self.account_report_line:
                 
