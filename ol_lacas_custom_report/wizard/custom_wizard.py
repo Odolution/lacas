@@ -430,7 +430,12 @@ class ReceivablesReportWizard(models.TransientModel):
 
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
         # raise UserError(str(final_lst))
+        # desired_name = ''+'\n'
         
+        # for item in temp_list_2:
+        #     desired_name += str(item['name'])+"========"+str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+
+        # raise UserError(str(desired_name))
         # invoice_checks_2 = []
         # final_list_2 = []
         temp_list_2 = []
@@ -438,7 +443,7 @@ class ReceivablesReportWizard(models.TransientModel):
             
 
             custom_dataa = {
-                       "name":'',
+                       "full_roll_no":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -467,7 +472,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "total_amount":0
                     }
             
-            custom_dataa['name'] = value.student_ids.name 
+            custom_dataa['full_roll_no'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else 0
             if value.month_date == "January" and value.year_date=='22':
                 custom_dataa['jan'] = value.amount_residual
             elif value.month_date == "Feburary" and value.year_date=='22':
@@ -528,7 +533,7 @@ class ReceivablesReportWizard(models.TransientModel):
         
         for element in temp_list_2:
             temp_dct={
-                        "name":'',
+                        "full_roll_no":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -556,7 +561,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-            temp_dct["name"]          =   element["name"]
+            temp_dct["full_roll_no"]  =   element["full_roll_no"]
             temp_dct["jan"]           =   element["jan"]
             temp_dct["feb"]           =   element["feb"]
             temp_dct["mar"]           =   element["mar"]
@@ -586,9 +591,9 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dct["dec_2"]           =   element["dec_2"]
             temp_dct["total_amount"]   =  element["total_amount"]
 
-            if element["name"] in invoice_check:
+            if element["full_roll_no"] in invoice_check:
             
-                index = invoice_check.index(element["name"])
+                index = invoice_check.index(element["full_roll_no"])
                 final_lst[index]["jan"]  +=    temp_dct["jan"]
                 final_lst[index]["feb"]  +=    temp_dct["feb"]  
                 final_lst[index]["mar"]  +=    temp_dct["mar"]  
@@ -620,7 +625,7 @@ class ReceivablesReportWizard(models.TransientModel):
         desired_name = ''+'\n'
         
         for item in temp_list_2:
-            desired_name += str(item['name'])+"========"+str(item['total_amount'])+'\n'
+            desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
 
         raise UserError(str(desired_name))
         
