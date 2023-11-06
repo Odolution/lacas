@@ -216,9 +216,9 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-            # raise UserError(value.x_studio_udid_monthly_bills)
 
             if value.x_studio_udid_monthly_bills == "124959":
+                raise UserError(value.x_studio_udid_monthly_bills)
                 a=a+str(value.name)+"===="+str(move.amount_total)+"\n"
 
 
