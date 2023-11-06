@@ -136,7 +136,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
         move_ids_raw = self.env['account.move'].search(domain)
 
-        raise UserError('Test')
+        raise UserError(domain)
 
         std_lst = []
         for rec in move_ids_raw:
@@ -609,14 +609,14 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
 
-        # desired_name = 'Fasih Ullah  Yasir'
+        desired_name = 'Fasih Ullah  Yasir'
 
-        # for item in final_lst:
-        #     if item['name'] == desired_name:
-        #         desired_dict = item
-        #         break
+        for item in final_lst:
+            if item['name'] == desired_name:
+                desired_dict = item
+                break
 
-        # raise UserError(str(desired_dict))
+        raise UserError(str(desired_dict))
         
  
         lines=[]
