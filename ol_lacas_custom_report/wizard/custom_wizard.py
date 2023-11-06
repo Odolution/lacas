@@ -471,8 +471,8 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-            raise UserError((value.student_id.facts_udid) )
-            custom_dataa['full_roll_no'] = value.x_student_id_cred.facts_udid 
+            # raise UserError((value.student_id.facts_udid) )
+            custom_dataa['full_roll_no'] = value.student_id.facts_udid 
             if value.month_date == "January" and value.year_date=='22':
                 custom_dataa['jan'] = value.amount_residual
             elif value.month_date == "Feburary" and value.year_date=='22':
