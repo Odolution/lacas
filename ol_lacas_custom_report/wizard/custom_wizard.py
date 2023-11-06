@@ -127,6 +127,7 @@ class ReceivablesReportWizard(models.TransientModel):
             ('state', '=', 'posted'),
             ('invoice_date', '>=', self.date_from),
             ('invoice_date', '<=', self.date_to),
+           
         ]
 
         if self.std_type == 'enrolled':
@@ -135,6 +136,8 @@ class ReceivablesReportWizard(models.TransientModel):
             domain.append(('x_student_id_cred.x_last_enrollment_status_id.name', '=', 'Graduated'))
 
         move_ids_raw = self.env['account.move'].search(domain)
+
+        # raise UserError(domain)
 
         std_lst = []
         for rec in move_ids_raw:
@@ -168,8 +171,11 @@ class ReceivablesReportWizard(models.TransientModel):
         invoice_check = []
         final_lst = []
         temp_lst = []
+
+        a=""
        
         for value in move_ids_raw:
+
             
 
             custom_data = {
@@ -212,6 +218,8 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
+           
+
             custom_data['name'] = value.x_student_id_cred.name if value.x_student_id_cred.name else ''
             custom_data['record_id'] = value.name 
             custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else 0
@@ -301,6 +309,7 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_lst.append(custom_data)
 
 
+
         for element in temp_lst:
             temp_dict={
                         "record_id":'',
@@ -385,14 +394,14 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dict["app_date"]       =  element["app_date"]
             temp_dict["total_amount"]   =  element["total_amount"]
 
-            if element["name"] not in invoice_check:
-                        invoice_check.append(element["name"])
+            if element["full_roll_no"] not in invoice_check:
+                        invoice_check.append(element["full_roll_no"])
                         final_lst.append(temp_dict)
             
             
 
             else:
-                index = invoice_check.index(element["name"])
+                index = invoice_check.index(element["full_roll_no"])
                 final_lst[index]["jan"]  +=    temp_dict["jan"]
                 final_lst[index]["feb"]  +=    temp_dict["feb"]  
                 final_lst[index]["mar"]  +=    temp_dict["mar"]  
@@ -421,7 +430,12 @@ class ReceivablesReportWizard(models.TransientModel):
 
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
         # raise UserError(str(final_lst))
+        # desired_name = ''+'\n'
+        
+        # for item in temp_list_2:
+        #     desired_name += str(item['name'])+"========"+str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
 
+        # raise UserError(str(desired_name))
         # invoice_checks_2 = []
         # final_list_2 = []
         temp_list_2 = []
@@ -429,7 +443,7 @@ class ReceivablesReportWizard(models.TransientModel):
             
 
             custom_dataa = {
-                       "name":'',
+                       "full_roll_no":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -457,8 +471,9 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-            
-            custom_dataa['name'] = value.student_ids.name 
+
+            # raise UserError((value.student_id.facts_udid) )
+            custom_dataa['full_roll_no'] = value.student_ids.facts_udid 
             if value.month_date == "January" and value.year_date=='22':
                 custom_dataa['jan'] = value.amount_residual
             elif value.month_date == "Feburary" and value.year_date=='22':
@@ -519,7 +534,7 @@ class ReceivablesReportWizard(models.TransientModel):
         
         for element in temp_list_2:
             temp_dct={
-                        "name":'',
+                        "full_roll_no":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -547,7 +562,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_2": 0,
                         "total_amount":0
                     }
-            temp_dct["name"]          =   element["name"]
+            temp_dct["full_roll_no"]  =   element["full_roll_no"]
             temp_dct["jan"]           =   element["jan"]
             temp_dct["feb"]           =   element["feb"]
             temp_dct["mar"]           =   element["mar"]
@@ -577,9 +592,10 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dct["dec_2"]           =   element["dec_2"]
             temp_dct["total_amount"]   =  element["total_amount"]
 
-            if element["name"] in invoice_check:
+            if element["full_roll_no"] in invoice_check:
             
-                index = invoice_check.index(element["name"])
+                index = invoice_check.index(element["full_roll_no"])
+                # raise UserError(index)
                 final_lst[index]["jan"]  +=    temp_dct["jan"]
                 final_lst[index]["feb"]  +=    temp_dct["feb"]  
                 final_lst[index]["mar"]  +=    temp_dct["mar"]  
@@ -607,14 +623,14 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
 
-        # desired_name = 'Fasih Ullah  Yasir'
+        # desired_dict={}
 
-        # for item in final_lst:
-        #     if item['name'] == desired_name:
-        #         desired_dict = item
-        #         break
+        # desired_name = ''+'\n'
+        
+        # for item in temp_list_2:
+        #     desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
 
-        # raise UserError(str(desired_dict))
+        # raise UserError(str(desired_name))
         
  
         lines=[]
@@ -669,7 +685,14 @@ class ReceivablesReportWizard(models.TransientModel):
                 lines.append(mvl.id)
            
         
+        # desired_name = ''+'\n'
         
+        # for item in final_lst:
+        #     desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+
+        # raise UserError(str(desired_name))
+       
+
         self.write({
             "account_report_line":[(6,0,lines)]
         }
