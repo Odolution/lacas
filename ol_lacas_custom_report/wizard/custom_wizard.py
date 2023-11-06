@@ -151,7 +151,6 @@ class ReceivablesReportWizard(models.TransientModel):
             ('state', '=', 'posted'),
             ('payment_state', 'in', ['not_paid', 'partial']),
             ('student_ids', 'in', std_lst),
-             ('x_studio_udid_monthly_bills', '=', '124959')
         ]
 
         inv_ids = self.env['account.move'].search(domain_2)
@@ -617,14 +616,12 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
         # desired_dict={}
-        # desired_name = 'Fasih Ullah  Yasir'
+        desired_name = 'Fasih Ullah  Yasir'+'\n'
 
-        # for item in final_lst:
-        #     if item['name'] == desired_name:
-        #         desired_dict = item
-        #         break
+        for item in final_lst:
+            desired_name = str(item)+'\n'
 
-        # raise UserError(str(desired_dict))
+        raise UserError(str(desired_name))
         
  
         lines=[]
