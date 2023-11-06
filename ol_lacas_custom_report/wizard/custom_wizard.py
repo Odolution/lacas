@@ -675,9 +675,10 @@ class ReceivablesReportWizard(models.TransientModel):
         desired_name = ''+'\n'
 
         for item in final_lst:
-            desired_name = str(item.full_roll_no)+"========"+str(item.total_amount)+'\n'
+            desired_name = str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
 
         raise UserError(str(desired_name))
+
         self.write({
             "account_report_line":[(6,0,lines)]
         }
