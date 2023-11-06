@@ -127,7 +127,6 @@ class ReceivablesReportWizard(models.TransientModel):
             ('state', '=', 'posted'),
             ('invoice_date', '>=', self.date_from),
             ('invoice_date', '<=', self.date_to),
-            ('std_factsid', '=', '30306')
         ]
 
         if self.std_type == 'enrolled':
