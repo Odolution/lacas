@@ -685,12 +685,12 @@ class ReceivablesReportWizard(models.TransientModel):
                 lines.append(mvl.id)
            
         
-        desired_name = ''+'\n'
+        # desired_name = ''+'\n'
         
-        for item in final_lst:
-            desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+        # for item in final_lst:
+        #     desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
 
-        raise UserError(str(desired_name))
+        # raise UserError(str(desired_name))
        
 
         self.write({
