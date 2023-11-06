@@ -620,7 +620,7 @@ class ReceivablesReportWizard(models.TransientModel):
         desired_name = ''+'\n'
         
         for item in temp_list_2:
-            desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+            desired_name += str(item['name'])+"========"+str(item['total_amount'])+'\n'
 
         raise UserError(str(desired_name))
         
