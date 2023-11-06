@@ -394,14 +394,14 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dict["app_date"]       =  element["app_date"]
             temp_dict["total_amount"]   =  element["total_amount"]
 
-            if element["name"] not in invoice_check:
+            if element["full_roll_no"] not in invoice_check:
                         invoice_check.append(element["full_roll_no"])
                         final_lst.append(temp_dict)
             
             
 
             else:
-                index = invoice_check.index(element["name"])
+                index = invoice_check.index(element["full_roll_no"])
                 final_lst[index]["jan"]  +=    temp_dict["jan"]
                 final_lst[index]["feb"]  +=    temp_dict["feb"]  
                 final_lst[index]["mar"]  +=    temp_dict["mar"]  
