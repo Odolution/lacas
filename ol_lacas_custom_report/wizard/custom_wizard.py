@@ -808,7 +808,7 @@ class ReceivablesReportWizard(models.TransientModel):
             desired_name = ''+'\n'
         
             for rec in self.account_report_line:
-                desired_name = str(irec.full_roll_no)+"========"+str(rec.total_amount)+'\n'
+                desired_name = str(rec.full_roll_no)+"========"+str(rec.total_amount)+'\n'
 
             raise UserError(str(desired_name))
 
