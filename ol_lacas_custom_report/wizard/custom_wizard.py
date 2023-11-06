@@ -430,12 +430,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
         # raise UserError(str(final_lst))
-        desired_name = ''+'\n'
         
-        for item in temp_lst:
-            desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
-
-        raise UserError(str(desired_name))
         # invoice_checks_2 = []
         # final_list_2 = []
         temp_list_2 = []
@@ -622,7 +617,12 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
         # desired_dict={}
 
-       
+        desired_name = ''+'\n'
+        
+        for item in temp_list_2:
+            desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+
+        raise UserError(str(desired_name))
         
  
         lines=[]
