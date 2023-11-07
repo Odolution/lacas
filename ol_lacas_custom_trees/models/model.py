@@ -174,7 +174,11 @@ class ext(models.Model):
 
                 if late_deduct_tot>0:
                     amnt_after=abs(total-late_deduct_tot-total_consession)
-                    rec.net_amount=str(amnt_after)
+                    if amnt_after>0:
+                        rec.net_amount=str(amnt_after)
+                    else:
+                        rec.net_amount="0"
+
                 #raise UserError(amnt_after)
                 else:
                     amnt_total_wo_latefee=abs(total-total_consession)
