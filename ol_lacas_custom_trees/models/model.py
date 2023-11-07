@@ -167,27 +167,27 @@ class ext(models.Model):
                         concession.append(abs_price)
 
 
-                #if amt:
-                total=sum(amt)
-                total_consession=sum(concession)
-                late_deduct_tot=sum(late)
+                if amt:
+                    total=sum(amt)
+                    total_consession=sum(concession)
+                    late_deduct_tot=sum(late)
 
-                if late_deduct_tot>0:
-                    amnt_after=abs(total-late_deduct_tot-total_consession)
-                    if amnt_after>0:
-                        rec.net_amount=str(amnt_after)
-                    else:
-                        rec.net_amount="0"
+                    if late_deduct_tot>0:
+                        amnt_after=abs(total-late_deduct_tot-total_consession)
+                        if amnt_after>0:
+                            rec.net_amount=str(amnt_after)
+                        else:
+                            rec.net_amount="0"
 
-                #raise UserError(amnt_after)
-                else:            
-                    amnt_total_wo_latefee=abs(total-total_consession)
-                    #nofloat=int(total)
-                    #raise UserError(amnt_total_wo_latefee)
-                    if amnt_total_wo_latefee>0:
-                        rec.net_amount=str(amnt_total_wo_latefee)
-                    else:
-                        rec.net_amount="0"
+                    #raise UserError(amnt_after)
+                    else:            
+                        amnt_total_wo_latefee=abs(total-total_consession)
+                        #nofloat=int(total)
+                        #raise UserError(amnt_total_wo_latefee)
+                        if amnt_total_wo_latefee>0:
+                            rec.net_amount=str(amnt_total_wo_latefee)
+                        else:
+                            rec.net_amount="0"
                 #nofloat_tot=int(amnt_after)
                 
 
