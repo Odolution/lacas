@@ -192,6 +192,8 @@ class ext(models.Model):
                 #nofloat_tot=int(amnt_after)
                 else:
                     rec.net_amount="0"
+            else:
+                rec.net_amount="0"
 
 
 
