@@ -180,12 +180,14 @@ class ext(models.Model):
                         rec.net_amount="0"
 
                 #raise UserError(amnt_after)
-                else:
+                else:            
                     amnt_total_wo_latefee=abs(total-total_consession)
                     #nofloat=int(total)
                     #raise UserError(amnt_total_wo_latefee)
-
-                    rec.net_amount=str(amnt_total_wo_latefee)
+                    if amnt_total_wo_latefee>0:
+                        rec.net_amount=str(amnt_total_wo_latefee)
+                    else:
+                        rec.net_amount="0"
                 #nofloat_tot=int(amnt_after)
                 
 
