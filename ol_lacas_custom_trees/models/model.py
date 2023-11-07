@@ -188,8 +188,11 @@ class ext(models.Model):
                             rec.net_amount=str(amnt_total_wo_latefee)
                         else:
                             rec.net_amount="0"
+            
                 #nofloat_tot=int(amnt_after)
-                
+                else:
+                    rec.net_amount="0"
+
 
 
 
