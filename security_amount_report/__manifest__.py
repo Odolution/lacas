@@ -11,7 +11,8 @@
     "version": "15.0.1",
 
     "depends": [
-        'account_accountant'
+        'account_accountant',
+        'ol_withdrawn_status_field'
     ],
 
     "data": [
