@@ -5,7 +5,7 @@ import math
 from odoo.exceptions import ValidationError
 from datetime import datetime
 
-class contacts(models.Model):
+class account(models.Model):
     _inherit= 'account.move'
 
     withdrawn_status = fields.Selection([('y', 'Y'), ('n', 'N')],string="Withdrawn Status", compute='_compute_withdrawn_status')
