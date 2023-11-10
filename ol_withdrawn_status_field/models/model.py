@@ -11,7 +11,7 @@ class contacts(models.Model):
     withdrawn_status = fields.Selection([('y', 'Y'), ('n', 'N')],string="Withdrawn Status", default="n",compute='_compute_withdrawn_status')
 
 
-    @api.depends('state','amount_residual')
+    # @api.depends('state','amount_residual')
     def _compute_withdrawn_status(self):
         for rec in self:
             if rec['state']=='posted' and float(rec['amount_residual'])==0:
