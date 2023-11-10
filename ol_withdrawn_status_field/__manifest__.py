@@ -10,7 +10,7 @@
     'sequence':100,
     'summary': 'Create withdrawn status fields',
     'description': """""",
-    'depends': ['account'],
+    'depends': ['account','cus_report'],
     'data': [
         'security/ir.model.access.csv',
         'views/view.xml',
