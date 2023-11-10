@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="aging_invoice_form" model="ir.ui.view">
+        <field name="name">security.amount.report</field>
+        <field name="model">security.amount.report</field>
+        <field name="arch" type="xml">
+            <form string="Security Amount Report">
+                <!-- <field name="is_get_records_button_clicked" invisible="1" /> -->
+                <footer>
+                    <!-- <button name="get_report_records" string="Get Records" type="object" class="btn-primary" /> -->
+                    <button name="print_xlsx" string="Download Excel Report" type="object" class="btn-primary" />
+                    <!-- <button name="print_pdf" string="Download PDF Report" type="object" class="btn-primary" attrs="{'invisible': [('is_get_records_button_clicked', '=', False)]}" /> -->
+                </footer>
+                <!-- <sheet>
+                    <group>
+                        <group name="filter" string="Filters">
+                            <field name="custom_start_date">
+                            </field>
+                            <field name="custom_end_date">
+                            </field>
+                            <field name="employee_names" widget="many2many_tags">
+                            </field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page id="utilisation_tab" string="Report">
+                            <field name="line_ids" widget="section_and_note_one2many" mode="tree">
+                                <tree editable="bottom" string="Report Lines">
+                                    <field name="employee_id" />
+                                    <field name="custom_attendance_string" />
+                                    <field name="custom_hours_worked_string" />
+                                    <field name="custom_hours_lost_string" />
+                                    <field name="utilisation_percentage" string="Time Utilisation %" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet> -->
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_security_amount_report" model="ir.actions.act_window">
+        <field name="name">Security Amount Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">security.amount.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Create your Report
+        </p>
+        </field>
+    </record>
+    <record id="view_sale_book_day_excel" model="ir.ui.view">
+        <field name="name">view.sale.book.day.excel </field>
+        <field name="model">sale.day.book.report.excel</field>
+        <field name="arch" type="xml">
+        <form string="Generate Excel File">
+            <group>
+                <field name="file_name" invisible="1" />
+                <field name="excel_file" readonly="1" filename="file_name" />
+            </group>
+            <footer>
+                <button string="Cancel" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+    <menuitem id="menu_security_amount_report" name="Security Amount Report" action="action_security_amount_report" parent="account.menu_finance_reports" sequence="20" />
+
+</odoo>

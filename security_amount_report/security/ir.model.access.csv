@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+security_amount_report.security_amount_report,access_security_amount_report,security_amount_report.model_security_amount_report,base.group_user,1,1,1,1
+security_amount_report.sale_day_book_report_excel,access_security_amount_report,security_amount_report.model_sale_day_book_report_excel,base.group_user,1,1,1,1
+
