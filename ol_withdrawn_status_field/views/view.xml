@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="view_account_move_inherit_withdrawn_status" model="ir.ui.view">
+            <field name="name">view.account.move.inherit.withdrawn.status</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='refund_receive']" position="after">
+                    <field name="withdrawn_status"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
