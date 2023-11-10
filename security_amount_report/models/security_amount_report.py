@@ -119,10 +119,10 @@ class SecurityAmountReport(models.Model):
                             worksheet.write(row, 6, "N/A")
 
                         if admission.x_studio_withdrawn_status:
-                            worksheet.write(row, 7, admission.x_studio_withdrawn_status)
+                            worksheet.write(row, 7, admission.withdrawn_status)
                             
                         elif reversal.x_studio_withdrawn_status:
-                            worksheet.write(row, 7, reversal.x_studio_withdrawn_status)
+                            worksheet.write(row, 7, reversal.withdrawn_status)
                             
                         else:
                             worksheet.write(row, 7, "N/A")
