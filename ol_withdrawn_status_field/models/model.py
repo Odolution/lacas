@@ -8,6 +8,7 @@ from datetime import datetime
 class Reversal(models.Model):
     _inherit= 'account.move' 
 
+    withdrawn_status = fields.Selection([('Y', 'Y'), ('N', 'N')], compute='_compute_withdrawn_status_reversal',string="Withdrawn Status")
     withdrawn_status_reversal = fields.Selection([('Y', 'Y'), ('N', 'N')], compute='_compute_withdrawn_status_reversal',string="Withdrawn Status",store=True)
     withdrawn_status_bill = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status",store=True)
 
