@@ -8,20 +8,20 @@ from datetime import datetime
 class Reversal(models.Model):
     _inherit= 'account.move' 
 
-    withdrawn_status_reversal = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status",store=True)
+    withdrawn_status_reversal = fields.Selection([('Y', 'Y'), ('N', 'N')], compute='_compute_withdrawn_status_reversal',string="Withdrawn Status",store=True)
     withdrawn_status_bill = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status",store=True)
 
 # , compute='_compute_withdrawn_status_bill'
-# , compute='_compute_withdrawn_status_reversal'
 
-    # # @api.depends('state','amount_residual')
-    # def _compute_withdrawn_status_reversal(self):
-    #     for rec in self:
-    #         if rec['state']=='posted' and float(rec['amount_residual'])==0:
-    #             rec.withdrawn_status_reversal= 'Y'
 
-    #         else:
-    #             rec.withdrawn_status_reversal= 'N'
+
+    def _compute_withdrawn_status_reversal(self):
+        for rec in self:
+            if rec['state']=='posted' and float(rec['amount_residual'])==0:
+                rec.withdrawn_status_reversal= 'Y'
+
+            else:
+                rec.withdrawn_status_reversal= 'N'
 
     # def _compute_withdrawn_status_bill(self):
     #     for rec in self:
