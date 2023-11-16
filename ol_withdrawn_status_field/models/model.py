@@ -26,7 +26,10 @@ class Reversal(models.Model):
         for rec in self:
             if rec['move_type']=='out_invoice':
                 reversal= self.env['account.move'].search([('move_type','=','out_refund'),('facts_id_cred_custom','in',[rec['std_factsid'],rec['std_factsid2']]),('withdrawn_status_reversal','=','Y')])
-                rec.withdrawn_status_bill= 'Y'
+                if reversal:
+                    rec.withdrawn_status_bill= 'Y'
+                else:
+                    rec.withdrawn_status_bill= 'N'                    
 
             else:
                 rec.withdrawn_status_bill= 'N'
