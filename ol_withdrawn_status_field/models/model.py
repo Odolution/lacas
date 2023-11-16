@@ -8,8 +8,8 @@ from datetime import datetime
 class Reversal(models.Model):
     _inherit= 'account.move'
 
-    withdrawn_status_reversal = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status", compute='_compute_withdrawn_status_reversal')
-    withdrawn_status_bill = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status", compute='_compute_withdrawn_status_bill')
+    withdrawn_status_reversal = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status", compute='_compute_withdrawn_status_reversal',store=True)
+    withdrawn_status_bill = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status", compute='_compute_withdrawn_status_bill',store=True)
 
 
 
@@ -25,7 +25,7 @@ class Reversal(models.Model):
     def _compute_withdrawn_status_bill(self):
         for rec in self:
             if rec['move_type']=='out_invoice':
-                reversal= self.env['account.move'].search([('move_type','=','out_refund'),('facts_id_cred_custom','in',[rec['std_factsid'],rec['std_factsid2']]),('withdrawn_status_reversal','=','Y')])
+                reversal= self.env['account.move'].search([('move_type','=','out_refund'),('facts_id_cred_custom','in',[rec['std_factsid'],rec['std_factsid2']]),('withdrawn_status_reversal','=','Y'),('state','=','posted')])
                 if reversal:
                     rec.withdrawn_status_bill= 'Y'
                 else:
