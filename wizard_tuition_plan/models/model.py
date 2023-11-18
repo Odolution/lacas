@@ -87,7 +87,7 @@ class wizard_tuition_plan(models.TransientModel):
                                 
                                 line.unlink()
                             else:
-                                raise UserError("true")
+                               # raise UserError("true")
                                 
 
                                 pass
