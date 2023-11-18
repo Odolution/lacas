@@ -77,9 +77,19 @@ class wizard_tuition_plan(models.TransientModel):
                 lines_not_to_remove_discount = t_plan.line_ids.filtered(lambda l: l.product_id.is_discount_type)
                 lines_not_to_remove_studio_code = t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'])
                 combined_lines_not_to_remove = lines_not_to_remove_discount + lines_not_to_remove_studio_code
-                raise UserError(str(combined_lines_not_to_remove))
+                #raise UserError(str(combined_lines_not_to_remove))
                 
-                lines_to_remove.unlink()
+                for line in t_plan.line_ids:
+                    if combined_lines_not_to_remove:
+                        for res in combined_lines_not_to_remove:
+                            if line.id != res.id:
+                                line.unlink()
+                    else:
+                        line.unlink()
+
+                        
+                
+               # lines_to_remove.unlink()
             else:
 
                 non_discount_lines_to_remove =t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code not in ['ART', 'BIO', 'CHM', 'COM', 'PHY']  and l.product_id.is_discount_type == 0)
