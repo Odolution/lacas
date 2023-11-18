@@ -83,15 +83,12 @@ class wizard_tuition_plan(models.TransientModel):
                     if combined_lines_not_to_remove:
                         for res in combined_lines_not_to_remove:
                             if line == res:
-                                raise UserError(str(line)+str(res))
-                
-                            else:
-                               # raise UserError("true")
-                                
-
                                 pass
-                    else:
-                        line.unlink()
+                            else:
+                                line.unlink()
+                            
+                            
+                    
 
                         
                 
