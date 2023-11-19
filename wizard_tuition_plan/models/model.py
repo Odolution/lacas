@@ -74,8 +74,9 @@ class wizard_tuition_plan(models.TransientModel):
             
 
             if t_plan.student_grade_level_ids.name == "XI":
-                lines_to_remove = t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'] or l.product_id.is_discount_type == 0)
-                lines_to_remove.unlink()
+                #lines_to_remove = t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code in ['ART', 'BIO', 'CHM', 'COM', 'PHY'] or l.product_id.is_discount_type == 0)
+                lines_to_override = t_plan.line_ids.filtered(lambda l: not (l.product_id.x_studio_code or l.product_id.is_discount_type))
+                lines_to_override.unlink()
             else:
                 non_discount_lines_to_remove =t_plan.line_ids.filtered(lambda l: l.product_id.x_studio_code not in ['ART', 'BIO', 'CHM', 'COM', 'PHY']  and l.product_id.is_discount_type == 0)
                 non_discount_lines_to_remove.unlink()
