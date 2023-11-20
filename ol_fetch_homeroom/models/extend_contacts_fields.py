@@ -64,7 +64,6 @@ class SchoolStudent(models.Model):
                 'Milestone Satellite Campus':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvGbYG0n5QbcqTCYDNGsb/56dFX+3fd+prljyAo/ZqSy75iTii/cy5UMuZbVef1Wis=",
                 'Milestone Upper Mall Campus':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EsZwKzAHy9IvPdDUH58UdRf5EgcaMRRkHOf7TscdxY9IuHeuXoDAC3azV/P9TQT7lg=",
                 'Milestone Valencia Campus':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EtlN0ghB6E5rDe1hC9kYe45vB6b26Zg+Ymzu7rr9W89Dg86wX4veamHfXvOG9M+gpU=",
-                'Milestone Model Town Campus': "ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvTFCkn5V/wFqP+d3CHeBNzLfXX/ZwjCbtWmp/Zv3Ih8/SsLvD6KX8GLqZHbk/ZsM0=",
                 'Milestone Model Town Senior Campus': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EsGJHcioGvg6uL1doVglkRyhKwkbCFXTaymG9pmLwZwlAGe4U8dQWGXqBref8Xb4VE=',
                 'Milestone Muslim Town (Matric)': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Evd1rLR/9C+I1nmDiAv2rpwRKorQgVh3dvn7XqZbqsTj5klXsVOR1X+jCExuTFcvww=',
                 'Milestone Upper Mall (Matric)': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuEvn4hhx929JAhljKEBitMMvJbEW/ebJjmxtu7kD/M0ikd2oW0teUkCOG4Hx99H98=',
@@ -89,18 +88,14 @@ class SchoolStudent(models.Model):
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
-            
-
-            
+                    
             if len(std.grade_level_ids) >= 1:
                 grade_level = std.grade_level_ids[0].name
                 if grade_level:
                     url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
                     response = requests.request("GET", url, headers=headers).json()['results']
-                    raise UserError(response)
                     if len(response) > 0:
                         record = response[-1]
-                        # raise UserError(record)
                         class_id = record.get('classId')
                         url = f"https://api.factsmgt.com/Classes/v2?filters=classId=={class_id}"
                         response = requests.request("GET", url, headers=headers).json()['results']
