@@ -88,6 +88,7 @@ class SchoolStudent(models.Model):
         
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
+            raise UserError(api_key)
             headers['Facts-Api-Key'] = api_key
             
 
