@@ -64,7 +64,6 @@ class SchoolStudent(models.Model):
                 'Milestone Satellite Campus':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvGbYG0n5QbcqTCYDNGsb/56dFX+3fd+prljyAo/ZqSy75iTii/cy5UMuZbVef1Wis=",
                 'Milestone Upper Mall Campus':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EsZwKzAHy9IvPdDUH58UdRf5EgcaMRRkHOf7TscdxY9IuHeuXoDAC3azV/P9TQT7lg=",
                 'Milestone Valencia Campus':"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EtlN0ghB6E5rDe1hC9kYe45vB6b26Zg+Ymzu7rr9W89Dg86wX4veamHfXvOG9M+gpU=",
-                'Milestone Model Town Campus': "ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvTFCkn5V/wFqP+d3CHeBNzLfXX/ZwjCbtWmp/Zv3Ih8/SsLvD6KX8GLqZHbk/ZsM0=",
                 'Milestone Model Town Senior Campus': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EsGJHcioGvg6uL1doVglkRyhKwkbCFXTaymG9pmLwZwlAGe4U8dQWGXqBref8Xb4VE=',
                 'Milestone Muslim Town (Matric)': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Evd1rLR/9C+I1nmDiAv2rpwRKorQgVh3dvn7XqZbqsTj5klXsVOR1X+jCExuTFcvww=',
                 'Milestone Upper Mall (Matric)': 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuEvn4hhx929JAhljKEBitMMvJbEW/ebJjmxtu7kD/M0ikd2oW0teUkCOG4Hx99H98=',
