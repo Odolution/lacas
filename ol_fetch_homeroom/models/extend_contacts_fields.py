@@ -95,9 +95,10 @@ class SchoolStudent(models.Model):
             if len(std.grade_level_ids) >= 1:
                 grade_level = std.grade_level_ids[0].name
                 if grade_level:
+                    raise UserError(std.facts_id)
                     url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
                     response = requests.request("GET", url, headers=headers).json()['results']
-                    raise UserError(response)
+                    # raise UserError(response)
                     if len(response) > 0:
                         record = response[-1]
                         # raise UserError(record)
