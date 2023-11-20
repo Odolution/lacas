@@ -84,12 +84,14 @@ class SchoolStudent(models.Model):
                 students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         else:
                 students = self.env['school.student'].search([('id', '=', student_id)])
+        
+        raise UserError(students)
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
             
 
-            raise UserError(std.grade_level_ids)
+            
             if len(std.grade_level_ids) >= 1:
                 grade_level = std.grade_level_ids[0].name
                 
