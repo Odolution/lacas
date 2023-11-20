@@ -85,7 +85,7 @@ class SchoolStudent(models.Model):
         else:
                 students = self.env['school.student'].search([('id', '=', student_id)])
         
-        raise UserError(students)
+        
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
@@ -94,7 +94,7 @@ class SchoolStudent(models.Model):
             
             if len(std.grade_level_ids) >= 1:
                 grade_level = std.grade_level_ids[0].name
-                
+                raise UserError(grade_level)
                 if grade_level:
                     url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
                     response = requests.request("GET", url, headers=headers).json()['results']
