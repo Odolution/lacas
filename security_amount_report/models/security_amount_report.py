@@ -172,9 +172,11 @@ class SecurityAmountReport(models.Model):
                                     worksheet.write(row, 3, student.facts_udid)
                                 else:
                                     worksheet.write(row, 3, "N/A")
-                                
-                                if student.grade_level_ids:
-                                    worksheet.write(row, 4, student.grade_level_ids.name)
+                                for grade in student.grade_level_ids:
+
+                                # if student.grade_level_ids:
+                                    worksheet.write(row, 4, grade.name)
+                                    break
                                 # elif admission.class_name:
                                 #     worksheet.write(row, 4, admission.class_name)
                                 elif reversal.class_name:
