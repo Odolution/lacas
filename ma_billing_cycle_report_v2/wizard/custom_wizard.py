@@ -82,17 +82,19 @@ class RecoveryReportWizard(models.TransientModel):
             total_count=0
             with_out_Withdrawn=0
             total_Recovery_paid=0
-            for bill_rec in school_bill_ids:
-                invoice_date = bill_rec.invoice_date
-                month_in_invoice = invoice_date.strftime('%m')
-                year_in_invoice = invoice_date.strftime('%y')
-               
+            for bill_rec in school_bill_ids:           
                 total_count += float(bill_rec.amount_total)
                 if bill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
                     with_out_Withdrawn += float(bill_rec.amount_total)
                 
-                if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                    total_Recovery_paid += float(bill_rec.amount_total)
+                if bill_rec.payment_state =="paid":
+                    if bill_rec.ol_payment_date:
+                        payment_date = bill_rec.ol_payment_date
+                        month_in_payment = payment_date.strftime('%m')
+                        year_in_payment = payment_date.strftime('%y')
+
+                        if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                            total_Recovery_paid += float(bill_rec.amount_total)
 
                     # if month_key in billing_counts:
                     #     billing_counts[month_key] += float(bill_rec.amount_total)
@@ -185,6 +187,8 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,4,6,rec.total_Issuance_billing, style=style_title)
                     worksheet.write_merge(row,row,7,9,rec.with_out_Withdrawn_billing, style=style_title)
                     worksheet.write_merge(row,row,10,12,rec.total_Recovery_paid, style=style_title)
+
+                    worksheet.write_merge(row,row,13,15,rec.total_Recovery_paid, style=style_title)
 
                     row+=1
 
