@@ -103,7 +103,7 @@ class RecoveryReportWizard(models.TransientModel):
                     #     billing_counts[month_key] = float(bill_rec.amount_total)
                     #     total_count += float(bill_rec.amount_total)
 
-            billing_list_paid[select_new] = with_out_Withdrawn
+            total_Issuance_billing_list[select_new] = total_count
             with_out_Withdrawn_billing_list[select_new] = with_out_Withdrawn
             total_Recovery_paid_list[select_new] = total_Recovery_paid
     
@@ -187,8 +187,8 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,4,6,rec.total_Issuance_billing, style=style_title)
                     worksheet.write_merge(row,row,7,9,rec.with_out_Withdrawn_billing, style=style_title)
                     worksheet.write_merge(row,row,10,12,rec.total_Recovery_paid, style=style_title)
-
-                    worksheet.write_merge(row,row,13,15,rec.total_Recovery_paid, style=style_title)
+                    Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                    worksheet.write_merge(row,row,13,15,Receivables, style=style_title)
 
                     row+=1
 
