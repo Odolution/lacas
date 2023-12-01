@@ -82,8 +82,8 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(0, 1, 6, 11, "RECEIVABLE OF WITHDRAWAL STUDENTS", style=style_title)
             worksheet = workbook.add_sheet('Students Branch Std')
 
-            sheet.write(0,0, 'S#',  style=red_style_title)
-            sheet.write(0,1, 'Branch',  style=red_style_title)
+            worksheet.write(0,0, 'S#',  style=red_style_title)
+            worksheet.write(0,1, 'Branch',  style=red_style_title)
             # worksheet.write_merge(0,1,0,3,"",)
 
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
