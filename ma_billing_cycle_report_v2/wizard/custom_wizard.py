@@ -32,7 +32,6 @@ class AccountMoveReport(models.TransientModel):
 # class ByMonthlyAccountMoveReport(models.TransientModel): 
 #     _name = 'billing.student.bi.monthly.report.line'
 
-# access_student_bi_monthly_report_line,access.student.bi.monthly.report.line,model_student_bi_monthly_report_line,,1,1,1,0
     
 #     record_id=fields.Char('ID')
 #     branch_name=fields.Char('name')
