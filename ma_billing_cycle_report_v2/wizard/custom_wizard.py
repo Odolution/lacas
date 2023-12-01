@@ -152,9 +152,12 @@ class RecoveryReportWizard(models.TransientModel):
             v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')   
 
+            for rec in self.account_report_line:
+                if rec:
+                    # Print row data
+                    worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
 
-
-
+                    row+=1
 
 
             fp = io.BytesIO()
