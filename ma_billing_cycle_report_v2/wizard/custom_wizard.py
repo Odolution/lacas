@@ -56,7 +56,7 @@ class RecoveryReportWizard(models.TransientModel):
         if xlwt:
             global billing_counts ,by_monthly_billing_counts,select_by_monthly_list
             
-            filename = 'Students Branch Report.xls'
+            filename = 'Percentage wise billing cycle summary report v2.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
@@ -80,8 +80,11 @@ class RecoveryReportWizard(models.TransientModel):
 
             # worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
             # worksheet.write_merge(0, 1, 6, 11, "RECEIVABLE OF WITHDRAWAL STUDENTS", style=style_title)
-            
             worksheet = workbook.add_sheet('Students Branch Std')
+
+            sheet.write(0,0, 'S#',  style=red_style_title)
+            sheet.write(0,1, 'Branch',  style=red_style_title)
+            # worksheet.write_merge(0,1,0,3,"",)
 
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
             v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
