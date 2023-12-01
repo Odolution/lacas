@@ -54,6 +54,7 @@ class RecoveryReportWizard(models.TransientModel):
     
     def action_print_report(self):
         school_ids= []
+        lines=[]
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
