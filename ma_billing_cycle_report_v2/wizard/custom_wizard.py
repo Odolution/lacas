@@ -28,17 +28,8 @@ class AccountMoveReport(models.TransientModel):
     branch_name=fields.Char('name')
     total_Issuance_billing =fields.Float('total_Issuance_billing')
     with_out_Withdrawn_billing =fields.Float('with_out_Withdrawn_billing')
-    # school_bill_len =fields.Float('Total')
-    # billing_list_paid =fields.Float('Paid')
-
-# class ByMonthlyAccountMoveReport(models.TransientModel): 
-#     _name = 'billing.student.bi.monthly.report.line'
-
-    
-#     record_id=fields.Char('ID')
-#     branch_name=fields.Char('name')
-#     school_bill_len =fields.Float('Total')
-#     billing_list_paid =fields.Float('Paid')
+    total_Recovery_paid =fields.Float('total_Recovery_paid')
+   
     
 
 class RecoveryReportWizard(models.TransientModel):
@@ -59,21 +50,16 @@ class RecoveryReportWizard(models.TransientModel):
         school_ids= []
         total_Issuance_billing_list={}
         with_out_Withdrawn_billing_list={}
+        total_Recovery_paid_list={}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
-        # v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
-        # v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
+        pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
+        pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
 
-        # v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
-        # v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
-
-        # pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
-        # pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
-
-        # pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
-        # pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+        pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
+        pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
         for rec in school_ids_raw:
             if rec.name !="Milestone Model Town (Matric)":
@@ -84,6 +70,7 @@ class RecoveryReportWizard(models.TransientModel):
             school_bill_ids = self.env['account.move'].search([
                 ('x_studio_previous_branch', '=', rec.name),
                 ('move_type','=','out_invoice'),
+                ('state', '=', 'posted'),
                ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
             ])
 
@@ -94,11 +81,18 @@ class RecoveryReportWizard(models.TransientModel):
 
             total_count=0
             with_out_Withdrawn=0
+            total_Recovery_paid=0
             for bill_rec in school_bill_ids:
+                invoice_date = bill_rec.invoice_date
+                month_in_invoice = invoice_date.strftime('%m')
+                year_in_invoice = invoice_date.strftime('%y')
                
                 total_count += float(bill_rec.amount_total)
                 if rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
                     with_out_Withdrawn += float(bill_rec.amount_total)
+                
+                if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                    total_Recovery_paid += float(bill_rec.amount_total)
 
                     # if month_key in billing_counts:
                     #     billing_counts[month_key] += float(bill_rec.amount_total)
@@ -109,6 +103,7 @@ class RecoveryReportWizard(models.TransientModel):
 
             billing_list_paid[select_new] = with_out_Withdrawn
             with_out_Withdrawn_billing_list[select_new] = with_out_Withdrawn
+            total_Recovery_paid_list[select_new] = total_Recovery_paid
     
 
 
@@ -117,11 +112,13 @@ class RecoveryReportWizard(models.TransientModel):
             name_view = school_ids[item].name
             billing_view = total_Issuance_billing_list[name_view]
             with_out_Withdrawn_billing = with_out_Withdrawn_billing_list[name_view]
+            total_Recovery_paid_final = total_Recovery_paid_list[name_view]
             mvl=self.env['billing.student.report.line'].create({
                                         
                 "branch_name":name_view,
                 "total_Issuance_billing":billing_view,
                 "with_out_Withdrawn_billing":with_out_Withdrawn_billing,
+                "total_Recovery_paid":total_Recovery_paid_final,
             })
             lines.append(mvl.id)
         
@@ -187,6 +184,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,1,3,rec.branch_name, style=style_title)
                     worksheet.write_merge(row,row,4,6,rec.total_Issuance_billing, style=style_title)
                     worksheet.write_merge(row,row,7,9,rec.with_out_Withdrawn_billing, style=style_title)
+                    worksheet.write_merge(row,row,10,12,rec.total_Recovery_paid, style=style_title)
 
                     row+=1
 
