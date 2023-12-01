@@ -26,6 +26,7 @@ class AccountMoveReport(models.TransientModel):
     
     record_id=fields.Char('ID')
     branch_name=fields.Char('name')
+    total_Issuance_billing =fields.Float('total_Issuance_billing')
     # school_bill_len =fields.Float('Total')
     # billing_list_paid =fields.Float('Paid')
 
@@ -53,8 +54,10 @@ class RecoveryReportWizard(models.TransientModel):
     # by_account_report_line=fields.Many2many('student.bi.monthly.report.line', string='Account by Monthly report Line')
     
     def action_print_report(self):
-        school_ids= []
         lines=[]
+        school_ids= []
+        total_Issuance_billing_list={}
+
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
@@ -82,19 +85,53 @@ class RecoveryReportWizard(models.TransientModel):
                ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
             ])
 
+            if rec.name in ("Milestone Model Town (Matric)"):
+                select_new="Milestone Model Town Senior Campus"
+            else:
+                select_new=rec.name
 
-            # for bill_rec in school_bill_ids:
+            total_count=0
+            total_count_paid=0
+            for bill_rec in school_bill_ids:
+                # invoice_date = bill_rec.invoice_date
+                # month_in_invoice = invoice_date.strftime('%m')
+                # year_in_invoice = invoice_date.strftime('%y')
+                
+                # # Check if the invoice date is within the specified range
+                # if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
+                #     # Create a key using the month and year
+                #     month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
+                    
+                #     if bill_rec.payment_state =="paid":
+                #         if bill_rec.ol_payment_date:
+                #             payment_date = bill_rec.ol_payment_date
+                #             month_in_payment = payment_date.strftime('%m')
+                #             year_in_payment = payment_date.strftime('%y')
+
+                #             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                total_count += float(bill_rec.amount_total)
+
+                    # if month_key in billing_counts:
+                    #     billing_counts[month_key] += float(bill_rec.amount_total)
+                    #     total_count += float(bill_rec.amount_total)
+                    # else:
+                    #     billing_counts[month_key] = float(bill_rec.amount_total)
+                    #     total_count += float(bill_rec.amount_total)
+
+            # billing_list_paid[select_new] = total_count_paid
+            total_Issuance_billing_list[select_new] = total_count
+    
 
 
 
         for item in range(len(school_ids)):
             name_view = school_ids[item].name
-            # billing_view = billing_list[name_view]
+            billing_view = total_Issuance_billing_list[name_view]
             # billing_paid_view = billing_list_paid[name_view]
             mvl=self.env['billing.student.report.line'].create({
                                         
                 "branch_name":name_view,
-                # "school_bill_len":billing_view,
+                "total_Issuance_billing":billing_view,
                 # "billing_list_paid":billing_paid_view,
             })
             lines.append(mvl.id)
@@ -159,6 +196,7 @@ class RecoveryReportWizard(models.TransientModel):
                 if rec:
                     # Print row data
                     worksheet.write_merge(row,row,1,3,rec.branch_name, style=style_title)
+                    worksheet.write_merge(row,row,4,5,rec.total_Issuance_billing, style=style_title)
 
                     row+=1
 
