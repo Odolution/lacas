@@ -13,7 +13,7 @@
     'website': '',
     'images': [
     ],
-    'depends': ["account","base"
+    'depends': ["account","base",'ma_school_branch_report'
     ],
     'data': [
         
