@@ -52,7 +52,7 @@
                 name="Branch Recovery Report " 
                 parent="account.menu_finance_reports" 
                 sequence="6"/> -->
-    <menuitem id="menu_action_school_branch_report" 
+    <menuitem id="menu_action_billing_branch_report" 
                 name="Billing cycle Report v2" 
                 action="action_account_print_billing_school_branch_report" 
                 parent="menu_school_branch_of_student"/>
