@@ -42,7 +42,7 @@ class AccountMoveReport(models.TransientModel):
 
 class RecoveryReportWizard(models.TransientModel):
     _name="billing.cycle.school.report.wizard"
-    _description='Print Percentage wise billing cycle summary report Wizard'
+    _description='Percentage wise billing cycle summary report Wizard'
 
     
     from_date = fields.Date(string='From')
@@ -50,6 +50,6 @@ class RecoveryReportWizard(models.TransientModel):
     from_date_pay = fields.Date(string='From')
     to_date_pay = fields.Date(string='To')
     
-    account_report_line=fields.Many2many('student.report.line', string='Account report Line')
-    by_account_report_line=fields.Many2many('student.bi.monthly.report.line', string='Account by Monthly report Line')
+    account_report_line=fields.Many2many('billing.student.report.line', string='Account report Line')
+    # by_account_report_line=fields.Many2many('student.bi.monthly.report.line', string='Account by Monthly report Line')
     

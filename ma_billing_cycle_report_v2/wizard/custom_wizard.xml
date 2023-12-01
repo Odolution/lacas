@@ -30,7 +30,7 @@
              
              <footer>
                 <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
-                <button name="action_print_excel_school_branch_report" type="object" string="Print Excel" class="btn-primary" />
+                <!-- <button name="action_print_excel_school_branch_report" type="object" string="Print Excel" class="btn-primary" /> -->
                 <!-- <button name="action_polulate" type="object" string="Populate" /> -->
                 
                  <button string="Cancel" class="btn-secondary" special="cancel"/>
