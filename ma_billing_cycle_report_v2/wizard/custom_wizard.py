@@ -88,7 +88,7 @@ class RecoveryReportWizard(models.TransientModel):
                 year_in_invoice = invoice_date.strftime('%y')
                
                 total_count += float(bill_rec.amount_total)
-                if rebill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
+                if bill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
                     with_out_Withdrawn += float(bill_rec.amount_total)
                 
                 if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
