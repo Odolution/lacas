@@ -1,8 +1,8 @@
 <odoo>
 
 <record model="ir.ui.view" id="view_report_billing_school_branch">
-        <field name="name">billing.cycle.school.report.wizard.form</field>
-        <field name="model" >billing.cycle.school.report.wizard</field>
+        <field name="name">billing.cycle.report.wizard.form</field>
+        <field name="model" >billing.cycle.report.wizard</field>
       
         <field name="arch" type="xml">
         
@@ -42,7 +42,7 @@
      <record id="action_account_print_billing_school_branch_report" model="ir.actions.act_window">
             <field name="name">Percentage wise billing cycle summary report v2</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">billing.cycle.school.report.wizard</field>
+            <field name="res_model">billing.cycle.report.wizard</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_report_billing_school_branch"/>
             <field name="target">new</field>
