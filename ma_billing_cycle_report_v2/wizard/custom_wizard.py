@@ -81,7 +81,8 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
             # worksheet.write_merge(0, 1, 6, 11, "RECEIVABLE OF WITHDRAWAL STUDENTS", style=style_title)
             worksheet = workbook.add_sheet('Students Branch Std')
-
+            for i in range(0,20):
+                worksheet.set_column(0,i,22)
             worksheet.write(0,0, 'S#',  style=red_style_title)
             worksheet.write(0,1, 'Branch',  style=red_style_title)
             # worksheet.write_merge(0,1,0,3,"",)
