@@ -21,13 +21,13 @@ except ImportError:
 
 
 
-# class AccountMoveReport(models.TransientModel):
-#     _name = 'billing.student.report.line'
+class AccountMoveReport(models.TransientModel):
+    _name = 'billing.student.report.line'
     
-#     record_id=fields.Char('ID')
-#     branch_name=fields.Char('name')
-#     school_bill_len =fields.Float('Total')
-#     billing_list_paid =fields.Float('Paid')
+    record_id=fields.Char('ID')
+    branch_name=fields.Char('name')
+    # school_bill_len =fields.Float('Total')
+    # billing_list_paid =fields.Float('Paid')
 
 # class ByMonthlyAccountMoveReport(models.TransientModel): 
 #     _name = 'billing.student.bi.monthly.report.line'
@@ -49,10 +49,63 @@ class RecoveryReportWizard(models.TransientModel):
     from_date_pay = fields.Date(string='From')
     to_date_pay = fields.Date(string='To')
     
-    # account_report_line=fields.Many2many('billing.student.report.line', string='Account report Line')
+    account_report_line=fields.Many2many('billing.student.report.line', string='Account report Line')
     # by_account_report_line=fields.Many2many('student.bi.monthly.report.line', string='Account by Monthly report Line')
     
+    def action_print_report(self):
+        school_ids_raw=self.env['school.school'].search([])
+        school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
+
+        v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
+        v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
+
+        v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
+        v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
+
+        pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
+        pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
+
+        pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
+        pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+
+        for rec in school_ids_raw:
+            if rec.name !="Milestone Model Town (Matric)":
+            #     continue
+                school_ids.append(rec)
+            # raise UserError(rec) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
+           
+            school_bill_ids = self.env['account.move'].search([
+                ('x_studio_previous_branch', '=', rec.name),
+                ('move_type','=','out_invoice')
+                ('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
+            ])
+
+
+            # for bill_rec in school_bill_ids:
+
+
+
+        for item in range(len(school_ids)):
+            name_view = school_ids[item].name
+            # billing_view = billing_list[name_view]
+            # billing_paid_view = billing_list_paid[name_view]
+            mvl=self.env['billing.student.report.line'].create({
+                                        
+                "branch_name":name_view,
+                # "school_bill_len":billing_view,
+                # "billing_list_paid":billing_paid_view,
+            })
+            lines.append(mvl.id)
+        
+        self.write({
+            "account_report_line":[(6,0,lines)]
+        })  
+
+
     def action_print_excel_billing_report(self):
+        
+        self.action_print_report()
+
         if xlwt:
             global billing_counts ,by_monthly_billing_counts,select_by_monthly_list
             
