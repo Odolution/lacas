@@ -27,6 +27,7 @@ class AccountMoveReport(models.TransientModel):
     record_id=fields.Char('ID')
     branch_name=fields.Char('name')
     total_Issuance_billing =fields.Float('total_Issuance_billing')
+    with_out_Withdrawn_billing =fields.Float('with_out_Withdrawn_billing')
     # school_bill_len =fields.Float('Total')
     # billing_list_paid =fields.Float('Paid')
 
@@ -57,6 +58,7 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         school_ids= []
         total_Issuance_billing_list={}
+        with_out_Withdrawn_billing_list={}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -91,25 +93,12 @@ class RecoveryReportWizard(models.TransientModel):
                 select_new=rec.name
 
             total_count=0
-            total_count_paid=0
+            with_out_Withdrawn=0
             for bill_rec in school_bill_ids:
-                # invoice_date = bill_rec.invoice_date
-                # month_in_invoice = invoice_date.strftime('%m')
-                # year_in_invoice = invoice_date.strftime('%y')
-                
-                # # Check if the invoice date is within the specified range
-                # if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
-                #     # Create a key using the month and year
-                #     month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
-                    
-                #     if bill_rec.payment_state =="paid":
-                #         if bill_rec.ol_payment_date:
-                #             payment_date = bill_rec.ol_payment_date
-                #             month_in_payment = payment_date.strftime('%m')
-                #             year_in_payment = payment_date.strftime('%y')
-
-                #             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+               
                 total_count += float(bill_rec.amount_total)
+                if rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
+                    with_out_Withdrawn += float(bill_rec.amount_total)
 
                     # if month_key in billing_counts:
                     #     billing_counts[month_key] += float(bill_rec.amount_total)
@@ -118,8 +107,8 @@ class RecoveryReportWizard(models.TransientModel):
                     #     billing_counts[month_key] = float(bill_rec.amount_total)
                     #     total_count += float(bill_rec.amount_total)
 
-            # billing_list_paid[select_new] = total_count_paid
-            total_Issuance_billing_list[select_new] = total_count
+            billing_list_paid[select_new] = with_out_Withdrawn
+            with_out_Withdrawn_billing_list[select_new] = with_out_Withdrawn
     
 
 
@@ -127,12 +116,12 @@ class RecoveryReportWizard(models.TransientModel):
         for item in range(len(school_ids)):
             name_view = school_ids[item].name
             billing_view = total_Issuance_billing_list[name_view]
-            # billing_paid_view = billing_list_paid[name_view]
+            with_out_Withdrawn_billing = with_out_Withdrawn_billing_list[name_view]
             mvl=self.env['billing.student.report.line'].create({
                                         
                 "branch_name":name_view,
                 "total_Issuance_billing":billing_view,
-                # "billing_list_paid":billing_paid_view,
+                "with_out_Withdrawn_billing":with_out_Withdrawn_billing,
             })
             lines.append(mvl.id)
         
@@ -196,7 +185,8 @@ class RecoveryReportWizard(models.TransientModel):
                 if rec:
                     # Print row data
                     worksheet.write_merge(row,row,1,3,rec.branch_name, style=style_title)
-                    worksheet.write_merge(row,row,4,5,rec.total_Issuance_billing, style=style_title)
+                    worksheet.write_merge(row,row,4,6,rec.total_Issuance_billing, style=style_title)
+                    worksheet.write_merge(row,row,7,9,rec.with_out_Withdrawn_billing, style=style_title)
 
                     row+=1
 
