@@ -55,7 +55,7 @@
     <menuitem id="menu_action_billing_branch_report" 
                 name="Billing cycle Report v2" 
                 action="action_account_print_billing_school_branch_report" 
-                parent="menu_school_branch_of_student"/>
+                parent="ma_school_branch_report.menu_school_branch_of_student"/>
 
  
 
