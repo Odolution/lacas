@@ -168,9 +168,10 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,7,9, 'Net Billing Exc.Withdrawals',  style=red_style_title)
             worksheet.write_merge(0,1,10,12, 'Total Recovery',  style=red_style_title)
             worksheet.write_merge(0,1,13,15, 'Receivables',  style=red_style_title)
-            worksheet.write_merge(0,1,16,17, 'Bade Dabts',  style=red_style_title)
-            worksheet.write_merge(0,1,18,20, "'%'age of Recovery on Enrolled and Paid Bills",  style=red_style_title)
-            worksheet.write_merge(0,1,21,23, "Actual Recovery '%'age",  style=red_style_title)
+            worksheet.write_merge(0,1,16,17, 'Total',  style=red_style_title)
+            worksheet.write_merge(0,1,18,20, 'Bade Dabts',  style=red_style_title)
+            worksheet.write_merge(0,1,21,23, "'%'age of Recovery on Enrolled and Paid Bills",  style=red_style_title)
+            worksheet.write_merge(0,1,24,26, "Actual Recovery '%'age",  style=red_style_title)
             # worksheet.(0,1,0,3,"",)
 
             # v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
@@ -189,6 +190,8 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,10,12,rec.total_Recovery_paid, style=style_title)
                     Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
                     worksheet.write_merge(row,row,13,15,Receivables, style=style_title)
+                    Total = Receivables + rec.total_Recovery_paid
+                    worksheet.write_merge(row,row,16,17,Total, style=style_title)
 
                     row+=1
 
