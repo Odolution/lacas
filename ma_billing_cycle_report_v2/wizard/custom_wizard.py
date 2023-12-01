@@ -53,6 +53,7 @@ class RecoveryReportWizard(models.TransientModel):
     # by_account_report_line=fields.Many2many('student.bi.monthly.report.line', string='Account by Monthly report Line')
     
     def action_print_report(self):
+        school_ids= []
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
 
@@ -76,8 +77,8 @@ class RecoveryReportWizard(models.TransientModel):
            
             school_bill_ids = self.env['account.move'].search([
                 ('x_studio_previous_branch', '=', rec.name),
-                ('move_type','=','out_invoice')
-                ('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
+                ('move_type','=','out_invoice'),
+               ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
             ])
 
 
