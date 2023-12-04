@@ -197,7 +197,7 @@ class RecoveryReportWizard(models.TransientModel):
                     Recovery_on_Enrolled_and_Paid_Bills = (rec.total_Recovery_paid/rec.with_out_Withdrawn_billing)*100
                     worksheet.write_merge(row,row,21,23,Recovery_on_Enrolled_and_Paid_Bills, style=style_title)
                     Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
-                    worksheet.write_merge(row,row,21,23,Recovery_on_Enrolled_and_Paid_Bills, style=style_title)
+                    worksheet.write_merge(row,row,24,26,Recovery_on_Enrolled_and_Paid_Bills, style=style_title)
 
                     row+=1
 
