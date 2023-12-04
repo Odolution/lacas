@@ -11,14 +11,16 @@ class WithdrawnStatusOnSecurity(models.Model):
     def _compute_withdrawn_status_for_security(self):
         adm_account_move = self.env['account.move'].search([('student_ids', '=', rec.id),('move_type', '=', 'out_invoice'),('journal_id.name', '=', 'Admission Challan')])
         rev_account_move = self.env['account.move'].search([('x_student_id_cred', '=', rec.id),('move_type', '=', 'out_refund'),('journal_id.name', '=', 'Security Deposit')])
-        if adm_account_move:
-            self.withdrawn_status_computed=adm_account_move.withdrawn_status_bill
-            self.withdrawn_status_security=self.withdrawn_status_computed
-        elif rev_account_move:
-            self.withdrawn_status_computed=rev_account_move.withdrawn_status_reversal
-            self.withdrawn_status_security=self.withdrawn_status_computed
-        else:
-            self.withdrawn_status_computed='N/A'
-            self.withdrawn_status_security=self.withdrawn_status_computed
             
+        for rec in self:
+            if adm_account_move:
+                rec.withdrawn_status_computed=adm_account_move.withdrawn_status_bill
+                rec.withdrawn_status_security=rec.withdrawn_status_computed
+            elif rev_account_move:
+                rec.withdrawn_status_computed=rev_account_move.withdrawn_status_reversal
+                rec.withdrawn_status_security=rec.withdrawn_status_computed
+            else:
+                rec.withdrawn_status_computed='N/A'
+                rec.withdrawn_status_security=rec.withdrawn_status_computed
+                
 
