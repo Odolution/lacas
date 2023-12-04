@@ -8,7 +8,7 @@ class WithdrawnStatusOnSecurity(models.Model):
     withdrawn_status_computed=fields.Char(compute='_compute_withdrawn_status_for_security')
     withdrawn_status_security=fields.Char()
 
-    @api.depends('account.move.')
+    @api.depends('withdrawn_status_computed')
     def _compute_withdrawn_status_for_security(self):
         account_move = self.env['account.move'].search([('std_factsid', '=', self.facts_id),('journal_id', '=', 'Admission Challan'),
     ('move_type', '=', 'out_invoice')], limit=1)
