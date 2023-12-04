@@ -16,6 +16,7 @@ class WithdrawnStatusOnSecurity(models.Model):
         if adm_account_move:
             for student_record in adm_account_move:
                 if student_record['withdrawn_status_bill']:
+                    self.withdrawn_status_computed=student_record['withdrawn_status_bill']
                     self.withdrawn_status_security=student_record['withdrawn_status_bill']
                     self.withdrawn_computed_bool=True
                 else:
@@ -24,6 +25,7 @@ class WithdrawnStatusOnSecurity(models.Model):
         elif rev_account_move:
             for student_record in rev_account_move:
                 if student_record['withdrawn_status_reversal']:
+                    self.withdrawn_status_computed=student_record['withdrawn_status_reversal']
                     self.withdrawn_status_security=student_record['withdrawn_status_reversal']
                     self.withdrawn_computed_bool=True
                 else:
