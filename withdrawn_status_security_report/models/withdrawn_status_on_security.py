@@ -9,6 +9,7 @@ class WithdrawnStatusOnSecurity(models.Model):
     withdrawn_status_security=fields.Char()
     withdrawn_computed_bool=fields.Boolean()
 
+    @api.depends('id')
     def _compute_withdrawn_status_for_security(self):
         raise UserError('here')
         withdrawn_computed_bool=False
