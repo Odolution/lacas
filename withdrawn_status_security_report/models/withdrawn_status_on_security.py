@@ -8,15 +8,14 @@ class WithdrawnStatusOnSecurity(models.Model):
     withdrawn_status_computed=fields.Char(compute='_compute_withdrawn_status_for_security')
     withdrawn_status_security=fields.Char()
 
-    @api.depends('facts_id')
     def _compute_withdrawn_status_for_security(self):
-        account_move = self.env['account.move'].search([('std_factsid', '=', self.facts_id),('journal_id', '=', 'Admission Challan'),
-    ('move_type', '=', 'out_invoice')], limit=1)
-
-        if account_move:
-            self.withdrawn_status_computed = account_move.withdrawn_status_bill
-            self.withdrawn_status_security = account_move.withdrawn_status_bill
+        adm_account_move = self.env['account.move'].search([('student_ids', '=', rec.id),('move_type', '=', 'out_invoice'),('journal_id.name', '=', 'Admission Challan')])
+        rev_account_move = self.env['account.move'].search([('x_student_id_cred', '=', rec.id),('move_type', '=', 'out_refund'),('journal_id.name', '=', 'Security Deposit')])
+        if adm_account_move:
+            self.withdrawn_status_computed=adm_account_move.withdrawn_status_bill
+        elif rev_account_move:
+            self.withdrawn_status_computed=rev_account_move.withdrawn_status_reversal
         else:
-            self.withdrawn_status_security = 'N/A'
+            self.withdrawn_status_computed='N/A'
             
 
