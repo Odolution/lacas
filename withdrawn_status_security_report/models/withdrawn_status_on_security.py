@@ -5,11 +5,11 @@ from datetime import datetime
 class WithdrawnStatusOnSecurity(models.Model):
     _inherit=['school.student']
 
-    withdrawn_status_computed=fields.Char(compute='_compute_withdrawn_status_for_security')
+    withdrawn_status_computed=fields.Char(compute="_compute_withdrawn_status_for_security")
     withdrawn_status_security=fields.Char()
     withdrawn_computed_bool=fields.Boolean()
 
-    @api.depends('facts_id')
+
     def _compute_withdrawn_status_for_security(self):
         raise UserError('here')
         withdrawn_computed_bool=False
