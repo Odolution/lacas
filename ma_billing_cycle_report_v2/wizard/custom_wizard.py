@@ -214,16 +214,16 @@ class RecoveryReportWizard(models.TransientModel):
                     total_Bade_Dabts += Bade_Dabts
 
                     row+=1
-            worksheet.write_merge(0,1,0,0, '',  style=red_style_title)
-            worksheet.write_merge(0,1,1,3, 'Total',  style=red_style_title)
-            worksheet.write_merge(0,1,4,6, total_total_Issuance_billing,  style=red_style_title)
-            worksheet.write_merge(0,1,7,9,total_with_out_Withdrawn_billing ,  style=red_style_title)
-            worksheet.write_merge(0,1,10,12,total_total_Recovery_paid,  style=red_style_title)
-            worksheet.write_merge(0,1,13,15,total_Receivables,  style=red_style_title)
-            worksheet.write_merge(0,1,16,17,total_Total,  style=red_style_title)
-            worksheet.write_merge(0,1,18,20,total_Bade_Dabts,  style=red_style_title)
-            worksheet.write_merge(0,1,21,23,,  style=red_style_title)
-            worksheet.write_merge(0,1,24,26,,  style=red_style_title)
+            worksheet.write_merge(row,row,0,0, '',  style=red_style_title)
+            worksheet.write_merge(row,row,1,3, 'Total',  style=red_style_title)
+            worksheet.write_merge(row,row,4,6, total_total_Issuance_billing,  style=red_style_title)
+            worksheet.write_merge(row,row,7,9,total_with_out_Withdrawn_billing ,  style=red_style_title)
+            worksheet.write_merge(row,row,10,12,total_total_Recovery_paid,  style=red_style_title)
+            worksheet.write_merge(row,row,13,15,total_Receivables,  style=red_style_title)
+            worksheet.write_merge(row,row,16,17,total_Total,  style=red_style_title)
+            worksheet.write_merge(row,row,18,20,total_Bade_Dabts,  style=red_style_title)
+            worksheet.write_merge(row,row,21,23,'',  style=red_style_title)
+            worksheet.write_merge(row,row,24,26,'',  style=red_style_title)
 
             fp = io.BytesIO()
             workbook.save(fp)
