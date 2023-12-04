@@ -12,6 +12,7 @@ class WithdrawnStatusOnSecurity(models.Model):
 
     def _compute_withdrawn_status_for_security(self):
         for rec in self:
+            self.withdrawn_status_computed='fsdhfg'
             self.withdrawn_status_security="skdjfhsdkj"
             
         # withdrawn_computed_bool=False
