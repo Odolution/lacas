@@ -10,6 +10,7 @@ class WithdrawnStatusOnSecurity(models.Model):
     withdrawn_computed_bool=fields.Boolean()
 
     def _compute_withdrawn_status_for_security(self):
+        raise UserError('here')
         withdrawn_computed_bool=False
         adm_account_move = env['account.move'].search([('student_ids', '=', rec.id),('move_type', '=', 'out_invoice'),('journal_id.name', '=', 'Admission Challan')])
         rev_account_move = env['account.move'].search([('x_student_id_cred', '=', rec.id),('move_type', '=', 'out_refund'),('journal_id.name', '=', 'Security Deposit')])
