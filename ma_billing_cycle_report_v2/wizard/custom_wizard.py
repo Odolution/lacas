@@ -174,11 +174,7 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,24,26, "Actual Recovery '%'age",  style=red_style_title)
             # worksheet.(0,1,0,3,"",)
 
-            # v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
-            # v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
-
-            # v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
-            # v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')   
+            total_total_Issuance_billing=0
             row=2
             col=4
             for rec in self.account_report_line:
@@ -194,10 +190,18 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,16,17,Total, style=style_title)
                     Bade_Dabts = rec.total_Issuance_billing - Total
                     worksheet.write_merge(row,row,18,20,Bade_Dabts, style=style_title)
-                    Recovery_on_Enrolled_and_Paid_Bills = (rec.total_Recovery_paid/rec.with_out_Withdrawn_billing)*100
+                    if rec.total_Recovery_paid and rec.with_out_Withdrawn_billing:
+                        Recovery_on_Enrolled_and_Paid_Bills = (rec.total_Recovery_paid/rec.with_out_Withdrawn_billing)*100
+                    else:
+                        Recovery_on_Enrolled_and_Paid_Bills = 0
                     worksheet.write_merge(row,row,21,23,Recovery_on_Enrolled_and_Paid_Bills, style=style_title)
-                    Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
+                    if rec.total_Recovery_paid and rec.total_Issuance_billing:
+                        Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
+                    else:
+                        Actual_Recovery = 0
                     worksheet.write_merge(row,row,24,26,Recovery_on_Enrolled_and_Paid_Bills, style=style_title)
+
+                    total_total_Issuance_billing += rec.total_Issuance_billing
 
                     row+=1
 
