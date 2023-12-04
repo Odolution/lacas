@@ -192,6 +192,12 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,13,15,Receivables, style=style_title)
                     Total = Receivables + rec.total_Recovery_paid
                     worksheet.write_merge(row,row,16,17,Total, style=style_title)
+                    Bade_Dabts = rec.total_Issuance_billing - Total
+                    worksheet.write_merge(row,row,18,20,Bade_Dabts, style=style_title)
+                    Recovery_on_Enrolled_and_Paid_Bills = (rec.total_Recovery_paid/rec.with_out_Withdrawn_billing)*100
+                    worksheet.write_merge(row,row,21,23,Recovery_on_Enrolled_and_Paid_Bills, style=style_title)
+                    Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
+                    worksheet.write_merge(row,row,21,23,Recovery_on_Enrolled_and_Paid_Bills, style=style_title)
 
                     row+=1
 
