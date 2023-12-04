@@ -6,7 +6,7 @@
     'sequence': -100,
     'description': 'Withdrawn Status on Security Report',
     'images' : [],
-    'depends' : ['school'],
+    'depends' : [],
     'data': [
         'views/withdrawn_status_on_security.xml'
     ],
