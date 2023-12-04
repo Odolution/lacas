@@ -1,0 +1,13 @@
+<odoo>
+
+    <record id="month_field" model="ir.ui.view">
+        <field name="name">school.student.form_extension</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="edoob.school_student_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='gender']" position="after">
+                <field name="withdrawn_status_security" string="Withdrawn Status"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
