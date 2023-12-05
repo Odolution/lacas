@@ -174,6 +174,8 @@ class RecoveryReportWizard(models.TransientModel):
 
     def action_print_excel_billing_report(self):
         
+        self._date_constrains()
+
         self.action_print_report()
 
         if xlwt:
