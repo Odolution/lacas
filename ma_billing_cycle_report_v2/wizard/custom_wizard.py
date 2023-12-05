@@ -45,6 +45,49 @@ class RecoveryReportWizard(models.TransientModel):
     account_report_line=fields.Many2many('billing.student.report.line', string='Account report Line')
     # by_account_report_line=fields.Many2many('student.bi.monthly.report.line', string='Account by Monthly report Line')
     
+    def _date_constrains(self):
+        if not self.to_date or not self.from_date:
+            raise UserError("Sorry, you must enter all dates..")
+        
+        
+        if not self.from_date and not self.to_date :
+            raise UserError("Sorry, you must enter dates..")
+        
+        else:
+
+            from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
+            to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
+            from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
+            to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
+            # raise UserError(from_year)
+
+            if self.to_date < self.from_date:
+                # raise UserError(datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y'))
+
+                raise ValidationError(_('Sorry, End Date Must be greater Than Start Date...'))
+
+        if not self.to_date_pay or not self.from_date_pay:
+            raise UserError("Sorry, you must enter all dates..")
+        
+        
+        if not self.from_date_pay and not self.to_date_pay :
+            raise UserError("Sorry, you must enter dates..")
+        
+        else:
+
+            pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
+            pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+
+            pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
+            pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
+            # raise UserError(from_year)
+
+            if self.to_date_pay < self.from_date_pay:
+                # raise UserError(datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y'))
+
+                raise ValidationError(_('Sorry, End Date Must be greater Than Start Date...'))
+
+
     def action_print_report(self):
         lines=[]
         school_ids= []
