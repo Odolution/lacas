@@ -60,7 +60,7 @@ class SecurityAmountReport(models.Model):
             enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
             # raise UserError(enrolled_students)
             for student in enrolled_students:
-                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("student_ids","=",student.id)], limit=1)
+                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ('state','=','posted'),("x_student_id_cred","=",student.id)], limit=1)
                 for line in admission.invoice_line_ids:
                     if line.account_id.name == 'Security Fee':
