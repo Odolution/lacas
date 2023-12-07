@@ -15,7 +15,7 @@ class Reversal(models.Model):
 
 
 
-
+    @api.depends('name')
     def _compute_withdrawn_status_reversal(self):
         for rec in self:
             if rec['state']=='posted' and float(rec['amount_residual'])==0:
@@ -26,6 +26,7 @@ class Reversal(models.Model):
                 rec.withdrawn_status_reversal_compute='N'
                 rec.withdrawn_status_reversal= 'N'
 
+    @api.depends('name')
     def _compute_withdrawn_status_bill(self):
         for rec in self:
             if rec['move_type']=='out_invoice' and rec['std_factsid']:
