@@ -59,93 +59,103 @@ class SecurityAmountReport(models.Model):
             serial_number = 1
             enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
             # raise UserError(enrolled_students)
+            # done=[]
             for student in enrolled_students:
-                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ("student_ids","in",[student.id])], limit=1)
-                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ('state','=','posted'),("x_student_id_cred","=",student.id)], limit=1)
-                for line in admission.invoice_line_ids:
-                    if line.account_id.name == 'Security Fee':
-                        worksheet.write(row, 0, serial_number)
-
-                        if student.name:
-                            worksheet.write(row, 1, student.name)
-                        else:
-                            worksheet.write(row, 1, "N/A")
-
-                        if admission.partner_id.name:
-                            worksheet.write(row, 2, admission.partner_id.name)
-                        else:
-                            worksheet.write(row, 2, "N/A")
-
-                        if student.facts_udid:
-                            worksheet.write(row, 3, student.facts_udid)
-                        else:
-                            worksheet.write(row, 3, "N/A")
-                        
-                        if student.grade_level_ids:
-                            worksheet.write(row, 4, student.grade_level_ids.name)
-                        elif admission.class_name:
-                            worksheet.write(row, 4, admission.class_name)
-                        else:
-                            worksheet.write(row, 4, "N/A")
-                        if student.homeroom:
-                            worksheet.write(row, 5, student.homeroom)
-                        elif admission.student_ids:
-                            student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
-                            if student:
-                                homeroom = student.homeroom
-                                if homeroom != False:
-                                    vals = homeroom.split('-')
-                                    if vals[-1].isalpha():
-                                        worksheet.write(row, 5, vals[-1])
-                                    else:
-                                        student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
-                                        if student:
-                                            homeroom = student.homeroom
-                                            if homeroom != False:
-                                                vals = homeroom.split('-')
-                                                if vals[-1].isalpha():
-                                                    worksheet.write(row, 5, vals[-1])
-                                                else:
-                                                    worksheet.write(row, 5, "N/A")
-                        else:
-                            worksheet.write(row, 5, "N/A")
-
-                        if student.id :
-                            if student.x_last_school_id :
-                                worksheet.write(row, 6, student.x_last_school_id.name)
-                        elif admission.std_current_branch:
-                            worksheet.write(row, 6, admission.std_current_branch)
-                        else:
-                            worksheet.write(row, 6, "N/A")
-
-                        if admission.withdrawn_status:
-                            worksheet.write(row, 7, admission.withdrawn_status)
-                            
-                        elif reversal.withdrawn_status:
-                            worksheet.write(row, 7, reversal.withdrawn_status)
-                            
-                        else:
-                            worksheet.write(row, 7, "N/A")
-
-                        if admission.invoice_date:
-                            worksheet.write(row, 8, str(admission.invoice_date))
-                        else:
-                            worksheet.write(row, 8, "N/A")
-                         
+                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
+                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'), ('state','=','draft'),("x_student_id_cred","=",student.id)], limit=1)
+                if admission:
+                    for line in admission.invoice_line_ids:
                         if line.account_id.name == 'Security Fee':
-                            worksheet.write(row, 9, line.price_total)
-                        elif line.account_id.name != 'Security Fee':
-                            for rev_line in reversal.invoice_line_ids:
-                                if rev_line.account_id.name == 'Security Fee':
-                                    worksheet.write(row, 9, rev_line.price_total)
+                            worksheet.write(row, 0, serial_number)
+    
+                    # for adm in admission:
+                    #     for line in adm.invoice_line_ids:
+                    #         if line.account_id.name == 'Security Fee' and student not in done:
+                    #             worksheet.write(row, 0, serial_number)
+    
+                            if student.name:
+                                worksheet.write(row, 1, student.name)
+                            else:
+                                worksheet.write(row, 1, "N/A")
+    
+                            if admission.partner_id.name:
+                                worksheet.write(row, 2, admission.partner_id.name)
+                            else:
+                                worksheet.write(row, 2, "N/A")
+    
+                            if student.facts_udid:
+                                worksheet.write(row, 3, student.facts_udid)
+                            else:
+                                worksheet.write(row, 3, "N/A")
+                            
+                            if student.grade_level_ids:
+                                worksheet.write(row, 4, student.grade_level_ids.name)
+                            elif admission.class_name:
+                                worksheet.write(row, 4, admission.class_name)
+                            else:
+                                worksheet.write(row, 4, "N/A")
+                            if student.homeroom:
+                                worksheet.write(row, 5, student.homeroom)
+                            elif admission.student_ids:
+                                student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
+                                if student:
+                                    homeroom = student.homeroom
+                                    if homeroom != False:
+                                        vals = homeroom.split('-')
+                                        if vals[-1].isalpha():
+                                            worksheet.write(row, 5, vals[-1])
+                                        else:
+                                            student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
+                                            if student:
+                                                homeroom = student.homeroom
+                                                if homeroom != False:
+                                                    vals = homeroom.split('-')
+                                                    if vals[-1].isalpha():
+                                                        worksheet.write(row, 5, vals[-1])
+                                                    else:
+                                                        worksheet.write(row, 5, "N/A")
+                            else:
+                                worksheet.write(row, 5, "N/A")
+    
+                            if student.id :
+                                if student.x_last_school_id :
+                                    worksheet.write(row, 6, student.x_last_school_id.name)
+                            elif admission.std_current_branch:
+                                worksheet.write(row, 6, admission.std_current_branch)
+                            else:
+                                worksheet.write(row, 6, "N/A")
+    
+                            if admission.withdrawn_status_bill:
+                                worksheet.write(row, 7, admission.withdrawn_status_bill)
                                 
-                        else:
-                            worksheet.write(row, 9, "N/A")
-
-                        serial_number += 1
-                        row+=1
-                    else:
-                        # pass
+                            elif reversal.withdrawn_status_reversal:
+                                worksheet.write(row, 7, reversal.withdrawn_status_reversal)
+                                
+                            else:
+                                raise UserError(str('Admission ')+str(admission.id))
+                                worksheet.write(row, 7, "N/A")
+    
+                            if admission.invoice_date:
+                                worksheet.write(row, 8, str(admission.invoice_date))
+                            else:
+                                worksheet.write(row, 8, "N/A")
+                             
+                            if line.account_id.name == 'Security Fee':
+                                worksheet.write(row, 9, line.price_total)
+                            # elif line.account_id.name != 'Security Fee':
+                            #     for rev_line in reversal.invoice_line_ids:
+                            #         if rev_line.account_id.name == 'Security Fee':
+                            #             worksheet.write(row, 9, rev_line.price_total)
+                                    
+                            else:
+                                worksheet.write(row, 9, "N/A")
+    
+                            serial_number += 1
+                            row+=1
+                            # done.append(student)
+                else:
+                    # pass
+                    if reversal:
                         for line in reversal.invoice_line_ids:
                             if line.account_id.name == 'Security Fee':
                                 worksheet.write(row, 0, serial_number)
@@ -154,8 +164,8 @@ class SecurityAmountReport(models.Model):
                                 else:
                                     worksheet.write(row, 1, "N/A")
         
-                                if admission.partner_id.name:
-                                    worksheet.write(row, 2, admission.partner_id.name)
+                                if reversal.partner_id.name:
+                                    worksheet.write(row, 2, reversal.partner_id.name)
                                 else:
                                     worksheet.write(row, 2, "N/A")
         
@@ -163,17 +173,24 @@ class SecurityAmountReport(models.Model):
                                     worksheet.write(row, 3, student.facts_udid)
                                 else:
                                     worksheet.write(row, 3, "N/A")
-                                
+                                # for grade in student.grade_level_ids:
+
                                 if student.grade_level_ids:
-                                    worksheet.write(row, 4, student.grade_level_ids.name)
-                                elif admission.class_name:
-                                    worksheet.write(row, 4, admission.class_name)
+                                    for grade in student.grade_level_ids:
+                                        worksheet.write(row, 4, grade.name)
+                                        break
+                                # elif admission.class_name:
+                                #     worksheet.write(row, 4, admission.class_name)
+                                elif reversal.class_name:
+                                    worksheet.write(row, 4, reversal.class_name)
                                 else:
                                     worksheet.write(row, 4, "N/A")
                                 if student.homeroom:
                                     worksheet.write(row, 5, student.homeroom)
-                                elif admission.student_ids:
-                                    student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
+                                # elif admission.student_ids:
+                                #     student = self.env['school.student'].search([('id','=',admission.student_ids.id)])
+                                elif reversal.student_ids:
+                                    student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
                                     if student:
                                         homeroom = student.homeroom
                                         if homeroom != False:
@@ -196,37 +213,40 @@ class SecurityAmountReport(models.Model):
                                 if student.id :
                                     if student.x_last_school_id :
                                         worksheet.write(row, 6, student.x_last_school_id.name)
-                                elif admission.std_current_branch:
-                                    worksheet.write(row, 6, admission.std_current_branch)
+                                # elif admission.std_current_branch:
+                                #     worksheet.write(row, 6, admission.std_current_branch)
+                                elif reversal.std_current_branch:
+                                    worksheet.write(row, 6, reversal.std_current_branch)
                                 else:
                                     worksheet.write(row, 6, "N/A")
         
-                                if admission.withdrawn_status:
-                                    worksheet.write(row, 7, admission.withdrawn_status)
-                                    
-                                elif reversal.withdrawn_status:
-                                    worksheet.write(row, 7, reversal.withdrawn_status)
+                                # if admission.withdrawn_status:
+                                #     worksheet.write(row, 7, admission.withdrawn_status)
+                                if reversal.withdrawn_status_reversal:
+                                    worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                                     
                                 else:
+                                    raise UserError(str('Reversal ')+str(reversal.id))
                                     worksheet.write(row, 7, "N/A")
         
-                                if admission.invoice_date:
-                                    worksheet.write(row, 8, str(admission.invoice_date))
+                                if reversal.invoice_date:
+                                    worksheet.write(row, 8, str(reversal.invoice_date))
                                 else:
                                     worksheet.write(row, 8, "N/A")
                                  
                                 if line.account_id.name == 'Security Fee':
                                     worksheet.write(row, 9, line.price_total)
-                                elif line.account_id.name != 'Security Fee':
-                                    for rev_line in reversal.invoice_line_ids:
-                                        if rev_line.account_id.name == 'Security Fee':
-                                            worksheet.write(row, 9, rev_line.price_total)
+                                # elif line.account_id.name != 'Security Fee':
+                                #     for rev_line in admission.invoice_line_ids:
+                                #         if rev_line.account_id.name == 'Security Fee':
+                                #             worksheet.write(row, 9, rev_line.price_total)
                                         
                                 else:
                                     worksheet.write(row, 9, "N/A")
         
                                 serial_number += 1
                                 row+=1
+                                # done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
 
