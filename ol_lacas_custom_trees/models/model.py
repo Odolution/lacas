@@ -146,6 +146,7 @@ class ext(models.Model):
 
     def _compute_net_amnt(self):
         for rec in self:
+            rec.net_amount="0"
             if rec.invoice_line_ids:
                 amt=[]
                 late=[]
