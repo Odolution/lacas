@@ -146,7 +146,6 @@ class ext(models.Model):
 
     def _compute_net_amnt(self):
         for rec in self:
-            rec.net_amount="0"
             if rec.invoice_line_ids:
                 amt=[]
                 late=[]
@@ -157,7 +156,7 @@ class ext(models.Model):
                     if line.product_id.is_discount_type!=True:
                         #if line.product_id.name!="Late Fee":
                         amt.append(line.price_total)
-                    if 'Late Fee' in line.product_id.name:
+                    if line.product_id.name and 'Late Fee' in line.product_id.name:
                         late.append(line.price_total)
                     else:
                         late.append(0)
