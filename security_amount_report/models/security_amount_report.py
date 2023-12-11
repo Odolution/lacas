@@ -57,7 +57,7 @@ class SecurityAmountReport(models.Model):
             
             row = 1
             serial_number = 1
-            enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
+            enrolled_students = self.env['school.student'].search([()])
             # raise UserError(enrolled_students)
             # done=[]
             for student in enrolled_students:
