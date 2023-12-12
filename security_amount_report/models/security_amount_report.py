@@ -155,10 +155,11 @@ class SecurityAmountReport(models.Model):
                             # done.append(student)
                             #adding active / inactive column
                             if student.enrollment_status_ids:
-                                if student.enrollment_status_ids[0].name == 'Enrolled':
-                                    worksheet.write(row, 10, 'Y')
-                                else:
-                                    worksheet.write(row, 10, 'N')
+                                for status in student.enrollment_status_ids:
+                                    if status.name == 'Enrolled':
+                                        worksheet.write(row, 10, 'Y')
+                                    else:
+                                        worksheet.write(row, 10, 'N')
                             else:
                                 worksheet.write(row, 10, "N/A")
     
@@ -254,10 +255,11 @@ class SecurityAmountReport(models.Model):
                                     worksheet.write(row, 9, "N/A")
                                     
                                 if student.enrollment_status_ids:
-                                    if student.enrollment_status_ids[0].name == 'Enrolled':
-                                        worksheet.write(row, 10, 'Y')
-                                    else:
-                                        worksheet.write(row, 10, 'N')
+                                    for status in student.enrollment_status_ids:
+                                        if status.name == 'Enrolled':
+                                            worksheet.write(row, 10, 'Y')
+                                        else:
+                                            worksheet.write(row, 10, 'N')
                                 else:
                                     worksheet.write(row, 10, "N/A")
     
