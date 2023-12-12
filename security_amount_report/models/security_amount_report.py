@@ -256,13 +256,13 @@ class SecurityAmountReport(models.Model):
                                 else:
                                     worksheet.write(row, 9, "N/A")
                                     
-                                if student.enrollment_status_ids:
-                                    for status in student.enrollment_status_ids:
-                                        if status.name == 'Enrolled':
-                                            worksheet.write(row, 10, 'Y')
-                                            break
-                                        else:
-                                            worksheet.write(row, 10, 'N')
+                                # if student.enrollment_status_ids:
+                                #     for status in student.enrollment_status_ids:
+                                #         if status.name == 'Enrolled':
+                                #             worksheet.write(row, 10, 'Y')
+                                #             break
+                                #         else:
+                                #             worksheet.write(row, 10, 'N')
                                 # else:
                                 #     worksheet.write(row, 10, "N/A")
     
