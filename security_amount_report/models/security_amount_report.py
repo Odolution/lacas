@@ -161,6 +161,9 @@ class SecurityAmountReport(models.Model):
                             else:
                                 worksheet.write(row, 10, "N/A")
                             
+                            serial_number += 1
+                            row+=1
+                            
                 else:
                     # pass
                     if reversal:
@@ -260,8 +263,9 @@ class SecurityAmountReport(models.Model):
                                             worksheet.write(row, 10, 'N')
                                 else:
                                     worksheet.write(row, 10, "N/A")
-                serial_number += 1
-                row+=1
+    
+                                serial_number += 1
+                                row+=1
                                 # done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
