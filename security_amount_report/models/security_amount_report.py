@@ -132,7 +132,7 @@ class SecurityAmountReport(models.Model):
                                 worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                                 
                             else:
-                                raise UserError(str('Admission ')+str(admission.id))
+                                # raise UserError(str('Admission ')+str(admission.id))
                                 worksheet.write(row, 7, "N/A")
     
                             if admission.invoice_date:
@@ -235,7 +235,7 @@ class SecurityAmountReport(models.Model):
                                     worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                                     
                                 else:
-                                    raise UserError(str('Reversal ')+str(reversal.id))
+                                    # raise UserError(str('Reversal ')+str(reversal.id))
                                     worksheet.write(row, 7, "N/A")
         
                                 if reversal.invoice_date:
