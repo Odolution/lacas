@@ -149,6 +149,7 @@ class SecurityAmountReport(models.Model):
                                     
                             else:
                                 worksheet.write(row, 9, "N/A")
+                            worksheet.write(row, 10, 'test')
     
                             # done.append(student)
                             #adding active / inactive column
@@ -265,7 +266,7 @@ class SecurityAmountReport(models.Model):
                                 #             worksheet.write(row, 10, 'N')
                                 # else:
                                 #     worksheet.write(row, 10, "N/A")
-    
+                                worksheet.write(row, 10, 'test')
                                 serial_number += 1
                                 row+=1
                                 # done.append(student)
