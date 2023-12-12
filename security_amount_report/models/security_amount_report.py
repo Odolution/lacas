@@ -44,7 +44,7 @@ class SecurityAmountReport(models.Model):
             
             # worksheet.write_merge(6, 7, 5, 14, "SECURITY AMOUNT REPORT", style=style_title)
 
-            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
+            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY','test']
 
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(0, 0, col*1, col*1, field_name, style=style_title)
