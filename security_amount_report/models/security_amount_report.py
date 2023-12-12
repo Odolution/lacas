@@ -150,8 +150,6 @@ class SecurityAmountReport(models.Model):
                             else:
                                 worksheet.write(row, 9, "N/A")
     
-                            serial_number += 1
-                            row+=1
                             # done.append(student)
                             #adding active / inactive column
                             if student.enrollment_status_ids:
@@ -162,7 +160,9 @@ class SecurityAmountReport(models.Model):
                                         worksheet.write(row, 10, 'N')
                             else:
                                 worksheet.write(row, 10, "N/A")
-    
+                            serial_number += 1
+                            row+=1
+                            
                 else:
                     # pass
                     if reversal:
