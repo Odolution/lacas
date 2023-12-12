@@ -1936,20 +1936,21 @@ class agingsReportWizard(models.TransientModel):
             
       
             for i in range(range_start,range_stop+1):
+                if len(months[i]) >= 11:
       
-                worksheet.write_merge(0,1,col,col,months[i][1],lime_style_title)
-                worksheet.write_merge(0,1,col+1,col+1,months[i][2],lime_style_title)
-                worksheet.write_merge(0,1,col+2,col+2,months[i][3],lime_style_title)
-                worksheet.write_merge(0,1,col+3,col+3,months[i][4],lime_style_title)
-                worksheet.write_merge(0,1,col+4,col+4,months[i][5],lime_style_title)
-                worksheet.write_merge(0,1,col+5,col+5,months[i][6],lime_style_title)
-                worksheet.write_merge(0,1,col+6,col+6,months[i][7],lime_style_title)
-                worksheet.write_merge(0,1,col+7,col+7,months[i][8],lime_style_title)
-                worksheet.write_merge(0,1,col+8,col+8,months[i][9],lime_style_title)
-                worksheet.write_merge(0,1,col+9,col+9,months[i][10],lime_style_title)
+                    worksheet.write_merge(0,1,col,col,months[i][1],lime_style_title)
+                    worksheet.write_merge(0,1,col+1,col+1,months[i][2],lime_style_title)
+                    worksheet.write_merge(0,1,col+2,col+2,months[i][3],lime_style_title)
+                    worksheet.write_merge(0,1,col+3,col+3,months[i][4],lime_style_title)
+                    worksheet.write_merge(0,1,col+4,col+4,months[i][5],lime_style_title)
+                    worksheet.write_merge(0,1,col+5,col+5,months[i][6],lime_style_title)
+                    worksheet.write_merge(0,1,col+6,col+6,months[i][7],lime_style_title)
+                    worksheet.write_merge(0,1,col+7,col+7,months[i][8],lime_style_title)
+                    worksheet.write_merge(0,1,col+8,col+8,months[i][9],lime_style_title)
+                    worksheet.write_merge(0,1,col+9,col+9,months[i][10],lime_style_title)
 
-            
-                col+=10
+                
+                    col+=10
 
         #     worksheet.write_merge(0,1,col,col+1,"Total", lime_style_title)   
             
