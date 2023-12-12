@@ -44,7 +44,7 @@ class SecurityAmountReport(models.Model):
             
             # worksheet.write_merge(6, 7, 5, 14, "SECURITY AMOUNT REPORT", style=style_title)
 
-            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
+            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY','ACTIVE/INACTIVE']
 
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(0, 0, col*1, col*1, field_name, style=style_title)
@@ -57,7 +57,7 @@ class SecurityAmountReport(models.Model):
             
             row = 1
             serial_number = 1
-            enrolled_students = self.env['school.student'].search([('enrollment_status_ids.id','=', 2)])
+            enrolled_students = self.env['school.student'].search([])
             # raise UserError(enrolled_students)
             # done=[]
             for student in enrolled_students:
@@ -132,7 +132,7 @@ class SecurityAmountReport(models.Model):
                                 worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                                 
                             else:
-                                raise UserError(str('Admission ')+str(admission.id))
+                                # raise UserError(str('Admission ')+str(admission.id))
                                 worksheet.write(row, 7, "N/A")
     
                             if admission.invoice_date:
@@ -149,10 +149,27 @@ class SecurityAmountReport(models.Model):
                                     
                             else:
                                 worksheet.write(row, 9, "N/A")
+                            
     
+                            # done.append(student)
+                            #adding active / inactive column
+                            if student.enrollment_status_ids:
+                                enrolled = False
+                                for status in student.enrollment_status_ids:
+                                    if status.name == 'Enrolled':
+                                        enrolled = True
+                                        break
+                                
+                                if enrolled:
+                                    worksheet.write(row, 10, 'Y')
+                                else:
+                                    worksheet.write(row, 10, 'N')
+                            else:
+                                worksheet.write(row, 10, "N/A")
+                            
                             serial_number += 1
                             row+=1
-                            # done.append(student)
+                            
                 else:
                     # pass
                     if reversal:
@@ -226,7 +243,7 @@ class SecurityAmountReport(models.Model):
                                     worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                                     
                                 else:
-                                    raise UserError(str('Reversal ')+str(reversal.id))
+                                    # raise UserError(str('Reversal ')+str(reversal.id))
                                     worksheet.write(row, 7, "N/A")
         
                                 if reversal.invoice_date:
@@ -243,7 +260,21 @@ class SecurityAmountReport(models.Model):
                                         
                                 else:
                                     worksheet.write(row, 9, "N/A")
-        
+                                    
+                                if student.enrollment_status_ids:
+                                    enrolled = False
+                                    for status in student.enrollment_status_ids:
+                                        if status.name == 'Enrolled':
+                                            enrolled = True
+                                            break
+                                    
+                                    if enrolled:
+                                        worksheet.write(row, 10, 'Y')
+                                    else:
+                                        worksheet.write(row, 10, 'N')
+                                else:
+                                    worksheet.write(row, 10, "N/A")
+                                    
                                 serial_number += 1
                                 row+=1
                                 # done.append(student)
