@@ -156,10 +156,11 @@ class SecurityAmountReport(models.Model):
                                 for status in student.enrollment_status_ids:
                                     if status.name == 'Enrolled':
                                         worksheet.write(row, 10, 'Y')
+                                        break
                                     else:
                                         worksheet.write(row, 10, 'N')
-                            else:
-                                worksheet.write(row, 10, "N/A")
+                            # else:
+                            #     worksheet.write(row, 10, "N/A")
                             
                             serial_number += 1
                             row+=1
@@ -259,10 +260,11 @@ class SecurityAmountReport(models.Model):
                                     for status in student.enrollment_status_ids:
                                         if status.name == 'Enrolled':
                                             worksheet.write(row, 10, 'Y')
+                                            break
                                         else:
                                             worksheet.write(row, 10, 'N')
-                                else:
-                                    worksheet.write(row, 10, "N/A")
+                                # else:
+                                #     worksheet.write(row, 10, "N/A")
     
                                 serial_number += 1
                                 row+=1
