@@ -157,7 +157,9 @@ class SecurityAmountReport(models.Model):
                                     if status.name == 'Enrolled':
                                         worksheet.write(row, 10, 'Y')
                                     else:
-                                        worksheet.write(row, 10, 'N')
+                                        if worksheet.cell(row, 10).value == '':
+                                                worksheet.write(row, 10, 'N')
+
                             else:
                                 worksheet.write(row, 10, "N/A")
                             
@@ -260,7 +262,10 @@ class SecurityAmountReport(models.Model):
                                         if status.name == 'Enrolled':
                                             worksheet.write(row, 10, 'Y')
                                         else:
-                                            worksheet.write(row, 10, 'N')
+                                            if worksheet.cell(row, 10).value == '':
+                                                worksheet.write(row, 10, 'N')
+
+                                            # worksheet.write(row, 10, 'N')
                                 else:
                                     worksheet.write(row, 10, "N/A")
     
