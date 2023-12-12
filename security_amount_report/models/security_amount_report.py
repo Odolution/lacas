@@ -44,7 +44,7 @@ class SecurityAmountReport(models.Model):
             
             # worksheet.write_merge(6, 7, 5, 14, "SECURITY AMOUNT REPORT", style=style_title)
 
-            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY','test']
+            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY','ACTIVE/INACTIVE']
 
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(0, 0, col*1, col*1, field_name, style=style_title)
@@ -149,19 +149,23 @@ class SecurityAmountReport(models.Model):
                                     
                             else:
                                 worksheet.write(row, 9, "N/A")
-                            worksheet.write(row, 10, 'test')
+                            
     
                             # done.append(student)
                             #adding active / inactive column
-                            # if student.enrollment_status_ids:
-                            #     for status in student.enrollment_status_ids:
-                            #         if status.name == 'Enrolled':
-                            #             worksheet.write(row, 10, 'Y')
-                            #             break
-                            #         else:
-                            #             worksheet.write(row, 10, 'N')
-                            # else:
-                            #     worksheet.write(row, 10, "N/A")
+                            if student.enrollment_status_ids:
+                                enrolled = False
+                                for status in student.enrollment_status_ids:
+                                    if status.name == 'Enrolled':
+                                        enrolled = True
+                                        break
+                                
+                                if enrolled:
+                                    worksheet.write(row, 10, 'Y')
+                                else:
+                                    worksheet.write(row, 10, 'N')
+                            else:
+                                worksheet.write(row, 10, "N/A")
                             
                             serial_number += 1
                             row+=1
@@ -257,16 +261,20 @@ class SecurityAmountReport(models.Model):
                                 else:
                                     worksheet.write(row, 9, "N/A")
                                     
-                                # if student.enrollment_status_ids:
-                                #     for status in student.enrollment_status_ids:
-                                #         if status.name == 'Enrolled':
-                                #             worksheet.write(row, 10, 'Y')
-                                #             break
-                                #         else:
-                                #             worksheet.write(row, 10, 'N')
-                                # else:
-                                #     worksheet.write(row, 10, "N/A")
-                                worksheet.write(row, 10, 'test')
+                                if student.enrollment_status_ids:
+                                    enrolled = False
+                                    for status in student.enrollment_status_ids:
+                                        if status.name == 'Enrolled':
+                                            enrolled = True
+                                            break
+                                    
+                                    if enrolled:
+                                        worksheet.write(row, 10, 'Y')
+                                    else:
+                                        worksheet.write(row, 10, 'N')
+                                else:
+                                    worksheet.write(row, 10, "N/A")
+                                    
                                 serial_number += 1
                                 row+=1
                                 # done.append(student)
