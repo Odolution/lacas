@@ -44,7 +44,7 @@ class SecurityAmountReport(models.Model):
             
             # worksheet.write_merge(6, 7, 5, 14, "SECURITY AMOUNT REPORT", style=style_title)
 
-            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY']
+            field_names = ['Sr.#', 'STUDENT NAME', 'FATHER NAME', '6 DIGIT ID', 'CLASS', 'SECTION', 'BRANCH', 'WITHDRAWN', 'ADM. DATE', 'SECURITY','ACTIVE/INACTIVE']
 
             for col, field_name in enumerate(field_names):
                 worksheet.write_merge(0, 0, col*1, col*1, field_name, style=style_title)
@@ -57,7 +57,7 @@ class SecurityAmountReport(models.Model):
             
             row = 1
             serial_number = 1
-            enrolled_students = self.env['school.student'].search([()])
+            enrolled_students = self.env['school.student'].search([])
             # raise UserError(enrolled_students)
             # done=[]
             for student in enrolled_students:
@@ -154,13 +154,13 @@ class SecurityAmountReport(models.Model):
                             row+=1
                             # done.append(student)
                             #adding active / inactive column
-                            # if student.enrollment_status_ids:
-                            #     if student.enrollment_status_ids.name == 'Enrolled':
-                            #         worksheet.write(row, 10, 'Y')
-                            #     else:
-                            #         worksheet.write(row, 10, 'N')
-                            # else:
-                            #     worksheet.write(row, 10, "N/A")
+                            if student.enrollment_status_ids:
+                                if student.enrollment_status_ids.name == 'Enrolled':
+                                    worksheet.write(row, 10, 'Y')
+                                else:
+                                    worksheet.write(row, 10, 'N')
+                            else:
+                                worksheet.write(row, 10, "N/A")
     
                 else:
                     # pass
@@ -253,13 +253,13 @@ class SecurityAmountReport(models.Model):
                                 else:
                                     worksheet.write(row, 9, "N/A")
                                     
-                                # if student.enrollment_status_ids:
-                                #     if student.enrollment_status_ids.name == 'Enrolled':
-                                #         worksheet.write(row, 10, 'Y')
-                                #     else:
-                                #         worksheet.write(row, 10, 'N')
-                                # else:
-                                #     worksheet.write(row, 10, "N/A")
+                                if student.enrollment_status_ids:
+                                    if student.enrollment_status_ids.name == 'Enrolled':
+                                        worksheet.write(row, 10, 'Y')
+                                    else:
+                                        worksheet.write(row, 10, 'N')
+                                else:
+                                    worksheet.write(row, 10, "N/A")
     
                                 serial_number += 1
                                 row+=1
