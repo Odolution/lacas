@@ -1934,7 +1934,7 @@ class agingsReportWizard(models.TransientModel):
 
             col = 3
             
-            raise UserError(months)
+            raise UserError(str(months))
             for i in range(range_start,range_stop+1):
       
                 worksheet.write_merge(0,1,col,col,months[i][1],lime_style_title)
