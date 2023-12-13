@@ -1957,9 +1957,9 @@ class agingsReportWizard(models.TransientModel):
             column = 3
             row = 2
             sn=1
+            raise UserError(str(self.account_report_line))
             for rec in self.account_report_line:
                 if rec:
-                    raise UserError("Test")
                     column = 3
 
                     worksheet.write(row,0,sn)
