@@ -69,7 +69,7 @@ class SecurityAmountReport(models.Model):
                 ])
                 for move in accounts:
                     if move.x_student_id_cred.id not in unique_student_ids:
-                        unique_student_ids.append(move.x_student_id_cred.id)
+                        unique_student_ids.append(move.x_student_id_cred)
 
             # Convert unique_student_ids to tuple for use in the PostgreSQL query
                 unique_student_ids_tuple = tuple(unique_student_ids)
