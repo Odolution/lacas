@@ -359,6 +359,7 @@ class agingsReportWizard(models.TransientModel):
         
 
         move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+        raise UserError(str(move_ids))
         branch_lst=[]
 
         for inv in move_ids:
@@ -369,7 +370,7 @@ class agingsReportWizard(models.TransientModel):
         lines=[]
 
 
-        raise UserError(str(branch_lst))
+        # raise UserError(str(branch_lst))
         for branch in branch_lst:
             raise UserError(str(branch))
 
