@@ -59,6 +59,7 @@ class SecurityAmountReport(models.Model):
             serial_number = 1
             # raise UserError(enrolled_students)
             # done=[]
+            unique_student_ids = []
             students = env['school.student'].search([])
             for student in students:
                 accounts = self.env['account.move'].search([
@@ -69,13 +70,10 @@ class SecurityAmountReport(models.Model):
                     if move.x_student_id_cred.id not in unique_student_ids:
                         unique_student_ids.append(move.x_student_id_cred)
             unique_student_ids_tuple = tuple(unique_student_ids)
-            enrolled_students = self.env['school.student'].search([])
 
-            unique_student_ids = []
+            
+            enrolled_students = self.env['school.student'].search([])            
             for student in enrolled_students:
-                
-            # Convert unique_student_ids to tuple for use in the PostgreSQL query
-                
 
                 reversal = self.env['account.move'].search([
                     ("move_type", "=", "out_refund"),
