@@ -61,7 +61,7 @@ class SecurityAmountReport(models.Model):
             # raise UserError(enrolled_students)
             # done=[]
             for student in enrolled_students:
-                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
+                # admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
                 
                 # if admission:
@@ -267,29 +267,29 @@ class SecurityAmountReport(models.Model):
                                     
                             else:
                                 worksheet.write(row, 9, "N/A")
-                            if student.enrollment_status_ids:
-                                enrolled = False
-                                for status in student.enrollment_status_ids:
-                                    if status.name == 'Enrolled':
-                                        enrolled = True
-                                        break
-
-                                if enrolled:
-                                    worksheet.write(row, 10, 'Y')
-                                else:
-                                    worksheet.write(row, 10, 'N')
-                            else:
-                                worksheet.write(row, 10, "N/A")
-
                             # if student.enrollment_status_ids:
+                            #     enrolled = False
                             #     for status in student.enrollment_status_ids:
                             #         if status.name == 'Enrolled':
-                            #             worksheet.write(row, 10, 'Y')
+                            #             enrolled = True
                             #             break
-                            #         else:
-                            #             worksheet.write(row, 10, 'N')
+
+                            #     if enrolled:
+                            #         worksheet.write(row, 10, 'Y')
+                            #     else:
+                            #         worksheet.write(row, 10, 'N')
                             # else:
                             #     worksheet.write(row, 10, "N/A")
+
+                            if student.enrollment_status_ids:
+                                for status in student.enrollment_status_ids:
+                                    if status.name == 'Enrolled':
+                                        worksheet.write(row, 10, 'Y')
+                                        break
+                                    else:
+                                        worksheet.write(row, 10, 'N')
+                            else:
+                                worksheet.write(row, 10, "N/A")
 
                             serial_number += 1
                             row+=1
