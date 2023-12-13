@@ -64,7 +64,7 @@ class SecurityAmountReport(models.Model):
 
             
             for student in enrolled_students:
-                accounts = env['account.move'].search([("move_type","=","out_refund"), ("x_student_id_cred","=",student.id)])
+                accounts = self.env['account.move'].search([("move_type","=","out_refund"), ("x_student_id_cred","=",student.id)])
                 # admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 for move in accounts:
                     if move.x_student_id_cred not in unique_student_ids:
