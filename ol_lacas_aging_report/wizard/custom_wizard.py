@@ -1933,8 +1933,7 @@ class agingsReportWizard(models.TransientModel):
                     range_stop = key
 
             col = 3
-            
-            raise UserError(str(months))
+
             for i in range(range_start,range_stop+1):
       
                 worksheet.write_merge(0,1,col,col,months[i][1],lime_style_title)
@@ -1960,7 +1959,7 @@ class agingsReportWizard(models.TransientModel):
             sn=1
             for rec in self.account_report_line:
                 if rec:
-
+                    raise UserError("Test")
                     column = 3
 
                     worksheet.write(row,0,sn)
