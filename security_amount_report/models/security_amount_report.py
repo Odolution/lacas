@@ -15,7 +15,7 @@ import xlwt
 
 class SecurityAmountReport(models.Model):
     _name = "security.amount.report"
-
+z
     def print_xlsx(self):
         if xlwt:
             
