@@ -371,6 +371,7 @@ class agingsReportWizard(models.TransientModel):
 
 
         for branch in branch_lst:
+            raise UserError(branch)
 
            
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
