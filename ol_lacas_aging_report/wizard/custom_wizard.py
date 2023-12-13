@@ -1807,7 +1807,7 @@ class agingsReportWizard(models.TransientModel):
             
             
             
-            
+            raise UserError(str(lines))
             self.write({
                 "account_report_line":[(6,0,lines)]
             }
@@ -1957,7 +1957,7 @@ class agingsReportWizard(models.TransientModel):
             column = 3
             row = 2
             sn=1
-            raise UserError(str(self.account_report_line))
+            # raise UserError(str(self.account_report_line))
             for rec in self.account_report_line:
                 if rec:
                     column = 3
