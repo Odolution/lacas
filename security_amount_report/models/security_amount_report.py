@@ -66,6 +66,7 @@ class SecurityAmountReport(models.Model):
                     ("move_type", "=", "out_refund"),
                     ("x_student_id_cred", "=", student.id)
                 ])
+                
                 for move in accounts:
                     if move.x_student_id_cred.id not in unique_student_ids:
                         unique_student_ids.append(move.x_student_id_cred)
