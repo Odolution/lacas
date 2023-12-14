@@ -181,7 +181,7 @@ class RecoveryReportWizard(models.TransientModel):
         if xlwt:
             global billing_counts ,by_monthly_billing_counts,select_by_monthly_list
             
-            filename = 'branch wise recovery report with Bad debt.xls'
+            filename = 'Branch wise recovery report with Bad debt.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
