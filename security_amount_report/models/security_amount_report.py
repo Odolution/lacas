@@ -58,22 +58,22 @@ class SecurityAmountReport(models.Model):
             enrolled_students = self.env['school.student'].search([])
             # raise UserError(enrolled_students)
             # done=[]
-            unique_student_ids = []
-            students = self.env['school.student'].search([])
-            for student in students:
-                accounts = self.env['account.move'].search([
-                    ("move_type", "=", "out_refund"),
-                    ("x_student_id_cred", "=", student.id)
-                ])
+            # unique_student_ids = []
+            # students = self.env['school.student'].search([])
+            # for student in students:
+            #     accounts = self.env['account.move'].search([
+            #         ("move_type", "=", "out_refund"),
+            #         ("x_student_id_cred", "=", student.id)
+            #     ])
 
-                for move in accounts:
-                    if move.x_student_id_cred.id not in unique_student_ids:
-                        unique_student_ids.append(move.x_student_id_cred.id)
+            #     for move in accounts:
+            #         if move.x_student_id_cred.id not in unique_student_ids:
+            #             unique_student_ids.append(move.x_student_id_cred.id)
 
-            unique_student_ids_tuple = tuple(unique_student_ids)
+            # unique_student_ids_tuple = tuple(unique_student_ids)
             for student in enrolled_students:
                 # admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
-                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","in",unique_student_ids_tuple)], limit=1)
+                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
                 # if admission:
                 #     for line in admission.invoice_line_ids:
                 #         if line.account_id.name == 'Security Fee':
