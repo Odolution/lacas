@@ -390,7 +390,7 @@ class agingsReportWizard(models.TransientModel):
 
             x = ""
             for i in branch_wise_inv:
-                if len(i.program_ids == 1):
+                if len(i.program_ids) == 1:
                     x += str(i.campus) + "\n"
             raise UserError(x)
 
