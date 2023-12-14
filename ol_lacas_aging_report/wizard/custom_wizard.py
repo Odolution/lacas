@@ -370,8 +370,8 @@ class agingsReportWizard(models.TransientModel):
         lines=[]
 
         x = ""
-        for i in branch_lst: x += str(i.name) + "\n"
-        raise UserError(x)
+        # for i in branch_lst: x += str(i.name) + "\n"
+        # raise UserError(x)
 
 
         for branch in branch_lst:
