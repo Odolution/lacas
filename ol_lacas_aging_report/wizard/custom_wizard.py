@@ -360,7 +360,7 @@ class agingsReportWizard(models.TransientModel):
 
         # move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-        raise UserError(str(move_ids))
+        # raise UserError(str(move_ids))
         branch_lst=[]
 
         for inv in move_ids:
@@ -373,7 +373,7 @@ class agingsReportWizard(models.TransientModel):
 
         # raise UserError(str(branch_lst))
         for branch in branch_lst:
-            raise UserError(str(branch))
+            # raise UserError(str(branch))
 
            
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
@@ -1810,7 +1810,7 @@ class agingsReportWizard(models.TransientModel):
             
             
             
-            raise UserError(str(lines))
+            # raise UserError(str(lines))
             self.write({
                 "account_report_line":[(6,0,lines)]
             }
