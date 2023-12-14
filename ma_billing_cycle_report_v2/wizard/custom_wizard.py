@@ -181,7 +181,7 @@ class RecoveryReportWizard(models.TransientModel):
         if xlwt:
             global billing_counts ,by_monthly_billing_counts,select_by_monthly_list
             
-            filename = 'Percentage wise billing cycle summary report v2.xls'
+            filename = 'branch wise recovery report with Bad debt.xls'
             # One sheet by partner
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
@@ -237,7 +237,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,2,2,rec.total_Issuance_billing, style=style_title)
                     worksheet.write_merge(row,row,3,3,rec.with_out_Withdrawn_billing, style=style_title)
                     worksheet.write_merge(row,row,4,4,rec.total_Recovery_paid, style=style_title)
-                    Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                    Receivables = rec.with_out_Withdrawn_billing - rec.total_Recovery_paid
                     worksheet.write_merge(row,row,5,5,Receivables, style=style_title)
                     Total = Receivables + rec.total_Recovery_paid
                     worksheet.write_merge(row,row,6,6,Total, style=style_title)
