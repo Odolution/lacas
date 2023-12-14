@@ -729,7 +729,11 @@ class agingsReportWizard(models.TransientModel):
                         "bad_debt_dec_2": 0,
                         "percentage_bdb_dec_2": '',
 
-                    } 
+                    }
+
+            custom_data['student_branch'] = branch.name
+            custom_data['student_campus'] = branch.name
+
             x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
             for value in branch_wise_inv:
                 if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + "\n"
@@ -748,8 +752,8 @@ class agingsReportWizard(models.TransientModel):
                 #     for p_id in value.program_ids:
                 #         if p_id == branch.id:
 
-                custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
-                custom_data['student_campus'] = value.campus if value.campus else ''
+                # custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
+                # custom_data['student_campus'] = value.campus if value.campus else ''
 
                 if value.month_date == "January" and value.year_date=='22':
                     if value.payment_state=='not_paid':
@@ -1841,7 +1845,7 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
-        raise UserError(x)
+        # raise UserError(x)
        
         
 
