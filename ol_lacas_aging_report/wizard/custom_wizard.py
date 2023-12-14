@@ -732,7 +732,8 @@ class agingsReportWizard(models.TransientModel):
                     } 
             x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
             for value in branch_wise_inv:
-                x += str(value.program_ids.display_name) + "\t" + str(value.campus) + "\n"
+                if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + "\n"
+                else: x += "   " + "\t" + str(value.campus) + "\n"
                 # x += str(value.program_ids.display_name) + "\t" + str(value.campus)
                 # if value.program_ids==branch:
 
