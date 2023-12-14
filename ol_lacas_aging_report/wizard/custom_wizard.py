@@ -370,21 +370,24 @@ class agingsReportWizard(models.TransientModel):
         lines=[]
 
         x = ""
-        for i in branch_lst: x += str(i.name) + "\n"
-        raise UserError(x)
+        # for i in branch_lst: x += str(i.name) + "\n"
+        # raise UserError(x)
 
-        x = ""
+        count = 0
 
         for branch in branch_lst:
-
+            count += 1
            
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
 
-            # for value in branch_wise_invoice:
-            #     value
-
+            if count == 9:
+                x = str(branch.id) + "\n"
+                for value in branch_wise_invoice:
+                    x += str(value.name) + "\t" + value.campus + "\t" + value.program_ids.display_name + "\n"
+                raise UserError(x)
+                
             custom_data = {
                    
                         "student_branch":"",
