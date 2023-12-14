@@ -373,7 +373,7 @@ class agingsReportWizard(models.TransientModel):
         # for i in branch_lst: x += str(i.name) + "\n"
         # raise UserError(x)
 
-        # x = ""
+        x = ""
 
         for branch in branch_lst:
            
@@ -730,7 +730,7 @@ class agingsReportWizard(models.TransientModel):
                         "percentage_bdb_dec_2": '',
 
                     } 
-
+            x += str(branch.name) + "\n"
             for value in branch_wise_inv:
                 # x += str(value.program_ids.display_name) + "\t" + str(value.campus)
                 # if value.program_ids==branch:
@@ -1839,6 +1839,7 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
+        raise UserError(x)
        
         
 
