@@ -722,7 +722,7 @@ class agingsReportWizard(models.TransientModel):
             for value in branch_wise_inv:
                 # if value.program_ids==branch:
 
-                raise UserError(str(value.journal_id))
+                # raise UserError(str(value.journal_id))
 
                 custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
                 custom_data['student_campus'] = value.campus if value.campus else ''
