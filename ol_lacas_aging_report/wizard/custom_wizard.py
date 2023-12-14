@@ -376,17 +376,23 @@ class agingsReportWizard(models.TransientModel):
 
         for branch in branch_lst:
 
-            if branch.name == "Milestone Valencia Campus":
-                a = self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-                x = str(branch.name) + "\n"
-                for i in a:
-                    x += str(i.campus) + "\n"
-                raise UserError(x)
+            # if branch.name == "Milestone Valencia Campus":
+            #     a = self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            #     x = str(branch.name) + "\n"
+            #     for i in a:
+            #         x += str(i.campus) + "\n"
+            #     raise UserError(x)
 
            
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             # raise UserError(branch_wise_inv)
+
+            x = ""
+            for i in branch_wise_inv:
+                if len(i.program_ids == 1):
+                    x += str(i.campus) + "\n"
+            raise UserError(x)
 
             custom_data = {
                    
