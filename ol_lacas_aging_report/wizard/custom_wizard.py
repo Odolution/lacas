@@ -370,17 +370,20 @@ class agingsReportWizard(models.TransientModel):
         lines=[]
 
         x = ""
-        # for i in branch_lst: x += str(i.name) + "\n"
-        # raise UserError(x)
+        for i in branch_lst: x += str(i.name) + "\n"
+        raise UserError(x)
 
+        x = ""
 
         for branch in branch_lst:
 
            
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),(branch.id,'in','program_ids'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+
+            # for value in branch_wise_invoice:
+            #     value
 
             custom_data = {
                    
@@ -724,6 +727,7 @@ class agingsReportWizard(models.TransientModel):
                     } 
 
             for value in branch_wise_inv:
+
                 # if value.program_ids==branch:
 
                 # raise UserError(str(value.journal_id))
@@ -736,6 +740,7 @@ class agingsReportWizard(models.TransientModel):
                 # if len(value.program_ids)==1:
                 #     for p_id in value.program_ids:
                 #         if p_id == branch.id:
+
                 custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
                 custom_data['student_campus'] = value.campus if value.campus else ''
 
