@@ -375,7 +375,8 @@ class agingsReportWizard(models.TransientModel):
 
            
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            
+            raise UserError(branch_wise_inv)
+
             custom_data = {
                    
                         "student_branch":"",
