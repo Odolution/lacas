@@ -385,9 +385,9 @@ class agingsReportWizard(models.TransientModel):
             if count == 9:
                 x = str(branch.id) + "\n"
                 for value in branch_wise_invoice:
-                    x += str(value.name) + "\t" + value.campus + "\t" + value.program_ids.display_name + "\n"
+                    x += value.campus + "\t" + value.program_ids.display_name + "\n"
                 raise UserError(x)
-                
+
             custom_data = {
                    
                         "student_branch":"",
