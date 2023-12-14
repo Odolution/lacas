@@ -373,7 +373,7 @@ class agingsReportWizard(models.TransientModel):
         # for i in branch_lst: x += str(i.name) + "\n"
         # raise UserError(x)
 
-        x = ""
+        # x = ""
 
         for branch in branch_lst:
            
@@ -388,7 +388,7 @@ class agingsReportWizard(models.TransientModel):
             #     #     x += i.campus + "\t" + i.program_ids.display_name + "\n"
             #     # raise UserError(x) 
 
-            x += "\n\n" + str(branch.name)
+            # x += "\n\n" + str(branch.name)
 
             custom_data = {
                    
@@ -732,7 +732,7 @@ class agingsReportWizard(models.TransientModel):
                     } 
 
             for value in branch_wise_inv:
-                x += str(value.program_ids.display_name) + "\t" + str(value.campus)
+                # x += str(value.program_ids.display_name) + "\t" + str(value.campus)
                 # if value.program_ids==branch:
 
                 # raise UserError(str(value.journal_id))
@@ -1839,7 +1839,6 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
-        raise UserError(x)
        
         
 
