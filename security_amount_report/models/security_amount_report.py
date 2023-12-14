@@ -52,7 +52,7 @@ class SecurityAmountReport(models.Model):
             # domain = [('move_type', '=', 'out_refund')]
             # searching with filter that move_type is of out_refund type which is of Reversal
             # account_move_object = self.env['account.move'].search(domain)
-            
+            count_students=0
             row = 1
             serial_number = 1
             enrolled_students = self.env['school.student'].search([])
@@ -72,7 +72,7 @@ class SecurityAmountReport(models.Model):
 
             # unique_student_ids_tuple = tuple(unique_student_ids)
             for student in enrolled_students:
-                # admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
+                admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
                 # if admission:
                 #     for line in admission.invoice_line_ids:
@@ -288,7 +288,7 @@ class SecurityAmountReport(models.Model):
                             #             worksheet.write(row, 10, 'N')
                             # else:
                             #     worksheet.write(row, 10, "N/A")
-
+                            count_students+=1
                             serial_number += 1
                             row+=1
                                 # done.append(student)
@@ -305,7 +305,7 @@ class SecurityAmountReport(models.Model):
                     'target':'new'
                 }
             return res
-            
+            raise UserError(count_students)
         else:
             raise Warning (""" You Don't have xlwt library.\n Please install it by executing this command :  sudo pip3 install xlwt""")
         
