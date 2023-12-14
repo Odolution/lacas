@@ -294,7 +294,7 @@ class SecurityAmountReport(models.Model):
                                 # done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
-
+            raise UserError(count_students)
 
             export_id = self.env['sale.day.book.report.excel'].create({'excel_file': base64.encodestring(fp.getvalue()), 'file_name': filename})
             res = {
@@ -304,8 +304,9 @@ class SecurityAmountReport(models.Model):
                     'type': 'ir.actions.act_window',
                     'target':'new'
                 }
+            
             return res
-            raise UserError(count_students)
+            
         else:
             raise Warning (""" You Don't have xlwt library.\n Please install it by executing this command :  sudo pip3 install xlwt""")
         
