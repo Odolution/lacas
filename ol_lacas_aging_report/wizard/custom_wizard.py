@@ -388,6 +388,7 @@ class agingsReportWizard(models.TransientModel):
                     x += value.campus + "\t" + value.program_ids.display_name + "\n"
                 raise UserError(x)
 
+
             custom_data = {
                    
                         "student_branch":"",
