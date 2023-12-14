@@ -1937,7 +1937,8 @@ class agingsReportWizard(models.TransientModel):
 
             col = 3
             
-      
+            x = str(range_start) + "\n" + str(range_stop)
+            raise UserError(x)
             for i in range(range_start,range_stop+1):
                 if len(months[i]) >= 11:
       
