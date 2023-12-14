@@ -376,7 +376,7 @@ class agingsReportWizard(models.TransientModel):
            
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            raise UserError(branch_wise_inv)
+            # raise UserError(branch_wise_inv)
 
             custom_data = {
                    
@@ -722,7 +722,7 @@ class agingsReportWizard(models.TransientModel):
             for value in branch_wise_inv:
                 # if value.program_ids==branch:
 
-                    
+                raise UserError(str(journal_id))
 
                 custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
                 custom_data['student_campus'] = value.campus if value.campus else ''
