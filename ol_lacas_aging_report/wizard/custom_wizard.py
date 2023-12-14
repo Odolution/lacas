@@ -383,7 +383,7 @@ class agingsReportWizard(models.TransientModel):
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
 
             if count == 9:
-                x = str(branch.id) + "\n" + str(branch_wise_inv)
+                x = str(branch.name) + "\n" + str(branch_wise_inv)
                 raise UserError(x)
                 # for i in branch_wise_invoice:
                 #     x += i.campus + "\t" + i.program_ids.display_name + "\n"
