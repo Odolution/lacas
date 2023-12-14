@@ -1845,7 +1845,7 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
-        # raise UserError(x)
+        raise UserError(x)
        
         
 
