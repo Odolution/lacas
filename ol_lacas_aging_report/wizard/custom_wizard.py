@@ -746,7 +746,7 @@ class agingsReportWizard(models.TransientModel):
                 #     for p_id in value.program_ids:
                 #         if p_id == branch.id:
 
-                custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
+                custom_data['student_branch'] = branch.name if  len(value.program_ids)==1  else ""
                 custom_data['student_campus'] = value.campus if value.campus else ''
 
                 if value.month_date == "January" and value.year_date=='22':
