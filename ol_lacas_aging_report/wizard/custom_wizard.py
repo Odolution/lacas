@@ -370,11 +370,18 @@ class agingsReportWizard(models.TransientModel):
         lines=[]
 
         x = ""
-        for i in branch_lst: x += str(i.name) + "\n"
-        raise UserError(x)
+        # for i in branch_lst: x += str(i.name) + "\n"
+        # raise UserError(x)
 
 
         for branch in branch_lst:
+
+            if branch.name == "Milestone Valencia Campus":
+                a = self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+                x = str(branch.name) + "\n"
+                for i in a:
+                    x += str(i.campus) + "\n"
+                raise UserError(x)
 
            
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
