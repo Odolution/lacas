@@ -718,13 +718,16 @@ class agingsReportWizard(models.TransientModel):
 
                     } 
 
+            custom_data['student_branch'] = branch.name
+            custom_data['student_campus'] = branch.name
+
             for value in branch_wise_inv:
                 # if value.program_ids==branch:
 
                     
 
-                custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
-                custom_data['student_campus'] = value.campus if value.campus else ''
+                # custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
+                # custom_data['student_campus'] = value.campus if value.campus else ''
 
                 if value.month_date == "January" and value.year_date=='22':
                     if value.payment_state=='not_paid':
