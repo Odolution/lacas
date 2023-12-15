@@ -725,7 +725,8 @@ class agingsReportWizard(models.TransientModel):
             custom_data['student_branch'] = branch.name
             # custom_data['student_campus'] = branch.name
 
-            x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
+            # x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
+
             for value in branch_wise_inv:
                 # if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + str(value) + "\n"
                 # else: x += "   " + "\t" + str(value.campus) + str(value) + "\n"
