@@ -373,7 +373,7 @@ class agingsReportWizard(models.TransientModel):
         # for i in branch_lst: x += str(i.name) + "\n"
         # raise UserError(x)
 
-        x = ""
+        # x = ""
 
         for branch in branch_lst:
            
@@ -727,7 +727,7 @@ class agingsReportWizard(models.TransientModel):
 
             # x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
 
-            x += str(branch.name) + "\n"
+            # x += str(branch.name) + "\n"
             for value in branch_wise_inv:
                 # if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + str(value) + "\n"
                 # else: x += "   " + "\t" + str(value.campus) + str(value) + "\n"
@@ -1830,7 +1830,7 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
-        raise UserError(x)
+        # raise UserError(x)
        
         
 
