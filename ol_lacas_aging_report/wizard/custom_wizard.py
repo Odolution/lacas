@@ -373,22 +373,13 @@ class agingsReportWizard(models.TransientModel):
         # for i in branch_lst: x += str(i.name) + "\n"
         # raise UserError(x)
 
-        x = ""
+        # x = ""
 
         for branch in branch_lst:
            
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
 
-            # if count == 9:
-            #     x = str(branch.name) + "\n" + str(branch_wise_inv)
-            #     raise UserError(x)
-            #     # for i in branch_wise_invoice:
-            #     #     x += i.campus + "\t" + i.program_ids.display_name + "\n"
-            #     # raise UserError(x) 
-
-            # x += "\n\n" + str(branch.name)
 
             custom_data = {
                    
@@ -732,28 +723,15 @@ class agingsReportWizard(models.TransientModel):
                     }
 
             custom_data['student_branch'] = branch.name
-            custom_data['student_campus'] = branch.name
+            # custom_data['student_campus'] = branch.name
 
             x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
             for value in branch_wise_inv:
-                if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + str(value) + "\n"
-                else: x += "   " + "\t" + str(value.campus) + str(value) + "\n"
-                # x += str(value.program_ids.display_name) + "\t" + str(value.campus)
-                # if value.program_ids==branch:
-
-                # raise UserError(str(value.journal_id))
-            
-                # if len(value.program_ids)==1:
-                #     x = str(value.program_ids == branch.id)
-                #     x += "\n" + str(value.program_ids)
-                #     raise UserError(x)
-
-                # if len(value.program_ids)==1:
-                #     for p_id in value.program_ids:
-                #         if p_id == branch.id:
+                # if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + str(value) + "\n"
+                # else: x += "   " + "\t" + str(value.campus) + str(value) + "\n"
 
                 # custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
-                # custom_data['student_campus'] = value.campus if value.campus else ''
+                custom_data['student_campus'] = value.campus if value.campus else ''
 
                 if value.month_date == "January" and value.year_date=='22':
                     if value.payment_state=='not_paid':
@@ -1845,7 +1823,7 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
-        raise UserError(x)
+        # raise UserError(x)
        
         
 
