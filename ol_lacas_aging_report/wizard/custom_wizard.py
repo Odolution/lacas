@@ -1920,7 +1920,7 @@ class agingsReportWizard(models.TransientModel):
                 'AUG-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
                 21:['09','SEP-23 (RECEIVABLES)','SEP-23 (ON DUE)','SEP-23 (AFTER DUE ON SEP)','SEP-23 (30 DAYS)','SEP-23 (60 DAYS)','SEP-23 (90 DAYS)',
                 'SEP-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
-                23:['10','OCT-23 (RECEIVABLES)','OCT-23 (ON DUE)','OCT-23 (AFTER DUE ON OCT)','OCT-23 (30 DAYS)','OCT-23 (60 DAYS)','OCT-23 (90 DAYS)',
+                22:['10','OCT-23 (RECEIVABLES)','OCT-23 (ON DUE)','OCT-23 (AFTER DUE ON OCT)','OCT-23 (30 DAYS)','OCT-23 (60 DAYS)','OCT-23 (90 DAYS)',
                 'OCT-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
                 23:['11','NOV-23 (RECEIVABLES)','NOV-23 (ON DUE)','NOV-23 (AFTER DUE ON NOV)','NOV-23 (30 DAYS)','NOV-23 (60 DAYS)','NOV-23 (90 DAYS)',
                 'NOV-23 (Recovery after 90 days)','Total Received and Receivables','Bade Debts','Percentage of Bad Debts',200,'23'],
