@@ -373,7 +373,7 @@ class agingsReportWizard(models.TransientModel):
         # for i in branch_lst: x += str(i.name) + "\n"
         # raise UserError(x)
 
-        # x = ""
+        x = ""
 
         for branch in branch_lst:
            
@@ -727,12 +727,16 @@ class agingsReportWizard(models.TransientModel):
 
             # x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
 
+            x += str(branch.name) + "\n"
             for value in branch_wise_inv:
                 # if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + str(value) + "\n"
                 # else: x += "   " + "\t" + str(value.campus) + str(value) + "\n"
 
                 # custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
                 # custom_data['student_campus'] = value.campus if value.campus else ''
+
+                x += str(value) + "\t" + str(value.name) + "\t" + str(value.month_date) + "\t" + str(value.year_date) + "\t" + str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(value.bill_amount) + "\n"
+                
 
                 if value.month_date == "January" and value.year_date=='22':
                     if value.payment_state=='not_paid':
@@ -1824,7 +1828,7 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
-        # raise UserError(x)
+        raise UserError(x)
        
         
 
