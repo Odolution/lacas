@@ -735,7 +735,9 @@ class agingsReportWizard(models.TransientModel):
                 # custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
                 # custom_data['student_campus'] = value.campus if value.campus else ''
 
-                x += str(value) + "\t" + str(value.name) + "\t" + str(value.month_date) + "\t" + str(value.year_date) + "\t" + str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(value.bill_amount) + "\n"
+                if value.month_date == "January" and value.year_date=='23':
+                    if value.payment_state == 'not_paid' or value.payment_state == 'paid':
+                        x += str(value) + "\t" + str(value.name) + "\t" + str(value.month_date) + "\t" + str(value.year_date) + "\t" + str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(value.bill_amount) + "\t" + str(value.program_ids) + "\n"
                 
 
                 if value.month_date == "January" and value.year_date=='22':
