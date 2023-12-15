@@ -294,7 +294,6 @@ class SecurityAmountReport(models.Model):
                                 # done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
-            raise UserError(count_students)
 
             export_id = self.env['sale.day.book.report.excel'].create({'excel_file': base64.encodestring(fp.getvalue()), 'file_name': filename})
             res = {
