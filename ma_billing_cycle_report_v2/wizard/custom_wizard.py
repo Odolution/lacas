@@ -214,7 +214,7 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(0,1,4,4, 'Total Recovery',  style=red_style_title)
             worksheet.write_merge(0,1,5,5, 'Receivables',  style=red_style_title)
             worksheet.write_merge(0,1,6,6, 'Total',  style=red_style_title)
-            worksheet.write_merge(0,1,7,7, 'Bade Dabts',  style=red_style_title)
+            worksheet.write_merge(0,1,7,7, 'Bad Debts',  style=red_style_title)
             worksheet.write_merge(0,1,8,8, "'%'age of Recovery on '\n' Enrolled and Paid Bills",  style=red_style_title)
             worksheet.write_merge(0,1,9,9, "Actual Recovery '%'age",  style=red_style_title)
             # worksheet.(0,1,0,3,"",)
