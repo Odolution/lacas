@@ -571,7 +571,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     if new_month_key==month_key:
                                         key = f"{new_substring}-{months[i][3]}-{months[i][0]}"
                                         row_month_total= months_recovery_dict.get(key, 0)+count
-                                        months_total_recovery.update({key: row_month_total})
+                                        months_recovery_dict.update({key: row_month_total})
 
                         else:
                             
