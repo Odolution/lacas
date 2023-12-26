@@ -261,7 +261,6 @@ class RecoveryReportWizard(models.TransientModel):
                     # Create a key using the month and year
                     month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
 
-                    billing_counts_paid[month_key] = 0 # HAMZA NAVEED
                     
                     if bill_rec.payment_state =="paid":
                         if bill_rec.ol_payment_date:
@@ -272,7 +271,11 @@ class RecoveryReportWizard(models.TransientModel):
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                                 total_count_paid += float(bill_rec.amount_total)
                                 # HAMZA NAVEED
-                                billing_counts_paid[month_key] += float(bill_rec.amount_total)
+                                if month_key in billing_counts_paid:
+                                    billing_counts_paid[month_key] += float(bill_rec.amount_total)
+                                else:
+                                    billing_counts_paid[month_key] = float(bill_rec.amount_total)
+
 
 
                     if month_key in billing_counts:
