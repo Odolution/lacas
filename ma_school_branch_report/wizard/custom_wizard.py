@@ -401,7 +401,6 @@ class RecoveryReportWizard(models.TransientModel):
 
 
     def action_print_excel_school_branch_report(self):
-        raise UserError("TEST")
         
 
         self.action_print_report()
@@ -569,6 +568,8 @@ class RecoveryReportWizard(models.TransientModel):
                             if not select_by_monthly_list:
                                 worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
                                 worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
+                                x = str(row) + "\t" + str(col+2) + "\t" + str(col+4) + "\t" + str(group_recovery) + "\t" + str(final_recovery)
+                                raise UserError(x)
                                 if group_recovery>0 and group_recovery>0:
                                     total_per_new =(group_recovery/group_total)*100
                                     worksheet.write_merge(row,row,col+5,col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
@@ -715,8 +716,6 @@ class RecoveryReportWizard(models.TransientModel):
             if not select_by_monthly_list:
                 worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
                 worksheet.write_merge(row,row,col+2,col+4,final_recovery, style=yellow_style_title)
-                x = str(row) + "\t" + str(col+2) + "\t" + str(col+4) + "\t" + str(group_recovery) + "\t" + str(final_recovery)
-                raise UserError(row)
                 if final_total>0 and final_recovery>0:
                     final_total_per =(final_recovery/final_total)*100
                     worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
@@ -807,6 +806,9 @@ class RecoveryReportWizard(models.TransientModel):
                             # worksheet.write_merge(new_row,new_row,0,3,"Total", style=yellow_style_title)
                             worksheet.write_merge(new_row,new_row,new_col,new_col+1,group_total, style=yellow_style_title)
                             worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,group_recovery, style=yellow_style_title)
+                            x = str(row) + "\t" + str(col+2) + "\t" + str(col+4) + "\t" + str(group_recovery) + "\t" + str(final_recovery)
+                            raise UserError(x)
+                            
                             if group_recovery>0 and group_recovery>0:
                                 total_per_new =(group_recovery/group_total)*100
                                 worksheet.write_merge(new_row,new_row,new_col+5,new_col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
@@ -867,6 +869,8 @@ class RecoveryReportWizard(models.TransientModel):
                                 # worksheet.write_merge(new_row,new_row,0,3,"Total", style=yellow_style_title)
                                 worksheet.write_merge(new_row,new_row,new_col,new_col+1,group_total, style=yellow_style_title)
                                 worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,group_recovery, style=yellow_style_title)
+                                x = str(row) + "\t" + str(col+2) + "\t" + str(col+4) + "\t" + str(group_recovery) + "\t" + str(final_recovery)
+                                raise UserError(x)
                                 if group_recovery>0 and group_recovery>0:
                                     total_per_new =(group_recovery/group_total)*100
                                     worksheet.write_merge(new_row,new_row,new_col+5,new_col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
