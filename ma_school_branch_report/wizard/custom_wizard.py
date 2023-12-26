@@ -1084,12 +1084,13 @@ class RecoveryReportWizard(models.TransientModel):
                         for month_key, count in by_monthly_billing_counts.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(new_row,new_row,new_col,new_col+2,count,style=style_title)
+                        new_col+=3
                         # HAMZA NAVEED
                         for month_key, count in by_monthly_billing_counts_paid.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(new_row,new_row,new_col,new_col+2,count,style=style_title)
-                            
                         new_col+=3
+                            
                     # new_row+=1
                     both_total=rec.school_bill_len+months_row_total_dict.get(rec.branch_name)
                     both_total_paid=rec.billing_list_paid+months_row_paid_dict.get(rec.branch_name)
