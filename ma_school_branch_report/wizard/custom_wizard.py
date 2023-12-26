@@ -312,7 +312,7 @@ class RecoveryReportWizard(models.TransientModel):
             message += f"Month: {month_key}, Number of bills: {count}\n"
 
         message += "\n\n\n\n"
-        message = "Billing Counts:\n\n"
+        message += "Billing Counts:\n\n"
         for month_key, count in billing_counts.items():
             # month_key format: 'yy-mm'
             message += f"Month: {month_key}, Number of bills: {count}\n"
