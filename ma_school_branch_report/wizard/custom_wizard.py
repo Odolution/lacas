@@ -300,16 +300,26 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(billing_counts)
 
 
-        message = "Billing information:\n\n"
+        message = "PAID Billing Counts:\n\n"
         for month_key, count in billing_counts_paid.items():
             # month_key format: 'yy-mm'
             message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # Raise a UserError with the summarized message
-        # raise UserError(message)
         message += "\n\n\n\n"
-        message += "Billing information:\n\n"
+        message += "PAID Billing Information:\n\n"
         for month_key, count in billing_list_paid.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
+
+        message += "\n\n\n\n"
+        message = "Billing Counts:\n\n"
+        for month_key, count in billing_counts.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
+            
+        message += "\n\n\n\n"
+        message += "Billing Information:\n\n"
+        for month_key, count in billing_list.items():
             # month_key format: 'yy-mm'
             message += f"Month: {month_key}, Number of bills: {count}\n"
             
