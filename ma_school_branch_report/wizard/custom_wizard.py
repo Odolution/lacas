@@ -269,6 +269,7 @@ class RecoveryReportWizard(models.TransientModel):
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                                 total_count_paid += float(bill_rec.amount_total)
 
+
                     if month_key in billing_counts:
                         billing_counts[month_key] += float(bill_rec.amount_total)
                         total_count += float(bill_rec.amount_total)
@@ -287,13 +288,15 @@ class RecoveryReportWizard(models.TransientModel):
            
             # raise UserError(billing_counts)
 
-        message = "Billing information:\n\n"
-        for month_key, count in billing_counts_paid.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        raise UserError(str(billing_counts == billing_list))
+
+        # message = "Billing information:\n\n"
+        # for month_key, count in billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # Raise a UserError with the summarized message
-        raise UserError(message)
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
         
 
         for item in range(len(school_ids)):
