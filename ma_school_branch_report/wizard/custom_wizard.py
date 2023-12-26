@@ -496,8 +496,8 @@ class RecoveryReportWizard(models.TransientModel):
                 # raise UserError(months[i][0]+" "+months[i][3])
                 worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1],red_style_title)
                 # HAMZA NAVEED
-                col+=3
-                worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
+                # col+=3
+                # worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
 
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
@@ -567,8 +567,8 @@ class RecoveryReportWizard(models.TransientModel):
                                     worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                     # HAMZA NAVEED
                                     col+=3
-                                    worksheet.write_merge(row,row,col,col+2,"count", style=yellow_style_title)
-                                    col+=3
+                                    # worksheet.write_merge(row,row,col,col+2,"count", style=yellow_style_title)
+                                    # col+=3
                                     
                             worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
 
@@ -602,8 +602,8 @@ class RecoveryReportWizard(models.TransientModel):
                                         if new_month_key==month_key:
                                             worksheet.write_merge(row,row,col,col+2,count,style=style_title)
                                             # HAMZA NAVEED
-                                            col+=3
-                                            worksheet.write_merge(row,row,col,col+2,'count',style=style_title)
+                                            # col+=3
+                                            # worksheet.write_merge(row,row,col,col+2,'count',style=style_title)
                                         
                                     col+=3
                                 
@@ -642,8 +642,8 @@ class RecoveryReportWizard(models.TransientModel):
                                         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                         col+=3
                                         # HAMZA NAVEED
-                                        worksheet.write_merge(row,row,col,col+2,'count', style=yellow_style_title)
-                                        col+=3
+                                        # worksheet.write_merge(row,row,col,col+2,'count', style=yellow_style_title)
+                                        # col+=3
                                         
                                 worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
 
@@ -691,8 +691,8 @@ class RecoveryReportWizard(models.TransientModel):
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
                                 # HAMZA NAVEED
-                                col+=3
-                                worksheet.write_merge(row,row,col,col+2,'count',style=style_title)
+                                # col+=3
+                                # worksheet.write_merge(row,row,col,col+2,'count',style=style_title)
                                 
                              
                         col+=3
@@ -748,7 +748,7 @@ class RecoveryReportWizard(models.TransientModel):
             # # Raise a UserError with the summarized message
             # raise UserError(message)
 
-            new_col=col+7 # HAMZA NAVEED
+            new_col=col
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
