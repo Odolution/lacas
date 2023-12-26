@@ -208,10 +208,11 @@ class RecoveryReportWizard(models.TransientModel):
         billing_list_paid={}
         by_monthly_billing_list={}
         by_monthly_billing_list_paid={}
-        global billing_counts , billing_counts_paid , by_monthly_billing_counts ,select_by_monthly_list,month_dict
+        global billing_counts , billing_counts_paid , by_monthly_billing_counts, by_monthly_billing_counts_paid ,select_by_monthly_list,month_dict
         billing_counts = {}
         billing_counts_paid = {} # HAMZA NAVEED
         by_monthly_billing_counts = {}
+        by_monthly_billing_counts_paid = {} # HAMZA NAVEED
 
 
         select_by_monthly_list=self.by_monthly_calculation()
@@ -300,31 +301,31 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(billing_counts)
 
 
-        message = "PAID Billing Counts:\n\n"
-        for month_key, count in billing_counts_paid.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message = "PAID Billing Counts:\n\n"
+        # for month_key, count in billing_counts_paid.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        message += "\n\n\n\n"
-        message += "PAID Billing Information:\n\n"
-        for month_key, count in billing_list_paid.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message += "\n\n\n\n"
+        # message += "PAID Billing Information:\n\n"
+        # for month_key, count in billing_list_paid.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
 
-        message += "\n\n\n\n"
-        message += "Billing Counts:\n\n"
-        for month_key, count in billing_counts.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message += "\n\n\n\n"
+        # message += "Billing Counts:\n\n"
+        # for month_key, count in billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        message += "\n\n\n\n"
-        message += "Billing Information:\n\n"
-        for month_key, count in billing_list.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message += "\n\n\n\n"
+        # message += "Billing Information:\n\n"
+        # for month_key, count in billing_list.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # Raise a UserError with the summarized message
-        raise UserError(message)
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
         
 
         for item in range(len(school_ids)):
@@ -385,6 +386,13 @@ class RecoveryReportWizard(models.TransientModel):
 
                                     if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                                         total_count_paid += float(bill_rec.amount_total)
+                                        # HAMZA NAVEED
+                                        if month_key in by_monthly_billing_counts_paid:
+                                            by_monthly_billing_counts_paid[month_key] += float(bill_rec.amount_total)
+                                        else:
+                                            by_monthly_billing_counts_paid[month_key] = float(bill_rec.amount_total)
+
+
 
                             if month_key in by_monthly_billing_counts:
                                 by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
@@ -394,6 +402,9 @@ class RecoveryReportWizard(models.TransientModel):
                                 total_count += float(bill_rec.amount_total)
                 if month_key not in by_monthly_billing_counts:
                     by_monthly_billing_counts[month_key]=0
+                # HAMZA NAVEED
+                if month_key not in by_monthly_billing_counts_paid:
+                    by_monthly_billing_counts_paid[month_key]=0
 
                 by_monthly_billing_list_paid[select_new] = total_count_paid
                 by_monthly_billing_list[select_new] = total_count
@@ -422,13 +433,31 @@ class RecoveryReportWizard(models.TransientModel):
                 "by_account_report_line":[(6,0,by_lines)]
             })  
 
-        # message = "by Billing information:\n\n"
-        # for month_key, count in by_monthly_billing_counts.items():
-        #     # month_key format: 'yy-mm'
-        #     message += f"Month: {month_key}, Number of bills: {count}\n"
+        message = "PAID Billing Counts:\n\n"
+        for month_key, count in by_monthly_billing_counts_paid.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # # Raise a UserError with the summarized message
-        # raise UserError(message)
+        message += "\n\n\n\n"
+        message += "PAID Billing Information:\n\n"
+        for month_key, count in by_monthly_billing_list_paid.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
+
+        message += "\n\n\n\n"
+        message += "Billing Counts:\n\n"
+        for month_key, count in by_monthly_billing_counts.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
+            
+        message += "\n\n\n\n"
+        message += "Billing Information:\n\n"
+        for month_key, count in by_monthly_billing_list.items():
+            # month_key format: 'yy-mm'
+            message += f"Month: {month_key}, Number of bills: {count}\n"
+            
+        # Raise a UserError with the summarized message
+        raise UserError(message)
 
 
     def action_print_excel_school_branch_report(self):
