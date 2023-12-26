@@ -208,8 +208,9 @@ class RecoveryReportWizard(models.TransientModel):
         billing_list_paid={}
         by_monthly_billing_list={}
         by_monthly_billing_list_paid={}
-        global billing_counts , by_monthly_billing_counts ,select_by_monthly_list,month_dict
+        global billing_counts , billing_counts_paid , by_monthly_billing_counts ,select_by_monthly_list,month_dict
         billing_counts = {}
+        billing_counts_paid = {} # HAMZA NAVEED
         by_monthly_billing_counts = {}
 
 
@@ -268,6 +269,9 @@ class RecoveryReportWizard(models.TransientModel):
 
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                                 total_count_paid += float(bill_rec.amount_total)
+                                # HAMZA NAVEED
+                                if month_key in billing_counts_paid: billing_counts_paid[month_key] = float(bill_rec.amount_total)
+                                else: billing_counts_paid[month_key] += float(bill_rec.amount_total)
 
 
                     if month_key in billing_counts:
@@ -285,10 +289,12 @@ class RecoveryReportWizard(models.TransientModel):
                     month_key = f"{select_new}-{str(year)[-2:]}-{month:02}"
                     if month_key not in billing_counts:
                         billing_counts[month_key] = 0
+                    # HAMZA NAVEED
+                    if month_key not in billing_counts_paid:
+                        billing_counts_paid[month_key] = 0
            
             # raise UserError(billing_counts)
 
-        raise UserError(str(billing_counts) + "\n\n\n" + str(billing_list))
 
         # message = "Billing information:\n\n"
         # for month_key, count in billing_counts.items():
