@@ -440,9 +440,6 @@ class RecoveryReportWizard(models.TransientModel):
             
             
 
-           
-
-
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
             v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
 
