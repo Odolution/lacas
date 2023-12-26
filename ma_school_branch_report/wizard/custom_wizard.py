@@ -288,7 +288,7 @@ class RecoveryReportWizard(models.TransientModel):
            
             # raise UserError(billing_counts)
 
-        raise UserError(str(billing_counts == billing_list))
+        raise UserError(str(billing_counts) + "\n\n\n" + str(billing_list))
 
         # message = "Billing information:\n\n"
         # for month_key, count in billing_counts.items():
