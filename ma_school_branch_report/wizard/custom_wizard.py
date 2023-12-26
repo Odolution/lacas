@@ -785,6 +785,7 @@ class RecoveryReportWizard(models.TransientModel):
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
                         col+=3
+                        # HAMZA NAVEED
                         for month_key, count in billing_counts_paid.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(row,row,col,col+2,count,style=style_title)
@@ -814,6 +815,22 @@ class RecoveryReportWizard(models.TransientModel):
                 total=0
                 test_year_month = f"{months[i][3]}-{months[i][0]}"
                 for month_key, count in months_total_dict.items():
+                    input_string = month_key
+                    parts = input_string.split("-")
+                    result = f"{parts[1]}-{parts[2]}"
+                    # raise UserError(str(month_key)+" "+str(new_month_key))
+                    if test_year_month==result:
+                        total+=count
+
+                worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
+                col+=3
+
+            # HAMZA NAVEED
+            for i in range(range_start,range_stop+1):
+                # check=True
+                total=0
+                test_year_month = f"{months[i][3]}-{months[i][0]}"
+                for month_key, count in months_recovery_dict.items():
                     input_string = month_key
                     parts = input_string.split("-")
                     result = f"{parts[1]}-{parts[2]}"
