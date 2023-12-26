@@ -305,7 +305,7 @@ class RecoveryReportWizard(models.TransientModel):
         # raise UserError(message)
         message += "\n\n\n\n"
         message += "Billing information:\n\n"
-        for month_key, count in billing_counts_paid.items():
+        for month_key, count in billing_list.items():
             # month_key format: 'yy-mm'
             message += f"Month: {month_key}, Number of bills: {count}\n"
             
