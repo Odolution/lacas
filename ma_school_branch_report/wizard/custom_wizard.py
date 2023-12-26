@@ -858,13 +858,15 @@ class RecoveryReportWizard(models.TransientModel):
                 
 #             # # Raise a UserError with the summarized message
 #             # raise UserError(message)
-            raise UserError(col)
             new_col=col
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
                 worksheet.write_merge(0,1,new_col,new_col+2,'Bi Monthly '+month_in_list,red_style_title)
                 # worksheet.write_merge(row,row,new_col,new_col+1,months[i][2])
+                new_col+=3
+                # HAMZA NAVEED
+                worksheet.write_merge(0,1,new_col,new_col+2,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
                 new_col+=3
             
             worksheet.write_merge(0,1,new_col,new_col+1,"Total",style=red_style_title)
@@ -877,6 +879,7 @@ class RecoveryReportWizard(models.TransientModel):
             final_recovery=0
             new_group_name_list=[]
             new_months_total_dict={}
+            new_months_recovery_dict={} # HAMZA NAVEED
 
             new_row=2
             new_col=col
@@ -900,6 +903,12 @@ class RecoveryReportWizard(models.TransientModel):
                                     key = f"{new_substring}-{month_in_list}"
                                     row_month_total= new_months_total_dict.get(key, 0)+count
                                     new_months_total_dict.update({key: row_month_total})
+                            # HAMZA NAVEED
+                            for month_key, count in by_monthly_billing_counts_paid.items():
+                                if new_month_key==month_key:
+                                    key = f"{new_substring}-{month_in_list}"
+                                    row_month_total= new_months_recovery_dict.get(key, 0)+count
+                                    new_months_recovery_dict.update({key: row_month_total})
                     else:
                         main_string = new_group_name_list[0]
                         substring = main_string.split(' ')[0] + ' ' + main_string.split(' ')[1]
@@ -918,6 +927,12 @@ class RecoveryReportWizard(models.TransientModel):
                                         key = f"{new_substring}-{month_in_list}"
                                         row_month_total= new_months_total_dict.get(key, 0)+count
                                         new_months_total_dict.update({key: row_month_total})
+                                # HAMZA NAVEED
+                                for month_key, count in by_monthly_billing_counts_paid.items():
+                                    if new_month_key==month_key:
+                                        key = f"{new_substring}-{month_in_list}"
+                                        row_month_total= new_months_recovery_dict.get(key, 0)+count
+                                        new_months_recovery_dict.update({key: row_month_total})
 
                         else:
                             
@@ -928,6 +943,15 @@ class RecoveryReportWizard(models.TransientModel):
                                 result = split_parts[0]
                                 if substring == result:
                                     result
+                                    worksheet.write_merge(new_row,new_row,new_col,new_col+2,count, style=yellow_style_title)
+                                    new_col+=3
+                            # HAMZA NAVEED
+                            for month_key, count in new_months_recovery_dict.items():
+                                original_string = month_key
+                                split_parts = original_string.split('-')
+                                result = split_parts[0]
+                                if substring == result:
+                                    #result
                                     worksheet.write_merge(new_row,new_row,new_col,new_col+2,count, style=yellow_style_title)
                                     new_col+=3
                                     
@@ -957,8 +981,14 @@ class RecoveryReportWizard(models.TransientModel):
                                     for month_key, count in by_monthly_billing_counts.items():
                                         if new_month_key==month_key:
                                             worksheet.write_merge(new_row,new_row,new_col,new_col+2,count,style=style_title)
+                                    new_col+=3
+                                    # HAMZA NAVEED
+                                    for month_key, count in by_monthly_billing_counts_paid.items():
+                                        if new_month_key==month_key:
+                                            worksheet.write_merge(new_row,new_row,new_col,new_col+2,count,style=style_title)
                                         
                                     new_col+=3
+
                                 both_total=rec.school_bill_len+months_row_total_dict.get(rec.branch_name)
                                 both_total_paid=rec.billing_list_paid+months_row_paid_dict.get(rec.branch_name)
                                 worksheet.write_merge(new_row,new_row,new_col,new_col+1,both_total,style=style_title)
@@ -982,8 +1012,22 @@ class RecoveryReportWizard(models.TransientModel):
                                             key = f"{rec.branch_name}-{month_in_list}"
                                             row_month_total= new_months_total_dict.get(key, 0)+count
                                             new_months_total_dict.update({key: row_month_total})
+                                    # HAMZA NAVEED
+                                    for month_key, count in by_monthly_billing_counts_paid.items():
+                                        if new_month_key==month_key:
+                                            key = f"{rec.branch_name}-{month_in_list}"
+                                            row_month_total= new_months_recovery_dict.get(key, 0)+count
+                                            new_months_recovery_dict.update({key: row_month_total})
                                 new_col=col
                                 for month_key, count in new_months_total_dict.items():
+                                    original_string = month_key
+                                    split_parts = original_string.split('-')
+                                    result = split_parts[0]
+                                    if rec.branch_name == result:
+                                        worksheet.write_merge(new_row,new_row,new_col,new_col+2,count, style=yellow_style_title)
+                                        new_col+=3
+                                # HAMZA NAVEED
+                                for month_key, count in new_months_recovery_dict.items():
                                     original_string = month_key
                                     split_parts = original_string.split('-')
                                     result = split_parts[0]
@@ -1023,6 +1067,12 @@ class RecoveryReportWizard(models.TransientModel):
                                             key = f"{new_substring}-{month_in_list}"
                                             row_month_total= new_months_total_dict.get(key, 0)+count
                                             new_months_total_dict.update({key: row_month_total})
+                                    # HAMZA NAVEED
+                                    for month_key, count in by_monthly_billing_counts_paid.items():
+                                        if new_month_key==month_key:
+                                            key = f"{new_substring}-{month_in_list}"
+                                            row_month_total= new_months_recovery_dict.get(key, 0)+count
+                                            new_months_recovery_dict.update({key: row_month_total})
                     
                     # Print row data
                     # worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
@@ -1032,6 +1082,10 @@ class RecoveryReportWizard(models.TransientModel):
                         # check=True
                         new_month_key = f"{rec.branch_name}-{month_in_list}"
                         for month_key, count in by_monthly_billing_counts.items():
+                            if new_month_key==month_key:
+                                worksheet.write_merge(new_row,new_row,new_col,new_col+2,count,style=style_title)
+                        # HAMZA NAVEED
+                        for month_key, count in by_monthly_billing_counts_paid.items():
                             if new_month_key==month_key:
                                 worksheet.write_merge(new_row,new_row,new_col,new_col+2,count,style=style_title)
                             
@@ -1066,6 +1120,23 @@ class RecoveryReportWizard(models.TransientModel):
 
                 worksheet.write_merge(new_row,new_row,new_col,new_col+2,total,style=yellow_style_title)
                 new_col+=3
+
+                # HAMZA NAVEED
+            for month_in_list in select_by_monthly_list:
+                # check=True
+                total=0
+                test_year_month = f"{month_in_list}"
+                for month_key, count in new_months_recovery_dict.items():
+                    input_string = month_key
+                    parts = input_string.split("-")
+                    result = f"{parts[1]}-{parts[2]}-{parts[3]}"
+                    # raise UserError(str(month_key)+" "+str(test_year_month))
+                    if test_year_month==result:
+                        total+=count
+
+                worksheet.write_merge(new_row,new_row,new_col,new_col+2,total,style=yellow_style_title)
+                new_col+=3
+
             if select_by_monthly_list:
                 worksheet.write_merge(new_row,new_row,new_col,new_col+1,final_total, style=yellow_style_title)
                 worksheet.write_merge(new_row,new_row,new_col+2,new_col+4,final_recovery, style=yellow_style_title)
