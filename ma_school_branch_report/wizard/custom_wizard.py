@@ -401,7 +401,7 @@ class RecoveryReportWizard(models.TransientModel):
 
 
     def action_print_excel_school_branch_report(self):
-        
+        raise UserError("TEST")
         
 
         self.action_print_report()
