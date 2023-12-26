@@ -433,31 +433,31 @@ class RecoveryReportWizard(models.TransientModel):
                 "by_account_report_line":[(6,0,by_lines)]
             })  
 
-        message = "PAID Billing Counts:\n\n"
-        for month_key, count in by_monthly_billing_counts_paid.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message = "PAID Billing Counts:\n\n"
+        # for month_key, count in by_monthly_billing_counts_paid.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        message += "\n\n\n\n"
-        message += "PAID Billing Information:\n\n"
-        for month_key, count in by_monthly_billing_list_paid.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message += "\n\n\n\n"
+        # message += "PAID Billing Information:\n\n"
+        # for month_key, count in by_monthly_billing_list_paid.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
 
-        message += "\n\n\n\n"
-        message += "Billing Counts:\n\n"
-        for month_key, count in by_monthly_billing_counts.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message += "\n\n\n\n"
+        # message += "Billing Counts:\n\n"
+        # for month_key, count in by_monthly_billing_counts.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        message += "\n\n\n\n"
-        message += "Billing Information:\n\n"
-        for month_key, count in by_monthly_billing_list.items():
-            # month_key format: 'yy-mm'
-            message += f"Month: {month_key}, Number of bills: {count}\n"
+        # message += "\n\n\n\n"
+        # message += "Billing Information:\n\n"
+        # for month_key, count in by_monthly_billing_list.items():
+        #     # month_key format: 'yy-mm'
+        #     message += f"Month: {month_key}, Number of bills: {count}\n"
             
-        # Raise a UserError with the summarized message
-        raise UserError(message)
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
 
 
     def action_print_excel_school_branch_report(self):
@@ -553,6 +553,8 @@ class RecoveryReportWizard(models.TransientModel):
             for i in range(range_start,range_stop+1):
                 # raise UserError(months[i][0]+" "+months[i][3])
                 worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1],red_style_title)
+                col+=3
+                worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=3
             # # if select_by_monthly_list:
