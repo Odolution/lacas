@@ -127,9 +127,10 @@ class RecoveryReportWizard(models.TransientModel):
             total_Recovery_paid=0
             for bill_rec in school_bill_ids:           
                 # total_count += float(bill_rec.amount_total)
-                total_count += float(bill_rec.amount_total)
+                total_count += float(bill_rec.net_amount)
                 if bill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
-                    with_out_Withdrawn += float(bill_rec.amount_total)
+                    # with_out_Withdrawn += float(bill_rec.amount_total)
+                    with_out_Withdrawn += float(bill_rec.net_amount)
                 
                 if bill_rec.payment_state =="paid":
                     if bill_rec.ol_payment_date:
@@ -138,7 +139,8 @@ class RecoveryReportWizard(models.TransientModel):
                         year_in_payment = payment_date.strftime('%y')
 
                         if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                            total_Recovery_paid += float(bill_rec.amount_total)
+                            # total_Recovery_paid += float(bill_rec.amount_total)
+                            total_Recovery_paid += float(bill_rec.net_amount)
 
                     # if month_key in billing_counts:
                     #     billing_counts[month_key] += float(bill_rec.amount_total)
@@ -189,8 +191,12 @@ class RecoveryReportWizard(models.TransientModel):
             
             style_title = xlwt.easyxf(
             " align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            header = xlwt.easyxf('pattern: pattern solid;'
-            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+            # header = xlwt.easyxf('pattern: pattern solid;'
+            # "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+            header_style = xlwt.easyxf('font: bold on, color black;'
+                           'pattern: pattern solid, fore_colour gray25;'
+                           'align: vertical center, horiz center;'
+                           'border: top thin, bottom thin, right thin, left thin')
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour light_green;'
