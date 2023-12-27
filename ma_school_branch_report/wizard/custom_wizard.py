@@ -629,6 +629,8 @@ class RecoveryReportWizard(models.TransientModel):
                         else:
                             
                             col=4
+                            a = str(len(months_total_dict)) + "\t" + str(len(months_recovery_dict))
+                            raise UserError(a)
                             for month_key, count in months_total_dict.items():
                                 original_string = month_key
                                 split_parts = original_string.split('-')
