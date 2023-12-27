@@ -1206,7 +1206,7 @@ class RecoveryReportWizard(models.TransientModel):
                 total=0
                 total_recovery = 0
                 test_year_month = f"{month_in_list}"
-                for month_key in new_months_total_dict.items():
+                for month_key in new_months_total_dict:
                     input_string = month_key
                     parts = input_string.split("-")
                     result = f"{parts[1]}-{parts[2]}-{parts[3]}"
