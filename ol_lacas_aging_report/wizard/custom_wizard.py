@@ -729,8 +729,6 @@ class agingsReportWizard(models.TransientModel):
             for value in branch_wise_inv:
                 # if value.x_studio_previous_branch==branch:
                 
-                x = str(value)+"\n"+str(value.month_date)+"\n"+str(value.year_date)
-                raise UserError(x)
                     
 
                 # custom_data['student_branch'] = value.x_studio_previous_branch.display_name if  len(value.x_studio_previous_branch)==1  else ""
@@ -1221,6 +1219,7 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['actual_recievable_oct_2'] += (int(value.bill_amount))
 
                 elif value.month_date == "November" and value.year_date=='23':
+                    raise UserError(str(value.id) + "\t" + str(value))
                     if value.payment_state=='not_paid':
                         custom_data['recievable_nov_2'] += value.due_amount
                     if value.payment_state=='paid':
