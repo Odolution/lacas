@@ -1241,7 +1241,6 @@ class RecoveryReportWizard(models.TransientModel):
                     'target':'new'
                 }
             return res
-
             
         else:
             raise Warning (""" You Don't have xlwt library.\n Please install it by executing this command :  sudo pip3 install xlwt""")
