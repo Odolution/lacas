@@ -300,6 +300,7 @@ class RecoveryReportWizard(models.TransientModel):
                         else:
                             Total_Actual_Recovery_branch = 0
                         worksheet.write_merge(row,row,9,9, str(f"{Total_Actual_Recovery_branch:.1f}")+"%",  style=red_style_title)
+                        worksheet.write_merge(row,row,10,10,total_enrolled_unpaid_student_count_branch ,  style=red_style_title)
                         row+=1
 
                         total_total_Issuance_billing_branch = rec.total_Issuance_billing
@@ -336,7 +337,7 @@ class RecoveryReportWizard(models.TransientModel):
                     else:
                         Actual_Recovery = 0
                     worksheet.write_merge(row,row,9,9,str(f"{Actual_Recovery:.1f}")+"%", style=style_title)
-                    worksheet.write_merge(row,row,9,9,enrolled_unpaid_student_count, style=style_title)
+                    worksheet.write_merge(row,row,10,10,enrolled_unpaid_student_count, style=style_title)
 
                     total_total_Issuance_billing += rec.total_Issuance_billing
                     total_with_out_Withdrawn_billing += rec.with_out_Withdrawn_billing
@@ -365,6 +366,7 @@ class RecoveryReportWizard(models.TransientModel):
             else:
                 Total_Actual_Recovery = 0
             worksheet.write_merge(row,row,9,9, str(f"{Total_Actual_Recovery:.1f}")+"%",  style=red_style_title)
+            worksheet.write_merge(row,row,10,10,total_enrolled_unpaid_student_count ,  style=red_style_title)
 
             fp = io.BytesIO()
             workbook.save(fp)
