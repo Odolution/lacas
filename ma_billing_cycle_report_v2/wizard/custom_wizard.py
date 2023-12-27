@@ -270,9 +270,9 @@ class RecoveryReportWizard(models.TransientModel):
                                             
                     #     if bills:
                     #         enrolled_unpaid_student_count+=1
-                    students = env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+                    students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
                     student_ids = students.ids  # Get a list of student ids
-                    bills = env['account.move'].search(
+                    bills = self.env['account.move'].search(
                         [
                             ('x_studio_previous_branch', '=', rec.branch_name),
                             ('move_type', '=', 'out_invoice'),
