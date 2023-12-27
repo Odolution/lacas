@@ -240,7 +240,7 @@ class RecoveryReportWizard(models.TransientModel):
             match= b_split[0]+' '+b_split[1]
             for rec in self.account_report_line:
                 if rec:       
-                    b= rec.branch_name.lower()      
+                    b= rec.branch_name.lower()  
                     # rec.branch_name
                     # if match==False:
                     #     b_split= b.split(' ')
