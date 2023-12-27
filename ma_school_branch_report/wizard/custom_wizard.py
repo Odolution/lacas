@@ -646,7 +646,7 @@ class RecoveryReportWizard(models.TransientModel):
                             #         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                             #         col+=3
                             x = ""
-                            for month_key in months_total_dict():
+                            for month_key in months_total_dict:
                                 result = month_key.split('-')[0]
                                 if substring == result:
                                     x += str(months_total_dict[month_key]) + "\t" + str(col) + "\t" + str(col+2) + str(row)
