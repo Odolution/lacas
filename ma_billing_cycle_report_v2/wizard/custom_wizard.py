@@ -126,6 +126,7 @@ class RecoveryReportWizard(models.TransientModel):
             with_out_Withdrawn=0
             total_Recovery_paid=0
             for bill_rec in school_bill_ids:           
+                # total_count += float(bill_rec.amount_total)
                 total_count += float(bill_rec.amount_total)
                 if bill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
                     with_out_Withdrawn += float(bill_rec.amount_total)
@@ -254,23 +255,31 @@ class RecoveryReportWizard(models.TransientModel):
                     #     ('student_ids_ol.x_last_enrollment_status_id.name', '=', 'Enrolled'),
                     #     ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
                     # ])
-                    enrolled_unpaid_student_count=0
-                    students= self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-                    for student in students:
-                        bills= self.env['account.move'].search([
-                                                ('x_studio_previous_branch', '=', rec.branch_name),
-                                                ('move_type','=','out_invoice'),
-                                                ('payment_state', '=', 'not_paid'),
-                                                ('student_ids_ol.id', '=', student.id),
-                                                ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
-                                            ],limit=1)
+                    # enrolled_unpaid_student_count=0
+                    # students= self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+                    # for student in students:
+                    #     bills= self.env['account.move'].search([
+                    #                             ('x_studio_previous_branch', '=', rec.branch_name),
+                    #                             ('move_type','=','out_invoice'),
+                    #                             ('payment_state', '=', 'not_paid'),
+                    #                             ('student_ids_ol.id', '=', student.id),
+                    #                             ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
+                    #                         ],limit=1)
                                             
-                        if bills:
-                            enrolled_unpaid_student_count+=1
-                    # rec.branch_name
-                    # if match==False:
-                    #     b_split= b.split(' ')
-                    #     match= b_split[0]+' '+b_split[1]
+                    #     if bills:
+                    #         enrolled_unpaid_student_count+=1
+                    students = env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+                    student_ids = students.ids  # Get a list of student ids
+                    bills = env['account.move'].search(
+                        [
+                            ('x_studio_previous_branch', '=', rec.branch_name),
+                            ('move_type', '=', 'out_invoice'),
+                            ('student_ids_ol.id', 'in', student_ids),
+                            ('payment_state', '=', 'not_paid'),
+                            ('invoice_date', '>=', self.from_date),
+                            ('invoice_date', '<=', self.to_date),
+                        ])
+                    enrolled_unpaid_student_count = len(set(bills.mapped('student_ids_ol.id')))
                     if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ):
                         total_total_Issuance_billing_branch += rec.total_Issuance_billing
                         total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
