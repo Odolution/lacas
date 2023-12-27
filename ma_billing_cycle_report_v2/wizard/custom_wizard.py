@@ -193,7 +193,7 @@ class RecoveryReportWizard(models.TransientModel):
             " align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             # header = xlwt.easyxf('pattern: pattern solid;'
             # "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
-            header_style = xlwt.easyxf('font: bold on, color black;'
+            header = xlwt.easyxf('font: bold on, color black;'
                            'pattern: pattern solid, fore_colour gray25;'
                            'align: vertical center, horiz center;'
                            'border: top thin, bottom thin, right thin, left thin') 
