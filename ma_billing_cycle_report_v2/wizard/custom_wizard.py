@@ -235,6 +235,7 @@ class RecoveryReportWizard(models.TransientModel):
             col=4
             count = 0
             first_record =self.account_report_line[0] 
+            first_record= first_record.branch_name.lower()
             b_split= first_record.split(' ')
             match= b_split[0]+' '+b_split[1]
             for rec in self.account_report_line:
