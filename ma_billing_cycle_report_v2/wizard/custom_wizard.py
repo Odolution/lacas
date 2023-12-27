@@ -216,7 +216,7 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(0, 1, 6, 11, "RECEIVABLE OF WITHDRAWAL STUDENTS", style=style_title)
             worksheet = workbook.add_sheet('Students Branch Std')
             formatted_date_from = self.from_date.strftime('%b-%Y')
-            formatted_date_to = self.your_date_field.strftime('%d-%b-%Y')
+            formatted_date_to = self.to_date.strftime('%d-%b-%Y')
             date_string= 'Billing '+str(formatted_date_from)+ str(' %')+"age wise recovery As on "+ str(formatted_date_to)
             worksheet.write_merge(0,0,2,7,date_string, style=header)
 
