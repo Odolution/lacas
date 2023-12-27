@@ -1240,7 +1240,7 @@ class agingsReportWizard(models.TransientModel):
                             if diff.days>120:
                                 custom_data['actual_recievable_nov_2'] += (int(value.bill_amount))
                     if value.id == 222922:
-                        raise UserError(str(value.due_amount) + "\t" + custom_data['recievable_nov_2'])
+                        raise UserError(str(value.due_amount) + "\t" + str(custom_data['recievable_nov_2']))
 
 
                 elif value.month_date == "December" and value.year_date=='23':
