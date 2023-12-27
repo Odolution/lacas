@@ -1238,9 +1238,6 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['thirdmon_nov_2'] += (int(value.bill_amount))
                             if diff.days>120:
                                 custom_data['actual_recievable_nov_2'] += (int(value.bill_amount))
-                    if value.id==222922:
-                        x = custom_data['recievable_nov_2']
-                        raise UserError(x)
 
                 elif value.month_date == "December" and value.year_date=='23':
                     if value.payment_state=='not_paid':
@@ -1411,6 +1408,19 @@ class agingsReportWizard(models.TransientModel):
             if custom_data['recievable_dec_2']!=0:
                 bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']*100
 
+
+            x = "*"*10 + "\t" + custom_data['student_branch'] + "\t" + "*"*10
+            x += "\n"
+            x += "*"*10 + "\t" + custom_data['student_campus'] + "\t" + "*"*10
+            x += "\n"
+
+            count = 0
+            for i,j in custom_data.items():
+                if count==0 or count==1: continue
+                x += str(i) + "\t" + str(j) + "\n"
+            raise UserError(x)
+
+                
 
 
 
