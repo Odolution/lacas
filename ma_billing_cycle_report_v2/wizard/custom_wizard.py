@@ -196,7 +196,7 @@ class RecoveryReportWizard(models.TransientModel):
             header_style = xlwt.easyxf('font: bold on, color black;'
                            'pattern: pattern solid, fore_colour gray25;'
                            'align: vertical center, horiz center;'
-                           'border: top thin, bottom thin, right thin, left thin')
+                           'border: top thin, bottom thin, right thin, left thin') 
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour light_green;'
