@@ -1418,6 +1418,7 @@ class agingsReportWizard(models.TransientModel):
             for i,j in custom_data.items():
                 if count==0 or count==1: continue
                 x += str(i) + "\t" + str(j) + "\n"
+                count +=1
             raise UserError(x)
 
                 
