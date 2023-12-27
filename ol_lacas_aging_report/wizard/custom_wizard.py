@@ -729,7 +729,8 @@ class agingsReportWizard(models.TransientModel):
             for value in branch_wise_inv:
                 # if value.x_studio_previous_branch==branch:
                 
-                # raise UserError(str(value.id) + "\t" + str(value.month_date) + "\t" + str(value.year_date))
+                if value.payment_state=='paid':
+                    raise UserError(str(value.id) + "\t" + str(value.month_date) + "\t" str(value.year_date))
                     
 
                 # custom_data['student_branch'] = value.x_studio_previous_branch.display_name if  len(value.x_studio_previous_branch)==1  else ""
@@ -1239,6 +1240,7 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['thirdmon_nov_2'] += (int(value.bill_amount))
                             if diff.days>120:
                                 custom_data['actual_recievable_nov_2'] += (int(value.bill_amount))
+                    # HAMZA NAVEED
                     if value.id == 222922:
                         raise UserError(str(value.due_amount) + "\t" + str(custom_data['recievable_nov_2']))
 
@@ -1413,6 +1415,7 @@ class agingsReportWizard(models.TransientModel):
                 bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']*100
 
 
+            # HAMZA NAVEED
             x = "*"*10 + "\t" + custom_data['student_branch'] + "\t" + "*"*10
             x += "\n"
             x += "*"*10 + "\t" + custom_data['student_campus'] + "\t" + "*"*10
