@@ -6,8 +6,8 @@ import xlsxwriter
 _
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
-
-
+import logging
+_logger = logging.getLogger(__name__)
 import base64
 
 import io
@@ -363,24 +363,24 @@ class agingsReportWizard(models.TransientModel):
         branch_lst=[]
 
         for inv in move_ids:
-            if len(inv.program_ids)==1:
-                if inv.program_ids not in branch_lst:
-                    branch_lst.append(inv.program_ids)
+            if inv.x_studio_previous_branch!=False:
+                if inv.x_studio_previous_branch not in branch_lst :
+                    campus=inv.x_studio_previous_branch
+                    branch_lst.append(str(campus))
 
         lines=[]
+        _logger.info(f"branch: {branch_lst}")
 
-        # x = ""
-        # for i in branch_lst: x += str(i.name) + "\n"
-        # raise UserError(x)
 
-        # x = ""
 
         for branch in branch_lst:
+            _logger.info(f"loop: {branch}")
+
            
-            # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-
-
+            # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            _logger.info(f"invoices length: {len(branch_wise_inv)}")
+            
             custom_data = {
                    
                         "student_branch":"",
@@ -720,29 +720,24 @@ class agingsReportWizard(models.TransientModel):
                         "bad_debt_dec_2": 0,
                         "percentage_bdb_dec_2": '',
 
-                    }
+                    } 
 
-            custom_data['student_branch'] = branch.name
-            custom_data['student_campus'] = branch.name
+            custom_data['student_branch'] = branch
+            custom_data['student_campus'] = branch
 
-            # x += "*"*10 + "\t" + str(branch.name) + "*"*10 + "\t" + "\n"
-
-            # x += str(branch.name) + "\n"
             for value in branch_wise_inv:
-                # if len(value.program_ids)==1: x += str(value.program_ids.display_name) + "\t" + str(value.campus) + str(value) + "\n"
-                # else: x += "   " + "\t" + str(value.campus) + str(value) + "\n"
+                # if value.x_studio_previous_branch==branch:
 
-                # custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
+                    
+
+                # custom_data['student_branch'] = value.x_studio_previous_branch.display_name if  len(value.x_studio_previous_branch)==1  else ""
                 # custom_data['student_campus'] = value.campus if value.campus else ''
-
-                if value.month_date == "January" and value.year_date=='23':
-                    if value.payment_state == 'not_paid' or value.payment_state == 'paid':
-                        x += str(value) + "\t" + str(value.name) + "\t" + str(value.month_date) + "\t" + str(value.year_date) + "\t" + str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(value.bill_amount) + "\t" + str(value.program_ids) + "\n"
-                
 
                 if value.month_date == "January" and value.year_date=='22':
                     if value.payment_state=='not_paid':
                         custom_data['recievable_jan'] += value.due_amount
+                        _logger.info(f"recievable_jan: {custom_data['recievable_jan']}")
+                        
                     if value.payment_state=='paid':
                         custom_data['recievable_jan'] += (int(value.bill_amount))
                         if value.ol_payment_date:
@@ -1805,19 +1800,19 @@ class agingsReportWizard(models.TransientModel):
     
             })
             lines.append(mvl.id)
-            # lst=[]
-            # lst.append(mvl['student_branch'])
-            # lst.append(mvl['student_campus'])
-            # lst.append(mvl['recievable_jan_2'])
-            # lst.append(mvl['ondue_jan_2'])
-            # lst.append(mvl['afterdue_jan_2'])
-            # lst.append(mvl['firstmon_jan_2'])
-            # lst.append(mvl['secmon_jan_2'])
-            # lst.append(mvl['thirdmon_jan_2'])
-            # lst.append(mvl['thirdmon_jan_2'])
-            # lst.append(mvl['actual_recievable_jan_2'])
-            # lst.append(mvl['bad_debt_jan_2'])
-            # raise UserError(lst)
+            lst=[]
+            lst.append(mvl['student_branch'])
+            lst.append(mvl['student_campus'])
+            lst.append(mvl['recievable_jan_2'])
+            lst.append(mvl['ondue_jan_2'])
+            lst.append(mvl['afterdue_jan_2'])
+            lst.append(mvl['firstmon_jan_2'])
+            lst.append(mvl['secmon_jan_2'])
+            lst.append(mvl['thirdmon_jan_2'])
+            lst.append(mvl['thirdmon_jan_2'])
+            lst.append(mvl['actual_recievable_jan_2'])
+            lst.append(mvl['bad_debt_jan_2'])
+            _logger.info(f"branch: {lst}")
 
 
             
@@ -1830,7 +1825,7 @@ class agingsReportWizard(models.TransientModel):
 
             )
             # raise UserError(str(final_lst))
-        # raise UserError(x)
+        
        
         
 
@@ -1950,22 +1945,22 @@ class agingsReportWizard(models.TransientModel):
 
             col = 3
             
-            for i in range(range_start,range_stop+1):
-                if len(months[i]) >= 11:
       
-                    worksheet.write_merge(0,1,col,col,months[i][1],lime_style_title)
-                    worksheet.write_merge(0,1,col+1,col+1,months[i][2],lime_style_title)
-                    worksheet.write_merge(0,1,col+2,col+2,months[i][3],lime_style_title)
-                    worksheet.write_merge(0,1,col+3,col+3,months[i][4],lime_style_title)
-                    worksheet.write_merge(0,1,col+4,col+4,months[i][5],lime_style_title)
-                    worksheet.write_merge(0,1,col+5,col+5,months[i][6],lime_style_title)
-                    worksheet.write_merge(0,1,col+6,col+6,months[i][7],lime_style_title)
-                    worksheet.write_merge(0,1,col+7,col+7,months[i][8],lime_style_title)
-                    worksheet.write_merge(0,1,col+8,col+8,months[i][9],lime_style_title)
-                    worksheet.write_merge(0,1,col+9,col+9,months[i][10],lime_style_title)
+            for i in range(range_start,range_stop+1):
+      
+                worksheet.write_merge(0,1,col,col,months[i][1],lime_style_title)
+                worksheet.write_merge(0,1,col+1,col+1,months[i][2],lime_style_title)
+                worksheet.write_merge(0,1,col+2,col+2,months[i][3],lime_style_title)
+                worksheet.write_merge(0,1,col+3,col+3,months[i][4],lime_style_title)
+                worksheet.write_merge(0,1,col+4,col+4,months[i][5],lime_style_title)
+                worksheet.write_merge(0,1,col+5,col+5,months[i][6],lime_style_title)
+                worksheet.write_merge(0,1,col+6,col+6,months[i][7],lime_style_title)
+                worksheet.write_merge(0,1,col+7,col+7,months[i][8],lime_style_title)
+                worksheet.write_merge(0,1,col+8,col+8,months[i][9],lime_style_title)
+                worksheet.write_merge(0,1,col+9,col+9,months[i][10],lime_style_title)
 
-                
-                    col+=10
+            
+                col+=10
 
         #     worksheet.write_merge(0,1,col,col+1,"Total", lime_style_title)   
             
