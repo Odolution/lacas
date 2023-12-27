@@ -215,21 +215,22 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
             # worksheet.write_merge(0, 1, 6, 11, "RECEIVABLE OF WITHDRAWAL STUDENTS", style=style_title)
             worksheet = workbook.add_sheet('Students Branch Std')
-            formatted_date = self.from_date.strftime('%b-%Y')
-            date_string= 'Billing '+str(formatted_date)+" '%'age wise recovery As on "+ str(self.to_date)
-            worksheet.write_merge(0,0,2,6,date_string, style=header)
+            formatted_date_from = self.from_date.strftime('%b-%Y')
+            formatted_date_to = self.your_date_field.strftime('%d-%b-%Y')
+            date_string= 'Billing '+str(formatted_date_from)+ str(' %')+"age wise recovery As on "+ str(formatted_date_to)
+            worksheet.write_merge(0,0,2,7,date_string, style=header)
 
-            worksheet.write_merge(1,2,0,0, 'S#',  style=red_style_title)
-            worksheet.write_merge(1,2,1,1, 'Branch',  style=red_style_title)
-            worksheet.write_merge(1,2,2,2, 'Total Issuance',  style=red_style_title)
-            worksheet.write_merge(1,2,3,3, 'Net Billing Exc.Withdrawals',  style=red_style_title)
-            worksheet.write_merge(1,2,4,4, 'Total Recovery',  style=red_style_title)
-            worksheet.write_merge(1,2,5,5, 'Receivables',  style=red_style_title)
-            worksheet.write_merge(1,2,6,6, 'Total',  style=red_style_title)
-            worksheet.write_merge(1,2,7,7, 'Bade Dabts',  style=red_style_title)
-            worksheet.write_merge(1,2,8,8, "'%'age of Recovery on '\n' Enrolled and Paid Bills",  style=red_style_title)
-            worksheet.write_merge(1,2,9,9, "Actual Recovery '%'age",  style=red_style_title)
-            worksheet.write_merge(1,2,10,10, "Count of enrolled students with Un-Paid status",  style=red_style_title)
+            worksheet.write_merge(3,4,0,0, 'S#',  style=red_style_title)
+            worksheet.write_merge(3,4,1,1, 'Branch',  style=red_style_title)
+            worksheet.write_merge(3,4,2,2, 'Total Issuance',  style=red_style_title)
+            worksheet.write_merge(3,4,3,3, 'Net Billing Exc.Withdrawals',  style=red_style_title)
+            worksheet.write_merge(3,4,4,4, 'Total Recovery',  style=red_style_title)
+            worksheet.write_merge(3,4,5,5, 'Receivables',  style=red_style_title)
+            worksheet.write_merge(3,4,6,6, 'Total',  style=red_style_title)
+            worksheet.write_merge(3,4,7,7, 'Bade Dabts',  style=red_style_title)
+            worksheet.write_merge(3,4,8,8, "'%'age of Recovery on '\n' Enrolled and Paid Bills",  style=red_style_title)
+            worksheet.write_merge(3,4,9,9, "Actual Recovery '%'age",  style=red_style_title)
+            worksheet.write_merge(3,4,10,10, "Count of enrolled students with Un-Paid status",  style=red_style_title)
             # worksheet.(0,1,0,3,"",)
 
             total_total_Issuance_billing=0
@@ -246,7 +247,7 @@ class RecoveryReportWizard(models.TransientModel):
             total_Bade_Dabts_branch=0
             total_enrolled_unpaid_student_count=0
             total_enrolled_unpaid_student_count_branch=0
-            row=3
+            row=5
             col=4
             count = 0
             first_record =self.account_report_line[0] 
