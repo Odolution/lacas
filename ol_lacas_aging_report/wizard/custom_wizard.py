@@ -736,6 +736,8 @@ class agingsReportWizard(models.TransientModel):
                 if value.month_date == "January" and value.year_date=='22':
                     if value.payment_state=='not_paid':
                         custom_data['recievable_jan'] += value.due_amount
+                        _logger.info(f"recievable_jan: {custom_data['recievable_jan']}")
+                        
                     if value.payment_state=='paid':
                         custom_data['recievable_jan'] += (int(value.bill_amount))
                         if value.ol_payment_date:
@@ -1798,19 +1800,19 @@ class agingsReportWizard(models.TransientModel):
     
             })
             lines.append(mvl.id)
-            # lst=[]
-            # lst.append(mvl['student_branch'])
-            # lst.append(mvl['student_campus'])
-            # lst.append(mvl['recievable_jan_2'])
-            # lst.append(mvl['ondue_jan_2'])
-            # lst.append(mvl['afterdue_jan_2'])
-            # lst.append(mvl['firstmon_jan_2'])
-            # lst.append(mvl['secmon_jan_2'])
-            # lst.append(mvl['thirdmon_jan_2'])
-            # lst.append(mvl['thirdmon_jan_2'])
-            # lst.append(mvl['actual_recievable_jan_2'])
-            # lst.append(mvl['bad_debt_jan_2'])
-            # raise UserError(lst)
+            lst=[]
+            lst.append(mvl['student_branch'])
+            lst.append(mvl['student_campus'])
+            lst.append(mvl['recievable_jan_2'])
+            lst.append(mvl['ondue_jan_2'])
+            lst.append(mvl['afterdue_jan_2'])
+            lst.append(mvl['firstmon_jan_2'])
+            lst.append(mvl['secmon_jan_2'])
+            lst.append(mvl['thirdmon_jan_2'])
+            lst.append(mvl['thirdmon_jan_2'])
+            lst.append(mvl['actual_recievable_jan_2'])
+            lst.append(mvl['bad_debt_jan_2'])
+            _logger.info(f"branch: {lst}")
 
 
             
