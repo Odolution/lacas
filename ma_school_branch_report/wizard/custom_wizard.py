@@ -542,21 +542,21 @@ class RecoveryReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            worksheet.write_merge(0,1,0,3,"Current Branch/School", style=red_style_title)
+            worksheet.write_merge(0,1,0,0,"Current Branch/School", style=red_style_title)
             # worksheet.write_merge(0,1,4,5,"Billing month Jul-23",style=red_style_title)
             
             
-            col = 4
+            col = 1
             
             # raise UserError(str(range_start)+" "+str(range_stop))
       
             for i in range(range_start,range_stop+1):
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1],red_style_title)
-                col+=3
-                worksheet.write_merge(0,1,col,col+2,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
+                worksheet.write_merge(0,1,col,col,'Billing month '+months[i][1],red_style_title)
+                col+=1
+                worksheet.write_merge(0,1,col,col,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
-                col+=3
+                col+=1
             # # if select_by_monthly_list:
             #     worksheet.write_merge(0,1,col,col+1,"Total",style=red_style_title)
             #     worksheet.write_merge(0,1,col+2,col+4,"Branch Wise Recovery",style=red_style_title)
@@ -574,7 +574,7 @@ class RecoveryReportWizard(models.TransientModel):
             months_row_total_dict={}
             months_row_paid_dict={}
             row=2
-            col=4
+            col=1
             for rec in self.account_report_line:
                 if rec:
                 #    Total
@@ -628,7 +628,7 @@ class RecoveryReportWizard(models.TransientModel):
 
                         else:
                             
-                            col=4
+                            col=1
                             # for month_key, count in months_total_dict.items():
                             #     original_string = month_key
                             #     split_parts = original_string.split('-')
@@ -650,22 +650,22 @@ class RecoveryReportWizard(models.TransientModel):
                             for month_key in months_total_dict:
                                 result = month_key.split('-')[0]
                                 if substring == result:
-                                    worksheet.write_merge(row,row,col,col+2,int(months_total_dict[month_key]), style=yellow_style_title)
-                                    col += 3
-                                    worksheet.write_merge(row,row,col,col+2,int(months_recovery_dict[month_key]), style=yellow_style_title)
-                                    col += 3
+                                    worksheet.write_merge(row,row,col,col,int(months_total_dict[month_key]), style=yellow_style_title)
+                                    col += 1
+                                    worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
+                                    col += 1
 
                                     
-                            worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+                            worksheet.write_merge(row,row,0,0,"Total", style=yellow_style_title)
 
                             if not select_by_monthly_list:
-                                worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
-                                worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
+                                worksheet.write_merge(row,row,col,col,group_total, style=yellow_style_title)
+                                worksheet.write_merge(row,row,col+1,col+1,group_recovery, style=yellow_style_title)
                                 if group_recovery>0 and group_recovery>0:
                                     total_per_new =(group_recovery/group_total)*100
-                                    worksheet.write_merge(row,row,col+5,col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
                                 else:
-                                    worksheet.write_merge(row,row,col+5,col+6,'0 %',style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col+2,col+2,'0 %',style=yellow_style_title)
                                 # raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
 
                             row+=1
@@ -677,36 +677,36 @@ class RecoveryReportWizard(models.TransientModel):
 
                             if rec.branch_name in ("LACAS Johar Town A Level","Milestone Model Town Campus"):
                                 # Print row data
-                                worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                                col=4
+                                worksheet.write_merge(row,row,0,0,rec.branch_name, style=style_title)
+                                col=1
                                 for i in range(range_start,range_stop+1):
                                     # check=True
                                     new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                     for month_key, count in billing_counts.items():
                                         if new_month_key==month_key:
-                                            worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                                    col+=3
+                                            worksheet.write_merge(row,row,col,col,count,style=style_title)
+                                    col+=1
                                 # HAMZA NAVEED
                                 for i in range(range_start,range_stop+1):
                                     # check=True
                                     new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                     for month_key, count in billing_counts_paid.items():
                                         if new_month_key==month_key:
-                                            worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                                    col+=3
+                                            worksheet.write_merge(row,row,col,col,count,style=style_title)
+                                    col+=1
                                 
                                 # add 
                                 if select_by_monthly_list:
                                     months_row_total_dict.update({rec.branch_name:rec.school_bill_len })
                                     months_row_paid_dict.update({rec.branch_name:rec.billing_list_paid })
                                 else:
-                                    worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
-                                    worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
+                                    worksheet.write_merge(row,row,col,col,rec.school_bill_len,style=style_title)
+                                    worksheet.write_merge(row,row,col+1,col+1,rec.billing_list_paid,style=style_title)
                                     if rec.school_bill_len>0 and rec.billing_list_paid>0:
                                         total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                                        worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 4))+' %',style=style_title)
                                     else:
-                                        worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,'0 %',style=style_title)
                                 row+=1
 
                                 group_name_list.append(rec.branch_name)
@@ -727,7 +727,7 @@ class RecoveryReportWizard(models.TransientModel):
                                             key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                             row_month_total= months_recovery_dict.get(key, 0)+count
                                             months_recovery_dict.update({key: row_month_total})
-                                col=4
+                                col=1
                                 # for month_key, count in months_total_dict.items():
                                 #     original_string = month_key
                                 #     split_parts = original_string.split('-')
@@ -749,21 +749,21 @@ class RecoveryReportWizard(models.TransientModel):
                                 for month_key in months_total_dict:
                                     result = month_key.split('-')[0]
                                     if rec.branch_name == result:
-                                        worksheet.write_merge(row,row,col,col+2,int(months_total_dict[month_key]), style=yellow_style_title)
-                                        col += 3
-                                        worksheet.write_merge(row,row,col,col+2,int(months_recovery_dict[month_key]), style=yellow_style_title)
-                                        col += 3
+                                        worksheet.write_merge(row,row,col,col,int(months_total_dict[month_key]), style=yellow_style_title)
+                                        col += 1
+                                        worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
+                                        col += 1
                                         
-                                worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+                                worksheet.write_merge(row,row,0,0,"Total", style=yellow_style_title)
 
                                 if not select_by_monthly_list:
-                                    worksheet.write_merge(row,row,col,col+1,group_total, style=yellow_style_title)
-                                    worksheet.write_merge(row,row,col+2,col+4,group_recovery, style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col,col,group_total, style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col+1,col+1,group_recovery, style=yellow_style_title)
                                     if group_recovery>0 and group_recovery>0:
                                         total_per_new =(group_recovery/group_total)*100
-                                        worksheet.write_merge(row,row,col+5,col+6,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
                                     else:
-                                        worksheet.write_merge(row,row,col+5,col+6,'0 %',style=yellow_style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,'0 %',style=yellow_style_title)
                                     # raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
 
                                 row+=1
@@ -797,40 +797,40 @@ class RecoveryReportWizard(models.TransientModel):
                                             months_recovery_dict.update({key: row_month_total})
                     
                     # Print row data
-                    worksheet.write_merge(row,row,0,3,rec.branch_name, style=style_title)
-                    col=4
+                    worksheet.write_merge(row,row,0,0,rec.branch_name, style=style_title)
+                    col=1
                     for i in range(range_start,range_stop+1):
                         # check=True
                         new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                         for month_key, count in billing_counts.items():
                             if new_month_key==month_key:
-                                worksheet.write_merge(row,row,col,col+2,count,style=style_title)
-                        col+=3
+                                worksheet.write_merge(row,row,col,col,count,style=style_title)
+                        col+=1
                         # HAMZA NAVEED
                         for month_key, count in billing_counts_paid.items():
                             if new_month_key==month_key:
-                                worksheet.write_merge(row,row,col,col+2,count,style=style_title)
+                                worksheet.write_merge(row,row,col,col,count,style=style_title)
                              
-                        col+=3
+                        col+=1
                     
                     # add 
                     if select_by_monthly_list:
                         months_row_total_dict.update({rec.branch_name:rec.school_bill_len })
                         months_row_paid_dict.update({rec.branch_name:rec.billing_list_paid })
                     else:
-                        worksheet.write_merge(row,row,col,col+1,rec.school_bill_len,style=style_title)
-                        worksheet.write_merge(row,row,col+2,col+4,rec.billing_list_paid,style=style_title)
+                        worksheet.write_merge(row,row,col,col,rec.school_bill_len,style=style_title)
+                        worksheet.write_merge(row,row,col+1,col+1,rec.billing_list_paid,style=style_title)
                         if rec.school_bill_len>0 and rec.billing_list_paid>0:
                             total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                            worksheet.write_merge(row,row,col+5,col+6,str(round(total_per, 4))+' %',style=style_title)
+                            worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 4))+' %',style=style_title)
                         else:
-                            worksheet.write_merge(row,row,col+5,col+6,'0 %',style=style_title)
+                            worksheet.write_merge(row,row,col+2,col+2,'0 %',style=style_title)
                     row+=1
          
         #  final total row
-            worksheet.write_merge(row,row,0,3,"Total", style=yellow_style_title)
+            worksheet.write_merge(row,row,0,0,"Total", style=yellow_style_title)
 
-            col=4
+            col=1
             # for i in range(range_start,range_stop+1):
             #     # check=True
             #     total=0
@@ -877,17 +877,17 @@ class RecoveryReportWizard(models.TransientModel):
                     if test_year_month==result:
                         total+=months_total_dict[month_key]
                         total_recovery+=months_recovery_dict[month_key]
-                worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
-                col+=3
-                worksheet.write_merge(row,row,col,col+2,total_recovery,style=yellow_style_title)
-                col+=3
+                worksheet.write_merge(row,row,col,col,total,style=yellow_style_title)
+                col+=1
+                worksheet.write_merge(row,row,col,col,total_recovery,style=yellow_style_title)
+                col+=1
             
             if not select_by_monthly_list:
-                worksheet.write_merge(row,row,col,col+1,final_total, style=yellow_style_title)
-                worksheet.write_merge(row,row,col+2,col+4,final_recovery, style=yellow_style_title)
+                worksheet.write_merge(row,row,col,col,final_total, style=yellow_style_title)
+                worksheet.write_merge(row,row,col+1,col+1,final_recovery, style=yellow_style_title)
                 if final_total>0 and final_recovery>0:
                     final_total_per =(final_recovery/final_total)*100
-                    worksheet.write_merge(row,row,col+5,col+6,str(round(final_total_per, 4))+' %',style=yellow_style_title)
+                    worksheet.write_merge(row,row,col+2,col+2,str(round(final_total_per, 4))+' %',style=yellow_style_title)
            
 #  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
 
