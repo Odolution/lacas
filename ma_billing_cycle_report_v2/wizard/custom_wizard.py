@@ -245,7 +245,7 @@ class RecoveryReportWizard(models.TransientModel):
                     # if match==False:
                     #     b_split= b.split(' ')
                     #     match= b_split[0]+' '+b_split[1]
-                    if b.startswith(match) and (b != 'lacas johar town a level' ) and (b != 'milestone model town campus' ) and (b != 'milestone model town senior campus' ):
+                    if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ):
                         total_total_Issuance_billing_branch += rec.total_Issuance_billing
                         total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
                         total_total_Recovery_paid_branch += rec.total_Recovery_paid
