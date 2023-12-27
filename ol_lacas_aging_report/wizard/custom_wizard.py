@@ -720,8 +720,8 @@ class agingsReportWizard(models.TransientModel):
 
                     } 
 
-            custom_data['student_branch'] = branch.name
-            custom_data['student_campus'] = branch.name
+            custom_data['student_branch'] = branch
+            custom_data['student_campus'] = branch
 
             for value in branch_wise_inv:
                 # if value.x_studio_previous_branch==branch:
