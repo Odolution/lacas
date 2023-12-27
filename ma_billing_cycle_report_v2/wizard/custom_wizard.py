@@ -249,6 +249,9 @@ class RecoveryReportWizard(models.TransientModel):
                         total_total_Issuance_billing_branch += rec.total_Issuance_billing
                         total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
                         total_total_Recovery_paid_branch += rec.total_Recovery_paid
+                        Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                        Total = Receivables + rec.total_Recovery_paid
+                        Bade_Dabts = rec.total_Issuance_billing - Total
                         total_Receivables_branch += Receivables
                         total_Total_branch += Total
                         total_Bade_Dabts_branch += Bade_Dabts
