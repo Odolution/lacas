@@ -729,8 +729,8 @@ class agingsReportWizard(models.TransientModel):
             for value in branch_wise_inv:
                 # if value.x_studio_previous_branch==branch:
                 
-                if value.payment_state=='paid':
-                    raise UserError(str(value.id) + "\t" + str(value.month_date) + "\t" + str(value.year_date))
+                # if value.payment_state=='paid':
+                #     raise UserError(str(value.id) + "\t" + str(value.month_date) + "\t" + str(value.year_date))
                     
 
                 # custom_data['student_branch'] = value.x_studio_previous_branch.display_name if  len(value.x_studio_previous_branch)==1  else ""
