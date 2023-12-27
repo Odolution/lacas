@@ -234,83 +234,86 @@ class RecoveryReportWizard(models.TransientModel):
             row=2
             col=4
             count = 0
+            first_record =self.account_report_line[0] 
+            b_split= first_record.split(' ')
+            match= b_split[0]+' '+b_split[1]
             for rec in self.account_report_line:
-                if rec:
-                    match=False
-                    for b in branch:
-                        if match==False:
-                            b_split= b.split(' ')
-                            match= b_split[0]+' '+b_split[1]
-                        if b.startswith(match):
-                            total_total_Issuance_billing_branch += rec.total_Issuance_billing
-                            total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
-                            total_total_Recovery_paid_branch += rec.total_Recovery_paid
-                            total_Receivables_branch += Receivables
-                            total_Total_branch += Total
-                            total_Bade_Dabts_branch += Bade_Dabts
+                if rec:       
+                    b= rec.branch_name.lower()      
+                    # rec.branch_name
+                    # if match==False:
+                    #     b_split= b.split(' ')
+                    #     match= b_split[0]+' '+b_split[1]
+                    if b.startswith(match):
+                        total_total_Issuance_billing_branch += rec.total_Issuance_billing
+                        total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
+                        total_total_Recovery_paid_branch += rec.total_Recovery_paid
+                        total_Receivables_branch += Receivables
+                        total_Total_branch += Total
+                        total_Bade_Dabts_branch += Bade_Dabts
+                    else:
+                        b_split= b.split(' ')
+                        match= b_split[0]+' '+b_split[1]
+                        worksheet.write_merge(row,row,0,0, '',  style=red_style_title)
+                        worksheet.write_merge(row,row,1,1, 'Total',  style=red_style_title)
+                        worksheet.write_merge(row,row,2,2, total_total_Issuance_billing_branch,  style=red_style_title)
+                        worksheet.write_merge(row,row,3,3,total_with_out_Withdrawn_billing_branch ,  style=red_style_title)
+                        worksheet.write_merge(row,row,4,4,total_total_Recovery_paid_branch,  style=red_style_title)
+                        worksheet.write_merge(row,row,5,5,total_Receivables_branch,  style=red_style_title)
+                        worksheet.write_merge(row,row,6,6,total_Total_branch,  style=red_style_title)
+                        worksheet.write_merge(row,row,7,7,total_Bade_Dabts_branch,  style=red_style_title)
+                        if total_total_Recovery_paid_branch and total_with_out_Withdrawn_billing_branch:
+                            total_Recovery_on_Enrolled_and_Paid_Bills_branch = (total_total_Recovery_paid_branch/total_with_out_Withdrawn_billing_branch)*100
                         else:
-                            b_split= b.split(' ')
-                            match= b_split[0]+' '+b_split[1]
-                            worksheet.write_merge(row,row,0,0, '',  style=red_style_title)
-                            worksheet.write_merge(row,row,1,1, 'Total',  style=red_style_title)
-                            worksheet.write_merge(row,row,2,2, total_total_Issuance_billing_branch,  style=red_style_title)
-                            worksheet.write_merge(row,row,3,3,total_with_out_Withdrawn_billing_branch ,  style=red_style_title)
-                            worksheet.write_merge(row,row,4,4,total_total_Recovery_paid_branch,  style=red_style_title)
-                            worksheet.write_merge(row,row,5,5,total_Receivables_branch,  style=red_style_title)
-                            worksheet.write_merge(row,row,6,6,total_Total_branch,  style=red_style_title)
-                            worksheet.write_merge(row,row,7,7,total_Bade_Dabts_branch,  style=red_style_title)
-                            if total_total_Recovery_paid_branch and total_with_out_Withdrawn_billing_branch:
-                                total_Recovery_on_Enrolled_and_Paid_Bills_branch = (total_total_Recovery_paid_branch/total_with_out_Withdrawn_billing_branch)*100
-                            else:
-                                total_Recovery_on_Enrolled_and_Paid_Bills_branch = 0
-                            worksheet.write_merge(row,row,8,8,  str(f"{total_Recovery_on_Enrolled_and_Paid_Bills_branch:.1f}")+"%" ,  style=red_style_title)
-                            if total_total_Recovery_paid_branch and total_total_Issuance_billing_branch:
-                                Total_Actual_Recovery_branch = (total_total_Recovery_paid_branch/total_total_Issuance_billing_branch)*100
-                            else:
-                                Total_Actual_Recovery_branch = 0
-                            worksheet.write_merge(row,row,9,9, str(f"{Total_Actual_Recovery_branch:.1f}")+"%",  style=red_style_title)
-                            row+=1
-
-                            total_total_Issuance_billing_branch=0
-                            total_with_out_Withdrawn_billing_branch=0
-                            total_total_Recovery_paid_branch=0
-                            total_Receivables_branch=0
-                            total_Total_branch=0
-                            total_Bade_Dabts_branch=0
-                        
-                        # print('Total')
-                        count +=1
-                        # Print row data
-                        worksheet.write_merge(row,row,0,0,count, style=style_title)
-                        worksheet.write_merge(row,row,1,1,rec.branch_name, style=style_title)
-                        worksheet.write_merge(row,row,2,2,rec.total_Issuance_billing, style=style_title)
-                        worksheet.write_merge(row,row,3,3,rec.with_out_Withdrawn_billing, style=style_title)
-                        worksheet.write_merge(row,row,4,4,rec.total_Recovery_paid, style=style_title)
-                        Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
-                        worksheet.write_merge(row,row,5,5,Receivables, style=style_title)
-                        Total = Receivables + rec.total_Recovery_paid
-                        worksheet.write_merge(row,row,6,6,Total, style=style_title)
-                        Bade_Dabts = rec.total_Issuance_billing - Total
-                        worksheet.write_merge(row,row,7,7,Bade_Dabts, style=style_title)
-                        if rec.total_Recovery_paid and rec.with_out_Withdrawn_billing:
-                            Recovery_on_Enrolled_and_Paid_Bills = (rec.total_Recovery_paid/rec.with_out_Withdrawn_billing)*100
+                            total_Recovery_on_Enrolled_and_Paid_Bills_branch = 0
+                        worksheet.write_merge(row,row,8,8,  str(f"{total_Recovery_on_Enrolled_and_Paid_Bills_branch:.1f}")+"%" ,  style=red_style_title)
+                        if total_total_Recovery_paid_branch and total_total_Issuance_billing_branch:
+                            Total_Actual_Recovery_branch = (total_total_Recovery_paid_branch/total_total_Issuance_billing_branch)*100
                         else:
-                            Recovery_on_Enrolled_and_Paid_Bills = 0
-                        worksheet.write_merge(row,row,8,8,str(f"{Recovery_on_Enrolled_and_Paid_Bills:.1f}")+"%", style=style_title)
-                        if rec.total_Recovery_paid and rec.total_Issuance_billing:
-                            Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
-                        else:
-                            Actual_Recovery = 0
-                        worksheet.write_merge(row,row,9,9,str(f"{Actual_Recovery:.1f}")+"%", style=style_title)
-
-                        total_total_Issuance_billing += rec.total_Issuance_billing
-                        total_with_out_Withdrawn_billing += rec.with_out_Withdrawn_billing
-                        total_total_Recovery_paid += rec.total_Recovery_paid
-                        total_Receivables += Receivables
-                        total_Total += Total
-                        total_Bade_Dabts += Bade_Dabts
-
+                            Total_Actual_Recovery_branch = 0
+                        worksheet.write_merge(row,row,9,9, str(f"{Total_Actual_Recovery_branch:.1f}")+"%",  style=red_style_title)
                         row+=1
+
+                        total_total_Issuance_billing_branch=0
+                        total_with_out_Withdrawn_billing_branch=0
+                        total_total_Recovery_paid_branch=0
+                        total_Receivables_branch=0
+                        total_Total_branch=0
+                        total_Bade_Dabts_branch=0
+                    
+                    # print('Total')
+                    count +=1
+                    # Print row data
+                    worksheet.write_merge(row,row,0,0,count, style=style_title)
+                    worksheet.write_merge(row,row,1,1,rec.branch_name, style=style_title)
+                    worksheet.write_merge(row,row,2,2,rec.total_Issuance_billing, style=style_title)
+                    worksheet.write_merge(row,row,3,3,rec.with_out_Withdrawn_billing, style=style_title)
+                    worksheet.write_merge(row,row,4,4,rec.total_Recovery_paid, style=style_title)
+                    Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                    worksheet.write_merge(row,row,5,5,Receivables, style=style_title)
+                    Total = Receivables + rec.total_Recovery_paid
+                    worksheet.write_merge(row,row,6,6,Total, style=style_title)
+                    Bade_Dabts = rec.total_Issuance_billing - Total
+                    worksheet.write_merge(row,row,7,7,Bade_Dabts, style=style_title)
+                    if rec.total_Recovery_paid and rec.with_out_Withdrawn_billing:
+                        Recovery_on_Enrolled_and_Paid_Bills = (rec.total_Recovery_paid/rec.with_out_Withdrawn_billing)*100
+                    else:
+                        Recovery_on_Enrolled_and_Paid_Bills = 0
+                    worksheet.write_merge(row,row,8,8,str(f"{Recovery_on_Enrolled_and_Paid_Bills:.1f}")+"%", style=style_title)
+                    if rec.total_Recovery_paid and rec.total_Issuance_billing:
+                        Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
+                    else:
+                        Actual_Recovery = 0
+                    worksheet.write_merge(row,row,9,9,str(f"{Actual_Recovery:.1f}")+"%", style=style_title)
+
+                    total_total_Issuance_billing += rec.total_Issuance_billing
+                    total_with_out_Withdrawn_billing += rec.with_out_Withdrawn_billing
+                    total_total_Recovery_paid += rec.total_Recovery_paid
+                    total_Receivables += Receivables
+                    total_Total += Total
+                    total_Bade_Dabts += Bade_Dabts
+
+                    row+=1
             worksheet.write_merge(row,row,0,0, '',  style=red_style_title)
             worksheet.write_merge(row,row,1,1, 'Total',  style=red_style_title)
             worksheet.write_merge(row,row,2,2, total_total_Issuance_billing,  style=red_style_title)
