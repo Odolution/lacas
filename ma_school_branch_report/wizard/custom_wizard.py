@@ -629,8 +629,6 @@ class RecoveryReportWizard(models.TransientModel):
                         else:
                             
                             col=4
-                            if len(months_total_dict) != len(months_recovery_dict):
-                                raise UserError("SOME ERROR")
                             for month_key, count in months_total_dict.items():
                                 original_string = month_key
                                 split_parts = original_string.split('-')
@@ -638,14 +636,14 @@ class RecoveryReportWizard(models.TransientModel):
                                 if substring == result:
                                     worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                     col+=3
-                                    # HAMZA NAVEED
-                                    for month_key, count in months_recovery_dict.items():
-                                        original_string = month_key
-                                        split_parts = original_string.split('-')
-                                        result = split_parts[0]
-                                        if substring == result:
-                                            worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                                            col+=3
+                                # HAMZA NAVEED
+                                for month_key, count in months_recovery_dict.items():
+                                    original_string = month_key
+                                    split_parts = original_string.split('-')
+                                    result = split_parts[0]
+                                    if substring == result:
+                                        worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                        col+=3
                                 
                             # # HAMZA NAVEED
                             # for month_key, count in months_recovery_dict.items():
@@ -736,14 +734,14 @@ class RecoveryReportWizard(models.TransientModel):
                                     if rec.branch_name == result:
                                         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
                                         col+=3
-                                        # HAMZA NAVEED
-                                        for month_key, count in months_recovery_dict.items():
-                                            original_string = month_key
-                                            split_parts = original_string.split('-')
-                                            result = split_parts[0]
-                                            if rec.branch_name == result:
-                                                worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                                                col+=3
+                                    # HAMZA NAVEED
+                                    for month_key, count in months_recovery_dict.items():
+                                        original_string = month_key
+                                        split_parts = original_string.split('-')
+                                        result = split_parts[0]
+                                        if rec.branch_name == result:
+                                            worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                            col+=3
                                 # # HAMZA NAVEED
                                 # for month_key, count in months_recovery_dict.items():
                                 #     original_string = month_key
