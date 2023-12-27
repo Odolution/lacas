@@ -1219,7 +1219,6 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['actual_recievable_oct_2'] += (int(value.bill_amount))
 
                 elif value.month_date == "November" and value.year_date=='23':
-                    raise UserError(str(value.id) + "\t" + str(value))
                     if value.payment_state=='not_paid':
                         custom_data['recievable_nov_2'] += value.due_amount
                     if value.payment_state=='paid':
@@ -1239,6 +1238,9 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['thirdmon_nov_2'] += (int(value.bill_amount))
                             if diff.days>120:
                                 custom_data['actual_recievable_nov_2'] += (int(value.bill_amount))
+                    if value.id==222922:
+                        x = custom_data['recievable_nov_2']
+                        raise UserError(x)
 
                 elif value.month_date == "December" and value.year_date=='23':
                     if value.payment_state=='not_paid':
