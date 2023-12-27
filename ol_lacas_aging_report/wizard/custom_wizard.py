@@ -1414,11 +1414,8 @@ class agingsReportWizard(models.TransientModel):
             x += "*"*10 + "\t" + custom_data['student_campus'] + "\t" + "*"*10
             x += "\n"
 
-            count = 0
-            for i,j in custom_data.items():
-                if count==0 or count==1: continue
-                x += str(i) + "\t" + str(j) + "\n"
-                count +=1
+            for i in custom_data:
+                x += str(i) + "\t" + str(custom_data[i]) + "\n"
             raise UserError(x)
 
                 
