@@ -363,10 +363,10 @@ class agingsReportWizard(models.TransientModel):
         branch_lst=[]
 
         for inv in move_ids:
-            # if len(inv.x_studio_previous_branch)==1:
-            if inv.x_studio_previous_branch not in branch_lst:
-                campus=inv.x_studio_previous_branch
-                branch_lst.append(str(campus))
+            if inv.x_studio_previous_branch!=False:
+                if inv.x_studio_previous_branch not in branch_lst :
+                    campus=inv.x_studio_previous_branch
+                    branch_lst.append(str(campus))
 
         lines=[]
         _logger.info(f"branch: {branch_lst}")
@@ -374,10 +374,12 @@ class agingsReportWizard(models.TransientModel):
 
 
         for branch in branch_lst:
+            _logger.info(f"loop: {branch}")
 
            
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            _logger.info(f"invoices length: {len(branch_wise_inv)}")
             
             custom_data = {
                    
