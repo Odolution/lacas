@@ -242,12 +242,12 @@ class RecoveryReportWizard(models.TransientModel):
                             b_split= b.split(' ')
                             match= b_split[0]+' '+b_split[1]
                         if b.startswith(match):
-                        total_total_Issuance_billing_branch += rec.total_Issuance_billing
-                        total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
-                        total_total_Recovery_paid_branch += rec.total_Recovery_paid
-                        total_Receivables_branch += Receivables
-                        total_Total_branch += Total
-                        total_Bade_Dabts_branch += Bade_Dabts
+                            total_total_Issuance_billing_branch += rec.total_Issuance_billing
+                            total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
+                            total_total_Recovery_paid_branch += rec.total_Recovery_paid
+                            total_Receivables_branch += Receivables
+                            total_Total_branch += Total
+                            total_Bade_Dabts_branch += Bade_Dabts
                         else:
                             b_split= b.split(' ')
                             match= b_split[0]+' '+b_split[1]
