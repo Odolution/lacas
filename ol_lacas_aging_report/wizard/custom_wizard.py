@@ -362,7 +362,6 @@ class agingsReportWizard(models.TransientModel):
         move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         branch_lst=[]
 
-        raise UserError(move_ids)
 
         for inv in move_ids:
             if inv.x_studio_previous_branch!=False:
@@ -382,6 +381,7 @@ class agingsReportWizard(models.TransientModel):
             # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             _logger.info(f"invoices length: {len(branch_wise_inv)}")
+            raise UserError(branch_wise_inv)
             
             custom_data = {
                    
