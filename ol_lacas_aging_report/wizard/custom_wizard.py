@@ -6,8 +6,8 @@ import xlsxwriter
 _
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
-
-
+import logging
+_logger = logging.getLogger(__name__)
 import base64
 
 import io
@@ -363,19 +363,21 @@ class agingsReportWizard(models.TransientModel):
         branch_lst=[]
 
         for inv in move_ids:
-            if len(inv.program_ids)==1:
-                if inv.program_ids not in branch_lst:
-                    branch_lst.append(inv.program_ids)
+            # if len(inv.x_studio_previous_branch)==1:
+            if inv.x_studio_previous_branch not in branch_lst:
+                campus=inv.x_studio_previous_branch
+                branch_lst.append(str(campus))
 
         lines=[]
+        _logger.info(f"branch: {branch_lst}")
 
 
 
         for branch in branch_lst:
 
            
-            # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
-            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('program_ids','=',branch.id),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            # branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch.id),('journal_id','=',125),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
+            branch_wise_inv=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('x_studio_previous_branch','=',branch),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
             
             custom_data = {
                    
@@ -722,11 +724,11 @@ class agingsReportWizard(models.TransientModel):
             custom_data['student_campus'] = branch.name
 
             for value in branch_wise_inv:
-                # if value.program_ids==branch:
+                # if value.x_studio_previous_branch==branch:
 
                     
 
-                # custom_data['student_branch'] = value.program_ids.display_name if  len(value.program_ids)==1  else ""
+                # custom_data['student_branch'] = value.x_studio_previous_branch.display_name if  len(value.x_studio_previous_branch)==1  else ""
                 # custom_data['student_campus'] = value.campus if value.campus else ''
 
                 if value.month_date == "January" and value.year_date=='22':
