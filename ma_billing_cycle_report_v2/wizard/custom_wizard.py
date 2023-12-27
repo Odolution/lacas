@@ -189,6 +189,8 @@ class RecoveryReportWizard(models.TransientModel):
             
             style_title = xlwt.easyxf(
             " align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
+            header = xlwt.easyxf('pattern: pattern solid;'
+            "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
             "font:bold on,; align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             yellow_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour light_green;'
@@ -209,7 +211,7 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet = workbook.add_sheet('Students Branch Std')
             formatted_date = self.from_date.strftime('%b-%Y')
             date_string= 'Billing '+str(formatted_date)+" '%'age wise recovery As on "+ str(self.to_date)
-            worksheet.write_merge(0,0,2,6,date_string, style=style_title)
+            worksheet.write_merge(0,0,2,6,date_string, style=header)
 
             worksheet.write_merge(1,2,0,0, 'S#',  style=red_style_title)
             worksheet.write_merge(1,2,1,1, 'Branch',  style=red_style_title)
