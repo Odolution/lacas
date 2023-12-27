@@ -278,12 +278,15 @@ class RecoveryReportWizard(models.TransientModel):
                         worksheet.write_merge(row,row,9,9, str(f"{Total_Actual_Recovery_branch:.1f}")+"%",  style=red_style_title)
                         row+=1
 
-                        total_total_Issuance_billing_branch=0
-                        total_with_out_Withdrawn_billing_branch=0
-                        total_total_Recovery_paid_branch=0
-                        total_Receivables_branch=0
-                        total_Total_branch=0
-                        total_Bade_Dabts_branch=0
+                        total_total_Issuance_billing_branch = rec.total_Issuance_billing
+                        total_with_out_Withdrawn_billing_branch = rec.with_out_Withdrawn_billing
+                        total_total_Recovery_paid_branch = rec.total_Recovery_paid
+                        Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                        Total = Receivables + rec.total_Recovery_paid
+                        Bade_Dabts = rec.total_Issuance_billing - Total
+                        total_Receivables_branch = Receivables
+                        total_Total_branch = Total
+                        total_Bade_Dabts_branch = Bade_Dabts
                     
                     # print('Total')
                     count +=1
