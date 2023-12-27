@@ -635,6 +635,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 result = split_parts[0]
                                 if substring == result:
                                     worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                    raise UserError(count) #HAMZAN
                                     col+=3
                             # HAMZA NAVEED
                             for month_key, count in months_recovery_dict.items():
