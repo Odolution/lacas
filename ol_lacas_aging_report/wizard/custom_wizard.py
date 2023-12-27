@@ -362,6 +362,8 @@ class agingsReportWizard(models.TransientModel):
         move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         branch_lst=[]
 
+        raise UserError(move_ids)
+
         for inv in move_ids:
             if inv.x_studio_previous_branch!=False:
                 if inv.x_studio_previous_branch not in branch_lst :
