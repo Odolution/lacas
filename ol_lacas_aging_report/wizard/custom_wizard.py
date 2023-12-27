@@ -1244,7 +1244,7 @@ class agingsReportWizard(models.TransientModel):
                     # if value.id == 222922:
                     #     raise UserError(str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(custom_data['recievable_nov_2']))
                     if value.id == 220632:
-                        raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + "\t" + str(custom_data['recievable_nov_2']))
+                        raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
 
 
 
