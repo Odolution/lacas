@@ -254,16 +254,16 @@ class RecoveryReportWizard(models.TransientModel):
                     enrolled_unpaid_student_count=0
                     students= env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
                     for student in students:
-                    bills= env['account.move'].search([
-                                            ('x_studio_previous_branch', '=', rec.branch_name),
-                                            ('move_type','=','out_invoice'),
-                                            ('payment_state', '=', 'not_paid'),
-                                            ('student_ids_ol.id', '=', student.id),
-                                            ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
-                                        ],limit=1)
-                                        
-                    if bills:
-                        enrolled_unpaid_student_count+=1
+                        bills= env['account.move'].search([
+                                                ('x_studio_previous_branch', '=', rec.branch_name),
+                                                ('move_type','=','out_invoice'),
+                                                ('payment_state', '=', 'not_paid'),
+                                                ('student_ids_ol.id', '=', student.id),
+                                                ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
+                                            ],limit=1)
+                                            
+                        if bills:
+                            enrolled_unpaid_student_count+=1
                     # rec.branch_name
                     # if match==False:
                     #     b_split= b.split(' ')
