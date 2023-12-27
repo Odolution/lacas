@@ -650,9 +650,9 @@ class RecoveryReportWizard(models.TransientModel):
                             for month_key in months_total_dict:
                                 result = month_key.split('-')[0]
                                 if substring == result:
-                                    worksheet.write_merge(row,row,col,col+2,str(months_total_dict[month_key]), style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col,col+2,months_total_dict[month_key], style=yellow_style_title)
                                     col += 3
-                                    worksheet.write_merge(row,row,col,col+2,str(months_recovery_dict[month_key]), style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col,col+2,months_recovery_dict[month_key], style=yellow_style_title)
                                     col += 3
 
                                     
