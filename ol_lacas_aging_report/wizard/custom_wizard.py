@@ -1248,7 +1248,7 @@ class agingsReportWizard(models.TransientModel):
                     # PAID
                     if value.id == 220632:
                     #     raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
-                        raise UserError(str(value.payment_state) + "\t" + str((int(value.amount_total_signed))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']) + "\t" + str(custom_data['ondue_nov_2']) + "\t" + str(custom_data['afterdue_nov_2']) + "\t" + str(custom_data['firstmon_nov_2']) + "\t" + str(custom_data['secdue_nov_2']) + "\t" + str(custom_data['thirddue_nov_2']))
+                        raise UserError(str(value.payment_state) + "\t" + str((int(value.amount_total_signed))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']) + "\t" + str(custom_data['ondue_nov_2']) + "\t" + str(custom_data['afterdue_nov_2']) + "\t" + str(custom_data['firstmon_nov_2']) + "\t" + str(custom_data['secmon_nov_2']) + "\t" + str(custom_data['thirdmon_nov_2']))
 
 
 
