@@ -29,6 +29,7 @@ class AccountMoveReport(models.TransientModel):
     total_Issuance_billing =fields.Float('total_Issuance_billing')
     with_out_Withdrawn_billing =fields.Float('with_out_Withdrawn_billing')
     total_Recovery_paid =fields.Float('total_Recovery_paid')
+    total_bad_debt =fields.Float('total_bad_debt')
    
     
 
@@ -94,6 +95,7 @@ class RecoveryReportWizard(models.TransientModel):
         total_Issuance_billing_list={}
         with_out_Withdrawn_billing_list={}
         total_Recovery_paid_list={}
+        total_bad_debts_list={}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -125,12 +127,15 @@ class RecoveryReportWizard(models.TransientModel):
             total_count=0
             with_out_Withdrawn=0
             total_Recovery_paid=0
+            total_bad_debt=0
             for bill_rec in school_bill_ids:           
                 # total_count += float(bill_rec.amount_total)
                 total_count += float(bill_rec.net_amount)
                 if bill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
                     # with_out_Withdrawn += float(bill_rec.amount_total)
                     with_out_Withdrawn += float(bill_rec.net_amount)
+                elif bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="not_paid":
+                    total_bad_debt += float(bill_rec.net_amount)
                 
                 if bill_rec.payment_state =="paid":
                     if bill_rec.ol_payment_date:
@@ -142,16 +147,11 @@ class RecoveryReportWizard(models.TransientModel):
                             # total_Recovery_paid += float(bill_rec.amount_total)
                             total_Recovery_paid += float(bill_rec.net_amount)
 
-                    # if month_key in billing_counts:
-                    #     billing_counts[month_key] += float(bill_rec.amount_total)
-                    #     total_count += float(bill_rec.amount_total)
-                    # else:
-                    #     billing_counts[month_key] = float(bill_rec.amount_total)
-                    #     total_count += float(bill_rec.amount_total)
 
             total_Issuance_billing_list[select_new] = total_count
             with_out_Withdrawn_billing_list[select_new] = with_out_Withdrawn
             total_Recovery_paid_list[select_new] = total_Recovery_paid
+            total_bad_debts_list[select_new] = total_bad_debt
     
 
 
@@ -161,12 +161,14 @@ class RecoveryReportWizard(models.TransientModel):
             billing_view = total_Issuance_billing_list[name_view]
             with_out_Withdrawn_billing = with_out_Withdrawn_billing_list[name_view]
             total_Recovery_paid_final = total_Recovery_paid_list[name_view]
+            total_bad_debts_final = total_bad_debts_list[name_view]
             mvl=self.env['billing.student.report.line'].create({
                                         
                 "branch_name":name_view,
                 "total_Issuance_billing":billing_view,
                 "with_out_Withdrawn_billing":with_out_Withdrawn_billing,
                 "total_Recovery_paid":total_Recovery_paid_final,
+                "total_bad_debt":total_bad_debts_final,
             })
             lines.append(mvl.id)
         
