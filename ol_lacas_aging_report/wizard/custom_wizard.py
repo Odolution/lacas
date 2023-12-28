@@ -1228,7 +1228,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            raise UserError(diff)
+                            # raise UserError(diff)
                             if diff.days >0 and diff.days<11:
                                 custom_data['ondue_nov_2'] += (int(value.amount_residual_signed))
                             if diff.days >10 and diff.days<31:
@@ -1247,9 +1247,9 @@ class agingsReportWizard(models.TransientModel):
                     #     raise UserError(str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(custom_data['recievable_nov_2']))
                         # raise UserError(str(value.payment_state) + "\t" + str(value.amount_residual_signed) + "\t" + str(custom_data['recievable_nov_2']))
                     
-                    if value.payment_state =="paid":
-                    #     raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
-                        raise UserError(str(value.id) + "\t" + str((int(value.amount_total_signed))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']) + "\t" + str(custom_data['ondue_nov_2']) + "\t" + str(custom_data['afterdue_nov_2']) + "\t" + str(custom_data['firstmon_nov_2']) + "\t" + str(custom_data['secmon_nov_2']) + "\t" + str(custom_data['thirdmon_nov_2']))
+                    # if value.payment_state =="paid":
+                    # #     raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
+                    #     raise UserError(str(value.id) + "\t" + str((int(value.amount_total_signed))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']) + "\t" + str(custom_data['ondue_nov_2']) + "\t" + str(custom_data['afterdue_nov_2']) + "\t" + str(custom_data['firstmon_nov_2']) + "\t" + str(custom_data['secmon_nov_2']) + "\t" + str(custom_data['thirdmon_nov_2']))
 
 
 
