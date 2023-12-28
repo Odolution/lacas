@@ -726,6 +726,10 @@ class agingsReportWizard(models.TransientModel):
             custom_data['student_branch'] = branch
             custom_data['student_campus'] = branch
 
+            # HAMZA NAVEED
+            if custom_data['student_branch'] == "LACAS Burki A Level":
+                x = f"********************{custom_data['student_branch']}********************"
+
             for value in branch_wise_inv:
                 # if value.x_studio_previous_branch==branch:
                 
@@ -1044,6 +1048,10 @@ class agingsReportWizard(models.TransientModel):
                             if diff.days>120:
                                 custom_data['actual_recievable_feb_2'] += (int(value.amount_total_signed))
 
+                            # HAMZA NAVEED
+                            if custom_data['student_branch'] == "LACAS Burki A Level":
+                                x += f"{value.name}\t PayDate: {value.ol_payment_date}\t InvoiceDate: {value.first_date}\t Diff: {diff}\n"
+
 
                 elif value.month_date == "March"and value.year_date=='23':
                     if value.payment_state=='not_paid':
@@ -1272,6 +1280,9 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['thirdmon_dec_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
                                 custom_data['actual_recievable_dec_2'] += (int(value.amount_total_signed))
+
+            # HAMZA NAVEED
+            if custom_data['student_branch'] == "LACAS Burki A Level": raise UserError(x)
 
             tr_jan=custom_data['ondue_jan']+custom_data['afterdue_jan']+ custom_data['firstmon_jan']+custom_data['secmon_jan']+custom_data['thirdmon_jan']+ custom_data['actual_recievable_jan']
             bd_jan=custom_data['recievable_jan']-tr_jan
