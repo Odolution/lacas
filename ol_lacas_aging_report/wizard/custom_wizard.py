@@ -1045,6 +1045,8 @@ class agingsReportWizard(models.TransientModel):
                                 custom_data['secmon_feb_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
                                 custom_data['thirdmon_feb_2'] += (int(value.amount_total_signed))
+                                if custom_data['student_branch'] == "LACAS Burki A Level":
+                                    x += f"{value.amount_total_signed}"
                             if diff.days>120:
                                 custom_data['actual_recievable_feb_2'] += (int(value.amount_total_signed))
 
