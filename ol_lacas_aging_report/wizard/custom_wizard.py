@@ -1241,14 +1241,14 @@ class agingsReportWizard(models.TransientModel):
                             if diff.days>120:
                                 custom_data['actual_recievable_nov_2'] += (int(value.amount_residual_signed))
                     # HAMZA NAVEED
-                    if value.id == 222922:
+                    # if value.id == 222922:
                     # UNPAID
                     #     raise UserError(str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(custom_data['recievable_nov_2']))
-                        raise UserError(str(value.payment_state) + "\t" + str(value.amount_residual_signed) + "\t" + str(custom_data['recievable_nov_2']))
+                        # raise UserError(str(value.payment_state) + "\t" + str(value.amount_residual_signed) + "\t" + str(custom_data['recievable_nov_2']))
                     # PAID
-                    # if value.id == 220632:
+                    if value.id == 220632:
                     #     raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
-                    #     raise UserError(str(value.payment_state) + "\t" + str((int(value.amount_total_signed))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
+                        raise UserError(str(value.payment_state) + "\t" + str((int(value.amount_total_signed))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']) + "\t" + str(custom_data['ondue_nov_2']) + "\t" + str(custom_data['afterdue_nov_2']) + "\t" + str(custom_data['firstmon_nov_2']) + "\t" + str(custom_data['secdue_nov_2']) + "\t" + str(custom_data['thirddue_nov_2']))
 
 
 
