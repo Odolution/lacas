@@ -1232,7 +1232,7 @@ class agingsReportWizard(models.TransientModel):
                             # raise UserError(f"ID: {value.id}\npayment_date: {value.ol_payment_date}\ninvoice_date: {value.invoice_date}\nfirst_date: {first_date}\nDiff: {diff}\n Diff.days: {diff.days}")
 
                             if diff.days<11:
-                                raise UserError("Test")
+                                # raise UserError("Test")
                                 custom_data['ondue_nov_2'] += (int(value.amount_residual_signed))
                                 raise UserError(f"{custom_data['ondue_nov_2']}\n{value.amount_residual_signed}")
                             if diff.days >10 and diff.days<31:
