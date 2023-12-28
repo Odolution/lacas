@@ -1234,6 +1234,7 @@ class agingsReportWizard(models.TransientModel):
                             if diff.days<11:
                                 raise UserError("Test")
                                 custom_data['ondue_nov_2'] += (int(value.amount_residual_signed))
+                                raise UserError(f"{custom_data['ondue_nov_2']}\n{value.amount_residual_signed}")
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_nov_2'] += (int(value.amount_residual_signed))
                             if diff.days>30 and diff.days<61:
