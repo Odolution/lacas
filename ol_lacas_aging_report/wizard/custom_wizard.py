@@ -1050,7 +1050,7 @@ class agingsReportWizard(models.TransientModel):
 
                             # HAMZA NAVEED
                             if custom_data['student_branch'] == "LACAS Burki A Level":
-                                x += f"{value.name}\t PayDate: {value.ol_payment_date}\t InvoiceDate: {value.first_date}\t Diff: {diff}\n"
+                                x += f"{value.name}\t PayDate: {value.ol_payment_date}\t InvoiceDate: {first_date}\t Diff: {diff}\n"
 
 
                 elif value.month_date == "March"and value.year_date=='23':
