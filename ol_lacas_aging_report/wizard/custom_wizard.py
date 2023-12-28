@@ -746,7 +746,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_jan'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_jan'] += (int(value.amount_total_signed))
@@ -769,7 +769,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_feb'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_feb'] += (int(value.amount_total_signed))
@@ -790,7 +790,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_mar'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_mar'] += (int(value.amount_total_signed))
@@ -812,7 +812,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_apr'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_apr'] += (int(value.amount_total_signed))
@@ -834,7 +834,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_may'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_may'] += (int(value.amount_total_signed))
@@ -856,7 +856,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_jun'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_jun'] += (int(value.amount_total_signed))
@@ -878,7 +878,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_jul'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_jul'] += (int(value.amount_total_signed))
@@ -900,7 +900,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_aug'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_aug'] += (int(value.amount_total_signed))
@@ -921,7 +921,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_sep'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_sep'] += (int(value.amount_total_signed))
@@ -942,7 +942,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_oct'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_oct'] += (int(value.amount_total_signed))
@@ -964,7 +964,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_nov'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_nov'] += (int(value.amount_total_signed))
@@ -986,7 +986,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_dec'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_dec'] += (int(value.amount_total_signed))
@@ -1008,7 +1008,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_jan_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_jan_2'] += (int(value.amount_total_signed))
@@ -1031,7 +1031,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_feb_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_feb_2'] += (int(value.amount_total_signed))
@@ -1053,7 +1053,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_mar_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_mar_2'] += (int(value.amount_total_signed))
@@ -1076,7 +1076,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_apr_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_apr_2'] += (int(value.amount_total_signed))
@@ -1098,7 +1098,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_may_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_may_2'] += (int(value.amount_total_signed))
@@ -1120,7 +1120,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_jun_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_jun_2'] += (int(value.amount_total_signed))
@@ -1142,7 +1142,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_jul_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_jul_2'] += (int(value.amount_total_signed))
@@ -1163,7 +1163,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_aug_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_aug_2'] += (int(value.amount_total_signed))
@@ -1185,7 +1185,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_sep_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_sep_2'] += (int(value.amount_total_signed))
@@ -1207,7 +1207,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_oct_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_oct_2'] += (int(value.amount_total_signed))
@@ -1263,7 +1263,7 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
+                            if diff.days<11:
                                 custom_data['ondue_dec_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
                                 custom_data['afterdue_dec_2'] += (int(value.amount_total_signed))
