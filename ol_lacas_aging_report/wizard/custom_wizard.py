@@ -1249,9 +1249,9 @@ class agingsReportWizard(models.TransientModel):
                     #     raise UserError(str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(custom_data['recievable_nov_2']))
                         # raise UserError(str(value.payment_state) + "\t" + str(value.amount_total_signed) + "\t" + str(custom_data['recievable_nov_2']))
                     
-                    if value.payment_state =="paid":
+                    # if value.payment_state =="paid":
                     #     raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
-                        raise UserError(f"{value.id}\n{(int(value.amount_total_signed))}\n{value.bill_amount}\n{custom_data['recievable_nov_2']}\n{custom_data['ondue_nov_2']}\n{custom_data['afterdue_nov_2']}\n{custom_data['firstmon_nov_2']}\n{custom_data['secmon_nov_2']}\n{custom_data['thirdmon_nov_2']}")
+                        # raise UserError(f"{value.id}\n{(int(value.amount_total_signed))}\n{value.bill_amount}\n{custom_data['recievable_nov_2']}\n{custom_data['ondue_nov_2']}\n{custom_data['afterdue_nov_2']}\n{custom_data['firstmon_nov_2']}\n{custom_data['secmon_nov_2']}\n{custom_data['thirdmon_nov_2']}")
 
 
 
