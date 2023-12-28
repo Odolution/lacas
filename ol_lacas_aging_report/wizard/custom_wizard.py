@@ -1229,7 +1229,7 @@ class agingsReportWizard(models.TransientModel):
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
 
-                            # raise UserError(f"payment_date: {value.ol_payment_date}\ninvoice_date: {value.invoice_date}\nfirst_date: {first_date}\nDiff: {diff}")
+                            raise UserError(f"ID: {value.id}\npayment_date: {value.ol_payment_date}\ninvoice_date: {value.invoice_date}\nfirst_date: {first_date}\nDiff: {diff}\n Diff.days: {diff.days}")
 
                             if diff.days<11:
                                 custom_data['ondue_nov_2'] += (int(value.amount_residual_signed))
