@@ -1228,9 +1228,6 @@ class agingsReportWizard(models.TransientModel):
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-
-                            # raise UserError(f"ID: {value.id}\npayment_date: {value.ol_payment_date}\ninvoice_date: {value.invoice_date}\nfirst_date: {first_date}\nDiff: {diff}\n Diff.days: {diff.days}")
-
                             if diff.days<11:
                                 custom_data['ondue_nov_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
@@ -1425,15 +1422,15 @@ class agingsReportWizard(models.TransientModel):
                 bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']*100
 
 
-            # HAMZA NAVEED
-            x = "*"*10 + "\t" + custom_data['student_branch'] + "\t" + "*"*10
-            x += "\n"
-            x += "*"*10 + "\t" + custom_data['student_campus'] + "\t" + "*"*10
-            x += "\n"
+            # # HAMZA NAVEED
+            # x = "*"*10 + "\t" + custom_data['student_branch'] + "\t" + "*"*10
+            # x += "\n"
+            # x += "*"*10 + "\t" + custom_data['student_campus'] + "\t" + "*"*10
+            # x += "\n"
 
-            for i in custom_data:
-                x += str(i) + "\t" + str(custom_data[i]) + "\n"
-            raise UserError(x)
+            # for i in custom_data:
+            #     x += str(i) + "\t" + str(custom_data[i]) + "\n"
+            # raise UserError(x)
 
                 
 
