@@ -1284,7 +1284,7 @@ class agingsReportWizard(models.TransientModel):
 
             # HAMZA NAVEED
             if custom_data['student_branch'] == "LACAS Burki A Level":
-                x += f"\n{custom_data['ondue_feb_2']}\t{custom_data['afterdue_feb_2']}\t{custom_data['firstmon_feb_2']}\t{custom_data['secondmon_feb_2']}\t{custom_data['thirdmon_feb_2']}\t{custom_data['actual_recievable_feb_2']}"
+                x += f"\n{custom_data['ondue_feb_2']}\t{custom_data['afterdue_feb_2']}\t{custom_data['firstmon_feb_2']}\t{custom_data['secmon_feb_2']}\t{custom_data['thirdmon_feb_2']}\t{custom_data['actual_recievable_feb_2']}"
                 raise UserError(x)
 
             tr_jan=custom_data['ondue_jan']+custom_data['afterdue_jan']+ custom_data['firstmon_jan']+custom_data['secmon_jan']+custom_data['thirdmon_jan']+ custom_data['actual_recievable_jan']
