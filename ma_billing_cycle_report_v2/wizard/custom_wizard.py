@@ -273,7 +273,7 @@ class RecoveryReportWizard(models.TransientModel):
                             ('invoice_date', '>=', self.from_date),
                             ('invoice_date', '<=', self.to_date),
                         ])
-                    raise UserError(bill)
+                    raise UserError(bills)
                     enrolled_unpaid_student_count = len(set(bills.mapped('student_ids_ol.id')))
                     if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ):
                         total_total_Issuance_billing_branch += rec.total_Issuance_billing
