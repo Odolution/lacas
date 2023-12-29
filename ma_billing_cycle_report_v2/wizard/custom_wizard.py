@@ -372,7 +372,7 @@ class RecoveryReportWizard(models.TransientModel):
                     total_enrolled_unpaid_student_count+= enrolled_unpaid_student_count
 
                     row+=1
-            raise UserError(bills)
+            raise UserError(b_dict)
             
             worksheet.write_merge(row,row,0,0, '',  style=red_style_title)
             worksheet.write_merge(row,row,1,1, 'Total',  style=red_style_title)
