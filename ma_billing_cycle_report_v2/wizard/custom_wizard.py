@@ -20,6 +20,12 @@ except ImportError:
     xlwt = None
 
 
+class Student(models.Model):
+    _inherit='account.move'
+
+    current_enrollment_status_dev= fields.Many2one(related= 'student_ids_ol.x_last_enrollment_status_id',readonly=True,store=True,string='Enrollment status for devlopment')
+
+
 
 class AccountMoveReport(models.TransientModel):
     _name = 'billing.student.report.line'
@@ -268,7 +274,8 @@ class RecoveryReportWizard(models.TransientModel):
                             ('state', '=', 'posted'),
                             # ('student_ids_ol.id', 'in', student_ids),
                             # ('x_studio_enrollment_statusbills.name', '=', 'Enrolled'),
-                            ('student_ids_ol.x_last_enrollment_status_id.name', '=', 'Enrolled'),
+                            ('current_enrollment_status_dev.name', '=', 'Enrolled'),
+                            # ('student_ids_ol.x_last_enrollment_status_id.name', '=', 'Enrolled'),
                             ('payment_state', '=', 'not_paid'),
                             ('invoice_date', '>=', self.from_date),
                             ('invoice_date', '<=', self.to_date),
