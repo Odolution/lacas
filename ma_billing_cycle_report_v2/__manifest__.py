@@ -13,7 +13,7 @@
     'website': '',
     'images': [
     ],
-    'depends': ["account","base",
+    'depends': ["account","base","ol_lacas_custom_trees"
     ],
     'data': [
         
