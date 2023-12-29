@@ -270,21 +270,21 @@ class RecoveryReportWizard(models.TransientModel):
                             year_in_payment = payment_date.strftime('%y')
 
                             if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                total_count_paid += float(bill_rec.amount_total)
+                                total_count_paid += float(bill_rec.net_amount)
                                 # HAMZA NAVEED
                                 if month_key in billing_counts_paid:
-                                    billing_counts_paid[month_key] += float(bill_rec.amount_total)
+                                    billing_counts_paid[month_key] += float(bill_rec.net_amount)
                                 else:
-                                    billing_counts_paid[month_key] = float(bill_rec.amount_total)
+                                    billing_counts_paid[month_key] = float(bill_rec.net_amount)
 
 
 
                     if month_key in billing_counts:
-                        billing_counts[month_key] += float(bill_rec.amount_total)
-                        total_count += float(bill_rec.amount_total)
+                        billing_counts[month_key] += float(bill_rec.net_amount)
+                        total_count += float(bill_rec.net_amount)
                     else:
-                        billing_counts[month_key] = float(bill_rec.amount_total)
-                        total_count += float(bill_rec.amount_total)
+                        billing_counts[month_key] = float(bill_rec.net_amount)
+                        total_count += float(bill_rec.net_amount)
 
             billing_list_paid[select_new] = total_count_paid
             billing_list[select_new] = total_count
@@ -385,20 +385,20 @@ class RecoveryReportWizard(models.TransientModel):
                                     year_in_payment = payment_date.strftime('%y')
 
                                     if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                        total_count_paid += float(bill_rec.amount_total)
+                                        total_count_paid += float(bill_rec.net_amount)
                                         # HAMZA NAVEED
                                         if month_key in by_monthly_billing_counts_paid:
-                                            by_monthly_billing_counts_paid[month_key] += float(bill_rec.amount_total)
+                                            by_monthly_billing_counts_paid[month_key] += float(bill_rec.net_amount)
                                         else:
-                                            by_monthly_billing_counts_paid[month_key] = float(bill_rec.amount_total)
+                                            by_monthly_billing_counts_paid[month_key] = float(bill_rec.net_amount)
 
 
 
                             if month_key in by_monthly_billing_counts:
-                                by_monthly_billing_counts[month_key] += float(bill_rec.amount_total)
+                                by_monthly_billing_counts[month_key] += float(bill_rec.net_amount)
                                 total_count += float(bill_rec.amount_total)
                             else:
-                                by_monthly_billing_counts[month_key] = float(bill_rec.amount_total)
+                                by_monthly_billing_counts[month_key] = float(bill_rec.net_amount)
                                 total_count += float(bill_rec.amount_total)
                 if month_key not in by_monthly_billing_counts:
                     by_monthly_billing_counts[month_key]=0
@@ -468,7 +468,7 @@ class RecoveryReportWizard(models.TransientModel):
         
         
         if xlwt:
-            global billing_counts ,by_monthly_billing_counts,select_by_monthly_list
+            global billing_counts, billing_counts_paid ,by_monthly_billing_counts, by_monthly_billing_counts_paid, select_by_monthly_list
             
             filename = 'Students Branch Report.xls'
             # One sheet by partner
