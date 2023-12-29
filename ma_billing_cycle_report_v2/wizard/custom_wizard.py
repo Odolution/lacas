@@ -281,6 +281,7 @@ class RecoveryReportWizard(models.TransientModel):
                         [
                             ('x_studio_previous_branch', '=', rec.branch_name),
                             ('move_type', '=', 'out_invoice'),
+                            ('state', '=', 'posted'),
                             # ('student_ids_ol.id', 'in', student_ids),
                             ('x_studio_enrollment_statusbills.name', '=', 'Enrolled'),
                             ('payment_state', '=', 'not_paid'),
