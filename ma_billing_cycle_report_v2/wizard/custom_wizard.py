@@ -265,22 +265,16 @@ class RecoveryReportWizard(models.TransientModel):
             for rec in self.account_report_line:
                 if rec:       
                     b= rec.branch_name.lower()  
-                    students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-                    student_ids = students.ids  # Get a list of student ids
                     bills = self.env['account.move'].search(
                         [
                             ('x_studio_previous_branch', '=', rec.branch_name),
                             ('move_type', '=', 'out_invoice'),
                             ('state', '=', 'posted'),
-                            # ('student_ids_ol.id', 'in', student_ids),
-                            # ('x_studio_enrollment_statusbills.name', '=', 'Enrolled'),
                             ('current_enrollment_status_dev.name', '=', 'Enrolled'),
-                            # ('student_ids_ol.x_last_enrollment_status_id.name', '=', 'Enrolled'),
                             ('payment_state', '=', 'not_paid'),
                             ('invoice_date', '>=', self.from_date),
                             ('invoice_date', '<=', self.to_date),
                         ])
-                    raise UserError(bills)
                     enrolled_unpaid_student_count = len(set(bills.mapped('student_ids_ol.id')))
                     if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ):
                         total_total_Issuance_billing_branch += rec.total_Issuance_billing
