@@ -256,24 +256,23 @@ class RecoveryReportWizard(models.TransientModel):
             first_record= first_record.branch_name.lower()
             b_split= first_record.split(' ')
             match= b_split[0]+' '+b_split[1]
-            b_dict={}
             for rec in self.account_report_line:
                 if rec:       
-                    b= rec.branch_name.lower()  
-                    students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-                    student_ids = students.ids  # Get a list of student ids
-                    bills = self.env['account.move'].search(
-                        [
-                            ('x_studio_previous_branch', '=', rec.branch_name),
-                            ('move_type', '=', 'out_invoice'),
-                            # ('student_ids_ol.id', 'in', student_ids),
-                            ('x_studio_enrollment_statusbills.name', '=', 'Enrolled'),
-                            ('payment_state', '=', 'not_paid'),
-                            ('invoice_date', '>=', self.from_date),
-                            ('invoice_date', '<=', self.to_date),
-                        ])
-                    b_dict[rec.branch_name]=bills
-                    continue
+                    # b= rec.branch_name.lower()  
+                    # students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+                    # student_ids = students.ids  # Get a list of student ids
+                    # bills = self.env['account.move'].search(
+                    #     [
+                    #         ('x_studio_previous_branch', '=', rec.branch_name),
+                    #         ('move_type', '=', 'out_invoice'),
+                    #         # ('student_ids_ol.id', 'in', student_ids),
+                    #         ('x_studio_enrollment_statusbills.name', '=', 'Enrolled'),
+                    #         ('payment_state', '=', 'not_paid'),
+                    #         ('invoice_date', '>=', self.from_date),
+                    #         ('invoice_date', '<=', self.to_date),
+                    #     ])
+                    # b_dict[rec.branch_name]=bills
+                    # continue
                     b= rec.branch_name.lower()  
                     students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
                     student_ids = students.ids  # Get a list of student ids
@@ -288,7 +287,6 @@ class RecoveryReportWizard(models.TransientModel):
                             ('invoice_date', '>=', self.from_date),
                             ('invoice_date', '<=', self.to_date),
                         ])
-                    raise UserError(bills)
                     enrolled_unpaid_student_count = len(set(bills.mapped('student_ids_ol.id')))
                     # enrolled_unpaid_student_count = len(set(bills.mapped('student_ids[0].id')))
                     if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ):
@@ -373,7 +371,7 @@ class RecoveryReportWizard(models.TransientModel):
                     total_enrolled_unpaid_student_count+= enrolled_unpaid_student_count
 
                     row+=1
-            raise UserError(str(b_dict))
+            # raise UserError(str(b_dict))
             
             worksheet.write_merge(row,row,0,0, '',  style=red_style_title)
             worksheet.write_merge(row,row,1,1, 'Total',  style=red_style_title)
