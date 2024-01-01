@@ -78,7 +78,7 @@ class SecurityAmountReport(models.Model):
 
                 if reversal:
                     # if reversal.withdrawn_status_reversal=="Y" and reversal.x_studio_enrolled_cred.name=="Enrolled":
-                    if reversal.withdrawn_status_reversal!="Y":
+                    if reversal.withdrawn_status_reversal=="Y":
                         raise UserError(reversal.withdrawn_status_reversal)
                         count += 1
 
