@@ -112,6 +112,10 @@ class RecoveryReportWizard(models.TransientModel):
         pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
         pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
 
+        # Convert year and month pairs to a comparable format (like integers or date objects)
+        start_period = pay_from_year * 12 + pay_from_month
+        end_period = pay_to_year * 12 + pay_to_month
+
         for rec in school_ids_raw:
             if rec.name !="Milestone Model Town (Matric)":
             #     continue
@@ -148,11 +152,21 @@ class RecoveryReportWizard(models.TransientModel):
                         payment_date = bill_rec.ol_payment_date
                         month_in_payment = payment_date.strftime('%m')
                         year_in_payment = payment_date.strftime('%y')
+                        # Convert year and month pairs to a comparable format (like integers or date objects)
+                        payment_period = year_in_payment * 12 + month_in_payment
 
-                        if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                        # Adjust for year-end rollover
+                        if end_period < start_period:
+                            end_period += 12
+                        # raise UserError(str(pay_from_year )+str(year_in_payment)+str(pay_to_year))
+                        # raise UserError(str(pay_from_month )+str(month_in_payment)+str(pay_to_month))
+                        # raise UserError(str(bill_rec.net_amount)+str(bill_rec))
+                        if pay_from_year <= year_in_payment <= pay_to_year and start_period <= payment_period <= end_period:
+                            # raise UserError(str("test"))
                             # total_Recovery_paid += float(bill_rec.amount_total)
                             total_Recovery_paid += float(bill_rec.net_amount)
 
+            # raise UserError(str(total_Recovery_paid))
 
             total_Issuance_billing_list[select_new] = total_count
             with_out_Withdrawn_billing_list[select_new] = with_out_Withdrawn
@@ -161,6 +175,7 @@ class RecoveryReportWizard(models.TransientModel):
     
 
 
+        # raise UserError(str(total_Recovery_paid_list))
 
         for item in range(len(school_ids)):
             name_view = school_ids[item].name
@@ -181,6 +196,15 @@ class RecoveryReportWizard(models.TransientModel):
         self.write({
             "account_report_line":[(6,0,lines)]
         })  
+
+          
+        # message = "Billing Information:\n\n"
+        # for count in self.account_report_line:
+        #     # month_key format: 'yy-mm'
+        #     message += f"School: {count.branch_name}, total_Recovery_paid: {count.total_Recovery_paid} \n"
+            
+        # # Raise a UserError with the summarized message
+        # raise UserError(message)
 
 
     def action_print_excel_billing_report(self):
