@@ -268,31 +268,31 @@ class SecurityAmountReport(models.Model):
                                     
                             else:
                                 worksheet.write(row, 9, "N/A")
-                            if student.enrollment_status_ids:
-                                enrolled = False
-                                for status in student.enrollment_status_ids:
-                                    if status.name == 'Enrolled':
-                                        enrolled = True
-                                        break
+                    if student.enrollment_status_ids:
+                        enrolled = False
+                        for status in student.enrollment_status_ids:
+                            if status.name == 'Enrolled':
+                                enrolled = True
+                                break
 
-                                if enrolled:
-                                    worksheet.write(row, 10, 'Y')
-                                else:
-                                    worksheet.write(row, 10, 'N')
-                            else:
-                                worksheet.write(row, 10, "N/A")    
-                            # if student.enrollment_status_ids:
-                            #     for status in student.enrollment_status_ids:
-                            #         if status.name == 'Enrolled':
-                            #             worksheet.write(row, 10, 'Y')
-                            #             break
-                            #         else:
-                            #             worksheet.write(row, 10, 'N')
-                            # else:
-                            #     worksheet.write(row, 10, "N/A")
-                            count_students+=1
-                            serial_number += 1
-                            row+=1
+                        if enrolled:
+                            worksheet.write(row, 10, 'Y')
+                        else:
+                            worksheet.write(row, 10, 'N')
+                    else:
+                        worksheet.write(row, 10, "N/A")    
+                    # if student.enrollment_status_ids:
+                    #     for status in student.enrollment_status_ids:
+                    #         if status.name == 'Enrolled':
+                    #             worksheet.write(row, 10, 'Y')
+                    #             break
+                    #         else:
+                    #             worksheet.write(row, 10, 'N')
+                    # else:
+                    #     worksheet.write(row, 10, "N/A")
+                    count_students+=1
+                    serial_number += 1
+                    row+=1
                                 # done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
