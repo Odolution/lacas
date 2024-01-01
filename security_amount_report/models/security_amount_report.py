@@ -81,16 +81,18 @@ class SecurityAmountReport(models.Model):
             if reversal:
                 for rec in reversal:
                     if rec.x_student_id_cred.name in students:
-                        students[rec.x_student_id_cred.name] += 1
+                        students[rec.x_student_id_cred.id] += 1
                     else:
-                        students[rec.x_student_id_cred.name] = 1
-                    if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
-                        count += 1
+                        students[rec.x_student_id_cred.id] = 1
+                    # if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
+                    #     count += 1
+            
             x = str(len(students)) + "\n"
             count = 0
             for i, j in students.items():
                 count += j
-                x += f"{i}\t{j}\n"
+                student = self.env['school.student'].search([("id","=",i)], limit=1)
+                x += f"{student.name}\t{j}\n"
             x += str(count)
             raise UserError(x)
             # HAMZA NAVEED
