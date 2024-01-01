@@ -77,7 +77,8 @@ class SecurityAmountReport(models.Model):
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
 
                 if reversal:
-                    if reversal.withdrawn_status_reversal=="Y" and reversal.x_studio_enrolled_cred.name=="Enrolled":
+                    # if reversal.withdrawn_status_reversal=="Y" and reversal.x_studio_enrolled_cred.name=="Enrolled":
+                    if reversal.withdrawn_status_reversal!="Y": raise UserError(reversal.withdrawn_status_reversal)
                         count += 1
 
 
