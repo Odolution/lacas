@@ -175,7 +175,7 @@ class RecoveryReportWizard(models.TransientModel):
     
 
 
-        raise UserError(str(total_Recovery_paid_list))
+        # raise UserError(str(total_Recovery_paid_list))
 
         for item in range(len(school_ids)):
             name_view = school_ids[item].name
