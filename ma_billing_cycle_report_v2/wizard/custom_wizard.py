@@ -105,7 +105,7 @@ class RecoveryReportWizard(models.TransientModel):
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
-	11/13/2023
+	# 11/13/2023
         pay_from_month=datetime.strptime(str(self.from_date_pay), "%m-%d-%Y").strftime('%m')
         pay_from_year=datetime.strptime(str(self.from_date_pay), "%m-%d-%Y").strftime('%y')
 
