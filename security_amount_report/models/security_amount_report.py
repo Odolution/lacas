@@ -71,7 +71,20 @@ class SecurityAmountReport(models.Model):
             #             unique_student_ids.append(move.x_student_id_cred.id)
 
             # unique_student_ids_tuple = tuple(unique_student_ids)
+
             count = 0
+            for student in enrolled_students:
+                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)])
+
+                if reversal:
+                    for rec in reversal:
+                        if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
+                            count += 1
+            
+            raise UserError(count)
+
+
+
             for student in enrolled_students:
                 admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
@@ -79,7 +92,7 @@ class SecurityAmountReport(models.Model):
                 if reversal.id in [84894, 78199, 82708, 83731, 78168, 82281, 85560]:
                     raise UserError(f"{reversal.withdrawn_status_reversal}\t{reversal.x_studio_enrolled_cred.name}")
                 # if reversal.withdrawn_status_reversal=="Y" and reversal.x_studio_enrolled_cred.name=="Enrolled":
-                #     count += 1
+                #     raise UserError("TEST")
 
 
                 # if admission:
@@ -300,7 +313,7 @@ class SecurityAmountReport(models.Model):
                             serial_number += 1
                             row+=1
                                 # done.append(student)
-            raise UserError(str(count))
+
             fp = io.BytesIO()
             workbook.save(fp)
 
