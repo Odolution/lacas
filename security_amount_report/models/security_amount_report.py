@@ -76,13 +76,19 @@ class SecurityAmountReport(models.Model):
             # for student in enrolled_students:
             reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit')])
 
-
+            students = {}
             if reversal:
                 for rec in reversal:
+                    if x_student_id_cred.name in students:
+                        students[x_student_id_cred.name] += 1
+                    else:
+                        students[x_student_id_cred.name] = 1
                     if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
                         count += 1
-            
-            raise UserError(count)
+            x = ""
+            for i, j in students.item():
+                x += f"{i}\t{j}\n"
+            raise UserError(x)
 
 
 
