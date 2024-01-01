@@ -922,7 +922,7 @@ class RecoveryReportWizard(models.TransientModel):
                     # raise UserError(str(month_key)+" "+str(new_month_key))
                     if test_year_month==result:
                         total+=months_total_dict[month_key]
-                        total_recovery+=months_recovery_dict[month_key]
+                        total_recovery += months_recovery_dict.get(month_key, 0)
                 worksheet.write_merge(row,row,col,col,total,style=yellow_style_title)
                 col+=1
                 worksheet.write_merge(row,row,col,col,total_recovery,style=yellow_style_title)
