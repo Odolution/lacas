@@ -90,9 +90,9 @@ class SecurityAmountReport(models.Model):
             count = 0
             for i, j in students.items():
                 count += j
-                if j!=1: x += f"{i.id}\t{j}**********\n"
-                else: x += f"{i.id}\t{j}\n"
-                
+                if j!=1: x += f"{i}\t{j}**********\n"
+                else: x += f"{i}\t{j}\n"
+
             x += str(count)
             raise UserError(x)
             # HAMZA NAVEED
