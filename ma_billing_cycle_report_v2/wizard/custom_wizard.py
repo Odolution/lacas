@@ -154,7 +154,7 @@ class RecoveryReportWizard(models.TransientModel):
                             # total_Recovery_paid += float(bill_rec.amount_total)
                             total_Recovery_paid += float(bill_rec.net_amount)
 
-            raise UserError(str(total_Recovery_paid))
+            # raise UserError(str(total_Recovery_paid))
 
             total_Issuance_billing_list[select_new] = total_count
             with_out_Withdrawn_billing_list[select_new] = with_out_Withdrawn
