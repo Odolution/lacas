@@ -144,7 +144,7 @@ class RecoveryReportWizard(models.TransientModel):
                     total_bad_debt += float(bill_rec.net_amount)
                 
                 if bill_rec.payment_state =="paid":
-                    
+                    raise UserError(str("test"))
                     if bill_rec.ol_payment_date:
                         payment_date = bill_rec.ol_payment_date
                         month_in_payment = payment_date.strftime('%m')
