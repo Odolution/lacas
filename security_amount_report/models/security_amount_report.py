@@ -79,10 +79,10 @@ class SecurityAmountReport(models.Model):
             students = {}
             if reversal:
                 for rec in reversal:
-                    if x_student_id_cred.name in students:
-                        students[x_student_id_cred.name] += 1
+                    if rec.x_student_id_cred.name in students:
+                        students[rec.x_student_id_cred.name] += 1
                     else:
-                        students[x_student_id_cred.name] = 1
+                        students[rec.x_student_id_cred.name] = 1
                     if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
                         count += 1
             x = ""
