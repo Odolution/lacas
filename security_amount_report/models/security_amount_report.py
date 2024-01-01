@@ -80,7 +80,7 @@ class SecurityAmountReport(models.Model):
             students = {}
             if reversal:
                 for rec in reversal:
-                    if rec.x_student_id_cred.name in students:
+                    if rec.x_student_id_cred.id in students:
                         students[rec.x_student_id_cred.id] += 1
                     else:
                         students[rec.x_student_id_cred.id] = 1
