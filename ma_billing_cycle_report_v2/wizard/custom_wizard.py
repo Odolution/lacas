@@ -149,6 +149,7 @@ class RecoveryReportWizard(models.TransientModel):
                         month_in_payment = payment_date.strftime('%m')
                         year_in_payment = payment_date.strftime('%y')
                         raise UserError(str(pay_from_year )+str(year_in_payment)+str(pay_to_year))
+                        raise UserError(str(pay_from_month )+str(month_in_payment)+str(pay_to_month))
                         # raise UserError(str(bill_rec.net_amount)+str(bill_rec))
                         if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                             raise UserError(str("test"))
