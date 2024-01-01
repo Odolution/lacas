@@ -182,6 +182,16 @@ class RecoveryReportWizard(models.TransientModel):
             "account_report_line":[(6,0,lines)]
         })  
 
+          
+        message += "\n\n\n\n"
+        message += "Billing Information:\n\n"
+        for count in self.account_report_line:
+            # month_key format: 'yy-mm'
+            message += f"School: {count.branch_name}, total_Recovery_paid: {count.total_Recovery_paid} \n"
+            
+        # Raise a UserError with the summarized message
+        raise UserError(message)
+
 
     def action_print_excel_billing_report(self):
         
