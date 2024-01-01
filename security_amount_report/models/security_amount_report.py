@@ -86,7 +86,7 @@ class SecurityAmountReport(models.Model):
                     if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
                         count += 1
             x = ""
-            for i, j in students.item():
+            for i, j in students.items():
                 x += f"{i}\t{j}\n"
             raise UserError(x)
 
