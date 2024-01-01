@@ -227,11 +227,28 @@ class RecoveryReportWizard(models.TransientModel):
         v_to_month=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%m')
         v_to_year=datetime.strptime(str(self.to_date), "%Y-%m-%d").strftime('%y')
 
+        # Convert year and month pairs to a comparable format (like integers or date objects)
+        v_start_period = v_from_year * 12 + v_from_month
+        v_end_period = v_to_year * 12 + v_to_month
+        # Adjust for year-end rollover
+        if v_end_period < v_start_period:
+            v_end_period += 12
+
+
         pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
         pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
 
         pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
         pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+
+
+        # Convert year and month pairs to a comparable format (like integers or date objects)
+        start_period = pay_from_year * 12 + pay_from_month
+        end_period = pay_to_year * 12 + pay_to_month
+
+        # Adjust for year-end rollover
+        if end_period < start_period:
+            end_period += 12
 
         for rec in school_ids_raw:
             if rec.name !="Milestone Model Town (Matric)":
@@ -257,8 +274,10 @@ class RecoveryReportWizard(models.TransientModel):
                 month_in_invoice = invoice_date.strftime('%m')
                 year_in_invoice = invoice_date.strftime('%y')
                 
+                v_payment_period = year_in_invoice * 12 + month_in_invoice
+
                 # Check if the invoice date is within the specified range
-                if v_from_year <= year_in_invoice <= v_to_year and v_from_month <= month_in_invoice <= v_to_month:
+                if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
                     # Create a key using the month and year
                     month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
 
@@ -268,8 +287,9 @@ class RecoveryReportWizard(models.TransientModel):
                             payment_date = bill_rec.ol_payment_date
                             month_in_payment = payment_date.strftime('%m')
                             year_in_payment = payment_date.strftime('%y')
-
-                            if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
+                            payment_period = year_in_payment * 12 + month_in_payment
+                            
+                            if pay_from_year <= year_in_payment <= pay_to_year and start_period <= payment_period <= end_period:
                                 total_count_paid += float(bill_rec.net_amount)
                                 # HAMZA NAVEED
                                 if month_key in billing_counts_paid:
@@ -531,6 +551,18 @@ class RecoveryReportWizard(models.TransientModel):
                 22:['10','OCT-23',200,'23'],
                 23:['11','NOV-23',200,'23'],
                 24:['12','DEC-23',200,'23'],
+                25:['01','JAN-24',130,'24'],
+                26:['02','FEB-24',140,'24'],
+                27:['03','MAR-24',150,'24'],
+                28:['04','APR-24',160,'24'],
+                29:['05','MAY-24',170,'24'],
+                30:['06','JUN-24',180,'24'],
+                31:['07','JUL-24',190,'24'],
+                32:['08','AUG-24',200,'24'],
+                33:['09','SEP-24',200,'24'],
+                34:['10','OCT-24',200,'24'],
+                35:['11','NOV-24',200,'24'],
+                36:['12','DEC-24',200,'24'],
                 }
             range_start = 0
             range_stop = 0
@@ -652,7 +684,14 @@ class RecoveryReportWizard(models.TransientModel):
                                 if substring == result:
                                     worksheet.write_merge(row,row,col,col,int(months_total_dict[month_key]), style=yellow_style_title)
                                     col += 1
-                                    worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
+                                    if month_key in months_recovery_dict:
+                                        value = int(months_recovery_dict[month_key])
+                                        worksheet.write_merge(row, row, col, col, value, style=yellow_style_title)
+                                    else:
+                                        # Handle the missing key, e.g., write a default value or log a warning
+                                        worksheet.write_merge(row, row, col, col, 0, style=yellow_style_title)  # example with a default value
+
+                                    # worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
                                     col += 1
 
                                     
@@ -751,7 +790,14 @@ class RecoveryReportWizard(models.TransientModel):
                                     if rec.branch_name == result:
                                         worksheet.write_merge(row,row,col,col,int(months_total_dict[month_key]), style=yellow_style_title)
                                         col += 1
-                                        worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
+                                        if month_key in months_recovery_dict:
+                                            value = int(months_recovery_dict[month_key])
+                                            worksheet.write_merge(row, row, col, col, value, style=yellow_style_title)
+                                        else:
+                                            # Handle the missing key, e.g., write a default value or log a warning
+                                            worksheet.write_merge(row, row, col, col, 0, style=yellow_style_title)  # example with a default value
+
+                                        # worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
                                         col += 1
                                         
                                 worksheet.write_merge(row,row,0,0,"Total", style=yellow_style_title)
@@ -876,7 +922,7 @@ class RecoveryReportWizard(models.TransientModel):
                     # raise UserError(str(month_key)+" "+str(new_month_key))
                     if test_year_month==result:
                         total+=months_total_dict[month_key]
-                        total_recovery+=months_recovery_dict[month_key]
+                        total_recovery += months_recovery_dict.get(month_key, 0)
                 worksheet.write_merge(row,row,col,col,total,style=yellow_style_title)
                 col+=1
                 worksheet.write_merge(row,row,col,col,total_recovery,style=yellow_style_title)
