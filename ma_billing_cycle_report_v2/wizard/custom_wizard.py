@@ -183,7 +183,6 @@ class RecoveryReportWizard(models.TransientModel):
         })  
 
           
-        message += "\n\n\n\n"
         message += "Billing Information:\n\n"
         for count in self.account_report_line:
             # month_key format: 'yy-mm'
