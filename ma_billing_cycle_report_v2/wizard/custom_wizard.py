@@ -105,12 +105,12 @@ class RecoveryReportWizard(models.TransientModel):
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
+	11/13/2023
+        pay_from_month=datetime.strptime(str(self.from_date_pay), "%m-%d-%Y").strftime('%m')
+        pay_from_year=datetime.strptime(str(self.from_date_pay), "%m-%d-%Y").strftime('%y')
 
-        pay_from_month=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%m')
-        pay_from_year=datetime.strptime(str(self.from_date_pay), "%Y-%m-%d").strftime('%y')
-
-        pay_to_month=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%m')
-        pay_to_year=datetime.strptime(str(self.to_date_pay), "%Y-%m-%d").strftime('%y')
+        pay_to_month=datetime.strptime(str(self.to_date_pay), "%m-%d-%Y").strftime('%m')
+        pay_to_year=datetime.strptime(str(self.to_date_pay), "%m-%d-%Y").strftime('%y')
 
         for rec in school_ids_raw:
             if rec.name !="Milestone Model Town (Matric)":
@@ -148,7 +148,7 @@ class RecoveryReportWizard(models.TransientModel):
                         payment_date = bill_rec.ol_payment_date
                         month_in_payment = payment_date.strftime('%m')
                         year_in_payment = payment_date.strftime('%y')
-                        raise UserError(str(pay_from_year <= year_in_payment <= pay_to_year))
+                        raise UserError(str(pay_from_year )+str(year_in_payment)+str(pay_to_year))
                         # raise UserError(str(bill_rec.net_amount)+str(bill_rec))
                         if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                             raise UserError(str("test"))
