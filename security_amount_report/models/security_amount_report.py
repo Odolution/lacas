@@ -76,9 +76,10 @@ class SecurityAmountReport(models.Model):
                 admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
 
-                if reversal:
-                    if reversal.withdrawn_status_reversal=="Y" and reversal.x_studio_enrolled_cred.name=="Enrolled":
-                        count += 1
+                if reversal.id in [84894, 78199, 82708, 83731, 78168, 82281, 85560]:
+                    raise UserError(f"{reversal.withdrawn_status_reversal}\t{reversal.x_studio_enrolled_cred.name}")
+                # if reversal.withdrawn_status_reversal=="Y" and reversal.x_studio_enrolled_cred.name=="Enrolled":
+                #     count += 1
 
 
                 # if admission:
