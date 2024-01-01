@@ -74,6 +74,7 @@ class SecurityAmountReport(models.Model):
             for student in enrolled_students:
                 admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
+
         
                 # if admission:
                 #     for line in admission.invoice_line_ids:
@@ -267,31 +268,31 @@ class SecurityAmountReport(models.Model):
                                     
                             else:
                                 worksheet.write(row, 9, "N/A")
-                    if student.enrollment_status_ids:
-                        enrolled = False
-                        for status in student.enrollment_status_ids:
-                            if status.name == 'Enrolled':
-                                enrolled = True
-                                break
+                            if student.enrollment_status_ids:
+                                enrolled = False
+                                for status in student.enrollment_status_ids:
+                                    if status.name == 'Enrolled':
+                                        enrolled = True
+                                        break
 
-                        if enrolled:
-                            worksheet.write(row, 10, 'Y')
-                        else:
-                            worksheet.write(row, 10, 'N')
-                    else:
-                        worksheet.write(row, 10, "N/A")    
-                    # if student.enrollment_status_ids:
-                    #     for status in student.enrollment_status_ids:
-                    #         if status.name == 'Enrolled':
-                    #             worksheet.write(row, 10, 'Y')
-                    #             break
-                    #         else:
-                    #             worksheet.write(row, 10, 'N')
-                    # else:
-                    #     worksheet.write(row, 10, "N/A")
-                    count_students+=1
-                    serial_number += 1
-                    row+=1
+                                if enrolled:
+                                    worksheet.write(row, 10, 'Y')
+                                else:
+                                    worksheet.write(row, 10, 'N')
+                            else:
+                                worksheet.write(row, 10, "N/A")    
+                            # if student.enrollment_status_ids:
+                            #     for status in student.enrollment_status_ids:
+                            #         if status.name == 'Enrolled':
+                            #             worksheet.write(row, 10, 'Y')
+                            #             break
+                            #         else:
+                            #             worksheet.write(row, 10, 'N')
+                            # else:
+                            #     worksheet.write(row, 10, "N/A")
+                            count_students+=1
+                            serial_number += 1
+                            row+=1
                                 # done.append(student)
             fp = io.BytesIO()
             workbook.save(fp)
