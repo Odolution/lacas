@@ -71,9 +71,11 @@ class SecurityAmountReport(models.Model):
             #             unique_student_ids.append(move.x_student_id_cred.id)
 
             # unique_student_ids_tuple = tuple(unique_student_ids)
+            x = str(student.name)
             for student in enrolled_students:
                 admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
+                raise UserError(f"{x}\n{reversal}")
         
                 # if admission:
                 #     for line in admission.invoice_line_ids:
