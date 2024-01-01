@@ -91,8 +91,7 @@ class SecurityAmountReport(models.Model):
             count = 0
             for i, j in students.items():
                 count += j
-                student = self.env['school.student'].search([("id","=",i)], limit=1)
-                x += f"{student.name}\t{j}\n"
+                x += f"{i}\t{j}\n"
             x += str(count)
             raise UserError(x)
             # HAMZA NAVEED
