@@ -181,6 +181,8 @@ class SecurityAmountReport(models.Model):
                 # else:
                 #     # pass
                 if reversal:
+                    if len(reversal.invoice_line_ids) > 1:
+                        raise UserError(reversal.id)
                     for line in reversal.invoice_line_ids:
                         if line.account_id.name == 'Security Fee':
                             worksheet.write(row, 0, serial_number)
