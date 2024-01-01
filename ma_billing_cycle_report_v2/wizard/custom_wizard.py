@@ -183,7 +183,7 @@ class RecoveryReportWizard(models.TransientModel):
         })  
 
           
-        message += "Billing Information:\n\n"
+        message = "Billing Information:\n\n"
         for count in self.account_report_line:
             # month_key format: 'yy-mm'
             message += f"School: {count.branch_name}, total_Recovery_paid: {count.total_Recovery_paid} \n"
