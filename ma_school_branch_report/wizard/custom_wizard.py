@@ -684,7 +684,14 @@ class RecoveryReportWizard(models.TransientModel):
                                 if substring == result:
                                     worksheet.write_merge(row,row,col,col,int(months_total_dict[month_key]), style=yellow_style_title)
                                     col += 1
-                                    worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
+                                    if month_key in months_recovery_dict:
+                                        value = int(months_recovery_dict[month_key])
+                                        worksheet.write_merge(row, row, col, col, value, style=yellow_style_title)
+                                    else:
+                                        # Handle the missing key, e.g., write a default value or log a warning
+                                        worksheet.write_merge(row, row, col, col, 0, style=yellow_style_title)  # example with a default value
+
+                                    # worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
                                     col += 1
 
                                     
