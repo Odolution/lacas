@@ -72,6 +72,7 @@ class SecurityAmountReport(models.Model):
 
             # unique_student_ids_tuple = tuple(unique_student_ids)
 
+            # HAMZA NAVEED
             count = 0
             # for student in enrolled_students:
             reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit')])
@@ -85,14 +86,14 @@ class SecurityAmountReport(models.Model):
                         students[rec.x_student_id_cred.name] = 1
                     if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
                         count += 1
-            x = ""
+            x = str(len(students)) + "\n"
             count = 0
             for i, j in students.items():
                 count += j
                 x += f"{i}\t{j}\n"
             x += str(count)
             raise UserError(x)
-
+            # HAMZA NAVEED
 
 
             for student in enrolled_students:
