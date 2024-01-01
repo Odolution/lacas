@@ -72,36 +72,29 @@ class SecurityAmountReport(models.Model):
 
             # unique_student_ids_tuple = tuple(unique_student_ids)
 
-            count = 0
-            for student in enrolled_students:
-                reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)])
-                for rev in reversal:
-                    if rev.id in [84894, 78199, 82708, 83731, 78168, 82281, 85560]:
-                        count += 1
-            raise UserError(count)
-
-
 
             # HAMZA NAVEED
-            # reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit')])
+            reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit')])
             
-            # students = {}
-            # if reversal:
-            #     for rec in reversal:
-            #         if rec.x_student_id_cred in students:
-            #             students[rec.x_student_id_cred] += 1
-            #         else:
-            #             students[rec.x_student_id_cred] = 1
-            #         # if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
-            #         #     count += 1
+            students = {}
+            if reversal:
+                for rec in reversal:
+                    if rec.x_student_id_cred.id in students:
+                        students[rec.x_student_id_cred.id] += 1
+                    else:
+                        students[rec.x_student_id_cred.id] = 1
+                    # if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
+                    #     count += 1
             
-            # x = str(len(students)) + "\n"
-            # count = 0
-            # for i, j in students.items():
-            #     count += j
-            #     x += f"{i.id}\t{j}\n"
-            # x += str(count)
-            # raise UserError(x)
+            x = str(len(students)) + "\n"
+            count = 0
+            for i, j in students.items():
+                count += j
+                if j!=1: x += f"{i.id}\t{j}**********\n"
+                else: x += f"{i.id}\t{j}\n"
+                
+            x += str(count)
+            raise UserError(x)
             # HAMZA NAVEED
 
 
