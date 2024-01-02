@@ -532,7 +532,7 @@ class RecoveryReportWizard(models.TransientModel):
             formatted_date_from = self.from_date.strftime('%b-%Y')
             formatted_date_to = self.to_date.strftime('%d-%b-%Y')
             date_string= 'Billing  '+str(formatted_date_from)+ str(' %')+"cycle wise average '%' of recovery. "+ str(formatted_date_to)
-            # worksheet.write_merge(0,0,2,7,date_string, style=header)
+            worksheet.write_merge(0,0,2,7,date_string, style=header)
 
 
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
@@ -589,7 +589,7 @@ class RecoveryReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            worksheet.write_merge(1,2,0,0,"Current Branch/School", style=red_style_title)
+            worksheet.write_merge(2,3,0,0,"Current Branch/School", style=red_style_title)
             # worksheet.write_merge(0,1,4,5,"Billing month Jul-23",style=red_style_title)
             
             
@@ -599,9 +599,9 @@ class RecoveryReportWizard(models.TransientModel):
       
             for i in range(range_start,range_stop+1):
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(1,2,col,col,'Billing month '+months[i][1],red_style_title)
+                worksheet.write_merge(2,3,col,col,'Issuance '+months[i][1],red_style_title)
                 col+=1
-                worksheet.write_merge(1,2,col,col,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
+                worksheet.write_merge(2,3,col,col,'RECOVERY '+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=1
             # # if select_by_monthly_list:
@@ -971,9 +971,9 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(0,1,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
                 new_col+=1
             
-            worksheet.write_merge(0,1,new_col,new_col,"Total",style=red_style_title)
-            worksheet.write_merge(0,1,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
-            worksheet.write_merge(0,1,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
+            worksheet.write_merge(2,3,new_col,new_col,"Total",style=red_style_title)
+            worksheet.write_merge(2,3,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
+            worksheet.write_merge(2,3,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
 
             group_total=0
             final_total=0
