@@ -1,4 +1,4 @@
-from odoo import models
+from odoo import models, fields, api
 
 class Difference_Bills(models.Model):
     _inherit = 'account.move'
