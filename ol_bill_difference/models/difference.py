@@ -2,7 +2,7 @@ from odoo import models, fields, api
 
 class Difference_Bills(models.Model):
     _inherit = 'account.move'
-    # _name = 'account.move.difference'
+    _name = 'difference'
     x_difference = fields.Float(string="Difference", compute='_compute_difference', digits=(10,2))
 
 @api.depends('net_amount', 'amount_total_signed')
