@@ -964,11 +964,11 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(0,1,new_col,new_col,'Bi Monthly '+month_in_list,red_style_title)
+                worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list,red_style_title)
                 # worksheet.write_merge(row,row,new_col,new_col+1,months[i][2])
                 new_col+=1
                 # HAMZA NAVEED
-                worksheet.write_merge(0,1,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
+                worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
                 new_col+=1
             
             worksheet.write_merge(2,3,new_col,new_col,"Total",style=red_style_title)
