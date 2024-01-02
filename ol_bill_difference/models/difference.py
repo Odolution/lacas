@@ -10,4 +10,4 @@ class Difference_Bills(models.Model):
         for record in self:
             record['difference_amount'] = False
             if record.net_amount != '' and record.amount_total_signed != '':
-                record['difference_amount'] = float(record.net_amount) - float(record.amount_total_signed)
+                record['difference_amount'] = float(record.amount_total_signed) - float(record.net_amount)
