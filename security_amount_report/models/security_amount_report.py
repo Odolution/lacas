@@ -80,6 +80,8 @@ class SecurityAmountReport(models.Model):
             if reversals:
                 for reversal in reversals:
 
+                    worksheet.write(row, 0, serial_number)
+
                     if reversal.x_student_id_cred.name:
                         worksheet.write(row, 1, reversal.x_student_id_cred.name)
                     else:
