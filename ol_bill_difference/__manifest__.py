@@ -16,7 +16,6 @@
     'installable': True,
     'application': True,
     'auto_install': False,
-    'qweb': [
-    ],
+    'qweb': [],
     'license': 'LGPL-3',
 }
