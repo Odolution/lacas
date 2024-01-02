@@ -613,7 +613,7 @@ class RecoveryReportWizard(models.TransientModel):
             months_recovery_dict={} # HAMZA NAVEED
             months_row_total_dict={}
             months_row_paid_dict={}
-            row=2
+            row=3
             col=1
             for rec in self.account_report_line:
                 if rec:
