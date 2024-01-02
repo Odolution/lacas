@@ -73,38 +73,38 @@ class SecurityAmountReport(models.Model):
             # unique_student_ids_tuple = tuple(unique_student_ids)
 
 
-            # HAMZA NAVEED
-            reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit')])
+            # # HAMZA NAVEED
+            # reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit')])
             
-            students = {}
-            check = 0
-            if reversal:
-                for rec in reversal:
-                    if rec.x_student_id_cred in students:
-                        students[rec.x_student_id_cred] += 1
-                    else:
-                        students[rec.x_student_id_cred] = 1
-                    if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
-                        check += 1
+            # students = {}
+            # check = 0
+            # if reversal:
+            #     for rec in reversal:
+            #         if rec.x_student_id_cred in students:
+            #             students[rec.x_student_id_cred] += 1
+            #         else:
+            #             students[rec.x_student_id_cred] = 1
+            #         if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
+            #             check += 1
             
-            x = str(check) + "\n" + str(len(students)) + "\n"
-            count = 0
-            for i, j in students.items():
-                count += j
-                if j!=1: x += f"{i}\t{j}**********\n"
-                else: x += f"{i}\t{j}\n"
+            # x = str(check) + "\n" + str(len(students)) + "\n"
+            # count = 0
+            # for i, j in students.items():
+            #     count += j
+            #     if j!=1: x += f"{i}\t{j}**********\n"
+            #     else: x += f"{i}\t{j}\n"
 
-            x += str(count)
-            raise UserError(x)
-            # HAMZA NAVEED
+            # x += str(count)
+            # raise UserError(x)
+            # # HAMZA NAVEED
 
 
             for student in enrolled_students:
                 admission = self.env['account.move'].search([("move_type","=","out_invoice"),('journal_id.name','=','Admission Challan'), ('state','=','posted'), ("student_ids","in",[student.id])], limit=1)
                 reversal = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),("x_student_id_cred","=",student.id)], limit=1)
 
-                if reversal.id in [84894, 78199, 82708, 83731, 78168, 82281, 85560]:
-                    raise UserError(f"{reversal.withdrawn_status_reversal}\t{reversal.x_studio_enrolled_cred.name}")
+                # if reversal.id in [84894, 78199, 82708, 83731, 78168, 82281, 85560]:
+                #     raise UserError(f"{reversal.withdrawn_status_reversal}\t{reversal.x_studio_enrolled_cred.name}")
                 # if reversal.withdrawn_status_reversal=="Y" and reversal.x_studio_enrolled_cred.name=="Enrolled":
                 #     raise UserError("TEST")
 
