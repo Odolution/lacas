@@ -7,7 +7,7 @@
     'summary': 'Difference Calculation for lacas invoicing',
     'description': "Difference Calculation for lacas invoicing",
     'website': '',
-    'depends': ["account", "challan_field"],
+    'depends': ["account", "challan_field", "ol_lacas_custom_trees"],
     'data': [
         "views/x_difference_view.xml",
     ],
