@@ -589,7 +589,7 @@ class RecoveryReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            worksheet.write_merge(1,2,0,0,"Current Branch/School", style=red_style_title)
+            worksheet.write_merge(2,3,0,0,"Current Branch/School", style=red_style_title)
             # worksheet.write_merge(0,1,4,5,"Billing month Jul-23",style=red_style_title)
             
             
@@ -599,9 +599,9 @@ class RecoveryReportWizard(models.TransientModel):
       
             for i in range(range_start,range_stop+1):
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(1,2,col,col,'Issuance '+months[i][1],red_style_title)
+                worksheet.write_merge(2,3,col,col,'Issuance '+months[i][1],red_style_title)
                 col+=1
-                worksheet.write_merge(1,2,col,col,'RECOVERY '+months[i][1],red_style_title)
+                worksheet.write_merge(2,3,col,col,'RECOVERY '+months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=1
             # # if select_by_monthly_list:
@@ -620,7 +620,7 @@ class RecoveryReportWizard(models.TransientModel):
             months_recovery_dict={} # HAMZA NAVEED
             months_row_total_dict={}
             months_row_paid_dict={}
-            row=3
+            row=4
             col=1
             for rec in self.account_report_line:
                 if rec:
@@ -964,16 +964,16 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(1,2,new_col,new_col,'Bi Monthly '+month_in_list,red_style_title)
+                worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list,red_style_title)
                 # worksheet.write_merge(row,row,new_col,new_col+1,months[i][2])
                 new_col+=1
                 # HAMZA NAVEED
-                worksheet.write_merge(1,2,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
+                worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
                 new_col+=1
             
-            worksheet.write_merge(1,2,new_col,new_col,"Total",style=red_style_title)
-            worksheet.write_merge(1,2,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
-            worksheet.write_merge(1,2,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
+            worksheet.write_merge(2,3,new_col,new_col,"Total",style=red_style_title)
+            worksheet.write_merge(2,3,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
+            worksheet.write_merge(2,3,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
 
             group_total=0
             final_total=0
@@ -983,7 +983,7 @@ class RecoveryReportWizard(models.TransientModel):
             new_months_total_dict={}
             new_months_recovery_dict={} # HAMZA NAVEED
 
-            new_row=3
+            new_row=4
             new_col=col
 
             for rec in self.by_account_report_line:
