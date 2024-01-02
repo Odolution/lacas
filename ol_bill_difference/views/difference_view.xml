@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <data>
                 <xpath expr="//field[@name='tuition']" position="after">
-                    <field name="difference" string="Difference"/>
+                    <field name="difference_amount" string="Difference"/>
                 </xpath>    
             </data>
         </field>

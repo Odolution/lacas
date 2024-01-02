@@ -9,7 +9,7 @@
     'website': '',
     'depends': ["account", "challan_field", "ol_lacas_custom_trees"],
     'data': [
-        "views/x_difference_view.xml",
+        "views/difference_view.xml",
     ],
     'demo': [
     ],
