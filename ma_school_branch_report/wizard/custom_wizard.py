@@ -532,7 +532,7 @@ class RecoveryReportWizard(models.TransientModel):
             formatted_date_from = self.from_date.strftime('%b-%Y')
             formatted_date_to = self.to_date.strftime('%d-%b-%Y')
             date_string= 'Billing  '+str(formatted_date_from)+ str(' %')+"cycle wise average '%' of recovery. "+ str(formatted_date_to)
-            # worksheet.write_merge(0,0,2,7,date_string, style=header)
+            worksheet.write_merge(0,0,2,7,date_string, style=header)
 
 
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
