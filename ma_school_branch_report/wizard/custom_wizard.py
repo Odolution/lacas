@@ -21,7 +21,7 @@ except ImportError:
 
 
 def format_with_commas(number):
-    return "{:,}".format(number)
+    return "{:,}".format(int(number))
 
 
 
