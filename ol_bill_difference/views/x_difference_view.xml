@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<!-- <odoo> -->
+<odoo>
     <record id="x_difference_view" model="ir.ui.view">
         <field name="name">difference_view</field>
         <field name="model">account.move</field>
@@ -13,4 +13,4 @@
             </data>
         </field>
     </record>
-<!-- </odoo> -->
+</odoo>
