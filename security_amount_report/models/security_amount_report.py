@@ -78,10 +78,11 @@ class SecurityAmountReport(models.Model):
             
             students = {}
             check = 0
+            more_inv_lines = []
             if reversal:
                 for rec in reversal:
                     if len(rec.invoice_line_ids)!=1:
-                        raise UserError(rec.id)
+                        more_inv_lines.append(rec.id)
                     if rec.x_student_id_cred in students:
                         students[rec.x_student_id_cred] += 1
                     else:
@@ -89,6 +90,7 @@ class SecurityAmountReport(models.Model):
                     if rec.withdrawn_status_reversal=="Y" and rec.x_studio_enrolled_cred.name=="Enrolled":
                         check += 1
             
+            raise UserError(str(more_inv_lines))
             x = str(check) + "\n" + str(len(students)) + "\n"
             count = 0
             for i, j in students.items():
