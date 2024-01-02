@@ -53,7 +53,7 @@
                 parent="account.menu_finance_reports" 
                 sequence="6"/>
     <menuitem id="menu_action_school_branch_report" 
-                name="Branch Wise Recovery Report" 
+                name="Billing cycle wise average % of recovery" 
                 action="action_account_print_school_branch_report" 
                 parent="menu_school_branch_of_student"/>
 

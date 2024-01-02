@@ -505,7 +505,10 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet = workbook.add_sheet('Students Branch Std')
             
 
-            
+            header = xlwt.easyxf('font: bold on, color black;'
+                           'pattern: pattern solid, fore_colour gray25;'
+                           'align: vertical center, horiz center;'
+                           'border: top thin, bottom thin, right thin, left thin') 
             style_title = xlwt.easyxf(
             " align: vertical center,horiz center; border: top thin, bottom thin, right thin, left thin")
             red_style_title = xlwt.easyxf('pattern: pattern solid, fore_colour tan;'
@@ -526,7 +529,11 @@ class RecoveryReportWizard(models.TransientModel):
             # worksheet.write_merge(0, 1, 0, 5,"LACAS SCHOOL NETWORK ",style=style_title)
             # worksheet.write_merge(0, 1, 6, 11, "RECEIVABLE OF WITHDRAWAL STUDENTS", style=style_title)
             
-            
+            formatted_date_from = self.from_date.strftime('%b-%Y')
+            formatted_date_to = self.to_date.strftime('%d-%b-%Y')
+            date_string= 'Billing  '+str(formatted_date_from)+"cycle wise average '%' of recovery. "+ str(formatted_date_to)
+            worksheet.write_merge(0,0,2,7,date_string, style=header)
+
 
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
             v_from_year=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%y')
