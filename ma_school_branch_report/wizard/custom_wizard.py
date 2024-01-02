@@ -983,7 +983,7 @@ class RecoveryReportWizard(models.TransientModel):
             new_months_total_dict={}
             new_months_recovery_dict={} # HAMZA NAVEED
 
-            new_row=2
+            new_row=3
             new_col=col
 
             for rec in self.by_account_report_line:
