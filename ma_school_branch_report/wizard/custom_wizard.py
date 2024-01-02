@@ -582,7 +582,7 @@ class RecoveryReportWizard(models.TransientModel):
 
                     range_stop = key
 
-            worksheet.write_merge(0,1,0,0,"Current Branch/School", style=red_style_title)
+            worksheet.write_merge(1,2,0,0,"Current Branch/School", style=red_style_title)
             # worksheet.write_merge(0,1,4,5,"Billing month Jul-23",style=red_style_title)
             
             
@@ -592,9 +592,9 @@ class RecoveryReportWizard(models.TransientModel):
       
             for i in range(range_start,range_stop+1):
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(0,1,col,col,'Billing month '+months[i][1],red_style_title)
+                worksheet.write_merge(1,2,col,col,'Billing month '+months[i][1],red_style_title)
                 col+=1
-                worksheet.write_merge(0,1,col,col,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
+                worksheet.write_merge(1,2,col,col,'Billing month '+months[i][1]+' RECOVERY',red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=1
             # # if select_by_monthly_list:
