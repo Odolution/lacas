@@ -532,7 +532,7 @@ class RecoveryReportWizard(models.TransientModel):
             formatted_date_from = self.from_date.strftime('%b-%Y')
             formatted_date_to = self.to_date.strftime('%d-%b-%Y')
             date_string= 'Billing  '+str(formatted_date_from)+ str(' %')+"cycle wise average '%' of recovery. "+ str(formatted_date_to)
-            # worksheet.write_merge(0,0,2,7,date_string, style=header)
+            worksheet.write_merge(0,0,2,7,date_string, style=header)
 
 
             v_from_month=datetime.strptime(str(self.from_date), "%Y-%m-%d").strftime('%m')
@@ -964,16 +964,16 @@ class RecoveryReportWizard(models.TransientModel):
             # raise UserError(new_col)
             for month_in_list in select_by_monthly_list:
                 # raise UserError(months[i][0]+" "+months[i][3])
-                worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list,red_style_title)
+                worksheet.write_merge(0,1,new_col,new_col,'Bi Monthly '+month_in_list,red_style_title)
                 # worksheet.write_merge(row,row,new_col,new_col+1,months[i][2])
                 new_col+=1
                 # HAMZA NAVEED
-                worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
+                worksheet.write_merge(0,1,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
                 new_col+=1
             
-            worksheet.write_merge(2,3,new_col,new_col,"Total",style=red_style_title)
-            worksheet.write_merge(2,3,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
-            worksheet.write_merge(2,3,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
+            worksheet.write_merge(0,1,new_col,new_col,"Total",style=red_style_title)
+            worksheet.write_merge(0,1,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
+            worksheet.write_merge(0,1,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
 
             group_total=0
             final_total=0
