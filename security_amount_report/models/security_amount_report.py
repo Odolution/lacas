@@ -161,12 +161,12 @@ class SecurityAmountReport(models.Model):
                                 worksheet.write(row, 9, line.price_total)
                                 break
                             else:
-                                x = f"{reversal.x_student_id_cred.id}\n"
-                                x += f"{reversal.x_student_id_cred.invoice_ids}\n"
-                                x += f"{reversal.x_student_id_cred.unpaid_invoices}\n"
-                                x += f"{reversal.x_student_id_cred.	unreconciled_aml_ids}\n"
-                                raise UserError(x)
-                                worksheet.write(row, 9, "N/A")
+                                pass
+                    
+                    if is_security == False:
+                        raise UserError(reversal.id)
+                        bills = [('student_ids', '=', reversal.x_student_id_cred.id)]
+                                
                                 
 
                     
