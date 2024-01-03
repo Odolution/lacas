@@ -95,7 +95,7 @@ class SecurityAmountReport(models.Model):
 
 
                     if reversal.x_student_id_cred.facts_id:
-                        worksheet.write(row, 3, reversal.x_student_id_cred.facts_id)
+                        worksheet.write(row, 3, reversal.x_student_id_cred.facts_udid)
                     else:
                         worksheet.write(row, 3, "N/A")
 
@@ -112,24 +112,24 @@ class SecurityAmountReport(models.Model):
                     
                     if reversal.x_student_id_cred.homeroom:
                         worksheet.write(row, 5, reversal.x_student_id_cred.homeroom)
-                    elif reversal.student_ids:
-                        student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
-                        if student:
-                            homeroom = student.homeroom
-                            if homeroom != False:
-                                vals = homeroom.split('-')
-                                if vals[-1].isalpha():
-                                    worksheet.write(row, 5, vals[-1])
-                                else:
-                                    student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
-                                    if student:
-                                        homeroom = student.homeroom
-                                        if homeroom != False:
-                                            vals = homeroom.split('-')
-                                            if vals[-1].isalpha():
-                                                worksheet.write(row, 5, vals[-1])
-                                            else:
-                                                worksheet.write(row, 5, "N/A")
+                    # elif reversal.student_ids:
+                    #     student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
+                    #     if student:
+                    #         homeroom = student.homeroom
+                    #         if homeroom != False:
+                    #             vals = homeroom.split('-')
+                    #             if vals[-1].isalpha():
+                    #                 worksheet.write(row, 5, vals[-1])
+                    #             else:
+                    #                 student = self.env['school.student'].search([('id','=',reversal.student_ids.id)])
+                    #                 if student:
+                    #                     homeroom = student.homeroom
+                    #                     if homeroom != False:
+                    #                         vals = homeroom.split('-')
+                    #                         if vals[-1].isalpha():
+                    #                             worksheet.write(row, 5, vals[-1])
+                    #                         else:
+                    #                             worksheet.write(row, 5, "N/A")
                     else:
                         worksheet.write(row, 5, "N/A")
 
@@ -154,13 +154,29 @@ class SecurityAmountReport(models.Model):
                         worksheet.write(row, 8, "N/A")
 
                     
+                    security = False
                     for line in reversal.invoice_line_ids:
-                        if line.account_id.name == 'Security Fee':
+                        if line.account_id.name.strip() == 'Security':
                             if line.price_total:
-                                worksheet.write(row, 9, line.price_total)
+                                security = line.price_total
                             else:
                                 worksheet.write(row, 9, "N/A")
                             break
+
+                    if security == False:
+
+                        bills = self.env['account.move'].search([("student_ids.id","=",reversal.id),('journal_id.name','=','Admission Challan')])
+                        for bill in bills:
+                            for lines in billinvoice_line_ids:
+                                if line.name.strip() == "Security":
+                                    security = line.price_total
+                                    break
+
+                    if security == False:
+                        worksheet.write(row, 9, "N/A")
+                    else:
+                        worksheet.write(row, 9, security)
+                    
                     
                     
                     if reversal.x_studio_enrolled_cred.name:
