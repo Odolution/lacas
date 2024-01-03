@@ -676,38 +676,38 @@ class RecoveryReportWizard(models.TransientModel):
                         else:
                             
                             col=1
-                            # for month_key, count in months_total_dict.items():
-                            #     original_string = month_key
-                            #     split_parts = original_string.split('-')
-                            #     result = split_parts[0]
-                            #     if substring == result:
-                            #         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                            #         col+=3
-                                
-                            # # HAMZA NAVEED
-                            # for month_key, count in months_recovery_dict.items():
-                            #     original_string = month_key
-                            #     split_parts = original_string.split('-')
-                            #     result = split_parts[0]
-                            #     if substring == result:
-                            #         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                            #         col+=3
-
-                            # HAMZA NAVEED
-                            for month_key in months_total_dict:
-                                result = month_key.split('-')[0]
+                            for month_key, count in months_total_dict.items():
+                                original_string = month_key
+                                split_parts = original_string.split('-')
+                                result = split_parts[0]
                                 if substring == result:
-                                    worksheet.write_merge(row,row,col,col,format_with_commas(int(months_total_dict[month_key])), style=yellow_style_title)
-                                    col += 1
-                                    if month_key in months_recovery_dict:
-                                        value = int(months_recovery_dict[month_key])
-                                        worksheet.write_merge(row, row, col, col, format_with_commas(value), style=yellow_style_title)
-                                    else:
-                                        # Handle the missing key, e.g., write a default value or log a warning
-                                        worksheet.write_merge(row, row, col, col, 0, style=yellow_style_title)  # example with a default value
+                                    worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                    col+=1
+                                
+                            # HAMZA NAVEED
+                            for month_key, count in months_recovery_dict.items():
+                                original_string = month_key
+                                split_parts = original_string.split('-')
+                                result = split_parts[0]
+                                if substring == result:
+                                    worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                    col+=1
 
-                                    # worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
-                                    col += 1
+                            # # HAMZA NAVEED
+                            # for month_key in months_total_dict:
+                            #     result = month_key.split('-')[0]
+                            #     if substring == result:
+                            #         worksheet.write_merge(row,row,col,col,format_with_commas(int(months_total_dict[month_key])), style=yellow_style_title)
+                            #         col += 1
+                            #         if month_key in months_recovery_dict:
+                            #             value = int(months_recovery_dict[month_key])
+                            #             worksheet.write_merge(row, row, col, col, format_with_commas(value), style=yellow_style_title)
+                            #         else:
+                            #             # Handle the missing key, e.g., write a default value or log a warning
+                            #             worksheet.write_merge(row, row, col, col, 0, style=yellow_style_title)  # example with a default value
+
+                            #         # worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
+                            #         col += 1
 
                                     
                             worksheet.write_merge(row,row,0,0,"Total", style=yellow_style_title)
@@ -782,38 +782,38 @@ class RecoveryReportWizard(models.TransientModel):
                                             row_month_total= months_recovery_dict.get(key, 0)+count
                                             months_recovery_dict.update({key: row_month_total})
                                 col=1
-                                # for month_key, count in months_total_dict.items():
-                                #     original_string = month_key
-                                #     split_parts = original_string.split('-')
-                                #     result = split_parts[0]
-                                #     if rec.branch_name == result:
-                                #         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                                #         col+=3
-
-                                # # HAMZA NAVEED
-                                # for month_key, count in months_recovery_dict.items():
-                                #     original_string = month_key
-                                #     split_parts = original_string.split('-')
-                                #     result = split_parts[0]
-                                #     if rec.branch_name == result:
-                                #         worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
-                                #         col+=3
+                                for month_key, count in months_total_dict.items():
+                                    original_string = month_key
+                                    split_parts = original_string.split('-')
+                                    result = split_parts[0]
+                                    if rec.branch_name == result:
+                                        worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                        col+=1
 
                                 # HAMZA NAVEED
-                                for month_key in months_total_dict:
-                                    result = month_key.split('-')[0]
+                                for month_key, count in months_recovery_dict.items():
+                                    original_string = month_key
+                                    split_parts = original_string.split('-')
+                                    result = split_parts[0]
                                     if rec.branch_name == result:
-                                        worksheet.write_merge(row,row,col,col,format_with_commas(int(months_total_dict[month_key])), style=yellow_style_title)
-                                        col += 1
-                                        if month_key in months_recovery_dict:
-                                            value = int(months_recovery_dict[month_key])
-                                            worksheet.write_merge(row, row, col, col, format_with_commas(value), style=yellow_style_title)
-                                        else:
-                                            # Handle the missing key, e.g., write a default value or log a warning
-                                            worksheet.write_merge(row, row, col, col, 0, style=yellow_style_title)  # example with a default value
+                                        worksheet.write_merge(row,row,col,col+2,count, style=yellow_style_title)
+                                        col+=1
 
-                                        # worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
-                                        col += 1
+                                # # HAMZA NAVEED
+                                # for month_key in months_total_dict:
+                                #     result = month_key.split('-')[0]
+                                #     if rec.branch_name == result:
+                                #         worksheet.write_merge(row,row,col,col,format_with_commas(int(months_total_dict[month_key])), style=yellow_style_title)
+                                #         col += 1
+                                #         if month_key in months_recovery_dict:
+                                #             value = int(months_recovery_dict[month_key])
+                                #             worksheet.write_merge(row, row, col, col, format_with_commas(value), style=yellow_style_title)
+                                #         else:
+                                #             # Handle the missing key, e.g., write a default value or log a warning
+                                #             worksheet.write_merge(row, row, col, col, 0, style=yellow_style_title)  # example with a default value
+
+                                #         # worksheet.write_merge(row,row,col,col,int(months_recovery_dict[month_key]), style=yellow_style_title)
+                                #         col += 1
                                         
                                 worksheet.write_merge(row,row,0,0,"Total", style=yellow_style_title)
 
