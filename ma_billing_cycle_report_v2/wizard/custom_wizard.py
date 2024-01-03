@@ -144,7 +144,7 @@ class RecoveryReportWizard(models.TransientModel):
                 if bill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
                     # with_out_Withdrawn += float(bill_rec.amount_total)
                     with_out_Withdrawn += float(bill_rec.net_amount)
-                elif bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="not_paid":
+                elif bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="paid":
                     total_bad_debt += float(bill_rec.net_amount)
                 
                 if bill_rec.payment_state =="paid":
@@ -300,7 +300,7 @@ class RecoveryReportWizard(models.TransientModel):
                             ('invoice_date', '<=', self.to_date),
                         ])
                     enrolled_unpaid_student_count = len(set(bills.mapped('student_ids_ol.id')))
-                    if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ) and (b != 'lACAS gulberg boys' ):
+                    if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ) and (b != 'lACAS gulberg girls campus' ):
                         total_total_Issuance_billing_branch += rec.total_Issuance_billing
                         total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
                         total_total_Recovery_paid_branch += rec.total_Recovery_paid
