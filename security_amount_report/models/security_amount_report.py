@@ -162,11 +162,18 @@ class SecurityAmountReport(models.Model):
                             break
                             
                     if flag == False:
-                        raise UserError(reversal.id)
                         bills = self.env['account.move'].search([('student_ids', '=', reversal.x_student_id_cred.id)])
-
+                        for bill in bills:
+                            if bill.journal_id.name == "Security Deposit":
+                                for line in bill.invoice_line_ids:
+                                    if line.account_id.name == 'Security Fee' and line.price_total!=0:
+                                        worksheet.write(row, 9, line.price_total)
+                                        flag = True
                     
-                        # bills = [('student_ids', '=', reversal.x_student_id_cred.id)]
+                    if flag == False:
+                        worksheet.write(row, 9, "N/A")
+
+    
                                 
                                 
 
