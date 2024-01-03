@@ -741,7 +741,7 @@ class RecoveryReportWizard(models.TransientModel):
                                             worksheet.write_merge(row,row,col,col,format_with_commas(count),style=style_title)
                                     col+=1
                                 # HAMZA NAVEED
-                                for i in range(range_start,range_stop+1):
+                                # for i in range(range_start,range_stop+1):
                                     # check=True
                                     new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                     for month_key, count in billing_counts_paid.items():
