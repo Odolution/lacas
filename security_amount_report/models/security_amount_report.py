@@ -156,27 +156,13 @@ class SecurityAmountReport(models.Model):
                     
                     security = False
                     for line in reversal.invoice_line_ids:
-                        if line.account_id.name.strip() == 'Security':
+                        if line.account_id.name == 'Security Deposit':
                             if line.price_total:
+                                worksheet.write(row, 9, line.price_total)
                                 security = line.price_total
                             else:
                                 worksheet.write(row, 9, "N/A")
                             break
-
-                    if security == False:
-
-                        bills = self.env['account.move'].search([("student_ids.id","=",reversal.id),('journal_id.name','=','Admission Challan')])
-                        for bill in bills:
-                            for lines in billinvoice_line_ids:
-                                if line.name.strip() == "Security":
-                                    security = line.price_total
-                                    break
-
-                    if security == False:
-                        worksheet.write(row, 9, "N/A")
-                    else:
-                        worksheet.write(row, 9, security)
-                    
                     
                     
                     if reversal.x_studio_enrolled_cred.name:
