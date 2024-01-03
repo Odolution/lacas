@@ -351,7 +351,7 @@ class RecoveryReportWizard(models.TransientModel):
                             Total_Actual_Recovery_branch = (total_total_Recovery_paid_branch/total_total_Issuance_billing_branch)*100
                         else:
                             Total_Actual_Recovery_branch = 0
-                        worksheet.write_merge(row,row,9,9, str(f"{Total_Actual_Recovery_branch:.1f}")+"%",  style=red_style_title)
+                        worksheet.write_merge(row,row,9,9, str(f"{Total_Actual_Recovery_branch:.2f}")+"%",  style=red_style_title)
                         worksheet.write_merge(row,row,10,10,total_enrolled_unpaid_student_count_branch ,  style=red_style_title)
                         row+=1
 
@@ -384,7 +384,7 @@ class RecoveryReportWizard(models.TransientModel):
                         Recovery_on_Enrolled_and_Paid_Bills = (rec.total_Recovery_paid/rec.with_out_Withdrawn_billing)*100
                     else:
                         Recovery_on_Enrolled_and_Paid_Bills = 0
-                    worksheet.write_merge(row,row,8,8,str(f"{Recovery_on_Enrolled_and_Paid_Bills:.1f}")+"%", style=style_title)
+                    worksheet.write_merge(row,row,8,8,str(f"{Recovery_on_Enrolled_and_Paid_Bills:.2f}")+"%", style=style_title)
                     if rec.total_Recovery_paid and rec.total_Issuance_billing:
                         Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
                     else:
