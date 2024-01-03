@@ -770,7 +770,7 @@ class ReceivablesReportWizard(models.TransientModel):
             v_to_month=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%y')
 
-            raise UserError(v_from_year)
+            
 
             months= {
                 1:['01','JAN-22',10,'22'],
@@ -809,6 +809,8 @@ class ReceivablesReportWizard(models.TransientModel):
                     range_stop = key
 
             col = 27
+
+            raise UserError(range_stop)
             
             for i in range(range_start,range_stop+1):      
                 worksheet.write_merge(2,3,col,col+1,months[i][1],red_style_title)
