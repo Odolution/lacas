@@ -905,7 +905,7 @@ class RecoveryReportWizard(models.TransientModel):
                         total+=count
 
                 worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
-                col+=3
+                col+=1
 
             # HAMZA NAVEED
             for i in range(range_start,range_stop+1):
@@ -921,7 +921,7 @@ class RecoveryReportWizard(models.TransientModel):
                         total+=count
 
                 worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
-                col+=3
+                col+=1
 
             # HAMZA NAVEED
             # for i in range(range_start,range_stop+1):
