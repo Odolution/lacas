@@ -159,9 +159,11 @@ class SecurityAmountReport(models.Model):
                             if line.price_total:
                                 is_security = True
                                 worksheet.write(row, 9, line.price_total)
+                                break
                             else:
-                                worksheet.write(row, 9, "N/A")
-                            break
+                                raise UserError(f"{reversal.x_student_id_cred.id}\t{reversal.x_student_id_cred.invoice_ids}")
+                            
+
                     
                     
                     if reversal.x_studio_enrolled_cred.name:
