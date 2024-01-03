@@ -715,9 +715,6 @@ class ReceivablesReportWizard(models.TransientModel):
         
         
         if xlwt:
-
-            raise UserError("HIT")
-
             
             filename = 'RECEIVABLE OF WITHDRAWAL STUDENTS.xls'
             # One sheet by partner
@@ -762,6 +759,9 @@ class ReceivablesReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,21,22,"Leaving Reaon", red_style_title)
             worksheet.write_merge(2,3,23,24,"Remarks", red_style_title)
             worksheet.write_merge(2,3,25,26,"Withdrawn DT", red_style_title)
+
+
+            raise UserError("HIT")
 
 
             v_from_month=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%m')
