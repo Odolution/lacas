@@ -716,6 +716,8 @@ class ReceivablesReportWizard(models.TransientModel):
         
         if xlwt:
 
+            raise UserError("HIT")
+
             
             filename = 'RECEIVABLE OF WITHDRAWAL STUDENTS.xls'
             # One sheet by partner
@@ -806,7 +808,6 @@ class ReceivablesReportWizard(models.TransientModel):
 
             col = 27
             
-            raise UserError(range_start)
             for i in range(range_start,range_stop+1):      
                 worksheet.write_merge(2,3,col,col+1,months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
