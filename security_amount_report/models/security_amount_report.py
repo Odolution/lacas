@@ -154,7 +154,7 @@ class SecurityAmountReport(models.Model):
                         worksheet.write(row, 8, "N/A")
 
                     flag = False
-                    x = str(flag) + "\n"
+                    x = ""
                     for line in reversal.invoice_line_ids:
                         if line.account_id.name == 'Security Fee':
                             x += "has security fee\n"
@@ -166,7 +166,7 @@ class SecurityAmountReport(models.Model):
                             else:
                                 pass
                     
-                    if is_security == False:
+                    if flag == False:
                         raise UserError(f"{x}\t{reversal.id})
                         bills = [('student_ids', '=', reversal.x_student_id_cred.id)]
                                 
