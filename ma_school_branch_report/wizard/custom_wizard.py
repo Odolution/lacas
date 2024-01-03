@@ -892,56 +892,56 @@ class RecoveryReportWizard(models.TransientModel):
             worksheet.write_merge(row,row,0,0,"Total", style=yellow_style_title)
 
             col=1
-            for i in range(range_start,range_stop+1):
-                # check=True
-                total=0
-                test_year_month = f"{months[i][3]}-{months[i][0]}"
-                for month_key, count in months_total_dict.items():
-                    input_string = month_key
-                    parts = input_string.split("-")
-                    result = f"{parts[1]}-{parts[2]}"
-                    # raise UserError(str(month_key)+" "+str(new_month_key))
-                    if test_year_month==result:
-                        total+=count
-
-                worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
-                col+=1
-
-            # HAMZA NAVEED
-            for i in range(range_start,range_stop+1):
-                # check=True
-                total=0
-                test_year_month = f"{months[i][3]}-{months[i][0]}"
-                for month_key, count in months_recovery_dict.items():
-                    input_string = month_key
-                    parts = input_string.split("-")
-                    result = f"{parts[1]}-{parts[2]}"
-                    # raise UserError(str(month_key)+" "+str(new_month_key))
-                    if test_year_month==result:
-                        total+=count
-
-                worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
-                col+=1
-
-            # HAMZA NAVEED
             # for i in range(range_start,range_stop+1):
             #     # check=True
             #     total=0
-            #     total_recovery = 0
             #     test_year_month = f"{months[i][3]}-{months[i][0]}"
-                
-            #     for month_key in months_total_dict:
+            #     for month_key, count in months_total_dict.items():
             #         input_string = month_key
             #         parts = input_string.split("-")
             #         result = f"{parts[1]}-{parts[2]}"
             #         # raise UserError(str(month_key)+" "+str(new_month_key))
             #         if test_year_month==result:
-            #             total+=months_total_dict[month_key]
-            #             total_recovery += months_recovery_dict.get(month_key, 0)
-            #     worksheet.write_merge(row,row,col,col,format_with_commas(total),style=yellow_style_title)
-            #     col+=1
-            #     worksheet.write_merge(row,row,col,col,format_with_commas(total_recovery),style=yellow_style_title)
-            #     col+=1
+            #             total+=count
+
+            #     worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
+            #     col+=3
+
+            # # HAMZA NAVEED
+            # for i in range(range_start,range_stop+1):
+            #     # check=True
+            #     total=0
+            #     test_year_month = f"{months[i][3]}-{months[i][0]}"
+            #     for month_key, count in months_recovery_dict.items():
+            #         input_string = month_key
+            #         parts = input_string.split("-")
+            #         result = f"{parts[1]}-{parts[2]}"
+            #         # raise UserError(str(month_key)+" "+str(new_month_key))
+            #         if test_year_month==result:
+            #             total+=count
+
+            #     worksheet.write_merge(row,row,col,col+2,total,style=yellow_style_title)
+            #     col+=3
+
+            # HAMZA NAVEED
+            for i in range(range_start,range_stop+1):
+                # check=True
+                total=0
+                total_recovery = 0
+                test_year_month = f"{months[i][3]}-{months[i][0]}"
+                
+                for month_key in months_total_dict:
+                    input_string = month_key
+                    parts = input_string.split("-")
+                    result = f"{parts[1]}-{parts[2]}"
+                    # raise UserError(str(month_key)+" "+str(new_month_key))
+                    if test_year_month==result:
+                        total+=months_total_dict[month_key]
+                        total_recovery += months_recovery_dict.get(month_key, 0)
+                worksheet.write_merge(row,row,col,col,format_with_commas(total),style=yellow_style_title)
+                col+=1
+                worksheet.write_merge(row,row,col,col,format_with_commas(total_recovery),style=yellow_style_title)
+                col+=1
             
             if not select_by_monthly_list:
                 worksheet.write_merge(row,row,col,col,format_with_commas(final_total), style=yellow_style_title)
