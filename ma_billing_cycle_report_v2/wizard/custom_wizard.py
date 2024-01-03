@@ -389,7 +389,7 @@ class RecoveryReportWizard(models.TransientModel):
                         Actual_Recovery = (rec.total_Recovery_paid/rec.total_Issuance_billing)*100
                     else:
                         Actual_Recovery = 0
-                    worksheet.write_merge(row,row,9,9,str(f"{Actual_Recovery:.1f}")+"%", style=style_title)
+                    worksheet.write_merge(row,row,9,9,str(f"{Actual_Recovery:.2f}")+"%", style=style_title)
                     worksheet.write_merge(row,row,10,10,enrolled_unpaid_student_count, style=style_title)
 
                     total_total_Issuance_billing += rec.total_Issuance_billing
@@ -415,7 +415,7 @@ class RecoveryReportWizard(models.TransientModel):
                 total_Recovery_on_Enrolled_and_Paid_Bills = (total_total_Recovery_paid/total_with_out_Withdrawn_billing)*100
             else:
                 total_Recovery_on_Enrolled_and_Paid_Bills = 0
-            worksheet.write_merge(row,row,8,8,  str(f"{total_Recovery_on_Enrolled_and_Paid_Bills:.1f}")+"%" ,  style=red_style_title)
+            worksheet.write_merge(row,row,8,8,  str(f"{total_Recovery_on_Enrolled_and_Paid_Bills:.2f}")+"%" ,  style=red_style_title)
             if total_total_Recovery_paid and total_total_Issuance_billing:
                 Total_Actual_Recovery = (total_total_Recovery_paid/total_total_Issuance_billing)*100
             else:
