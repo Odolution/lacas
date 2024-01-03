@@ -168,6 +168,7 @@ class SecurityAmountReport(models.Model):
                                 if line.account_id.name == 'Security Fee' and line.price_total!=0:
                                     worksheet.write(row, 9, line.price_total)
                                     flag = True
+                                    break
                     
                     if flag == False:
                         worksheet.write(row, 9, "N/A")
