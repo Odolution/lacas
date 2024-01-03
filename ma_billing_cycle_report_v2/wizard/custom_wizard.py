@@ -141,10 +141,10 @@ class RecoveryReportWizard(models.TransientModel):
             total_Recovery_paid=0
             total_bad_debt=0
             total_Receivables=0
-            total_Issuance_billing = 0 
-            total_Recovery_paid_1 = 0
 
             for bill_rec in school_bill_ids:           
+                total_Issuance_billing = 0 
+                total_Recovery_paid_1 = 0
                 # total_count += float(bill_rec.amount_total)
                 total_count += float(bill_rec.net_amount)
                 total_Issuance_billing = float(bill_rec.net_amount)
