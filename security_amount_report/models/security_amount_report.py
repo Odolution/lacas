@@ -173,7 +173,7 @@ class SecurityAmountReport(models.Model):
                                 break    
                     
                     if flag == False:
-                        worksheet.write(row, 9, "N/A")
+                        worksheet.write(row, 9, "-")
 
     
                                 
