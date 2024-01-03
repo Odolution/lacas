@@ -717,7 +717,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(row,row,col+1,col+1,format_with_commas(group_recovery), style=yellow_style_title)
                                 if group_recovery>0 and group_recovery>0:
                                     total_per_new =(group_recovery/group_total)*100
-                                    worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                                 else:
                                     worksheet.write_merge(row,row,col+2,col+2,'0 %',style=yellow_style_title)
                                 # raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
@@ -758,7 +758,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     worksheet.write_merge(row,row,col+1,col+1,format_with_commas(rec.billing_list_paid),style=style_title)
                                     if rec.school_bill_len>0 and rec.billing_list_paid>0:
                                         total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 4))+' %',style=style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 2))+' %',style=style_title)
                                     else:
                                         worksheet.write_merge(row,row,col+2,col+2,'0 %',style=style_title)
                                 row+=1
@@ -822,7 +822,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     worksheet.write_merge(row,row,col+1,col+1,format_with_commas(group_recovery), style=yellow_style_title)
                                     if group_recovery>0 and group_recovery>0:
                                         total_per_new =(group_recovery/group_total)*100
-                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                                     else:
                                         worksheet.write_merge(row,row,col+2,col+2,'0 %',style=yellow_style_title)
                                     # raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
@@ -883,7 +883,7 @@ class RecoveryReportWizard(models.TransientModel):
                         worksheet.write_merge(row,row,col+1,col+1,format_with_commas(rec.billing_list_paid),style=style_title)
                         if rec.school_bill_len>0 and rec.billing_list_paid>0:
                             total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                            worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 4))+' %',style=style_title)
+                            worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 2))+' %',style=style_title)
                         else:
                             worksheet.write_merge(row,row,col+2,col+2,'0 %',style=style_title)
                     row+=1
@@ -948,7 +948,7 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(row,row,col+1,col+1,format_with_commas(final_recovery), style=yellow_style_title)
                 if final_total>0 and final_recovery>0:
                     final_total_per =(final_recovery/final_total)*100
-                    worksheet.write_merge(row,row,col+2,col+2,str(round(final_total_per, 4))+' %',style=yellow_style_title)
+                    worksheet.write_merge(row,row,col+2,col+2,str(round(final_total_per, 2))+' %',style=yellow_style_title)
            
 #  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
 
@@ -1071,7 +1071,7 @@ class RecoveryReportWizard(models.TransientModel):
                             worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(group_recovery), style=yellow_style_title)
                             if group_recovery>0 and group_recovery>0:
                                 total_per_new =(group_recovery/group_total)*100
-                                worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                             else:
                                 worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=yellow_style_title)
                             #  raise UserError(str(new_group_name_list)+"==="+str(group_total)+" =="+str(new_row))
@@ -1106,7 +1106,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(both_total_paid),style=style_title)
                                 if both_total>0 and both_total_paid>0:
                                     total_per =(both_total_paid/both_total)*100
-                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 4))+' %',style=style_title)
+                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 2))+' %',style=style_title)
                                 else:
                                     worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=style_title)
                                 new_row+=1
@@ -1163,7 +1163,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(group_recovery), style=yellow_style_title)
                                 if group_recovery>0 and group_recovery>0:
                                     total_per_new =(group_recovery/group_total)*100
-                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                                 else:
                                     worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=yellow_style_title)
                                 #  raise UserError(str(new_group_name_list)+"==="+str(group_total)+" =="+str(new_row))
@@ -1221,7 +1221,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(both_total_paid),style=style_title)
                     if both_total>0 and both_total_paid>0:
                         total_per =(both_total_paid/both_total)*100
-                        worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 4))+' %',style=style_title)
+                        worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 2))+' %',style=style_title)
                     else:
                         worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=style_title)
                     new_row+=1
@@ -1286,8 +1286,7 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(final_recovery), style=yellow_style_title)
                 if final_total>0 and final_recovery>0:
                     final_total_per =(final_recovery/final_total)*100
-                    # str(f"{Actual_Recovery:.2f}")
-                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(f"{final_total_per:.2f}")+' %',style=yellow_style_title)
+                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(final_total_per, 2))+' %',style=yellow_style_title)
                            
 
 
