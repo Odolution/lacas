@@ -810,7 +810,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             col = 27
 
-            raise UserError(range_start)
+            # raise UserError(range_start)
             
             for i in range(range_start,range_stop+1):      
                 worksheet.write_merge(2,3,col,col+1,months[i][1],red_style_title)
