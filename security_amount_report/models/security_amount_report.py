@@ -164,11 +164,12 @@ class SecurityAmountReport(models.Model):
                     if flag == False:
                         bills = self.env['account.move'].search([('student_ids', '=', reversal.x_student_id_cred.id)])
                         for bill in bills:
-                            for line in bill.invoice_line_ids:
-                                if line.account_id.name == 'Security Fee' and line.price_total!=0:
-                                    worksheet.write(row, 9, line.price_total)
-                                    flag = True
-                                    break
+                            if bill.journal_id.name == "Admission Challan":
+                                for line in bill.invoice_line_ids:
+                                    if line.account_id.name == 'Security Fee' and line.price_total!=0:
+                                        worksheet.write(row, 9, line.price_total)
+                                        flag = True
+                                        break
                     
                     if flag == False:
                         worksheet.write(row, 9, "N/A")
