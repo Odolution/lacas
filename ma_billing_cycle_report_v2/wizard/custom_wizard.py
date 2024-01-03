@@ -141,7 +141,7 @@ class RecoveryReportWizard(models.TransientModel):
             for bill_rec in school_bill_ids:           
                 # total_count += float(bill_rec.amount_total)
                 total_count += float(bill_rec.net_amount)
-                if bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn":
+                if bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="paid":
                     # with_out_Withdrawn += float(bill_rec.amount_total)
                     with_out_Withdrawn += float(bill_rec.net_amount)
                 elif bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="not_paid":
