@@ -153,13 +153,12 @@ class SecurityAmountReport(models.Model):
                     else:
                         worksheet.write(row, 8, "N/A")
 
-                    
+                    is_security = False
                     for line in reversal.invoice_line_ids:
-                        raise UserError(f"{reversal.id}\t{line.account_id.name}")
-                        if line.account_id.name == 'Security Deposit':
+                        if line.account_id.name == 'Security Fee':
                             if line.price_total:
+                                is_security = True
                                 worksheet.write(row, 9, line.price_total)
-                                security = line.price_total
                             else:
                                 worksheet.write(row, 9, "N/A")
                             break
