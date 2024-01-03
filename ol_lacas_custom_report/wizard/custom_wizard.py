@@ -761,7 +761,7 @@ class ReceivablesReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,25,26,"Withdrawn DT", red_style_title)
 
 
-            raise UserError("HIT")
+            
 
 
             v_from_month=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%m')
@@ -769,6 +769,8 @@ class ReceivablesReportWizard(models.TransientModel):
 
             v_to_month=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%y')
+
+            raise UserError(v_to_year)
 
             months= {
                 1:['01','JAN-22',10,'22'],
