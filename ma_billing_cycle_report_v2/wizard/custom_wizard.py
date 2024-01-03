@@ -36,6 +36,7 @@ class AccountMoveReport(models.TransientModel):
     with_out_Withdrawn_billing =fields.Float('with_out_Withdrawn_billing')
     total_Recovery_paid =fields.Float('total_Recovery_paid')
     total_bad_debt =fields.Float('total_bad_debt')
+    Receivables =fields.Float('Receivables')
    
     
 
@@ -102,6 +103,7 @@ class RecoveryReportWizard(models.TransientModel):
         with_out_Withdrawn_billing_list={}
         total_Recovery_paid_list={}
         total_bad_debts_list={}
+        total_Receivables_list={}
 
         school_ids_raw=self.env['school.school'].search([])
         school_ids_raw = school_ids_raw.sorted(lambda o : o.name)
@@ -138,14 +140,24 @@ class RecoveryReportWizard(models.TransientModel):
             with_out_Withdrawn=0
             total_Recovery_paid=0
             total_bad_debt=0
+            total_Receivables=0
+
             for bill_rec in school_bill_ids:           
+                total_Issuance_billing = 0 
+                total_Recovery_paid_1 = 0
                 # total_count += float(bill_rec.amount_total)
                 total_count += float(bill_rec.net_amount)
+                total_Issuance_billing = float(bill_rec.net_amount)
                 if bill_rec.student_ids.x_last_enrollment_status_id.name !="Withdrawn":
                     # with_out_Withdrawn += float(bill_rec.amount_total)
                     with_out_Withdrawn += float(bill_rec.net_amount)
-                elif bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="not_paid":
+                elif bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="paid":
+                    with_out_Withdrawn += float(bill_rec.net_amount)
+
+                if bill_rec.student_ids.x_last_enrollment_status_id.name =="Withdrawn" and bill_rec.payment_state =="not_paid":
                     total_bad_debt += float(bill_rec.net_amount)
+                
+                
                 
                 if bill_rec.payment_state =="paid":
                     if bill_rec.ol_payment_date:
@@ -165,13 +177,18 @@ class RecoveryReportWizard(models.TransientModel):
                             # raise UserError(str("test"))
                             # total_Recovery_paid += float(bill_rec.amount_total)
                             total_Recovery_paid += float(bill_rec.net_amount)
+                            total_Recovery_paid_1 = float(bill_rec.net_amount)
 
+                if bill_rec.student_ids.x_last_enrollment_status_id.name =="Enrolled" and bill_rec.payment_state =="not_paid":
+                    Receivables = total_Issuance_billing - total_Recovery_paid_1
+                    total_Receivables += float(Receivables)
             # raise UserError(str(total_Recovery_paid))
 
             total_Issuance_billing_list[select_new] = total_count
             with_out_Withdrawn_billing_list[select_new] = with_out_Withdrawn
             total_Recovery_paid_list[select_new] = total_Recovery_paid
             total_bad_debts_list[select_new] = total_bad_debt
+            total_Receivables_list[select_new] = total_Receivables
     
 
 
@@ -183,6 +200,7 @@ class RecoveryReportWizard(models.TransientModel):
             with_out_Withdrawn_billing = with_out_Withdrawn_billing_list[name_view]
             total_Recovery_paid_final = total_Recovery_paid_list[name_view]
             total_bad_debts_final = total_bad_debts_list[name_view]
+            total_Receivables_final = total_Receivables_list[name_view]
             mvl=self.env['billing.student.report.line'].create({
                                         
                 "branch_name":name_view,
@@ -190,6 +208,7 @@ class RecoveryReportWizard(models.TransientModel):
                 "with_out_Withdrawn_billing":with_out_Withdrawn_billing,
                 "total_Recovery_paid":total_Recovery_paid_final,
                 "total_bad_debt":total_bad_debts_final,
+                "Receivables":total_Receivables_final,
             })
             lines.append(mvl.id)
         
@@ -300,11 +319,11 @@ class RecoveryReportWizard(models.TransientModel):
                             ('invoice_date', '<=', self.to_date),
                         ])
                     enrolled_unpaid_student_count = len(set(bills.mapped('student_ids_ol.id')))
-                    if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ):
+                    if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ) and (b != 'lacas gulberg girls campus' ):
                         total_total_Issuance_billing_branch += rec.total_Issuance_billing
                         total_with_out_Withdrawn_billing_branch += rec.with_out_Withdrawn_billing
                         total_total_Recovery_paid_branch += rec.total_Recovery_paid
-                        Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                        Receivables = rec.Receivables
                         Total = Receivables + rec.total_Recovery_paid
                         Bade_Dabts = rec.total_Issuance_billing - Total
                         total_Receivables_branch += Receivables
@@ -339,7 +358,7 @@ class RecoveryReportWizard(models.TransientModel):
                         total_total_Issuance_billing_branch = rec.total_Issuance_billing
                         total_with_out_Withdrawn_billing_branch = rec.with_out_Withdrawn_billing
                         total_total_Recovery_paid_branch = rec.total_Recovery_paid
-                        Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                        Receivables = rec.Receivables
                         Total = Receivables + rec.total_Recovery_paid
                         Bade_Dabts = rec.total_Issuance_billing - Total
                         total_Receivables_branch = Receivables
@@ -354,7 +373,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,2,2,rec.total_Issuance_billing, style=style_title)
                     worksheet.write_merge(row,row,3,3,rec.with_out_Withdrawn_billing, style=style_title)
                     worksheet.write_merge(row,row,4,4,rec.total_Recovery_paid, style=style_title)
-                    Receivables = rec.total_Issuance_billing - rec.total_Recovery_paid
+                    Receivables = rec.Receivables
                     worksheet.write_merge(row,row,5,5,Receivables, style=style_title)
                     Total = Receivables + rec.total_Recovery_paid
                     worksheet.write_merge(row,row,6,6,Total, style=style_title)
