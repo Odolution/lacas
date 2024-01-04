@@ -409,10 +409,10 @@ class RecoveryReportWizard(models.TransientModel):
                                     year_in_payment = payment_date.strftime('%y')
 
                                     if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                        formatted_net_amount='{:,}'.format(bill_rec.net_amount)
+                                        # formatted_net_amount='{:,}'.format(bill_rec.net_amount)
                 
-                                        #total_count_paid += float(bill_rec.net_amount)
-                                        total_count_paid += formatted_net_amount
+                                        total_count_paid += float(bill_rec.net_amount)
+                                        # total_count_paid += formatted_net_amount
                                         
                                         # HAMZA NAVEED
                                         if month_key in by_monthly_billing_counts_paid:
