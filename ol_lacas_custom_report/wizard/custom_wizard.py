@@ -736,7 +736,6 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dct["jan_3"]           =   element["jan_3"]
             temp_dct["feb_3"]           =   element["feb_3"]
             temp_dct["mar_3"]           =   element["mar_3"]
-            temp_dct["jan_3"]           =   element["jan_3"]
             temp_dct["apr_3"]           =   element["apr_3"]
             temp_dct["may_3"]           =   element["may_3"]
             temp_dct["jun_3"]           =   element["jun_3"]
