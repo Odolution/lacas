@@ -658,7 +658,7 @@ class ReceivablesReportWizard(models.TransientModel):
             
             custom_dataa['total_amount']=value.amount_residual
             
-            raise UserError(custom_dataa['apr_3'])
+            #raise UserError(custom_dataa['apr_3'])
             temp_list_2.append(custom_dataa)
         # raise UserError(str(temp_list_2))
         
@@ -749,6 +749,8 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dct["nov_3"]           =   element["nov_3"]
             temp_dct["dec_3"]           =   element["dec_3"]
             temp_dct["total_amount"]   =  element["total_amount"]
+
+            raise UserError(temp_dct["apr_3"])
 
             if element["full_roll_no"] in invoice_check:
             
