@@ -446,7 +446,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             temp_dict["jan_3"]           =   element["jan_3"]
             temp_dict["feb_3"]           =   element["feb_3"]
-            temp_dict["mar_3"]           =   element["mar_3"]]
+            temp_dict["mar_3"]           =   element["mar_3"]
             temp_dict["apr_3"]           =   element["apr_3"]
             temp_dict["may_3"]           =   element["may_3"]
             temp_dict["jun_3"]           =   element["jun_3"]
