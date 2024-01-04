@@ -65,6 +65,19 @@
                                         <field name="oct_2"></field>
                                         <field name="nov_2"></field>
                                         <field name="dec_2"></field>
+
+                                        <field name="jan_3"></field>
+                                        <field name="feb_3"></field>
+                                        <field name="mar_3"></field>
+                                        <field name="apr_3"></field>
+                                        <field name="may_3"></field>
+                                        <field name="jun_3"></field>
+                                        <field name="jul_3"></field>
+                                        <field name="aug_3"></field>
+                                        <field name="sep_3"></field>
+                                        <field name="oct_3"></field>
+                                        <field name="nov_3"></field>
+                                        <field name="dec_3"></field>
                                         <field name="total_amount"></field>
                                         
                                         

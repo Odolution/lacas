@@ -64,6 +64,19 @@ class AccountMoveReport(models.TransientModel):
     nov_2=fields.Integer('NOV-23')
     dec_2=fields.Integer('DEC-23')
 
+    jan_3=fields.Integer('JAN-24')
+    feb_3=fields.Integer('FEB-24')
+    mar_3=fields.Integer('MAR-24')
+    apr_3=fields.Integer('APR-24')
+    may_3=fields.Integer('MAY-24')
+    jun_3=fields.Integer('JUN-24')
+    jul_3=fields.Integer('JUL-24')
+    aug_3=fields.Integer('AUG-24')
+    sep_3=fields.Integer('SEP-24')
+    oct_3=fields.Integer('OCT-24')
+    nov_3=fields.Integer('NOV-24')
+    dec_3=fields.Integer('DEC-24')
+
   
 
     
@@ -101,13 +114,13 @@ class ReceivablesReportWizard(models.TransientModel):
 
             if from_year and to_year :
 
-                if  from_year < '22' or from_year >'23':
-                    raise UserError("Sorry, Year must be between 2022-2023..")
-                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+                if  from_year < '22' or from_year >'24':
+                    raise UserError("Sorry, Year must be between 2022-2024..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2024...'))
 
-                elif to_year <"22" or to_year >"23":
-                    raise UserError("Sorry, Year must be between 2022-2023..")
-                    raise ValidationError(_('Sorry, Year must be 2022-2023...'))
+                elif to_year <"22" or to_year >"24":
+                    raise UserError("Sorry, Year must be between 2022-2024..")
+                    raise ValidationError(_('Sorry, Year must be 2022-2024...'))
 
         
 
@@ -216,6 +229,19 @@ class ReceivablesReportWizard(models.TransientModel):
                         "oct_2": 0,
                         "nov_2": 0,
                         "dec_2": 0,
+
+                        "jan_3": 0,
+                        "feb_3": 0,
+                        "mar_3": 0,
+                        "apr_3": 0,
+                        "may_3": 0,
+                        "jun_3": 0,
+                        "jul_3": 0,
+                        "aug_3": 0,
+                        "sep_3": 0,
+                        "oct_3": 0,
+                        "nov_3": 0,
+                        "dec_3": 0,
                         "total_amount":0
                     }
            
@@ -301,14 +327,38 @@ class ReceivablesReportWizard(models.TransientModel):
                 custom_data['nov_2'] = value.amount_residual
             elif value.month_date == "December" and value.year_date=='23':
                 custom_data['dec_2'] = value.amount_residual
+
+            elif value.month_date == "January" and value.year_date=='24':
+                custom_data['jan_3'] = value.amount_residual
+            elif value.month_date == "Feburary" and value.year_date=='24':
+                custom_data['feb_3'] = value.amount_residual
+            elif value.month_date == "March"and value.year_date=='24':
+                custom_data['mar_3'] = value.amount_residual
+            elif value.month_date == "April" and value.year_date=='24':
+                custom_data['apr_3'] = value.amount_residual
+            elif value.month_date == "May" and value.year_date=='24':
+                custom_data['may_3'] = value.amount_residual
+            elif value.month_date == "June" and value.year_date=='24':
+                custom_data['jun_3'] = value.amount_residual
+            elif value.month_date == "July" and value.year_date=='24':
+                custom_data['jul_3'] = value.amount_residual
+            elif value.month_date == "August" and value.year_date=='24':
+                custom_data['aug_3'] = value.amount_residual
+            elif value.month_date == "September" and value.year_date=='24':
+                custom_data['sep_3'] = value.amount_residual
+            elif value.month_date == "October" and value.year_date=='24':
+                custom_data['oct_3'] = value.amount_residual
+            elif value.month_date == "November" and value.year_date=='24':
+                custom_data['nov_3'] = value.amount_residual
+            elif value.month_date == "December" and value.year_date=='24':
+                custom_data['dec_3'] = value.amount_residual
             
             custom_data['total_amount']=value.amount_residual
             
            
 
             temp_lst.append(custom_data)
-
-
+            #raise UserError(custom_data["apr_3"])
 
         for element in temp_lst:
             temp_dict={
@@ -349,6 +399,19 @@ class ReceivablesReportWizard(models.TransientModel):
                         "oct_2": 0,
                         "nov_2": 0,
                         "dec_2": 0,
+
+                        "jan_3": 0,
+                        "feb_3": 0,
+                        "mar_3": 0,
+                        "apr_3":0,
+                        "may_3":0,
+                        "jun_3": 0,
+                        "jul_3":0,
+                        "aug_3":0,
+                        "sep_3": 0,
+                        "oct_3": 0,
+                        "nov_3": 0,
+                        "dec_3": 0,
                         "total_amount":0
                     }
            
@@ -380,6 +443,19 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dict["nov_2"]           =   element["nov_2"]
             temp_dict["dec_2"]           =   element["dec_2"]
 
+            temp_dict["jan_3"]           =   element["jan_3"]
+            temp_dict["feb_3"]           =   element["feb_3"]
+            temp_dict["mar_3"]           =   element["mar_3"]
+            temp_dict["apr_3"]           =   element["apr_3"]
+            temp_dict["may_3"]           =   element["may_3"]
+            temp_dict["jun_3"]           =   element["jun_3"]
+            temp_dict["jul_3"]           =   element["jul_3"]
+            temp_dict["aug_3"]           =   element["aug_3"]
+            temp_dict["sep_3"]           =   element["sep_3"]
+            temp_dict["oct_3"]           =   element["oct_3"]
+            temp_dict["nov_3"]           =   element["nov_3"]
+            temp_dict["dec_3"]           =   element["dec_3"]
+
             temp_dict["record_id"]     =   element["record_id"]
             temp_dict["roll_no"]       =   element["roll_no"]
             temp_dict["full_roll_no"]  =   element["full_roll_no"]
@@ -394,8 +470,11 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dict["app_date"]       =  element["app_date"]
             temp_dict["total_amount"]   =  element["total_amount"]
 
+            #raise UserError(temp_dict["apr_3"])
+
             if element["full_roll_no"] not in invoice_check:
                         invoice_check.append(element["full_roll_no"])
+                        #raise UserError(temp_dict["apr_3"])
                         final_lst.append(temp_dict)
             
             
@@ -427,6 +506,21 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["oct_2"]  +=    temp_dict["oct_2"]
                 final_lst[index]["nov_2"]  +=    temp_dict["nov_2"]
                 final_lst[index]["dec_2"]  +=    temp_dict["dec_2"]
+
+                final_lst[index]["jan_3"]  +=    temp_dict["jan_3"]
+                final_lst[index]["feb_3"]  +=    temp_dict["feb_3"]  
+                final_lst[index]["mar_3"]  +=    temp_dict["mar_3"]  
+                final_lst[index]["apr_3"]  +=    temp_dict["apr_3"]  
+                final_lst[index]["may_3"]  +=    temp_dict["may_3"] 
+                final_lst[index]["jun_3"]  +=    temp_dict["jun_3"] 
+                final_lst[index]["jul_3"]  +=    temp_dict["jul_3"] 
+                final_lst[index]["aug_3"]  +=    temp_dict["aug_3"]
+                final_lst[index]["sep_3"]  +=    temp_dict["sep_3"]
+                final_lst[index]["oct_3"]  +=    temp_dict["oct_3"]
+                final_lst[index]["nov_3"]  +=    temp_dict["nov_3"]
+                final_lst[index]["dec_3"]  +=    temp_dict["dec_3"]
+
+                #raise UserError(final_lst[index]["apr_3"])
 
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
         # raise UserError(str(final_lst))
@@ -469,6 +563,19 @@ class ReceivablesReportWizard(models.TransientModel):
                         "oct_2": 0,
                         "nov_2": 0,
                         "dec_2": 0,
+
+                        "jan_3": 0,
+                        "feb_3": 0,
+                        "mar_3": 0,
+                        "apr_3":0,
+                        "may_3":0,
+                        "jun_3": 0,
+                        "jul_3":0,
+                        "aug_3":0,
+                        "sep_3": 0,
+                        "oct_3": 0,
+                        "nov_3": 0,
+                        "dec_3": 0,
                         "total_amount":0
                     }
 
@@ -523,10 +630,35 @@ class ReceivablesReportWizard(models.TransientModel):
                 custom_dataa['nov_2'] = value.amount_residual
             elif value.month_date == "December" and value.year_date=='23':
                 custom_dataa['dec_2'] = value.amount_residual
+
+            elif value.month_date == "January" and value.year_date=='24':
+                custom_dataa['jan_3'] = value.amount_residual
+            elif value.month_date == "Feburary" and value.year_date=='24':
+                custom_dataa['feb_3'] = value.amount_residual
+            elif value.month_date == "March"and value.year_date=='24':
+                custom_dataa['mar_3'] = value.amount_residual
+            elif value.month_date == "April" and value.year_date=='24':
+                custom_dataa['apr_3'] = value.amount_residual
+            elif value.month_date == "May" and value.year_date=='24':
+                custom_dataa['may_3'] = value.amount_residual
+            elif value.month_date == "June" and value.year_date=='24':
+                custom_dataa['jun_3'] = value.amount_residual
+            elif value.month_date == "July" and value.year_date=='24':
+                custom_dataa['jul_3'] = value.amount_residual
+            elif value.month_date == "August" and value.year_date=='24':
+                custom_dataa['aug_3'] = value.amount_residual
+            elif value.month_date == "September" and value.year_date=='24':
+                custom_dataa['sep_3'] = value.amount_residual
+            elif value.month_date == "October" and value.year_date=='24':
+                custom_dataa['oct_3'] = value.amount_residual
+            elif value.month_date == "November" and value.year_date=='24':
+                custom_dataa['nov_3'] = value.amount_residual
+            elif value.month_date == "December" and value.year_date=='24':
+                custom_dataa['dec_3'] = value.amount_residual
             
             custom_dataa['total_amount']=value.amount_residual
             
-        
+            #raise UserError(custom_dataa['apr_3'])
             temp_list_2.append(custom_dataa)
         # raise UserError(str(temp_list_2))
         
@@ -560,6 +692,19 @@ class ReceivablesReportWizard(models.TransientModel):
                         "oct_2": 0,
                         "nov_2": 0,
                         "dec_2": 0,
+
+                        "jan_3": 0,
+                        "feb_3": 0,
+                        "mar_3": 0,
+                        "apr_3":0,
+                        "may_3":0,
+                        "jun_3": 0,
+                        "jul_3":0,
+                        "aug_3":0,
+                        "sep_3": 0,
+                        "oct_3": 0,
+                        "nov_3": 0,
+                        "dec_3": 0,
                         "total_amount":0
                     }
             temp_dct["full_roll_no"]  =   element["full_roll_no"]
@@ -590,7 +735,22 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dct["oct_2"]           =   element["oct_2"]
             temp_dct["nov_2"]           =   element["nov_2"]
             temp_dct["dec_2"]           =   element["dec_2"]
+
+            temp_dct["jan_3"]           =   element["jan_3"]
+            temp_dct["feb_3"]           =   element["feb_3"]
+            temp_dct["mar_3"]           =   element["mar_3"]
+            temp_dct["apr_3"]           =   element["apr_3"]
+            temp_dct["may_3"]           =   element["may_3"]
+            temp_dct["jun_3"]           =   element["jun_3"]
+            temp_dct["jul_3"]           =   element["jul_3"]
+            temp_dct["aug_3"]           =   element["aug_3"]
+            temp_dct["sep_3"]           =   element["sep_3"]
+            temp_dct["oct_3"]           =   element["oct_3"]
+            temp_dct["nov_3"]           =   element["nov_3"]
+            temp_dct["dec_3"]           =   element["dec_3"]
             temp_dct["total_amount"]   =  element["total_amount"]
+
+            #raise UserError(temp_dct["apr_3"])
 
             if element["full_roll_no"] in invoice_check:
             
@@ -621,7 +781,22 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["oct_2"]  +=    temp_dct["oct_2"]
                 final_lst[index]["nov_2"]  +=    temp_dct["nov_2"]
                 final_lst[index]["dec_2"]  +=    temp_dct["dec_2"]
+
+                final_lst[index]["jan_3"]  +=    temp_dct["jan_3"]
+                final_lst[index]["feb_3"]  +=    temp_dct["feb_3"]  
+                final_lst[index]["mar_3"]  +=    temp_dct["mar_3"]  
+                final_lst[index]["apr_3"]  +=    temp_dct["apr_3"]  
+                final_lst[index]["may_3"]  +=    temp_dct["may_3"] 
+                final_lst[index]["jun_3"]  +=    temp_dct["jun_3"] 
+                final_lst[index]["jul_3"]  +=    temp_dct["jul_3"] 
+                final_lst[index]["aug_3"]  +=    temp_dct["aug_3"]
+                final_lst[index]["sep_3"]  +=    temp_dct["sep_3"]
+                final_lst[index]["oct_3"]  +=    temp_dct["oct_3"]
+                final_lst[index]["nov_3"]  +=    temp_dct["nov_3"]
+                final_lst[index]["dec_3"]  +=    temp_dct["dec_3"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
+
+            
 
         # desired_dict={}
 
@@ -677,11 +852,25 @@ class ReceivablesReportWizard(models.TransientModel):
                     "nov_2":mov['nov_2'],
                     "dec_2":mov['dec_2'],
 
+                    "jan_3":mov['jan_3'],
+                    "feb_3":mov['feb_3'],
+                    "mar_3":mov['mar_3'],
+                    "apr_3":mov['apr_3'],
+                    "may_3":mov['may_3'],
+                    "jun_3":mov['jun_3'],
+                    "jul_3":mov['jul_3'],
+                    "aug_3":mov['aug_3'],
+                    "sep_3":mov['sep_3'],
+                    "oct_3":mov['oct_3'],
+                    "nov_3":mov['nov_3'],
+                    "dec_3":mov['dec_3'],
+
                     "total_amount": round(mov['total_amount'] or 0, 2)
             
                     
         
                 })
+                #raise UserError(mvl)
                 lines.append(mvl.id)
            
         
@@ -715,6 +904,7 @@ class ReceivablesReportWizard(models.TransientModel):
         
         
         if xlwt:
+
             
             filename = 'RECEIVABLE OF WITHDRAWAL STUDENTS.xls'
             # One sheet by partner
@@ -761,16 +951,11 @@ class ReceivablesReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,25,26,"Withdrawn DT", red_style_title)
 
 
-            
-
-
             v_from_month=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%m')
             v_from_year=datetime.strptime(str(first_date), "%Y-%m-%d").strftime('%y')
 
             v_to_month=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%y')
-
-            
 
             months= {
                 1:['01','JAN-22',10,'22'],
@@ -797,6 +982,19 @@ class ReceivablesReportWizard(models.TransientModel):
                 22:['10','OCT-23',200,'23'],
                 23:['11','NOV-23',200,'23'],
                 24:['12','DEC-23',200,'23'],
+
+                25:['01','JAN-24',130,'24'],
+                26:['02','FEB-24',140,'24'],
+                27:['03','MAR-24',150,'24'],
+                28:['04','APR-24',160,'24'],
+                29:['05','MAY-24',170,'24'],
+                30:['06','JUN-24',180,'24'],
+                31:['07','JUL-24',190,'24'],
+                32:['08','AUG-24',200,'24'],
+                33:['09','SEP-24',200,'24'],
+                34:['10','OCT-24',200,'24'],
+                35:['11','NOV-24',200,'24'],
+                36:['12','DEC-24',200,'24'],
                 }
             range_start = 0
             range_stop = 0
@@ -809,10 +1007,10 @@ class ReceivablesReportWizard(models.TransientModel):
                     range_stop = key
 
             col = 27
-
-            # raise UserError(range_start)
             
-            for i in range(range_start,range_stop+1):      
+      
+            for i in range(range_start,range_stop+1):
+      
                 worksheet.write_merge(2,3,col,col+1,months[i][1],red_style_title)
                 # worksheet.write_merge(row,row,col,col+1,months[i][2])
                 col+=2
@@ -874,6 +1072,19 @@ class ReceivablesReportWizard(models.TransientModel):
                         22:['10','OCT-23',rec.oct_2,'23'],
                         23:['11','NOV-23',rec.nov_2,'23'],
                         24:['12','DEC-23',rec.dec_2,'23'],
+
+                        25:['01','JAN-24',rec.jan_3,'24'],
+                        26:['02','FEB-24',rec.feb_3,'24'],
+                        27:['03','MAR-24',rec.mar_3,'24'],
+                        28:['04','APR-24',rec.apr_3,'24'],
+                        29:['05','MAY-24',rec.may_3,'24'],
+                        30:['06','JUN-24',rec.jun_3,'24'],
+                        31:['07','JUL-24',rec.jul_3,'24'],
+                        32:['08','AUG-24',rec.aug_3,'24'],
+                        33:['09','SEP-24',rec.sep_3,'24'],
+                        34:['10','OCT-24',rec.oct_3,'24'],
+                        34:['11','NOV-24',rec.nov_3,'24'],
+                        36:['12','DEC-24',rec.dec_3,'24'],
                     }
                     range_start = 0
                     range_stop = 0
@@ -914,33 +1125,3 @@ class ReceivablesReportWizard(models.TransientModel):
         else:
             raise Warning (""" You Don't have xlwt library.\n Please install it by executing this command :  sudo pip3 install xlwt""")
         
-
-   
-                
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
