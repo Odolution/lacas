@@ -796,11 +796,7 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["dec_3"]  +=    temp_dct["dec_3"]
                 final_lst[index]["total_amount"]   +=    temp_dct["total_amount"]  
 
-            #Arham
-            else:
-                invoice_check.append(element["full_roll_no"])
-                #raise UserError(temp_dict["apr_3"])
-                final_lst.append(temp_dict)
+            
 
         # desired_dict={}
 
@@ -874,7 +870,7 @@ class ReceivablesReportWizard(models.TransientModel):
                     
         
                 })
-                raise UserError(mvl)
+                #raise UserError(mvl)
                 lines.append(mvl.id)
            
         

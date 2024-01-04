@@ -13,7 +13,7 @@
     'website': '',
     'images': [
     ],
-    'depends': ["account","base"
+    'depends': ["account","base","challan_field",
     ],
     'data': [
         
