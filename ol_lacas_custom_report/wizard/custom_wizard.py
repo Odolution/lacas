@@ -358,8 +358,7 @@ class ReceivablesReportWizard(models.TransientModel):
            
 
             temp_lst.append(custom_data)
-
-        raise UserError(temp_lst[0]["apr_3"])
+            raise UserError(custom_data["apr_3"])
 
         for element in temp_lst:
             temp_dict={
