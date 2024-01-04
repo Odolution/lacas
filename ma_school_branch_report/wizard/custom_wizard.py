@@ -248,7 +248,7 @@ class RecoveryReportWizard(models.TransientModel):
 
         # Convert year and month pairs to a comparable format (like integers or date objects)
         start_period = pay_from_year * 12 + pay_from_month
-        end_period = pay_to_yeaschool_bill_idsr * 12 + pay_to_month
+        end_period = pay_to_year * 12 + pay_to_month
 
         # Adjust for year-end rollover
         if end_period < start_period:
