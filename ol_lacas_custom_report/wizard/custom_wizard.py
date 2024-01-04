@@ -862,6 +862,7 @@ class ReceivablesReportWizard(models.TransientModel):
                     
         
                 })
+                raise UserError(mvl)
                 lines.append(mvl.id)
            
         
