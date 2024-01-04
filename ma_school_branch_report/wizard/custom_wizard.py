@@ -248,7 +248,7 @@ class RecoveryReportWizard(models.TransientModel):
 
         # Convert year and month pairs to a comparable format (like integers or date objects)
         start_period = pay_from_year * 12 + pay_from_month
-        end_period = pay_to_year * 12 + pay_to_month
+        end_period = pay_to_yeaschool_bill_idsr * 12 + pay_to_month
 
         # Adjust for year-end rollover
         if end_period < start_period:
@@ -258,7 +258,7 @@ class RecoveryReportWizard(models.TransientModel):
             if rec.name !="Milestone Model Town (Matric)":
             #     continue
                 school_ids.append(rec)
-            # raise UserError(rec) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
+            # raise UserError(recschool_bill_ids) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
            
             school_bill_ids = self.env['account.move'].search([
                 ('x_studio_previous_branch', '=', rec.name),
@@ -971,8 +971,8 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
                 new_col+=1
             
-            worksheet.write_merge(2,3,new_col,new_col,"Total",style=red_style_title)
-            worksheet.write_merge(2,3,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
+            worksheet.write_merge(2,3,new_col,new_col,"Total Issuance",style=red_style_title)
+            worksheet.write_merge(2,3,new_col+1,new_col+1,"Total Recovery",style=red_style_title)
             worksheet.write_merge(2,3,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
 
             group_total=0
