@@ -470,7 +470,7 @@ class ReceivablesReportWizard(models.TransientModel):
             temp_dict["app_date"]       =  element["app_date"]
             temp_dict["total_amount"]   =  element["total_amount"]
 
-            raise UserError(temp_dict["apr_3"])
+            #raise UserError(temp_dict["apr_3"])
 
             if element["full_roll_no"] not in invoice_check:
                         invoice_check.append(element["full_roll_no"])
@@ -518,6 +518,8 @@ class ReceivablesReportWizard(models.TransientModel):
                 final_lst[index]["oct_3"]  +=    temp_dict["oct_3"]
                 final_lst[index]["nov_3"]  +=    temp_dict["nov_3"]
                 final_lst[index]["dec_3"]  +=    temp_dict["dec_3"]
+
+                raise UserError(final_lst[index]["apr_3"])
 
                 final_lst[index]["total_amount"]   +=    temp_dict["total_amount"]  
         # raise UserError(str(final_lst))
