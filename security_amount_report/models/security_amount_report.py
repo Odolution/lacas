@@ -148,9 +148,28 @@ class SecurityAmountReport(models.Model):
                         worksheet.write(row, 7, "N/A")
 
                     
-                    if reversal.invoice_date:
-                        worksheet.write(row, 8, str(reversal.invoice_date))
-                    else:
+                    # if reversal.invoice_date:
+                    #     worksheet.write(row, 8, str(reversal.invoice_date))
+                    # else:
+                    #     worksheet.write(row, 8, "N/A")
+                    adm_flag = False
+                    bills = self.env['account.move'].search([('student_ids', '=', reversal.x_student_id_cred.id)])
+                    for bill in bills:
+                        if bill.journal_id.name == "Admission Challan":
+                            worksheet.write(row, 8, str(bill.invoice_date))
+                            adm_flag = True
+                            break
+                    
+                    # not found admission date
+                    if adm_flag == False:
+                        for history in reversal.x_student_id_cred.enrollment_history_ids:
+                            if history.enrollment_status_id.name == "Admission":
+                                worksheet.write(row, 8, history.timestamp.strftime("%Y-%m-%d"))
+                                adm_flag = True
+                                break
+                    
+                    # still not found admission date
+                    if adm_flag == False:
                         worksheet.write(row, 8, "N/A")
 
 
@@ -161,6 +180,7 @@ class SecurityAmountReport(models.Model):
                             flag = True
                             break
                             
+                    # Security Fee not found
                     if flag == False:
                         bills = self.env['account.move'].search([('student_ids', '=', reversal.x_student_id_cred.id)])
                         for bill in bills:
@@ -172,6 +192,7 @@ class SecurityAmountReport(models.Model):
                             if flag == True:
                                 break    
                     
+                    # Security Fee still not found
                     if flag == False:
                         worksheet.write(row, 9, "-")
 
