@@ -301,8 +301,8 @@ class RecoveryReportWizard(models.TransientModel):
 
                 # Check if the invoice date is within the specified range
                 #Arham
-                _logger.info(f"year_in_voice: {year_in_invoice} v_from_year: {v_from_year} v_to_year:{v_to_year}")
-                _logger.info(f"v_start_period: {v_start_period} v_payment_period: {v_payment_period} v_end_period:{v_end_period}")
+                # _logger.info(f"year_in_voice: {year_in_invoice} v_from_year: {v_from_year} v_to_year:{v_to_year}")
+                # _logger.info(f"v_start_period: {v_start_period} v_payment_period: {v_payment_period} v_end_period:{v_end_period}")
 
                 if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
                 # Create a key using the month and year
@@ -430,6 +430,9 @@ class RecoveryReportWizard(models.TransientModel):
                                     payment_date = bill_rec.ol_payment_date
                                     month_in_payment = payment_date.strftime('%m')
                                     year_in_payment = payment_date.strftime('%y')
+
+                                    _logger.info(f"pay_from_year: {pay_from_year} year_in_payment: {year_in_payment} pay_to_year:{pay_to_year}")
+                                    _logger.info(f"pay_from_month: {pay_from_month} month_in_payment: {month_in_payment} pay_to_month:{pay_to_month}")
 
                                     if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
                                         # formatted_net_amount='{:,}'.format(bill_rec.net_amount)
