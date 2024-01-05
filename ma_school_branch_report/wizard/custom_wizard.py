@@ -12,6 +12,9 @@ from odoo.exceptions import UserError
 import calendar
 import time 
 
+import logging
+_logger = logging.getLogger(__name__)
+
 import base64
 
 import io
@@ -299,6 +302,8 @@ class RecoveryReportWizard(models.TransientModel):
                 # Check if the invoice date is within the specified range
                 #Arham
                 if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
+                    _logger.info(f"year_in_voice: {year_in_invoice} v_from_year: {v_from_year} v_to_year:{v_to_year}")
+                    _logger.info(f"v_start_period: {v_start_period} v_payment_period: {v_payment_period} v_end_period:{v_end_period}")
                 # Create a key using the month and year
                     month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
 
