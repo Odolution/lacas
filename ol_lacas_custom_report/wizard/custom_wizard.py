@@ -1040,7 +1040,7 @@ class ReceivablesReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,1,3,rec.record_id,heading_style)
                     worksheet.write_merge(row,row,4,5,rec.app_date,heading_style)
                     worksheet.write_merge(row,row,6,7,rec.roll_no,heading_style)
-                    worksheet.write_merge(row,row,8,9,rec.full_roll_number,heading_style,text_style)
+                    worksheet.write_merge(row,row,8,9,rec.full_roll_number,text_style)
                     worksheet.write_merge(row,row,10,11,rec.name,heading_style)
                     worksheet.write_merge(row,row,12,13,rec.student_batch,heading_style)
                     worksheet.write_merge(row,row,14,16,rec.student_branch,heading_style)
