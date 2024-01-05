@@ -150,7 +150,7 @@ class RecoveryReportWizard(models.TransientModel):
         selected_month = self.list_months()
         month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
         
-        t1=time.time()
+        
         by_sort_by_monthly_list = self.env['account.move'].search([
             # ('x_studio_previous_branch', '=', rec.name),
             ('state', '=', 'posted'),
@@ -158,11 +158,12 @@ class RecoveryReportWizard(models.TransientModel):
             ('journal_id', '=', 126),
             
         ])
-        t2=time.time()
-        raise UserError(t2-t1)
+        
 
         combinations = []
         final_combinations = []
+
+        t1=time.time()
 
         # Separate the list into sublists for each year
         yearly_lists = {}
@@ -178,6 +179,9 @@ class RecoveryReportWizard(models.TransientModel):
                 for j in range(i + 1, len(months)):
                     combination = f"{months[i]}-{months[j]}-{year}"
                     combinations.append(combination)
+        
+        t2=time.time()
+        raise UserError(t2-t1)
 
         for item in combinations:
             month_start1 , month_end1, and_year1 = item.split('-')
