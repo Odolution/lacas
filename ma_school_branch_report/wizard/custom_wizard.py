@@ -309,20 +309,20 @@ class RecoveryReportWizard(models.TransientModel):
                     month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
 
                 
-                if bill_rec.payment_state =="paid":
-                    if bill_rec.ol_payment_date:
-                        payment_date = bill_rec.ol_payment_date
-                        month_in_payment = payment_date.strftime('%m')
-                        year_in_payment = payment_date.strftime('%y')
-                        payment_period = year_in_payment * 12 + month_in_payment
-                        
-                        if pay_from_year <= year_in_payment <= pay_to_year and start_period <= payment_period <= end_period:
-                            total_count_paid += float(bill_rec.net_amount)
-                            # HAMZA NAVEED
-                            if month_key in billing_counts_paid:
-                                billing_counts_paid[month_key] += float(bill_rec.net_amount)
-                            else:
-                                billing_counts_paid[month_key] = float(bill_rec.net_amount)
+                    if bill_rec.payment_state =="paid":
+                        if bill_rec.ol_payment_date:
+                            payment_date = bill_rec.ol_payment_date
+                            month_in_payment = payment_date.strftime('%m')
+                            year_in_payment = payment_date.strftime('%y')
+                            payment_period = year_in_payment * 12 + month_in_payment
+                            
+                            if pay_from_year <= year_in_payment <= pay_to_year and start_period <= payment_period <= end_period:
+                                total_count_paid += float(bill_rec.net_amount)
+                                # HAMZA NAVEED
+                                if month_key in billing_counts_paid:
+                                    billing_counts_paid[month_key] += float(bill_rec.net_amount)
+                                else:
+                                    billing_counts_paid[month_key] = float(bill_rec.net_amount)
 
 
 
