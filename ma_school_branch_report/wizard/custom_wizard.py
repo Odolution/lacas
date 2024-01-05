@@ -203,21 +203,21 @@ class RecoveryReportWizard(models.TransientModel):
 
         
         
-        t1=time.time()
+        #t1=time.time()
         
 
         # Create a new list to store unique items
         unique_final_combinations_list = []
 
         for item in final_combinations:
-            #if item not in unique_final_combinations_list:
-            unique_final_combinations_list.append(item)
+            if item not in unique_final_combinations_list:
+                unique_final_combinations_list.append(item)
         
         return unique_final_combinations_list
-        raise UserError(unique_final_combinations_list)
+        #raise UserError(unique_final_combinations_list)
 
-        t2=time.time()
-        raise UserError(t2-t1)
+        #t2=time.time()
+        #raise UserError(t2-t1)
 
     def action_print_report(self):
 
@@ -298,9 +298,9 @@ class RecoveryReportWizard(models.TransientModel):
 
                 # Check if the invoice date is within the specified range
                 #Arham
-                #if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
+                if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
                 # Create a key using the month and year
-                month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
+                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
 
                 
                 if bill_rec.payment_state =="paid":
