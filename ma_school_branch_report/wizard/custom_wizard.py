@@ -181,7 +181,7 @@ class RecoveryReportWizard(models.TransientModel):
                     combinations.append(combination)
         
         
-        t1=time.time()
+        
         for item in combinations:
             month_start1 , month_end1, and_year1 = item.split('-')
             condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
@@ -202,6 +202,8 @@ class RecoveryReportWizard(models.TransientModel):
                             final_combinations.append(item)
 
         
+        raise UserError("HIT")
+        t1=time.time()
         
         # Create a new list to store unique items
         unique_final_combinations_list = []
