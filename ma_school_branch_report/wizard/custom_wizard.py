@@ -412,7 +412,7 @@ class RecoveryReportWizard(models.TransientModel):
                                         # formatted_net_amount='{:,}'.format(bill_rec.net_amount)
                 
                                         total_count_paid += float(bill_rec.net_amount)
-                                        total_count_paid += formatted_net_amount
+                                        # total_count_paid += formatted_net_amount
                                         
                                         # HAMZA NAVEED
                                         if month_key in by_monthly_billing_counts_paid:
