@@ -432,8 +432,9 @@ class RecoveryReportWizard(models.TransientModel):
                                     year_in_payment = payment_date.strftime('%y')
                                     payment_period = year_in_payment * 12 + month_in_payment
 
-                                    _logger.info(f"pay_from_year: {pay_from_year} year_in_payment: {year_in_payment} pay_to_year:{pay_to_year}")
-                                    _logger.info(f"pay_from_month: {pay_from_month} month_in_payment: {month_in_payment} pay_to_month:{pay_to_month}")
+                                    _logger.info(f"pay_from_year: {pay_from_year} -- year_in_payment: {year_in_payment} -- pay_to_year:{pay_to_year}")
+                                    # _logger.info(f"pay_from_month: {pay_from_month} month_in_payment: {month_in_payment} pay_to_month:{pay_to_month}")
+                                    _logger.info(f"start_period: {start_period} -- payment_period: {payment_period} -- end_period:{end_period}")
 
                                     #Arham
                                     # if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month: 
