@@ -163,7 +163,7 @@ class RecoveryReportWizard(models.TransientModel):
         combinations = []
         final_combinations = []
 
-        t1=time.time()
+        
 
         # Separate the list into sublists for each year
         yearly_lists = {}
@@ -180,9 +180,8 @@ class RecoveryReportWizard(models.TransientModel):
                     combination = f"{months[i]}-{months[j]}-{year}"
                     combinations.append(combination)
         
-        t2=time.time()
-        raise UserError(t2-t1)
-
+        
+        t1=time.time()
         for item in combinations:
             month_start1 , month_end1, and_year1 = item.split('-')
             condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
@@ -201,6 +200,9 @@ class RecoveryReportWizard(models.TransientModel):
                     if condition1 == condition2:
                         if invoice.bill_date not in final_combinations:
                             final_combinations.append(item)
+
+        t2=time.time()
+        raise UserError(t2-t1)
         
         # Create a new list to store unique items
         unique_final_combinations_list = []
