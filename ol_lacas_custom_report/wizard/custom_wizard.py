@@ -3,6 +3,7 @@ from odoo import models, api, fields, _
 # from odoo.exceptions import UserError
 from datetime import datetime
 import xlsxwriter
+from xlwt import easyxf
 _
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
@@ -912,6 +913,7 @@ class ReceivablesReportWizard(models.TransientModel):
             workbook = xlwt.Workbook()
             # sheet = workbook.add_sheet(report_name[:31])
             worksheet = workbook.add_sheet('Receivables of Withdrawl Std')
+            text_style = xlwt.easyxf('align: horiz left')
             
 
             
