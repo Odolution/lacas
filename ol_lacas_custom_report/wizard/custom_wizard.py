@@ -888,7 +888,7 @@ class ReceivablesReportWizard(models.TransientModel):
         }
 
         )
-        # raise UserError(str(final_lst))
+        raise UserError(str(final_lst))
        
        
         
