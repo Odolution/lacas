@@ -202,9 +202,9 @@ class RecoveryReportWizard(models.TransientModel):
                             final_combinations.append(item)
 
         
-        raise UserError("HIT")
-        t1=time.time()
         
+        t1=time.time()
+
         # Create a new list to store unique items
         unique_final_combinations_list = []
 
