@@ -10,6 +10,7 @@ _
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
 import calendar
+import time 
 
 import base64
 
@@ -149,6 +150,7 @@ class RecoveryReportWizard(models.TransientModel):
         selected_month = self.list_months()
         month_dict = {"January": 1,"Jan": 1,"February": 2,"Feb": 2,"March": 3,"Mar": 3,"April": 4,"Apr": 4,"May": 5,"June": 6,"Jun": 6,"July": 7,"Jul": 7,"August": 8,"Aug": 8,"September": 9,"Sep": 9,"October": 10,"Oct": 10,"November": 11,"Nov": 11,"December": 12,"Dec": 12}
         
+        
         by_sort_by_monthly_list = self.env['account.move'].search([
             # ('x_studio_previous_branch', '=', rec.name),
             ('state', '=', 'posted'),
@@ -156,9 +158,12 @@ class RecoveryReportWizard(models.TransientModel):
             ('journal_id', '=', 126),
             
         ])
+        
 
         combinations = []
         final_combinations = []
+
+        
 
         # Separate the list into sublists for each year
         yearly_lists = {}
@@ -174,7 +179,9 @@ class RecoveryReportWizard(models.TransientModel):
                 for j in range(i + 1, len(months)):
                     combination = f"{months[i]}-{months[j]}-{year}"
                     combinations.append(combination)
-
+        
+        
+        
         for item in combinations:
             month_start1 , month_end1, and_year1 = item.split('-')
             condition1 = str(month_dict.get(month_start1.capitalize()))+"-"+str(month_dict.get(month_end1.capitalize()))+"-"+and_year1
@@ -193,15 +200,24 @@ class RecoveryReportWizard(models.TransientModel):
                     if condition1 == condition2:
                         if invoice.bill_date not in final_combinations:
                             final_combinations.append(item)
+
         
+        
+        #t1=time.time()
+        
+
         # Create a new list to store unique items
         unique_final_combinations_list = []
 
         for item in final_combinations:
             if item not in unique_final_combinations_list:
                 unique_final_combinations_list.append(item)
+        
         return unique_final_combinations_list
-        # raise UserError(unique_final_combinations_list)
+        #raise UserError(unique_final_combinations_list)
+
+        #t2=time.time()
+        #raise UserError(t2-t1)
 
     def action_print_report(self):
 
@@ -258,7 +274,7 @@ class RecoveryReportWizard(models.TransientModel):
             if rec.name !="Milestone Model Town (Matric)":
             #     continue
                 school_ids.append(rec)
-            # raise UserError(rec) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
+            # raise UserError(recschool_bill_ids) Milestone Model Town (Matric) or Milestone Model Town Senior Campus
            
             school_bill_ids = self.env['account.move'].search([
                 ('x_studio_previous_branch', '=', rec.name),
@@ -281,25 +297,26 @@ class RecoveryReportWizard(models.TransientModel):
                 v_payment_period = year_in_invoice * 12 + month_in_invoice
 
                 # Check if the invoice date is within the specified range
-                if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
-                    # Create a key using the month and year
-                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
+                #Arham
+                #if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
+                # Create a key using the month and year
+                month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
 
-                    
-                    if bill_rec.payment_state =="paid":
-                        if bill_rec.ol_payment_date:
-                            payment_date = bill_rec.ol_payment_date
-                            month_in_payment = payment_date.strftime('%m')
-                            year_in_payment = payment_date.strftime('%y')
-                            payment_period = year_in_payment * 12 + month_in_payment
-                            
-                            if pay_from_year <= year_in_payment <= pay_to_year and start_period <= payment_period <= end_period:
-                                total_count_paid += float(bill_rec.net_amount)
-                                # HAMZA NAVEED
-                                if month_key in billing_counts_paid:
-                                    billing_counts_paid[month_key] += float(bill_rec.net_amount)
-                                else:
-                                    billing_counts_paid[month_key] = float(bill_rec.net_amount)
+                
+                if bill_rec.payment_state =="paid":
+                    if bill_rec.ol_payment_date:
+                        payment_date = bill_rec.ol_payment_date
+                        month_in_payment = payment_date.strftime('%m')
+                        year_in_payment = payment_date.strftime('%y')
+                        payment_period = year_in_payment * 12 + month_in_payment
+                        
+                        if pay_from_year <= year_in_payment <= pay_to_year and start_period <= payment_period <= end_period:
+                            total_count_paid += float(bill_rec.net_amount)
+                            # HAMZA NAVEED
+                            if month_key in billing_counts_paid:
+                                billing_counts_paid[month_key] += float(bill_rec.net_amount)
+                            else:
+                                billing_counts_paid[month_key] = float(bill_rec.net_amount)
 
 
 
@@ -409,10 +426,10 @@ class RecoveryReportWizard(models.TransientModel):
                                     year_in_payment = payment_date.strftime('%y')
 
                                     if pay_from_year <= year_in_payment <= pay_to_year and pay_from_month <= month_in_payment <= pay_to_month:
-                                        formatted_net_amount='{:,}'.format(bill_rec.net_amount)
+                                        # formatted_net_amount='{:,}'.format(bill_rec.net_amount)
                 
-                                        #total_count_paid += float(bill_rec.net_amount)
-                                        total_count_paid += formatted_net_amount
+                                        total_count_paid += float(bill_rec.net_amount)
+                                        # total_count_paid += formatted_net_amount
                                         
                                         # HAMZA NAVEED
                                         if month_key in by_monthly_billing_counts_paid:
@@ -717,7 +734,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(row,row,col+1,col+1,format_with_commas(group_recovery), style=yellow_style_title)
                                 if group_recovery>0 and group_recovery>0:
                                     total_per_new =(group_recovery/group_total)*100
-                                    worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                    worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                                 else:
                                     worksheet.write_merge(row,row,col+2,col+2,'0 %',style=yellow_style_title)
                                 # raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
@@ -741,7 +758,7 @@ class RecoveryReportWizard(models.TransientModel):
                                             worksheet.write_merge(row,row,col,col,format_with_commas(count),style=style_title)
                                     col+=1
                                 # HAMZA NAVEED
-                                for i in range(range_start,range_stop+1):
+                                # for i in range(range_start,range_stop+1):
                                     # check=True
                                     new_month_key = f"{rec.branch_name}-{months[i][3]}-{months[i][0]}"
                                     for month_key, count in billing_counts_paid.items():
@@ -758,7 +775,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     worksheet.write_merge(row,row,col+1,col+1,format_with_commas(rec.billing_list_paid),style=style_title)
                                     if rec.school_bill_len>0 and rec.billing_list_paid>0:
                                         total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 4))+' %',style=style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 2))+' %',style=style_title)
                                     else:
                                         worksheet.write_merge(row,row,col+2,col+2,'0 %',style=style_title)
                                 row+=1
@@ -822,7 +839,7 @@ class RecoveryReportWizard(models.TransientModel):
                                     worksheet.write_merge(row,row,col+1,col+1,format_with_commas(group_recovery), style=yellow_style_title)
                                     if group_recovery>0 and group_recovery>0:
                                         total_per_new =(group_recovery/group_total)*100
-                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                        worksheet.write_merge(row,row,col+2,col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                                     else:
                                         worksheet.write_merge(row,row,col+2,col+2,'0 %',style=yellow_style_title)
                                     # raise UserError(str(group_name_list)+"==="+str(group_total)+" =="+str(row))
@@ -883,7 +900,7 @@ class RecoveryReportWizard(models.TransientModel):
                         worksheet.write_merge(row,row,col+1,col+1,format_with_commas(rec.billing_list_paid),style=style_title)
                         if rec.school_bill_len>0 and rec.billing_list_paid>0:
                             total_per =(rec.billing_list_paid/rec.school_bill_len)*100
-                            worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 4))+' %',style=style_title)
+                            worksheet.write_merge(row,row,col+2,col+2,str(round(total_per, 2))+' %',style=style_title)
                         else:
                             worksheet.write_merge(row,row,col+2,col+2,'0 %',style=style_title)
                     row+=1
@@ -948,7 +965,7 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(row,row,col+1,col+1,format_with_commas(final_recovery), style=yellow_style_title)
                 if final_total>0 and final_recovery>0:
                     final_total_per =(final_recovery/final_total)*100
-                    worksheet.write_merge(row,row,col+2,col+2,str(round(final_total_per, 4))+' %',style=yellow_style_title)
+                    worksheet.write_merge(row,row,col+2,col+2,str(round(final_total_per, 2))+' %',style=yellow_style_title)
            
 #  # ++++++++++++++++++++++++BY monthy ++++++++++++++++++++++++++++++++++++++++
 
@@ -971,8 +988,8 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(2,3,new_col,new_col,'Bi Monthly '+month_in_list+' RECOVERY',red_style_title)
                 new_col+=1
             
-            worksheet.write_merge(2,3,new_col,new_col,"Total",style=red_style_title)
-            worksheet.write_merge(2,3,new_col+1,new_col+1,"Branch Wise Recovery",style=red_style_title)
+            worksheet.write_merge(2,3,new_col,new_col,"Total Issuance",style=red_style_title)
+            worksheet.write_merge(2,3,new_col+1,new_col+1,"Total Recovery",style=red_style_title)
             worksheet.write_merge(2,3,new_col+2,new_col+2,"'%' age of Recovery",style=yellow_style_title)
 
             group_total=0
@@ -1071,7 +1088,7 @@ class RecoveryReportWizard(models.TransientModel):
                             worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(group_recovery), style=yellow_style_title)
                             if group_recovery>0 and group_recovery>0:
                                 total_per_new =(group_recovery/group_total)*100
-                                worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                             else:
                                 worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=yellow_style_title)
                             #  raise UserError(str(new_group_name_list)+"==="+str(group_total)+" =="+str(new_row))
@@ -1106,7 +1123,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(both_total_paid),style=style_title)
                                 if both_total>0 and both_total_paid>0:
                                     total_per =(both_total_paid/both_total)*100
-                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 4))+' %',style=style_title)
+                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 2))+' %',style=style_title)
                                 else:
                                     worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=style_title)
                                 new_row+=1
@@ -1163,7 +1180,7 @@ class RecoveryReportWizard(models.TransientModel):
                                 worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(group_recovery), style=yellow_style_title)
                                 if group_recovery>0 and group_recovery>0:
                                     total_per_new =(group_recovery/group_total)*100
-                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 4))+' %',style=yellow_style_title)
+                                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per_new, 2))+' %',style=yellow_style_title)
                                 else:
                                     worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=yellow_style_title)
                                 #  raise UserError(str(new_group_name_list)+"==="+str(group_total)+" =="+str(new_row))
@@ -1221,7 +1238,7 @@ class RecoveryReportWizard(models.TransientModel):
                     worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(both_total_paid),style=style_title)
                     if both_total>0 and both_total_paid>0:
                         total_per =(both_total_paid/both_total)*100
-                        worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 4))+' %',style=style_title)
+                        worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(total_per, 2))+' %',style=style_title)
                     else:
                         worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,'0 %',style=style_title)
                     new_row+=1
@@ -1286,7 +1303,7 @@ class RecoveryReportWizard(models.TransientModel):
                 worksheet.write_merge(new_row,new_row,new_col+1,new_col+1,format_with_commas(final_recovery), style=yellow_style_title)
                 if final_total>0 and final_recovery>0:
                     final_total_per =(final_recovery/final_total)*100
-                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(final_total_per, 4))+' %',style=yellow_style_title)
+                    worksheet.write_merge(new_row,new_row,new_col+2,new_col+2,str(round(final_total_per, 2))+' %',style=yellow_style_title)
                            
 
 
