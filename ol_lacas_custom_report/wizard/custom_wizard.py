@@ -28,6 +28,7 @@ class AccountMoveReport(models.TransientModel):
     record_id=fields.Char('ID')
     roll_no=fields.Integer('Roll No')
     full_roll_no=fields.Integer('Roll No')
+    full_roll_number=fields.Integer('Roll No')
     student_batch=fields.Char('Batch')
     student_branch=fields.Char('Branch')
     student_class=fields.Char('Class')
@@ -195,7 +196,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "record_id":'',
                         "roll_no":0,
                         "name":'',
-                        "full_roll_no":0,
+                        "full_roll_number":" ",
                         "student_batch":'',
                         "student_branch":"",
                         "student_class":'',
@@ -249,7 +250,7 @@ class ReceivablesReportWizard(models.TransientModel):
             custom_data['name'] = value.x_student_id_cred.name if value.x_student_id_cred.name else ''
             custom_data['record_id'] = value.name 
             custom_data['roll_no'] = value.x_student_id_cred.facts_id if value.x_student_id_cred.facts_id else 0
-            custom_data['full_roll_no'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else 0
+            custom_data['full_roll_number'] = value.x_student_id_cred.facts_udid if value.x_student_id_cred.facts_udid else 0
             custom_data['student_batch'] = value.x_studio_batch.x_name if value.x_studio_batch.x_name else ''
             # custom_data['student_branch'] = value.x_student_id_cred.school_ids.name if  value.x_student_id_cred.school_ids.name else ""
             if value.x_student_id_cred:
@@ -265,7 +266,7 @@ class ReceivablesReportWizard(models.TransientModel):
             # custom_data['name'] = value.partner_id.name
             # custom_data['record_id'] = value.name 
             # custom_data['roll_no'] =  0
-            # custom_data['full_roll_no'] = 0
+            # custom_data['full_roll_number'] = 0
             # custom_data['student_batch'] =  ''
             # custom_data['student_branch'] =  ""
             # custom_data['student_class'] = ''
@@ -365,7 +366,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "record_id":'',
                         "roll_no":0,
                         "name":'',
-                        "full_roll_no":0,
+                        "full_roll_number":" ",
                         "student_batch":'',
                         "student_branch":"",
                         "student_class":'',
@@ -458,7 +459,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             temp_dict["record_id"]     =   element["record_id"]
             temp_dict["roll_no"]       =   element["roll_no"]
-            temp_dict["full_roll_no"]  =   element["full_roll_no"]
+            temp_dict["full_roll_number"]  =   element["full_roll_number"]
             temp_dict["name"]          =   element["name"]
             temp_dict["student_batch"] =   element["student_batch"]
             temp_dict["student_branch"]=   element["student_branch"]
@@ -472,15 +473,15 @@ class ReceivablesReportWizard(models.TransientModel):
 
             #raise UserError(temp_dict["apr_3"])
 
-            if element["full_roll_no"] not in invoice_check:
-                        invoice_check.append(element["full_roll_no"])
+            if element["full_roll_number"] not in invoice_check:
+                        invoice_check.append(element["full_roll_number"])
                         #raise UserError(temp_dict["apr_3"])
                         final_lst.append(temp_dict)
             
             
 
             else:
-                index = invoice_check.index(element["full_roll_no"])
+                index = invoice_check.index(element["full_roll_number"])
                 final_lst[index]["jan"]  +=    temp_dict["jan"]
                 final_lst[index]["feb"]  +=    temp_dict["feb"]  
                 final_lst[index]["mar"]  +=    temp_dict["mar"]  
@@ -527,7 +528,7 @@ class ReceivablesReportWizard(models.TransientModel):
         # desired_name = ''+'\n'
         
         # for item in temp_list_2:
-        #     desired_name += str(item['name'])+"========"+str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+        #     desired_name += str(item['name'])+"========"+str(item['full_roll_number'])+"========"+str(item['total_amount'])+'\n'
 
         # raise UserError(str(desired_name))
         # invoice_checks_2 = []
@@ -537,7 +538,7 @@ class ReceivablesReportWizard(models.TransientModel):
             
 
             custom_dataa = {
-                       "full_roll_no":'',
+                       "full_roll_number":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -580,7 +581,7 @@ class ReceivablesReportWizard(models.TransientModel):
                     }
 
             # raise UserError((value.student_id.facts_udid) )
-            custom_dataa['full_roll_no'] = value.student_ids.facts_udid 
+            custom_dataa['full_roll_number'] = value.student_ids.facts_udid 
             if value.month_date == "January" and value.year_date=='22':
                 custom_dataa['jan'] = value.amount_residual
             elif value.month_date == "Feburary" and value.year_date=='22':
@@ -666,7 +667,7 @@ class ReceivablesReportWizard(models.TransientModel):
         
         for element in temp_list_2:
             temp_dct={
-                        "full_roll_no":'',
+                        "full_roll_number":'',
                         "jan": 0,
                         "feb": 0,
                         "mar": 0,
@@ -707,7 +708,7 @@ class ReceivablesReportWizard(models.TransientModel):
                         "dec_3": 0,
                         "total_amount":0
                     }
-            temp_dct["full_roll_no"]  =   element["full_roll_no"]
+            temp_dct["full_roll_number"]  =   element["full_roll_number"]
             temp_dct["jan"]           =   element["jan"]
             temp_dct["feb"]           =   element["feb"]
             temp_dct["mar"]           =   element["mar"]
@@ -752,9 +753,9 @@ class ReceivablesReportWizard(models.TransientModel):
 
             #raise UserError(temp_dct["apr_3"])
 
-            if element["full_roll_no"] in invoice_check:
+            if element["full_roll_number"] in invoice_check:
             
-                index = invoice_check.index(element["full_roll_no"])
+                index = invoice_check.index(element["full_roll_number"])
                 # raise UserError(index)
                 final_lst[index]["jan"]  +=    temp_dct["jan"]
                 final_lst[index]["feb"]  +=    temp_dct["feb"]  
@@ -803,7 +804,7 @@ class ReceivablesReportWizard(models.TransientModel):
         # desired_name = ''+'\n'
         
         # for item in temp_list_2:
-        #     desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+        #     desired_name += str(item['full_roll_number'])+"========"+str(item['total_amount'])+'\n'
 
         # raise UserError(str(desired_name))
         
@@ -825,7 +826,7 @@ class ReceivablesReportWizard(models.TransientModel):
                     "remarks":mov['remarks'],
                     "withdrawn_date":mov['withdrawn_date'],
                    "app_date":mov['app_date'],
-                    "full_roll_no":mov['full_roll_no'],
+                    "full_roll_number":mov['full_roll_number'],
                     "jan":mov['jan'],
                     "feb":mov['feb'],
                     "mar":mov['mar'],
@@ -877,7 +878,7 @@ class ReceivablesReportWizard(models.TransientModel):
         # desired_name = ''+'\n'
         
         # for item in final_lst:
-        #     desired_name += str(item['full_roll_no'])+"========"+str(item['total_amount'])+'\n'
+        #     desired_name += str(item['full_roll_number'])+"========"+str(item['total_amount'])+'\n'
 
         # raise UserError(str(desired_name))
        
@@ -939,7 +940,7 @@ class ReceivablesReportWizard(models.TransientModel):
             worksheet.write_merge(2,3,0,0,"Sr.No", style=red_style_title)
             worksheet.write_merge(2,3,1,3,"ID",style=red_style_title)
             worksheet.write_merge(2,3,4,5,"App Date",style=red_style_title)
-            worksheet.write_merge(2,3,6,7,"Roll No",style=red_style_title)
+            worksheet.write_merge(2,3,6,7,"Facts ID",style=red_style_title)
             worksheet.write_merge(2,3,8,9,"6 Digit Roll No",style=yellow_style_title)
             worksheet.write_merge(2,3,10,11,"Name",style=red_style_title)
             worksheet.write_merge(2,3,12,13,"Batch #",style=red_style_title)
@@ -1037,7 +1038,7 @@ class ReceivablesReportWizard(models.TransientModel):
                     worksheet.write_merge(row,row,1,3,rec.record_id,heading_style)
                     worksheet.write_merge(row,row,4,5,rec.app_date,heading_style)
                     worksheet.write_merge(row,row,6,7,rec.roll_no,heading_style)
-                    worksheet.write_merge(row,row,8,9,rec.full_roll_no,heading_style)
+                    worksheet.write_merge(row,row,8,9,rec.full_roll_number,heading_style)
                     worksheet.write_merge(row,row,10,11,rec.name,heading_style)
                     worksheet.write_merge(row,row,12,13,rec.student_batch,heading_style)
                     worksheet.write_merge(row,row,14,16,rec.student_branch,heading_style)
