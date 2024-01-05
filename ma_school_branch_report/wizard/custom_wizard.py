@@ -210,8 +210,9 @@ class RecoveryReportWizard(models.TransientModel):
         unique_final_combinations_list = []
 
         for item in final_combinations:
-            if item not in unique_final_combinations_list:
-                unique_final_combinations_list.append(item)
+            #if item not in unique_final_combinations_list:
+            unique_final_combinations_list.append(item)
+        
         return unique_final_combinations_list
         raise UserError(unique_final_combinations_list)
 
