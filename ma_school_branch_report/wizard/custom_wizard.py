@@ -204,7 +204,7 @@ class RecoveryReportWizard(models.TransientModel):
         
         
         t1=time.time()
-        raise UserError(len(final_combinations))
+        
 
         # Create a new list to store unique items
         unique_final_combinations_list = []
@@ -213,7 +213,7 @@ class RecoveryReportWizard(models.TransientModel):
             if item not in unique_final_combinations_list:
                 unique_final_combinations_list.append(item)
         return unique_final_combinations_list
-        # raise UserError(unique_final_combinations_list)
+        raise UserError(unique_final_combinations_list)
 
         t2=time.time()
         raise UserError(t2-t1)
