@@ -201,8 +201,7 @@ class RecoveryReportWizard(models.TransientModel):
                         if invoice.bill_date not in final_combinations:
                             final_combinations.append(item)
 
-        t2=time.time()
-        raise UserError(t2-t1)
+        
         
         # Create a new list to store unique items
         unique_final_combinations_list = []
@@ -212,6 +211,9 @@ class RecoveryReportWizard(models.TransientModel):
                 unique_final_combinations_list.append(item)
         return unique_final_combinations_list
         # raise UserError(unique_final_combinations_list)
+
+        t2=time.time()
+        raise UserError(t2-t1)
 
     def action_print_report(self):
 
