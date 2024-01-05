@@ -298,9 +298,9 @@ class RecoveryReportWizard(models.TransientModel):
 
                 # Check if the invoice date is within the specified range
                 #Arham
-                #if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
+                if v_from_year <= year_in_invoice <= v_to_year and v_start_period <= v_payment_period <= v_end_period:
                 # Create a key using the month and year
-                month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
+                    month_key = f"{select_new}-{year_in_invoice}-{month_in_invoice}"
 
                 
                 if bill_rec.payment_state =="paid":
