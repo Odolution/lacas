@@ -27,16 +27,16 @@ class product_ext(models.Model):
     _inherit = "product.product"
     is_discount_type = fields.Boolean('is_discount_type')
     discount_ids = fields.One2many('product.cdiscount',"parent_product_id", string='Discount')
-    #Karimdad: Added security_discount field for discount calc on invoice
-    security_discount = fields.Boolean('security_discount')
+    # #Karimdad: Added security_discount field for discount calc on invoice
+    # security_discount = fields.Boolean('security_discount')
     
     
 class template_ext(models.Model):
     _inherit = "product.template"
     is_discount_type = fields.Boolean('is_discount_type')
     discount_ids = fields.One2many('product.cdiscount', "parent_template_id",string='Discount')
-    #Karimdad: Added security_discount field for discount calc on invoice
-    security_discount = fields.Boolean('security_discount')
+    # #Karimdad: Added security_discount field for discount calc on invoice
+    # security_discount = fields.Boolean('security_discount')
     
 class invoice_ext(models.Model):
 
