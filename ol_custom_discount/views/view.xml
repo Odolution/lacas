@@ -66,8 +66,8 @@
 
                         <!-- Karimdad: added boolean for security_discount -->
                         <span class="d-inline-block">
-                            <field name="is_discount_type"/>
-                            <label for="is_discount_type" string="security_discount"/>
+                            <field name="security_discount"/>
+                            <label for="security_discount" string="security_discount"/>
                         </span>
                        
                 </div>
