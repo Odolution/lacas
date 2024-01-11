@@ -61,7 +61,7 @@
                 <div name="options" groups="base.group_user">
                         <span class="d-inline-block">
                             <field name="is_discount_type"/>
-                            <label for="is_discount_type"/>
+                            <label for="check_discount_type"/>
                         </span>
                        
                 </div>
