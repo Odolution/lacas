@@ -35,7 +35,7 @@
     </record>
          -->
 
-    <record model="ir.actions.server" id="server_action_account_move_charges">
+    <record model="ir.actions.server" id="server_action_update_security_charges">
         <field name="name">update charges</field>
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="account.move"/>
