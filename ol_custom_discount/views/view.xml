@@ -40,11 +40,7 @@
         <field name="type">ir.actions.server</field>
         <field name="model_id" ref="account.move"/>
         <field name="state">code</field>
-        <field name="code">
-            for line in self.invoice_line_ids:
-                if line.account_id == 2462:
-                    raise UserError(line.account_id)
-        </field>
+        <field name="code">action=model.get_security_charge()</field>
     </record>
 
     <record id="product_template_form_ext" model="ir.ui.view">

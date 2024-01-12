@@ -41,6 +41,12 @@ class template_ext(models.Model):
 class invoice_ext(models.Model):
 
     _inherit = "account.move"
+
+    def get_security_charge(self):
+        for line in self.invoice_line_ids:
+            if line.account_id == 2462:
+                raise UserError(line.price_unit)
+        
     def applyDiscount(self):
         
         for rec in self:
