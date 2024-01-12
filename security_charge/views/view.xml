@@ -1,0 +1,18 @@
+<odoo>
+    <record model="ir.actions.server" id="server_action_update_security_charges">
+        <field name="name">update charges</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="account.payment"/>
+        <field name="state">code</field>
+        <field name="code">action=model.get_security_charge()</field>
+    </record> 
+    
+    <record id="security_charges" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"></field>
+        <field name="arch" type="xml">    
+    </record>
+
+    
+</odoo>
