@@ -362,6 +362,7 @@ class agingsReportWizard(models.TransientModel):
         move_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),("invoice_date",">=",self.date_from),("invoice_date","<=",self.date_to)])
         branch_lst=[]
 
+
         for inv in move_ids:
             if inv.x_studio_previous_branch!=False:
                 if inv.x_studio_previous_branch not in branch_lst :
@@ -725,9 +726,15 @@ class agingsReportWizard(models.TransientModel):
             custom_data['student_branch'] = branch
             custom_data['student_campus'] = branch
 
+            # HAMZA NAVEED
+            if custom_data['student_branch'] == "LACAS Burki A Level":
+                x = f"********************{custom_data['student_branch']}********************"
+
             for value in branch_wise_inv:
                 # if value.x_studio_previous_branch==branch:
-
+                
+                # if value.payment_state=='paid':
+                #     raise UserError(str(value.id) + "\t" + str(value.month_date) + "\t" + str(value.year_date))
                     
 
                 # custom_data['student_branch'] = value.x_studio_previous_branch.display_name if  len(value.x_studio_previous_branch)==1  else ""
@@ -735,529 +742,552 @@ class agingsReportWizard(models.TransientModel):
 
                 if value.month_date == "January" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_jan'] += value.due_amount
+                        custom_data['recievable_jan'] += value.amount_residual_signed
                         _logger.info(f"recievable_jan: {custom_data['recievable_jan']}")
                         
                     if value.payment_state=='paid':
-                        custom_data['recievable_jan'] += (int(value.bill_amount))
+                        custom_data['recievable_jan'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_jan'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_jan'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_jan'] += (int(value.bill_amount))
+                                custom_data['afterdue_jan'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_jan'] += (int(value.bill_amount))
+                                custom_data['firstmon_jan'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_jan'] += (int(value.bill_amount))
+                                custom_data['secmon_jan'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_jan'] += (int(value.bill_amount))
+                                custom_data['thirdmon_jan'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_jan'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_jan'] += (int(value.amount_total_signed))
 
 
 
                 elif value.month_date == "Feburary" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_feb'] += value.due_amount
+                        custom_data['recievable_feb'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_feb'] += (int(value.bill_amount))
+                        custom_data['recievable_feb'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_feb'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_feb'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_feb'] += (int(value.bill_amount))
+                                custom_data['afterdue_feb'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_feb'] += (int(value.bill_amount))
+                                custom_data['firstmon_feb'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_feb'] += (int(value.bill_amount))
+                                custom_data['secmon_feb'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_feb'] += (int(value.bill_amount))
+                                custom_data['thirdmon_feb'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_feb'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_feb'] += (int(value.amount_total_signed))
 
                 elif value.month_date == "March"and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_mar'] += value.due_amount
+                        custom_data['recievable_mar'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_mar'] += (int(value.bill_amount))
+                        custom_data['recievable_mar'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_mar'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_mar'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_mar'] += (int(value.bill_amount))
+                                custom_data['afterdue_mar'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_mar'] += (int(value.bill_amount))
+                                custom_data['firstmon_mar'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_mar'] += (int(value.bill_amount))
+                                custom_data['secmon_mar'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_mar'] += (int(value.bill_amount))
+                                custom_data['thirdmon_mar'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_mar'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_mar'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "April" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_apr'] += value.due_amount
+                        custom_data['recievable_apr'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_apr'] += (int(value.bill_amount))
+                        custom_data['recievable_apr'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_apr'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_apr'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_apr'] += (int(value.bill_amount))
+                                custom_data['afterdue_apr'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_apr'] += (int(value.bill_amount))
+                                custom_data['firstmon_apr'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_apr'] += (int(value.bill_amount))
+                                custom_data['secmon_apr'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_apr'] += (int(value.bill_amount))
+                                custom_data['thirdmon_apr'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_apr'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_apr'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "May" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_may'] += value.due_amount
+                        custom_data['recievable_may'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_may'] += (int(value.bill_amount))
+                        custom_data['recievable_may'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_may'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_may'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_may'] += (int(value.bill_amount))
+                                custom_data['afterdue_may'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_may'] += (int(value.bill_amount))
+                                custom_data['firstmon_may'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_may'] += (int(value.bill_amount))
+                                custom_data['secmon_may'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_may'] += (int(value.bill_amount))
+                                custom_data['thirdmon_may'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_may'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_may'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "June" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_jun'] += value.due_amount
+                        custom_data['recievable_jun'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jun'] += (int(value.bill_amount))
+                        custom_data['recievable_jun'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_jun'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_jun'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_jun'] += (int(value.bill_amount))
+                                custom_data['afterdue_jun'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_jun'] += (int(value.bill_amount))
+                                custom_data['firstmon_jun'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_jun'] += (int(value.bill_amount))
+                                custom_data['secmon_jun'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_jun'] += (int(value.bill_amount))
+                                custom_data['thirdmon_jun'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_jun'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_jun'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "July" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_jul'] += value.due_amount
+                        custom_data['recievable_jul'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jul'] += (int(value.bill_amount))
+                        custom_data['recievable_jul'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_jul'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_jul'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_jul'] += (int(value.bill_amount))
+                                custom_data['afterdue_jul'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_jul'] += (int(value.bill_amount))
+                                custom_data['firstmon_jul'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_jul'] += (int(value.bill_amount))
+                                custom_data['secmon_jul'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_jul'] += (int(value.bill_amount))
+                                custom_data['thirdmon_jul'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_jul'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_jul'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "August" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_aug'] += value.due_amount
+                        custom_data['recievable_aug'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_aug'] += (int(value.bill_amount))
+                        custom_data['recievable_aug'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_aug'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_aug'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_aug'] += (int(value.bill_amount))
+                                custom_data['afterdue_aug'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_aug'] += (int(value.bill_amount))
+                                custom_data['firstmon_aug'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_aug'] += (int(value.bill_amount))
+                                custom_data['secmon_aug'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_aug'] += (int(value.bill_amount))
+                                custom_data['thirdmon_aug'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_aug'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_aug'] += (int(value.amount_total_signed))
 
                 elif value.month_date == "September" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_sep'] += value.due_amount
+                        custom_data['recievable_sep'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_sep'] += (int(value.bill_amount))
+                        custom_data['recievable_sep'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_sep'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_sep'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_sep'] += (int(value.bill_amount))
+                                custom_data['afterdue_sep'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_sep'] += (int(value.bill_amount))
+                                custom_data['firstmon_sep'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_sep'] += (int(value.bill_amount))
+                                custom_data['secmon_sep'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_sep'] += (int(value.bill_amount))
+                                custom_data['thirdmon_sep'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_sep'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_sep'] += (int(value.amount_total_signed))
 
                 elif value.month_date == "October" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_oct'] += value.due_amount
+                        custom_data['recievable_oct'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_oct'] += (int(value.bill_amount))
+                        custom_data['recievable_oct'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_oct'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_oct'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_oct'] += (int(value.bill_amount))
+                                custom_data['afterdue_oct'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_oct'] += (int(value.bill_amount))
+                                custom_data['firstmon_oct'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_oct'] += (int(value.bill_amount))
+                                custom_data['secmon_oct'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_oct'] += (int(value.bill_amount))
+                                custom_data['thirdmon_oct'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_oct'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_oct'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "November" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_nov'] += value.due_amount
+                        custom_data['recievable_nov'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_nov'] += (int(value.bill_amount))
+                        custom_data['recievable_nov'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_nov'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_nov'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_nov'] += (int(value.bill_amount))
+                                custom_data['afterdue_nov'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_nov'] += (int(value.bill_amount))
+                                custom_data['firstmon_nov'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_nov'] += (int(value.bill_amount))
+                                custom_data['secmon_nov'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_nov'] += (int(value.bill_amount))
+                                custom_data['thirdmon_nov'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_nov'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_nov'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "December" and value.year_date=='22':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_dec'] += value.due_amount
+                        custom_data['recievable_dec'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_dec'] += (int(value.bill_amount))
+                        custom_data['recievable_dec'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_dec'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_dec'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_dec'] += (int(value.bill_amount))
+                                custom_data['afterdue_dec'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_dec'] += (int(value.bill_amount))
+                                custom_data['firstmon_dec'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_dec'] += (int(value.bill_amount))
+                                custom_data['secmon_dec'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_dec'] += (int(value.bill_amount))
+                                custom_data['thirdmon_dec'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_dec'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_dec'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "January" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_jan_2'] += value.due_amount
+                        custom_data['recievable_jan_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jan_2'] += (int(value.bill_amount))
+                        custom_data['recievable_jan_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_jan_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_jan_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_jan_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_jan_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_jan_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_jan_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_jan_2'] += (int(value.bill_amount))
+                                custom_data['secmon_jan_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_jan_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_jan_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_jan_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_jan_2'] += (int(value.amount_total_signed))
 
 
 
                 elif value.month_date == "Feburary" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_feb_2'] += value.due_amount
+                        custom_data['recievable_feb_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_feb_2'] += (int(value.bill_amount))
+                        custom_data['recievable_feb_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_feb_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_feb_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_feb_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_feb_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_feb_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_feb_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_feb_2'] += (int(value.bill_amount))
+                                custom_data['secmon_feb_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_feb_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_feb_2'] += (int(value.amount_total_signed))
+                                if custom_data['student_branch'] == "LACAS Burki A Level":
+                                    x += f"\n\n{value.name} {value.amount_total_signed}\n\n"
                             if diff.days>120:
-                                custom_data['actual_recievable_feb_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_feb_2'] += (int(value.amount_total_signed))
+
+                            # HAMZA NAVEED
+                            if custom_data['student_branch'] == "LACAS Burki A Level":
+                                x += f"\n{value.name}\t PayDate: {value.ol_payment_date}\t InvoiceDate: {first_date}\t Diff: {diff.days}\t"
+                                
 
 
                 elif value.month_date == "March"and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_mar_2'] += value.due_amount
+                        custom_data['recievable_mar_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_mar_2'] += (int(value.bill_amount))
+                        custom_data['recievable_mar_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_mar_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_mar_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_mar_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_mar_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_mar_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_mar_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_mar_2'] += (int(value.bill_amount))
+                                custom_data['secmon_mar_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_mar_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_mar_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_mar_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_mar_2'] += (int(value.amount_total_signed))
 
 
 
                 elif value.month_date == "April" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_apr_2'] += value.due_amount
+                        custom_data['recievable_apr_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_apr_2'] += (int(value.bill_amount))
+                        custom_data['recievable_apr_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_apr_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_apr_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_apr_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_apr_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_apr_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_apr_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_apr_2'] += (int(value.bill_amount))
+                                custom_data['secmon_apr_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_apr_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_apr_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_apr_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_apr_2'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "May" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_may_2'] += value.due_amount
+                        custom_data['recievable_may_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_may_2'] += (int(value.bill_amount))
+                        custom_data['recievable_may_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_may_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_may_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_may_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_may_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_may_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_may_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_may_2'] += (int(value.bill_amount))
+                                custom_data['secmon_may_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_may_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_may_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_may_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_may_2'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "June" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_jun_2'] += value.due_amount
+                        custom_data['recievable_jun_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jun_2'] += (int(value.bill_amount))
+                        custom_data['recievable_jun_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_jun_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_jun_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_jun_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_jun_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_jun_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_jun_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_jun_2'] += (int(value.bill_amount))
+                                custom_data['secmon_jun_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_jun_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_jun_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_jun_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_jun_2'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "July" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_jul_2'] += value.due_amount
+                        custom_data['recievable_jul_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jul_2'] += (int(value.bill_amount))
+                        custom_data['recievable_jul_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_jul_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_jul_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_jul_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_jul_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_jul_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_jul_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_jul_2'] += (int(value.bill_amount))
+                                custom_data['secmon_jul_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_jul_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_jul_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_jul_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_jul_2'] += (int(value.amount_total_signed))
 
                 elif value.month_date == "August" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_aug_2'] += value.due_amount
+                        custom_data['recievable_aug_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_aug_2'] += (int(value.bill_amount))
+                        custom_data['recievable_aug_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_aug_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_aug_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_aug_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_aug_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_aug_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_aug_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_aug_2'] += (int(value.bill_amount))
+                                custom_data['secmon_aug_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_aug_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_aug_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_aug_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_aug_2'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "September" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_sep_2'] += value.due_amount
+                        custom_data['recievable_sep_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_sep_2'] += (int(value.bill_amount))
+                        custom_data['recievable_sep_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_sep_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_sep_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_sep_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_sep_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_sep_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_sep_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_sep_2'] += (int(value.bill_amount))
+                                custom_data['secmon_sep_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_sep_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_sep_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_sep_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_sep_2'] += (int(value.amount_total_signed))
 
 
                 elif value.month_date == "October" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_oct_2'] += value.due_amount
+                        custom_data['recievable_oct_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_oct_2'] += (int(value.bill_amount))
+                        custom_data['recievable_oct_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_oct_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_oct_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_oct_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_oct_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_oct_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_oct_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_oct_2'] += (int(value.bill_amount))
+                                custom_data['secmon_oct_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_oct_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_oct_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_oct_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_oct_2'] += (int(value.amount_total_signed))
 
                 elif value.month_date == "November" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_nov_2'] += value.due_amount
+                        custom_data['recievable_nov_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_nov_2'] += (int(value.bill_amount))
+                        custom_data['recievable_nov_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_nov_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_nov_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_nov_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_nov_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_nov_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_nov_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_nov_2'] += (int(value.bill_amount))
+                                custom_data['secmon_nov_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_nov_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_nov_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_nov_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_nov_2'] += (int(value.amount_total_signed))
+                    # HAMZA NAVEED
+                    # if value.payment_state == "not_paid":
+                    # UNPAID
+                    #     raise UserError(str(value.payment_state) + "\t" + str(value.due_amount) + "\t" + str(custom_data['recievable_nov_2']))
+                        # raise UserError(str(value.payment_state) + "\t" + str(value.amount_total_signed) + "\t" + str(custom_data['recievable_nov_2']))
+                    
+                    # if value.payment_state =="paid":
+                    #     raise UserError(str(value.payment_state) + "\t" + str((int(value.bill_amount))) + str(value.bill_amount) + "\t" + str(custom_data['recievable_nov_2']))
+                        # raise UserError(f"{value.id}\n{(int(value.amount_total_signed))}\n{value.bill_amount}\n{custom_data['recievable_nov_2']}\n{custom_data['ondue_nov_2']}\n{custom_data['afterdue_nov_2']}\n{custom_data['firstmon_nov_2']}\n{custom_data['secmon_nov_2']}\n{custom_data['thirdmon_nov_2']}")
+
+
 
                 elif value.month_date == "December" and value.year_date=='23':
                     if value.payment_state=='not_paid':
-                        custom_data['recievable_dec_2'] += value.due_amount
+                        custom_data['recievable_dec_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_dec_2'] += (int(value.bill_amount))
+                        custom_data['recievable_dec_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
-                            if diff.days >0 and diff.days<11:
-                                custom_data['ondue_dec_2'] += (int(value.bill_amount))
+                            if diff.days<11:
+                                custom_data['ondue_dec_2'] += (int(value.amount_total_signed))
                             if diff.days >10 and diff.days<31:
-                                custom_data['afterdue_dec_2'] += (int(value.bill_amount))
+                                custom_data['afterdue_dec_2'] += (int(value.amount_total_signed))
                             if diff.days>30 and diff.days<61:
-                                custom_data['firstmon_dec_2'] += (int(value.bill_amount))
+                                custom_data['firstmon_dec_2'] += (int(value.amount_total_signed))
                             if diff.days>60 and diff.days<91:
-                                custom_data['secmon_dec_2'] += (int(value.bill_amount))
+                                custom_data['secmon_dec_2'] += (int(value.amount_total_signed))
                             if diff.days>90 and diff.days<121:
-                                custom_data['thirdmon_dec_2'] += (int(value.bill_amount))
+                                custom_data['thirdmon_dec_2'] += (int(value.amount_total_signed))
                             if diff.days>120:
-                                custom_data['actual_recievable_dec_2'] += (int(value.bill_amount))
+                                custom_data['actual_recievable_dec_2'] += (int(value.amount_total_signed))
+
+            # HAMZA NAVEED
+            if custom_data['student_branch'] == "LACAS Burki A Level":
+                x += f"\n{custom_data['ondue_feb_2']}\t{custom_data['afterdue_feb_2']}\t{custom_data['firstmon_feb_2']}\t{custom_data['secmon_feb_2']}\t{custom_data['thirdmon_feb_2']}\t{custom_data['actual_recievable_feb_2']}"
+                # raise UserError(x)
 
             tr_jan=custom_data['ondue_jan']+custom_data['afterdue_jan']+ custom_data['firstmon_jan']+custom_data['secmon_jan']+custom_data['thirdmon_jan']+ custom_data['actual_recievable_jan']
             bd_jan=custom_data['recievable_jan']-tr_jan
@@ -1407,6 +1437,18 @@ class agingsReportWizard(models.TransientModel):
             if custom_data['recievable_dec_2']!=0:
                 bd_perc_dec_2=bd_dec_2/custom_data['recievable_dec_2']*100
 
+
+            # # HAMZA NAVEED
+            # x = "*"*10 + "\t" + custom_data['student_branch'] + "\t" + "*"*10
+            # x += "\n"
+            # x += "*"*10 + "\t" + custom_data['student_campus'] + "\t" + "*"*10
+            # x += "\n"
+
+            # for i in custom_data:
+            #     x += str(i) + "\t" + str(custom_data[i]) + "\n"
+            # raise UserError(x)
+
+                
 
 
 
@@ -2107,7 +2149,6 @@ class agingsReportWizard(models.TransientModel):
                 
 
            
-
 
 
 
