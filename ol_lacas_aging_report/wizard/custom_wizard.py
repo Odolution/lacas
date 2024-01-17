@@ -746,7 +746,7 @@ class agingsReportWizard(models.TransientModel):
                         _logger.info(f"recievable_jan: {custom_data['recievable_jan']}")
                         
                     if value.payment_state=='paid':
-                        custom_data['recievable_jan'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_jan'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -769,7 +769,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_feb'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_feb'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_feb'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -790,7 +790,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_mar'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_mar'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_mar'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -812,7 +812,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_apr'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_apr'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_apr'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -834,7 +834,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_may'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_may'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_may'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -856,7 +856,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_jun'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jun'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_jun'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -878,7 +878,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_jul'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jul'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_jul'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -900,7 +900,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_aug'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_aug'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_aug'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -921,7 +921,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_sep'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_sep'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_sep'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -942,7 +942,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_oct'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_oct'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_oct'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -964,7 +964,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_nov'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_nov'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_nov'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -986,7 +986,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_dec'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_dec'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_dec'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1008,7 +1008,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_jan_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jan_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_jan_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1031,7 +1031,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_feb_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_feb_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_feb_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1060,7 +1060,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_mar_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_mar_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_mar_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1083,7 +1083,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_apr_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_apr_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_apr_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1105,7 +1105,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_may_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_may_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_may_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1127,7 +1127,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_jun_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jun_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_jun_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1149,7 +1149,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_jul_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_jul_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_jul_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1170,7 +1170,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_aug_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_aug_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_aug_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1192,7 +1192,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_sep_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_sep_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_sep_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1214,7 +1214,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_oct_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_oct_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_oct_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1235,7 +1235,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_nov_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_nov_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_nov_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
@@ -1267,7 +1267,7 @@ class agingsReportWizard(models.TransientModel):
                     if value.payment_state=='not_paid':
                         custom_data['recievable_dec_2'] += value.amount_residual_signed
                     if value.payment_state=='paid':
-                        custom_data['recievable_dec_2'] += (int(value.amount_total_signed))
+                        # custom_data['recievable_dec_2'] += (int(value.amount_total_signed))
                         if value.ol_payment_date:
                             first_date=value.invoice_date.replace(day=1)
                             diff=value.ol_payment_date-first_date
