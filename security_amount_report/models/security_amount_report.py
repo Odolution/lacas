@@ -153,14 +153,18 @@ class SecurityAmountReport(models.Model):
                     # else:
                     #     worksheet.write(row, 8, "N/A")
                     
-                    adm_flag = False
+                    if reversal.x_studio_admission_date_1:
+                        worksheet.write(row, 8, str(reversal.x_studio_admission_date_1))
+                    else:
+                        worksheet.write(row, 8, "N/A")
+                    # adm_flag = False
 
-                    bills = self.env['account.move'].search([('student_ids', '=', reversal.x_student_id_cred.id)])
-                    for bill in bills:
-                        if bill.journal_id.name == "Admission Challan":
-                            worksheet.write(row, 8, str(bill.x_studio_admission_date_1))
-                            adm_flag = True
-                            break
+                    # bills = self.env['account.move'].search([('student_ids', '=', reversal.x_student_id_cred.id)])
+                    # for bill in bills:
+                    #     if bill.journal_id.name == "Admission Challan":
+                    #         worksheet.write(row, 8, str(bill.x_studio_admission_date_1))
+                    #         adm_flag = True
+                    #         break
                     
                     # # not found admission date
                     # if adm_flag == False:
@@ -171,8 +175,8 @@ class SecurityAmountReport(models.Model):
                     #             break
                     
                     # # still not found admission date
-                    if adm_flag == False:
-                        worksheet.write(row, 8, "N/A")
+                    # if adm_flag == False:
+                    #     worksheet.write(row, 8, "N/A")
 
 
                     flag = False
