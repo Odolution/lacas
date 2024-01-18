@@ -147,10 +147,14 @@ class SecurityAmountReport(models.Model):
                     else:
                         worksheet.write(row, 7, "N/A")
 
-                    
-                    if reversal.invoice_date:
-                        worksheet.write(row, 8, str(reversal.x_student_id_cred.enrollment_history_ids.enrolled_date))
-                    else:
+                    adm_flag = False
+                    for history in reversal.x_student_id_cred.enrollment_history_ids:
+                        if history.enrollment_status_id.name == "Admission":
+                            worksheet.write(row, 8, history.timestamp.strftime("%Y-%m-%d"))
+                            adm_flag = True
+                            break
+                        # worksheet.write(row, 8, str())
+                    if adm_flag == False:
                         worksheet.write(row, 8, "N/A")
 
 
