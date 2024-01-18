@@ -81,7 +81,7 @@ class account_fields(models.Model):
             self.security_amnt_lv=line_inv.price_total
           if line_inv.product_id.id==408:
             self.other_refunds_lv=line_inv.price_total
-          if line.account_id.id == 2353 and security>0:
+          if line_inv.product_id.id == 425 and security>0:
             self.security_amnt_lv=line_inv.price_total + security
 
         ##work for father name picking
