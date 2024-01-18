@@ -156,17 +156,17 @@ class SecurityAmountReport(models.Model):
                     bills = self.env['account.move'].search([('student_ids', '=', reversal.x_student_id_cred.id)])
                     for bill in bills:
                         if bill.journal_id.name == "Admission Challan":
-                            worksheet.write(row, 8, str(bill.invoice_date))
+                            worksheet.write(row, 8, str(bill.x_studio_admission_date))
                             adm_flag = True
                             break
                     
                     # not found admission date
-                    if adm_flag == False:
-                        for history in reversal.x_student_id_cred.enrollment_history_ids:
-                            if history.enrollment_status_id.name == "Admission":
-                                worksheet.write(row, 8, history.timestamp.strftime("%Y-%m-%d"))
-                                adm_flag = True
-                                break
+                    # if adm_flag == False:
+                    #     for history in reversal.x_student_id_cred.enrollment_history_ids:
+                    #         if history.enrollment_status_id.name == "Admission":
+                    #             worksheet.write(row, 8, history.timestamp.strftime("%Y-%m-%d"))
+                    #             adm_flag = True
+                    #             break
                     
                     # still not found admission date
                     if adm_flag == False:
