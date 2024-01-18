@@ -74,13 +74,17 @@ class account_fields(models.Model):
           elif len(splitted_name)>0:
             self.class_name=splitted_name[0]
 
+      security = 0
       if self.invoice_line_ids:
         for line_inv in self.invoice_line_ids:
           if line_inv.account_id.id==2462:
+            security = line_inv.price_total
             self.security_amnt_lv=line_inv.price_total
           if line_inv.product_id.id==408:
             self.other_refunds_lv=line_inv.price_total
-
+          if line_inv.product_id.id == 425 and security>0:
+            self.security_amnt_lv=line_inv.price_total + security
+            
         ##work for father name picking
         for relation in self.x_student_id_cred.relationship_ids:
           if relation.relationship_type_id.name == "Father":
