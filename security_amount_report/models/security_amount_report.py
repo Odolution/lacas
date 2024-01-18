@@ -149,7 +149,7 @@ class SecurityAmountReport(models.Model):
 
                     
                     if reversal.invoice_date:
-                        worksheet.write(row, 8, str(reversal.invoice_date))
+                        worksheet.write(row, 8, str(reversal.x_student_id_cred.enrollment_history_ids.enrolled_date))
                     else:
                         worksheet.write(row, 8, "N/A")
 
