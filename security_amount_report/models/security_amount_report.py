@@ -74,7 +74,7 @@ class SecurityAmountReport(models.Model):
 
 
             # HAMZA NAVEED
-            reversals = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),('x_studio_related_field_keYGH','=','127161')])
+            reversals = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),('udid_cred_custom.','=','127161')])
             serial_number = 1
             
             if reversals:
