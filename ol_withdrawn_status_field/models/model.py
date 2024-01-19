@@ -11,7 +11,7 @@ class Account_move(models.Model):
     withdrawn_status_reversal_compute = fields.Selection([('Y', 'Y'), ('N', 'N')], compute='_compute_withdrawn_status_reversal',string="Withdrawn Status")
     withdrawn_status_bill_compute = fields.Selection([('Y', 'Y'), ('N', 'N')],compute='_compute_withdrawn_status_bill',string="Withdrawn Status")
     withdrawn_status_reversal = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status",store = True)
-    withdrawn_status_bill = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status")
+    withdrawn_status_bill = fields.Selection([('Y', 'Y'), ('N', 'N')],string="Withdrawn Status",store = True)
 
 
 
