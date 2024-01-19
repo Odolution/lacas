@@ -143,13 +143,13 @@ class SecurityAmountReport(models.Model):
 
 
                     if reversal.withdrawn_status_reversal:
-                        # raise UserError(f"HIT {reversal.withdrawn_status_reversal}")
+                        raise UserError(f"HIT {reversal.withdrawn_status_reversal}")
                         worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                     else:
-                        raise("HEHEHE")
+                        # raise("HEHEHE")
                         worksheet.write(row, 7, "N/A")
 
-                    adm_flag = Falses
+                    adm_flag = False
                     for history in reversal.x_student_id_cred.enrollment_history_ids:
                         if history.enrollment_status_id.name == "Admission":
                             worksheet.write(row, 8, history.timestamp.strftime("%Y-%m-%d"))
