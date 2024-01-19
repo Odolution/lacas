@@ -74,7 +74,7 @@ class SecurityAmountReport(models.Model):
 
 
             # HAMZA NAVEED
-            reversals = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit')])
+            reversals = self.env['account.move'].search([("move_type","=","out_refund"),('journal_id.name','=','Security Deposit'),('id','=',276401)])
             serial_number = 1
             
             if reversals:
@@ -143,6 +143,7 @@ class SecurityAmountReport(models.Model):
 
 
                     if reversal.withdrawn_status_reversal:
+                        raise UserError(reversal.withdrawn_status_reversal)
                         worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                         
                     else:
