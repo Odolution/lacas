@@ -145,8 +145,8 @@ class SecurityAmountReport(models.Model):
                     # if reversal.withdrawn_status_reversal:
                     if reversal.withdrawn_status_bill:
                         # worksheet.write(row, 7, reversal.withdrawn_status_reversal)
-                        #Arham
-                        raise UserError(reversal.withdrawn_status_bill)
+                        #Arham.
+                        # raise UserError(reversal.withdrawn_status_bill)
                         worksheet.write(row, 7, reversal.withdrawn_status_bill)
                     else:
                         worksheet.write(row, 7, "N/A")
