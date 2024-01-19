@@ -143,9 +143,10 @@ class SecurityAmountReport(models.Model):
 
 
                     if reversal.withdrawn_status_reversal:
-                        raise UserError(f"HIT {reversal.withdrawn_status_reversal}")
+                        # raise UserError(f"HIT {reversal.withdrawn_status_reversal}")
                         worksheet.write(row, 7, reversal.withdrawn_status_reversal)
                     else:
+                        raise("HEHEHE")
                         worksheet.write(row, 7, "N/A")
 
                     adm_flag = Falses
