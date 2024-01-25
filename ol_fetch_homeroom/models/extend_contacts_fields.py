@@ -102,7 +102,7 @@ class SchoolStudent(models.Model):
                             if section:
                                 homeroom = grade_level + '-' + section
                                 std.homeroom = homeroom
-                                
+                                raise UserError(homeroom)
             grade_level_id = 320
             mother_cnic_id = 219
             father_cnic_id = 220
