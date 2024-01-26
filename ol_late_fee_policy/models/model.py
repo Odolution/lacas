@@ -67,10 +67,11 @@ class ext_invoice(models.Model):
     
     @api.depends('invoice_date_due')
     def _compute_late_fee_compute(self):
-        if self.payment_state=="paid" or self.state!="posted":
-            self.late_fee_compute=0
-        else:  
-            self.late_fee_compute=self.get_late_fee_charges()
+        for rec in self:
+            if rec.payment_state=="paid" or rec.state!="posted":
+                rec.late_fee_compute=0
+            else:  
+                rec.late_fee_compute=rec.get_late_fee_charges()
             
     def get_late_fee_charges(self,payment_date=None):
         
