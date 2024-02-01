@@ -960,7 +960,7 @@ class ReceivablesReportWizard(models.TransientModel):
             v_to_month=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%y')
 
-            raise UserError(f"{first_date}\n{last_date}")
+            # raise UserError(f"{first_date}\n{last_date}")
 
             months= {
                 1:['01','JAN-22',10,'22'],
