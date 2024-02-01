@@ -1002,6 +1002,8 @@ class ReceivablesReportWizard(models.TransientModel):
             range_start = 0
             range_stop = 0
             # raise UserError(v_to)
+            raise UserError(f"{v_from_month}\t{v_from_year}\n{v_to_month}\t{v_to_year}")
+
             for key, value in months.items():
                 if value[0] == v_from_month and value[3] == v_from_year:
                     range_start = key
@@ -1011,7 +1013,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             col = 27
             
-            raise UserError(f"{range_start}\t{range_stop}")
+            # raise UserError(f"{range_start}\t{range_stop}")
       
             for i in range(range_start,range_stop+1):
       
