@@ -1011,6 +1011,7 @@ class ReceivablesReportWizard(models.TransientModel):
 
             col = 27
             
+            raise UserError(f"{range_start}\t{range_stop}")
       
             for i in range(range_start,range_stop+1):
       
