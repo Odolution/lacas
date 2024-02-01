@@ -960,6 +960,8 @@ class ReceivablesReportWizard(models.TransientModel):
             v_to_month=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%m')
             v_to_year=datetime.strptime(str(last_date), "%Y-%m-%d").strftime('%y')
 
+            raise UserError(f"{first_date}\n{last_date}")
+
             months= {
                 1:['01','JAN-22',10,'22'],
                 2:['02','FEB-22',20,'22'],
@@ -1002,7 +1004,7 @@ class ReceivablesReportWizard(models.TransientModel):
             range_start = 0
             range_stop = 0
             # raise UserError(v_to)
-            raise UserError(f"{v_from_month}\t{v_from_year}\n{v_to_month}\t{v_to_year}")
+            # raise UserError(f"{v_from_month}\t{v_from_year}\n{v_to_month}\t{v_to_year}")
 
             for key, value in months.items():
                 if value[0] == v_from_month and value[3] == v_from_year:
