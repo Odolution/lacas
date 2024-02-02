@@ -75,6 +75,7 @@ class SchoolStudent(models.Model):
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
             'Facts-Api-Key': ''
         } 
+        raise UserError("HIT")
         # api_key = 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuIhXl6zCq8G/1abw2CTbjMnyQCEygm1dQE+p1fYauQRJ2/34/RKM5maKAUi6lhn3A='
         if not student_id:
             if timeline == 'daily':
