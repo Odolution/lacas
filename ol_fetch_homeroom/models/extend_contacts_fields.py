@@ -78,9 +78,8 @@ class SchoolStudent(models.Model):
         # api_key = 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuIhXl6zCq8G/1abw2CTbjMnyQCEygm1dQE+p1fYauQRJ2/34/RKM5maKAUi6lhn3A='
         if not student_id:
             if timeline == 'daily':
-                raise UserError("P-HIT")
                 students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-                raise UserError("H-HIT")
+                # raise UserError("H-HIT")
             else:
                 students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         else:
