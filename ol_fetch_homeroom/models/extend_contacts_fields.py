@@ -134,7 +134,7 @@ class SchoolStudent(models.Model):
                 rec.get_homeroom_and_custom_defined_fields()
 
     @api.model
-    def sync_homeroom_2(self,, timeline='daily', student_id=None):
+    def sync_homeroom_2(self, timeline='daily', student_id=None):
         school_name_key = {
                 "LACAS Burki A Level":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU=",
                 "LACAS Burki Boys":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EvlFxL8JZDP8b8yHRK/zLqt00IjeqpiNMsinE6yLyZbpp0itPr5auIhwYsRcAWgS2Y=",
