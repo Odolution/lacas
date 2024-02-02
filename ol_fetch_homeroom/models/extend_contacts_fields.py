@@ -83,7 +83,7 @@ class SchoolStudent(models.Model):
                 students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
         else:
                 students = self.env['school.student'].search([('id', '=', student_id)])
-        raise UserError(len(students))
+        # raise UserError(len(students))
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
@@ -102,6 +102,7 @@ class SchoolStudent(models.Model):
                             section = response[-1].get('section')
                             if section:
                                 homeroom = grade_level + '-' + section
+                                raise UserError(homeroom)
                                 std.homeroom = homeroom
                                 
             grade_level_id = 320
