@@ -127,5 +127,11 @@ class SchoolStudent(models.Model):
                 std.x_studio_grade_level = response.get('results')[0].get('data')
 
 
+    def sync_homeroom(self):
+        x = self.env['school.student'].sudo.search(('x_last_enrollment_status_id.name', '=', 'Enrolled'))
+        for rec in x:
+            rec.get_homeroom_and_custom_defined_fields()
 
-    
+
+
+
