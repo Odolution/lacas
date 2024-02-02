@@ -128,9 +128,10 @@ class SchoolStudent(models.Model):
 
 
     def sync_homeroom(self):
-        x = self.env['school.student'].sudo().search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-        for rec in x:
-            rec.get_homeroom_and_custom_defined_fields()
+        x = self.env['school.student'].sudo().search([('homeroom', '=', False),('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+        if x:
+            for rec in x:
+                rec.get_homeroom_and_custom_defined_fields()
 
 
 
