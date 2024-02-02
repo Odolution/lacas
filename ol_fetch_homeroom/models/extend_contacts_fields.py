@@ -81,6 +81,7 @@ class SchoolStudent(models.Model):
                 students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
             else:
                 students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
+                raise UserError(len(students))
         else:
                 students = self.env['school.student'].search([('id', '=', student_id)])
         for std in students:
