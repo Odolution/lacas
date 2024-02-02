@@ -7,7 +7,7 @@
   'description' : """Fetch Homeroom""",
   'depends':  ['edoob'],
   'data':  [
-    'views/server_action_homeroom',
+    'views/server_action_homeroom.xml',
   ],
   'demo':[],
   'application':  True,
