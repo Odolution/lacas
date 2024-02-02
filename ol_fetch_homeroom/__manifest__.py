@@ -6,7 +6,9 @@
   'summary' : 'Lacas Homeroom',
   'description' : """Fetch Homeroom""",
   'depends':  ['edoob'],
-  'data':  [],
+  'data':  [
+    'views/server_action_homeroom',
+  ],
   'demo':[],
   'application':  True,
   'auto_install':  False,
