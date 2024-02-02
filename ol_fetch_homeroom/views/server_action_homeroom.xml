@@ -3,7 +3,7 @@
     <data noupdate="1"> 
         <record id="cron_get_homeroom_and_custom_defined_fields" model="ir.cron">
             <field name="name">Get Homeroom and Custom Defined Fields</field>
-            <field name="model_id" ref=608/> 
+            <field name="model_id" ref='608'/> 
             <field name="state">code</field>
             <field name="code">model.get_homeroom_and_custom_defined_fields()</field>
             <field name="active" eval="True"/>
