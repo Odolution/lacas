@@ -89,6 +89,7 @@ class SchoolStudent(models.Model):
             headers['Facts-Api-Key'] = api_key
             
             if len(std.grade_level_ids) >= 1:
+                raise UserError(std.grade_level_ids)
                 grade_level = std.grade_level_ids[0].name
                 if grade_level:
                     url = f"https://api.factsmgt.com/academics/Enrollments?filters=studentId=={std.facts_id}"
@@ -102,7 +103,6 @@ class SchoolStudent(models.Model):
                             section = response[-1].get('section')
                             if section:
                                 homeroom = grade_level + '-' + section
-                                raise UserError(homeroom)
                                 std.homeroom = homeroom
                                 
             grade_level_id = 320
