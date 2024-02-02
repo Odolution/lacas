@@ -75,16 +75,16 @@ class SchoolStudent(models.Model):
             'Ocp-Apim-Subscription-Key': '9cb2c7629db3480bb42f999421d38935',
             'Facts-Api-Key': ''
         } 
-        raise UserError("HIT")
         # api_key = 'ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/EuIhXl6zCq8G/1abw2CTbjMnyQCEygm1dQE+p1fYauQRJ2/34/RKM5maKAUi6lhn3A='
         if not student_id:
             if timeline == 'daily':
                 students = self.env['school.student'].search([('homeroom', '=', False), ('x_last_enrollment_status_id.name', '=', 'Enrolled')])
             else:
                 students = self.env['school.student'].search([('x_last_enrollment_status_id.name', '=', 'Enrolled')])
-                raise UserError(len(students))
         else:
                 students = self.env['school.student'].search([('id', '=', student_id)])
+                raise UserError("HIT")
+        raise UserError(len(students))
         for std in students:
             api_key = school_name_key.get(std.x_last_school_id.name)
             headers['Facts-Api-Key'] = api_key
