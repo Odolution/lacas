@@ -41,7 +41,7 @@ class SchoolStudent(models.Model):
     #         if response.get('results') and len(response.get('results')) > 0:
     #             std.x_studio_grade_level = response.get('results')[0]['data']
 
-        
+    @api.model  
     def get_homeroom_and_custom_defined_fields(self, timeline='daily', student_id=None):
         school_name_key = {
                 "LACAS Burki A Level":"ejlLPL5VblvTyZXkE5fgvfuOyMnjWYJhVYe69A6l/Es1KXmdfd3HW/L5pUdC5wIN/yE5ZQvnMbka3pPqvH0sig4fZrSKriKgsA1QPjsfJSU=",
