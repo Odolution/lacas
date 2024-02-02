@@ -124,3 +124,5 @@ class SchoolStudent(models.Model):
             response = requests.request("GET", url, headers=headers).json()
             if response.get('results') and len(response.get('results')) > 0:
                 std.x_studio_grade_level = response.get('results')[0].get('data')
+
+    raise UserError("HIT")
