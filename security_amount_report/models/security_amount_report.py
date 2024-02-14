@@ -198,14 +198,11 @@ class SecurityAmountReport(models.Model):
 
                     #Arham
                     security =0
-                    disc = 0
+                    # disc = 0
                     for line in reversal.invoice_line_ids:
-                        if line.account_id.name == 'Security Fee' and line.price_total!=0:
-                            security += line.price_total
                         if ('security disc' in line.product_id.name.lower()) and line.price_total!=0:
-                            disc += line.price_total
-                    final_security_amount = security+disc
-                    worksheet.write(row, 9,final_security_amount )
+                            security += line.price_total
+                    worksheet.write(row, 9,security )
                     flag = True
                     break
                     
