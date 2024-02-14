@@ -198,14 +198,19 @@ class SecurityAmountReport(models.Model):
 
                     #Arham
                     flag = False
-                    for line in reversal.invoice_line_ids:
-                        security =0
-                        # if line.account_id.name == 'Security Fee' and line.price_total!=0:
-                        if 'security' in line.product_id.name.lower() and line.price_total!=0:
-                            security += line.price_total
-                        worksheet.write(row, 9, security)
-                        flag = True
+                    # for line in reversal.invoice_line_ids:
+                    #     security =0
+                    #     # if line.account_id.name == 'Security Fee' and line.price_total!=0:
+                    #     if 'security' in line.product_id.name.lower() and line.price_total!=0:
+                    #         security += line.price_total
+                    #     worksheet.write(row, 9, security)
+                    #     flag = True
+                    #     break
+                    if reversal.security_amount:
+                        worksheet.write(row, 9, reversal.security_amount)
+                        flag=True
                         break
+
                             
                     # Security Fee not found
                     if flag == False:
