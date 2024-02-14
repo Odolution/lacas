@@ -191,8 +191,8 @@ class SecurityAmountReport(models.Model):
                     flag = False
                     for line in reversal.invoice_line_ids:
                         if line.account_id.name == 'Security Fee' and line.price_total!=0:
-                            worksheet.write(row, 9, reversal.security_amount)
-                            # worksheet.write(row, 9, line.price_total)
+                            # worksheet.write(row, 9, reversal.security_amount)
+                            worksheet.write(row, 9, line.price_total)
                             flag = True
                             break
                             
