@@ -199,7 +199,7 @@ class SecurityAmountReport(models.Model):
                     security =0
                     # disc = 0
                     for line in reversal.invoice_line_ids:
-                        if ('security disc' in line.product_id.name.lower()) and line.price_total!=0:
+                        if ('security' in line.product_id.name.lower()) and line.price_total!=0:
                             security += line.price_total
                     worksheet.write(row, 9,security )
                     flag = True
