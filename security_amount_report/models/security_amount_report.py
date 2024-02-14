@@ -188,13 +188,24 @@ class SecurityAmountReport(models.Model):
                     #     worksheet.write(row, 8, "N/A")
 
 
+                    # flag = False
+                    # for line in reversal.invoice_line_ids:
+                    #     if line.account_id.name == 'Security Fee' and line.price_total!=0:
+                    #         # worksheet.write(row, 9, reversal.security_amount)
+                    #         worksheet.write(row, 9, line.price_total)
+                    #         flag = True
+                    #         break
+
+                    #Arham
                     flag = False
                     for line in reversal.invoice_line_ids:
-                        if line.account_id.name == 'Security Fee' and line.price_total!=0:
-                            # worksheet.write(row, 9, reversal.security_amount)
-                            worksheet.write(row, 9, line.price_total)
-                            flag = True
-                            break
+                        security =0
+                        # if line.account_id.name == 'Security Fee' and line.price_total!=0:
+                        if 'security' in line.account_id.name.lower() and line.price_total!=0:
+                            security += line.price_total
+                        worksheet.write(row, 9, security)
+                        flag = True
+                        break
                             
                     # Security Fee not found
                     if flag == False:
