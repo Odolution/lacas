@@ -141,12 +141,27 @@ class account_fields(models.Model):
                   if record.journal_id.id == 119:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
                     rec['name']=new_no
+
+                    ##Huzaifa
+                    record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
+                    record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
+                    record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
+                    wholename=""
+                    if record.student_ids.homeroom:
+                      wholename=record.student_ids.homeroom
+                      splitted_name=wholename.split('-')
+                      if len(splitted_name)>2:
+                        record['x_studio_previous_section']=splitted_name[2]
+                      elif len(splitted_name)>1:
+                        record['x_studio_previous_section']=splitted_name[1]
+
                   if record.journal_id.id == 125:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
                     rec['name']=new_no
                     record['payment_reference']=str(record.name)
-
-                    record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
+                    ##Huzaifa
+                    # record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
+                    record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
                     wholename=""
