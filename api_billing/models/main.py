@@ -189,7 +189,7 @@ class Billing(http.Controller):
             else:
                 obj["applicantName"]=str(mov["x_studio_current_student_name"])
                 obj["applicantId"]=str(mov['x_studio_current_fid'])
-                obj["Student_Father_Name"]=str(mov["father_name"])
+                obj["Student_Father_Name"]=str(mov["father_name"]) 
 
 
             obj["billedDate"]=str(mov["invoice_date"])
