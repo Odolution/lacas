@@ -38,13 +38,13 @@ class Billing(http.Controller):
         generated_token=''.join(password_1)
         return generated_token
 
-    @http.route(['/get_user'], type='http', auth="user")
+    @http.route(['/get_user'], type='http', auth="public")
 
     def get_user(self):
 
         return Response(json.dumps({'user':request.env.user.name}), content_type="application/json", status=200)
         
-    @http.route(['/get_voucher_info'], type='http', auth="user", website=True, sitemap=False)
+    @http.route(['/get_voucher_info'], type='http', auth="public", website=True, sitemap=False)
 
     def get_voucher_info(self):
 
@@ -247,7 +247,7 @@ class Billing(http.Controller):
 
 
 
-    @http.route(['/mark_voucher_as_payed'], type='json', auth='user', methods=['POST'])
+    @http.route(['/mark_voucher_as_payed'], type='json', auth='public', methods=['POST'])
     def mark_voucher_as_payed(self,**post_data):
 
         ##validate Authentication by checking API key.
@@ -594,7 +594,7 @@ class Billing(http.Controller):
 
 
 
-    @http.route(['/get_token_info'], type='json', auth='user', methods=['POST'])
+    @http.route(['/get_token_info'], type='json', auth='public', methods=['POST'])
     def get_token_info(self,**post_data):
 
         try:
