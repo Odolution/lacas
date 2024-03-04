@@ -153,10 +153,21 @@ class Billing(http.Controller):
             obj={}
             obj["billId"]=str(mov["name"]) 
             obj["dueDate"]=str(mov["invoice_date_due"]) if "invoice_date_due" in mov else None
-            obj["Amount"]=str(mov["amount_residual"]) 
+            # obj["dueAmount"]=str(mov["amount_residual"]+mov['late_fee_compute']) 
             obj["currency"]="PKR" 
             obj["accountIdentifier"]=str(mov["account_identifier"]) if "account_identifier" in mov else None
             obj["applicantMobileNo"]=mov['x_studio_contact_no'] if "x_studio_contact_no" in mov else None
+            late_fee= move_ids.get_late_fee_charges()
+            obj["Amount_after_DueDate"]=move_ids['amount_residual']+late_fee
+            voucher_status= mov['payment_state'] if "payment_state" in mov else None
+            if voucher_status=='paid':
+                voucher_code= 'P'
+            else:
+                voucher_code= 'U'
+            obj["Voucher_Status"]=voucher_code
+            obj["billedDate"]=str(mov['invoice_date']) if "invoice_date" in mov else None
+
+            obj["DynamicMembers"]={}
 
 
             student=False
@@ -176,17 +187,6 @@ class Billing(http.Controller):
             obj["billedDate"]=str(mov["invoice_date"])
             ##extract father name
             obj["Student_Father_Name"]=mov['partner_id']['name']
-
-            late_fee= move_ids.get_late_fee_charges()
-            obj["Amount_after_DueDate"]=move_ids['amount_residual']+late_fee
-            voucher_status= mov['payment_state'] if "payment_state" in mov else None
-            if voucher_status=='paid':
-                voucher_code= 'P'
-            else:
-                voucher_code= 'U'
-            obj["Voucher_Status"]=voucher_code
-            obj["billedDate"]=str(mov['invoice_date']) if "invoice_date" in mov else None
-            
             #end test
             return Response(json.dumps({
                     "Status": {
@@ -262,7 +262,7 @@ class Billing(http.Controller):
             is_invalid_auth=True
             
         if is_invalid_auth:
-            return {
+            return json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -294,13 +294,13 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                }
+                })
 
 
         verify_token= request.env['api.users'].sudo().search([('token', '=',auth[7:])],limit=1)
 
         if not verify_token or not auth:
-            return {
+            return json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -327,7 +327,7 @@ class Billing(http.Controller):
                                 "totalCount": 0,
                                 "filteredCount": 0
                                 }
-                }
+                })
                 
         ##reading posted data
         request_body = http.request.httprequest.data
@@ -348,7 +348,7 @@ class Billing(http.Controller):
             params[key]=str(data.get(key,""))
             if params[key]=="":
 
-                return {
+                return json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -380,14 +380,14 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                }
+                })
                 
         ##validate if all required integer fields are actually integers. if not, return an appropriate error message.
         for key in ["amountReceived"]:
             try:
                 params[key]=int(params[key])
             except:
-                return {
+                return json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -419,7 +419,7 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                }
+                })
                 
                 
         ##retrieve moves for this voucher. If no move, return appropriate error message.
@@ -427,7 +427,7 @@ class Billing(http.Controller):
         move_ids= request.env['account.move'].sudo().search([('name', '=', params["billId"])],limit=1)
 
         if not move_ids:
-            return {
+            return json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -459,13 +459,13 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                }
+                })
         mov=move_ids
 
 
         ##validate if invoice has been posted. if not, payment cannot be made. so returning appropriate error message.
         if mov["state"]!="posted":
-            return {
+            return json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -497,12 +497,12 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                }
+                })
             
         ##validate if invoice has is yet to be paid. if not, payment cannot be made. so returning appropriate error message.
         if mov["payment_state"] not in ["not_paid","partial","reversed"]:
 
-            return {
+            return json.dumps({
                     "Status": {
 
                         "StatusCode": 5000,
@@ -534,7 +534,7 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                }
+                })
         data={
                                                             'ref': mov["name"],
                                                             'payment_type':'inbound',
@@ -557,7 +557,7 @@ class Billing(http.Controller):
 
 
 
-        return {
+        return json.dumps({
 
                     "Status": {
 
@@ -573,7 +573,7 @@ class Billing(http.Controller):
 
                     },
 
-                    "Data": {"requestId":create_payment['id']},
+                    "Data": {"requestId":str(create_payment)},
 
                     "Navigation": {
 
@@ -589,7 +589,7 @@ class Billing(http.Controller):
 
                     }
 
-                }
+                })
     
 
 
@@ -615,11 +615,11 @@ class Billing(http.Controller):
                 for key in param_keys:
                     params[key]=str(data.get(key,""))
                     if params[key]=="":
-                        return {'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"}
+                        return json.dumps({'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"})
                 # Username and password verification
                 username_search= request.env['api.users'].sudo().search([('username', '=', params["username"]),('password', '=',params["password"])],limit=1)
                 if not username_search :
-                    return {'status': 'Error',"message": "Validation error : wrong "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"}
+                    return json.dumps({'status': 'Error',"message": "Validation error : wrong "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"})
                 idss=username_search['id']
 
                 
@@ -631,7 +631,7 @@ class Billing(http.Controller):
                 today = datetime.now().date()
 
                 
-                if not unexpired_token['token_expiry'] or unexpired_token['token_expiry']<today:
+                if not unexpired_token or unexpired_token['token_expiry']<today:
                     expire_date=today + timedelta(days=30)
                     days_after=expire_date
                     diff = expire_date -today
@@ -672,7 +672,7 @@ class Billing(http.Controller):
                     obj[".issued"]=str(rec["write_date"])
                     obj[".expires"]=str(rec["token_expiry"])
 
-                return dict(obj)
+                return json.dumps(dict(obj))
 
             #if existing user want to change/refresh token
             elif type_grant=="refresh_token":
@@ -685,7 +685,7 @@ class Billing(http.Controller):
                     params[key]=str(data.get(key,""))
                     if params[key]=="":
 
-                        return {'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide required "+key+".","code":204,"object":"obj"}
+                        return json.dumps({'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide required "+key+".","code":204,"object":"obj"})
 
 
                 #check that token if exists in odd
@@ -720,15 +720,15 @@ class Billing(http.Controller):
                     obj["refrest_token"]=str(refreshtoken)
                     obj[".issued"]=str(mov["write_date"])
                     obj[".expires"]=str(mov["token_expiry"])
-                    return dict(obj)
+                    return json.dumps(dict(obj))
                 else:
-                    return {'status': 'failed',"message": "No Such Token exists.","code":204,"object":{}}
+                    return json.dumps({'status': 'failed',"message": "No Such Token exists.","code":204,"object":{}})
             else:
-                return {'status': 'failed',"message": "Missing Grant type or invalid Grant type","code":200,"object":{}}
+                return json.dumps({'status': 'failed',"message": "Missing Grant type or invalid Grant type","code":200,"object":{}})
 
 
         except Exception as e:
-            {'status': 'Error',"message": "Unknown Error Occurred.","code":201}
+            json.dumps({'status': 'Error',"message": "Unknown Error Occurred.","code":201})
 
 
 
