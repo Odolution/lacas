@@ -162,8 +162,9 @@ class account_fields(models.Model):
                     rec['name']=new_no
                     record['payment_reference']=str(record.name)
                     ##Huzaifa
-                    # record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
-                    record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
+                    
+                    record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
+                   # record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
                     record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
                     wholename=""
