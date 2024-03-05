@@ -129,7 +129,7 @@ class RecoveryReportWizard(models.TransientModel):
                 ('move_type','=','out_invoice'),
                 ('state', '=', 'posted'),
                ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date),
-               ('journal_id', 'in', [125, 125]),
+               ('journal_id', 'in', [125, 126]),
             ])
 
             if rec.name in ("Milestone Model Town (Matric)"):
