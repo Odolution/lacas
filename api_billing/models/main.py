@@ -182,11 +182,23 @@ class Billing(http.Controller):
                 return Response(json.dumps({'status': 'Error',"message": "Validation Error : Provided billId has no student tagged. This voucher cannot be payed.","code":204}),content_type="application/json", status=200)
 
             ths_student=student
-            obj["applicantName"]=str(ths_student["name"])
-            obj["applicantId"]=str(ths_student["facts_id"])
+            # obj["applicantName"]=str(ths_student["name"])
+            # obj["applicantId"]=str(ths_student["facts_id"])
+            # obj["Student_Father_Name"]=mov['partner_id']['name']
+
+        #extra condition
+            if mov['x_studio_is_manual_record']==False:
+                obj["applicantName"]=str(ths_student["name"])
+                obj["applicantId"]=str(ths_student["facts_id"])
+                obj["Student_Father_Name"]=mov['partner_id']['name']
+            else:
+                obj["applicantName"]=str(mov["x_studio_current_student_name"])
+                obj["applicantId"]=str(mov['x_studio_current_fid'])
+                obj["Student_Father_Name"]=str(mov["x_studio_father"]) 
+        #extra condition
+
             obj["billedDate"]=str(mov["invoice_date"])
             ##extract father name
-            obj["Student_Father_Name"]=mov['partner_id']['name']
             #end test
             return Response(json.dumps({
                     "Status": {
