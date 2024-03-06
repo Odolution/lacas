@@ -148,6 +148,7 @@ class account_fields(models.Model):
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
                     #fizra
                     record['x_studio_current_student_name']=record.student_ids.first_name+" "+record.student_ids.last_name
+                    record['x_studio_current_fid']=record.student_ids.facts_id
                     wholename=""
                     if record.student_ids.homeroom:
                       wholename=record.student_ids.homeroom
@@ -156,6 +157,13 @@ class account_fields(models.Model):
                         record['x_studio_previous_section']=splitted_name[2]
                       elif len(splitted_name)>1:
                         record['x_studio_previous_section']=splitted_name[1]
+                    
+                     ##work for father name picking
+                    for relation in record.student_ids.relationship_ids:
+                      if relation.relationship_type_id.name == "Father":
+                        #record.father_facts_id=relation.individual_id.facts_id
+                        record['x_studio_father'] = relation.individual_id.name
+                        break
 
                   if record.journal_id.id == 125:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('monthly_bills')
@@ -177,6 +185,7 @@ class account_fields(models.Model):
                         record['x_studio_previous_section']=splitted_name[1]
                     for recs in record.line_ids:
                       recs['name'] = record.name
+                      
 
                   if record.journal_id.id == 126:
                     new_no = school_code + record.env['ir.sequence'].next_by_code('bi_monthly')
