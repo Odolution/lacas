@@ -118,7 +118,7 @@ class RecoveryReportWizard(models.TransientModel):
             if journals:
                 for journal in journals:
                     journal_list.append(journal.id)
-            raise UserError(journal_list)
+            # raise UserError(journal_list)
             if self.all_branch==True:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','in',journal_list),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             else:
