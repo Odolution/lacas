@@ -105,20 +105,20 @@ class RecoveryReportWizard(models.TransientModel):
         lines=[]
         new_lines=[]
 
-        ## Huzaifa ##
-        journal_list = []
-        journals = self.env['account.journal'].search([
-            '|',
-            ('name','=','Monthly Bills'),
-            ('name','=','Bi Monthly'),
-            ])
-        if journals:
-            for journal in journals:
-                journal_list.append(journal.id)
-
         selected_month = self.list_months()
         # raise UserError(selected_month)
         for month in selected_month:
+            ## Huzaifa ##
+            journal_list = []
+            journals = self.env['account.journal'].search([
+                '|',
+                ('name','=','Monthly Bills'),
+                ('name','=','Bi Monthly'),
+                ])
+            if journals:
+                for journal in journals:
+                    journal_list.append(journal.id)
+            # raise UserError(journal_list)
             if self.all_branch==True:
                 inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','in',journal_list),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
             else:
@@ -185,9 +185,9 @@ class RecoveryReportWizard(models.TransientModel):
 
         
         if self.all_branch==True:
-            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','in',journal_list),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('journal_id','=',126),('state','=','posted'),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
         else:
-            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','in',journal_list),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
+            for_by_month_inv_ids=self.env['account.move'].search([('move_type','=','out_invoice'),('state','=','posted'),('journal_id','=',126),('x_studio_current_branchschool','=',self.one_branch.id),('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)])
         
         # raise UserError(len(for_by_month_inv_ids))
          
