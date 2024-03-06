@@ -123,7 +123,7 @@ class Billing(http.Controller):
                 }), content_type="application/json", status=401)    ##extract voucher info
             move_ids= request.env['account.move'].sudo().search([('name', '=', str(voucher_id)),('state', '=', 'posted')],limit=1)
             if not move_ids:
-                move_ids= request.env['account.move'].sudo().search([('name', '=','0'+str(voucher_id)),('state', '=', 'posted')],limit=1)
+                move_ids= request.env['account.move'].sudo().search([('name', '=','0'+str(voucher_id)),('state', '=', 'posted'),('payment_state', '!=', 'paid')],limit=1)
 
             if not move_ids:
             
@@ -158,7 +158,7 @@ class Billing(http.Controller):
             obj["accountIdentifier"]=str(mov["account_identifier"]) if "account_identifier" in mov else None
             obj["applicantMobileNo"]=mov['x_studio_contact_no'] if "x_studio_contact_no" in mov else None
             late_fee= move_ids.get_late_fee_charges()
-            obj["Amount_after_DueDate"]=move_ids['amount_residual']+late_fee
+            obj["dueAmount"]=move_ids['amount_residual']+late_fee
             voucher_status= mov['payment_state'] if "payment_state" in mov else None
             if voucher_status=='paid':
                 voucher_code= 'P'
