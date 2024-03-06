@@ -348,7 +348,8 @@ class Billing(http.Controller):
 
         ##validate if all required fields have been provided. if not, return an appropriate error message.
         params={}
-        param_keys=["accountIdentifier","billId","bankId","amountReceived"]
+        param_keys=["accountIdentifier","billId","amountReceived"]
+        # param_keys=["accountIdentifier","billId","bankId","amountReceived"]
 
         for key in param_keys:
             params[key]=str(data.get(key,""))
