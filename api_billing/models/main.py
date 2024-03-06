@@ -121,7 +121,7 @@ class Billing(http.Controller):
                                 "filteredCount": 0
                                 }
                 }), content_type="application/json", status=401)    ##extract voucher info
-            move_ids= request.env['account.move'].sudo().search([('name', '=', str(voucher_id)),('state', '=', 'posted')],limit=1)
+            move_ids= request.env['account.move'].sudo().search([('name', '=', str(voucher_id)),('state', '=', 'posted'),('payment_state', '!=', 'paid')],limit=1)
             if not move_ids:
                 move_ids= request.env['account.move'].sudo().search([('name', '=','0'+str(voucher_id)),('state', '=', 'posted'),('payment_state', '!=', 'paid')],limit=1)
 
