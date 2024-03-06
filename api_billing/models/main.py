@@ -554,10 +554,10 @@ class Billing(http.Controller):
                                                 }
 
         
-        create_payment= request.env['account.payment'].create(data)
+        create_payment= request.env['account.payment'].sudo().create(data)
 
-        update_data = request.env['account.move'].browse(int(move_ids['id']))
-        update_data.write({
+        update_data = request.env['account.move'].sudo().browse(int(move_ids['id']))
+        update_data.sudo().write({
                             'account_identifier':params["accountIdentifier"],
 
                                 })
@@ -648,7 +648,7 @@ class Billing(http.Controller):
                     token=self.generate_token(self.token_length)
                     refreshtoken=self.generate_token(self.refresh_token_length)
                     update_data = request.env['api.users'].sudo().search([('id','=',int(idss))],limit=1)
-                    update_data.write({
+                    update_data.sudo().write({
                                 'token':token,
                                 'token_expiry':days_after,
                                 'token_refresh':refreshtoken,
@@ -710,8 +710,8 @@ class Billing(http.Controller):
                     ids=token_check['id']
                     token=self.generate_token(self.token_length)
                     refreshtoken=self.generate_token(self.refresh_token_length)
-                    update_token = request.env['api.users'].browse(int(ids))
-                    update_token.write({
+                    update_token = request.env['api.users'].sudo().browse(int(ids))
+                    update_token.sudo().write({
                                 'token':token,
                                 'token_expiry':days_after,
                                 'token_refresh':refreshtoken,
