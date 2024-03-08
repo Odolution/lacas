@@ -160,7 +160,7 @@ class Billing(http.Controller):
             late_fee= move_ids.get_late_fee_charges()
             # obj["dueAmount"]=move_ids['amount_residual']+late_fee
             obj["amountBeforeDue"]=move_ids['amount_residual']
-            obj["amountAfterDue"]=move_ids['amount_residual']+late_fee
+            obj["amountAfterDue"]=move_ids['amount_residual']+late_fee 
             voucher_status= mov['payment_state'] if "payment_state" in mov else None
             if voucher_status=='paid':
                 voucher_code= 'P'
