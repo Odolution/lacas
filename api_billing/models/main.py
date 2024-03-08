@@ -158,7 +158,9 @@ class Billing(http.Controller):
             obj["accountIdentifier"]=str(mov["account_identifier"]) if "account_identifier" in mov else None
             obj["applicantMobileNo"]=mov['x_studio_contact_no'] if "x_studio_contact_no" in mov else None
             late_fee= move_ids.get_late_fee_charges()
-            obj["dueAmount"]=move_ids['amount_residual']+late_fee
+            # obj["dueAmount"]=move_ids['amount_residual']+late_fee
+            obj["amountBeforeDue"]=move_ids['amount_residual']
+            obj["amountAfterDue"]=move_ids['amount_residual']+late_fee
             voucher_status= mov['payment_state'] if "payment_state" in mov else None
             if voucher_status=='paid':
                 voucher_code= 'P'
@@ -184,19 +186,19 @@ class Billing(http.Controller):
             ths_student=student
 
 
-            obj["applicantName"]=str(ths_student["name"])
-            obj["applicantId"]=str(ths_student["facts_id"])
-            obj["Student_Father_Name"]=mov['partner_id']['name']
-        #extra condition
-            # if mov['x_studio_is_manual_record']==False:
-            #     obj["applicantName"]=str(ths_student["name"])
-            #     obj["applicantId"]=str(ths_student["facts_id"])
-            #     obj["Student_Father_Name"]=mov['partner_id']['name']
-            # else:
-            #     obj["applicantName"]=str(mov["x_studio_current_student_name"])
-            #     obj["applicantId"]=str(mov['x_studio_current_fid'])
-            #     obj["Student_Father_Name"]=str(mov["x_studio_father"]) 
-        #extra condition
+            # obj["applicantName"]=str(ths_student["name"])
+            # obj["applicantId"]=str(ths_student["facts_id"])
+            # obj["Student_Father_Name"]=mov['partner_id']['name']
+        # extra condition
+            if mov['x_studio_is_manual_record']==False:
+                obj["applicantName"]=str(ths_student["name"])
+                obj["applicantId"]=str(ths_student["facts_id"])
+                obj["Student_Father_Name"]=mov['partner_id']['name']
+            else:
+                obj["applicantName"]=str(mov["x_studio_current_student_name"])
+                obj["applicantId"]=str(mov['x_studio_current_fid'])
+                obj["Student_Father_Name"]=str(mov["x_studio_father"]) 
+        # extra condition
         
             obj["billedDate"]=str(mov["invoice_date"])
             #end test
