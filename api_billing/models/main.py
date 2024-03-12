@@ -154,6 +154,7 @@ class Billing(http.Controller):
                 return Response(json.dumps({
                         "Status": {
                                         "StatusCode": 200,
+                                        "BillStatus": 700,
                                         "Message": "Bill already paid.",
                                         "Description": "Bill is already in it's paid state. No charges remaining.",
                                         "Errors": [],
@@ -226,6 +227,7 @@ class Billing(http.Controller):
             return Response(json.dumps({
                     "Status": {
                                     "StatusCode": 200,
+                                    "BillStatus": 600,
                                     "Message": "Success",
                                     "Description": "Success",
                                     "Errors": [],
