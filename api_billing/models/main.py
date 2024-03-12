@@ -121,29 +121,11 @@ class Billing(http.Controller):
                                 "filteredCount": 0
                                 }
                 }), content_type="application/json", status=401)    ##extract voucher info
-            move_ids= request.env['account.move'].sudo().search([('name', '=', str(voucher_id)),('state', '=', 'posted'),('payment_state', '!=', 'paid')],limit=1)
+            move_ids= request.env['account.move'].sudo().search([('name', '=', str(voucher_id)),('state', '=', 'posted')],limit=1)
             if not move_ids:
                 move_ids= request.env['account.move'].sudo().search([('name', '=','0'+str(voucher_id)),('state', '=', 'posted')],limit=1)
 
-            if move_ids['payment_state']=='paid':
-            
-                return Response(json.dumps({
-                        "Status": {
-                                        "StatusCode": 200,
-                                        "Message": "Bill already paid.",
-                                        "Description": "Bill is already in it's paid state. No charges remaining.",
-                                        "Errors": [],
-                                        "Error": []
-                        },
-                        "Data":'' ,
-                        "Navigation": {
-                                        "prevLink": None,
-                                        "nextLink": None,
-                                        "totalPages": 0,
-                                        "totalCount": 0,
-                                        "filteredCount": 0
-                        }
-                    }),content_type="application/json", status=200)
+
             if not move_ids:
             
                 return Response(json.dumps({
@@ -166,6 +148,26 @@ class Billing(http.Controller):
                                 "filteredCount": 0
                                 }
                 }), content_type="application/json", status=200)
+
+            if move_ids['payment_state']=='paid':
+            
+                return Response(json.dumps({
+                        "Status": {
+                                        "StatusCode": 200,
+                                        "Message": "Bill already paid.",
+                                        "Description": "Bill is already in it's paid state. No charges remaining.",
+                                        "Errors": [],
+                                        "Error": []
+                        },
+                        "Data":'' ,
+                        "Navigation": {
+                                        "prevLink": None,
+                                        "nextLink": None,
+                                        "totalPages": 0,
+                                        "totalCount": 0,
+                                        "filteredCount": 0
+                        }
+                    }),content_type="application/json", status=200)
             
 
             mov= move_ids
