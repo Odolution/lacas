@@ -424,6 +424,8 @@ class Billing(http.Controller):
             try:
                 params[key]=int(params[key])
             except:
+                return {'check',params[key]}
+
                 return json.dumps({
                     "Status": {
 
