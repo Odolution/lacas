@@ -465,6 +465,7 @@ class Billing(http.Controller):
         ##retrieve moves for this voucher. If no move, return appropriate error message.
         # move_ids=models.execute_kw(db, uid, password, 'account.move', 'search', [[['name', '=',params["billId"]]]])
         move_ids= request.env['account.move'].sudo().search([('name', '=', params["billId"])],limit=1)
+        return {'check',str(move_ids)}
 
         if not move_ids:
             return json.dumps({
@@ -589,7 +590,6 @@ class Billing(http.Controller):
         
         create_payment= request.env['account.payment'].sudo().create(data)
         
-        return {'check',str(create_payment)}
         update_data = request.env['account.move'].sudo().browse(int(move_ids['id']))
         update_data.write({
                             'account_identifier':params["accountIdentifier"],
