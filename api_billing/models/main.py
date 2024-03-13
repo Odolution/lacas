@@ -586,9 +586,9 @@ class Billing(http.Controller):
                                                             # 'date' :data['business_date'][counter]
                                                 }
 
-        return {'check',str(move_ids)}
         
         create_payment= request.env['account.payment'].sudo().create(data)
+        return {'check',str(create_payment)}
         
         update_data = request.env['account.move'].sudo().browse(int(move_ids['id']))
         update_data.write({
