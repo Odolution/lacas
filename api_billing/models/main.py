@@ -422,9 +422,10 @@ class Billing(http.Controller):
         ##validate if all required integer fields are actually integers. if not, return an appropriate error message.
         for key in ["amountReceived"]:
             try:
+                params[key]=float(params[key])
                 params[key]=int(params[key])
             except:
-                return {'check',params[key]}
+                # return {'check',params[key]}
 
                 return json.dumps({
                     "Status": {
