@@ -603,6 +603,7 @@ class Billing(http.Controller):
                 if invoice:                        
                     if create_payment['state']=="draft":
                         create_payment.sudo().action_post()
+                        return {'chek':'ho','payment_sta':create_payment['state']}
                     invoice.sudo().apply_late_fee_policy()
                     if invoice.amount_total >= invoice.amount_residual:
                         line_id = request.env['account.move.line'].sudo().search([('debit','=',0),('move_id','=',create_payment.move_id.id)])
