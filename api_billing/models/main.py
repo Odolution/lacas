@@ -593,8 +593,8 @@ class Billing(http.Controller):
         create_payment= request.env['account.payment'].sudo().create(data)
         #Reconcile payment, automated action on live, but create in it directly
         if create_payment:
-            # invoice=request.env['account.move'].sudo().search([('name','=',create_payment['ref'])])
-            # return {'data':data,'invoice':invoice}
+            invoice=request.env['account.move'].sudo().search([('name','=',create_payment['ref'])])
+            return {'data':data,'invoice':invoice}
 
             if create_payment['user_id']['id'] in [user_id.id,]: ##if payment creator is not API. then just continue
                 # try:
