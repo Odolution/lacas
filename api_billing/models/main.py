@@ -46,7 +46,7 @@ class Billing(http.Controller):
 
         return Response(json.dumps({'user':request.env.user.name}), content_type="application/json", status=200)
         
-    @http.route(['/get_voucher_info'], type='json', auth="public", website=True, sitemap=False)
+    @http.route(['/get_voucher_info'], type='http', auth="public", website=True, sitemap=False)
 
     def get_voucher_info(self):
 
