@@ -10,6 +10,7 @@ import string
 import random
 import os
 import yaml
+from werkzeug.wrappers import Request, Response
 
 
 
@@ -285,7 +286,7 @@ class Billing(http.Controller):
 
 
 
-    @http.route(['/mark_voucher_as_payed'], type='http', auth='public', methods=['POST'])
+    @http.route(['/mark_voucher_as_payed'], type='http',csrf=False, auth='public', methods=['POST'])
     def mark_voucher_as_payed(self,**post_data):
 
         ##validate Authentication by checking API key.
@@ -592,7 +593,7 @@ class Billing(http.Controller):
         create_payment=False
         #Reconcile payment, automated action on live, but create in it directly
         if create_payment:
-            if create_payment['user_id']['id'] not in [24,]: ##if payment creator is not API. then just continue
+            if create_payment['user_id']['id'] in [24,]: ##if payment creator is not API. then just continue
                 try:
                     invoice=self.env['account.move'].search([('name','=',rec['ref'])])
                     if invoice:                        
