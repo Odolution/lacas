@@ -591,22 +591,19 @@ class Billing(http.Controller):
         create_payment= request.env['account.payment'].sudo().create(data)
         create_payment=False
         #Reconcile payment, automated action on live, but create in it directly
-        # if create_payment:
-        #     if create_payment['user_id']['id'] not in [24,]: ##if payment creator is not API. then just continue
-        #     continue
-        #     try:
-        #         invoice=self.env['account.move'].search([('name','=',rec['ref'])])
-        #         if not invoice:
-        #             continue
-                
-        #         if create_payment['state']=="draft":
-        #             create_payment.action_post()
-        #         invoice.apply_late_fee_policy()
-        #         if invoice.amount_total >= invoice.amount_residual:
-        #             line_id = self.env['account.move.line'].search([('debit','=',0),('move_id','=',rec.move_id.id)])
-        #             invoice.js_assign_outstanding_line(line_id.id)
-        #     except:
-        #         continue
+        if create_payment:
+            if create_payment['user_id']['id'] not in [24,]: ##if payment creator is not API. then just continue
+                try:
+                    invoice=self.env['account.move'].search([('name','=',rec['ref'])])
+                    if invoice:                        
+                        if create_payment['state']=="draft":
+                            create_payment.action_post()
+                        invoice.apply_late_fee_policy()
+                        if invoice.amount_total >= invoice.amount_residual:
+                            line_id = self.env['account.move.line'].search([('debit','=',0),('move_id','=',rec.move_id.id)])
+                            invoice.js_assign_outstanding_line(line_id.id)
+                except:
+                    pass
 
         # Reconcile end
         
