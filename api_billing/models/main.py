@@ -588,12 +588,37 @@ class Billing(http.Controller):
 
         
         create_payment= request.env['account.payment'].sudo().create(data)
+
+        #Reconcile payment, automated action on live, but create in it directly
+        if create_payment:
+            if create_payment['user_id']['id'] not in [24,]: ##if payment creator is not API. then just continue
+                continue
+            try:
+                invoice=self.env['account.move'].search([('name','=',rec['ref'])])
+                if not invoice:
+                    continue
+                
+                if create_payment['state']=="draft":
+                    create_payment.action_post()
+                invoice.apply_late_fee_policy()
+                if invoice.amount_total >= invoice.amount_residual:
+                    line_id = self.env['account.move.line'].search([('debit','=',0),('move_id','=',rec.move_id.id)])
+                    invoice.js_assign_outstanding_line(line_id.id)
+            except:
+                continue
+
+        # Reconcile end
         
         update_data = request.env['account.move'].sudo().browse(int(move_ids['id']))
         update_data.write({
                             'account_identifier':params["accountIdentifier"],
 
                                 })
+        if update_data['payment_state']=='paid':
+            status_code= 700
+        else:
+            status_code= 600
+
 
 
 
@@ -602,6 +627,8 @@ class Billing(http.Controller):
                     "Status": {
 
                                     "StatusCode": 200,
+
+                                    "BillStatus": status_code,
 
                                     "Message": "Success",
 
