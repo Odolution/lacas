@@ -576,7 +576,7 @@ class Billing(http.Controller):
                                 "filteredCount": 0
                                 }
                 })
-        user_id=  request.env['res.users'].sudo()search([('name','ilike','API')],limit=1)
+        user_id=  request.env['res.users'].sudo().search([('name','ilike','API')],limit=1)
         data={
                                                             'ref': mov["name"],
                                                             'user_id': user_id.id,
