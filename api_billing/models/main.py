@@ -596,6 +596,8 @@ class Billing(http.Controller):
             if create_payment['user_id']['id'] in [user_id.id,]: ##if payment creator is not API. then just continue
                 # try:
                 invoice=request.env['account.move'].search([('name','=',create_payment['ref'])])
+                return {'data':data,'invoice':invoice}
+                
                 if invoice:                        
                     if create_payment['state']=="draft":
                         create_payment.action_post()
