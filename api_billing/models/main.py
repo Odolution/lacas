@@ -593,23 +593,21 @@ class Billing(http.Controller):
         create_payment= request.env['account.payment'].sudo().create(data)
         #Reconcile payment, automated action on live, but create in it directly
         if create_payment:
-            # invoice=request.env['account.move'].sudo().search([('name','=',create_payment['ref'])])
-            # return {'data':data,'invoice':invoice}
 
             # if create_payment['user_id']['id'] in [user_id.id,]: ##if payment creator is not API. then just continue
-                # try:
-            invoice=request.env['account.move'].sudo().search([('name','=',create_payment['ref'])])
-            
-            if invoice:                        
-                if create_payment['state']=="draft":
-                    create_payment.sudo().action_post()
-                    return {'chek':'ho','payment_sta':create_payment['state']}
-                invoice.sudo().apply_late_fee_policy()
-                if invoice.amount_total >= invoice.amount_residual:
-                    line_id = request.env['account.move.line'].sudo().search([('debit','=',0),('move_id','=',create_payment.move_id.id)])
-                    invoice.sudo().js_assign_outstanding_line(line_id.id)
-                # except:
-                #     pass
+            try:
+                invoice=request.env['account.move'].sudo().search([('name','=',create_payment['ref'])])
+                
+                if invoice:                        
+                    if create_payment['state']=="draft":
+                        create_payment.sudo().action_post()
+                        return {'chek':'ho','payment_sta':create_payment['state']}
+                    invoice.sudo().apply_late_fee_policy()
+                    if invoice.amount_total >= invoice.amount_residual:
+                        line_id = request.env['account.move.line'].sudo().search([('debit','=',0),('move_id','=',create_payment.move_id.id)])
+                        invoice.sudo().js_assign_outstanding_line(line_id.id)
+            except:
+                pass
 
         # Reconcile end
         
