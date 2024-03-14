@@ -576,8 +576,10 @@ class Billing(http.Controller):
                                 "filteredCount": 0
                                 }
                 })
+        user_id=  self.env['res.users'].search([('name','ilike','API')],limit=1)
         data={
                                                             'ref': mov["name"],
+                                                            'user_id': user_id.id,
                                                             'payment_type':'inbound',
                                                             'partner_type': "customer",
                                                             'amount': params["amountReceived"],
@@ -591,7 +593,7 @@ class Billing(http.Controller):
         create_payment= request.env['account.payment'].sudo().create(data)
         #Reconcile payment, automated action on live, but create in it directly
         if create_payment:
-            if create_payment['user_id']['id'] in [24,]: ##if payment creator is not API. then just continue
+            if create_payment['user_id']['id'] in [user_id.id,]: ##if payment creator is not API. then just continue
                 try:
                     invoice=self.env['account.move'].search([('name','=',rec['ref'])])
                     if invoice:                        
