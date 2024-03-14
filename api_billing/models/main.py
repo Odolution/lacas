@@ -9,6 +9,7 @@ from datetime import datetime, date, timedelta
 import string
 import random
 import os
+import yaml
 
 
 
@@ -588,7 +589,7 @@ class Billing(http.Controller):
 
         
         create_payment= request.env['account.payment'].sudo().create(data)
-
+        create_payment=False
         #Reconcile payment, automated action on live, but create in it directly
         if create_payment:
             if create_payment['user_id']['id'] not in [24,]: ##if payment creator is not API. then just continue
@@ -622,7 +623,8 @@ class Billing(http.Controller):
 
 
 
-        return json.dumps({
+        # return json.dumps({
+        return yaml.load({
 
                     "Status": {
 
