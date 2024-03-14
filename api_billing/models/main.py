@@ -595,13 +595,13 @@ class Billing(http.Controller):
         if create_payment:
             if create_payment['user_id']['id'] in [user_id.id,]: ##if payment creator is not API. then just continue
                 try:
-                    invoice=self.env['account.move'].search([('name','=',rec['ref'])])
+                    invoice=request.env['account.move'].search([('name','=',rec['ref'])])
                     if invoice:                        
                         if create_payment['state']=="draft":
                             create_payment.action_post()
                         invoice.apply_late_fee_policy()
                         if invoice.amount_total >= invoice.amount_residual:
-                            line_id = self.env['account.move.line'].search([('debit','=',0),('move_id','=',rec.move_id.id)])
+                            line_id = request.env['account.move.line'].search([('debit','=',0),('move_id','=',rec.move_id.id)])
                             invoice.js_assign_outstanding_line(line_id.id)
                 except:
                     pass
