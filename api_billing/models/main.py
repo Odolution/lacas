@@ -300,7 +300,7 @@ class Billing(http.Controller):
             is_invalid_auth=True
             
         if is_invalid_auth:
-            return json.dumps({
+            return {
                     "Status": {
 
                         "StatusCode": 5000,
@@ -332,13 +332,13 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                })
+                }
 
 
         verify_token= request.env['api.users'].sudo().search([('token', '=',auth[7:])],limit=1)
 
         if not verify_token or not auth:
-            return json.dumps({
+            return {
                     "Status": {
 
                         "StatusCode": 5000,
@@ -365,7 +365,7 @@ class Billing(http.Controller):
                                 "totalCount": 0,
                                 "filteredCount": 0
                                 }
-                })
+                }
                 
         ##reading posted data
         request_body = http.request.httprequest.data
@@ -386,7 +386,7 @@ class Billing(http.Controller):
             params[key]=str(data.get(key,""))
             if params[key]=="":
 
-                return json.dumps({
+                return {
                     "Status": {
 
                         "StatusCode": 5000,
@@ -418,7 +418,7 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                })
+                }
                 
         ##validate if all required integer fields are actually integers. if not, return an appropriate error message.
         for key in ["amountReceived"]:
@@ -428,7 +428,7 @@ class Billing(http.Controller):
             except:
                 # return {'check',params[key]}
 
-                return json.dumps({
+                return {
                     "Status": {
 
                         "StatusCode": 5000,
@@ -460,7 +460,7 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                })
+                }
                 
                 
         ##retrieve moves for this voucher. If no move, return appropriate error message.
@@ -468,7 +468,7 @@ class Billing(http.Controller):
         move_ids= request.env['account.move'].sudo().search([('name', '=', params["billId"])],limit=1)
 
         if not move_ids:
-            return json.dumps({
+            return {
                     "Status": {
 
                         "StatusCode": 5000,
@@ -500,13 +500,13 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                })
+                }
         mov=move_ids
 
 
         ##validate if invoice has been posted. if not, payment cannot be made. so returning appropriate error message.
         if mov["state"]!="posted":
-            return json.dumps({
+            return {
                     "Status": {
 
                         "StatusCode": 5000,
@@ -538,12 +538,12 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                })
+                }
             
         ##validate if invoice has is yet to be paid. if not, payment cannot be made. so returning appropriate error message.
         if mov["payment_state"] not in ["not_paid","partial","reversed"]:
 
-            return json.dumps({
+            return {
                     "Status": {
 
                         "StatusCode": 5000,
@@ -575,7 +575,7 @@ class Billing(http.Controller):
 
                                 "filteredCount": 0
                                 }
-                })
+                }
         user_id=  request.env['res.users'].sudo().search([('name','ilike','API')],limit=1)
         data={
                                                             'ref': mov["name"],
