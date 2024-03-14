@@ -622,7 +622,7 @@ class Billing(http.Controller):
 
 
         # return json.dumps({
-        return yaml.load({
+        return {
 
                     "Status": {
 
@@ -656,7 +656,7 @@ class Billing(http.Controller):
 
                     }
 
-                })
+                }
     
 
 
