@@ -285,7 +285,7 @@ class Billing(http.Controller):
 
 
 
-    @http.route(['/mark_voucher_as_payed'], type='json', auth='public', methods=['POST'])
+    @http.route(['/mark_voucher_as_payed'], type='http', auth='public', methods=['POST'])
     def mark_voucher_as_payed(self,**post_data):
 
         ##validate Authentication by checking API key.
