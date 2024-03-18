@@ -128,7 +128,8 @@ class RecoveryReportWizard(models.TransientModel):
                 ('x_studio_previous_branch', '=', rec.name),
                 ('move_type','=','out_invoice'),
                 ('state', '=', 'posted'),
-               ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date)
+               ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date),
+               ('journal_id.id', 'in', [125, 126]),
             ])
 
             if rec.name in ("Milestone Model Town (Matric)"):
@@ -317,6 +318,7 @@ class RecoveryReportWizard(models.TransientModel):
                             ('payment_state', '=', 'not_paid'),
                             ('invoice_date', '>=', self.from_date),
                             ('invoice_date', '<=', self.to_date),
+                            ('journal_id.id', 'in', [125, 126]),
                         ])
                     enrolled_unpaid_student_count = len(set(bills.mapped('student_ids_ol.id')))
                     if b.startswith(match) and (b != 'lacas johar town boys' ) and (b != 'milestone model town senior campus' ) and (b != 'lacas gulberg girls campus' ):
