@@ -539,41 +539,7 @@ class Billing(http.Controller):
                                 "filteredCount": 0
                                 }
                 }
-        late_fee= mov.get_late_fee_charges()
-        if params['amountReceived'] != mov['amount_residual']+late_fee:
-            return {
-                    "Status": {
 
-                        "StatusCode": 5000,
-
-                        "Message": "Invalid amount recieved", "Description": "Validation error : Provided amount is not equal to the actual bill amount.", "Errors": [
-
-                            "invalid.amount.received"],
-
-                        "Error": [
-
-                            {
-
-                                "errorCode": "invalid.amount.received",
-
-                                "errorContext": "Validation error : Provided amount is not equal to the actual bill amount."
-
-                            }
-                        ]
-                    },
-                    "Data": None,
-
-                    "Navigation": {"prevLink": None,
-
-                                "nextLink": None,
-
-                                "totalPages": 0,
-
-                                "totalCount": 0,
-
-                                "filteredCount": 0
-                                }
-                }
             
         ##validate if invoice has is yet to be paid. if not, payment cannot be made. so returning appropriate error message.
         if mov["payment_state"] not in ["not_paid","partial","reversed"]:
@@ -594,6 +560,42 @@ class Billing(http.Controller):
                                 "errorCode": "invalid.bill.id",
 
                                 "errorContext": "Validation error : Provided voucher is "+mov["payment_state"]+".Cannot add payment for this invoice."
+
+                            }
+                        ]
+                    },
+                    "Data": None,
+
+                    "Navigation": {"prevLink": None,
+
+                                "nextLink": None,
+
+                                "totalPages": 0,
+
+                                "totalCount": 0,
+
+                                "filteredCount": 0
+                                }
+                }
+
+        late_fee= mov.get_late_fee_charges()
+        if params['amountReceived'] != mov['amount_residual']+late_fee:
+            return {
+                    "Status": {
+
+                        "StatusCode": 5000,
+
+                        "Message": "Invalid amount recieved", "Description": "Validation error : Provided amount is not equal to the actual bill amount.", "Errors": [
+
+                            "invalid.amount.received"],
+
+                        "Error": [
+
+                            {
+
+                                "errorCode": "invalid.amount.received",
+
+                                "errorContext": "Validation error : Provided amount is not equal to the actual bill amount."
 
                             }
                         ]
