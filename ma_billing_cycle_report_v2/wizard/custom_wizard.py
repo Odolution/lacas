@@ -128,8 +128,6 @@ class RecoveryReportWizard(models.TransientModel):
                 ('x_studio_previous_branch', '=', rec.name),
                 ('move_type','=','out_invoice'),
                 ('state', '=', 'posted'),
-                ('current_enrollment_status_dev.name', '=', 'Enrolled'),
-                ('payment_state', '=', 'not_paid'),
                ('invoice_date',">=",self.from_date),('invoice_date',"<=",self.to_date),
                ('journal_id', 'in', [125, 126]),
             ])
