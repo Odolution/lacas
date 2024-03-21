@@ -127,13 +127,13 @@ class account_fields(models.Model):
             if record.state == 'posted':
               if record.move_type == 'out_invoice':
 #                 record['name'] = 'Draft'
-                
                 if seq == 0:
                   
                   school_code=""
                   if record.student_ids:
                     for student in record.student_ids:
                       school_code = student.x_last_school_id.description
+                      raise UserError(school_code)
                   if record.x_student_id_cred:
                     for school in record.x_school_id_cred:
                       school_code = school.description
