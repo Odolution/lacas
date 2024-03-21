@@ -122,7 +122,9 @@ class account_fields(models.Model):
                 seq = 0
 #             raise UserError(rec.name)
         res = super(account_fields, self).action_post()
+        school_code=""
         for record in self:
+          school_code=""
 #             raise UserError(record.name)
             if record.state == 'posted':
               if record.move_type == 'out_invoice':
