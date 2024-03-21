@@ -128,15 +128,14 @@ class account_fields(models.Model):
               if record.move_type == 'out_invoice':
 #                 record['name'] = 'Draft'
                 if seq == 0:
-                  
                   school_code=""
                   if record.student_ids:
                     for student in record.student_ids:
-                      school_code = student.x_last_school_id.description
-                      raise UserError(school_code)
+                      school_code += student.x_last_school_id.description
+                      
                   if record.x_student_id_cred:
                     for school in record.x_school_id_cred:
-                      school_code = school.description
+                      school_code += school.description
                  # new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
                   if record.journal_id.id == 119:
                    # new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
