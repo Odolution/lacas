@@ -124,15 +124,14 @@ class account_fields(models.Model):
         res = super(account_fields, self).action_post()
        # school_code=""
         for record in self:
-          
-          school_code=""
-
 #             raise UserError(record.name)
           if record.state == 'posted':
+             
             if record.move_type == 'out_invoice':
+              school_code=""
 #                 record['name'] = 'Draft'
               if seq == 0:
-                school_code=""
+               
                 if record.student_ids:
                   for student in record.student_ids:
                     school_code += student.x_last_school_id.description
