@@ -115,6 +115,9 @@ class account_fields(models.Model):
         
 #     @api.onchange('state')
     def action_post(self):
+
+
+
 #         record = self
         for rec in self:
             seq = 1
