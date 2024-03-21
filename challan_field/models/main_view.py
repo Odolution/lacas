@@ -234,7 +234,7 @@ class account_fields(models.Model):
                   
                   for rec in record.line_ids:
                     rec['name'] = new_no
-      return res
+        return res
                   # raise UserError(new_no)
 
 
