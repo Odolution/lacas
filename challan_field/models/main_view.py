@@ -121,7 +121,7 @@ class account_fields(models.Model):
             if '/' in rec.name:
                 seq = 0
 #             raise UserError(rec.name)
-        res = super(account_fields, self).action_post()
+       # res = super(account_fields, self).action_post()
         for record in self:
 #             raise UserError(record.name)
             if record.state == 'posted':
@@ -230,6 +230,7 @@ class account_fields(models.Model):
                     
                     for rec in record.line_ids:
                       rec['name'] = new_no
+        res = super(account_fields, self).action_post()
         return res
                   # raise UserError(new_no)
 
