@@ -154,8 +154,8 @@ class Billing(http.Controller):
             
                 return Response(json.dumps({
                         "Status": {
-                                        "StatusCode": 200,
-                                        "BillStatusCode": 700,
+                                        "StatusCode": 700,
+                                        # "BillStatusCode": 700,
                                         "Message": "Bill already paid.",
                                         "Description": "Bill is already in it's paid state. No charges remaining.",
                                         "Errors": [],
@@ -227,8 +227,8 @@ class Billing(http.Controller):
             #end test
             return Response(json.dumps({
                     "Status": {
-                                    "StatusCode": 200,
-                                    "BillStatus": 600,
+                                    "StatusCode": 600,
+                                    # "BillStatus": 600,
                                     "Message": "Success",
                                     "Description": "Success",
                                     "Errors": [],
@@ -547,7 +547,8 @@ class Billing(http.Controller):
             return {
                     "Status": {
 
-                        "StatusCode": 5000,
+                        # "StatusCode": 5000,
+                        "StatusCode": 700,
 
                         "Message": "Invalid billId", "Description": "Validation error : Provided voucher is "+mov["payment_state"]+".Cannot add payment for this invoice.", "Errors": [
 
@@ -666,9 +667,10 @@ class Billing(http.Controller):
 
                     "Status": {
 
-                                    "StatusCode": 200,
+                                    # "StatusCode": 200,
+                                    "StatusCode": status_code,
 
-                                    "BillStatus": status_code,
+                                    # "BillStatus": status_code,
 
                                     "Voucher_Status": "Paid",
 
