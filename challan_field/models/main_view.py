@@ -113,123 +113,43 @@ class account_fields(models.Model):
          break
             
         
-#     @api.onchange('state')
+
     def action_post(self):
-#         record = self
-        for rec in self:
-            seq = 1
-            if '/' in rec.name:
-                seq = 0
-#             raise UserError(rec.name)
-        res = super(account_fields, self).action_post()
-        for record in self:
-#             raise UserError(record.name)
-            if record.state == 'posted':
-              if record.move_type == 'out_invoice':
-#                 record['name'] = 'Draft'
-                
-                if seq == 0:
-                  
-                  school_code=""
-                  if record.school_ids:
-                    for school in record.school_ids:
-                      school_code = school.description
-                  if record.x_school_id_cred:
-                    for school in record.x_school_id_cred:
-                      school_code = school.description
-                 # new_no = school_code + record.env['ir.sequence'].next_by_code('adm_challan')
-                  if record.journal_id.id == 119:
-                    new_no = school_code + record.env['ir.sequence'].next_by_code('overall_bills')
-                    rec['name']=new_no
+      res = super(account_fields, self).action_post()
+      for record in self:
+          if record.state == 'posted' and record.move_type == 'out_invoice':
+              record['x_studio_previous_class'] = record.student_ids.x_studio_grade_level
+              record['x_studio_previous_branch'] = record.student_ids.x_last_school_id.name
+              record['x_studio_previous_batch'] = record.student_ids.x_studio_batchsession
+              record['x_studio_current_student_name'] = record.student_ids.first_name + " " + record.student_ids.last_name
+              record['x_studio_current_fid'] = record.student_ids.facts_id
+              
+              wholename = record.student_ids.homeroom if record.student_ids.homeroom else ""
+              splitted_name = wholename.split('-')
+              if len(splitted_name) > 2:
+                  record['x_studio_previous_section'] = splitted_name[2]
+              elif len(splitted_name) > 1:
+                  record['x_studio_previous_section'] = splitted_name[1]
 
-                    ##Huzaifa
-                    record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
-                    record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
-                    record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
-                    #fizra
-                    record['x_studio_current_student_name']=record.student_ids.first_name+" "+record.student_ids.last_name
-                    record['x_studio_current_fid']=record.student_ids.facts_id
-                    wholename=""
-                    if record.student_ids.homeroom:
-                      wholename=record.student_ids.homeroom
-                      splitted_name=wholename.split('-')
-                      if len(splitted_name)>2:
-                        record['x_studio_previous_section']=splitted_name[2]
-                      elif len(splitted_name)>1:
-                        record['x_studio_previous_section']=splitted_name[1]
-                    
-                     ##work for father name picking
-                    for relation in record.student_ids.relationship_ids:
-                      if relation.relationship_type_id.name == "Father":
-                        #record.father_facts_id=relation.individual_id.facts_id
-                        record['x_studio_father'] = relation.individual_id.name
-                        break
+              for relation in record.student_ids.relationship_ids:
+                  if relation.relationship_type_id.name == "Father":
+                      record['x_studio_father'] = relation.individual_id.name
+                      break
 
-                  if record.journal_id.id == 125:
-                    new_no = school_code + record.env['ir.sequence'].next_by_code('overall_bills')
-                    rec['name']=new_no
-                    record['payment_reference']=str(record.name)
-                    ##Huzaifa
-                    
-                    record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
-                   # record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
-                    record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
-                    record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
-                    wholename=""
-                    if record.student_ids.homeroom:
-                      wholename=record.student_ids.homeroom
-                      splitted_name=wholename.split('-')
-                      if len(splitted_name)>2:
-                        record['x_studio_previous_section']=splitted_name[2]
-                      elif len(splitted_name)>1:
-                        record['x_studio_previous_section']=splitted_name[1]
-                    for recs in record.line_ids:
-                      recs['name'] = record.name
-                      
+              if record.journal_id.id in [125, 124, 126]:
+                  record['x_studio_previous_class'] = record.student_ids.grade_level_ids.name
+                  record['x_studio_previous_branch'] = record.student_ids.x_last_school_id.name
+                  record['x_studio_previous_batch'] = record.student_ids.x_studio_batchsession
+                  if record.student_ids.homeroom:
+                      wholename = record.student_ids.homeroom
+                      splitted_name = wholename.split('-')
+                      if len(splitted_name) > 2:
+                          record['x_studio_previous_section'] = splitted_name[2]
+                      elif len(splitted_name) > 1:
+                          record['x_studio_previous_section'] = splitted_name[1]
 
-                  if record.journal_id.id == 126:
-                    new_no = school_code + record.env['ir.sequence'].next_by_code('overall_bills')
-                    rec['name']=new_no
+              for recs in record.line_ids:
+                  recs['name'] = record.name
 
-                    record['x_studio_previous_class']=record.student_ids.grade_level_ids.name
-                    record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
-                    record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
-                    wholename=""
-                    if record.student_ids.homeroom:
-                      wholename=record.student_ids.homeroom
-                      splitted_name=wholename.split('-')
-                      if len(splitted_name)>2:
-                        record['x_studio_previous_section']=splitted_name[2]
-                      elif len(splitted_name)>1:
-                        record['x_studio_previous_section']=splitted_name[1]
-                    
-                  #record.name = new_no
-                  if record.journal_id.id == 124:
-                    new_no = record.env['ir.sequence'].next_by_code('charges_reversal')
-                    rec['name']=new_no  
-                    #record.name = new_no
-                    
-                  # for rec in record.line_ids:
-                  #   #raise UserError(rec.new_no)  
-                  #   rec['name'] = new_no
-                  #   record.payment_reference = new_no
-                    
-              if record.move_type == 'out_refund':
-#                 record['name'] = 'Draft'
-                if seq == 0:
-                  # raise UserError(record)
-                  if record.x_school_id_cred:
-                    new_no = record.x_school_id_cred.description + record.env['ir.sequence'].next_by_code('overall_bills')
-                    record.payment_reference = new_no
-                    record.name = new_no
-                    
-                    for rec in record.line_ids:
-                      rec['name'] = new_no
-        return res
-                  # raise UserError(new_no)
+      return res
 
-
-# class school_panel_field(models.Model):
-#     _inherit = "school.student"
-
-#     Home_room = fields.Char("HomeRoom")
