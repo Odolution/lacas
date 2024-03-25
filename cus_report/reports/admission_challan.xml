@@ -67,13 +67,13 @@ LTD. A/C # 0195-
                     <t t-foreach="o.student_ids" t-as="i">
                     <t t-foreach="i.relationship_ids" t-as="d">
                      <!--<t-if "d.type.name" == 'father'> t-as="d" -->
-                     <t t-if="d.relationship_type_id.name == 'Father'">
-                       
-                     <td style="width: 70%; font-size:13px;"><strong><t t-esc="d.individual_id.name"/></strong></td>
-                    </t>
-                    <t t-else="">
-                        <td><strong/></td>
-                    </t>
+                       <t t-if="d.relationship_type_id.name == 'Father'">
+                         
+                       <td style="width: 70%; font-size:13px;"><strong><t t-esc="d.individual_id.name"/></strong></td>
+                      </t>
+                      <!-- <t t-else="">
+                          <td><strong/></td>
+                      </t> -->
                     <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
                     </t>
                     </t>
@@ -263,9 +263,9 @@ LTD. A/C # 0195-
                        
                      <td style="width: 70%; font-size:13px;"><strong><t t-esc="d.individual_id.name"/></strong></td>
                     </t>
-                    <t t-else="">
+                    <!-- <t t-else="">
                         <td><strong/></td>
-                    </t>
+                    </t> -->
                     <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
                     </t>
                     </t>
@@ -453,9 +453,9 @@ LTD. A/C # 0195-
                        
                      <td style="width: 70%; font-size:13px;"><strong><t t-esc="d.individual_id.name"/></strong></td>
                     </t>
-                    <t t-else="">
+                    <!-- <t t-else="">
                         <td><strong/></td>
-                    </t>
+                    </t> -->
                     <!--<td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td>-->
                     </t>
                     </t>
