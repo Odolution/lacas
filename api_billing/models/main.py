@@ -667,8 +667,8 @@ class Billing(http.Controller):
 
                     "Status": {
 
-                                    # "StatusCode": 200,
-                                    "StatusCode": status_code,
+                                    "StatusCode": 201,
+                                    # "StatusCode": status_code,
 
                                     # "BillStatus": status_code,
 
