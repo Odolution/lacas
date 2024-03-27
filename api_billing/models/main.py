@@ -175,6 +175,7 @@ class Billing(http.Controller):
             mov= move_ids
             obj={}
             obj["billId"]=str(mov["name"]) 
+            obj["BillingMonth"]=str(mov["bill_date"]) 
             obj["dueDate"]=str(mov["invoice_date_due"]) if "invoice_date_due" in mov else None
             # obj["dueAmount"]=str(mov["amount_residual"]+mov['late_fee_compute']) 
             obj["currency"]="PKR" 
