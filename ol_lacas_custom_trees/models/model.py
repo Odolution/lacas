@@ -396,7 +396,7 @@ class ext(models.Model):
 
             wholedate=str(rec_inv.invoice_date)
             splitted_name=wholedate.split('-')
-            if rec_inv.journal_id.id==125 :
+            if rec_inv.journal_id.id==125 or rec_inv.journal_id.id == 119:
                 if len(splitted_name)>2:
                     month=splitted_name[1]
                     wholeyear=splitted_name[0]
