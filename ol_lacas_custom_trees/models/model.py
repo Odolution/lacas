@@ -82,7 +82,12 @@ class ext(models.Model):
     oxford=fields.Integer(string="Oxford E Mate Charges")
     utility_charges=fields.Integer(string="Utility Charges")
     #########################################################
+#maaz
+    def js_assign_outstanding_line_custom(invoice,line_id):
+        invoice.sudo().js_assign_outstanding_line(line_id)
+        return True
 
+#maaz
 
     def _feild_students(self):
         for rec_std in self:

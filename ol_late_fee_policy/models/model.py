@@ -13,6 +13,11 @@ class payment_ext(models.Model):
     _inherit = "account.payment"
     late_fee=fields.Float(string="Late Fee")   
     amount_late_fee_exclusive=fields.Float(string="Total without Late Fee")
+
+    def action_post(self):
+        res = super(payment_ext, self).action_post()
+        return True
+
 class extwiz(models.TransientModel):
     _inherit = "account.payment.register"
     late_fee=fields.Float(string="Late Fee",compute='_compute_late_fee')
@@ -156,7 +161,7 @@ class ext_invoice(models.Model):
             #late_fee_charges=invoice._compute_late_fee()
             
             if late_fee_charges<=0:
-                return
+                return True
             ##late fee calculations are complete. now to put these charges in to the invoice lines.
             ##reset invoice to draft to be able to insert the new line
             invoice.button_draft()
@@ -191,6 +196,8 @@ class ext_invoice(models.Model):
                 }
                 invoice.invoice_line_ids=[(0,0,data)]
             invoice.action_post()
+
+        return True
 
 
             
