@@ -139,7 +139,7 @@ class ext(models.Model):
 
                 for line in rec.invoice_line_ids:
                     if line.product_id:
-                        if 'Late Fee' in line.product_id.name:
+                        if line.product_id.name and 'Late Fee' in line.product_id.name:
                             rec.latefee=line.price_total
                     # else:
                     #     rec.latefee=0
@@ -321,7 +321,7 @@ class ext(models.Model):
                         rec_inv.idcardfine=line.price_subtotal
                     elif 'Late Coming' in line.product_id.name:
                         rec_inv.latecoming=line.price_subtotal
-                    elif 'Late Fee' in line.product_id.name:
+                    elif line.product_id.name and  'Late Fee' in line.product_id.name:
                         rec_inv.latefee=line.price_subtotal
                     elif 'ID Card' in line.product_id.name:
                         rec_inv.idcard=line.price_subtotal
