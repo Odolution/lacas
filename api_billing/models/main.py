@@ -717,7 +717,7 @@ class Billing(http.Controller):
             try:
                 data = json.loads(request_body)
             except json.JSONDecodeError as e:
-                return json.loads({'error': 'Invalid JSON data', 'message': str(e)})
+                return {'error': 'Invalid JSON data', 'message': str(e)}
             type_grant= data.get("grant_type","")
             user_name= data.get("username","")
             # generate a token for user
@@ -727,11 +727,11 @@ class Billing(http.Controller):
                 for key in param_keys:
                     params[key]=str(data.get(key,""))
                     if params[key]=="":
-                        return json.dumps({'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"})
+                        return {'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"}
                 # Username and password verification
                 username_search= request.env['api.users'].sudo().search([('username', '=', params["username"]),('password', '=',params["password"])],limit=1)
                 if not username_search :
-                    return json.dumps({'status': 'Error',"message": "Validation error : wrong "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"})
+                    return {'status': 'Error',"message": "Validation error : wrong "+key+" provided. Please provide correct "+key+".","code":204,"object":"obj"}
                 idss=username_search['id']
 
                 
@@ -784,7 +784,7 @@ class Billing(http.Controller):
                     obj[".issued"]=str(rec["write_date"])
                     obj[".expires"]=str(rec["token_expiry"])
 
-                return json.dumps(dict(obj))
+                return dict(obj)
 
             #if existing user want to change/refresh token
             elif type_grant=="refresh_token":
@@ -797,7 +797,7 @@ class Billing(http.Controller):
                     params[key]=str(data.get(key,""))
                     if params[key]=="":
 
-                        return json.dumps({'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide required "+key+".","code":204,"object":"obj"})
+                        return {'status': 'Error',"message": "Validation error : No "+key+" provided. Please provide required "+key+".","code":204,"object":"obj"}
 
 
                 #check that token if exists in odd
@@ -832,15 +832,15 @@ class Billing(http.Controller):
                     obj["refrest_token"]=str(refreshtoken)
                     obj[".issued"]=str(mov["write_date"])
                     obj[".expires"]=str(mov["token_expiry"])
-                    return json.dumps(dict(obj))
+                    return dict(obj)
                 else:
-                    return json.dumps({'status': 'failed',"message": "No Such Token exists.","code":204,"object":{}})
+                    return {'status': 'failed',"message": "No Such Token exists.","code":204,"object":{}}
             else:
-                return json.dumps({'status': 'failed',"message": "Missing Grant type or invalid Grant type","code":200,"object":{}})
+                return {'status': 'failed',"message": "Missing Grant type or invalid Grant type","code":200,"object":{}}
 
 
         except Exception as e:
-            json.dumps({'status': 'Error',"message": "Unknown Error Occurred.","code":201})
+             return {'status': 'Error',"message": "Unknown Error Occurred.","code":201}
 
 
 
