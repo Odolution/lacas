@@ -743,7 +743,7 @@ class Billing(http.Controller):
                 today = datetime.now().date()
 
                 
-                if not unexpired_token or unexpired_token['token_expiry']<today:
+                if not unexpired_token['token'] or unexpired_token['token_refresh'] or unexpired_token['token_expiry']<today:
                     expire_date=today + timedelta(days=30)
                     days_after=expire_date
                     diff = expire_date -today
