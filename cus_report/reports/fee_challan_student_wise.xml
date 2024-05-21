@@ -128,9 +128,13 @@
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
-												<t t-foreach="o.student_ids" t-as="i">
+												<td style="width: 70%; font-size:11px;">
+												  <strong>
+												    <p><span t-field="x.x_studio_previous_class"/>-<span t-field="x.x_studio_previous_section"/></p>
+												  </strong>
+												</td>
+												<!-- <t t-foreach="o.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
-														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
@@ -145,9 +149,8 @@
 																</strong>
 															</td>
 														</t>
-														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
 													</t>
-												</t>
+												</t> -->
 											</tr>
 											<!-- next grade level -->
 											<tr>
@@ -492,9 +495,13 @@
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
-												<t t-foreach="o.student_ids" t-as="i">
+												<td style="width: 70%; font-size:11px;">
+												  <strong>
+												    <p><span t-field="x.x_studio_previous_class"/>-<span t-field="x.x_studio_previous_section"/></p>
+												  </strong>
+												</td>
+												<!-- <t t-foreach="o.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
-														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
@@ -509,9 +516,8 @@
 																</strong>
 															</td>
 														</t>
-														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
 													</t>
-												</t>
+												</t> -->
 											</tr>
 											<!-- next grade level -->
 											<tr>
@@ -858,9 +864,13 @@
 												<td style="text-align: left;color: grey; width: 30%; font-size:13px;">
 													Class :
 												</td>
-												<t t-foreach="o.student_ids" t-as="i">
+												<td style="width: 70%; font-size:11px;">
+												  <strong>
+												    <p><span t-field="x.x_studio_previous_class"/>-<span t-field="x.x_studio_previous_section"/></p>
+												  </strong>
+												</td>
+												<!-- <t t-foreach="o.student_ids" t-as="i">
 													<t t-foreach="i.enrollment_state_ids" t-as="d">
-														<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
 														<t t-if="d.enrollment_status_id.name == 'Admission'">
 															<td style="width: 70%; font-size:11px;">
 																<strong>
@@ -875,9 +885,8 @@
 																</strong>
 															</td>
 														</t>
-														<!-- <td style=" width: 70%; font-size:13px;"><strong><t t-esc="o.family_id.name"/></strong></td> -->
 													</t>
-												</t>
+												</t> -->
 											</tr>
 											<!-- next grade level -->
 											<tr>
