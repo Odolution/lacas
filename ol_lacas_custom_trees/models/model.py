@@ -2,6 +2,7 @@
 from odoo import models, fields, api, exceptions
 from odoo.exceptions import UserError
 import json
+from datetime import datetime
 
 class ext(models.Model):
     _inherit="account.move"
@@ -434,6 +435,13 @@ class ext(models.Model):
             if rec_inv.journal_id.id==126:
                 rec_inv.bill_date=rec_inv.bi_monthly_cycle+"-"+rec_inv.invoice_date.strftime('%y')
 
+            # Yaminah
+            if rec_inv.journal_id.id==119:
+                if rec_inv.invoice_date:
+                    date_obj = datetime.strptime(str(rec_inv.invoice_date), '%Y-%m-%d')
+                    rec_inv.bill_date = date_obj.strftime('%B-%y').capitalize()
+            # Yaminah
+
     @api.onchange('x_student_id_cred',"student_ids")
     def _students_onchange(self):
         #self.student_name=''
@@ -574,9 +582,14 @@ class ext(models.Model):
                         self.bill_date="Dec"+"-"+year
             
             if self.journal_id.id==126:
-                self.bill_date=self.bi_monthly_cycle+"-"+rec_inv.invoice_date.strftime('%y')
-           
-                
+                self.bill_date=self.bi_monthly_cycle+"-"+self.invoice_date.strftime('%y')
+
+            # Yaminah
+            if self.journal_id.id==119:
+                if self.invoice_date:
+                    date_obj = datetime.strptime(str(self.invoice_date), '%Y-%m-%d')
+                    self.bill_date = date_obj.strftime('%B-%y').capitalize()
+            # Yaminah    
     
             # if self.invoice_line_ids: 
             #         for line in self.invoice_line_ids:
