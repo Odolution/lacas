@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sincro_data_base_server_view_tree" model="ir.ui.view">
+        <field name="name">sincro_data_base.server.view.tree</field>
+        <field name="model">sincro_data_base.server</field>
+        <field name="arch" type="xml">
+            <tree string="Sincro data servers"  decoration-success="state != 'draft'"
+                  decoration-muted="state == 'draft'" >
+                <field name="id" optional="hide" />
+                <field name="state" invisible="1"/>
+                <field name="api_name"/>
+                <field name="name"/>
+                <field name="path"/>
+                <field name="method"/>
+                <field name="sequence" widget="handle" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="sincro_data_base_server_view_form" model="ir.ui.view">
+        <field name="name">sincro_data_base.server.view.form</field>
+        <field name="model">sincro_data_base.server</field>
+        <field name="arch" type="xml">
+            <form string="Sincro Data Base Server">
+                <header>
+                    <button
+                            string="Subscribe"
+                            name="subscribe"
+                            type="object"
+                            states="draft"
+                            class="oe_highlight"
+                    />
+                    <button
+                            string="Unsubscribe"
+                            name="unsubscribe"
+                            type="object"
+                            states="subscribed"
+                    />
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+
+                        <group>
+                            <field name="name"/>
+                            <field name="path"/>
+                        </group>
+                        <group>
+                            <field name="method"/>
+                            <field name="act_window_id"/>
+                            <field name="view_id"/>
+                            <field name="only_update"/>
+                            <field name="only_create_item"/>
+                        </group>
+                        <group>
+                            <field name="parameter_ids" widget="many2many_tags"/>
+                        </group>
+                        <field name="response_code" attrs="{'invisible': True}"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="model_id" attrs="{'invisible': [('method', 'in', ['ws_odoo','odoo_ws'])]}"/>
+                            <field name="ws_method"
+                                   attrs="{'required': [('method', '=', 'ws_odoo')], 'invisible': [('method', 'not in', ['ws_odoo','odoo_ws'])]}"></field>
+                        </group>
+                        <group>
+                            <field string="Origin URL" name="computed_path"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="API Data">
+                            <group>
+                                <field name="api_name"/>
+                            </group>
+                            <group>
+                                <field name="api_base_url"/>
+                                <field name="api_header_ids" widget="one2many"/>
+                            </group>
+                        </page>
+
+                        <page string="Automation Data">
+                            <group>
+                                <group>
+                                    <field name="retrieve_date"/>
+                                    <field name="interval_minutes"/>
+                                </group>
+                                <group>
+                                    <field name="skip"/>
+                                    <field name="limit"/>
+                                    <field string="Total requests" name="total_request"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Model Data" attrs="{'invisible': [('method', 'in', ['ws_odoo','odoo_ws'])]}">
+                            <group>
+                                <group>
+                                    <field name="model_name" invisible="1"/>
+                                    <field name="domain"/>
+                                </group>
+                                <group>
+                                    <field name="json_configuration_id"/>
+                                    <field name="json_pretty"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Testing">
+                            <group>
+                                <group>
+                                    <field name="test_item_model_id"/>
+                                </group>
+                                <group>
+                                    <button string="TEST" name="action_test_connection" type="object"
+                                            class="btn-warning oe_highlight"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="response_code" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="retrieve_date_test" readonly="1"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field string="Request" name="json_example" readonly="1"/>
+                            </group>
+                            <group>
+                                <field string="Response" name="response_message" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Logs">
+                            <field name="log_ids" readonly="1"/>
+                        </page>
+                        <page name="page_ws_odoo" string="Webservice -> Odoo configuration"
+                              attrs="{'invisible': [('method', '!=', 'ws_odoo')]}">
+                            <group>
+                                <group>
+                                    <field name="model_id" invisible="1"/>
+                                    <field string="Odoo Field Keys" name="ws_odoo_field_key_ids" widget="many2many_tags"
+                                           domain="[('server_id','=',id),('is_active','=',True)]"/>
+                                    <field name="context" />
+                                    <field name="parent_menu_id"/>
+                                    <field name="include_archived" />
+                                </group>
+                                <group>
+                                    <field string="Destiny Model" name="model_id"/>
+                                    <field name="key_json_data" />
+                                    <field name="is_active_skip_limit" />
+                                    <field name="is_save_in_log"/>
+                                </group>
+                            </group>
+                            <label for="mapped_field_ids">Mapped Fields</label>
+                            <button name="add_mapped_field" type="object" string="Add static field"/>
+                            <button name="add_json_mapped_field" type="object" string="Add JSON field"/>
+                            <field name="mapped_field_ids"/>
+                            <group>
+                                <group>
+                                    <field name="struct_response"  attrs="{'readonly': True}"   force_save="1" class="json-format"/>
+                                </group>
+                                <group>
+                                    <field name="ws_json" attrs="{'readonly': True} "  force_save="1" class="json-format"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="page_odoo_ws" string="Odoo -> Webservice configuration"
+                              attrs="{'invisible': [('method', '!=', 'odoo_ws')]}">
+                            <group>
+                                <group>
+                                    <field string="Origin Model" name="model_id"/>
+                                    <field name="model_name" invisible="1"/>
+                                    <field name="domain" widget="domain"
+                                           options="{'model': 'model_name', 'in_dialog': True}"/>
+                                    <field name="json_configuration_id"/>
+                                    <field name="json_pretty"/>
+                                </group>
+                                <group>
+                                    <group>
+                                        <button name="indent_json" type="object" string="Indent JSON / Text Format"/>
+                                    </group>
+                                    <field nolabel="1" name="struct_response" attrs="{'readonly': True}"
+                                           class="json-format border border-info p-2"/>
+                                </group>
+                            </group>
+                            <label for="mapped_field_ids" attrs="{'invisible': [('struct_response', '=', False)]}">Mapped
+                                Fields
+                            </label>
+                            <button name="add_mapped_field" attrs="{'invisible': [('struct_response', '=', False)]}"
+                                    type="object" string="Add mapped field"/>
+                            <field name="mapped_field_ids" attrs="{'invisible': [('struct_response', '=', False)]}"/>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

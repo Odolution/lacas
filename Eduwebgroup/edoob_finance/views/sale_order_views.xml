@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_order_form" model="ir.ui.view">
+    <field name="name">view.order.form.form.inherit</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <group name="partner_details" position="inside">
+        <field name="student_ids" widget="many2many_tags"/>
+        <field name="family_id"/>
+        <field name="grade_level_ids" widget="many2many_tags"/>
+        <field name="program_ids" widget="many2many_tags"/>
+        <field name="school_ids" widget="many2many_tags"/>
+        <field name="district_ids" widget="many2many_tags"/>
+      </group>
+      <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+        <field name="tuition_plan_id" widget="many2one" optional="hide"/>
+        <field name="student_id" widget="many2one" optional="show"/>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="sale_order_filter_edoob" model="ir.ui.view">
+    <field name="name">sale.order.edoob.view.search</field>
+    <field name="model">sale.order</field>
+     <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+    <field name="arch" type="xml">
+     <xpath expr="//field[@name='partner_id']" position="after">
+       <field name="student_ids" string="Students" filter_domain="[('student_ids', 'ilike', self)]"/>
+     </xpath>
+    </field>
+  </record>
+
+</odoo>

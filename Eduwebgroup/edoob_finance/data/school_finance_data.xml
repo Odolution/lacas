@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="school_finance_responsibility_percentage" model="decimal.precision">
+    <field name="name">Finance responsibility percentage</field>
+    <field name="digits">6</field>
+  </record>
+</odoo>

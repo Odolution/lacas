@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="res_config_settings_view_form" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit.edoob.finance</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="edoob.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <div id="school_setting" position="inside">
+        <h2>Finance</h2>
+        <div class="row mt16 o_settings_container" id="edoob_finance_container">
+          <div class="col-12 col-lg-6 o_setting_box" title="Apply manual discounts on sales order lines or display discounts computed from pricelists (option to activate in the pricelist configuration).">
+            <div class="o_setting_left_pane">
+              <field name="edoob_finance_split_by_student"/>
+            </div>
+            <div class="o_setting_right_pane">
+              <label for="edoob_finance_split_by_student"/>
+              <div class="text-muted">
+                Grant discounts on sales order lines
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </field>
+  </record>
+
+  <record id="school_finance_settings_action" model="ir.actions.act_window">
+    <field name="name">School finance Configuration</field>
+    <field name="res_model">res.config.settings</field>
+    <field name="view_id" ref="res_config_settings_view_form"/>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+    <field name="context">{'module': 'school_finance'}</field>
+  </record>
+
+  <!--     <menuitem id="school_finance_settings_menu" name="Configuration"
+            parent="main_school_finance_menu" action="school_finance_settings_action"/> -->
+</odoo>

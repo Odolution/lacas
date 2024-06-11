@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="res_partner_view_search" model="ir.ui.view">
+    <field name="name">res.partner.view.search.inherit.school.finance</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter" />
+    <field name="arch" type="xml">
+      <xpath expr="//search" position="inside">
+        <separator/>
+        <filter name="is_edoob_partner" string="School partner"
+                domain="[('is_edoob_partner', '!=', False)]" />
+      </xpath>
+    </field>
+  </record>
+</odoo>

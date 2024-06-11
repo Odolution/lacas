@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">School Facts Configuration</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="School Data-String" string="School Facts"
+                     data-key="school_facts">
+                    <div id="school_facts_sincro_data_setting">
+                        <h2>Step 1 - Sync Servers</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="facts_api_url"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="facts_api_url" class="o_light_label w-100"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="subscription_key"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="subscription_key" class="o_light_label w-100"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="facts_api_key"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="facts_api_key" class="o_light_label w-100"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="country_id"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="country_id" class="o_light_label w-100"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="eduweb_api_url"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="eduweb_api_url" class="o_light_label w-100"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="eduweb_api_key"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="eduweb_api_key" class="o_light_label w-100"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 o_setting_box d-flex justify-content-center">
+                                <button type="object" name="create_sync_data"
+                                        class="btn-primary setting-block-editing"
+                                        confirm="If you have a wrong configure, you will have to modify or delete them manually. Are you sure?">
+                                    Generate Sync servers
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="execute_facts_setting">
+                        <h2>Step 2 - Get Initial Data</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 o_setting_box  d-flex justify-content-center">
+                                <button type="object" name="sync_periods_from_facts" class="btn-primary setting-block-editing">
+                                    Sync Periods
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

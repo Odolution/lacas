@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="tuition_template_view_tree" model="ir.ui.view">
+    <field name="name">tuition.template.view.tree</field>
+    <field name="model">tuition.template</field>
+    <field name="arch" type="xml">
+      <tree string="Tuition templates">
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="tuition_template_view_form" model="ir.ui.view">
+    <field name="name">tuition.template.view.form</field>
+    <field name="model">tuition.template</field>
+    <field name="arch" type="xml">
+      <form string="Tuition template">
+        <header>
+          <button type="object"
+              name="button_new_tuition_plan"
+              class="btn btn-secondary" string="New tuition plan"
+              />
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_tuition_plans" type="object" class="oe_stat_button" icon="fa-refresh"
+                    attrs="{'invisible': [('tuition_plan_count', '=', 0)]}">
+              <field name="tuition_plan_count" widget="statinfo" string="Tuition plans"/>
+            </button>
+          </div>
+
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only"/>
+            <h1><field name="name"/></h1>
+          </div>
+          <group>
+            <group name="left_group">
+              <field name="company_id" invisible="1"/>
+              <field name="company_id" groups="base.group_multi_company"/>
+              <field name="currency_id" groups="base.group_multi_currency"/>
+              <field name="program_id" />
+              <field name="journal_id" />
+              <field name="payment_term_id" />
+            </group>
+            <group name="right_group">
+              <field name="pricelist_option" />
+              <field name="pricelist_id"
+                     attrs="{'invisible': [('pricelist_option', '!=', 'fixed_pricelist')], 'required': [('pricelist_option', '=', 'fixed_pricelist')]}" />
+            </group>
+          </group>
+          <notebook>
+            <page name="lines" string="Lines">
+              <field name="line_ids"
+                     context="{'default_currency_id': currency_id, 'default_journal_id': journal_id, 'default_tuition_plan_id': id}">
+                <tree editable="bottom" class="tuition_template_lines">
+                  <field name="sequence" widget="handle"/>
+                  <field name="company_id" invisible="1"/>
+                  <field name="product_id" optional="show"/>
+                  <field name="name" widget="section_and_note_text"/>
+
+                  <field name="installment_ids"
+                         context="{'default_tuition_plan_id': parent.id}"
+                         widget="many2many_tags"
+                         domain="[('id', 'in', template_installment_ids)]"
+                         optional="show"
+                         />
+
+                  <field name="account_id"
+                         groups="account.group_account_readonly"
+                         optional="show"
+                         options="{'no_create': True}" domain="[('deprecated', '=', False), ('user_type_id.type', 'not in', ('receivable', 'payable')), ('company_id', '=', parent.company_id), ('is_off_balance', '=', False)]"/>
+                  <field name="analytic_account_id"
+                         attrs="{'column_invisible': [('parent.invoice_method', 'not in', ['move'])]}"
+                         groups="analytic.group_analytic_accounting" optional="show"/>
+                  <field name="analytic_tag_ids" string="Analytic tags" widget="many2many_tags"
+                         groups="analytic.group_analytic_tags" optional="show"/>
+                  <field name="grade_level_ids" domain="[('program_id', '=', parent.program_id)]"
+                         widget="many2many_tags"
+                         optional="hide"/>
+                  <field name="domain" widget="domain"
+                         options="{'model': 'school.student', 'in_dialog': True}"
+                         optional="hide"/>
+                  <field name="quantity"/>
+                  <field name="unit_price" string="Default unit price"/>
+                  <field name="journal_id" optional="hide"/>
+                  <field name="currency_id" groups="base.group_multi_currency" optional="show"/>
+                  <field name="template_installment_ids" invisible="1" />
+                  <field name="tax_ids"
+                         domain="[('type_tax_use','=','sale'), ('company_id','=',parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                         widget="many2many_tags" optional="show"/>
+                  <field name="discount" optional="show" />
+                  <field name="price_subtotal" widget="monetary"
+                         groups="account.group_show_line_subtotals_tax_excluded" optional="show"/>
+                  <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included" optional="show"/>
+                </tree>
+              </field>
+            </page>
+            <page name="installments" string="Installments">
+              <group>
+                <field name="installment_template" />
+              </group>
+              <field name="installment_ids">
+                <tree>
+                  <field name="sequence" widget="handle" />
+                  <field name="name" />
+                  <field name="type" />
+                  <field name="date" optional="hide" />
+                  <field name="day_type" optional="show" />
+                  <field name="day_of_the_month" optional="show" />
+                  <field name="month" optional="show" />
+                  <field name="quarter" invisible="1"/>
+                  <field name="real_date" />
+                </tree>
+              </field>
+            </page>
+            <page name="recurring_options" string="Recurring options">
+              <group>
+                <group name="sales" string="Sales">
+                  <field name="invoice_method"/>
+                  <field name="post_action_option" />
+                </group>
+                <group name="accounting" string="Accounting">
+                  <field name="fiscal_position_id" />
+                  <field name="tax_country_id" />
+                  <field name="analytic_account_id"
+                         groups="analytic.group_analytic_accounting"
+                         attrs="{'invisible': [('invoice_method', 'not in', ['sale'])]}"/>
+                </group>
+                <group name="mailing" string="Mailing">
+                  <field name="sale_mail_template_id" />
+                  <field name="invoice_mail_template_id" />
+                </group>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+            <field name="message_follower_ids" groups="base.group_user"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record id="tuition_template_view_kanban" model="ir.ui.view">
+    <field name="name">tuition.template.view.kanban</field>
+    <field name="model">tuition.template</field>
+    <field name="arch" type="xml">
+      <kanban string="Tuition templates" class="oe_background_grey o_kanban_dashboard o_school_kanban_tuition_template">
+        <templates>
+          <t t-name="kanban-box">
+            <div>
+              <!--              <t t-value="JSON.parse(record.kanban_dashboard.raw_value)" t-set="dashboard"/>-->
+              <!--              <t t-value="record.type.raw_value" t-set="journal_type"/>-->
+              <t t-call="TuitionTemplateTop"/>
+              <div class="container o_kanban_card_content">
+                <div class="row">
+                  <t t-call="TuitionTemplateBody"/>
+                </div>
+                <t t-call="TuitionTemplateBodyGraph"/>
+              </div>
+              <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+              </div>
+            </div>
+          </t>
+          <t t-name="TuitionTemplateTop">
+            <div t-attf-class="o_kanban_card_header">
+              <div class="o_kanban_card_header_title">
+                  <div class="o_primary">
+                      <a type="object" name="action_view_tuition_plans">
+                        <field name="name"/>
+                      </a>
+                  </div>
+              </div>
+              <div class="o_kanban_manage_button_section">
+                  <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" aria-label="Selection" role="img" title="Selection"/></a>
+              </div>
+            </div>
+          </t>
+          <t t-name="TuitionTemplateBody" id="school.TuitionTemplateBody">
+            <div class="col-12 col-sm-5 mb-3 mb-sm-0 o_kanban_primary_left">
+              <button type="object" class="mb-1 btn btn-primary" name="button_new_tuition_plan">
+                <span>New tuition plan</span>
+              </button>
+              <a type="edit" class="d-inline-block btn btn-primary">
+                <span>Configuration</span>
+              </a>
+            </div>
+            <div class="col-12 col-sm-7 o_kanban_primary_right">
+              <div class="row">
+                <div class="col">Paid</div>
+                <div class="col">100$</div>
+              </div>
+            </div>
+          </t>
+          <t t-name="TuitionTemplateBodyGraph">
+              <field name="kanban_dashboard_graph" tuition_plan_dashboard="1" graph_type="bar" widget="dashboard_graph"/>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="tuition_template_view_search" model="ir.ui.view">
+    <field name="name">tuition.template.view.search</field>
+    <field name="model">tuition.template</field>
+    <field name="arch" type="xml">
+      <search string="Search Tuition templates">
+        <field name="name"/>
+        <separator/>
+        <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="tuition_template_action" model="ir.actions.act_window">
+    <field name="name">Tuition Templates</field>
+    <field name="res_model">tuition.template</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="target">current</field>
+    <field name="context">{}</field>
+  </record>
+
+  <menuitem
+          id="tuition_template_menu"
+          name="Tuition Templates"
+          action="tuition_template_action"
+          parent="tuition_management_menu"
+          sequence="10"/>
+</odoo>

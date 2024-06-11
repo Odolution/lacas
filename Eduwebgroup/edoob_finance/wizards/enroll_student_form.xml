@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <record id="enroll_student_form_step30_tuition" model="ir.ui.view">
+    <field name="name">enroll.student.form.step.30.tuition</field>
+    <field name="model">enroll.student.form</field>
+    <field name="inherit_id" ref="edoob.enroll_student_form"/>
+    <field name="arch" type="xml">
+      <group id="main_group" position="inside">
+        <group name="student_step" edoob_step="30">
+          <field name="tuition_template_id" />
+          <field name="post_tuition_plans" />
+        </group>
+      </group>
+    </field>
+  </record>
+
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tuition plan -->
+    <record id="tuition_plan_action_server_update_values" model="ir.actions.server">
+        <field name="name">Update values</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="state">code</field>
+        <field name="code">action = records.open_update_values_wizard()</field>
+    </record>
+
+    <record id="tuition_plan_action_server_post" model="ir.actions.server">
+        <field name="name">Confirm</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.button_confirm()</field>
+    </record>
+
+    <record id="tuition_plan_action_server_cancel" model="ir.actions.server">
+        <field name="name">Cancel</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.button_cancel()</field>
+    </record>
+
+    <record id="tuition_plan_action_server_draft" model="ir.actions.server">
+        <field name="name">Reset to draft</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.button_draft()</field>
+    </record>
+
+</odoo>

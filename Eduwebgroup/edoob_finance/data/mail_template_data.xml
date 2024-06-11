@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="sale_mail_template_id" model="mail.template">
+    <field name="name">Tuition plan: Sale order/quotation</field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="subject">Your sale order for the student/s: {{ ','.join(ctx.get('plans').mapped('student_id.name')) }}</field>
+    <field name="body_html" type="html">
+      <div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+        <table style="width:600px;margin:5px auto;">
+          <tbody>
+            <tr><td>
+              <a href="/"><img src="/web/binary/company_logo" style="vertical-align:baseline;max-width:100px;" /></a>
+            </td><td style="text-align:right;vertical-align:middle;">
+              Subscription Invoice
+            </td></tr>
+          </tbody>
+        </table>
+        <table style="width:600px;margin:0px auto;background:white;border:1px solid #e1e1e1;">
+          <tbody>
+            <tr><td style="padding:15px 20px 10px 20px;">
+              <p>Dear <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
+                <t t-if="object.partner_id.parent_id">
+                  (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>)
+                </t>
+              </p>
+              <p>
+                Here is, in attachment, your
+                <t t-if="object.name">
+                  sale order <strong t-out="object.name or ''">Office Cleaning Service"</strong>
+                </t>
+                <t t-else="">
+                  sale order
+                </t>
+                <t t-if="object.origin">
+                  (with reference: <t t-out="object.origin or ''">INVOICE_ORIGIN</t> )
+                </t>
+                amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">$ 10.00</strong>
+                from <t t-out="object.company_id.name or ''">YourCompany</t>.
+<!--                <t t-if="object.payment_state in ('paid', 'in_payment')">-->
+<!--                  This sale order is already paid.-->
+<!--                </t>-->
+                Please remit payment at your earliest convenience.
+              </p>
+              <p>Do not hesitate to contact us if you have any questions.</p>
+            </td></tr>
+<!--            <tr><td style="padding:15px 20px 10px 20px;" t-out="object.invoice_user_id.signature or ''">&#45;&#45;<br/>Mitchell Admin</td></tr>-->
+          </tbody>
+        </table>
+      </div>
+    </field>
+  </record>
+
+  <record id="invoice_mail_template_id" model="mail.template">
+    <field name="name">Tuition plan: Invoice</field>
+    <field name="model_id" ref="account.model_account_move"/>
+    <field name="subject">Your invoice for the student: {{ ','.join(ctx.get('plans').mapped('student_id.name')) }}</field>
+    <field name="body_html" type="html">
+      <div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+        <table style="width:600px;margin:5px auto;">
+          <tbody>
+            <tr><td>
+              <a href="/"><img src="/web/binary/company_logo" style="vertical-align:baseline;max-width:100px;" /></a>
+            </td><td style="text-align:right;vertical-align:middle;">
+              Subscription Invoice
+            </td></tr>
+          </tbody>
+        </table>
+        <table style="width:600px;margin:0px auto;background:white;border:1px solid #e1e1e1;">
+          <tbody>
+            <tr><td style="padding:15px 20px 10px 20px;">
+              <p>Dear <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
+                <t t-if="object.partner_id.parent_id">
+                  (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>)
+                </t>
+              </p>
+              <p>
+                Here is, in attachment, your
+                <t t-if="object.name">
+                  invoice <strong t-out="object.name or ''">Office Cleaning Service"</strong>
+                </t>
+                <t t-else="">
+                  invoice
+                </t>
+                <t t-if="object.invoice_origin">
+                  (with reference: <t t-out="object.invoice_origin or ''">INVOICE_ORIGIN</t> )
+                </t>
+                amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">$ 10.00</strong>
+                from <t t-out="object.company_id.name or ''">YourCompany</t>.
+                <!--                <t t-if="object.payment_state in ('paid', 'in_payment')">-->
+                <!--                  This sale order is already paid.-->
+                <!--                </t>-->
+                Please remit payment at your earliest convenience.
+              </p>
+              <p>Do not hesitate to contact us if you have any questions.</p>
+            </td></tr>
+            <!--            <tr><td style="padding:15px 20px 10px 20px;" t-out="object.invoice_user_id.signature or ''">&#45;&#45;<br/>Mitchell Admin</td></tr>-->
+          </tbody>
+        </table>
+      </div>
+    </field>
+  </record>
+</odoo>

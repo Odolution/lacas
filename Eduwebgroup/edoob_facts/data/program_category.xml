@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    
+    <record id="period_category_facts_year" model="school.period.category">
+        <field name="name">Facts Year</field>
+        <field name="facts_type">facts_year</field>
+    </record>
+    
+    <record id="period_category_facts_semester" model="school.period.category">
+        <field name="name">Facts Semester</field>
+        <field name="facts_type">facts_semester</field>
+        <field name="parent_id" ref="edoob_facts.period_category_facts_year" />
+    </record>
+    
+    <record id="period_category_facts_term" model="school.period.category">
+        <field name="name">Facts Term</field>
+        <field name="facts_type">facts_term</field>
+        <field name="parent_id" ref="edoob_facts.period_category_facts_year" />
+    </record>
+    
+</odoo>

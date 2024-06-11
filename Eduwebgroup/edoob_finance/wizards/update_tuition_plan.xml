@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="update_tuition_plan_action" model="ir.actions.act_window">
+    <field name="name">update tuition plan</field>
+    <field name="res_model">update.tuition.plan</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <record id="update_tuition_plan_view_form" model="ir.ui.view">
+    <field name="name">update.tuition.plan.view.form</field>
+    <field name="model">update.tuition.plan</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <group name="group_left">
+            <field name="update_company_id" />
+
+            <field name="update_currency_id" />
+            <field name="update_journal_id" />
+
+          </group>
+          <group name="group_right">
+            <field name="update_pricelist_option" />
+          </group>
+        </group>
+        <notebook>
+          <page string="Invoicing">
+            <group>
+              <group>
+                <field name="update_lines" />
+                <field name="update_installments" />
+              </group>
+              <group>
+                <field name="update_post_action_option" />
+                <field name="update_invoice_method" />
+                <field name="update_fiscal_position_id" />
+                <field name="update_analytic_account_id" />
+              </group>
+            </group>
+          </page>
+        </notebook>
+<!--        <notebook>-->
+<!--          <page string="Studets" name="students">-->
+<!--            <field name="student_ids" />-->
+<!--          </page>-->
+<!--        </notebook>-->
+        <footer>
+          <button name="button_update_tuition_plans"
+                  type="object" string="Confirm" class="btn-primary"/>
+          <button string="Cancel" special="cancel" class="btn-danger" />
+        </footer>
+      </form>
+    </field>
+  </record>
+</odoo>

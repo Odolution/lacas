@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sync_student_with_facts" model="ir.actions.act_window">
+        <field name="name">Sync with facts</field>
+        <field name="res_model">sync.student.with.facts</field>
+        <field name="binding_model_id" ref="edoob.model_school_student"/>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="school_student_view_form_inherit_finance" model="ir.ui.view">
+    <field name="name">school.student.view.form.inherit.finance</field>
+    <field name="model">school.student</field>
+    <field name="inherit_id" ref="edoob.school_student_view_form" />
+    <field name="arch" type="xml">
+      <notebook position="inside">
+        <page name="finance" string="Finance">
+          <group>
+            <field name="financial_responsibility_ids">
+              <tree editable="bottom">
+                <field name="student_family_ids" invisible="1"/>
+                <field name="family_id" domain="[('id', 'in', student_family_ids)]" />
+                <field name="product_category_id" />
+                <field name="percentage" widget="percentage"/>
+              </tree>
+            </field>
+          </group>
+        </page>
+      </notebook>
+
+      <xpath expr="//page[@name='relationships']/field[@name='relationship_ids']/tree" position="inside">
+        <field name="invoice_recipient" optional="show"/>
+      </xpath>
+
+      <div name="button_box" position="inside">
+        <button name="action_view_tuition_plans" type="object" class="oe_stat_button" icon="fa-refresh"
+                attrs="{'invisible': [('tuition_plan_count', '=', 0)]}">
+          <field name="tuition_plan_count" widget="statinfo" string="Tuition plans"/>
+        </button>
+      </div>
+
+    </field>
+  </record>
+  <record id="school_student_view_tree_inherit_finance" model="ir.ui.view">
+    <field name="name">school.student.view.tree.inherit.finance</field>
+    <field name="model">school.student</field>
+    <field name="inherit_id" ref="edoob.school_student_view_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="." position="inside">
+        <header>
+          <button name="%(edoob_finance.make_student_charge_action)d" type="action" string="Make a charge"/>
+        </header>
+      </xpath>
+    </field>
+  </record>
+</odoo>

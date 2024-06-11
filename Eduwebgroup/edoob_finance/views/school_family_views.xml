@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="school_family_view_form_inherit_finance" model="ir.ui.view">
+    <field name="name">school.family.view.form.inherit.finance</field>
+    <field name="model">school.family</field>
+    <field name="inherit_id" ref="edoob.school_family_view_form" />
+    <field name="arch" type="xml">
+      <notebook position="inside">
+        <page name="finance" string="Finance">
+          <group>
+            <group name="finance_group_left">
+              <field name="invoice_address_id"
+                     attrs="{'readonly': [('id', '=', False)]}"
+                     domain="invoice_address_id_domain"/>
+              <field name="filter_invoice_address_allow" attrs="{'readonly': [('id', '=', False)]}"/>
+              <field name="invoice_address_id_domain" invisible="1"/>
+            </group>
+            <group name="finance_group_right">
+            </group>
+          </group>
+        </page>
+      </notebook>
+    </field>
+  </record>
+</odoo>

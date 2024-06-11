@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sync_student_with_facts_view_form" model="ir.ui.view">
+        <field name="name">sync.student.with.facts.view.form</field>
+        <field name="model">sync.student.with.facts</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Sync student with facts">
+                <group cols="4">
+                    <field name="student_ids" invisible="1" />
+                    <field name="demographics_option" />
+                    <field name="families_option" />
+                    <field name="academics_option" />
+                </group>
+                <notebook>
+                    <page string="More options" name="more_options">
+                        <group string="Family options" attrs="{'invisible': [('families_option', '=', False)]}">
+                            <div class='alert alert-warning' role="alert" colspan="4"
+                                attrs="{'invisible': [('family_option_update_family_individuals', '=', False)]}">
+                                <p>
+                                    This will <b>only update the minimal data</b> for the selected students in order to
+                                    sync their relationships and finance responsibility percentages.
+                                </p>
+
+                                <p>
+                                    This will sync all the family member but <b>only with demographic data</b>.
+                                    If this sync create a <b>student</b>, the student will <b>only have the demographic
+                                    data.</b>
+                                </p>
+                            </div>
+                            <group>
+                                <field name="family_option_update_family" string="Update family data" />
+                                <field name="family_option_create_if_not_exists"
+                                       string="Create family if does not exists" />
+                            </group>
+                            <group>
+                                <field name="family_option_update_family_individuals" string="Individual" />
+                                <field name="family_option_relationships" string="Relationship" />
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="sync_students" string="Sync" type="object"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

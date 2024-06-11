@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+edoob_facts.access_sync_student_with_facts,edoob_facts.access_sync_student_with_facts,edoob_facts.model_sync_student_with_facts,base.group_user,1,1,1,1

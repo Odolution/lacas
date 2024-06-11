@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_res_school_facts_district_form_view">
+        <field name="name">view.res.school.facts.district.form.view</field>
+        <field name="model">school.district</field>
+        <field name="inherit_id" ref="edoob.school_district_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/div[@class='oe_title'][1]" position="after">
+                <field string="Facts ID" name="code" />
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_res_school_facts_school_form_view">
+        <field name="name">view.res.school.facts.school.form.view</field>
+        <field name="model">school.school</field>
+        <field name="inherit_id" ref="edoob.school_school_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[1]/field[1]" position="after">
+                <field string="Facts ID" name="code" />
+                <field name="facts_school_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_facts_program_form_view">
+        <field name="name">view.res.school.facts.program.form.view</field>
+        <field name="model">school.program</field>
+        <field name="inherit_id" ref="edoob.school_program_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[2]/field[1]" position="after">
+                <field name="is_facts_program" />
+                <field name="school_code_name" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_facts_period_form_view">
+        <field name="name">view.res.school.facts.period.form.view</field>
+        <field name="model">school.period</field>
+        <field name="inherit_id" ref="edoob.school_period_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[1]/field[3]" position="after">
+                <field name="facts_id" readonly="1"/>
+            </xpath>
+            <xpath expr="//group[2]/field[3]" position="after">
+                <field name="facts_semester_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_facts_grade_level_form_view">
+        <field name="name">view.res.school.facts.grade.level.form.view</field>
+        <field name="model">school.grade.level</field>
+        <field name="inherit_id" ref="edoob.school_grade_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[1]/group[1]" position="inside">
+                <field name="facts_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record> 
+
+</odoo>
+

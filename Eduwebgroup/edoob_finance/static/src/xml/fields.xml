@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+  <t t-name="edoob_finance.FieldMany2ManyCheckBoxes" owl="1">
+      <h1>Test</h1>
+<!--    <CustomCheckbox disabled="hasReadonlyModifier"-->
+<!--        value="value" class="o_field_boolean" t-on-change="_onChange"/>-->
+  </t>
+  <t t-name="edoob.finance.FieldMonetaryFamilyPrices" owl="1">
+    <span>
+      <!-- This is done with this variable to allow other modules to inherit and modify it easily-->
+      <t t-set="plan_options" t-value="['student', 'fixed_prices', 'fixed_pricelist']" />
+
+      <t t-if="plan_options.includes(recordData.plan_pricelist_option)">
+        <input type="text" t-if="props.options.mode == 'edit'"
+               class="o_input o_field_monetary o_field_number"
+               t-att-value="value" t-on-input="_onInput"/>
+        <t t-else="" t-raw="formattedValue" />
+      </t>
+      <t t-elif="recordData.plan_pricelist_option == 'invoice_address'">
+        <button class="btn btn-secondary" type="button" t-on-click="_showLinePrices">
+          <t t-esc="recordData.student_families.count"/> prices <i class="fa fa-arrow-right"/>
+        </button>
+      </t>
+    </span>
+  </t>
+
+  <t t-name="edoob.finance.FieldMonetaryFamilyDiscounts" owl="1">
+    <span>
+      <!-- This is done with this variable to allow other modules to inherit and modify it easily-->
+      <t t-set="plan_options" t-value="['student', 'fixed_prices', 'fixed_pricelist']" />
+
+      <t t-if="plan_options.includes(recordData.plan_pricelist_option)">
+        <input type="text" t-if="props.options.mode == 'edit'"
+               class="o_input o_field_monetary o_field_number"
+               t-att-value="value" t-on-input="_onInput"/>
+        <t t-else="" t-raw="formattedValue" />
+      </t>
+      <t t-elif="recordData.plan_pricelist_option == 'invoice_address'">
+        <button class="btn btn-secondary" type="button" t-on-click="_showLinePrices">
+          <t t-esc="recordData.student_families.count"/> discounts <i class="fa fa-arrow-right"/>
+        </button>
+      </t>
+    </span>
+  </t>
+</templates>

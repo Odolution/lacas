@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_res_school_facts_family_form_view">
+        <field name="name">view.res.school.facts.family.form.view</field>
+        <field name="model">school.family</field>
+        <field name="inherit_id" ref="edoob.school_family_view_form"/>
+        <field name="arch" type="xml">
+<!--        SOLO PARA ASEGURARSE QUE TIENE UN ELEMENTO EN EL COTNENER SHEET PARA EL BOTON DE LA SINCRO, ESTO VA A CAMBIAR CUANDO SE CAMBIE LA CONDICION DEL MODULO
+            SINCRO_DATA_BASE-->
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[1]/field[last()]" position="after">
+                 <field name="facts_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_facts_family_tree_view">
+        <field name="name">view.res.school.facts.family.tree.view</field>
+        <field name="model">school.family</field>
+        <field name="inherit_id" ref="edoob.school_family_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="facts_id" widget="integer" options="{'format': 0}" />
+                <field name="facts_udid" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_facts_family_search_view">
+        <field name="name">view.res.school.facts.family.search.view</field>
+        <field name="model">school.family</field>
+        <field name="inherit_id" ref="edoob.school_family_view_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="facts_id" />
+                <field name="facts_udid" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

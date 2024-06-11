@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record id="create_bulk_tuition_plan_action" model="ir.actions.act_window">
+    <field name="name">create bulk tuition plan</field>
+    <field name="res_model">create.bulk.tuition.plan</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <record id="create_bulk_tuition_plan_view_form" model="ir.ui.view">
+    <field name="name">create.bulk.tuition.plan.view.form</field>
+    <field name="model">create.bulk.tuition.plan</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <group name="group_left">
+            <field name="post_tuition_plans" />
+          </group>
+          <group name="group_right"></group>
+        </group>
+        <notebook>
+          <page string="Studets" name="students">
+            <field name="student_ids" />
+          </page>
+        </notebook>
+        <footer class="d-flex justify-content-between">
+          <button string="Cancel" special="cancel" class="btn-danger" />
+          <button name="button_generate_tuition_plans"
+                  type="object" string="Confirm" class="btn-primary"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+</odoo>

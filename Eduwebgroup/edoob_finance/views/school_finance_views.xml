@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="school_finance_management_menu"
+        name="Finance Management"
+        parent="edoob.school_panel_menu"
+        sequence="20"/>
+
+    <menuitem
+        id="tuition_management_menu"
+        name="Tuition Management"
+        parent="school_finance_management_menu" />
+
+</odoo>

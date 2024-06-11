@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="school_facts_sync" name="Sync with FACTS" parent="edoob.school_panel_menu" sequence="300"/>
+
+     <!-- Configuration -->
+    <menuitem id="school_facts_config" name="School Config" parent="edoob_facts.school_facts_sync" sequence="300" />
+    <menuitem id="school_facts_dem" name="Demographics" parent="edoob_facts.school_facts_sync" sequence="100" />
+    <menuitem id="school_facts_photos" name="Photos" parent="edoob_facts.school_facts_sync" sequence="300" />
+
+    <!-- Actions -->
+    <act_window
+            id="school_facts_config_school_action"
+            name="Action School"
+            target="new"
+            res_model="sincro_data_base.syncbutton.wizard"
+            view_mode="form"
+            context='{"type": "general_view", "menu_id": ref("edoob_facts.school_facts_config")}'
+    />
+    <act_window
+            id="school_facts_config_demog_action"
+            name="Action Demographics"
+            target="new"
+            res_model="sincro_data_base.syncbutton.wizard"
+            view_mode="form"
+            context='{"type": "general_view", "menu_id": ref("edoob_facts.school_facts_dem")}'
+    />
+
+    <act_window
+            id="school_facts_config_photo_action"
+            name="Action Photo"
+            target="new"
+            res_model="sincro_data_base.syncbutton.wizard"
+            view_mode="form"
+            context='{"type": "general_view", "menu_id": ref("edoob_facts.school_facts_photos")}'
+    />
+
+    <!-- We don't declare just up there because we need to use that ref in the action context, so in order to
+     prevent circular dependency we add the action field after the creation of both menu and actions -->
+    <record id="school_facts_config" model="ir.ui.menu">
+        <field name="action" ref="edoob_facts.school_facts_config_school_action"/>
+    </record>
+    <record id="school_facts_dem" model="ir.ui.menu">
+        <field name="action" ref="edoob_facts.school_facts_config_demog_action"/>
+    </record>
+    <record id="school_facts_photos" model="ir.ui.menu">
+        <field name="action" ref="edoob_facts.school_facts_config_photo_action"/>
+    </record>
+
+</odoo>
