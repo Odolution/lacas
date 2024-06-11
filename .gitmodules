@@ -1,16 +1,1 @@
-[submodule "edoob"]
-	path = Eduwebgroup/edoob
-	url = git@github.com:eduwebgroup/edoob.git
-	branch = 15.0
-[submodule "edoob_finance"]
-	path = Eduwebgroup/edoob_finance
-	url = git@github.com:eduwebgroup/edoob_finance.git
-	branch = 15.0
-[submodule "sincro_data_base"]
-	path = Eduwebgroup/sincro_data_base
-	url = git@github.com:eduwebgroup/sincro_data_base.git
-	branch = 15.0
-[submodule "edoob_facts"]
-	path = Eduwebgroup/edoob_facts
-	url = git@github.com:eduwebgroup/edoob_facts.git
-	branch = 15.0
+
