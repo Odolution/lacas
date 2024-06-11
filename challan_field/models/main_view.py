@@ -143,8 +143,13 @@ class account_fields(models.Model):
                     rec['name']=new_no
 
                     ##Huzaifa
-                    record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
-                    record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
+                    #record['x_studio_previous_class']=record.student_ids.x_studio_grade_level
+                    #record['x_studio_previous_branch']=record.student_ids.x_last_school_id.name
+                    if record.student_ids.grade_level_ids:
+                      record['x_studio_previous_class']=record.student_ids.grade_level_ids[0].name
+                    if record.student_ids.school_ids:
+                      record['x_studio_previous_branch']=record.student_ids.school_ids[0].name
+                    
                     record['x_studio_previous_batch']=record.student_ids.x_studio_batchsession
                     #fizra
                     record['x_studio_current_student_name']=record.student_ids.first_name+" "+record.student_ids.last_name
