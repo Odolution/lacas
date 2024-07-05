@@ -1,6 +1,8 @@
 from odoo import models, fields, api, exceptions
 from odoo.exceptions import UserError
 from datetime import datetime
+import requests
+
 class ext(models.Model):
     _inherit="account.move"
     def create_auto_invoices(self):
@@ -18,3 +20,22 @@ class ext(models.Model):
             while plan.next_installment_id.x_inv_date==todaydate:
               plan.button_create_charge()
         return
+
+#Maaz hit api to register student on their portal when addmission bill is paid
+
+    def post_api_when_bill_paid(self):
+        if self.journal_id.name!='Admission Challan':
+            return
+        url = "https://test-lacas.eschool.pk/api/odoo/admission.php"
+
+        data = {
+            'Username': 'fizra@gmail.com',
+            'Password': 'Lacas@4321',
+            'RegistrationNo': str(self.std_factsid),
+            'JoiningDate': '2024-07-04',
+            'RollNo': str(self.student_ids_ol.facts_udid),
+        }
+
+        # Sending the POST request
+        response = requests.post(url, data=data)
+        raise UserError(response.text)
