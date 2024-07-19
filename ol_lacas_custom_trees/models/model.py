@@ -31,7 +31,7 @@ class ext(models.Model):
     std_branch=fields.Char(string="Branch")
     std_current_branch=fields.Char(string="Current Branch", related='student_ids_ol_new.x_last_school_id.name')
     std_dob=fields.Date(string="Date of Birth", related='student_ids_ol_new.date_of_birth')
-    std_name=fields.Char(string="Student",related='student_ids_ol_new.name',store=True)
+    std_name=fields.Char(string="Student",related='student_ids_ol_new.name')
     std_batch=fields.Char(string="Batch", related='student_ids_ol_new.x_studio_batchsession')
     std_discount=fields.Char(string="Discount note empty ")
     std_reason=fields.Char(string="Concession Name empty")
