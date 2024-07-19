@@ -19,6 +19,7 @@
         
         "views/view.xml",
         "views/tab_fields.xml",
+        "views/account_move.xml",
     ],
     'demo': [
     ],
