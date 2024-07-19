@@ -7,6 +7,7 @@ from datetime import datetime
 class ext(models.Model):
     _inherit="account.move"
    
+    student_ids_ol_new = fields.Many2one('school.student', string="std ol new",compute='get_student') 
     student_ids_ol=fields.Many2one('school.student', string="std ol") # compute='_feild_students' removed from here
     #student_ids_ol=fields.Many2one('school.student', string="std ol")
     tuition=fields.Integer(string="Tuition Fee")
@@ -89,6 +90,13 @@ class ext(models.Model):
         return True
 
 #maaz
+
+    def get_student(self):
+        for rec_std in self:
+            if rec_std.student_ids:
+                rec_std.student_ids_ol=rec_std.student_ids[0].id
+            else:
+                rec_std.student_ids_ol=False
 
     def _feild_students(self):
         for rec_std in self:
