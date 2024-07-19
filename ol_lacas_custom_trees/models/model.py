@@ -7,7 +7,8 @@ from datetime import datetime
 class ext(models.Model):
     _inherit="account.move"
    
-    student_ids_ol_new = fields.Many2one('school.student', string="std ol new",compute='get_student') 
+    student_ids_ol_new = fields.Many2one('school.student', string="std ol new",compute='get_student') # Yaminah
+    
     student_ids_ol=fields.Many2one('school.student', string="std ol") # compute='_feild_students' removed from here
     #student_ids_ol=fields.Many2one('school.student', string="std ol")
     tuition=fields.Integer(string="Tuition Fee")
@@ -17,7 +18,7 @@ class ext(models.Model):
     utility=fields.Integer(string="Utility AC/Generator")
     student_code=fields.Char(string="UDID", compute="_compute_UDID")
     #student_code=fields.Char(string="UDID")
-    student_name=fields.Char(string="Name",related='student_ids_ol.name')
+    student_name=fields.Char(string="Name",related='student_ids_ol_new.name')
     class_name=fields.Char(string="Class")
     section_name=fields.Char(string="Section")
     campus=fields.Char(string="Campus")
@@ -28,15 +29,15 @@ class ext(models.Model):
     std_bill_date=fields.Char(string="Issue Date")
     std_due_date=fields.Char(string="Due Date")
     std_branch=fields.Char(string="Branch")
-    std_current_branch=fields.Char(string="Current Branch", related='student_ids_ol.x_last_school_id.name')
-    std_dob=fields.Date(string="Date of Birth", related='student_ids_ol.date_of_birth')
-    std_name=fields.Char(string="Student",related='student_ids_ol.name',store=True)
-    std_batch=fields.Char(string="Batch", related='student_ids_ol.x_studio_batchsession')
+    std_current_branch=fields.Char(string="Current Branch", related='student_ids_ol_new.x_last_school_id.name')
+    std_dob=fields.Date(string="Date of Birth", related='student_ids_ol_new.date_of_birth')
+    std_name=fields.Char(string="Student",related='student_ids_ol_new.name',store=True)
+    std_batch=fields.Char(string="Batch", related='student_ids_ol_new.x_studio_batchsession')
     std_discount=fields.Char(string="Discount note empty ")
     std_reason=fields.Char(string="Concession Name empty")
     std_fathername=fields.Char(string="Father Name", compute='_compute_father_name')
     #std_fathername=fields.Char(string="Father Name")
-    std_contactno=fields.Char(string="Contact No.", related='student_ids_ol.mobile')
+    std_contactno=fields.Char(string="Contact No.", related='student_ids_ol_new.mobile')
     adm_amount=fields.Char(string="Admission Amount")
     security_amount=fields.Char(string="Security Amount")
     bill_amount=fields.Char(string="Bill Amount")
