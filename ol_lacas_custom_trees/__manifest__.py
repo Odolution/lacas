@@ -13,7 +13,7 @@
     'website': '',
     'images': [
     ],
-    'depends': ["account","challan_field",
+    'depends': ["account","challan_field","edoob_facts"
     ],
     'data': [
         
