@@ -94,9 +94,9 @@ class ext(models.Model):
     def get_student(self):
         for rec_std in self:
             if rec_std.student_ids:
-                rec_std.student_ids_ol=rec_std.student_ids.id
+                rec_std.student_ids_ol_new=rec_std.student_ids.id
             else:
-                rec_std.student_ids_ol=False
+                rec_std.student_ids_ol_new=False
 
     def _feild_students(self):
         for rec_std in self:
