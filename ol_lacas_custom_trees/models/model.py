@@ -7,7 +7,7 @@ from datetime import datetime
 class ext(models.Model):
     _inherit="account.move"
    
-    student_ids_ol_new = fields.Many2one('school.student', string="std ol new",compute='get_student') # Yaminah
+    student_ids_ol_new = fields.Many2one('school.student', string="std ol new",compute='get_student',store=True) # Yaminah
     
     student_ids_ol=fields.Many2one('school.student', string="std ol") # compute='_feild_students' removed from here
     #student_ids_ol=fields.Many2one('school.student', string="std ol")
