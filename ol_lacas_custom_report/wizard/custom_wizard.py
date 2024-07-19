@@ -142,6 +142,7 @@ class ReceivablesReportWizard(models.TransientModel):
             ('state', '=', 'posted'),
             ('invoice_date', '>=', self.date_from),
             ('invoice_date', '<=', self.date_to),
+            ('journal_id.name', '!=', 'Admission Challan'),
            
         ]
 
