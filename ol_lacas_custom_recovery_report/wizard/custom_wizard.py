@@ -122,8 +122,11 @@ class RecoveryReportWizard(models.TransientModel):
             for rec in inv_ids:
                 invoice_month = rec.invoice_date.strftime("%b-%y")
                 if invoice_month==month:
-                    if rec.x_studio_udid_monthly_bills not in stud_lst:
-                        stud_lst.append(rec.x_studio_udid_monthly_bills)
+                    if rec.udid_bill not in stud_lst:
+                        stud_lst.append(rec.udid_bill)
+            
+                    # if rec.x_studio_udid_monthly_bills not in stud_lst:
+                    #     stud_lst.append(rec.x_studio_udid_monthly_bills
                 
                     month_issuance=month_issuance+rec.amount_total
 
@@ -212,8 +215,10 @@ class RecoveryReportWizard(models.TransientModel):
 
                 if condition1 == condition2:
                     # raise UserError(str(condition1)+"   "+str(rec.bill_date))
-                    if rec.x_studio_udid_monthly_bills not in scan_data_list:
-                        scan_data_list.append(rec.x_studio_udid_monthly_bills)
+                    if rec.udid_bill not in scan_data_list:
+                        scan_data_list.append(rec.udid_bill)
+                    # if rec.x_studio_udid_monthly_bills not in scan_data_list:
+                    #     scan_data_list.append(rec.x_studio_udid_monthly_bills)
         
                     by_month_issuance += float(rec.amount_total)
 
