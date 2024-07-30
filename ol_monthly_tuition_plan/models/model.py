@@ -29,6 +29,8 @@ class InheritTuitionPlan(models.Model):
                             rec.monthly_bill_check ='Paid Admission Challan'
                     else:
                         rec.monthly_bill_check ='None'
+            rec.monthly_bill_check_related = rec.monthly_bill_check
+        
             
 
 
