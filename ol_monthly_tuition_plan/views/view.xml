@@ -1,25 +1,14 @@
 <odoo>
-    <!-- <record id="account_payment_form_ext" model="ir.ui.view">
-        <field name="name">account_payment</field>
-        <field name="model">account.payment</field>
-        <field name="inherit_id" ref="account.view_account_payment_form"/>
+    <record id="school_student_tuition_plan" model="ir.ui.view">
+        <field name="name">school.student</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="edoob.school_student_view_form"/>
         <field name="arch" type="xml">
-           
-            <xpath expr="//field[@name='partner_bank_id']" position="after">
-                <field name="ol_check_in_favor_of"/>
-            </xpath>
+        <xpath expr="//field[@name='x_roll_number']" position="after">
+            <field name="monthly_bill_check" invisible="1"/>
+            <field name="monthly_bill_check_related"/>
+          </xpath>
         </field>
     </record>
-    <record id="account_payment_register_form_ext" model="ir.ui.view">
-        <field name="name">account_payment_register</field>
-        <field name="model">account.payment.register</field>
-        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
-        <field name="arch" type="xml">
-           
-            <xpath expr="//field[@name='communication']" position="after">
-                <field name="ol_check_in_favor_of"/>
-            </xpath>
-        </field>
-    </record> -->
-
+    
 </odoo>

@@ -16,7 +16,7 @@
     ],
     'data': [
         
-        # "views/view.xml",
+        "views/view.xml",
         
     ],
     'demo': [
