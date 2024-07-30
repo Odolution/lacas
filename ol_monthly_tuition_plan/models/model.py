@@ -10,6 +10,7 @@ class InheritTuitionPlan(models.Model):
     def _compute_monthly_bill_check(self):
         for rec in self:
             rec.monthly_bill_check ='None'
+            rec.monthly_bill_check_related = 'None'
             if rec.tuition_plan_count > 0:
                 if rec.tuition_plan_ids:
                     admission_plan_check = True
