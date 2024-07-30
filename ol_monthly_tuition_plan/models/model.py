@@ -9,27 +9,27 @@ class InheritTuitionPlan(models.Model):
     
     def _compute_monthly_bill_check(self):
         for rec in self:
-            # if rec.tuition_plan_count > 0:
-            #     if rec.tuition_plan_ids:
-            #         admission_plan_check = True
-            #         bills_check = False
-            #         for plan in rec.tuition_plan_ids:
-            #             if plan.journal_id.name == 'Admission Challan':
-            #                 if plan.account_move_count > 0:
-            #                     for inv in plan.account_move_ids:
-            #                         if inv.journal_id.name == 'Admission Challan' and inv.payment_state == 'paid':
-            #                             bills_check = True
-            #             else:
-            #                 admission_plan_check = False
-            #                 break
-                    
-            #         if admission_plan_check:
-            #             if bills_check:
-            #                 rec.monthly_bill_check ='Paid Admission Challan'
-            #         else:
-            #             rec.monthly_bill_check ='None'
-            # else:
             rec.monthly_bill_check ='None'
+            if rec.tuition_plan_count > 0:
+                if rec.tuition_plan_ids:
+                    admission_plan_check = True
+                    bills_check = False
+                    for plan in rec.tuition_plan_ids:
+                        if plan.journal_id.name == 'Admission Challan':
+                            if plan.account_move_count > 0:
+                                for inv in plan.account_move_ids:
+                                    if inv.journal_id.name == 'Admission Challan' and inv.payment_state == 'paid':
+                                        bills_check = True
+                        else:
+                            admission_plan_check = False
+                            break
+                    
+                    if admission_plan_check:
+                        if bills_check:
+                            rec.monthly_bill_check ='Paid Admission Challan'
+                    else:
+                        rec.monthly_bill_check ='None'
+            
 
 
         
