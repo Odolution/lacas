@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 class InheritTuitionPlan(models.Model):
     _inherit = "school.student"
     monthly_bill_check = fields.Char('Monthly bill', compute = '_compute_monthly_bill_check')
-    monthly_bill_check_related = fields.Char('Monthly bill check', related = 'monthly_bill_check')
+    monthly_bill_check_related = fields.Char('Monthly bill check')
     
     def _compute_monthly_bill_check(self):
         for rec in self:
