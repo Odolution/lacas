@@ -364,7 +364,7 @@ class ext(models.Model):
                         rec_inv.stationary=line.price_subtotal
                     elif 'Uniform Fine' in line.product_id.name:
                         rec_inv.uniform=line.price_subtotal
-                    elif 'Wellcome Party' in line.product_id.name:
+                    elif 'Welcome Party' in line.product_id.name:
                         rec_inv.welcome=line.price_subtotal
                     elif 'Work Books' in line.product_id.name:
                         rec_inv.workbook=line.price_subtotal
