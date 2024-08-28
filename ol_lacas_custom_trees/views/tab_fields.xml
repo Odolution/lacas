@@ -54,7 +54,7 @@
                             <field name="stationary"/>
                             <field name="welcome"/>
                             <field name="workbook"/>
-                            <!-- <field name="orb"/> -->
+                            <field name="orb"/>
 
                             <field name="Holiday_homework"/>
                             <field name="Technology_Charges"/>
