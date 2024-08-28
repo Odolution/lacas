@@ -80,6 +80,8 @@ class ext(models.Model):
     continuation=fields.Integer(string="Continuation")
     Holiday_homework=fields.Integer(string="Holiday Homework")
     Technology_Charges= fields.Integer(string="Technology Charges")
+    orb=fields.Integer(string="Orb")
+
 
     # Added by Anas Bin Ateeq
     oxford=fields.Integer(string="Oxford E Mate Charges")
@@ -280,6 +282,8 @@ class ext(models.Model):
                 rec_inv.Technology_Charges=0
                 rec_inv.utility_charges=0
                 rec_inv.oxford=0
+                rec_inv.orb=0
+
 
 
                 for line in rec_inv.invoice_line_ids:
@@ -374,6 +378,8 @@ class ext(models.Model):
                         rec_inv.Holiday_homework=line.price_subtotal
                     elif 'Technology Charge' in line.product_id.name:
                         rec_inv.Technology_Charges=line.price_subtotal
+                    elif 'ORB' in line.product_id.name:
+                        rec_inv.orb=line.price_subtotal
                     elif line.product_id.x_studio_code=='ART':
                         rec_inv.art=line.price_subtotal
                     elif line.product_id.x_studio_code=='COM':
