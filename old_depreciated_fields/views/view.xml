@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_res_school_olf_family_form_view">
+        <field name="name">view.res.school.olf.family.form.view</field>
+        <field name="model">school.family</field>
+        <field name="inherit_id" ref="ol_school_manager.school_family_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[1]/field[last()]" position="after">
+                 <field name="olf_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_olf_family_tree_view">
+        <field name="name">view.res.school.olf.family.tree.view</field>
+        <field name="model">school.family</field>
+        <field name="inherit_id" ref="ol_school_manager.school_family_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="olf_id" widget="integer" options="{'format': 0}" />
+                <field name="olf_udid" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_olf_family_search_view">
+        <field name="name">view.res.school.olf.family.search.view</field>
+        <field name="model">school.family</field>
+        <field name="inherit_id" ref="ol_school_manager.school_family_view_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="olf_id" />
+                <field name="olf_udid" />
+            </field>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="view_res_school_olf_family_individual_form_view">
+        <field name="name">view.res.school.olf.family.individual.form.view</field>
+        <field name="model">school.family.individual</field>
+        <field name="inherit_id" ref="ol_school_manager.school_individual_view_form"/>
+        <field name="arch" type="xml">
+
+            <!--        SOLO PARA ASEGURARSE QUE TIENE UN ELEMENTO EN EL COTNENER SHEET PARA EL BOTON DE LA SINCRO, ESTO VA A CAMBIAR CUANDO SE CAMBIE LA CONDICION DEL MODULO
+                        SINCRO_DATA_BASE-->
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//h1[1]/field[1]" position="after">
+                <br/>
+                <field name="olf_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_olf_family_individual_search_view">
+        <field name="name">view.res.school.olf.family.individual.search.view</field>
+        <field name="model">school.family.individual</field>
+        <field name="inherit_id" ref="ol_school_manager.school_individual_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="olf_id" />
+            </xpath>
+        </field>
+    </record>
+
+
+<record model="ir.ui.view" id="view_res_school_olf_student_form_view">
+        <field name="name">view.res.school.olf.student.form.view</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="ol_school_manager.school_student_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet[1]" position="inside">
+                <field name="id" invisible="1"/>
+            </xpath>
+            <xpath expr="//h1[1]/field[1]" position="after">
+                <br/>
+                <field name="olf_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_olf_student_kanban_view">
+        <field name="name">view.res.school.olf.student.kanban.view</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="ol_school_manager.school_student_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_kanban_record_title'][1]/field[1]" position="after">
+                <br/>
+                <field name="olf_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_olf_student_tree_view">
+        <field name="name">view.res.school.olf.student.tree.view</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="ol_school_manager.school_student_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="olf_id" widget="integer" options="{'format': 0}"/>
+                <field name="olf_udid" string="UDID"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_school_olf_student_search_view">
+        <field name="name">view.res.school.olf.student.search.view</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="ol_school_manager.school_student_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="olf_id" />
+                <field name="olf_udid" />
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

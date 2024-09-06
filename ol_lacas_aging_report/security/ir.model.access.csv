@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_aging_report_wizard,access.aging.report.wizard,model_aging_report_wizard,,1,1,1,0
+access.aging.invoice.group,access_aging_invoice_group,ol_lacas_custom_report.model_aging_invoice_group,base.group_user,1,1,1,1
+access.account.aging.move.line,access_account_aging_move_line,ol_lacas_aging_report.model_account_aging_move_line,base.group_user,1,1,1,1

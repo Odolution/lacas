@@ -1,0 +1,64 @@
+<odoo>
+
+<record model="ir.ui.view" id="view_report_school_branch">
+        <field name="name">school.branch.report.wizard.form</field>
+        <field name="model" >school.branch.report.wizard</field>
+      
+        <field name="arch" type="xml">
+        
+            <form string="Print School Branch Report">
+            
+              <group string="Select Invoice Date">
+
+                <group>
+                    <field name="from_date"/>
+                </group>
+                <group>
+                    <field name="to_date"/>
+                </group>
+              </group>
+
+              <group string="Select Payment Date">
+                <group>
+                    <field name="from_date_pay"/>
+                </group>
+                <group>
+                    <field name="to_date_pay"/>
+                </group>
+              </group>
+
+             
+             <footer>
+                <!-- <button name="action_print_report" type="object" string="Print" class="btn-primary" /> -->
+                <button name="action_print_excel_school_branch_report" type="object" string="Print Excel" class="btn-primary" />
+                <!-- <button name="action_polulate" type="object" string="Populate" /> -->
+                
+                 <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+            </form>
+            </field>      
+    </record>
+
+     <record id="action_account_print_school_branch_report" model="ir.actions.act_window">
+            <field name="name">Branch Wise Recovery Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.branch.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_report_school_branch"/>
+            <field name="target">new</field>
+        </record>
+
+    <menuitem id="menu_school_branch_of_student" 
+                name="Branch Recovery Report " 
+                parent="account.menu_finance_reports" 
+                sequence="6"/>
+    <menuitem id="menu_action_school_branch_report" 
+                name="Billing cycle wise average % of recovery" 
+                action="action_account_print_school_branch_report" 
+                parent="menu_school_branch_of_student"/>
+
+ 
+
+ 
+
+</odoo> 

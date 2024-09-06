@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="month_field" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+           
+            <xpath expr="//field[@name='invoice_date']" position="after">
+
+                
+                            <field name="month_date"/>
+                            <field name="year_date" invisible='1' />
+                           
+            </xpath>
+        </field>
+    </record>
+</odoo>
