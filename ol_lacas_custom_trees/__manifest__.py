@@ -16,6 +16,7 @@
     'depends': ["account","challan_field", "old_depreciated_fields", "ol_school_account"
                 
     ],
+    
     'data': [
         
         "views/view.xml",
