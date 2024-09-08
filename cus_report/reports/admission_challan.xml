@@ -445,7 +445,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.student_ids.olfd" />
+													<t t-esc="o.student_ids.olf_id" />
 												</strong>
 											</td>
 										</tr>
