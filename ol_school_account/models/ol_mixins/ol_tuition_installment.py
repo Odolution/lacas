@@ -210,10 +210,10 @@ class TuitionPlanMixin(models.AbstractModel):
 
     sale_mail_template_id = fields.Many2one(
         'mail.template', string="Sale order/quotation mail template", required=True,
-        default=lambda self: self.env.ref('ol_school_finance.sale_mail_template_id'))
+        default=lambda self: self.env.ref('ol_school_account.sale_mail_template_id'))
     invoice_mail_template_id = fields.Many2one(
         'mail.template', string="Invoice mail template", required=True,
-        default=lambda self: self.env.ref('ol_school_finance.invoice_mail_template_id'))
+        default=lambda self: self.env.ref('ol_school_account.invoice_mail_template_id'))
     terms_type = fields.Selection(related='company_id.terms_type')
     payment_term_id = fields.Many2one(
         'account.payment.term', string='Payment terms', check_company=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",)
