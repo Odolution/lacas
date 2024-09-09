@@ -876,10 +876,14 @@
 											<!-- Lacas Logo -->
 											<td style="align-items: center; ">
 												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo"/>
+												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo"/>
+
+												<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 											</td>
 											<!-- Bank Alfalah -->
 											<td style=" ">
-												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo"/>
+												<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
+
 											</td>
 										</tr>
 									</tbody>

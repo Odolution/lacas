@@ -12,32 +12,19 @@ class ext(models.Model):
     
     student_ids_ol=fields.Many2one('school.student', string="std ol") # compute='_feild_students' removed from here
     # x_studio_udid_monthly_bills = fields.Char(string="UDID Bills",related='student_ids_ol.olf_udid', store=True)
-    x_studio_udid_monthly_bills = fields.Char(compute='_compute_student_related_fields', string='UDID Bills', store=True)
-    x_studio_enrollment_statusbills = fields.Many2one('school.enrollment.status', string='Enrollment status(bills)',store=True, compute='_compute_student_related_fields')
+    x_studio_udid_monthly_bills = fields.Char(compute='_compute_x_studio_udid_monthly_bills', string='UDID Bills', store=True)
+    
     @api.depends('student_ids','x_student_id_cred')
-    def _compute_student_related_fields(self):
+    def _compute_x_studio_udid_monthly_bills(self):
         for rec in self:
             if not rec.x_studio_udid_monthly_bills:
                 if rec.student_ids:
                     rec['x_studio_udid_monthly_bills']= rec.student_ids.olf_udid
                 elif rec.x_student_id_cred:
                     rec['x_studio_udid_monthly_bills']= rec.x_student_id_cred.olf_udid
-            if not rec.x_studio_olf_id_bills or not rec.x_studio_olf:
-
-                if rec.student_ids:
-                    rec['x_studio_olf_id_bills']= rec.student_ids.olf_id
-                    rec['x_studio_olf']= rec.student_ids.olf_id
-                elif rec.x_student_id_cred:
-                    rec['x_studio_olf_id_bills']= rec.x_student_id_cred.olf_id
-                    rec['x_studio_olf']= rec.x_student_id_cred.olf_id
-            if not rec.x_studio_enrollment_statusbills:
-                if rec.student_ids:
-                    rec['x_studio_enrollment_statusbills']= rec.student_ids.x_last_enrollment_status_id
-                elif rec.x_student_id_cred:
-                    rec['x_studio_enrollment_statusbills']= rec.x_student_id_cred.x_last_enrollment_status_id
     
-    x_studio_olf_id_bills = fields.Integer(string="OLF ID Bills",compute='_compute_student_related_fields', store=True)
-    x_studio_olf = fields.Integer(string="OLF",compute='_compute_student_related_fields', store=True)
+    x_studio_olf_id_bills = fields.Integer(string="OLF ID Bills",related='student_ids_ol.olf_id')
+    x_studio_olf = fields.Integer(string="OLF",related='student_ids_ol.olf_id')
     #student_ids_ol=fields.Many2one('school.student', string="std ol")
     tuition=fields.Integer(string="Tuition Fee")
     club=fields.Integer(string="Club Charges")
@@ -176,7 +163,6 @@ class ext(models.Model):
     #             total=sum(amt)
     #             nofloat=int(total)
     #             rec.net_amount=str(nofloat)
-
 
     def _compute_late_fee_amnt(self):
         self.latefee=0

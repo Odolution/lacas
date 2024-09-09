@@ -64,7 +64,7 @@
 
         'web.tests_assets': [
             'ol_school_manager/static/tests/switch_school_menu.js'
-            ],
+            ]
     },
 
     'license': 'OPL-1',
