@@ -1,0 +1,345 @@
+<odoo>
+    <data>
+
+    <template id="cus_report.dues_assesment_sheet">
+        <t t-call="web.html_container"> 
+                <t t-foreach="docs" t-as="o">
+                  <style>
+                      .content {
+                       page-break-before: always;
+                      }
+                      
+                      tr {
+  page-break-after: always;
+}
+
+                </style>
+                  <div class="content">
+                  <div class="row">
+                    
+                    <div class="column" style="border: 1px solid black; width: 100%; margin-right: 1%; height:100vh">
+
+                      <table class="table table-dark" style="width:100%;">
+                    <tbody>
+                  <tr style="height: 65.5px;">
+                  <td style="align-items: center; ">
+                              <img style="padding-left:2%; " t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" height="80" width="120" class="float-left" alt="Logo"/>
+                  </td>
+                  <td style="align-items: center;font-size: 10px;">
+                  <p style="margin-left: 30px; "><strong style="font-size: 22px;">LACAS School Network</strong><br/><strong style="font-size: 18px;color:grey;">Dues Assessment Sheet </strong><br/></p>
+                  </td>
+                  </tr> 
+                  </tbody>
+                  </table>
+                  
+                    <hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
+                     <table style="width: 100%; font-size: 10px;">
+                    <tbody>
+                    <tr>
+                    <td style="width: 100%;border-bottom: 1px solid black;border-right: 1px solid black; border-left: 1px solid black;  border-top: 1px solid black; text-align: center; font-size: 15px;"><strong style="color:#BD3B2F;">Withdrawal No:</strong><span t-field="o.name"/></td>
+                  
+                  
+                    </tr>
+                    </tbody>
+                    </table>
+                    
+                    <div class="page">
+                    <div class="row" style=" width:90%; margin: auto;  padding-top:5px;">
+                    
+                    <div class="col-3"/>
+                </div>
+                </div>
+              <table style=" width: 100%; font-size: 15px;">
+<tbody>
+<tr>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Branch:</strong>
+  <span style=" padding-left:10px;" t-field="o.x_school_id_cred"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Application Submit Date :</strong>
+  <t t-if="o.withdrawl_submission_date">
+    <span style=" padding-left:10px;" t-esc="o.withdrawl_submission_date.strftime('%d-%m-%Y')"/></t> 
+  <t t-else="">-</t>
+
+  </td>
+</tr>
+<tr>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Class:</strong>
+  <t t-if="o.x_grade_level_cred">
+            
+           <span style=" padding-left:10px;"><t t-esc="o.x_grade_level_cred.name"/></span>
+          </t>
+    <t t-else="">
+      <t t-if="o.x_student_id_cred.homeroom">
+            
+          <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.homeroom"/></span>
+      </t>
+      <t t-else="o.x_student_id_cred.grade_level_ids">
+            
+           <span style=" padding-left:10px;"><t t-esc="o.x_student_id_cred.grade_level_ids.name"/></span>
+          </t>
+    </t>
+  </td>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px;font-size: 15px;">
+  <strong style="color:#BD3B2F;">Actual Leaving Date:</strong>
+  <!--<span style=" padding-left:10px;" t-field="o.actual_leaving_date"/>-->
+  <t t-if="o.actual_leaving_date">
+    <span style=" padding-left:10px;" t-esc="o.actual_leaving_date.strftime('%d-%m-%Y')"/></t> 
+  <t t-else="">-</t>
+  </td>
+
+</tr>
+<tr>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Roll No:</strong>
+  <span style="   padding-left:10px;" t-field="o.x_student_id_cred.olf_udid"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Notice Completion Date :</strong>
+  <!--<span style="  padding-left:10px;" t-field="o.notice_completion_date"/>-->
+  <t t-if="o.notice_completion_date">
+    <span style=" padding-left:10px;" t-esc="o.notice_completion_date.strftime('%d-%m-%Y')"/></t> 
+  <t t-else="">-</t>
+  </td>
+</tr>
+<tr>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Student:</strong>
+  <span style="  padding-left:10px;" t-field="o.x_student_id_cred"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Notice Fee  :</strong>
+  <span style="  padding-left:10px;" t-esc="int(o.notice_fee_withdrawal)"/>
+  </td>
+</tr>
+
+<tr>
+  <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Father:</strong>
+   <span style="padding-left:10px;" t-field="o.partner_id"/>
+  </td>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Admission Date:</strong>
+  <t t-if="env['account.move'].search([('student_ids.id','=',o.x_student_id_cred.id),('journal_id','=',119)])">
+   <span style="  padding-left:10px;" t-esc="env['account.move'].search([('student_ids.id','=',o.x_student_id_cred.id),('journal_id','=',119)]).invoice_date.strftime('%d-%m-%Y')"/>
+    </t>
+     <t t-else="o.x_student_id_cred">
+       <t t-foreach="o.x_student_id_cred.enrollment_state_ids" t-as="d">
+         <t t-if="d.enrolled_date">
+         
+         <span style="padding-left:10px;" t-esc="d.enrolled_date.strftime('%d-%m-%Y')"/>
+         </t>
+         </t>
+         </t>
+  </td>
+</tr>
+<tr>
+<td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Cheque in Favor of:</strong>
+ <t t-if="env['account.payment'].search([('ref','=',o.name)])">
+   <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name),('state','=','posted')]).ol_check_in_favor_of"/>
+   </t>
+   <t t-else="o.partner_id"><span style="padding-left:10px;" t-esc="o.partner_id.name"/>  </t>
+  </td>
+  <td style="width: 50%; border-top: 1px solid black;border-bottom: 1px solid black; border-right: 1px solid black;border-left: 1px solid black;  padding-left: 5px; font-size: 15px;">
+  <strong style="color:#BD3B2F;">Leaving Reason:</strong>
+ <t t-if="o.leaving_reason">
+   <span style="  padding-left:10px;" t-esc="o.leaving_reason.name"/>
+   </t>
+  </td>
+</tr>
+</tbody>
+</table>
+                  <br/><br/>
+                  
+                    <t t-set="refund_values" t-value="0"/> 
+                    <t t-set="receive_values" t-value="0"/>
+                 <table class="table table-dark" style="border-collapse:collapse;   margin: auto; width:100%;">
+                  <thead>
+                  <tr style="background-color: #B2BABB; width: 100px;">
+                    <th style="padding-left:30px; width: 132.138px; "><strong>Account</strong></th>
+                    <!--<th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>-->
+                    <th style="padding-Right:30px; width: 132.138px; "><strong>Subtotal</strong></th>
+                  </tr>
+                  </thead>
+                <tbody>
+                      
+                      <t t-foreach="o.invoice_line_ids" t-as="d">
+                      <tr style="">
+                        <td style="text-align: left; border: 1px solid black; "><t t-esc="d.product_id.name"/></td>
+                        <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
+                        <td style="text-align: right; border: 1px solid black; "><t t-esc="int(d.price_subtotal)"/></td>
+                      </tr>
+                      <!--<t t-set="receive_values" t-value="receive_values + int(d.price_subtotal)"/>-->
+                      <t t-set="refund_values" t-value="refund_values + int(d.price_subtotal)"/>
+                      </t>
+                      
+                      
+                      <t t-foreach="o.x_studio_charges.invoice_line_ids" t-as="charge">
+                      <tr style="">
+                        <td style="text-align: left; border: 1px solid black; "><t t-esc="charge.product_id.name"/></td>
+                        <!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
+                        <td style="text-align: right; border: 1px solid black; "><t t-esc="int(charge.price_subtotal)"/></td>
+                      </tr>
+                      <t t-set="receive_values" t-value="receive_values + int(charge.price_subtotal)"/>
+                      <!--<t t-esc="receive_values-refund_values"/>-->
+                      </t>
+                    </tbody>
+                  </table>
+                  
+                 
+                  
+                  <!--amount refundable-->
+    
+                 
+                
+                
+                   <table class="table table-dark" style="border-collapse:collapse;   margin: auto; width:100%;">
+                     
+                      <thead>
+                  <tr style="background-color: #B2BABB; width: 100px;">
+                    <th style="text-align: left; ">
+                      
+                      <t t-if="receive_values &gt; refund_values">
+                        <strong>Total Receivables</strong>
+                        <!--<t t-set="receive_values" t-value="0"/>-->
+                        
+                      </t>
+                      <t t-else="">
+                        <strong>Total Refundable</strong>
+                        <!--<t t-set="refund_values" t-value="0"/>-->
+                        
+                      </t>
+                    </th>
+                    <th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>
+                    <!--<th style=" text-align: right;  "><strong>Rs. <t t-esc="abs(receive_values-refund_values)"/> </strong></th>-->
+                    <th style=" text-align: right;  "><strong>Rs. <t t-esc="abs(receive_values-refund_values)"/> </strong></th>
+                  </tr>
+                  </thead>
+                  
+                  <!--<thead>-->
+                  <!--<tr style="background-color: #B2BABB; width: 100px;">-->
+                  <!--  <th style=" width: 98px;"><strong>Amount Refundable </strong></th>-->
+                    <!--<th style="text-align: right; width: 132.138px; font-size:13px;"><strong>Amount(PKR)</strong></th>-->
+                  <!--  <th style="text-align: right; border: 1px solid black;"><strong><t t-esc="int(d.price_subtotal)"/></strong></th>-->
+                  <!--</tr>-->
+                  <!--</thead>-->
+                  </table>
+                  
+                  <!--<table class="table table-dark" style=" padding-left:40px; width:90%;">-->
+                  <!--  <thead>-->
+                  <!--  <tr style="background-color: 878493; width: 100px;">-->
+                  <!--  <th style=" text-decoration: underline; width: 98px; font-size:20px; margin-left: 5%;">Amount Refundable </th>-->
+                  <!--  <th style="padding-Right:30px;  width: 98px; font-size:20px; margin-right: 5%;"><t t-esc="int(o.amount_residual)"/></th>-->
+                  <!--  </tr>-->
+                  <!--  </thead>-->
+                  <!--  </table>-->
+                  <br/><br/><br/>
+                  <table class="table " style="width:100%; padding-top: 25%;">
+                      <tbody>
+                       <td style="width:20%"> 
+                       <hr style="height: 1px; border-width: 0; padding-right:10px; color: black; background-color: black;"/>
+                       <span style=" padding-left:20%; "><strong>Prepared By </strong></span>  
+                      <!--<SPAN STYLE="text-decoration:overline;  text-align: left;  font-size: 14px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>-->
+                    </td>
+                    
+                     <td style="width:10%">
+                    </td>
+                    
+                    <td style="width:20%"> 
+                       <hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+                       <span style="padding-left:30%; "><strong>Checked By </strong></span>  
+                      <!--<SPAN STYLE="text-decoration:overline;  text-align: left;  font-size: 14px; font-weight:bold">Bank Officer Sign., Stamp  Date</SPAN>-->
+                    </td>
+                    
+                     <td style="width:10%">
+                    </td>
+                   
+                    
+                    <td style="width:20%">
+                         <hr style=" padding-right:10px; height: 1px; border-width: 0; color: black; background-color: black;"/>
+                       <span style=" padding-left:25%;  "><strong>Approved by</strong></span>  
+                      <!--<SPAN STYLE="text-decoration:overline; text-align: right;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
+                    </td>
+                    <td style="width:3%">
+                    </td>
+                    </tbody>    
+                    </table>
+                    
+                    <!-- agreement-->
+                    
+                     <hr style="height: 1px; border-width: 3px; background-color: red;"/>
+                     
+                     <h3 style="text-align:center; font-size:18px; ">Receiving</h3>
+                     
+                     <p style=" padding-left:40px; padding-right:40px;padding-bottom:10px">
+                       I, <strong> <t t-if="env['account.payment'].search([('ref','=',o.name),('state','=','posted')])">
+                        <span style="  padding-left:10px;padding-bottom:10px" t-esc="env['account.payment'].search([('ref','=',o.name),('state','=','posted')]).ol_check_in_favor_of"/>
+                                        </t>
+                       <t t-else="o.partner_id">
+                        <span style="padding-left:10px; padding-bottom:10px" t-esc="o.partner_id.name"/> </t> </strong>, do hereby confirm that I have received my entire dues from LACAS with
+Cheque # Dated :<strong> 
+<t t-if="o.invoice_date">
+<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/></t>
+<t t-else="">----</t>
+</strong> Rs. <t t-if="o.refund_receive == 'Refundable'">
+            
+         <span style=""><t t-esc="abs(receive_values-refund_values)"/></span>
+          </t>
+         <t t-else="">
+          <span style="">0</span>
+          </t> and I have no claim against School.
+                     </p><br/>
+                     
+                     <table class="table " style="width:100%; padding-top: 12%;">
+                      <tbody>
+                       <td style="width:20%"> 
+                       
+                    </td>
+                    
+                     <td style="width:10%">
+                    </td>
+                    
+                  
+                   
+                   
+                    
+                    <!--<td style="width:9% ;">-->
+                    <!--     <hr style="height: 1px; border-width: 0; color: black; margin-right:30px; background-color: black;"/>-->
+                    <!--   <span align="center" style=""><t t-esc="env['account.payment'].search([('ref','=',o.name)]).ol_check_in_favor_of"/></span>  -->
+                      <!--<SPAN STYLE="text-decoration:overline; text-align: center;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
+                    <!--</td>-->
+                     
+                     <td style="width:10% ;">
+                         <hr style="height: 1px; border-width: 0; color: black;  background-color: black;"/>
+                       <span align="center" style="">
+                         <t t-if="env['account.payment'].search([('ref','=',o.name),('state','=','posted')])">
+                           <span style="  padding-left:10px;" t-esc="env['account.payment'].search([('ref','=',o.name),('state','=','posted')]).ol_check_in_favor_of"/>
+                                </t>
+                        <t t-else="o.partner_id">
+                          <span style="padding-left:10px; padding-bottom:10px" t-esc="o.partner_id.name"/>  </t></span>  
+                      <!--<SPAN STYLE="text-decoration:overline; text-align: center;  font-size: 14px; font-weight:bold"> Sign. Depositor</SPAN> -->
+                    </td>
+                    
+                    <!-- <td style="width:2%">-->
+                    <!--</td>-->
+                    </tbody>    
+                    </table>
+
+
+                   </div>
+                    
+                   </div>
+                  
+                  </div>
+                 
+                             <!--<div id="last-page" style="page-break-after: always;"></div>-->
+
+                </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>

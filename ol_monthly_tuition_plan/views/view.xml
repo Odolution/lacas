@@ -1,0 +1,14 @@
+<odoo>
+    <record id="school_student_tuition_plan" model="ir.ui.view">
+        <field name="name">school.student</field>
+        <field name="model">school.student</field>
+        <field name="inherit_id" ref="ol_school_manager.school_student_view_form"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='x_roll_number']" position="after">
+            <field name="monthly_bill_check" invisible="1"/>
+            <field name="monthly_bill_check_related"/>
+          </xpath>
+        </field>
+    </record>
+    
+</odoo>

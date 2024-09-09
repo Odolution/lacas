@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tuition_add_plan_line_wiz,tuition.add_plan_line_wiz,model_tuition_add_plan_line_wiz,,1,1,1,1
+access_tuition_set_next_installment_wiz,tuition.set_next_installment_wiz,model_tuition_set_next_installment_wiz,,1,1,1,1
+access_installment_name,installment.name,model_installment_name,,1,1,1,1

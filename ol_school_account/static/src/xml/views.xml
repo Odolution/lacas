@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+  <t t-name="school.finance.Make.charge" owl="1">
+    <button type="button" class="btn btn-secondary o_make_charge_student"
+            t-on-click="goToMakeChargeWizard"
+            title="Make charge" accesskey="m">
+      Make charge
+    </button>
+  </t>
+</templates>

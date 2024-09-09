@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+
+
+    <record id="group_bill_menu" model="res.groups">
+        <field name="name">Allow Billing Menu </field>
+    </record>
+
+    <record id="group_reversal_menu" model="res.groups">
+        <field name="name">Allow Reversal Menu </field>
+    </record>
+
+    <record id="group_admission_challan" model="res.groups">
+        <field name="name">Allow Admission challan</field>
+    </record>
+
+    <record id="group_dues_assessment_sheet" model="res.groups">
+        <field name="name">Allow Dues Assessment Sheet </field>
+    </record>
+
+    <record id="group_fee_challan" model="res.groups">
+        <field name="name">Allow Fee Challan </field>
+    </record>
+
+    <record id="group_charges_menu" model="res.groups">
+        <field name="name">Allow Charges Mneu </field>
+    </record>
+
+    <record id="group_monthly_menu" model="res.groups">
+        <field name="name">Allow Monthly Mneu </field>
+    </record>
+
+    
+    
+
+   
+
+
+
+    
+
+</odoo>

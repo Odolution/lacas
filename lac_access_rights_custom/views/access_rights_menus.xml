@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  
+
+    <record id="account.menu_action_move_out_refund_type" model="ir.ui.menu">
+      <field name="groups_id" eval="[(4,ref('lac_access_rights_custom.group_reversal_menu'))]"/>
+    </record>
+
+
+    <record id="account.menu_action_move_out_invoice_type" model="ir.ui.menu">
+      <field name="groups_id" eval="[(4,ref('lac_access_rights_custom.group_bill_menu'))]"/>
+    </record>
+    
+    <record id="cus_report.report_admission_challan" model="ir.actions.report">
+      <field name="groups_id" eval="[(4,ref('lac_access_rights_custom.group_admission_challan'))]"/>
+    </record>
+
+    <record id="cus_report.report_dues_assesment_sheet" model="ir.actions.report">
+      <field name="groups_id" eval="[(4,ref('lac_access_rights_custom.group_dues_assessment_sheet'))]"/>
+    </record>
+
+    <record id="cus_report.generate_report" model="ir.actions.report">
+      <field name="groups_id" eval="[(4,ref('lac_access_rights_custom.group_fee_challan'))]"/>
+    </record>
+    
+</odoo>

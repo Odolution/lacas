@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tuition_wizard_tuition_plan,tuition.wizard_tuition_plan,model_tuition_wizard_tuition_plan,,1,1,1,1
