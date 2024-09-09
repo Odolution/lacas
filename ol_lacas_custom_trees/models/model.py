@@ -11,7 +11,18 @@ class ext(models.Model):
     student_ids_ol_new = fields.Many2one('school.student', string="std ol new",compute='get_student',store=True) # Yaminah
     
     student_ids_ol=fields.Many2one('school.student', string="std ol") # compute='_feild_students' removed from here
-    x_studio_udid_monthly_bills = fields.Char(string="UDID Bills",related='student_ids_ol.olf_udid', store=True)
+    # x_studio_udid_monthly_bills = fields.Char(string="UDID Bills",related='student_ids_ol.olf_udid', store=True)
+    x_studio_udid_monthly_bills = fields.Char(compute='_compute_x_studio_udid_monthly_bills', string='UDID Bills', store=True)
+    
+    @api.depends('student_ids','x_student_id_cred')
+    def _compute_x_studio_udid_monthly_bills(self):
+        for rec in self:
+            if not rec.x_studio_udid_monthly_bills:
+                if rec.student_ids:
+                    rec['x_studio_udid_monthly_bills']= rec.student_ids.olf_udid
+                elif rec.x_student_id_cred:
+                    rec['x_studio_udid_monthly_bills']= rec.x_student_id_cred.olf_udid
+    
     x_studio_olf_id_bills = fields.Integer(string="OLF ID Bills",related='student_ids_ol.olf_id')
     x_studio_olf = fields.Integer(string="OLF",related='student_ids_ol.olf_id')
     #student_ids_ol=fields.Many2one('school.student', string="std ol")
