@@ -38,65 +38,41 @@
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
 										<tr>
-											<!-- Left side with fields -->
-											<td style="width: 69%; vertical-align: top;">
-												<table style="width: 100%;">
-													<tbody>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																Bill Number:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="o.name"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																1-Bill ID:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="'100225008' + o.name"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																Issue Date:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left; color: grey; width: 70%; font-size:12px;">
-																Due Date:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<span style="background-color: yellow;">
-																	<strong>
-																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')"/>
-																	</strong>
-																</span>
-															</td>
-														</tr>
-													</tbody>
-												</table>
+											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
+												Bill Number:
 											</td>
-							
-											<!-- Right side with image -->
-											<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
-											  <img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.name" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left;color: grey; font-size:12px; width: 30%;">
+												Issue Date :
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left; color: grey; font-size:12px; width: 30%;">
+												Due Date :
+											</td>
+											<td>
+												<span style="background-color: yellow; width: 70%; font-size:12px;">
+													<strong>
+														<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+													</strong>
+												</span>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
@@ -106,9 +82,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<!--<t t-esc="o.student_ids.name"/>-->
-													<t t-esc="' '.join([o.student_ids.first_name or '', o.student_ids.middle_name or '', o.student_ids.last_name or '']).strip()"/>
-
+													<t t-esc="o.student_ids.name" />
 												</strong>
 											</td>
 										</tr>
@@ -123,8 +97,7 @@
 													<t t-if="d.relationship_type_id.name == 'Father'">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<!--<t t-esc="d.individual_id.name"/>-->
-																<t t-esc="' '.join([d.individual_id.first_name or '', d.individual_id.middle_name or '', d.individual_id.last_name or '']).strip()"/>
+																<t t-esc="d.individual_id.name" />
 															</strong>
 														</td>
 													</t>
@@ -144,7 +117,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.student_ids.olf_id"/>
+													<t t-esc="o.student_ids.olf_id" />
 												</strong>
 											</td>
 										</tr>
@@ -158,20 +131,19 @@
 												Class :
 											</td>
 											<t t-foreach="o.student_ids" t-as="i">
-												<t t-foreach="i.enrollment_status_ids" t-as="d">
+												<t t-foreach="i.enrollment_state_ids" t-as="d">
 													<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
-													<!--<t t-if="d.enrollment_state_ids.name == 'Admission'">-->
-													<t t-if="d.name == 'Admission'">
+													<t t-if="d.enrollment_status_id.name == 'Admission'">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<t t-esc="o.x_studio_previous_class"/>
+																<t t-esc="o.x_studio_previous_class" />
 															</strong>
 														</td>
 													</t>
 													<t t-else="">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<t t-esc="o.x_studio_previous_class"/>
+																<t t-esc="o.grade_level_ids.name" />
 															</strong>
 														</td>
 													</t>
@@ -186,7 +158,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.school_ids.name"/>
+													<t t-esc="o.school_ids.name" />
 												</strong>
 											</td>
 										</tr>
@@ -196,7 +168,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.x_studio_batch.display_name"/>
+													<t t-esc="o.x_studio_batch.display_name" />
 												</strong>
 											</td>
 										</tr>
@@ -206,7 +178,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.bill_date"/>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
 												</strong>
 											</td>
 										</tr>
@@ -234,11 +206,11 @@
 										<t t-foreach="o.invoice_line_ids" t-as="d">
 											<tr style="border: 1px solid black;">
 												<td style="text-align: left; border: 1px solid black; font-size:12px;">
-													<t t-esc="d.product_id.name"/>
+													<t t-esc="d.product_id.name" />
 												</td>
 												<!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
 												<td style="text-align: right; border: 1px solid black; font-size:12px;">
-													<t t-esc="int(d.price_subtotal)"/>
+													<t t-esc="int(d.price_subtotal)" />
 												</td>
 											</tr>
 										</t>
@@ -251,13 +223,13 @@
 												Total
 											</th>
 											<th style="text-align: right; width: 132.138px; font-size:12px; margin-right: 5%;">
-												<t t-esc="int(o.amount_residual)"/>
+												<t t-esc="int(o.amount_residual)" />
 											</th>
 										</tr>
 										<tr style="width: 100px;">
 											<td colspan="2" style="text-align: left; border: 1px solid black; font-size:11px;">
 												<em>
-													<t t-esc="o.currency_id.amount_to_text(o.amount_residual)"/>
+													<t t-esc="o.currency_id.amount_to_text(o.amount_residual)" />
 												</em>
 											</td>
 										</tr>
@@ -320,15 +292,21 @@
 								</table>
 								<!-- Yasir -->
 								<p style="padding-inline: 7px; margin-bottom: 30px;  font-size: 8px; color: grey;">
-									In case of any query please contact the school office or the LACAS accounts department. 
-									The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
-									<br/>
-								  Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
-								  Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
-								  Security is refundable within 6 months of withdrawal or leaving. For A level students,
-								  security is refundable after completion of A level.
-									<br/>
-									Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
+									In case of any query please contact the school office or the
+									LACAS accounts department.
+									The amount can be deposited through Cheque of Bank Alfalah or
+									cash at any branch of Bank Alfalah except Alfalah Islamic
+									Branch.
+									<br />
+									On line payment through ALFA App and Debit/Credit card is also
+									available as per details mentioned on LACAS website.
+									Security is refundable only if one month&apos;s advance notice is given
+									in writing or one month&apos;s advance fee is paid. Security is
+									refundable within 6 months of withdrawal or leaving. For A level
+									students, security is refundable after completion of A level.
+									<br />
+									Bank will not be responsible for any financial loss in case Deposit Slip/
+									Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement)
 								</p>
 							</div>
 							<!-- <br/> -->
@@ -357,7 +335,7 @@
 						<div class="column" style="float: left; border: 1px solid black; width: 32%;  height: 95%; margin-right: 1%;">
 							<t t-if="o.state=='draft'">
 								<div class="watermark" style="text-align:center; position:absolute;opacity:0.15;font-size:8em;">
-									<p t-field="o.state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
+									<p t-field="o.state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '" />
 								</div>
 							</t>
 							<table class="table table-dark" style="width:100%;">
@@ -365,7 +343,7 @@
 									<tr style="height: 65.5px;">
 										<!-- Allied Bank -->
 										<td style="align-items: center; ">
-											<img t-if="o.company_id.image1" t-att-src="image_data_uri(o.company_id.image1)" height="50" width="100" class="float-left" alt="Logo"/>
+											<img t-if="o.company_id.image1" t-att-src="image_data_uri(o.company_id.image1)" height="50" width="100" class="float-left" alt="Logo" />
 										</td>
 										<!--
 										<td style="align-items: center;font-size: 10px;">
@@ -374,79 +352,55 @@
 										-->
 										<!-- Lacas Logo -->
 										<td style="align-items: center; ">
-											<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo"/>
+											<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 										</td>
 										<!-- Bank Alfalah -->
 										<td style=" ">
-											<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo"/>
+											<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
 										</td>
 									</tr>
 								</tbody>
 							</table>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
+							<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
 										<tr>
-											<!-- Left side with fields -->
-											<td style="width: 69%; vertical-align: top;">
-												<table style="width: 100%;">
-													<tbody>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																Bill Number:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="o.name"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																1-Bill ID:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="'100225008' + o.name"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																Issue Date:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left; color: grey; width: 70%; font-size:12px;">
-																Due Date:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<span style="background-color: yellow;">
-																	<strong>
-																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')"/>
-																	</strong>
-																</span>
-															</td>
-														</tr>
-													</tbody>
-												</table>
+											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
+												Bill Number:
 											</td>
-							
-											<!-- Right side with image -->
-											<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
-											  <img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.name" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left;color: grey; font-size:12px; width: 30%;">
+												Issue Date :
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left; color: grey; font-size:12px; width: 30%;">
+												Due Date :
+											</td>
+											<td>
+												<span style="background-color: yellow; width: 70%; font-size:12px;">
+													<strong>
+														<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+													</strong>
+												</span>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
@@ -456,8 +410,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<!--<t t-esc="o.student_ids.name"/>-->
-													<t t-esc="' '.join([o.student_ids.first_name or '', o.student_ids.middle_name or '', o.student_ids.last_name or '']).strip()"/>
+													<t t-esc="o.student_ids.name" />
 												</strong>
 											</td>
 										</tr>
@@ -472,8 +425,7 @@
 													<t t-if="d.relationship_type_id.name == 'Father'">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<!--<t t-esc="d.individual_id.name"/>-->
-																<t t-esc="' '.join([d.individual_id.first_name or '', d.individual_id.middle_name or '', d.individual_id.last_name or '']).strip()"/>
+																<t t-esc="d.individual_id.name" />
 															</strong>
 														</td>
 													</t>
@@ -493,7 +445,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.student_ids.olf_id"/>
+													<t t-esc="o.student_ids.olf_id" />
 												</strong>
 											</td>
 										</tr>
@@ -507,19 +459,19 @@
 												Class :
 											</td>
 											<t t-foreach="o.student_ids" t-as="i">
-												<t t-foreach="i.enrollment_status_ids" t-as="d">
+												<t t-foreach="i.enrollment_state_ids" t-as="d">
 													<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
-													<t t-if="d.name == 'Admission'">
+													<t t-if="d.enrollment_status_id.name == 'Admission'">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<t t-esc="o.x_studio_previous_class"/>
+																<t t-esc="o.x_studio_previous_class" />
 															</strong>
 														</td>
 													</t>
 													<t t-else="">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<t t-esc="o.grade_level_ids.name"/>
+																<t t-esc="o.grade_level_ids.name" />
 															</strong>
 														</td>
 													</t>
@@ -534,7 +486,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.school_ids.name"/>
+													<t t-esc="o.school_ids.name" />
 												</strong>
 											</td>
 										</tr>
@@ -544,7 +496,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.x_studio_batch.display_name"/>
+													<t t-esc="o.x_studio_batch.display_name" />
 												</strong>
 											</td>
 										</tr>
@@ -554,7 +506,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.bill_date"/>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
 												</strong>
 											</td>
 										</tr>
@@ -582,11 +534,11 @@
 										<t t-foreach="o.invoice_line_ids" t-as="d">
 											<tr style="border: 1px solid black;">
 												<td style="text-align: left; border: 1px solid black; font-size:12px;">
-													<t t-esc="d.product_id.name"/>
+													<t t-esc="d.product_id.name" />
 												</td>
 												<!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
 												<td style="text-align: right; border: 1px solid black; font-size:12px;">
-													<t t-esc="int(d.price_subtotal)"/>
+													<t t-esc="int(d.price_subtotal)" />
 												</td>
 											</tr>
 										</t>
@@ -599,13 +551,13 @@
 												Total
 											</th>
 											<th style="text-align: right; width: 132.138px; font-size:12px; margin-right: 5%;">
-												<t t-esc="int(o.amount_residual)"/>
+												<t t-esc="int(o.amount_residual)" />
 											</th>
 										</tr>
 										<tr style="width: 100px;">
 											<td colspan="2" style="text-align: left; border: 1px solid black; font-size:11px;">
 												<em>
-													<t t-esc="o.currency_id.amount_to_text(o.amount_residual)"/>
+													<t t-esc="o.currency_id.amount_to_text(o.amount_residual)" />
 												</em>
 											</td>
 										</tr>
@@ -668,15 +620,21 @@
 								</table>
 								<!-- Yasir -->
 								<p style="padding-inline: 7px; margin-bottom: 30px;  font-size: 8px; color: grey;">
-									In case of any query please contact the school office or the LACAS accounts department. 
-									The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
-									<br/>
-								  Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
-								  Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
-								  Security is refundable within 6 months of withdrawal or leaving. For A level students,
-								  security is refundable after completion of A level.
-									<br/>
-									Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
+									In case of any query please contact the school office or the
+									LACAS accounts department.
+									The amount can be deposited through Cheque of Bank Alfalah or
+									cash at any branch of Bank Alfalah except Alfalah Islamic
+									Branch.
+									<br />
+									On line payment through ALFA App and Debit/Credit card is also
+									available as per details mentioned on LACAS website.
+									Security is refundable only if one month&apos;s advance notice is given
+									in writing or one month&apos;s advance fee is paid. Security is
+									refundable within 6 months of withdrawal or leaving. For A level
+									students, security is refundable after completion of A level.
+									<br />
+									Bank will not be responsible for any financial loss in case Deposit Slip/
+									Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement)
 								</p>
 							</div>
 							<!-- <br/> -->
@@ -705,7 +663,7 @@
 						<div class="column" style="float: left; border: 1px solid black; width: 32%;  height: 95%; margin-right: 0%;">
 							<t t-if="o.state=='draft'">
 								<div class="watermark" style="text-align:center; position:absolute;opacity:0.15;font-size:8em;">
-									<p t-field="o.state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '"/>
+									<p t-field="o.state" t-att-style="'transform:rotate(-45deg); -webkit-transform:rotate(-45deg); margin-left:50px; margin-top:300px; '" />
 								</div>
 							</t>
 							<table class="table table-dark" style="width:100%;">
@@ -713,7 +671,7 @@
 									<tr style="height: 65.5px;">
 										<!-- Allied Bank -->
 										<td style="align-items: center; ">
-											<img t-if="o.company_id.image1" t-att-src="image_data_uri(o.company_id.image1)" height="50" width="100" class="float-left" alt="Logo"/>
+											<img t-if="o.company_id.image1" t-att-src="image_data_uri(o.company_id.image1)" height="50" width="100" class="float-left" alt="Logo" />
 										</td>
 										<!--
 										<td style="align-items: center;font-size: 10px;">
@@ -722,79 +680,55 @@
 										-->
 										<!-- Lacas Logo -->
 										<td style="align-items: center; ">
-											<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo"/>
+											<img t-if="o.student_ids.x_last_school_id.image_1920" t-att-src="image_data_uri(o.student_ids.x_last_school_id.image_1920)" height="50" width="100" class="float-left" alt="Logo" />
 										</td>
 										<!-- Bank Alfalah -->
 										<td style=" ">
-											<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo"/>
+											<img t-if="o.company_id.image" t-att-src="image_data_uri(o.company_id.image)" height="50" width="100" class="float-left" alt="Logo" />
 										</td>
 									</tr>
 								</tbody>
 							</table>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: grey;"/>
+							<hr style="height: 1px; border-width: 0; color: black; background-color: grey;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
 										<tr>
-											<!-- Left side with fields -->
-											<td style="width: 69%; vertical-align: top;">
-												<table style="width: 100%;">
-													<tbody>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																Bill Number:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="o.name"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																1-Bill ID:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="'100225008' + o.name"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left;color: grey; width: 70%; font-size:12px;">
-																Issue Date:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<strong>
-																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>
-																</strong>
-															</td>
-														</tr>
-														<tr>
-															<td style="text-align: left; color: grey; width: 70%; font-size:12px;">
-																Due Date:
-															</td>
-															<td style="width: 30%; font-size:12px;">
-																<span style="background-color: yellow;">
-																	<strong>
-																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')"/>
-																	</strong>
-																</span>
-															</td>
-														</tr>
-													</tbody>
-												</table>
+											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
+												Bill Number:
 											</td>
-							
-											<!-- Right side with image -->
-											<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
-											  <img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.name" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left;color: grey; font-size:12px; width: 30%;">
+												Issue Date :
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left; color: grey; font-size:12px; width: 30%;">
+												Due Date :
+											</td>
+											<td>
+												<span style="background-color: yellow; width: 70%; font-size:12px;">
+													<strong>
+														<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+													</strong>
+												</span>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
@@ -804,8 +738,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<!--<t t-esc="o.student_ids.name"/>-->
-													<t t-esc="' '.join([o.student_ids.first_name or '', o.student_ids.middle_name or '', o.student_ids.last_name or '']).strip()"/>
+													<t t-esc="o.student_ids.name" />
 												</strong>
 											</td>
 										</tr>
@@ -820,8 +753,7 @@
 													<t t-if="d.relationship_type_id.name == 'Father'">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<!--<t t-esc="d.individual_id.name"/>-->
-																<t t-esc="' '.join([d.individual_id.first_name or '', d.individual_id.middle_name or '', d.individual_id.last_name or '']).strip()"/>
+																<t t-esc="d.individual_id.name" />
 															</strong>
 														</td>
 													</t>
@@ -841,7 +773,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.student_ids.olf_id"/>
+													<t t-esc="o.student_ids.olf_id" />
 												</strong>
 											</td>
 										</tr>
@@ -855,19 +787,19 @@
 												Class :
 											</td>
 											<t t-foreach="o.student_ids" t-as="i">
-												<t t-foreach="i.enrollment_status_ids" t-as="d">
+												<t t-foreach="i.enrollment_state_ids" t-as="d">
 													<!-- <t-if "d.type.name" == 'father'> t-as="d" -->
-													<t t-if="d.name == 'Admission'">
+													<t t-if="d.enrollment_status_id.name == 'Admission'">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<t t-esc="o.x_studio_previous_class"/>
+																<t t-esc="o.x_studio_previous_class" />
 															</strong>
 														</td>
 													</t>
 													<t t-else="">
 														<td style="width: 70%; font-size:12px;">
 															<strong>
-																<t t-esc="o.grade_level_ids.name"/>
+																<t t-esc="o.grade_level_ids.name" />
 															</strong>
 														</td>
 													</t>
@@ -882,7 +814,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.school_ids.name"/>
+													<t t-esc="o.school_ids.name" />
 												</strong>
 											</td>
 										</tr>
@@ -892,7 +824,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.x_studio_batch.display_name"/>
+													<t t-esc="o.x_studio_batch.display_name" />
 												</strong>
 											</td>
 										</tr>
@@ -902,7 +834,7 @@
 											</td>
 											<td style="width: 70%; font-size:12px;">
 												<strong>
-													<t t-esc="o.bill_date"/>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
 												</strong>
 											</td>
 										</tr>
@@ -930,11 +862,11 @@
 										<t t-foreach="o.invoice_line_ids" t-as="d">
 											<tr style="border: 1px solid black;">
 												<td style="text-align: left; border: 1px solid black; font-size:12px;">
-													<t t-esc="d.product_id.name"/>
+													<t t-esc="d.product_id.name" />
 												</td>
 												<!-- <td style="text-align: right; border: 1px solid black; font-size:13px;"><t t-esc="int(d.price_unit)"/></td> -->
 												<td style="text-align: right; border: 1px solid black; font-size:12px;">
-													<t t-esc="int(d.price_subtotal)"/>
+													<t t-esc="int(d.price_subtotal)" />
 												</td>
 											</tr>
 										</t>
@@ -947,13 +879,13 @@
 												Total
 											</th>
 											<th style="text-align: right; width: 132.138px; font-size:12px; margin-right: 5%;">
-												<t t-esc="int(o.amount_residual)"/>
+												<t t-esc="int(o.amount_residual)" />
 											</th>
 										</tr>
 										<tr style="width: 100px;">
 											<td colspan="2" style="text-align: left; border: 1px solid black; font-size:11px;">
 												<em>
-													<t t-esc="o.currency_id.amount_to_text(o.amount_residual)"/>
+													<t t-esc="o.currency_id.amount_to_text(o.amount_residual)" />
 												</em>
 											</td>
 										</tr>
@@ -1016,15 +948,21 @@
 								</table>
 								<!-- Yasir -->
 								<p style="padding-inline: 7px;margin-bottom: 30px;  font-size: 8px; color: grey;">
-									In case of any query please contact the school office or the LACAS accounts department. 
-									The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
-									<br/>
-								  Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
-								  Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
-								  Security is refundable within 6 months of withdrawal or leaving. For A level students,
-								  security is refundable after completion of A level.
-									<br/>
-									Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
+									In case of any query please contact the school office or the
+									LACAS accounts department.
+									The amount can be deposited through Cheque of Bank Alfalah or
+									cash at any branch of Bank Alfalah except Alfalah Islamic
+									Branch.
+									<br />
+									On line payment through ALFA App and Debit/Credit card is also
+									available as per details mentioned on LACAS website.
+									Security is refundable only if one month&apos;s advance notice is given
+									in writing or one month&apos;s advance fee is paid. Security is
+									refundable within 6 months of withdrawal or leaving. For A level
+									students, security is refundable after completion of A level.
+									<br />
+									Bank will not be responsible for any financial loss in case Deposit Slip/
+									Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement)
 								</p>
 							</div>
 							<!-- <br/> -->
