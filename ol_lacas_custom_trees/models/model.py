@@ -164,6 +164,7 @@ class ext(models.Model):
     #             nofloat=int(total)
     #             rec.net_amount=str(nofloat)
 
+
     def _compute_late_fee_amnt(self):
         self.latefee=0
         for rec in self:
