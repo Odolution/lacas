@@ -13,6 +13,7 @@ class SchoolStudent(models.Model):
     _inherit = 'school.student'
     
     olf_udid = fields.Char(string="olf UDID")
+    olf_id = fields.Integer(string="OLF ID", related='individual_id.olf_id', stored=True)
 
 class Partner(models.Model):
     _inherit = 'res.partner'
