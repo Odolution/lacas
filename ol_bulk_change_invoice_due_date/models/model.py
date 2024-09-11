@@ -26,6 +26,7 @@ class invoice_ext(models.Model):
 
     _inherit = "account.move"
     def action_open_bulk_edit_move_wizard(self):
+        raise UserError(self.ids)
 
         return {
             'name': _('Bulk Edit Due Date'),
