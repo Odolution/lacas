@@ -10,6 +10,7 @@ class bulk_edit_move_wiz(models.TransientModel):
     account_move_ids = fields.Many2many('account.move', string='account_moves')
     def apply(self):
         for wizard in self:
+            raise UserError(wizard.account_move_ids)
             for move in wizard.account_move_ids:
                 move.invoice_date_due=wizard.invoice_date_due
 
