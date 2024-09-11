@@ -12,8 +12,8 @@ class ext(models.Model):
     
     student_ids_ol=fields.Many2one('school.student', string="std ol") # compute='_feild_students' removed from here
     # x_studio_udid_monthly_bills = fields.Char(string="UDID Bills",related='student_ids_ol.olf_udid', store=True)
-    x_studio_udid_monthly_bills = fields.Char( string='UDID Bills', store=True)
-    x_studio_enrollment_statusbills = fields.Many2one('school.enrollment.status', string='Enrollment status(bills)',store=True)
+    x_studio_udid_monthly_bills = fields.Char(compute='_compute_student_related_fields', string='UDID Bills', store=True)
+    x_studio_enrollment_statusbills = fields.Many2one('school.enrollment.status', string='Enrollment status(bills)',store=True, compute='_compute_student_related_fields')
     @api.depends('student_ids','x_student_id_cred')
     def _compute_student_related_fields(self):
         for rec in self:
@@ -36,8 +36,8 @@ class ext(models.Model):
                 elif rec.x_student_id_cred:
                     rec['x_studio_enrollment_statusbills']= rec.x_student_id_cred.x_last_enrollment_status_id
     
-    x_studio_olf_id_bills = fields.Integer(string="OLF ID Bills", store=True)
-    x_studio_olf = fields.Integer(string="OLF", store=True)
+    x_studio_olf_id_bills = fields.Integer(string="OLF ID Bills",compute='_compute_student_related_fields', store=True)
+    x_studio_olf = fields.Integer(string="OLF",compute='_compute_student_related_fields', store=True)
     #student_ids_ol=fields.Many2one('school.student', string="std ol")
     tuition=fields.Integer(string="Tuition Fee")
     club=fields.Integer(string="Club Charges")
