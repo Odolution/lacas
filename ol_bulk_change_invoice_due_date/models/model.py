@@ -10,7 +10,7 @@ class bulk_edit_move_wiz(models.TransientModel):
     account_move_ids = fields.Many2many('account.move', string='account_moves')
     def apply(self):
         for wizard in self:
-            raise UserError(wizard.account_move_ids)
+            # raise UserError(wizard.account_move_ids)
             for move in wizard.account_move_ids:
                 move.invoice_date_due=wizard.invoice_date_due
 
@@ -26,7 +26,7 @@ class invoice_ext(models.Model):
 
     _inherit = "account.move"
     def action_open_bulk_edit_move_wizard(self):
-        raise UserError(self.ids)
+        # raise UserError(self.ids)
 
         return {
             'name': _('Bulk Edit Due Date'),
