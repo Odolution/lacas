@@ -6,6 +6,7 @@ from odoo.fields import Command
 
 import datetime
 from dateutil.relativedelta import relativedelta
+from datetime import date
 
 from odoo.tools import float_is_zero, html_keep_url, is_html_empty
 
