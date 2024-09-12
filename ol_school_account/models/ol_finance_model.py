@@ -405,6 +405,7 @@ class TuitionPlanInstallment(models.Model):
         elif records._name == 'account.move':
             records.sudo().write({'is_move_sent': True})
 
+    ##Huzaifa
     # def _get_monthly_date(self):
     #     self.ensure_one()
     #     if not self.month:
