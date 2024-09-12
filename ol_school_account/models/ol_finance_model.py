@@ -418,7 +418,7 @@ class TuitionPlanInstallment(models.Model):
         else:
             day = 1
 
-        next_date = datetime.date(year=plan_year, month=1, day=1) + relativedelta(month=int(self.month), day=day)
+        next_date = date(year=plan_year, month=1, day=1) + relativedelta(month=int(self.month), day=day)
         next_date = self.move_next_year_if_needed(next_date)
 
         return next_date
