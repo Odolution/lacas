@@ -1240,6 +1240,7 @@ class TuitionTemplateInstallment(models.Model):
                 } for installment in self]
         return values
 
+    ##Huzaifa
     # def _get_monthly_date(self):
     #     self.ensure_one()
     #     if not self.month:
