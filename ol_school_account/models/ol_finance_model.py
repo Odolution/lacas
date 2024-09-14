@@ -879,6 +879,8 @@ class TuitionPlan(models.Model):
             ('posted', "Posted"),
             ('cancel', "Cancelled"),
         ], string="State", default='draft', required=True, tracking=True, group_expand='_read_group_state',)
+
+
     student_grade_level_ids = fields.Many2many('school.grade.level', string="Student grade levels", store=True, compute='compute_student_grade_levels')
     posted_before = fields.Boolean(default=False)
     next_installment_id = fields.Many2one(
@@ -915,6 +917,15 @@ class TuitionPlan(models.Model):
     # process start
 
     discount_ids = fields.Many2many('ol.discount.charges', string="Discount Charges", store=True) 
+
+    odl_state = fields.Selection(
+        selection=[
+            ('draft', "Draft"),
+            ('first', "First Approval"),
+            ('second', "Second Approval"),
+            ('done', "Confirm"),
+        ], string="ODL State", default='draft', required=True)
+
 
     # @api.onchange('discount_ids')
     def discount_addition(self):
