@@ -220,7 +220,7 @@ class TuitionPlanMixin(models.AbstractModel):
 
     program_id = fields.Many2one(
         'school.program', required=True, ondelete='restrict', default=lambda self: self.env.program,
-        domain="[('school_id.district_company_ids', '=', company_id)]")
+        domain="[('school_id.district_company_ids', '=', company_id)]", string = "School")
 
     invoice_method = fields.Selection(selection=[
         ('sale', 'Sale order'),
