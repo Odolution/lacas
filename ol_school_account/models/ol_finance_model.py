@@ -917,7 +917,7 @@ class TuitionPlan(models.Model):
         for rec in self:
             # raise UserError(self.ids)
             
-            # discount_to_add = []
+            discount_to_add = []
             product_in_line = []
             installment_obj = [i for i in rec.line_ids[-1].installment_ids]
             # raise UserError(str(installment_obj[0].ids))
@@ -928,19 +928,22 @@ class TuitionPlan(models.Model):
 
             for discount in rec.discount_ids:
                 if discount.product_id.id not in product_in_line:
+                    discount_to_add.append(discount)
+
+            raise UserError(strt(discount_to_add))
             
-                    linedata={
-                            'plan_id':self.ids[0],
-                            'product_id':discount.product_id.id,
-                            'name':discount.product_id.name,
-                            'account_id':discount.product_id.property_account_income_id.id,
-                            'quantity':1,
-                            'installment_ids':[(6,0,[j.ids[0] for j in installment_obj])],
-                            'currency_id':rec.currency_id.id,
-                            'unit_price':0
-                            }
-                    # raise UserError([str(linedata)])
-                    new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
+            linedata={
+                    'plan_id':self.ids[0],
+                    'product_id':discount.product_id.id,
+                    'name':discount.product_id.name,
+                    'account_id':discount.product_id.property_account_income_id.id,
+                    'quantity':1,
+                    'installment_ids':[(6,0,[j.ids[0] for j in installment_obj])],
+                    'currency_id':rec.currency_id.id,
+                    'unit_price':0
+                    }
+            # raise UserError([str(linedata)])
+            new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
 
 
             
