@@ -921,7 +921,7 @@ class TuitionPlan(models.Model):
             installment_obj = [i for i in rec.line_ids[-1].installment_ids]
 
             for line in rec.line_ids:
-                product.append(line.product_id.id)
+                product_in_line.append(line.product_id.id)
     
 
             for discount in rec.discount_ids:
