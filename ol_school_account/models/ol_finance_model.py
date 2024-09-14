@@ -912,7 +912,7 @@ class TuitionPlan(models.Model):
 
     discount_ids = fields.Many2many('ol.discount.charges', string="Discount Charges", store=True) 
 
-    @api.onchange('discount_ids')
+    # @api.onchange('discount_ids')
     def discount_addition(self):
         for rec in self:
             # raise UserError(self.ids)
