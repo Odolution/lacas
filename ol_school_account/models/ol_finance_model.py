@@ -915,6 +915,7 @@ class TuitionPlan(models.Model):
     @api.onchange('discount_ids')
     def discount_addition(self):
         for rec in self:
+            raise UserError(self.env.context.get('active_id'))
             
             # discount_to_add = []
             product_in_line = []
