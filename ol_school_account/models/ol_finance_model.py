@@ -951,7 +951,7 @@ class TuitionPlan(models.Model):
             for line in rec.line_ids:
 
                 if line.discount_charges and line.product_id.id not in rec.discount_ids.mapped('product_id.id'):
-                    raise UserError([line,"--",rec.discount_ids.mapped('product_id.id')])
+                    # raise UserError([line,"--",rec.discount_ids.mapped('product_id.id')])
                     line.unlink()
 
             
