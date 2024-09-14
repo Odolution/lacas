@@ -261,3 +261,6 @@ class TuitionPlanMixin(models.AbstractModel):
     def confirm(self):
         for rec in self:
             rec.state='posted'
+    def reset(self):
+        for rec in self:
+            rec.state='draft'

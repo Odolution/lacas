@@ -1518,7 +1518,7 @@ class TuitionTemplate(models.Model):
     tuition_plan_count = fields.Integer(string="Tuition plan count", compute='compute_tuition_plan_count')
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('submit_for_approval', 'Submit FOr Approval'),
+        ('in_approval', 'In Approval'),
         ('posted', 'Posted')
     ], string='State')
     installment_template = fields.Selection(selection=[
