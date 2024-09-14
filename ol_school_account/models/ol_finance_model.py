@@ -946,14 +946,6 @@ class TuitionPlan(models.Model):
                 # raise UserError([str(linedata)])
                 new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
 
-
-            
-                
-
-
-
-
-
     # process end 
 
     @api.depends('line_ids.tax_ids', 'line_ids.unit_price', 'amount_total', 'amount_untaxed')
