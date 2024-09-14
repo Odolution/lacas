@@ -937,8 +937,8 @@ class TuitionPlan(models.Model):
                             'currency_id':rec.currency_id.id,
                             'unit_price':0
                             }
-                    raise UserError(srt(linedata))
-                    new_plan_line_id=self.env['tuition.plan.line'].sudo().create(linedata)
+                    raise UserError(str(linedata))
+                    new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
 
 
             
