@@ -930,7 +930,7 @@ class TuitionPlan(models.Model):
                 if discount.product_id.id not in product_in_line:
             
                     linedata={
-                            'plan_id':rec.ids,
+                            'plan_id':int(rec.ids),
                             'product_id':discount.product_id.id,
                             'name':discount.product_id.name,
                             'account_id':discount.product_id.property_account_income_id.id,
