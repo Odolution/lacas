@@ -485,7 +485,7 @@ class TuitionPlanLine(models.Model):
     company_id = fields.Many2one('res.company', related='plan_id.company_id')
 
     # process start
-    discount_charges = fields.Boolean('Discount Charges') 
+    # discount_charges = fields.Boolean('Discount Char') 
     # process end 
 
     # ==========================
