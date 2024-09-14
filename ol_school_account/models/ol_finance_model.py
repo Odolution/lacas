@@ -912,6 +912,41 @@ class TuitionPlan(models.Model):
 
     discount_ids = fields.Many2many('ol.discount.charges', string="Discount Charges", store=True) 
 
+    @api.onchange('discount_ids')
+    def discount_addition(self):
+        for rec in self:
+            
+            # discount_to_add = []
+            product_in_line = []
+            installment_obj = [i for i in rec.line_ids[-1].installment_ids]
+
+            for line in rec.line_ids:
+                product.append(line.product_id.id)
+    
+
+            for discount in rec.discount_ids:
+                if discount.product_id.id not in product_in_line:
+            
+                    linedata={
+                            'plan_id':rec.id,
+                            'product_id':discount.product_id.id,
+                            'name':discount.product_id.name,
+                            'account_id':discount.product_id.property_account_income_id.id,
+                            'quantity':1,
+                            'installment_ids':[(6,0,[j.id for j in installment_obj])],
+                            'currency_id':rec.currency_id.id,
+                            'unit_price':0
+                            }
+                    new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
+
+
+            
+                
+
+
+
+
+
     # process end 
 
     @api.depends('line_ids.tax_ids', 'line_ids.unit_price', 'amount_total', 'amount_untaxed')
