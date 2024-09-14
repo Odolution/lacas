@@ -484,6 +484,10 @@ class TuitionPlanLine(models.Model):
              "The default value comes from the customer.")
     company_id = fields.Many2one('res.company', related='plan_id.company_id')
 
+    # process start
+    discount_charges = fields.Boolean('Discount Charges') 
+    # process end 
+
     # ==========================
     # Compute & onchange methods
     # ==========================
@@ -915,24 +919,18 @@ class TuitionPlan(models.Model):
     # @api.onchange('discount_ids')
     def discount_addition(self):
         for rec in self:
-            # raise UserError(self.ids)
-            
             discount_to_add = []
             product_in_line = []
             installment_obj = [i for i in rec.line_ids[-1].installment_ids]
-            # raise UserError(str(installment_obj[0].ids))
 
             for line in rec.line_ids:
                 product_in_line.append(line.product_id.id)
-    
 
             for discount in rec.discount_ids:
                 if discount.product_id.id not in product_in_line:
                     discount_to_add.append(discount)
-            # raise UserError(discount_to_add)
-            for dis in discount_to_add:
 
-            
+            for dis in discount_to_add:
                 linedata={
                         'plan_id':self.ids[0],
                         'product_id':dis.product_id.id,
@@ -943,9 +941,11 @@ class TuitionPlan(models.Model):
                         'currency_id':rec.currency_id.id,
                         'unit_price':0
                         }
-                # raise UserError([str(linedata)])
-                
                 new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
+
+    def discount_remove(self):
+        for rec in self:
+
 
     # process end 
 
