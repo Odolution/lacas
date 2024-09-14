@@ -939,7 +939,7 @@ class TuitionPlan(models.Model):
                         'quantity':1,
                         'installment_ids':[(6,0,[j.ids[0] for j in installment_obj])],
                         'currency_id':rec.currency_id.id,
-                        'unit_price':0
+                        'unit_price':0,
                         'discount_charges':True
                         }
                 new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
