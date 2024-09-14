@@ -908,6 +908,12 @@ class TuitionPlan(models.Model):
     amount_tax = fields.Monetary(string='Taxes', store=True, compute='_amount_all')
     amount_total = fields.Monetary(string='Total', store=True, compute='_amount_all', tracking=4)
 
+    # process start
+
+    discount_ids = fields.Many2many('ol.discount.charges', string="Discount Charges", store=True) 
+
+    # process end 
+
     @api.depends('line_ids.tax_ids', 'line_ids.unit_price', 'amount_total', 'amount_untaxed')
     def _compute_tax_totals_json(self):
         def compute_taxes(line):

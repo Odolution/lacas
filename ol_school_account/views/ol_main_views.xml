@@ -331,6 +331,7 @@
               <field name="tuition_template_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
               <field name="next_installment_id"/>
               <field name="student_grade_level_ids" widget="many2many_tags"/>
+              <field name="discount_ids" widget="many2many_tags"/>
             </group>
             <group name="right_group">
               <label for="pricelist_option" groups="product.group_product_pricelist"/>
