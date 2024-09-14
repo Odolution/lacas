@@ -947,7 +947,7 @@ class TuitionPlan(models.Model):
     def discount_remove(self):
         for rec in self:
             discount_to_remove = []
-            raise UserError(rec.discount_ids.mapped('product_id'))
+            # raise UserError(rec.discount_ids.mapped('product_id'))
             for line in rec.line_ids:
 
                 if line.discount_charges and line.product_id.id not in rec.discount_ids.mapped('product_id.id'):
