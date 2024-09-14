@@ -937,7 +937,7 @@ class TuitionPlan(models.Model):
                             'currency_id':rec.currency_id.id,
                             'unit_price':0
                             }
-                    new_plan_line_id=self.env['tuition.plan.line'].create(linedata)
+                    new_plan_line_id=self.env['tuition.plan.line'].sudo().create(linedata)
 
 
             
