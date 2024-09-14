@@ -920,8 +920,8 @@ class TuitionPlan(models.Model):
             # discount_to_add = []
             product_in_line = []
             installment_obj = [i for i in rec.line_ids[-1].installment_ids]
-            raise UserError(str(installment_obj))
-            
+            raise UserError(str(installment_obj[0].name))
+
             for line in rec.line_ids:
                 product_in_line.append(line.product_id.id)
     
