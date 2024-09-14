@@ -914,7 +914,6 @@ class TuitionPlan(models.Model):
 
     @api.onchange('discount_ids')
     def discount_addition(self):
-        raise UserError(self.id)
         for rec in self:
             # raise UserError(self.ids)
             
@@ -931,7 +930,7 @@ class TuitionPlan(models.Model):
                 if discount.product_id.id not in product_in_line:
             
                     linedata={
-                            'plan_id':int(rec.ids),
+                            'plan_id':self.ids,
                             'product_id':discount.product_id.id,
                             'name':discount.product_id.name,
                             'account_id':discount.product_id.property_account_income_id.id,
@@ -940,7 +939,7 @@ class TuitionPlan(models.Model):
                             'currency_id':rec.currency_id.id,
                             'unit_price':0
                             }
-                    raise UserError([str(linedata),installment_obj])
+                    raise UserError([str(linedata)])
                     new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
 
 
