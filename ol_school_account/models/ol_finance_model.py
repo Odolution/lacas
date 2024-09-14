@@ -930,7 +930,7 @@ class TuitionPlan(models.Model):
                 if discount.product_id.id not in product_in_line:
                     discount_to_add.append(discount)
 
-            raise UserError(strt(discount_to_add))
+            raise UserError(str(discount_to_add))
             
             linedata={
                     'plan_id':self.ids[0],
