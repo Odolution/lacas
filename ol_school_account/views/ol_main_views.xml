@@ -289,7 +289,7 @@
         <header>
         <!-- process start  -->
           <button name="button_confirm" type="object"
-                  string="Confirm" attrs="{'invisible': [('state', '!=', 'draft'),('odl_state', '!=', 'done')]}"/>
+                  string="Confirm" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('odl_state', '!=', 'done')]}"/>
           <button name="button_draft" type="object"
                   string="Reset to draft" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
           <button name="button_cancel" type="object"
