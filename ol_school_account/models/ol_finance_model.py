@@ -1512,7 +1512,11 @@ class TuitionTemplate(models.Model):
     installment_ids = fields.One2many('tuition.template.installment', 'tuition_template_id', string="Installments")
     tuition_plan_ids = fields.One2many('tuition.plan', 'tuition_template_id', string="Tuition plans")
     tuition_plan_count = fields.Integer(string="Tuition plan count", compute='compute_tuition_plan_count')
-
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('submit_for_approval', 'Submit FOr Approval'),
+        ('posted', 'Posted')
+    ], string='State')
     installment_template = fields.Selection(selection=[
         ('quarterly', "Quarterly"),
         ('biannually', "Bi-Annually"),
