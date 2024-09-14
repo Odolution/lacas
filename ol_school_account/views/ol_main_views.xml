@@ -589,9 +589,10 @@
     <field name="arch" type="xml">
       <form string="Tuition template">
         <header>
-          <button type="object" name="button_new_tuition_plan" class="btn btn-secondary" string="New tuition plan" state='posted'/>
-          <button type="object" name="send_for_approval" class="btn btn-secondary" string="Ask Approval" state='draft'/>
-          <button type="object" name="confirm" class="btn btn-secondary" string="Confirm" state='submit_for_approval'/>
+          <button type="object" name="button_new_tuition_plan" class="btn oe_highlight" string="New tuition plan" states='posted'/>
+          <button type="object" name="send_for_approval" class="btn oe_highlight" string="Ask Approval" states='draft'/>
+          <button type="object" name="reset" class="btn btn-secondary" string="Reset" states='posted,in_approval'/>
+          <button type="object" name="confirm" class="btn oe_highlight" string="Confirm" states='in_approval'/>
           <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
         </header>
         <sheet>

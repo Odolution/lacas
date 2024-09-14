@@ -257,7 +257,10 @@ class TuitionPlanMixin(models.AbstractModel):
                 record.tax_country_id = record.company_id.account_fiscal_country_id
     def send_for_approval(self):
         for rec in self:
-            rec.state='send_for_approval'
+            rec.state='in_approval'
     def confirm(self):
         for rec in self:
             rec.state='posted'
+    def reset(self):
+        for rec in self:
+            rec.state='draft'
