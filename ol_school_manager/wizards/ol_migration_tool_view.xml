@@ -85,4 +85,49 @@
          </form>
       </field>
    </record>
+
+   <!-- process start -->
+
+   <record model="ir.actions.act_window" id="ol_discount_charges_action">
+      <field name="name">Discount Charges Action</field>
+      <field name="res_model">ol.discount.charges</field>
+      <field name="view_mode">tree,form</field>
+   </record>
+
+   <record id="discount_charges_tree" model="ir.ui.view">
+    <field name="name">discount.charges.tree</field>
+    <field name="model">ol.discount.charges</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="product_id"/>
+        </tree>
+    </field>
+  </record>
+
+
+   <record id="ol_discount_charges" model="ir.ui.view">
+      <field name="name">ol.discount.charges.form</field>
+      <field name="model">ol.discount.charges</field>
+      <field name="arch" type="xml">
+         <form>
+            <sheet>
+               <group>
+                   <group colspan="1" name="left_group">
+                     <field name="name" placeholder="Discount Name"/>
+                  </group>
+
+                  <group colspan="1" name="left_group">
+                     <field name="product_id" placeholder="Discount Product"/>
+                  </group>
+
+               </group>
+
+            </sheet>
+         </form>
+      </field>
+   </record>
+
+   <!-- process end  -->
+
 </odoo>

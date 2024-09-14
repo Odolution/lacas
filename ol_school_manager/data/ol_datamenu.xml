@@ -204,4 +204,18 @@
           parent="ol_school_manager.ol_school_manager_migration_tool_menu_string"
           sequence="100"/>
 
+  <!-- process start  -->
+
+  <menuitem id="ol_school_manager_ol_discount_charges" name="Discount"
+            parent="ol_school_manager.school_configuration_menu" sequence="100"/>
+
+  <menuitem
+          id="ol_school_manager_discount_charges_menu"
+          name="Discount Charges"
+          action="ol_school_manager.ol_discount_charges_action"
+          parent="ol_school_manager.ol_school_manager_ol_discount_charges"
+          sequence="100"/>
+
+
+  <!-- process end  -->
 </odoo>
