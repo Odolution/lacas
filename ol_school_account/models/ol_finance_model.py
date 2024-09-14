@@ -944,7 +944,7 @@ class TuitionPlan(models.Model):
                         'unit_price':0
                         }
                 # raise UserError([str(linedata)])
-                new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
+                new_plan_line_id=rec.env['tuition.plan.line'].with_context(discount_line=True).sudo().create(linedata)
 
     # process end 
 
