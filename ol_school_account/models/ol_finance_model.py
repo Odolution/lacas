@@ -935,7 +935,7 @@ class TuitionPlan(models.Model):
                             'name':discount.product_id.name,
                             'account_id':discount.product_id.property_account_income_id.id,
                             'quantity':1,
-                            'installment_ids':[(6,0,[j.ids for j in installment_obj])],
+                            'installment_ids':[(6,0,[j.ids[0] for j in installment_obj])],
                             'currency_id':rec.currency_id.id,
                             'unit_price':0
                             }
