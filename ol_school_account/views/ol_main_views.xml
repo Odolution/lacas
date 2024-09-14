@@ -287,8 +287,9 @@
         <field name="company_id" invisible="1"/>
         <field name="currency_id" invisible="1"/>
         <header>
+        <!-- process start  -->
           <button name="button_confirm" type="object"
-                  string="Confirm" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                  string="Confirm" attrs="{'invisible': [('state', '!=', 'draft'),('odl_state', '!=', 'done')]}"/>
           <button name="button_draft" type="object"
                   string="Reset to draft" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
           <button name="button_cancel" type="object"
@@ -297,14 +298,23 @@
                   groups="sales_team.group_sale_manager"
                   confirm="This will create charges for the next installment!"
                   string="Create charges" attrs="{'invisible': [('state', '!=', 'posted')]}"/>
-          <button name="open_update_values_wizard" type="object"
+          <!-- <button name="open_update_values_wizard" type="object"
                   confirm="This can overwrite user modifications!"
                   groups="sales_team.group_sale_salesman"
-                  string="Update values" />
+                  string="Update values" /> -->
           <field name="state" widget="statusbar"/>
         </header>
-        <!-- process start  -->
+        
         <header>
+          <button name="odl_first_approval" type="object"
+                  string="Submit for first Approval" attrs="{'invisible': [('odl_state', '!=', 'draft')]}"/>
+
+          <button name="odl_second_approval" type="object"
+                  string="Submit for second Approval" attrs="{'invisible': [('odl_state', '!=', 'first')]}"/>
+          
+          <button name="odl_confirm" type="object"
+                  string="Confirm" attrs="{'invisible': [('odl_state', '!=', 'second')]}"/>
+
           <field name="odl_state" widget="statusbar"/>
         </header>
         <!-- process end  -->

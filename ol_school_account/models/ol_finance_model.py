@@ -926,17 +926,11 @@ class TuitionPlan(models.Model):
             ('done', "Confirm"),
         ], string="ODL State", default='draft', required=True)
 
-
-    # @api.onchange('discount_ids')
     def discount_addition(self):
         for rec in self:
             discount_to_add = []
             product_in_line = [rec.line_ids.mapped('product_id.id')]
             installment_obj = [rec.line_ids[-1].mapped('installment_ids')]
-            # installment_obj = [i for i in rec.line_ids[-1].installment_ids]
-            # raise UserError([product_in_line,installment_obj])
-            # for line in rec.line_ids:
-            #     product_in_line.append(line.product_id.id)
 
             for discount in rec.discount_ids:
                 if discount.product_id.id not in product_in_line:
@@ -966,7 +960,14 @@ class TuitionPlan(models.Model):
                     # raise UserError([line,"--",rec.discount_ids.mapped('product_id.id')])
                     line.unlink()
 
-            
+    def odl_first_approval(self):
+        self.write({'odl_state': 'first'})
+
+    def odl_second_approval(self):
+        self.write({'odl_state': 'second'})
+
+    def odl_confirm(self): 
+        self.write({'odl_state': 'done'})
 
     # process end 
 
