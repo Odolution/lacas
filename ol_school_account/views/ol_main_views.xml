@@ -307,13 +307,13 @@
         
         <header>
           <button name="odl_first_approval" type="object"
-                  string="Submit for first Approval" attrs="{'invisible': [('odl_state', '!=', 'draft')]}"/>
+                  string="Submit for first Approval" attrs="{'invisible': [('odl_state', '!=', 'draft'),('discount_ids', '!=', False)]}"/>
 
           <button name="odl_second_approval" type="object"
-                  string="Submit for second Approval" attrs="{'invisible': [('odl_state', '!=', 'first')]}"/>
+                  string="Submit for second Approval" attrs="{'invisible': [('odl_state', '!=', 'first'),('discount_ids', '!=', False)]}"/>
           
           <button name="odl_confirm" type="object"
-                  string="Confirm" attrs="{'invisible': [('odl_state', '!=', 'second')]}"/>
+                  string="Confirm" attrs="{'invisible': [('odl_state', '!=', 'second'),('discount_ids', '!=', False)]}"/>
 
           <field name="odl_state" widget="statusbar"/>
         </header>
