@@ -920,7 +920,7 @@ class TuitionPlan(models.Model):
             # discount_to_add = []
             product_in_line = []
             installment_obj = [i for i in rec.line_ids[-1].installment_ids]
-            raise UserError(str(installment_obj[0].name))
+            raise UserError(str(installment_obj[0].ids))
 
             for line in rec.line_ids:
                 product_in_line.append(line.product_id.id)
@@ -935,7 +935,7 @@ class TuitionPlan(models.Model):
                             'name':discount.product_id.name,
                             'account_id':discount.product_id.property_account_income_id.id,
                             'quantity':1,
-                            'installment_ids':[(6,0,[j.ids for j in installment_obj])],
+                            'installment_ids':[(6,0,[j.id for j in installment_obj])],
                             'currency_id':rec.currency_id.id,
                             'unit_price':0
                             }
