@@ -929,7 +929,7 @@ class TuitionPlan(models.Model):
             for discount in rec.discount_ids:
                 if discount.product_id.id not in product_in_line:
                     discount_to_add.append(discount)
-            raise UserError(discount_to_add)
+            # raise UserError(discount_to_add)
             for dis in discount_to_add:
 
             
