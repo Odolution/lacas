@@ -484,10 +484,6 @@ class TuitionPlanLine(models.Model):
              "The default value comes from the customer.")
     company_id = fields.Many2one('res.company', related='plan_id.company_id')
 
-    # process start
-    # discount_charges = fields.Boolean('Discount Char') 
-    # process end 
-
     # ==========================
     # Compute & onchange methods
     # ==========================
@@ -945,7 +941,7 @@ class TuitionPlan(models.Model):
 
     def discount_remove(self):
         for rec in self:
-
+            
 
     # process end 
 
