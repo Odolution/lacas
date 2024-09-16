@@ -774,6 +774,7 @@
     <field name="model">school.student</field>
     <field name="arch" type="xml">
       <tree>
+        <field name="image_1920" optional="show" options="{&quot;size&quot;:[0,90]}" widget="image"/>
         <field name="name"/>
       </tree>
     </field>
