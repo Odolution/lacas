@@ -552,7 +552,7 @@
           <notebook name="main_notebook">
             <page name="setup" string="SETUP">
               <notebook name="nested_notebook">
-                <page name="families" string="Families">
+                <page name="families" string="Parents">
                   <field name="family_ids" context="{'default_student_ids': [id]}">
                     <kanban>
                       <field name="name"/>
@@ -576,7 +576,7 @@
                   </field>
                 </page>
 
-                <page name="relationships" string="Relationships">
+                <page name="relationships" string="Contacts">
                   <field name="relationship_ids"
                         add-label="Add a Relationship" mode="tree"
                         context="{'default_individual_id': id}">
@@ -592,7 +592,7 @@
                   </field>
                 </page>
 
-                <page name="healthcare" string="Healthcare">
+                <page name="healthcare" string="Medical Care">
                   <group>
                     <group name="group_left">
                       <field name="doctor_name"/>
@@ -615,7 +615,7 @@
                   </group>
                 </page>
 
-                <page name="academics" string="Academics">
+                <page name="academics" string="Academic Affairs">
                   <group col="4">
                     <field name="program_ids" widget="many2many_tags"/>
                     <field name="school_ids" widget="many2many_tags"/>
@@ -646,7 +646,7 @@
                   </field>
 
                 </page>
-                <page name="enrollment_history" string="Enrollment history">
+                <page name="enrollment_history" string="Student Enrollment History">
                   <field name="enrollment_history_ids">
                     <tree editable="top">
                       <field name="timestamp"/>
@@ -670,9 +670,7 @@
                     </tree>
                   </field>
                 </page>
-                <page name="other" string="Other">
-
-                </page>
+                
                 <page name="demographics" string="Demographics">
                   <group>
                     <group>
