@@ -581,7 +581,7 @@
           name="Student Fees Data"
           action="tuition_plan_action"
           parent="tuition_management_menu"
-          sequence="10"
+          sequence="1"
   />
 
       <!-- Family prices -->
