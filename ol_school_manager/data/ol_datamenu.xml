@@ -129,22 +129,22 @@
   <!-- People -->
   <!-- <menuitem id="people_management" name="People management" parent="ol_school_manager.school_panel_menu" sequence="10"/> -->
 
-  <menuitem id="people_management_app" name="Master Data" sequence="10" web_icon="ol_school_manager,static/icon.png"/>
+  <menuitem id="app_people_management" name="Master Data" sequence="10" web_icon="ol_school_manager,static/icon.png"/>
 
   <menuitem
           id="menu_students_app" name="Students/ Kids"
-          parent="ol_school_manager.people_management_app"
+          parent="ol_school_manager.app_people_management"
           sequence="1"
           action="action_school_students"/>
 
   <menuitem id="menu_individuals_app" name="People/ Parents"
-            parent="ol_school_manager.people_management_app"
+            parent="ol_school_manager.app_people_management"
             sequence="10"
             action="action_school_individuals"/>
 
 
-  <menuitem id="menu_families_app" name="Guardian/ Families"
-            parent="ol_school_manager.people_management_app"
+  <menuitem id="menu_families_app" name="Guardians/ Families"
+            parent="ol_school_manager.app_people_management"
             sequence="10"
             action="action_school_families"/>
 
