@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="tuition_plan_rule" model="ir.rule">
-        <field name="name">Tuition Plan: Multi Company</field>
+        <field name="name">Student Fees Data: Multi Company</field>
         <field name="model_id" ref="model_tuition_plan"/>
         <field name="perm_read">1</field>
         <field name="perm_write">1</field>

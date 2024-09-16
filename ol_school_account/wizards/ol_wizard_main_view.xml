@@ -3,7 +3,7 @@
 
   <!-- # create.bulk.tuition.plan  -->
   <record id="create_bulk_tuition_plan_action" model="ir.actions.act_window">
-    <field name="name">create bulk tuition plan</field>
+    <field name="name">create bulk Student Fees Data</field>
     <field name="res_model">create.bulk.tuition.plan</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>
@@ -144,7 +144,7 @@
   <!-- # update.tuition.plan -->
 
   <record id="update_tuition_plan_action" model="ir.actions.act_window">
-    <field name="name">update tuition plan</field>
+    <field name="name">update Student Fees Data</field>
     <field name="res_model">update.tuition.plan</field>
     <field name="view_mode">form</field>
     <field name="target">new</field>

@@ -4,7 +4,7 @@
             <field name="name">tuition.wizard_tuition_plan.form</field>
             <field name="model">tuition.wizard_tuition_plan</field>
             <field name="arch" type="xml">
-                <form string="Wizard Tuition Plan">
+                <form string="Wizard Student Fees Data">
 
                         <group>
                             <field name="plan_ids"/>

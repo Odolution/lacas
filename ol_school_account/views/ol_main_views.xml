@@ -194,7 +194,7 @@
       <div name="button_box" position="inside">
         <button name="action_view_tuition_plans" type="object" class="oe_stat_button" icon="fa-refresh"
                 attrs="{'invisible': [('tuition_plan_count', '=', 0)]}">
-          <field name="tuition_plan_count" widget="statinfo" string="Tuition plans"/>
+          <field name="tuition_plan_count" widget="statinfo" string="Student Fees Data"/>
         </button>
       </div>
 
@@ -269,7 +269,7 @@
     <field name="name">tuition.plan.view.tree</field>
     <field name="model">tuition.plan</field>
     <field name="arch" type="xml">
-      <tree string="Tuition Plans">
+      <tree string="Student Fees Data">
         <field name="name"/>
         <field name="student_id"/>
         <field name="next_installment_date"/>
@@ -281,7 +281,7 @@
     <field name="name">tuition.plan.view.form</field>
     <field name="model">tuition.plan</field>
     <field name="arch" type="xml">
-      <form string="Tuition Plan">
+      <form string="Student Fees Data">
         <field name="active" invisible="1"/>
         <field name="id" invisible="1"/>
         <field name="posted_before" invisible="1"/>
@@ -463,7 +463,7 @@
                     <field name="sale_mail_template_id"/>
                     <field name="invoice_mail_template_id"/>
                   </group>
-                  <group string="Tuition plan">
+                  <group string="Student Fees Data">
                     <field name="plan_year" />
                   </group>
                 </group>
@@ -546,7 +546,7 @@
     <field name="name">tuition.plan.view.search</field>
     <field name="model">tuition.plan</field>
     <field name="arch" type="xml">
-      <search string="Search Tuition Plans">
+      <search string="Search Student Fees Data">
         <field name="name"/>
         <separator/>
         <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
@@ -561,7 +561,7 @@
   </record>
 
   <record id="tuition_plan_action" model="ir.actions.act_window">
-    <field name="name">Tuition Plans</field>
+    <field name="name">Student Fees Data</field>
     <field name="res_model">tuition.plan</field>
     <field name="view_mode">kanban,tree,form</field>
     <field name="target">current</field>
@@ -581,7 +581,7 @@
     <field name="name">tuition.plan.family.prices.view.tree</field>
     <field name="model">tuition.plan.family.prices</field>
     <field name="arch" type="xml">
-      <tree string="Tuition Plans" create="0" edit="0" >
+      <tree string="Student Fees Data" create="0" edit="0" >
         <field name="family_id" widget="many2one"/>
         <field name="price" />
         <field name="discount" string="Disc.%" groups="product.group_discount_per_so_line"/>
@@ -607,7 +607,7 @@
     <field name="arch" type="xml">
       <form string="Tuition template">
         <header>
-          <button type="object" name="button_new_tuition_plan" class="btn oe_highlight" string="New tuition plan" states='posted'/>
+          <button type="object" name="button_new_tuition_plan" class="btn oe_highlight" string="New Student Fees Data" states='posted'/>
           <button type="object" name="send_for_approval" class="btn oe_highlight" string="Ask Approval" states='draft'/>
           <button type="object" name="reset" class="btn btn-secondary" string="Reset" states='posted,in_approval'/>
           <button type="object" name="confirm" class="btn oe_highlight" string="Confirm" states='in_approval'/>
@@ -617,7 +617,7 @@
           <div class="oe_button_box" name="button_box">
             <button name="action_view_tuition_plans" type="object" class="oe_stat_button" icon="fa-refresh"
                     attrs="{'invisible': [('tuition_plan_count', '=', 0)]}">
-              <field name="tuition_plan_count" widget="statinfo" string="Tuition plans"/>
+              <field name="tuition_plan_count" widget="statinfo" string="Student Fees Data"/>
             </button>
           </div>
           <field name="program_id" />
@@ -775,7 +775,7 @@
           <t t-name="TuitionTemplateBody" id="school.TuitionTemplateBody">
             <div class="col-12 col-sm-5 mb-3 mb-sm-0 o_kanban_primary_left">
               <button type="object" class="mb-1 btn btn-primary" name="button_new_tuition_plan">
-                <span>New tuition plan</span>
+                <span>New Student Fees Data</span>
               </button>
               <a type="edit" class="d-inline-block btn btn-primary">
                 <span>Configuration</span>
