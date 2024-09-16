@@ -127,7 +127,9 @@
             parent="ol_school_manager.school_panel_menu"/>
 
   <!-- People -->
-  <menuitem id="people_management" name="People management" parent="ol_school_manager.school_panel_menu" sequence="10"/>
+  <!-- <menuitem id="people_management" name="People management" parent="ol_school_manager.school_panel_menu" sequence="10"/> -->
+
+  <menuitem id="people_management_app" name="Master Data" sequence="10"/>
   <menuitem
           id="menu_students" name="Students"
           parent="ol_school_manager.people_management"
