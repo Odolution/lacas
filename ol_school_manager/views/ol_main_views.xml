@@ -551,147 +551,149 @@
           </group>
           <notebook name="main_notebook">
             <page name="setup" string="SETUP">
-              <page name="families" string="Families">
-                <field name="family_ids" context="{'default_student_ids': [id]}">
-                  <kanban>
-                    <field name="name"/>
-                    <templates>
-                      <t t-name="kanban-box">
-                        <div class="o_kanban_card oe_kanban_global_click p-4 o_ol_school_manager_individual_image d-flex">
-                          <field name="avatar_128" widget="image"
-                                options="{'zoom_delay': 1000, 'preventClicks': false}"/>
-                          <div class="oe_kanban_content pl-3 pr-3">
-                            <strong><field name="name"/></strong>
+              <notebook name="nested_notebook">
+                <page name="families" string="Families">
+                  <field name="family_ids" context="{'default_student_ids': [id]}">
+                    <kanban>
+                      <field name="name"/>
+                      <templates>
+                        <t t-name="kanban-box">
+                          <div class="o_kanban_card oe_kanban_global_click p-4 o_ol_school_manager_individual_image d-flex">
+                            <field name="avatar_128" widget="image"
+                                  options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                            <div class="oe_kanban_content pl-3 pr-3">
+                              <strong><field name="name"/></strong>
+                            </div>
+                            <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                    class="btn btn-primary"
+                                    title="open" type="object" name="open_family">
+                              <i class="fa fa-share-square-o"/>
+                            </button>
                           </div>
-                          <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
-                                  class="btn btn-primary"
-                                  title="open" type="object" name="open_family">
-                            <i class="fa fa-share-square-o"/>
-                          </button>
-                        </div>
-                      </t>
-                    </templates>
-                  </kanban>
-                </field>
-              </page>
+                        </t>
+                      </templates>
+                    </kanban>
+                  </field>
+                </page>
 
-              <page name="relationships" string="Relationships">
-                <field name="relationship_ids"
-                      add-label="Add a Relationship" mode="tree"
-                      context="{'default_individual_id': id}">
-                  <tree editable="bottom">
-                    <field name="individual_id" />
-                    <field name="relationship_type_id"/>
-                    <field name="custody" optional="show"/>
-                    <field name="correspondence" optional="show"/>
-                    <field name="grade_related" optional="show"/>
-                    <field name="family_portal" optional="show"/>
-                    <field name="is_emergency_contact" optional="show"/>
-                  </tree>
-                </field>
-              </page>
+                <page name="relationships" string="Relationships">
+                  <field name="relationship_ids"
+                        add-label="Add a Relationship" mode="tree"
+                        context="{'default_individual_id': id}">
+                    <tree editable="bottom">
+                      <field name="individual_id" />
+                      <field name="relationship_type_id"/>
+                      <field name="custody" optional="show"/>
+                      <field name="correspondence" optional="show"/>
+                      <field name="grade_related" optional="show"/>
+                      <field name="family_portal" optional="show"/>
+                      <field name="is_emergency_contact" optional="show"/>
+                    </tree>
+                  </field>
+                </page>
 
-              <page name="healthcare" string="Healthcare">
-                <group>
-                  <group name="group_left">
-                    <field name="doctor_name"/>
-                    <field name="doctor_phone"/>
-                    <field name="doctor_address"/>
+                <page name="healthcare" string="Healthcare">
+                  <group>
+                    <group name="group_left">
+                      <field name="doctor_name"/>
+                      <field name="doctor_phone"/>
+                      <field name="doctor_address"/>
+                      <separator colspan="2"/>
+                      <field name="permission_to_treat"/>
+                      <field name="blood_type"/>
+                    </group>
+                    <group name="group_right">
+                      <field name="hospital"/>
+                      <field name="hospital_address"/>
+                    </group>
                     <separator colspan="2"/>
-                    <field name="permission_to_treat"/>
-                    <field name="blood_type"/>
+                    <group colspan="2">
+                      <field name="conditions_ids"/>
+                      <field name="allergies_ids"/>
+                      <field name="medications_ids"/>
+                    </group>
                   </group>
-                  <group name="group_right">
-                    <field name="hospital"/>
-                    <field name="hospital_address"/>
+                </page>
+
+                <page name="academics" string="Academics">
+                  <group col="4">
+                    <field name="program_ids" widget="many2many_tags"/>
+                    <field name="school_ids" widget="many2many_tags"/>
+                    <field name="grade_level_ids" widget="many2many_tags"/>
+                    <field name="district_ids" widget="many2many_tags"/>
+                    <field name="enrollment_status_ids" widget="many2many_tags"/>
                   </group>
-                  <separator colspan="2"/>
-                  <group colspan="2">
-                    <field name="conditions_ids"/>
-                    <field name="allergies_ids"/>
-                    <field name="medications_ids"/>
-                  </group>
-                </group>
-              </page>
 
-              <page name="academics" string="Academics">
-                <group col="4">
-                  <field name="program_ids" widget="many2many_tags"/>
-                  <field name="school_ids" widget="many2many_tags"/>
-                  <field name="grade_level_ids" widget="many2many_tags"/>
-                  <field name="district_ids" widget="many2many_tags"/>
-                  <field name="enrollment_status_ids" widget="many2many_tags"/>
-                </group>
-
-                <field name="enrollment_state_ids" context="{'default_student_id': id}">
-                  <tree editable="bottom">
-                    <field name="program_id"/>
-                    <field name="grade_level_id"/>
-                    <field name="enrollment_status_id"/>
-                    <field name="enrollment_sub_status_id"
-                          attrs="{'readonly': [('enrollment_status_id', '=', False)]}"/>
+                  <field name="enrollment_state_ids" context="{'default_student_id': id}">
+                    <tree editable="bottom">
+                      <field name="program_id"/>
+                      <field name="grade_level_id"/>
+                      <field name="enrollment_status_id"/>
+                      <field name="enrollment_sub_status_id"
+                            attrs="{'readonly': [('enrollment_status_id', '=', False)]}"/>
 
 
-                    <field name="next_program_id"/>
-                    <field name="next_grade_level_id"/>
-                    <field name="next_enrollment_status_id"/>
-                    <field name="next_enrollment_sub_status_id"
-                          attrs="{'readonly': [('next_enrollment_status_id', '=', False)]}"/>
+                      <field name="next_program_id"/>
+                      <field name="next_grade_level_id"/>
+                      <field name="next_enrollment_status_id"/>
+                      <field name="next_enrollment_sub_status_id"
+                            attrs="{'readonly': [('next_enrollment_status_id', '=', False)]}"/>
 
-                    <field name="enrolled_date"/>
-                    <field name="graduation_date"/>
-                    <field name="withdraw_date"/>
-                  </tree>
-                </field>
+                      <field name="enrolled_date"/>
+                      <field name="graduation_date"/>
+                      <field name="withdraw_date"/>
+                    </tree>
+                  </field>
 
-              </page>
-              <page name="enrollment_history" string="Enrollment history">
-                <field name="enrollment_history_ids">
-                  <tree editable="top">
-                    <field name="timestamp"/>
-                    <field name="note"/>
+                </page>
+                <page name="enrollment_history" string="Enrollment history">
+                  <field name="enrollment_history_ids">
+                    <tree editable="top">
+                      <field name="timestamp"/>
+                      <field name="note"/>
 
-                    <field name="program_id"/>
-                    <field name="grade_level_id"/>
-                    <field name="enrollment_status_id"/>
-                    <field name="enrollment_sub_status_id"
-                          attrs="{'readonly': [('enrollment_status_id', '=', False)]}"/>
+                      <field name="program_id"/>
+                      <field name="grade_level_id"/>
+                      <field name="enrollment_status_id"/>
+                      <field name="enrollment_sub_status_id"
+                            attrs="{'readonly': [('enrollment_status_id', '=', False)]}"/>
 
-                    <field name="next_program_id"/>
-                    <field name="next_grade_level_id"/>
-                    <field name="next_enrollment_status_id"/>
-                    <field name="next_enrollment_sub_status_id"
-                          attrs="{'readonly': [('next_enrollment_status_id', '=', False)]}"/>
+                      <field name="next_program_id"/>
+                      <field name="next_grade_level_id"/>
+                      <field name="next_enrollment_status_id"/>
+                      <field name="next_enrollment_sub_status_id"
+                            attrs="{'readonly': [('next_enrollment_status_id', '=', False)]}"/>
 
-                    <field name="enrolled_date"/>
-                    <field name="graduation_date"/>
-                    <field name="withdraw_date"/>
-                  </tree>
-                </field>
-              </page>
-              <page name="other" string="Other">
+                      <field name="enrolled_date"/>
+                      <field name="graduation_date"/>
+                      <field name="withdraw_date"/>
+                    </tree>
+                  </field>
+                </page>
+                <page name="other" string="Other">
 
-              </page>
-              <page name="demographics" string="Demographics">
-                <group>
+                </page>
+                <page name="demographics" string="Demographics">
                   <group>
-                    <field name="vat"/>
-                    <field name="school_udid"/>
-                    <field name="email" widget="email"/>
-                    <field name="email2" widget="email"/>
-                    <field name="phone" widget="phone"/>
-                    <field name="mobile" widget="phone"/>
+                    <group>
+                      <field name="vat"/>
+                      <field name="school_udid"/>
+                      <field name="email" widget="email"/>
+                      <field name="email2" widget="email"/>
+                      <field name="phone" widget="phone"/>
+                      <field name="mobile" widget="phone"/>
+                    </group>
+                    <group>
+                      <field name="date_of_birth"/>
+                      <field name="citizenship"/>
+                      <field name="ethnicity"/>
+                      <field name="race"/>
+                      <field name="gender"/>
+                    </group>
                   </group>
-                  <group>
-                    <field name="date_of_birth"/>
-                    <field name="citizenship"/>
-                    <field name="ethnicity"/>
-                    <field name="race"/>
-                    <field name="gender"/>
-                  </group>
-                </group>
 
-              </page>
+                </page>
+              </notebook>
             </page>
           </notebook>
         </sheet>
