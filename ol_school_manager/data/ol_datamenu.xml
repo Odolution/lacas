@@ -170,12 +170,13 @@
   /> -->
 
   <menuitem
-          id="school_schools_menuitem_test"
+          id="school_campus_menuitem"
           parent="ol_school_account.school_finance_management_menu"
           name="Campus"
           sequence="20"
           action="ol_school_manager.school_schools_action"
   />
+
 
   <menuitem
           id="school_programs_menuitem"
