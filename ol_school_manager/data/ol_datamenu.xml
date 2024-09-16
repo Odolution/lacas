@@ -132,18 +132,18 @@
   <menuitem id="people_management_app" name="Master Data" sequence="10"/>
 
   <menuitem
-          id="menu_students" name="Students"
+          id="menu_students_app" name="Students/ Kids"
           parent="ol_school_manager.people_management_app"
           sequence="1"
           action="action_school_students"/>
 
-  <menuitem id="menu_individuals" name="Individuals"
+  <menuitem id="menu_individuals_app" name="People/ Parents"
             parent="ol_school_manager.people_management_app"
             sequence="10"
             action="action_school_individuals"/>
 
 
-  <menuitem id="menu_families" name="Families"
+  <menuitem id="menu_families_app" name="Guardian/ Families"
             parent="ol_school_manager.people_management_app"
             sequence="10"
             action="action_school_families"/>
