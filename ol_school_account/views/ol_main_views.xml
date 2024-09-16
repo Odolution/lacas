@@ -432,7 +432,7 @@
                     <div class="oe_clear"/>
                 </group>
               </page>
-              <page name="installments" string="Installments">
+              <page name="installments" string="Applicable Period">
                 <field name="installment_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
                   <tree>
                     <field name="sequence" widget="handle"/>
