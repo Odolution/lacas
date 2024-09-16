@@ -671,7 +671,7 @@
                   </field>
                 </page>
                 
-                <page name="demographics" string="Demographics">
+                <page name="demographics" string="Demographics Information">
                   <group>
                     <group>
                       <field name="vat"/>
