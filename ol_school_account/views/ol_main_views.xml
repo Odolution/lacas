@@ -568,9 +568,17 @@
     <field name="context">{}</field>
   </record>
 
-  <menuitem
+  <!-- <menuitem
           id="tuition_plan_menu"
           name="Tuition Plans"
+          action="tuition_plan_action"
+          parent="tuition_management_menu"
+          sequence="10"
+  /> -->
+
+  <menuitem
+          id="tuition_plan_menu_app"
+          name="Student Fees Data"
           action="tuition_plan_action"
           parent="tuition_management_menu"
           sequence="10"
