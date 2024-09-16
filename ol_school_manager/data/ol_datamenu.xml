@@ -163,7 +163,7 @@
 
   <menuitem
           id="school_schools_menuitem"
-          parent="ol_school_manager.school_structure_menu"
+          parent="ol_school_accountt.tuition_management_menu"
           name="School"
           sequence="20"
           action="ol_school_manager.school_schools_action"
