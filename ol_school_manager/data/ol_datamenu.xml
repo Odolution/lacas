@@ -95,6 +95,12 @@
     groups="ol_school_manager.group_school_view_only"
     />
 
+  <!-- process start  -->
+  <menuitem id="school_master_menu" name="School Master Data"
+    groups="ol_school_manager.group_school_view_only"
+    />
+  <!-- process end  -->
+
   <!-- Configuration -->
   <menuitem id="school_configuration_menu" name="Configuration" parent="ol_school_manager.school_panel_menu" sequence="200"/>
 
@@ -130,18 +136,18 @@
   <menuitem id="people_management" name="People management" parent="ol_school_manager.school_panel_menu" sequence="10"/>
   <menuitem
           id="menu_students" name="Students"
-          parent="ol_school_manager.people_management"
+          parent="ol_school_manager.school_master_menu"
           sequence="1"
           action="action_school_students"/>
 
   <menuitem id="menu_individuals" name="Individuals"
-            parent="ol_school_manager.people_management"
+            parent="ol_school_manager.school_master_menu"
             sequence="10"
             action="action_school_individuals"/>
 
 
   <menuitem id="menu_families" name="Families"
-            parent="ol_school_manager.people_management"
+            parent="ol_school_manager.school_master_menu"
             sequence="10"
             action="action_school_families"/>
 
@@ -163,7 +169,7 @@
 
   <menuitem
           id="school_schools_menuitem"
-          parent="ol_school_accountt.tuition_management_menu"
+          parent="ol_school_account.tuition_management_menu"
           name="School"
           sequence="20"
           action="ol_school_manager.school_schools_action"

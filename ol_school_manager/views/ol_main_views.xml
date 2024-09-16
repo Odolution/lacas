@@ -98,7 +98,7 @@
     <record model="ir.actions.act_window" id="action_school_families">
         <field name="name">Families</field>
         <field name="res_model">school.family</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">tree,kanban,form</field>
     </record>
 
   <record id="school_family_view_form" model="ir.ui.view">
@@ -268,7 +268,7 @@
     <record model="ir.actions.act_window" id="action_school_individuals">
         <field name="name">Individuals</field>
         <field name="res_model">school.family.individual</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">tree,kanban,form</field>
         <field name="context">{'lineal_name': True, 'search_default_non_student': 1}</field>
     </record>
 
@@ -491,7 +491,7 @@
     <record model="ir.actions.act_window" id="action_school_students">
         <field name="name">Students</field>
         <field name="res_model">school.student</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">tree,kanban,form</field>
         <field name="context">{
         'lineal_name': True
         }</field>

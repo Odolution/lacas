@@ -92,6 +92,7 @@
             <xpath expr="//div[@class='o_kanban_record_title'][1]/field[1]" position="after">
                 <br/>
                 <field name="olf_id" readonly="1"/>
+                <field name="enrollment_status_ids" optional="show" widget="many2many_tags"/>
             </xpath>
         </field>
     </record>
