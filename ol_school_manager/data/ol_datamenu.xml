@@ -170,7 +170,7 @@
   <menuitem
           id="school_schools_menuitem"
           parent="ol_school_account.tuition_management_menu"
-          name="School"
+          name="CAMPUS"
           sequence="20"
           action="ol_school_manager.school_schools_action"
   />
