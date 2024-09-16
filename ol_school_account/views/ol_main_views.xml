@@ -171,20 +171,21 @@
     <field name="model">school.student</field>
     <field name="inherit_id" ref="ol_school_manager.school_student_view_form" />
     <field name="arch" type="xml">
-      <notebook position="inside">
+      <xpath expr="//notebook[@name='nested_notebook']" position="inside">
+
         <page name="finance" string="Finance">
-          <group>
-            <field name="financial_responsibility_ids">
-              <tree editable="bottom">
-                <field name="student_family_ids" invisible="1"/>
-                <field name="family_id" domain="[('id', 'in', student_family_ids)]" />
-                <field name="product_category_id" />
-                <field name="percentage" widget="percentage"/>
-              </tree>
-            </field>
-          </group>
-        </page>
-      </notebook>
+            <group>
+              <field name="financial_responsibility_ids">
+                <tree editable="bottom">
+                  <field name="student_family_ids" invisible="1"/>
+                  <field name="family_id" domain="[('id', 'in', student_family_ids)]" />
+                  <field name="product_category_id" />
+                  <field name="percentage" widget="percentage"/>
+                </tree>
+              </field>
+            </group>
+          </page>
+      </xpath>
 
       <xpath expr="//page[@name='relationships']/field[@name='relationship_ids']/tree" position="inside">
         <field name="invoice_recipient" optional="show"/>
