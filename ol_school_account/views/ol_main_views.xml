@@ -568,14 +568,6 @@
     <field name="context">{}</field>
   </record>
 
-  <!-- <menuitem
-          id="tuition_plan_menu"
-          name="Tuition Plans"
-          action="tuition_plan_action"
-          parent="tuition_management_menu"
-          sequence="10"
-  /> -->
-
   <menuitem
           id="tuition_plan_menu_app"
           name="Student Fees Data"
@@ -603,7 +595,7 @@
     <field name="name">tuition.template.view.tree</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <tree string="Tuition templates">
+      <tree string="Fee Structure">
         <field name="name"/>
       </tree>
     </field>
@@ -613,7 +605,7 @@
     <field name="name">tuition.template.view.form</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <form string="Tuition template">
+      <form string="Fee Structure">
         <header>
           <button type="object" name="button_new_tuition_plan" class="btn oe_highlight" string="New Student Fees Data" states='posted'/>
           <button type="object" name="send_for_approval" class="btn oe_highlight" string="Ask Approval" states='draft'/>
@@ -749,7 +741,7 @@
     <field name="name">tuition.template.view.kanban</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <kanban string="Tuition templates" class="oe_background_grey o_kanban_dashboard o_school_kanban_tuition_template">
+      <kanban string="Fee Structure" class="oe_background_grey o_kanban_dashboard o_school_kanban_tuition_template">
         <templates>
           <t t-name="kanban-box">
             <div>
@@ -808,7 +800,7 @@
     <field name="name">tuition.template.view.search</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <search string="Search Tuition templates">
+      <search string="Search Fee Structure">
         <field name="name"/>
         <separator/>
         <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
@@ -817,7 +809,7 @@
   </record>
 
   <record id="tuition_template_action" model="ir.actions.act_window">
-    <field name="name">Tuition Templates</field>
+    <field name="name">Fee Structure</field>
     <field name="res_model">tuition.template</field>
     <field name="view_mode">kanban,tree,form</field>
     <field name="target">current</field>
@@ -825,8 +817,8 @@
   </record>
 
   <menuitem
-          id="tuition_template_menu"
-          name="Tuition Templates"
+          id="tuition_template_menu_app"
+          name="Fee Structure"
           action="tuition_template_action"
           parent="tuition_management_menu"
           sequence="10"
