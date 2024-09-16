@@ -161,18 +161,18 @@
           action="ol_school_manager.school_districts_action"
   />
 
-  <menuitem
+  <!-- <menuitem
           id="school_schools_menuitem"
           parent="ol_school_manager.school_structure_menu"
-          name="abc"
+          name="School"
           sequence="20"
           action="ol_school_manager.school_schools_action"
-  />
+  /> -->
 
   <menuitem
           id="school_schools_menuitem_test"
-          parent="ol_school_manager.people_management"
-          name="TEST"
+          parent="	ol_school_account.school_finance_management_menu"
+          name="Campuss"
           sequence="20"
           action="ol_school_manager.school_schools_action"
   />
