@@ -346,7 +346,7 @@
             <group>
               <group name="left_group">
                 <field name="student_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-                <field name="tuition_template_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="tuition_template_id" attrs="{'readonly': [('state', '!=', 'draft')]}" string="Fees Structure"/>
                 <field name="next_installment_id"/>
                 <field name="student_grade_level_ids" widget="many2many_tags"/>
                 <!-- process start  -->
