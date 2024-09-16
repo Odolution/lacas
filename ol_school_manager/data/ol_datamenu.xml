@@ -170,6 +170,14 @@
   />
 
   <menuitem
+          id="school_schools_menuitem_test"
+          parent="ol_school_manager.people_management"
+          name="TEST"
+          sequence="20"
+          action="ol_school_manager.school_schools_action"
+  />
+
+  <menuitem
           id="school_programs_menuitem"
           parent="ol_school_manager.school_structure_menu"
           name="Program"
