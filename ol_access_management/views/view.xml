@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Menu -->
+    <menuitem id="menu_access_rights_root" name="Access Rights" sequence="10"/>
+
+    <!-- Action -->
+    <record id="action_access_rights" model="ir.actions.act_window">
+        <field name="name">Access Rights</field>
+        <field name="res_model">access.rights</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_access_rights_tree"/>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_access_rights" name="Access Rights" parent="menu_access_rights_root"
+              action="action_access_rights" sequence="10"/>
+
+    <!-- List View -->
+    <record id="view_access_rights_tree" model="ir.ui.view">
+        <field name="name">access.rights.tree</field>
+        <field name="model">access.rights</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="branch_id"/>
+                <field name="user_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_access_rights_form" model="ir.ui.view">
+        <field name="name">access.rights.form</field>
+        <field name="model">access.rights</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="branch_id"/>
+                        <field name="user_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
