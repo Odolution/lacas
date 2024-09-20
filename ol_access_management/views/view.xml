@@ -6,9 +6,8 @@
     <!-- Action -->
     <record id="action_access_rights" model="ir.actions.act_window">
         <field name="name">Access Rights</field>
-        <field name="res_model">access.rights</field>
+        <field name="res_model">ol.access.rights</field>
         <field name="view_mode">tree,form</field>
-        <!-- Reference the correct tree view ID -->
         <field name="view_id" ref="view_access_rights_tree"/>
     </record>
 
@@ -18,8 +17,8 @@
 
     <!-- List View -->
     <record id="view_access_rights_tree" model="ir.ui.view">
-        <field name="name">access.rights.tree</field>
-        <field name="model">access.rights</field>
+        <field name="name">ol.access.rights.tree</field>
+        <field name="model">ol.access.rights</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
                 <field name="branch_id"/>
@@ -30,8 +29,8 @@
 
     <!-- Form View -->
     <record id="view_access_rights_form" model="ir.ui.view">
-        <field name="name">access.rights.form</field>
-        <field name="model">access.rights</field>
+        <field name="name">ol.access.rights.form</field>
+        <field name="model">ol.access.rights</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
@@ -42,3 +41,5 @@
                 </sheet>
             </form>
         </field>
+    </record>
+</odoo>
