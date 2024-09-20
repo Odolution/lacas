@@ -8,13 +8,15 @@ class ChallanPrinting(models.Model):
     _description = 'Challan Printing'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    company_id = fields.Many2one('res.company', readonly=True, default=lambda self: self.env.company.id)
+
     name = fields.Char(string='Name', compute='_compute_name', store=True)
     from_date = fields.Date(string='From Date')
     to_date = fields.Date(string='To Date')
 
     branch_ids = fields.Many2many('school.school', string='Branch')
+    journal_id = fields.Many2one('account.journal', string='Journal', domain="[('company_id', '=', company_id), ('type', '=', 'sale')]")
     class_ids = fields.Many2many('school.grade.level', string='Class')
-    journal_id = fields.Many2one('account.journal', string='Journal')
     enrollment_status_ids = fields.Many2many('school.enrollment.status', string='Enrollment Status')
 
 
@@ -25,6 +27,13 @@ class ChallanPrinting(models.Model):
             if rec.from_date: name.append(str(rec.from_date))
             if rec.to_date: name.append(str(rec.to_date))
             rec.name = ' - '.join(name)
+
+
+    @api.constrains('from_date', 'to_date')
+    def _check_dates(self):
+        for rec in self:
+            if rec.to_date and rec.from_date and rec.to_date < rec.from_date:
+                raise ValidationError('The "To Date" cannot be earlier than the "From Date".')
 
 
     def _get_sorted_bill_ids(self, unordered_bills):
