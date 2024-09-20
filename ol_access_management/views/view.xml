@@ -8,6 +8,7 @@
         <field name="name">Access Rights</field>
         <field name="res_model">access.rights</field>
         <field name="view_mode">tree,form</field>
+        <!-- Reference the correct tree view ID -->
         <field name="view_id" ref="view_access_rights_tree"/>
     </record>
 
@@ -41,5 +42,3 @@
                 </sheet>
             </form>
         </field>
-    </record>
-</odoo>
