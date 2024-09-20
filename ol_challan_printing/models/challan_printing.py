@@ -3,6 +3,9 @@ from odoo.exceptions import UserError, ValidationError
 import datetime, base64
 import threading
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class ChallanPrinting(models.Model):
     _name = 'challan.printing'
     _description = 'Challan Printing'
@@ -90,6 +93,7 @@ class ChallanPrinting(models.Model):
         ]
         # bills = self.env['account.move'].browse([380071,380067,380061,380056,380050,380036,380031,380021,380010,379989,379986,379984,379978,379970,379969])
         bills = self.env['account.move'].search(domain)
+        _logger.warning(bills)
         sorted_bill_ids = self._get_sorted_bill_ids(bills)
 
         # render pdf data and encode in bytes
