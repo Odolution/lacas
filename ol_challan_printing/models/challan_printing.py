@@ -16,4 +16,4 @@ class ChallanPrinting(models.Model):
 
 
     def generate_pdf_challan(self):
-        
+        pass
