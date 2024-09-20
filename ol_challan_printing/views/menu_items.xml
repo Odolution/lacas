@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="menu_challan_printing_root"
+        name="Challan Printing"
+        sequence="0"/>
+
+    <menuitem
+        id="menu_challan_printing"
+        name="Challan Printing"
+        action="action_challan_printing"
+        parent="menu_challan_printing_root"
+        sequence="0"/>
+
+</odoo>
