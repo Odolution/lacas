@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_school_student_admission_challan_form" model="ir.ui.view">
+            <field name="name">school.student.view.form.inherit.admission.challan</field>
+            <field name="model">school.student</field>
+            <field name="inherit_id" ref="ol_school_manager.school_student_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(action_create_admission_challan_wizard)d" string="Create Admission Challan" type="action"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
