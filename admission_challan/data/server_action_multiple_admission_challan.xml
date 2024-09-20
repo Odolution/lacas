@@ -1,12 +1,17 @@
 <odoo>
     <record id="action_create_admission_challan" model="ir.actions.server">
         <field name="name">Create Admission Challan</field>
-        <field name="model_id" ref="product.model_product_template"/>
-        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="model_id" ref="ol_school_manager.model_school_student"/>
+        <field name="binding_model_id" ref="ol_school_manager.model_school_student"/>
         <field name="state">code</field>
         <field name="code">
-            for rec in records:
-                rec.create_supplierinfo_records()
+            action = {
+                'type' : 'ir.actions.act_window',
+                'res_model': 'admission.challan.wizard',
+                'target': 'new',
+                'views' [(env.ref('').id, 'form')]
+                'context': {'default_student_ids': [(0, 0, record.ids)]}
+            }
         </field>
     </record>
 </odoo>

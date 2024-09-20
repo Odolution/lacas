@@ -5,7 +5,7 @@
     "sequence": -100,
     "summary": "Create admission challan.",
     "description": "",
-    "depends": ["base", "ol_school_account"],
+    "depends": ["base", "ol_school_account", "ol_school_manager"],
     "data": [
             # "security/ir.model.access.csv",
             # "data/server_action_multiple_admission_challan.xml",
