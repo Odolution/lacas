@@ -12,6 +12,7 @@
             # "views/admission_challan_view.xml" ,  
             # "views/tuition_template_view.xml" ,  
             # "wizard/create_admission_challan.xml",
+            
     ],
     "demo": [],
     "auto_install": False,
