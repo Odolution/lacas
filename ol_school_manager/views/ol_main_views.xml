@@ -696,14 +696,14 @@
 
                 <page name="concession" string="Concession">
 
-                  <field name="concession_line_ids">
+                  <!-- <field name="concession_line_ids">
                       <tree editable="top">
                         <field name="discount_name"/>
-                        <field name="discount_product"/>
+                        <field name="discount_product"/> -->
                         <!-- <field name="month_ids" widget="many2many_tags" optional="show"/> -->
                         
-                      </tree>
-                  </field>
+                      <!-- </tree>
+                  </field> -->
 
                 </page>
               </notebook>

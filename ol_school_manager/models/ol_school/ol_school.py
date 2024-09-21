@@ -974,7 +974,7 @@ class SchoolStudent(models.Model):
 
     # discount tab
 
-    concession_line_ids     =   fields.One2many('consession.line', 'student_id', string="Concession Line")
+    # concession_line_ids     =   fields.One2many('consession.line', 'student_id', string="Concession Line")
 
 
 
