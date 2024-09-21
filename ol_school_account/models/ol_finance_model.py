@@ -1215,7 +1215,7 @@ class TuitionPlan(models.Model):
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
             
             plan.write({'line_ids': line_concession_list})
-            raise UserError(str(plan.line_ids))
+            # raise UserError(str(plan.line_ids))
             
     #logic end
 
