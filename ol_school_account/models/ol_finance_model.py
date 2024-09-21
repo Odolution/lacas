@@ -487,7 +487,7 @@ class ConcessionLine(models.Model):
                 # 'discount_charges'  : True,
 
             })
-        raise UserError(str(values))
+        # raise UserError(str(values))
         return values
     #logic end
 
