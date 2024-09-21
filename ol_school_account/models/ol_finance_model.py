@@ -469,7 +469,7 @@ class ConcessionLine(models.Model):
 
         for line in self:
 
-            raise UserError(str(installment_obj))
+            raise UserError([j.ids[0] for j in installment_obj])
             
             values.append({
                 
