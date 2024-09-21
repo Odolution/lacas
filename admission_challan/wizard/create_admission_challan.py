@@ -16,7 +16,8 @@ class AdmissionChallanWizard(models.TransientModel):
             student_ids = self.env.context.get('student_ids')
             if student_ids:
                 for sid in student_ids:                    
-                    self.env['tuition.plan'].create({
+                    context = {**self._context, 'take_tuition_template_values': True, 'default_tuition_template_id':  self.tuition_template_id.id}
+                    self.env['tuition.plan'].with_context(context).create({
                     'student_id': sid,
                     'tuition_template_id': self.template_id.id,
                 })
