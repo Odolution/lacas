@@ -15,20 +15,20 @@
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div class="o_kanban_record_title">
+                        <div class="oe_kanban_global_click" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <div class="o_kanban_record_title" style="margin-top: 10px; margin-bottom: 10px;">
                                 <strong>
                                     <field name="from_date"/>
                                     -
                                     <field name="to_date"/>
                                 </strong>
                             </div>
-                            <div class="o_kanban_record_bottom">
-                                <field name="branch_ids"/>
-                                <field name="class_ids"/>
-                                <field name="journal_id"/>
-                                <field name="enrollment_status_ids"/>
-                            </div>
+                            <!--<div class="o_kanban_record_bottom">-->
+                            <!--    <field name="branch_ids"/>-->
+                            <!--    <field name="class_ids"/>-->
+                            <!--    <field name="journal_id"/>-->
+                            <!--    <field name="enrollment_status_ids"/>-->
+                            <!--</div>-->
                         </div>
                     </t>
                 </templates>
@@ -41,20 +41,32 @@
         <field name="model">challan.printing</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="generate_challan_pdf" type="object" string="Generate Fee Challan" class="oe_highlight" />
+                </header>
                 <sheet>
+                    <field name="name" invisible="1"/>
                     <group>
-                        <group>
+                        <group name="date_filter">
                             <field name="from_date"/>
                             <field name="to_date"/>
                         </group>
-                        <group>
-                            <field name="branch_ids" widget="many2many_tags"/>
-                            <field name="class_ids" widget="many2many_tags"/>
-                            <field name="journal_id" widget="many2many_tags"/>
-                            <field name="enrollment_status_ids" widget="many2many_tags"/>
-                        </group> 
+                        <group name="filter_journal">
+                            <field name="company_id" invisible="1"/>
+                            <field name="journal_id"/>
+                        </group>
+                    </group>
+                    <group name="filter_school_bills">
+                        <field name="branch_ids" widget="many2many_tags"/>
+                        <field name="class_ids" widget="many2many_tags"/>
+                        <field name="enrollment_status_ids" widget="many2many_tags"/>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>

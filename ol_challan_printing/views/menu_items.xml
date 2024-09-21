@@ -4,6 +4,7 @@
     <menuitem
         id="menu_challan_printing_root"
         name="Challan Printing"
+        web_icon="ol_challan_printing,static/description/icon.png"
         sequence="0"/>
 
     <menuitem
