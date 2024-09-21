@@ -11,7 +11,7 @@
         'hr_skills',
         'calendar',
         # 'ol_school_manager',
-        # 'ol_school_account',
+        'ol_school_account',
         ],
 
     'data': [
