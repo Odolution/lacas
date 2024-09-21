@@ -475,13 +475,11 @@ class ConcessionLine(models.Model):
 
         for line in self:
             lst = []
-            # raise UserError(str(installment_obj[0].id))
+            raise UserError([line.discount_product.id,line.discount_product.name])
             for j in installment_obj:
                 # raise UserError(j.ids)
                 lst.append(j.id)
-                
-            # raise UserError(lst)
-            
+
             values.append({
                 
                 'product_id'        : line.discount_product.id,
