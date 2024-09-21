@@ -324,13 +324,13 @@
         
         <header>
           <button name="odl_first_approval" type="object"
-                  string="Submit for first Approval" attrs="{'invisible': [('odl_state', '!=', 'draft'),('discount_ids', '!=', False)]}"/>
+                  string="Submit for first Approval" attrs="{'invisible': [('odl_state', '!=', 'draft'),]}"/>
 
           <button name="odl_second_approval" type="object"
-                  string="Submit for second Approval" attrs="{'invisible': [('odl_state', '!=', 'first'),('discount_ids', '!=', False)]}"/>
+                  string="Submit for second Approval" attrs="{'invisible': [('odl_state', '!=', 'first')]}"/>
           
           <button name="odl_confirm" type="object"
-                  string="Confirm" attrs="{'invisible': [('odl_state', '!=', 'second'),('discount_ids', '!=', False)]}"/>
+                  string="Confirm" attrs="{'invisible': [('odl_state', '!=', 'second')]}"/>
 
           <field name="odl_state" widget="statusbar"/>
         </header>
@@ -366,7 +366,7 @@
                 <field name="next_installment_id"/>
                 <field name="student_grade_level_ids" widget="many2many_tags"/>
                 <!-- process start  -->
-                <field name="discount_ids" widget="many2many_tags"/>
+                <!-- <field name="discount_ids" widget="many2many_tags"/> -->
                 <!-- process end  -->
               </group>
               <group name="right_group">

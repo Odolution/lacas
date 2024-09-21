@@ -1115,7 +1115,7 @@ class TuitionPlan(models.Model):
 
     # process start
 
-    discount_ids = fields.Many2many('ol.discount.charges', string="Discount Charges", store=True) 
+    # discount_ids = fields.Many2many('ol.discount.charges', string="Discount Charges", store=True) 
 
     odl_state = fields.Selection(
         selection=[
@@ -1125,39 +1125,39 @@ class TuitionPlan(models.Model):
             ('done', "Confirm"),
         ], string="ODL State", default='draft', required=True)
 
-    def discount_addition(self):
-        for rec in self:
-            discount_to_add = []
-            product_in_line = [rec.line_ids.mapped('product_id.id')]
-            installment_obj = [rec.line_ids[-1].mapped('installment_ids')]
+    # def discount_addition(self):
+    #     for rec in self:
+    #         discount_to_add = []
+    #         product_in_line = [rec.line_ids.mapped('product_id.id')]
+    #         installment_obj = [rec.line_ids[-1].mapped('installment_ids')]
 
-            for discount in rec.discount_ids:
-                if discount.product_id.id not in product_in_line:
-                    discount_to_add.append(discount)
+    #         for discount in rec.discount_ids:
+    #             if discount.product_id.id not in product_in_line:
+    #                 discount_to_add.append(discount)
 
-            for dis in discount_to_add:
-                linedata={
-                        'plan_id':self.ids[0],
-                        'product_id':dis.product_id.id,
-                        'name':dis.product_id.name,
-                        'account_id':dis.product_id.property_account_income_id.id,
-                        'quantity':1,
-                        'installment_ids':[(6,0,[j.ids[0] for j in installment_obj])],
-                        'currency_id':rec.currency_id.id,
-                        'unit_price':0,
-                        'discount_charges':True
-                        }
-                new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
+    #         for dis in discount_to_add:
+    #             linedata={
+    #                     'plan_id':self.ids[0],
+    #                     'product_id':dis.product_id.id,
+    #                     'name':dis.product_id.name,
+    #                     'account_id':dis.product_id.property_account_income_id.id,
+    #                     'quantity':1,
+    #                     'installment_ids':[(6,0,[j.ids[0] for j in installment_obj])],
+    #                     'currency_id':rec.currency_id.id,
+    #                     'unit_price':0,
+    #                     'discount_charges':True
+    #                     }
+    #             new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
 
-    def discount_remove(self):
-        for rec in self:
-            discount_to_remove = []
-            # raise UserError(rec.discount_ids.mapped('product_id'))
-            for line in rec.line_ids:
+    # def discount_remove(self):
+    #     for rec in self:
+    #         discount_to_remove = []
+    #         # raise UserError(rec.discount_ids.mapped('product_id'))
+    #         for line in rec.line_ids:
 
-                if line.discount_charges and line.product_id.id not in rec.discount_ids.mapped('product_id.id'):
-                    # raise UserError([line,"--",rec.discount_ids.mapped('product_id.id')])
-                    line.unlink()
+    #             if line.discount_charges and line.product_id.id not in rec.discount_ids.mapped('product_id.id'):
+    #                 # raise UserError([line,"--",rec.discount_ids.mapped('product_id.id')])
+    #                 line.unlink()
 
     def odl_first_approval(self):
         self.write({'odl_state': 'first'})
