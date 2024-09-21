@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 class AdmissionChallanWizard(models.TransientModel):
     _name = "admission.challan.wizard"
@@ -11,6 +12,7 @@ class AdmissionChallanWizard(models.TransientModel):
     def action_create_tuition_plan(self):
         self.ensure_one()
         if self.template_id:
+            raise UserError(self.student_ids)
             if self.student_ids:
                 for sid in self.student_ids:                    
                     self.env['tuition.plan'].create({
