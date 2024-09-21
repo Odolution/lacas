@@ -1213,8 +1213,9 @@ class TuitionPlan(models.Model):
         for plan in self:
             line_concession_list = plan.student_id.concession_line_ids.get_concession_values()
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
-            raise UserError(str(line_concession_list))
+            
             plan.write({'line_ids': line_concession_list})
+            raise UserError(str(plan.line_ids))
             
     #logic end
 
