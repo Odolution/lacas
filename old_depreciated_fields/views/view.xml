@@ -92,9 +92,12 @@
         <field name="inherit_id" ref="ol_school_manager.school_student_view_kanban"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@class='o_kanban_record_title'][1]/field[1]" position="after">
-                <br/>
-                <field name="olf_id" readonly="1"/>
-                <field name="enrollment_status_ids" optional="show" widget="many2many_tags"/>
+                <!-- Huzaifa COO -->
+                 
+                (
+                    <field name="olf_id" readonly="1"/>)
+                    <br></br>
+                    <field name="ol_enrollment_status" style="font-size:large;" widget="badge" decoration-success="ol_enrollment_status == 'enrolled'" decoration-danger="ol_enrollment_status in ['withdrawn','inactive']" decoration-primary="ol_enrollment_status == 'graduate'" decoration-info="ol_enrollment_status == 'admissions'"/>
             </xpath>
         </field>
     </record>
