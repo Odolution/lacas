@@ -468,8 +468,11 @@ class ConcessionLine(models.Model):
         values = []
 
         for line in self:
-
-            raise UserError([j.id for j in installment_obj])
+            lst = []
+            for j in installment_obj:
+                lst.append(j.id)
+                
+            raise UserError(lst)
             
             values.append({
                 
