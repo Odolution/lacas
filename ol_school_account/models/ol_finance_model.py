@@ -1378,7 +1378,7 @@ class TuitionPlan(models.Model):
             
             plan.write({'line_ids': line_concession_list})
 
-            raise UserError(str(plan.line_ids))
+            # raise UserError(str(plan.line_ids))
             
     #logic end
 
