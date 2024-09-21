@@ -872,6 +872,8 @@ class RelationshipType(models.Model):
 class ConcessionLine(models.Model):
     _name = "consession.line"
 
+    student_id = fields.Many2one('school.student', string="Student", ondelete='set null')
+
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
     discount_product = fields.Many2one('product.product', string="Discount Product")
     month            = fields.Many2many('tuition.installment', string="Month") 
