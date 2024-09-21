@@ -876,7 +876,7 @@ class ConcessionLine(models.Model):
 
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
     discount_product = fields.Many2one('product.product', string="Discount Product")
-    month            = fields.Many2many('tuition.installment', string="Month") 
+    month_ids        = fields.Many2many('tuition.installment', string="Month") 
 
 class SchoolStudent(models.Model):
     """ Student model """
@@ -941,7 +941,7 @@ class SchoolStudent(models.Model):
     # discount tab
 
     concession_line_ids     =   fields.One2many('consession.line', 'student_id', string="Concession Line")
-
+    form_month_ids        = fields.Many2many('tuition.installment', string="Month") 
 
 
 
