@@ -461,9 +461,15 @@ class ConcessionLine(models.Model):
     student_id = fields.Many2one('school.student', string="Student", ondelete='set null')
 
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
-    discount_product = fields.Many2one('product.product', string="Discount Product")
+    discount_product = fields.Many2one('product.product', string="Discount Product",readonly=True)
 
     #logic start
+    @api.onchange('discount_name')
+    def _onchange_discount(self):
+        for rec in self:
+            rec.discount_product = rec.discount_name.product_id
+    
+
     def get_concession_values(self,installment_obj):
         values = []
 
