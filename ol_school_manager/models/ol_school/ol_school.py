@@ -869,23 +869,23 @@ class RelationshipType(models.Model):
 #people.management.student
 
 
-class ConcessionLine(models.Model):
-    _name = "consession.line"
+# class ConcessionLine(models.Model):
+#     _name = "consession.line"
 
-    student_id = fields.Many2one('school.student', string="Student", ondelete='set null')
+#     student_id = fields.Many2one('school.student', string="Student", ondelete='set null')
 
-    discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
-    discount_product = fields.Many2one('product.product', string="Discount Product")
+#     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
+#     discount_product = fields.Many2one('product.product', string="Discount Product")
 
-    # installment_ids = fields.Many2many(
-    #     comodel_name='tuition.installment',   # Target model
-    #     string="Months",
-    #     relation='tuition_installment_month_services_rel',  # Relation table name
-    #     column1='line_id',                    # Field for the current model
-    #     column2='installment_id'               # Field for the target model
-    # )
+#     # installment_ids = fields.Many2many(
+#     #     comodel_name='tuition.installment',   # Target model
+#     #     string="Months",
+#     #     relation='tuition_installment_month_services_rel',  # Relation table name
+#     #     column1='line_id',                    # Field for the current model
+#     #     column2='installment_id'               # Field for the target model
+#     # )
 
-    month_ids        = fields.Many2many('tuition.installment', string="Month") 
+#     month_ids        = fields.Many2many('tuition.installment', string="Month") 
 
 class SchoolStudent(models.Model):
     """ Student model """
