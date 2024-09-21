@@ -464,18 +464,20 @@ class ConcessionLine(models.Model):
     discount_product = fields.Many2one('product.product', string="Discount Product")
 
     #logic start
-    def get_concession_values(self):
+    def get_concession_values(self,installment_obj):
         values = []
 
         for line in self:
             
             values.append({
                 
-                'product_id': line.discount_product.id,
-                'name': line.discount_product.name,
-                'quantity': 1,
-                'unit_price': 0,
-                'currency_id': line.student_id.currency_id.id,
+                'product_id'        : line.discount_product.id,
+                'name'              : line.discount_product.name,
+                'quantity'          : 1,
+                'unit_price'        : 0,
+                'currency_id'       : line.student_id.currency_id.id,
+                'installment_ids'   : [(6,0,[j.ids[0] for j in installment_obj])],
+                'discount_charges'  : True,
 
             })
         return values
@@ -801,6 +803,161 @@ class TuitionPlanLine(models.Model):
             self.discount = pricelist_data['discount']
 
 
+    #logic start
+
+    @api.onchange('installment_template')
+    def onchange_installment_template(self):
+        self.ensure_one()
+        self.line_ids.installment_ids = False
+        if self.installment_template == 'quarterly':
+            self.set_quarterly_installment()
+        elif self.installment_template == 'monthly':
+            self.set_monthly_installment()
+        elif self.installment_template == 'biannually':
+            self.set_biannually_installment()
+        elif self.installment_template == 'yearly':
+            self.set_yearly_installment()
+
+    def set_quarterly_installment(self):
+        self.ensure_one()
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q1',
+                    'month': '9',
+                    'day_type': 'first_day',
+                    'sequence': 1
+                    }),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q2',
+                    'month': '12',
+                    'day_type': 'first_day',
+                    'sequence': 2
+                    }),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q3',
+                    'month': '3',
+                    'day_type': 'first_day',
+                    'sequence': 3
+                    }),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q4',
+                    'month': '6',
+                    'day_type': 'first_day',
+                    'sequence': 4
+                    }),
+                ]
+
+    def set_monthly_installment(self):
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '1',
+                    'day_type': 'first_day',
+                    'sequence': 1,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '2',
+                    'day_type': 'first_day',
+                    'sequence': 2,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '3',
+                    'day_type': 'first_day',
+                    'sequence': 3,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '4',
+                    'day_type': 'first_day',
+                    'sequence': 4,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '5',
+                    'day_type': 'first_day',
+                    'sequence': 5,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '6',
+                    'day_type': 'first_day',
+                    'sequence': 6,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '7',
+                    'day_type': 'first_day',
+                    'sequence': 7,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '8',
+                    'day_type': 'first_day',
+                    'sequence': 8,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '9',
+                    'day_type': 'first_day',
+                    'sequence': 9,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '10',
+                    'day_type': 'first_day',
+                    'sequence': 10,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '11',
+                    'day_type': 'first_day',
+                    'sequence': 11,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '12',
+                    'day_type': 'first_day',
+                    'sequence': 12,
+                    }),
+                ]
+
+    def set_biannually_installment(self):
+        self.ensure_one()
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'biannually',
+                    'month': '9',
+                    'sequence': 1,
+                    }),
+                Command.create({
+                    'type': 'biannually',
+                    'month': '1',
+                    'sequence': 2,
+                    }),
+                ]
+
+    def set_yearly_installment(self):
+        self.ensure_one()
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'yearly',
+                    'month': '1',
+                    'day_type': 'first_day',
+                    'sequence': 1,
+                    }),
+                ]
+
+    #logic end
 class TuitionPlanFamilyPrices(models.TransientModel):
     _name = 'tuition.plan.family.prices'
     _rec_name = 'price'
@@ -999,6 +1156,8 @@ class TuitionPlan(models.Model):
     def odl_confirm(self): 
         self.write({'odl_state': 'done'})
 
+
+    
     # process end 
 
     @api.depends('line_ids.tax_ids', 'line_ids.unit_price', 'amount_total', 'amount_untaxed')
@@ -1204,18 +1363,22 @@ class TuitionPlan(models.Model):
             plan.update_values_based_on_tuition_plan()
         plan.update_lines(overwrite=True)
         #logic start
-        plan.update_line_concession()
+        if plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly':
+            plan.update_line_concession()
 
         
         return plan
 
     def update_line_concession(self):
         for plan in self:
-            line_concession_list = plan.student_id.concession_line_ids.get_concession_values()
+            installment_obj = [plan.line_ids[-1].mapped('installment_ids')]
+
+            line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
             
             plan.write({'line_ids': line_concession_list})
-            # raise UserError(str(plan.line_ids))
+
+            raise UserError(str(plan.line_ids))
             
     #logic end
 
