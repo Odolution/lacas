@@ -19,6 +19,8 @@ class ChallanPrinting(models.Model):
     class_ids = fields.Many2many('school.grade.level', string='Class')
     enrollment_status_ids = fields.Many2many('school.enrollment.status', string='Enrollment Status')
 
+    challan_generated = fields.Boolean(string='Challan Generated')
+
 
     @api.depends('from_date', 'to_date')
     def _compute_name(self):
@@ -106,6 +108,7 @@ class ChallanPrinting(models.Model):
             'res_id': self.id,
             'mimetype': 'application/pdf',
         })
+        self.challan_generated = True
 
         # commit the changes to the database
         new_cr.commit()
@@ -122,6 +125,9 @@ class ChallanPrinting(models.Model):
 
         if not (self.from_date and self.to_date and self.branch_ids and self.journal_id and self.enrollment_status_ids):
             raise UserError('Please Set all the values')
+
+        self.challan_generated = False
+        self.env.cr.commit()
 
         # create threads to run function that will create its own connection to database
         threaded_calculation = threading.Thread(
