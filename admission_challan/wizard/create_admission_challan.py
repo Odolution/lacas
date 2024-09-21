@@ -22,8 +22,8 @@ class AdmissionChallanWizard(models.TransientModel):
                     'tuition_template_id': self.template_id.id,
                 })
             else:
-                # Call the function on the template_id (tuition.template)
-                self.env['tuition.plan'].create({
+                context = {**self._context, 'take_tuition_template_values': True}
+                self.env['tuition.plan'].with_context(context).create({
                 'student_id': self.student_id.id,
                 'tuition_template_id': self.template_id.id,
             })
