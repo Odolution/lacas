@@ -1364,9 +1364,9 @@ class TuitionPlan(models.Model):
         plan.update_lines(overwrite=True)
         #logic start
         
-        if plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly':
+        # if plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly':
             
-            plan.update_line_concession()
+        plan.update_line_concession()
 
         
         return plan
@@ -1378,7 +1378,7 @@ class TuitionPlan(models.Model):
             line_concession_list = plan.student_id.concession_line_ids.get_concession_values(None)
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
 
-            raise UserError(str(line_concession_list))
+            # raise UserError(str(line_concession_list))
             
             plan.write({'line_ids': line_concession_list})
 
