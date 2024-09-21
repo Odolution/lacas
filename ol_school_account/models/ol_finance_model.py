@@ -455,6 +455,11 @@ class TuitionPlanInstallment(models.Model):
 
 # tuition.plan.line 
 
+class ConcessionLine(models.Model):
+    _inherit = "concession.plan.line"
+
+    month_ids        = fields.Many2many('tuition.installment', string="Month") 
+
 class TuitionPlanLine(models.Model):
     _name = 'tuition.plan.line'
     _inherit = 'tuition.line.mixin'
