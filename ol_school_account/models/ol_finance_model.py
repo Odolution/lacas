@@ -1204,12 +1204,14 @@ class TuitionPlan(models.Model):
         plan.update_lines(overwrite=True)
         #logic start
         plan.update_line_concession()
+
         
         return plan
 
     def update_line_concession(self):
         for plan in self:
             line_concession_list = plan.student_id.concession_line_ids.get_concession_values()
+            raise UserError(str(line_concession_list))
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
             plan.write({'line_ids': line_concession_list})
     #logic end
