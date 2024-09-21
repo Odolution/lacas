@@ -885,7 +885,7 @@ class ConcessionLine(models.Model):
     #     column2='installment_id'               # Field for the target model
     # )
 
-    month_ids        = fields.Many2many('tuition.installment', string="Month") 
+    # month_ids        = fields.Many2many('tuition.installment', string="Month") 
 
 class SchoolStudent(models.Model):
     """ Student model """
