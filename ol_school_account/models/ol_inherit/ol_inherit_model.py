@@ -196,6 +196,10 @@ class Student(models.Model):
         'school.financial.responsibility', 'student_id',
         string="Financial responsibilities")
 
+    # Concession tab
+
+    concession_line_ids     =   fields.One2many('concession.plan.line', 'student_id', string="Concession Line")
+
     @api.constrains('financial_responsibility_ids')
     def _check_category_sum(self):
         for student in self:
