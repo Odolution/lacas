@@ -475,7 +475,7 @@ class ConcessionLine(models.Model):
                 'name': line.discount_product.name,
                 'quantity': 1,
                 'unit_price': 0,
-                'currency_id': student_id.currency_id.id,
+                'currency_id': line.student_id.currency_id.id,
 
             })
         return values
