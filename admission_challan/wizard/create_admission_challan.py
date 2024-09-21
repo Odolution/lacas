@@ -7,14 +7,15 @@ class AdmissionChallanWizard(models.TransientModel):
 
     template_id = fields.Many2one('tuition.template', string="Fee Template", required=True)
     student_id = fields.Many2one('school.student', string="Student")
-    student_ids = fields.Many2one('school.student', string="Student")
+    # student_ids = fields.Many2one('school.student', string="Student")
     
     def action_create_tuition_plan(self):
         self.ensure_one()
         if self.template_id:
-            raise UserError(str(self.env.context.get('default_student_ids')))
-            if self.student_ids:
-                for sid in self.student_ids:                    
+
+            student_ids = self.env.context.get('student_ids')
+            if student_ids:
+                for sid in student_ids:                    
                     self.env['tuition.plan'].create({
                     'student_id': sid.id,
                     'tuition_template_id': self.template_id.id,
