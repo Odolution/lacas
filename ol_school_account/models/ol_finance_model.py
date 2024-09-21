@@ -1375,7 +1375,7 @@ class TuitionPlan(models.Model):
         for plan in self:
             installment_obj = [plan.line_ids[-1].mapped('installment_ids')]
 
-            line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
+            line_concession_list = plan.student_id.concession_line_ids.get_concession_values(None)
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
 
             # raise UserError(str(line_concession_list))
