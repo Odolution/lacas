@@ -1365,7 +1365,7 @@ class TuitionPlan(models.Model):
         #logic start
         
         if plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly':
-            raise UserError([plan.journal_id.name,'hello'])
+            
             plan.update_line_concession()
 
         
