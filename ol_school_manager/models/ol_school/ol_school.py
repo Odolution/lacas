@@ -877,7 +877,7 @@ class ConcessionLine(models.Model):
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
     discount_product = fields.Many2one('product.product', string="Discount Product")
 
-    discount_ids = fields.Many2many('tuition.plan', string="plan", store=True) 
+    discount_ids = fields.Many2one('tuition.plan', string="plan", store=True) 
 
 
 class SchoolStudent(models.Model):
