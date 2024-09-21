@@ -463,6 +463,24 @@ class ConcessionLine(models.Model):
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
     discount_product = fields.Many2one('product.product', string="Discount Product")
 
+    #logic start
+    def get_concession_values(self):
+        values = []
+
+        for line in self:
+            
+            values.append({
+                
+                'product_id': line.discount_product.id,
+                'name': line.discount_product.name,
+                'quantity': 1,
+                'unit_price': 0
+
+            })
+        return values
+    #logic end
+
+
 
 class TuitionPlanLine(models.Model):
     _name = 'tuition.plan.line'
@@ -1184,7 +1202,17 @@ class TuitionPlan(models.Model):
         if self._context.get('take_tuition_template_values', False):
             plan.update_values_based_on_tuition_plan()
         plan.update_lines(overwrite=True)
+        #logic start
+        plan.update_line_concession()
+        
         return plan
+
+    def update_line_concession(self):
+        for plan in self:
+            line_concession_list = plan.student_id.concession_line_ids.get_concession_values()
+            line_concession_list = [Command.create(vals) for vals in line_concession_list]
+            plan.write({'line_ids': line_concession_list})
+    #logic end
 
     def update_lines(self, overwrite=False):
         for plan in self:
