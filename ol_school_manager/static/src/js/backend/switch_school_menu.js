@@ -167,11 +167,11 @@ registry.category("systray").add("ol_school_manager.SwitchSchoolMenu", {Componen
 
 
 
-export class BottomSystray extends Component {
-    template = "ol_school_manager.bottom_systray_template";
-}
+// export class BottomSystray extends Component {
+//     template = "ol_school_manager.bottom_systray_template";
+// }
 
 
-const item = { Component: BottomSystray };
-registry.category("bottom_systray").add("bottom_systray", item);
-registry.category("bottom_systray").add("ol_school_manager.SwitchSchoolMenu", {Component: SwitchSchoolMenu}, {sequence: 2});
+// const item = { Component: BottomSystray };
+// registry.category("bottom_systray").add("bottom_systray", item);
+// registry.category("bottom_systray").add("ol_school_manager.SwitchSchoolMenu", {Component: SwitchSchoolMenu}, {sequence: 2});
