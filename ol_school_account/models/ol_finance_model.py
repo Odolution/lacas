@@ -195,6 +195,8 @@ class TuitionPlanInstallment(models.Model):
         column1='installment_id',
         column2='line_id',
         string="Lines")
+
+
     template_installment_id = fields.Many2one('tuition.template.installment', string="Template installment")
 
     def create_recurring_charge(self, origin_plan=False):

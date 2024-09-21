@@ -700,12 +700,10 @@
                       <tree editable="top">
                         <field name="discount_name"/>
                         <field name="discount_product"/>
-                        <field name="month_ids" widget="many2many_tags" optional="show"/>
+                        <!-- <field name="month_ids" widget="many2many_tags" optional="show"/> -->
                         
                       </tree>
                   </field>
-
-                  <field name="form_month_ids"/>
 
                 </page>
               </notebook>
