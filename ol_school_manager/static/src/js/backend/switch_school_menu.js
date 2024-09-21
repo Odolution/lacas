@@ -164,3 +164,13 @@ QWeb.registerComponent("SwitchSchoolMenu", SwitchSchoolMenu);
 QWeb.registerComponent("SwitchSchoolTree", SwitchSchoolTree);
 
 registry.category("systray").add("ol_school_manager.SwitchSchoolMenu", {Component: SwitchSchoolMenu}, {sequence: 2});
+
+
+
+class BottomSystray extends Component {
+    template = "ol_school_manager.bottom_systray_template";
+}
+
+
+const item = { Component: BottomSystray };
+registry.category("bottom_systray").add("ol_school_manager.SwitchSchoolMenu", {Component: SwitchSchoolMenu}, {sequence: 2});

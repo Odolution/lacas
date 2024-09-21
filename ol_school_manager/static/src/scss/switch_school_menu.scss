@@ -86,3 +86,14 @@
         }
     }
 }
+
+.bottom_systray {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa; /* Optional: Change background color */
+    z-index: 1000; /* Ensure it stays on top */
+    display: flex;
+    justify-content: center; /* Center the content */
+    padding: 10px; /* Optional: Add padding */
+}

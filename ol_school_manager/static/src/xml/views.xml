@@ -42,8 +42,14 @@
       <t t-component="SwitchSchoolTree"/>
     </Dropdown>
   </t>
+  
   <!--data-jstree='{"selected": true }'-->
   <t t-name="ol_school_manager.SwitchSchoolTree" owl="1">
     <div t-ref="jsTreeDiv"/>
+  </t>
+  <t t-name="ol_school_manager.bottom_systray_template" owl="1">
+        <div class="bottom_systray">
+            <t t-component="SwitchSchoolMenu"/>
+        </div>
   </t>
 </templates>
