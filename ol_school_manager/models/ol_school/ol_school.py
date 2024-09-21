@@ -869,7 +869,7 @@ class RelationshipType(models.Model):
 #people.management.student
 
 
-class ConcessionLine(model.Model):
+class ConcessionLine(models.Model):
     _name = "consession.line"
 
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
