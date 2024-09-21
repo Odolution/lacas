@@ -93,6 +93,7 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@class='o_kanban_record_title'][1]/field[1]" position="after">
                 <!-- Huzaifa COO -->
+                 
                 (
                     <field name="olf_id" readonly="1"/>)
                     <br></br>
