@@ -876,6 +876,11 @@ class ConcessionLine(models.Model):
 
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
     discount_product = fields.Many2one('product.product', string="Discount Product")
+    installment_ids = fields.Many2many(
+        'tuition.installment', string="Months",
+        relation='tuition_installment_month_services_rel',
+        column1='line_id',
+        column2='installment_id')
     # month_ids        = fields.Many2many('tuition.installment', string="Month") 
 
 class SchoolStudent(models.Model):
