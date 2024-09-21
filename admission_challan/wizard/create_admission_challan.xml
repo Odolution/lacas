@@ -19,7 +19,7 @@
 
     <record id="action_create_admission_challan_wizard" model="ir.actions.act_window">
         <field name="name">Create Admission Challan</field>
-        <field name="res_model">admission.appointment.wizard</field>
+        <field name="res_model">admission.challan.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="context">{'default_student_id': active_id}</field>
