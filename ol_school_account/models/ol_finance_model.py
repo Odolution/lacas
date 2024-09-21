@@ -477,7 +477,7 @@ class ConcessionLine(models.Model):
                 'unit_price'        : 0,
                 'currency_id'       : line.student_id.currency_id.id,
                 # 'installment_ids'   : [(6,0,[j.ids[0] for j in installment_obj])],
-                # 'discount_charges'  : True,
+                'discount_charges'  : True,
 
             })
         return values
