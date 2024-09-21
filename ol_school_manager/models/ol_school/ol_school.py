@@ -868,6 +868,14 @@ class RelationshipType(models.Model):
 
 #people.management.student
 
+
+class ConcessionLine(model.Model):
+    _name = "consession.line"
+
+    discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
+    discount_product = fields.Many2one('product.product', string="Discount Product")
+    month            = fields.Many2many('tuition.installment', string="Month") 
+
 class SchoolStudent(models.Model):
     """ Student model """
 
@@ -927,6 +935,13 @@ class SchoolStudent(models.Model):
     enrollment_state_ids = fields.One2many('school.student.enrollment.state', 'student_id', string="Enroll states")
     relationship_ids = fields.One2many('school.student.relationship', 'student_id', string="Relationships")
     homeroom = fields.Char(string="Homeroom")
+
+    # discount tab
+
+    concession_line_ids     =   fields.One2many('consession.line', 'student_id', string="Concession Line")
+
+
+
 
     ##############################
     # Compute and search methods #
