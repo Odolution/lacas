@@ -1363,6 +1363,7 @@ class TuitionPlan(models.Model):
             plan.update_values_based_on_tuition_plan()
         plan.update_lines(overwrite=True)
         #logic start
+        raise UserError(plan.journal_id.name)
         if plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly':
             plan.update_line_concession()
 
