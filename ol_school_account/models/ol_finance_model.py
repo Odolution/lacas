@@ -463,8 +463,6 @@ class ConcessionLine(models.Model):
     discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
     discount_product = fields.Many2one('product.product', string="Discount Product")
 
-    month_ids        = fields.Many2many('tuition.installment', string="Month") 
-
 
 class TuitionPlanLine(models.Model):
     _name = 'tuition.plan.line'
