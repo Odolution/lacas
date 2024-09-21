@@ -4,10 +4,12 @@
         <record id="view_tuition_template_form" model="ir.ui.view">
             <field name="name">tuition.template.form.inherit</field>
             <field name="model">tuition.template</field>
-            <field name="inherit_id" ref="ol_school_account.tuition_template_view_form"/>
+            <field name="inherit_id" ref="ol_school_account.tuition_template_view_form" />
             <field name="arch" type="xml">
-                <xpath expr="//form[1]/sheet[1]/el[1]/group[1]/group[@name='left_group']/field[@name='company_id'][2]" position="after">
-                    <field name="grade_level_ids"/>
+                <xpath
+                    expr="//form[1]/sheet[1]/el[1]/group[1]/group[@name='left_group']/field[@name='company_id'][2]"
+                    position="after">
+                    <field name="grade_level_ids" />
                 </xpath>
             </field>
         </record>

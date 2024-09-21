@@ -9,8 +9,8 @@
                 'type' : 'ir.actions.act_window',
                 'res_model': 'admission.challan.wizard',
                 'target': 'new',
-                'views' [(env.ref('').id, 'form')]
-                'context': {'default_student_ids': [(0, 0, record.ids)]}
+                'views' [(env.ref('admission_challan.view_create_admission_challan_wizard_form').id, 'form')]
+                'context': {'default_student_ids': [(6, 0, record.ids)]}
             }
         </field>
     </record>
