@@ -1364,9 +1364,9 @@ class TuitionPlan(models.Model):
         plan.update_lines(overwrite=True)
         #logic start
         
-        # if plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly':
+        if plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly':
             
-        plan.update_line_concession()
+            plan.update_line_concession()
 
         
         return plan
