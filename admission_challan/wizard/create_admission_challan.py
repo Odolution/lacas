@@ -12,8 +12,8 @@ class AdmissionChallanWizard(models.TransientModel):
         if self.template_id:
             # Call the function on the template_id (tuition.template)
             self.env['tuition.plan'].create({
-            'student_id': self.student_id,
-            'tuition_template_id': self.template_id,
+            'student_id': self.student_id.id,
+            'tuition_template_id': self.template_id.id,
         })
         return {'type': 'ir.actions.act_window_close'}
 
