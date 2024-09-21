@@ -51,8 +51,9 @@
                 <field name="id" invisible="1"/>
             </xpath>
             <xpath expr="//h1[1]/field[1]" position="after">
-                <br/>
-                <field name="olf_id" readonly="1"/>
+                (
+                <field name="olf_id" readonly="1"/>)
+                <field name="ol_enrollment_status" widget="badge"  decoration-success="ol_enrollment_status == 'enrolled'" decoration-danger="ol_enrollment_status in ['withdrawn','inactive']" decoration-primary="ol_enrollment_status == 'graduate'"  decoration-info="ol_enrollment_status == 'admissions'"/>
             </xpath>
         </field>
     </record>
