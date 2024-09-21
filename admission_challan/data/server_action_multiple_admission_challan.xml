@@ -10,7 +10,7 @@
                 'res_model': 'admission.challan.wizard',
                 'target': 'new',
                 'views': [(env.ref('admission_challan.view_create_admission_challan_wizard_form').id, 'form')],
-                'context': {'default_student_ids': [(6, 0, record.ids)]}
+                'context': {'default_student_ids': [(6, 0, records.ids)]}
             }
         </field>
     </record>
