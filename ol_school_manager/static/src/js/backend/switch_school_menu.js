@@ -173,4 +173,5 @@ class BottomSystray extends Component {
 
 
 const item = { Component: BottomSystray };
+registry.category("bottom_systray").add("bottom_systray", item);
 registry.category("bottom_systray").add("ol_school_manager.SwitchSchoolMenu", {Component: SwitchSchoolMenu}, {sequence: 2});
