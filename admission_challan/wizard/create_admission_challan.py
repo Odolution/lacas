@@ -12,7 +12,7 @@ class AdmissionChallanWizard(models.TransientModel):
     def action_create_tuition_plan(self):
         self.ensure_one()
         if self.template_id:
-            raise UserError(self.student_ids)
+            raise UserError(str(self.env.context))
             if self.student_ids:
                 for sid in self.student_ids:                    
                     self.env['tuition.plan'].create({
