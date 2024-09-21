@@ -468,6 +468,8 @@ class ConcessionLine(models.Model):
         values = []
 
         for line in self:
+
+            raise UserError(str(installment_obj))
             
             values.append({
                 
