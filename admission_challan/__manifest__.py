@@ -9,10 +9,9 @@
     "data": [
             "security/ir.model.access.csv",
             # "data/server_action_multiple_admission_challan.xml",
-            "views/admission_challan_view.xml" ,  
-            "views/tuition_template_view.xml" ,  
             "wizard/create_admission_challan.xml",
-            
+            "views/admission_challan_view.xml",  
+            "views/tuition_template_view.xml",
     ],
     "demo": [],
     "auto_install": False,
