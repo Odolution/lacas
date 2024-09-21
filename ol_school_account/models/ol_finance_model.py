@@ -474,7 +474,8 @@ class ConcessionLine(models.Model):
                 'product_id': line.discount_product.id,
                 'name': line.discount_product.name,
                 'quantity': 1,
-                'unit_price': 0
+                'unit_price': 0,
+                'currency_id': student_id.currency_id.id,
 
             })
         return values
@@ -1212,9 +1213,9 @@ class TuitionPlan(models.Model):
         for plan in self:
             line_concession_list = plan.student_id.concession_line_ids.get_concession_values()
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
-            
+            raise UserError(str(plan.line_concession_list))
             plan.write({'line_ids': line_concession_list})
-            raise UserError(str(plan.line_ids))
+            
     #logic end
 
     def update_lines(self, overwrite=False):
