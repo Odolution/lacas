@@ -954,9 +954,7 @@ class SchoolStudent(models.Model):
     relationship_ids = fields.One2many('school.student.relationship', 'student_id', string="Relationships")
     homeroom = fields.Char(string="Homeroom")
 
-    # discount tab
-
-    # concession_line_ids     =   fields.One2many('consession.line', 'student_id', string="Concession Line")
+    
 
 
 
