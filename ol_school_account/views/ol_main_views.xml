@@ -180,7 +180,7 @@
                 <tree editable="bottom">
 
                   <field name="discount_name"/>
-                  <field name="discount_product"/>                  
+                  <field name="discount_product" readonly="1"/>                  
                 </tree>
               </field>
             
