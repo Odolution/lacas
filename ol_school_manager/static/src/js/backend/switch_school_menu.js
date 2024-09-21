@@ -167,7 +167,7 @@ registry.category("systray").add("ol_school_manager.SwitchSchoolMenu", {Componen
 
 
 
-class BottomSystray extends Component {
+export class BottomSystray extends Component {
     template = "ol_school_manager.bottom_systray_template";
 }
 
