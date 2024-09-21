@@ -552,7 +552,8 @@
           <notebook name="main_notebook">
             <page name="setup" string="SETUP">
               <notebook name="nested_notebook">
-                <page name="families" string="Parents">
+                <!-- ubaid -->
+                <!-- <page name="families" string="Parents">
                   <field name="family_ids" context="{'default_student_ids': [id]}">
                     <kanban>
                       <field name="name"/>
@@ -574,7 +575,7 @@
                       </templates>
                     </kanban>
                   </field>
-                </page>
+                </page> -->
 
                 <page name="relationships" string="Contacts">
                   <field name="relationship_ids"
@@ -583,16 +584,17 @@
                     <tree editable="bottom">
                       <field name="individual_id" />
                       <field name="relationship_type_id"/>
-                      <field name="custody" optional="show"/>
+                      <!-- ubaid -->
+                      <!-- <field name="custody" optional="show"/>
                       <field name="correspondence" optional="show"/>
                       <field name="grade_related" optional="show"/>
                       <field name="family_portal" optional="show"/>
-                      <field name="is_emergency_contact" optional="show"/>
+                      <field name="is_emergency_contact" optional="show"/> -->
                     </tree>
                   </field>
                 </page>
-
-                <page name="healthcare" string="Medical Care">
+                <!-- ubaid -->
+                <!-- <page name="healthcare" string="Medical Care">
                   <group>
                     <group name="group_left">
                       <field name="doctor_name"/>
@@ -613,7 +615,7 @@
                       <field name="medications_ids"/>
                     </group>
                   </group>
-                </page>
+                </page> -->
 
                 <page name="academics" string="Academic Affairs">
                   <group col="4">

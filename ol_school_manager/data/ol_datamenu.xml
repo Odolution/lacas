@@ -107,7 +107,8 @@
 
 
   <!-- Misc -->
-  <menuitem id="healthcare_settings_menu" name="Healthcare settings"
+   <!-- ubaid -->
+  <!-- <menuitem id="healthcare_settings_menu" name="Healthcare settings"
             parent="ol_school_manager.school_configuration_menu" sequence="20"/>
 
   <menuitem id="adm_menu_healthcare_allergy"
@@ -120,7 +121,7 @@
 
   <menuitem id="adm_menu_healthcare_medication"
             parent="healthcare_settings_menu" name="Medications"
-            action="action_school_settings_healthcare_medication"/>
+            action="action_school_settings_healthcare_medication"/> -->
 
 
   <menuitem id="school_paremeters_menu" name="School parameters"
@@ -166,12 +167,17 @@
             action="action_school_families"/> -->
 
   <!-- School structure -->
-
-  <menuitem
+  <!-- ubaid -->
+  <!-- <menuitem
           id="school_structure_menu"
           name="School structure"
           parent="ol_school_manager.school_configuration_menu"
-          sequence="1"/>
+          sequence="1"/> -->
+  <menuitem
+          id="school_structure_menu"
+          name="School structure"
+          parent="ol_school_manager.school_panel_menu"
+          sequence="21"/>
 
   <menuitem
           id="school_districts_menuitem"
@@ -223,7 +229,8 @@
   />
 
   <!-- Wizards -->
-  <menuitem id="ol_school_manager_migration_tool_menu_string" name="Migration Tool"
+   <!-- ubaid -->
+  <!-- <menuitem id="ol_school_manager_migration_tool_menu_string" name="Migration Tool"
             parent="ol_school_manager.school_configuration_menu" sequence="100"/>
 
   <menuitem
@@ -231,7 +238,7 @@
           name="Migration Tool Method"
           action="ol_school_manager.ol_migration_tool_action"
           parent="ol_school_manager.ol_school_manager_migration_tool_menu_string"
-          sequence="100"/>
+          sequence="100"/> -->
 
   <!-- process start  -->
 

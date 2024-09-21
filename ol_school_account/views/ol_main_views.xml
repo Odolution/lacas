@@ -171,7 +171,8 @@
     <field name="model">school.student</field>
     <field name="inherit_id" ref="ol_school_manager.school_student_view_form" />
     <field name="arch" type="xml">
-      <xpath expr="//notebook[@name='nested_notebook']" position="inside">
+      <!-- ubaid -->
+      <!-- <xpath expr="//notebook[@name='nested_notebook']" position="inside">
 
         <page name="finance" string="Monetary Affairs">
             <group>
@@ -189,7 +190,7 @@
 
       <xpath expr="//page[@name='relationships']/field[@name='relationship_ids']/tree" position="inside">
         <field name="invoice_recipient" optional="show"/>
-      </xpath>
+      </xpath> -->
 
       <div name="button_box" position="inside">
         <button name="action_view_tuition_plans" type="object" class="oe_stat_button" icon="fa-refresh"
