@@ -7,7 +7,6 @@ class AdmissionChallanWizard(models.TransientModel):
 
     template_id = fields.Many2one('tuition.template', string="Fee Template", required=True)
     student_id = fields.Many2one('school.student', string="Student")
-    # student_ids = fields.Many2one('school.student', string="Student")
     
     def action_create_tuition_plan(self):
         self.ensure_one()
