@@ -57,15 +57,5 @@
       </xpath>
   </t> -->
 
-   <template id="custom_button_in_navbar" inherit_id="web.NavBar" name="Custom Button in NavBar">
-        <xpath expr="//div[@class='o_menu_systray']" position="before">
-            <div class="custom_home_button" style="margin-right: 15px;">
-                <button type="button" class="btn btn-primary" id="custom_nav_button">
-                    My Custom Button
-                </button>
-            </div>
-        </xpath>
-    </template>
-
 
 </templates>

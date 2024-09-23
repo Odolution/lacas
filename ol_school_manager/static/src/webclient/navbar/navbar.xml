@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+  <t t-name="ol_school_manager.nav_custom" t-inherit="web.NavBar" t-inherit-mode="primary">
+     <xpath expr="//div[@class='o_menu_systray']" position="before">
+        <div class="bottom_systray">
+          kasdnoisnfp
+              <!-- <t t-component="web.SwitchCompanyMenu"/> -->
+        </div>
+      </xpath>
+  </t>
+
+</templates>
