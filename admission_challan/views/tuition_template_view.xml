@@ -9,7 +9,7 @@
                 <xpath
                     expr="//form[1]/sheet[1]/el[1]/group[1]/group[@name='left_group']/field[@name='company_id'][2]"
                     position="after">
-                    <field name="grade_level_ids" domain="[('program_id', '=', program_id)]"/>
+                    <field name="grade_level_ids" domain="[('program_id', '=', program_id)]" widget= "many2many_tags" />
                 </xpath>
             </field>
         </record>
