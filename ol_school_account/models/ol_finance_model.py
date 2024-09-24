@@ -343,7 +343,7 @@ class TuitionPlanInstallment(models.Model):
         move_vals = {
             'move_type': 'out_invoice',
             'invoice_date': invoice_date,
-            'partner_id': family.invoice_address_id.id,
+            'partner_id': family.partner_id.id,
             'family_id': family.id,
             'invoice_line_ids': move_line_vals,
             'company_id': plan.company_id.id,
