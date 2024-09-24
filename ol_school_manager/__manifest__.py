@@ -47,6 +47,7 @@
             'ol_school_manager/static/src/xml/views.xml'
             ],
         'web.assets_backend': [
+            
             'ol_school_manager/static/src/webclient/**/*',
 
 
