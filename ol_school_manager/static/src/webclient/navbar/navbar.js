@@ -8,7 +8,7 @@ import { symmetricalDifference } from "@web/core/utils/arrays";
 const { Component, hooks } = owl;
 const { useState } = hooks;
 
-export class SwitchCompanyMenu extends Component {
+export class nav_custom extends Component {
     setup() {
         this.companyService = useService("company");
         this.currentCompany = this.companyService.currentCompany;
@@ -37,15 +37,15 @@ export class SwitchCompanyMenu extends Component {
         );
     }
 }
-SwitchCompanyMenu.template = "ol_school_manager.nav_custom";
-SwitchCompanyMenu.toggleDelay = 1000;
+nav_custom.template = "ol_school_manager.nav_custom";
+nav_custom.toggleDelay = 1000;
 
 export const systrayItem = {
-    Component: SwitchCompanyMenu,
+    Component: nav_custom,
     isDisplayed(env) {
         const { availableCompanies } = env.services.company;
         return Object.keys(availableCompanies).length > 1;
     },
 };
 
-registry.category("systray").add("SwitchCompanyMenu", systrayItem, { sequence: 1 });
+registry.category("systray").add("nav_custom", systrayItem, { sequence: 1 });
