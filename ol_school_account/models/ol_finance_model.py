@@ -341,7 +341,7 @@ class TuitionPlanInstallment(models.Model):
         if not family.invoice_address_id:
             raise UserError(_("The family %s doesn't have invoice address!", family.name))
         for rec in value:
-            raise UserError(rec.individual_id)
+            raise UserError(rec.individual_id.name)
         move_vals = {
             'move_type': 'out_invoice',
             'invoice_date': invoice_date,
