@@ -332,6 +332,7 @@ class TuitionPlanInstallment(models.Model):
 
     def _prepare_invoice_values_for_family(self, plan, journal, family, lines, real_date, invoice_date,value):
         move_line_vals = []
+        id = 0
         for line in lines.filtered(lambda l: family in l.plan_id.student_id.family_ids):
             line_vals = line.prepare_invoice_line_values(family)
             if line_vals["price_unit"]:
@@ -341,7 +342,9 @@ class TuitionPlanInstallment(models.Model):
         if not family.invoice_address_id:
             raise UserError(_("The family %s doesn't have invoice address!", family.name))
         for rec in value:
-            raise UserError(rec.individual_id.name)
+            # if rec.individual_id.relationship_type_id.name == "Father":
+                
+            raise UserError(rec.individual_id.partner_id.name)
         move_vals = {
             'move_type': 'out_invoice',
             'invoice_date': invoice_date,
