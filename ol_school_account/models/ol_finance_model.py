@@ -344,7 +344,7 @@ class TuitionPlanInstallment(models.Model):
         for rec in value:
             # if rec.individual_id.relationship_type_id.name == "Father":
                 
-            raise UserError(rec.individual_id.partner_id.name)
+            raise UserError(rec.individual_id.last_name)
         move_vals = {
             'move_type': 'out_invoice',
             'invoice_date': invoice_date,
