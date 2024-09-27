@@ -38,6 +38,68 @@
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
 										<tr>
+											<!-- Left side with fields -->
+											<td style="width: 70%; vertical-align: top;">
+												<table style="width: 100%;">
+													<tbody>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																Bill Number:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="o.name" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																1-Bill ID:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="'100225008' + o.name" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																Issue Date:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left; color: grey; width: 30%; font-size:12px;">
+																Due Date:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<span style="background-color: yellow;">
+																	<strong>
+																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+																	</strong>
+																</span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+							
+											<!-- Right side with image -->
+											<td style="width: 30%; text-align: center; vertical-align: top;">
+												<img src="/cus_report/static/src/img/bill.jpeg" />	
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- <div>
+								<table class="table table-dark" style="width:100%;">
+									<tbody>
+										<tr>
 											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
 												Bill Number:
 											</td>
@@ -71,7 +133,7 @@
 										</tr>
 									</tbody>
 								</table>
-							</div>
+							</div> -->
 							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
@@ -292,21 +354,15 @@
 								</table>
 								<!-- Yasir -->
 								<p style="padding-inline: 7px; margin-bottom: 30px;  font-size: 8px; color: grey;">
-									In case of any query please contact the school office or the
-									LACAS accounts department.
-									The amount can be deposited through Cheque of Bank Alfalah or
-									cash at any branch of Bank Alfalah except Alfalah Islamic
-									Branch.
-									<br />
-									On line payment through ALFA App and Debit/Credit card is also
-									available as per details mentioned on LACAS website.
-									Security is refundable only if one month&apos;s advance notice is given
-									in writing or one month&apos;s advance fee is paid. Security is
-									refundable within 6 months of withdrawal or leaving. For A level
-									students, security is refundable after completion of A level.
-									<br />
-									Bank will not be responsible for any financial loss in case Deposit Slip/
-									Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement)
+									In case of any query please contact the school office or the LACAS accounts department. 
+									The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
+									<br/>
+								  Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
+								  Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
+								  Security is refundable within 6 months of withdrawal or leaving. For A level students,
+								  security is refundable after completion of A level.
+									<br/>
+									Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
 								</p>
 							</div>
 							<!-- <br/> -->
@@ -366,6 +422,68 @@
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
 										<tr>
+											<!-- Left side with fields -->
+											<td style="width: 70%; vertical-align: top;">
+												<table style="width: 100%;">
+													<tbody>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																Bill Number:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="o.name" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																1-Bill ID:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="'100225008' + o.name" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																Issue Date:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left; color: grey; width: 30%; font-size:12px;">
+																Due Date:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<span style="background-color: yellow;">
+																	<strong>
+																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+																	</strong>
+																</span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+							
+											<!-- Right side with image -->
+											<td style="width: 30%; text-align: center; vertical-align: top;">
+												<img src="/cus_report/static/src/img/bill.jpeg" />	
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- <div>
+								<table class="table table-dark" style="width:100%;">
+									<tbody>
+										<tr>
 											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
 												Bill Number:
 											</td>
@@ -399,7 +517,7 @@
 										</tr>
 									</tbody>
 								</table>
-							</div>
+							</div> -->
 							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
@@ -620,21 +738,15 @@
 								</table>
 								<!-- Yasir -->
 								<p style="padding-inline: 7px; margin-bottom: 30px;  font-size: 8px; color: grey;">
-									In case of any query please contact the school office or the
-									LACAS accounts department.
-									The amount can be deposited through Cheque of Bank Alfalah or
-									cash at any branch of Bank Alfalah except Alfalah Islamic
-									Branch.
-									<br />
-									On line payment through ALFA App and Debit/Credit card is also
-									available as per details mentioned on LACAS website.
-									Security is refundable only if one month&apos;s advance notice is given
-									in writing or one month&apos;s advance fee is paid. Security is
-									refundable within 6 months of withdrawal or leaving. For A level
-									students, security is refundable after completion of A level.
-									<br />
-									Bank will not be responsible for any financial loss in case Deposit Slip/
-									Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement)
+									In case of any query please contact the school office or the LACAS accounts department. 
+									The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
+									<br/>
+								  Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
+								  Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
+								  Security is refundable within 6 months of withdrawal or leaving. For A level students,
+								  security is refundable after completion of A level.
+									<br/>
+									Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
 								</p>
 							</div>
 							<!-- <br/> -->
@@ -694,6 +806,68 @@
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
 										<tr>
+											<!-- Left side with fields -->
+											<td style="width: 70%; vertical-align: top;">
+												<table style="width: 100%;">
+													<tbody>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																Bill Number:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="o.name" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																1-Bill ID:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="'100225008' + o.name" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left;color: grey; width: 30%; font-size:12px;">
+																Issue Date:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<strong>
+																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+																</strong>
+															</td>
+														</tr>
+														<tr>
+															<td style="text-align: left; color: grey; width: 30%; font-size:12px;">
+																Due Date:
+															</td>
+															<td style="width: 70%; font-size:12px;">
+																<span style="background-color: yellow;">
+																	<strong>
+																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+																	</strong>
+																</span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+							
+											<!-- Right side with image -->
+											<td style="width: 30%; text-align: center; vertical-align: top;">
+												<img src="/cus_report/static/src/img/bill.jpeg" />	
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- <div>
+								<table class="table table-dark" style="width:100%;">
+									<tbody>
+										<tr>
 											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
 												Bill Number:
 											</td>
@@ -727,7 +901,7 @@
 										</tr>
 									</tbody>
 								</table>
-							</div>
+							</div> -->
 							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
 							<div>
 								<table class="table table-dark" style="width:100%;">
@@ -948,21 +1122,15 @@
 								</table>
 								<!-- Yasir -->
 								<p style="padding-inline: 7px;margin-bottom: 30px;  font-size: 8px; color: grey;">
-									In case of any query please contact the school office or the
-									LACAS accounts department.
-									The amount can be deposited through Cheque of Bank Alfalah or
-									cash at any branch of Bank Alfalah except Alfalah Islamic
-									Branch.
-									<br />
-									On line payment through ALFA App and Debit/Credit card is also
-									available as per details mentioned on LACAS website.
-									Security is refundable only if one month&apos;s advance notice is given
-									in writing or one month&apos;s advance fee is paid. Security is
-									refundable within 6 months of withdrawal or leaving. For A level
-									students, security is refundable after completion of A level.
-									<br />
-									Bank will not be responsible for any financial loss in case Deposit Slip/
-									Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement)
+									In case of any query please contact the school office or the LACAS accounts department. 
+									The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
+									<br/>
+								  Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
+								  Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
+								  Security is refundable within 6 months of withdrawal or leaving. For A level students,
+								  security is refundable after completion of A level.
+									<br/>
+									Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
 								</p>
 							</div>
 							<!-- <br/> -->
