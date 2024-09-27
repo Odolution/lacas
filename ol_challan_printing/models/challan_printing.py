@@ -128,6 +128,9 @@ class ChallanPrinting(models.Model):
         if not (self.from_date and self.to_date and self.branch_ids and self.journal_id and self.enrollment_status_ids):
             raise UserError('Please Set all the values')
 
+        if self.challan_inprogress:
+            return
+        
         self.challan_generated = False
         self.challan_inprogress = True
         self.env.cr.commit()
