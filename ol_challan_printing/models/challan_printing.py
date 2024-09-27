@@ -128,16 +128,14 @@ class ChallanPrinting(models.Model):
         if not (self.from_date and self.to_date and self.branch_ids and self.journal_id and self.enrollment_status_ids):
             raise UserError('Please Set all the values')
 
-        if self.challan_inprogress:
-            return
-        
-        self.challan_generated = False
-        self.challan_inprogress = True
-        self.env.cr.commit()
+        if not self.challan_inprogress:
+            self.challan_generated = False
+            self.challan_inprogress = True
+            self.env.cr.commit()
 
-        # create threads to run function that will create its own connection to database
-        threaded_calculation = threading.Thread(
-            target = self._generate_challan_pdf,
-            args = ()
-        )
-        threaded_calculation.start()
+            # create threads to run function that will create its own connection to database
+            threaded_calculation = threading.Thread(
+                target = self._generate_challan_pdf,
+                args = ()
+            )
+            threaded_calculation.start()
