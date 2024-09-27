@@ -92,7 +92,7 @@
 												</td>
 								
 												<!-- Right side with image -->
-												<td style="width: 100px; height:100px ; text-align: center; vertical-align: top;">
+												<td style="width: 60px; height:60px ; text-align: center; vertical-align: top;">
 												<img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
 												</td>
 											</tr>
@@ -515,7 +515,7 @@
 												</td>
 								
 												<!-- Right side with image -->
-												<td style="width: 100px; height:100px ; text-align: center; vertical-align: top;">
+												<td style="width: 60px; height:60px ; text-align: center; vertical-align: top;">
 												<img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
 												</td>
 											</tr>
@@ -940,7 +940,7 @@
 												</td>
 								
 												<!-- Right side with image -->
-												<td style="width: 100px; height:100px ; text-align: center; vertical-align: top;">
+												<td style="width: 60px; height:60px ; text-align: center; vertical-align: top;">
 												<img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
 												</td>
 											</tr>
