@@ -9,6 +9,7 @@
                    <xpath expr="//page[@name='general_info']//field[@name='website']" position="after">
                        <field name="image" widget="image" class="float-left oe_avatar" />
                        <field name="image1" widget="image" class="float-left oe_avatar" />
+                       <field name="bill" widget="image" class="float-left oe_avatar" />
 
                     </xpath>
         </field>
