@@ -51,7 +51,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="o.name" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -61,7 +63,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="'100225008' + o.name" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -71,7 +75,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -82,7 +88,9 @@
 																<td style="width: 30%; font-size:12px;">
 																	<span style="background-color: yellow;">
 																		<strong>
+
 																			<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+
 																		</strong>
 																	</span>
 																</td>
@@ -94,6 +102,7 @@
 												<!-- Right side with image -->
 												<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
 												<img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+
 												</td>
 											</tr>
 										</tbody>
@@ -132,11 +141,14 @@
 															<t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/>
 														</strong>
 													</span>
+
 												</td>
 											</tr>
 										</tbody>
 									</table>
+
 								</div> -->
+
 								<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
 								<div>
 									<table class="table table-dark" style="width:100%;">
@@ -389,6 +401,7 @@
 										<!-- Yasir -->
 										<p style="padding-inline: 7px; margin: 2px 10px 10px 10px;  font-size: 8px; color: grey;">
 											In case of any query please contact the school office or the LACAS accounts department. 
+
 											The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
 											<br/>
 											Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
@@ -397,6 +410,7 @@
 											security is refundable after completion of A level.
 											<br/>
 											Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
+
 										</p>
 									</div>
 									<br/>
@@ -474,7 +488,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="o.name" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -484,7 +500,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="'100225008' + o.name" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -494,7 +512,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -505,7 +525,9 @@
 																<td style="width: 30%; font-size:12px;">
 																	<span style="background-color: yellow;">
 																		<strong>
+
 																			<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+
 																		</strong>
 																	</span>
 																</td>
@@ -517,6 +539,7 @@
 												<!-- Right side with image -->
 												<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
 												<img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+
 												</td>
 											</tr>
 										</tbody>
@@ -555,11 +578,14 @@
 															<t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/>
 														</strong>
 													</span>
+
 												</td>
 											</tr>
 										</tbody>
 									</table>
+
 								</div> -->
+
 								<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
 								<div>
 									<table class="table table-dark" style="width:100%;">
@@ -814,6 +840,7 @@
 										<!-- Yasir -->
 										<p style="padding-inline: 7px; margin: 2px 10px 10px 10px;  font-size: 8px; color: grey;">
 											In case of any query please contact the school office or the LACAS accounts department. 
+
 											The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
 											<br/>
 											Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
@@ -822,6 +849,7 @@
 											security is refundable after completion of A level.
 											<br/>
 											Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
+
 										</p>
 									</div>
 									<br/>
@@ -899,7 +927,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="o.name" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -909,7 +939,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="'100225008' + o.name" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -919,7 +951,9 @@
 																</td>
 																<td style="width: 30%; font-size:12px;">
 																	<strong>
+
 																		<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+
 																	</strong>
 																</td>
 															</tr>
@@ -930,7 +964,9 @@
 																<td style="width: 30%; font-size:12px;">
 																	<span style="background-color: yellow;">
 																		<strong>
+
 																			<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+
 																		</strong>
 																	</span>
 																</td>
@@ -942,6 +978,7 @@
 												<!-- Right side with image -->
 												<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
 												<img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+
 												</td>
 											</tr>
 										</tbody>
@@ -980,11 +1017,14 @@
 															<t t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/>
 														</strong>
 													</span>
+
 												</td>
 											</tr>
 										</tbody>
 									</table>
+
 								</div> -->
+
 								<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
 								<div>
 									<table class="table table-dark" style="width:100%;">
@@ -1238,6 +1278,7 @@
 										<!-- Yasir -->
 										<p style="padding-inline: 7px; margin: 2px 10px 10px 10px;  font-size: 8px; color: grey;">
 											In case of any query please contact the school office or the LACAS accounts department. 
+
 											The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
 											<br/>
 											Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
@@ -1246,6 +1287,7 @@
 											security is refundable after completion of A level.
 											<br/>
 											Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
+
 										</p>
 									</div>
 									<br/>
