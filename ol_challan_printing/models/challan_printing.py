@@ -19,7 +19,8 @@ class ChallanPrinting(models.Model):
     class_ids = fields.Many2many('school.grade.level', string='Class')
     enrollment_status_ids = fields.Many2many('school.enrollment.status', string='Enrollment Status')
 
-    challan_generated = fields.Boolean(string='Challan Generated')
+    challan_generated = fields.Boolean(string='Challan Generated', default=False)
+    challan_inprogress = fields.Boolean(string='Challan Inprogress', default=False)
 
 
     @api.depends('from_date', 'to_date')
@@ -109,6 +110,7 @@ class ChallanPrinting(models.Model):
             'mimetype': 'application/pdf',
         })
         self.challan_generated = True
+        self.challan_inprogress = False
 
         # commit the changes to the database
         new_cr.commit()
@@ -127,6 +129,7 @@ class ChallanPrinting(models.Model):
             raise UserError('Please Set all the values')
 
         self.challan_generated = False
+        self.challan_inprogress = True
         self.env.cr.commit()
 
         # create threads to run function that will create its own connection to database

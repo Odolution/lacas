@@ -13,6 +13,7 @@
                 <field name="journal_id"/>
                 <field name="enrollment_status_ids"/>
                 <field name="challan_generated"/>
+                <field name="challan_inprogress"/>
 
                 <templates>
                     <t t-name="kanban-box">
@@ -26,6 +27,11 @@
                                     <t t-if="record.challan_generated.raw_value">
                                         <span style="background-color: #ffcc00; padding: 5px; border-radius: 5px; font-weight: bold; color: red;">
                                             Challan Generated
+                                        </span>
+                                    </t>
+                                    <t t-if="record.challan_inprogress.raw_value">
+                                        <span style="background-color: #14adb3; padding: 5px; border-radius: 5px; font-weight: bold; color: black;">
+                                            Generating Challan
                                         </span>
                                     </t>
                                 </strong>
@@ -53,6 +59,7 @@
                 <!-- invisible fields -->
                 <field name="name" invisible="1"/>
                 <field name="challan_generated" invisible="1"/>
+                <field name="challan_inprogress" invisible="1"/>
 
                 <!-- challan generated indication -->
                 <div    attrs="{'invisible' : [('challan_generated', '=', False)]}"
@@ -60,6 +67,12 @@
                                 border-radius: 5px; font-weight: bold; color: red;
                                 text-align: center; font-size:20px;">
                     <span> Challan Generated </span>
+                </div>
+                <div    attrs="{'invisible' : [('challan_inprogress', '=', False)]}"
+                        style="background-color: #14adb3; padding-top: 5px; padding-bottom: 5px; 
+                                border-radius: 5px; font-weight: bold; color: black;
+                                text-align: center; font-size:20px;">
+                    <span> Generating Challan </span>
                 </div>
 
                 <!-- header -->
@@ -76,13 +89,13 @@
                         </group>
                         <group name="filter_journal">
                             <field name="company_id" invisible="1"/>
-                            <field name="journal_id"/>
+                            <field name="journal_id" options="{'no_create': True, 'no_create_edit': True}"/>
                         </group>
                     </group>
                     <group name="filter_school_bills">
-                        <field name="branch_ids" widget="many2many_tags"/>
-                        <field name="class_ids" widget="many2many_tags"/>
-                        <field name="enrollment_status_ids" widget="many2many_tags"/>
+                        <field name="branch_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" />
+                        <field name="class_ids" widget="many2many_tags" domain="[('school_id','in',branch_ids)]" options="{'no_create': True, 'no_create_edit': True}" />
+                        <field name="enrollment_status_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" />
                     </group>
                 </sheet>
 
