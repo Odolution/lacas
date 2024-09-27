@@ -23,7 +23,7 @@
         'reports/dues_assesment_sheet.xml',
         'reports/fee_challan_student_wise.xml',
     ],
-    "images": [],
+    "images": ['static/src/img/bill.jpeg'],
     "auto_install": False,
     "application": True,
     "installable": True,

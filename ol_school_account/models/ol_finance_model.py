@@ -319,18 +319,20 @@ class TuitionPlanInstallment(models.Model):
         invoice_date = self[0].real_date
         real_date = self[0].real_date
         move_vals_list = []
+        value = origin_plan.student_id.relationship_ids
         # We build several sale move depending on
         for family in origin_plan.student_id.family_ids:
             if not family.invoice_address_id:
                 raise UserError(_("Family %s[%s] doesn't have an invoice address!", family.name, family.id))
-            move_vals = self._prepare_invoice_values_for_family(plan, journal, family, lines, real_date, invoice_date)
+            move_vals = self._prepare_invoice_values_for_family(plan, journal, family, lines, real_date, invoice_date,value)
             if not move_vals:
                 continue
             move_vals_list.append(move_vals)
         return move_vals_list
 
-    def _prepare_invoice_values_for_family(self, plan, journal, family, lines, real_date, invoice_date):
+    def _prepare_invoice_values_for_family(self, plan, journal, family, lines, real_date, invoice_date,value):
         move_line_vals = []
+        id = 0
         for line in lines.filtered(lambda l: family in l.plan_id.student_id.family_ids):
             line_vals = line.prepare_invoice_line_values(family)
             if line_vals["price_unit"]:
@@ -339,11 +341,21 @@ class TuitionPlanInstallment(models.Model):
             return False
         if not family.invoice_address_id:
             raise UserError(_("The family %s doesn't have invoice address!", family.name))
-
+        for rec in value:
+            if rec:
+                if rec.relationship_type_id.name == "Father":
+                    id = rec.individual_id.partner_id.id
+                    break
+                else:
+                    id = rec.individual_id.partner_id.id
+                    break
+            else:
+                id = family.invoice_address_id.id
+                
         move_vals = {
             'move_type': 'out_invoice',
             'invoice_date': invoice_date,
-            'partner_id': family.invoice_address_id.id,
+            'partner_id': id,
             'family_id': family.id,
             'invoice_line_ids': move_line_vals,
             'company_id': plan.company_id.id,

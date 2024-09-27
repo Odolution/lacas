@@ -47,6 +47,10 @@
             'ol_school_manager/static/src/xml/views.xml'
             ],
         'web.assets_backend': [
+            
+            'ol_school_manager/static/src/webclient/**/*',
+
+
             'ol_school_manager/static/src/js/backend/*',
             'ol_school_manager/static/src/scss/*',
 
@@ -60,7 +64,7 @@
 
         'web.tests_assets': [
             'ol_school_manager/static/tests/switch_school_menu.js'
-            ]
+            ],
     },
 
     'license': 'OPL-1',

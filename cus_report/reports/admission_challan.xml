@@ -48,7 +48,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="o.name"/>
+
+																	<t t-esc="o.name" />
+
 																</strong>
 															</td>
 														</tr>
@@ -58,7 +60,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="'100225008' + o.name"/>
+
+																	<t t-esc="'100225008' + o.name" />
+
 																</strong>
 															</td>
 														</tr>
@@ -68,7 +72,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>
+
+																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+
 																</strong>
 															</td>
 														</tr>
@@ -79,7 +85,9 @@
 															<td style="width: 30%; font-size:12px;">
 																<span style="background-color: yellow;">
 																	<strong>
-																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')"/>
+
+																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+
 																	</strong>
 																</span>
 															</td>
@@ -91,12 +99,54 @@
 											<!-- Right side with image -->
 											<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
 											  <img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+							<!-- <div>
+								<table class="table table-dark" style="width:100%;">
+									<tbody>
+										<tr>
+											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
+												Bill Number:
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.name" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left;color: grey; font-size:12px; width: 30%;">
+												Issue Date :
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left; color: grey; font-size:12px; width: 30%;">
+												Due Date :
+											</td>
+											<td>
+												<span style="background-color: yellow; width: 70%; font-size:12px;">
+													<strong>
+														<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+													</strong>
+												</span>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div> -->
+							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
+
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
@@ -398,7 +448,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="o.name"/>
+
+																	<t t-esc="o.name" />
+
 																</strong>
 															</td>
 														</tr>
@@ -408,7 +460,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="'100225008' + o.name"/>
+
+																	<t t-esc="'100225008' + o.name" />
+
 																</strong>
 															</td>
 														</tr>
@@ -418,7 +472,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>
+
+																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+
 																</strong>
 															</td>
 														</tr>
@@ -429,7 +485,9 @@
 															<td style="width: 30%; font-size:12px;">
 																<span style="background-color: yellow;">
 																	<strong>
-																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')"/>
+
+																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+
 																	</strong>
 																</span>
 															</td>
@@ -441,12 +499,54 @@
 											<!-- Right side with image -->
 											<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
 											  <img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+							<!-- <div>
+								<table class="table table-dark" style="width:100%;">
+									<tbody>
+										<tr>
+											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
+												Bill Number:
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.name" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left;color: grey; font-size:12px; width: 30%;">
+												Issue Date :
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left; color: grey; font-size:12px; width: 30%;">
+												Due Date :
+											</td>
+											<td>
+												<span style="background-color: yellow; width: 70%; font-size:12px;">
+													<strong>
+														<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+													</strong>
+												</span>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div> -->
+							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
+
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
@@ -746,7 +846,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="o.name"/>
+
+																	<t t-esc="o.name" />
+
 																</strong>
 															</td>
 														</tr>
@@ -756,7 +858,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="'100225008' + o.name"/>
+
+																	<t t-esc="'100225008' + o.name" />
+
 																</strong>
 															</td>
 														</tr>
@@ -766,7 +870,9 @@
 															</td>
 															<td style="width: 30%; font-size:12px;">
 																<strong>
-																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')"/>
+
+																	<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+
 																</strong>
 															</td>
 														</tr>
@@ -777,7 +883,9 @@
 															<td style="width: 30%; font-size:12px;">
 																<span style="background-color: yellow;">
 																	<strong>
-																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')"/>
+
+																		<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+
 																	</strong>
 																</span>
 															</td>
@@ -789,12 +897,54 @@
 											<!-- Right side with image -->
 											<td style="width: 60px; height:70px ; text-align: center; vertical-align: top;">
 											  <img t-if="o.company_id.bill" t-att-src="image_data_uri(o.company_id.bill)" height="50" width="50" alt="Logo"/>
+
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<hr style="height: 1px; border-width: 0; color: black; background-color: black;"/>
+							<!-- <div>
+								<table class="table table-dark" style="width:100%;">
+									<tbody>
+										<tr>
+											<td style="text-align: left;color: grey;  width: 30%; font-size:12px;">
+												Bill Number:
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.name" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left;color: grey; font-size:12px; width: 30%;">
+												Issue Date :
+											</td>
+											<td style="width: 70%; font-size:12px;">
+												<strong>
+													<t t-esc="o.invoice_date.strftime('%d-%m-%Y')" />
+												</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left; color: grey; font-size:12px; width: 30%;">
+												Due Date :
+											</td>
+											<td>
+												<span style="background-color: yellow; width: 70%; font-size:12px;">
+													<strong>
+														<t t-esc="o.invoice_date_due.strftime('%d-%m-%Y')" />
+													</strong>
+												</span>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div> -->
+							<hr style="height: 1px; border-width: 0; color: black; background-color: black;" />
+
 							<div>
 								<table class="table table-dark" style="width:100%;">
 									<tbody>
