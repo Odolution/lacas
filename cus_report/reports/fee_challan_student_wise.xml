@@ -1237,15 +1237,15 @@
 										</span>
 										<!-- Yasir -->
 										<p style="padding-inline: 7px; margin: 2px 10px 10px 10px;  font-size: 8px; color: grey;">
-											In case of any query please contact the school office or the LACAS accounts department. 
-									The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
-									<br/>
-								  Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
-								  Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
-								  Security is refundable within 6 months of withdrawal or leaving. For A level students,
-								  security is refundable after completion of A level.
-									<br/>
-									Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
+													In case of any query please contact the school office or the LACAS accounts department. 
+											The amount can be deposited through Cheque of Bank Alfalah or cash at any branch of Bank Alfalah except Alfalah Islamic Branch.
+											<br/>
+											Online payment using 1 Bill option. Debit/Credit card is also available as per details mentioned on LACAS website. 
+											Security is refundable only if one month's advance notice is given in writing or one month's advance fee is paid. 
+											Security is refundable within 6 months of withdrawal or leaving. For A level students,
+											security is refundable after completion of A level.
+											<br/>
+											Bank will not be responsible for any financial loss in case Deposit Slip/ Challan bears rubber stamp impression instead of FBP (Flatbed Printer endorsement).
 										</p>
 									</div>
 									<br />
@@ -1296,22 +1296,23 @@
 								</div>
 							</div>
 						</div>
-						<div style="">
-							<table class="table" style="width:100%; ">
-								<tbody style="">
-									<td style="padding-left: 22%;">
-										Student Copy
-									</td>
-									<td style="padding-right: 12%;">
-										Office Copy
-									</td>
-									<td style="">
-										Bank Copy
-									</td>
-								</tbody>
-							</table>
-						</div>
-						<p style="page-break-after:always;" />
+						<!-- </div> -->
+							<div style="">
+								<table class="table" style="width:100%; ">
+									<tbody style="">
+										<td style="padding-left: 22%;">
+											Student Copy
+										</td>
+										<td style="padding-right: 12%;">
+											Office Copy
+										</td>
+										<td style="">
+											Bank Copy
+										</td>
+									</tbody>
+								</table>
+							</div>
+							<p style="page-break-after:always;" />
 					</t>
 				</t>
 			</t>
