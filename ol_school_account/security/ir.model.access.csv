@@ -35,3 +35,5 @@ access_update_tuition_plan_sale,access.update.tuition.plan.sale,model_update_tui
 access_tuition_plan_family_prices_user,access.tuition.plan.family.prices.user,model_tuition_plan_family_prices,base.group_user,1,0,0,0
 
 ol_school_account.access_ol_school_account_concession_plan_line,access_ol_school_account_concession_plan_line,ol_school_account.model_concession_plan_line,,1,1,1,1
+
+ol_school_account.account_student_bulk_concessions,access_student_bulk_concessions,ol_school_account.model_student_bulk_concessions,,1,1,1,1

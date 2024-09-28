@@ -17,7 +17,7 @@ from odoo.tools import float_is_zero, float_compare
 
 import datetime
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 # create.bulk.tuition.plan 
 
@@ -807,5 +807,36 @@ class UpdateTuitionPLan(models.TransientModel):
                         _logger.error(e)
                         raise UserError(msg)
 
+
+# Add Bulk Concessions
+class StudentConcessions(models.TransientModel):
+    _name = 'student.bulk.concessions'
+    _description = 'Create Bulk Concession Plans for Students'
+
+    student_ids = fields.Many2many('school.student', string='School Students')
+    discount_charges_ids = fields.Many2many('ol.discount.charges', string='Discount Charges')
+
+    @api.model
+    def default_get(self, fields):
+        defaults = super().default_get(fields)
+        defaults.update({
+            'student_ids' : self.env.context.get('active_ids', False)
+        })
+        return defaults
+    
+
+    def action_confirm(self):
+        for rec in self:
+            if not rec.discount_charges_ids:
+                continue
+            
+            for student in rec.student_ids:
+                for discount_charge in rec.discount_charges_ids:
+                    self.env['concession.plan.line'].create({
+                        'student_id' : student.id,
+                        'discount_name' : discount_charge.id,
+                        'discount_product' : discount_charge.product_id.id
+                    })
+                student.add_discount_plan()
 
 

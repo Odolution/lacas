@@ -200,6 +200,21 @@ class Student(models.Model):
 
     concession_line_ids     =   fields.One2many('concession.plan.line', 'student_id', string="Concession Line")
 
+    # open wizard for buld concession plans creation
+    def action_open_concession_plan_wizard(self):
+        return {
+            'name': 'Concession Plans',
+            'type': 'ir.actions.act_window',
+            'res_model': 'student.bulk.concessions',
+            'view_mode': 'form',
+            'view_id': self.env.ref('ol_school_account.student_bulk_concessions_form').id,
+            'target': 'new',
+            'context': {
+                'active_ids' : self.ids,
+            }
+        }
+
+
     def add_discount_plan(self):
         # raise ValidationError(str(self.tuition_plan_ids))
 

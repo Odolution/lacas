@@ -196,4 +196,36 @@
       </form>
     </field>
   </record>
+
+  <!-- Add Bulk Concessions -->
+
+  <record id="student_bulk_concessions_wizard_open" model="ir.actions.server">
+    <field name="name">Add Concession Plans</field>
+    <field name="model_id" ref="model_school_student"/>
+    <field name="binding_model_id" ref="model_school_student"/>
+    <field name="state">code</field>
+    <field name="code">
+        action = records.action_open_concession_plan_wizard()
+    </field>
+  </record>
+
+  <record id="student_bulk_concessions_form" model="ir.ui.view">
+    <field name="name">student.bulk.concessions.form</field>
+    <field name="model">student.bulk.concessions</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+              <group>
+                <field name="student_ids" widget="many2many_tags"/>
+                <field name="discount_charges_ids" widget="many2many_tags"/>
+              </group>
+            </sheet>
+            <footer>
+              <button name="action_confirm" string="Confirm" type="object" class="btn-primary" />
+              <button string="Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+  
 </odoo>
