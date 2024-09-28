@@ -222,7 +222,9 @@ class Student(models.Model):
 
             final_concession_list = [Command.create(vals) for vals in final_concession_list]
 
-            raise ValidationError(str(final_concession_list))
+            plan.write({'line_ids': final_concession_list})
+
+            # raise ValidationError(str(final_concession_list))
 
         
 
