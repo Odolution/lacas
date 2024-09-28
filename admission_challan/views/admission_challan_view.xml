@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="ol_school_manager.school_student_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                    <button name="%(admission_challan.action_create_admission_challan_wizard)d" context="{'default_student_id': active_id}" string="Create Admission Challan" type="action"/>
+                    <button name="%(admission_challan.action_create_admission_challan_wizard)d" context="{'default_student_id': active_id}" string="Create Student Fee Data" type="action"/>
                 </xpath>
             </field>
         </record>
