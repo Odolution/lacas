@@ -325,7 +325,7 @@ class TuitionPlanInstallment(models.Model):
         real_date = self[0].real_date
         move_vals_list = []
         value = origin_plan.student_id.relationship_ids
-        raise UserError([str(values),'hit'])
+        raise UserError([str(value),'hit'])
         # We build several sale move depending on
         for family in origin_plan.student_id.family_ids:
             if not family.invoice_address_id:
