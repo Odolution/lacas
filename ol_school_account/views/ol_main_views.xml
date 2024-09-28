@@ -176,7 +176,7 @@
 
         <page name="concession" string="Concession">
 
-              <button name="add_discount_plan" string="Add to Student Fee Data"/>
+              <button name="add_discount_plan" type="object" string="Add to Student Fee Data"/>
             
               <field name="concession_line_ids">
                 <tree editable="bottom">
