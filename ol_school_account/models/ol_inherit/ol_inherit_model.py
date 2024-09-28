@@ -205,26 +205,25 @@ class Student(models.Model):
 
         for plan in self.tuition_plan_ids:
 
-            
+            if plan.state == 'posted':
 
-            installment_obj = plan.line_ids[-1].installment_ids
-            line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
+                installment_obj = plan.line_ids[-1].installment_ids
+                line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
 
-            final_concession_list = []
+                final_concession_list = []
 
-            for discount in line_concession_list:
+                for discount in line_concession_list:
 
-                if discount.get('product_id') not in plan.line_ids.mapped('product_id.id'):
-                    final_concession_list.append(discount)
+                    if discount.get('product_id') not in plan.line_ids.mapped('product_id.id'):
+                        final_concession_list.append(discount)
 
-            # raise ValidationError(str(final_concession_list))
-            # raise ValidationError([line_concession_list[0].get('product_id'), plan.line_ids.mapped('product_id.id')])
+                # raise ValidationError(str(final_concession_list))
+                # raise ValidationError([line_concession_list[0].get('product_id'), plan.line_ids.mapped('product_id.id')])
 
-            final_concession_list = [Command.create(vals) for vals in final_concession_list]
+                final_concession_list = [Command.create(vals) for vals in final_concession_list]
 
-            plan.write({'line_ids': final_concession_list})
+                plan.write({'line_ids': final_concession_list})
 
-            # raise ValidationError(str(final_concession_list))
 
         
 
