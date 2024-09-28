@@ -326,7 +326,7 @@ class TuitionPlanInstallment(models.Model):
         move_vals_list = []
         value = origin_plan.student_id.relationship_ids
         if not value:
-            raise UserError(_("Their is no Relationship on [%s] Student", student_id.olf_id))
+            raise UserError(_("Their is no Relationship on [%s] Student", origin_plan.student_id.olf_id))
         # We build several sale move depending on
         for family in origin_plan.student_id.family_ids:
             if not family.invoice_address_id:
