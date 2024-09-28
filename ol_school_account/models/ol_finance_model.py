@@ -316,6 +316,9 @@ class TuitionPlanInstallment(models.Model):
         return self.env['account.move'].create(vals_list)
 
     def _prepare_invoice_values(self, lines, journal, origin_plan=False):
+
+        raise UserError('hittt')
+
         self._ensure_tuition_same_configuration()
         plan = origin_plan or self[0].tuition_plan_id
         invoice_date = self[0].real_date
