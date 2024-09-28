@@ -1377,8 +1377,9 @@ class TuitionPlan(models.Model):
             if force or plan._is_tuition_pending_to_create_charge():
                 
                 other_plans = plan._find_other_plans_in_same_group()
-                raise UserError('hit')
+                
                 next_installments = other_plans.mapped('next_installment_id')
+                raise UserError('hitt')
                 if next_installments:
                     next_installments.create_recurring_charge(origin_plan=plan)
 
