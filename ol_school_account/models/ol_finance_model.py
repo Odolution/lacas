@@ -1228,6 +1228,7 @@ class TuitionPlan(models.Model):
 
     def button_draft(self):
         self.write({'state': 'draft'})
+        self.write({'odl_state': 'draft'})
 
     def button_cancel(self):
         self.write({'state': 'cancel'})
