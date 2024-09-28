@@ -326,10 +326,10 @@
 
         <filter name="group_by_program_id" string="Program" context="{'group_by': 'program_id'}"/>
 
-        <searchpanel>
+        <!-- <searchpanel>
           <field name="program_id" select="multi" string="School/Program" groupby="school_id" icon="fa-building"
                  color="#4682b4"/>
-        </searchpanel>
+        </searchpanel> -->
       </search>
     </field>
   </record>
