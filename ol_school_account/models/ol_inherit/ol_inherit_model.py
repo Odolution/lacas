@@ -212,13 +212,16 @@ class Student(models.Model):
 
             final_concession_list = []
 
-            raise ValidationError([line_concession_list[0].get('product_id'), plan.line_ids.mapped('product_id.id')])
+            
 
             for discount in line_concession_list:
 
                 if discount.get('product_id') not in plan.line_ids.mapped('product_id.id'):
                     final_concession_list.append(discount)
 
+                    
+            raise ValidationError(str(final_concession_list))
+            # raise ValidationError([line_concession_list[0].get('product_id'), plan.line_ids.mapped('product_id.id')])
             
                 
 
