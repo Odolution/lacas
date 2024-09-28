@@ -1545,20 +1545,20 @@ class TuitionTemplateInstallment(models.Model):
                 } for installment in self]
         return values
 
-    def _get_monthly_date(self):
-        self.ensure_one()
-        if not self.month:
-            return False
-        today = fields.Date.today()
-        if self.day_type == 'last_day':
-            day = 31
-        elif self.day_type == 'day_number':
-            day = int(self.day_of_the_month)
-        else:
-            day = 1
-        next_date = today + relativedelta(month=int(self.month), day=day)
-        next_date = self.move_next_year_if_needed(next_date)
-        return next_date
+    # def _get_monthly_date(self):
+    #     self.ensure_one()
+    #     if not self.month:
+    #         return False
+    #     today = fields.Date.today()
+    #     if self.day_type == 'last_day':
+    #         day = 31
+    #     elif self.day_type == 'day_number':
+    #         day = int(self.day_of_the_month)
+    #     else:
+    #         day = 1
+    #     next_date = today + relativedelta(month=int(self.month), day=day)
+    #     next_date = self.move_next_year_if_needed(next_date)
+    #     return next_date
 
     def get_previous_installment(self):
         sorted_sibling_installments = self.tuition_template_id.installment_ids.sorted('sequence')
