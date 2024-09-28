@@ -1382,7 +1382,7 @@ class TuitionPlan(models.Model):
                 
                 if next_installments:
                     next_installments.create_recurring_charge(origin_plan=plan)
-                    raise UserError(next_installments)
+                    
 
     @api.model
     def create(self, vals):
