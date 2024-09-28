@@ -209,7 +209,10 @@ class Student(models.Model):
 
             installment_obj = plan.line_ids[-1].installment_ids
             line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
-            raise ValidationError(str(line_concession_list[0].get('product_id')))
+            raise ValidationError([line_concession_list[0].get('product_id'), plan.line_ids.mapped('product_id')])
+            # for discount in line_concession_list:
+                
+
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
 
             raise ValidationError(str(line_concession_list))
