@@ -1141,6 +1141,7 @@ class TuitionPlan(models.Model):
             ('first', "First Approval"),
             ('second', "Second Approval"),
             ('done', "Confirm"),
+            ('cancel', "Cancel"),
         ], string="ODL State", default='draft', required=True)
 
     # def discount_addition(self):
@@ -1232,6 +1233,7 @@ class TuitionPlan(models.Model):
 
     def button_cancel(self):
         self.write({'state': 'cancel'})
+        self.write({'odl_state': 'cancel'})
 
     def open_update_values_wizard(self):
         context = {'active_ids': self.ids, 'active_model': self._name, **self._context}
