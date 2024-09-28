@@ -201,7 +201,11 @@ class Student(models.Model):
     concession_line_ids     =   fields.One2many('concession.plan.line', 'student_id', string="Concession Line")
 
     def add_discount_plan(self):
-        raise UserError('hit')
+        raise ValidationError(str(self.tuition_plan_ids))
+
+        # for plan in 
+
+        
 
     @api.constrains('financial_responsibility_ids')
     def _check_category_sum(self):
