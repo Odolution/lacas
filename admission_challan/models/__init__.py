@@ -1,0 +1,1 @@
+from . import tuition_template

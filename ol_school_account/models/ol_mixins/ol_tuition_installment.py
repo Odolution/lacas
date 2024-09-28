@@ -220,12 +220,12 @@ class TuitionPlanMixin(models.AbstractModel):
 
     program_id = fields.Many2one(
         'school.program', required=True, ondelete='restrict', default=lambda self: self.env.program,
-        domain="[('school_id.district_company_ids', '=', company_id)]")
+        domain="[('school_id.district_company_ids', '=', company_id)]", string = "School")
 
     invoice_method = fields.Selection(selection=[
         ('sale', 'Sale order'),
         ('move', 'Invoice'),
-        ], default='sale', required=True)
+        ], default='sale', required=True)                                                   
     post_action_option = fields.Selection(selection=[
         ('nothing', "Do nothing"),
         ('send', "Send"),
@@ -255,3 +255,12 @@ class TuitionPlanMixin(models.AbstractModel):
                 record.tax_country_id = record.fiscal_position_id.country_id
             else:
                 record.tax_country_id = record.company_id.account_fiscal_country_id
+    def send_for_approval(self):
+        for rec in self:
+            rec.state='in_approval'
+    def confirm(self):
+        for rec in self:
+            rec.state='posted'
+    def reset(self):
+        for rec in self:
+            rec.state='draft'

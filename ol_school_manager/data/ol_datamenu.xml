@@ -107,7 +107,8 @@
 
 
   <!-- Misc -->
-  <menuitem id="healthcare_settings_menu" name="Healthcare settings"
+   <!-- ubaid -->
+  <!-- <menuitem id="healthcare_settings_menu" name="Healthcare settings"
             parent="ol_school_manager.school_configuration_menu" sequence="20"/>
 
   <menuitem id="adm_menu_healthcare_allergy"
@@ -120,15 +121,35 @@
 
   <menuitem id="adm_menu_healthcare_medication"
             parent="healthcare_settings_menu" name="Medications"
-            action="action_school_settings_healthcare_medication"/>
+            action="action_school_settings_healthcare_medication"/> -->
 
 
   <menuitem id="school_paremeters_menu" name="School parameters"
             parent="ol_school_manager.school_panel_menu"/>
 
   <!-- People -->
-  <menuitem id="people_management" name="People management" parent="ol_school_manager.school_panel_menu" sequence="10"/>
+  <!-- <menuitem id="people_management" name="People management" parent="ol_school_manager.school_panel_menu" sequence="10"/> -->
+
+  <menuitem id="app_people_management" name="Master Data" sequence="10" web_icon="ol_school_manager,static/icon.png"/>
+
   <menuitem
+          id="app_menu_students" name="Students/ Kids"
+          parent="ol_school_manager.app_people_management"
+          sequence="1"
+          action="action_school_students"/>
+
+  <menuitem id="app_menu_individuals" name="People/ Parents"
+            parent="ol_school_manager.app_people_management"
+            sequence="10"
+            action="action_school_individuals"/>
+
+
+  <menuitem id="app_menu_families" name="Guardians/ Families"
+            parent="ol_school_manager.app_people_management"
+            sequence="10"
+            action="action_school_families"/>
+
+  <!-- <menuitem
           id="menu_students" name="Students"
           parent="ol_school_manager.people_management"
           sequence="1"
@@ -143,15 +164,20 @@
   <menuitem id="menu_families" name="Families"
             parent="ol_school_manager.people_management"
             sequence="10"
-            action="action_school_families"/>
+            action="action_school_families"/> -->
 
   <!-- School structure -->
-
-  <menuitem
+  <!-- ubaid -->
+  <!-- <menuitem
           id="school_structure_menu"
           name="School structure"
           parent="ol_school_manager.school_configuration_menu"
-          sequence="1"/>
+          sequence="1"/> -->
+  <menuitem
+          id="school_structure_menu"
+          name="School structure"
+          parent="ol_school_manager.school_panel_menu"
+          sequence="21"/>
 
   <menuitem
           id="school_districts_menuitem"
@@ -161,13 +187,22 @@
           action="ol_school_manager.school_districts_action"
   />
 
-  <menuitem
+  <!-- <menuitem
           id="school_schools_menuitem"
           parent="ol_school_manager.school_structure_menu"
           name="School"
           sequence="20"
           action="ol_school_manager.school_schools_action"
+  /> -->
+
+  <menuitem
+          id="school_campus_menuitem"
+          parent="ol_school_account.school_finance_management_menu"
+          name="Campus"
+          sequence="20"
+          action="ol_school_manager.school_schools_action"
   />
+
 
   <menuitem
           id="school_programs_menuitem"
@@ -194,7 +229,8 @@
   />
 
   <!-- Wizards -->
-  <menuitem id="ol_school_manager_migration_tool_menu_string" name="Migration Tool"
+   <!-- ubaid -->
+  <!-- <menuitem id="ol_school_manager_migration_tool_menu_string" name="Migration Tool"
             parent="ol_school_manager.school_configuration_menu" sequence="100"/>
 
   <menuitem
@@ -202,6 +238,20 @@
           name="Migration Tool Method"
           action="ol_school_manager.ol_migration_tool_action"
           parent="ol_school_manager.ol_school_manager_migration_tool_menu_string"
+          sequence="100"/> -->
+
+  <!-- process start  -->
+
+  <menuitem id="ol_school_manager_ol_discount_charges" name="Discount"
+            parent="ol_school_manager.school_configuration_menu" sequence="100"/>
+
+  <menuitem
+          id="ol_school_manager_discount_charges_menu"
+          name="Discount Charges"
+          action="ol_school_manager.ol_discount_charges_action"
+          parent="ol_school_manager.ol_school_manager_ol_discount_charges"
           sequence="100"/>
 
+
+  <!-- process end  -->
 </odoo>

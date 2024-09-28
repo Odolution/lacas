@@ -9,6 +9,14 @@ from odoo.tools.safe_eval import safe_eval, test_python_expr
 
 _logger = logging.getLogger(__name__)
 
+# process start
+class OlDiscountClass(models.Model):
+    _name = 'ol.discount.charges'
+    
+    name        = fields.Char('Discount Name')
+    product_id  = fields.Many2one('product.product', string="Discount Product")
+
+# process end
 
 class OlMigrationToolWizard(models.TransientModel):
     _name = 'ol.migration.tool.wizard'

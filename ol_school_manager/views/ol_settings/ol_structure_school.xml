@@ -15,9 +15,10 @@
       <search>
         <field name="name"/>
         <field name="company_ids"/>
-        <searchpanel>
+        <!-- ubaid -->
+        <!-- <searchpanel>
           <field name="company_ids" select="multi" string="Company" icon="fa-building" color="#4682b4"/>
-        </searchpanel>
+        </searchpanel> -->
       </search>
     </field>
   </record>
@@ -130,9 +131,10 @@
       <search>
         <field name="name"/>
         <field name="district_id"/>
-        <searchpanel>
+        <!-- ubaid -->
+        <!-- <searchpanel>
           <field name="district_id" select="multi" string="Districts" icon="fa-building" color="#4682b4"/>
-        </searchpanel>
+        </searchpanel> -->
       </search>
     </field>
   </record>
@@ -230,11 +232,11 @@
         <field name="parent_id"/>
 
         <filter name="filter_root_parent" string="Root parent" domain="[('parent_id', '=', False)]"/>
-
-        <searchpanel>
+        <!-- ubaid -->
+        <!-- <searchpanel>
           <field name="school_id" select="multi" string="District/School" groupby="district_id" icon="fa-building"
                  color="#4682b4"/>
-        </searchpanel>
+        </searchpanel> -->
       </search>
     </field>
   </record>
@@ -410,12 +412,12 @@
         <filter name="group_by_program_id" string="Program" context="{'group_by': 'program_id'}"/>
         <filter name="group_by_school_id" string="School" context="{'group_by': 'school_id'}"/>
         <filter name="group_by_district_id" string="District" context="{'group_by': 'district_id'}"/>
-
-        <searchpanel>
+        <!-- ubaid -->
+        <!-- <searchpanel>
           <field name="program_id" select="multi" string="School/Program" groupby="school_id" icon="fa-building"
                  color="#4682b4"/>
           <field name="district_id" select="multi" icon="fa-flag" color="#4682b4"/>
-        </searchpanel>
+        </searchpanel> -->
       </search>
     </field>
   </record>

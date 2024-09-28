@@ -868,6 +868,7 @@ class RelationshipType(models.Model):
 
 #people.management.student
 
+
 class SchoolStudent(models.Model):
     """ Student model """
 
@@ -918,7 +919,32 @@ class SchoolStudent(models.Model):
     district_ids = fields.Many2many('school.district', compute='_compute_academics', store=True)
     enrollment_status_ids = fields.Many2many(
         'school.enrollment.status', string="Enrollment status", store=True, compute='_compute_academics')
+    #Huzaifa COO
+    ol_enrollment_status = fields.Selection([
+        ('enrolled', 'Enrolled'),
+        ('admissions', 'Admissions'),
+        ('withdrawn', 'Withdrawn'),
+        ('inactive', 'Inactive'),
+        ('graduate', 'Graduate'),
+        ('pre-enrolled', 'Pre-Enrolled'),
+    ],compute='_compute_enrollment', string='Enrollment Status')
 
+    def _compute_enrollment(self):
+        for rec in self:
+            if rec.enrollment_status_ids.type == 'enrolled':
+                rec["ol_enrollment_status"] = 'enrolled'
+            elif rec.enrollment_status_ids.type == 'inactive':
+                rec["ol_enrollment_status"] = 'inactive'
+            elif rec.enrollment_status_ids.type == 'admissions':
+                rec["ol_enrollment_status"] = 'admissions'
+            elif rec.enrollment_status_ids.type == 'graduate':
+                rec["ol_enrollment_status"] = 'graduate'
+            elif rec.enrollment_status_ids.type == 'withdrawn':
+                rec["ol_enrollment_status"] = 'withdrawn'
+            elif rec.enrollment_status_ids.type == 'pre-enrolled':
+                rec["ol_enrollment_status"] = 'pre-enrolled'
+            else:
+                rec["ol_enrollment_status"] = False
     # wizard related resource field
     wizard_student_id = fields.Integer()
     reference_id = fields.Char('Student Reference ID')
@@ -927,6 +953,11 @@ class SchoolStudent(models.Model):
     enrollment_state_ids = fields.One2many('school.student.enrollment.state', 'student_id', string="Enroll states")
     relationship_ids = fields.One2many('school.student.relationship', 'student_id', string="Relationships")
     homeroom = fields.Char(string="Homeroom")
+
+    
+
+
+
 
     ##############################
     # Compute and search methods #

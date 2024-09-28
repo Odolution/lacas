@@ -171,29 +171,46 @@
     <field name="model">school.student</field>
     <field name="inherit_id" ref="ol_school_manager.school_student_view_form" />
     <field name="arch" type="xml">
-      <notebook position="inside">
-        <page name="finance" string="Finance">
-          <group>
-            <field name="financial_responsibility_ids">
-              <tree editable="bottom">
-                <field name="student_family_ids" invisible="1"/>
-                <field name="family_id" domain="[('id', 'in', student_family_ids)]" />
-                <field name="product_category_id" />
-                <field name="percentage" widget="percentage"/>
-              </tree>
-            </field>
-          </group>
-        </page>
-      </notebook>
+
+      <xpath expr="//notebook[@name='nested_notebook']" position="inside">
+
+        <page name="concession" string="Concession">
+            
+              <field name="concession_line_ids">
+                <tree editable="bottom">
+
+                  <field name="discount_name"/>
+                  <field name="discount_product" />                  
+                </tree>
+              </field>
+            
+          </page>
+      </xpath>
+      <!-- ubaid -->
+      <!-- <xpath expr="//notebook[@name='nested_notebook']" position="inside">
+
+        <page name="finance" string="Monetary Affairs">
+            <group>
+              <field name="financial_responsibility_ids">
+                <tree editable="bottom">
+                  <field name="student_family_ids" invisible="1"/>
+                  <field name="family_id" domain="[('id', 'in', student_family_ids)]" />
+                  <field name="product_category_id" />
+                  <field name="percentage" widget="percentage"/>
+                </tree>
+              </field>
+            </group>
+          </page>
+      </xpath>
 
       <xpath expr="//page[@name='relationships']/field[@name='relationship_ids']/tree" position="inside">
         <field name="invoice_recipient" optional="show"/>
-      </xpath>
+      </xpath> -->
 
       <div name="button_box" position="inside">
         <button name="action_view_tuition_plans" type="object" class="oe_stat_button" icon="fa-refresh"
                 attrs="{'invisible': [('tuition_plan_count', '=', 0)]}">
-          <field name="tuition_plan_count" widget="statinfo" string="Tuition plans"/>
+          <field name="tuition_plan_count" widget="statinfo" string="Student Fees Data"/>
         </button>
       </div>
 
@@ -268,7 +285,7 @@
     <field name="name">tuition.plan.view.tree</field>
     <field name="model">tuition.plan</field>
     <field name="arch" type="xml">
-      <tree string="Tuition Plans">
+      <tree string="Student Fees Data">
         <field name="name"/>
         <field name="student_id"/>
         <field name="next_installment_date"/>
@@ -280,15 +297,16 @@
     <field name="name">tuition.plan.view.form</field>
     <field name="model">tuition.plan</field>
     <field name="arch" type="xml">
-      <form string="Tuition Plan">
+      <form string="Student Fees Data">
         <field name="active" invisible="1"/>
         <field name="id" invisible="1"/>
         <field name="posted_before" invisible="1"/>
         <field name="company_id" invisible="1"/>
         <field name="currency_id" invisible="1"/>
         <header>
+        <!-- process start  -->
           <button name="button_confirm" type="object"
-                  string="Confirm" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                  string="Confirm" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('odl_state', '!=', 'done')]}"/>
           <button name="button_draft" type="object"
                   string="Reset to draft" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
           <button name="button_cancel" type="object"
@@ -297,12 +315,26 @@
                   groups="sales_team.group_sale_manager"
                   confirm="This will create charges for the next installment!"
                   string="Create charges" attrs="{'invisible': [('state', '!=', 'posted')]}"/>
-          <button name="open_update_values_wizard" type="object"
+          <!-- <button name="open_update_values_wizard" type="object"
                   confirm="This can overwrite user modifications!"
                   groups="sales_team.group_sale_salesman"
-                  string="Update values" />
+                  string="Update values" /> -->
           <field name="state" widget="statusbar"/>
         </header>
+        
+        <header>
+          <button name="odl_first_approval" type="object"
+                  string="Submit for first Approval" attrs="{'invisible': [('odl_state', '!=', 'draft'),]}"/>
+
+          <button name="odl_second_approval" type="object"
+                  string="Submit for second Approval" attrs="{'invisible': [('odl_state', '!=', 'first')]}"/>
+          
+          <button name="odl_confirm" type="object"
+                  string="Confirm" attrs="{'invisible': [('odl_state', '!=', 'second')]}"/>
+
+          <field name="odl_state" widget="statusbar"/>
+        </header>
+        <!-- process end  -->
         <sheet>
           <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
                   attrs="{'invisible': [('active', '=', True)]}"/>
@@ -318,139 +350,144 @@
             </button>
           </div>
 
-          <div class="oe_title" attrs="{}">
-            <label for="name" class="oe_edit_only"/>
-            <h1 attrs="{'invisible': [('posted_before', '=', False)]}">
-              <field name="name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-            </h1>
-            <h1 attrs="{'invisible': [('posted_before', '!=', False)]}">New</h1>
-          </div>
-          <group>
-            <group name="left_group">
-              <field name="student_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-              <field name="tuition_template_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-              <field name="next_installment_id"/>
-              <field name="student_grade_level_ids" widget="many2many_tags"/>
+          <field name="program_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+          <el attrs="{'invisible': [('program_id', '=', False)]}">
+            <div class="oe_title" attrs="{}">
+              <label for="name" class="oe_edit_only"/>
+              <h1 attrs="{'invisible': [('posted_before', '=', False)]}">
+                <field name="name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+              </h1>
+              <h1 attrs="{'invisible': [('posted_before', '!=', False)]}">New</h1>
+            </div>
+            <group>
+              <group name="left_group">
+                <field name="student_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="tuition_template_id" attrs="{'readonly': [('state', '!=', 'draft')]}" string="Fees Structure"/>
+                <field name="next_installment_id"/>
+                <field name="student_grade_level_ids" widget="many2many_tags"/>
+                <!-- process start  -->
+                <!-- <field name="discount_ids" widget="many2many_tags"/> -->
+                <!-- process end  -->
+              </group>
+              <group name="right_group">
+                <label for="pricelist_option" groups="product.group_product_pricelist"/>
+                <div groups="product.group_product_pricelist" class="o_row">
+                  <field name="pricelist_option" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                  <button type="object" name="update_prices"
+                    string=" Update Prices"
+                    help="Recompute all prices based on this pricelist"
+                    class="btn-link mb-1 px-0" icon="fa-refresh"
+                    confirm="This will update all unit prices based on the currently set pricelist."
+                    attrs="{'invisible': [('state', 'in', ['posted','cancel'])]}"/>
+                </div>
+                <field name="pricelist_id"
+                      attrs="{'invisible': [('pricelist_option', '!=', 'fixed_pricelist')], 'required': [('pricelist_option', '=', 'fixed_pricelist')], 'readonly': [('state', '!=', 'draft')]}" />
+                <field name="currency_id" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                      groups="base.group_multi_currency"/>
+                <field name="company_id" attrs="{'readonly': [('state', '!=', 'draft')]}"
+                      groups="base.group_multi_company"/>
+                <!--              <field name="program_id" groups="school.group_school_multi_program"/>-->
+                <field name="journal_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="payment_term_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="merge_group_color" widget="color_picker"/>
+              </group>
             </group>
-            <group name="right_group">
-              <label for="pricelist_option" groups="product.group_product_pricelist"/>
-              <div groups="product.group_product_pricelist" class="o_row">
-                <field name="pricelist_option" attrs="{'readonly': [('state', '!=', 'draft')]}" />
-                <button type="object" name="update_prices"
-                  string=" Update Prices"
-                  help="Recompute all prices based on this pricelist"
-                  class="btn-link mb-1 px-0" icon="fa-refresh"
-                  confirm="This will update all unit prices based on the currently set pricelist."
-                  attrs="{'invisible': [('state', 'in', ['posted','cancel'])]}"/>
-              </div>
-              <field name="pricelist_id"
-                     attrs="{'invisible': [('pricelist_option', '!=', 'fixed_pricelist')], 'required': [('pricelist_option', '=', 'fixed_pricelist')], 'readonly': [('state', '!=', 'draft')]}" />
-              <field name="currency_id" attrs="{'readonly': [('state', '!=', 'draft')]}"
-                     groups="base.group_multi_currency"/>
-              <field name="company_id" attrs="{'readonly': [('state', '!=', 'draft')]}"
-                     groups="base.group_multi_company"/>
-              <!--              <field name="program_id" groups="school.group_school_multi_program"/>-->
-              <field name="program_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-              <field name="journal_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-              <field name="payment_term_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-              <field name="merge_group_color" widget="color_picker"/>
-            </group>
-          </group>
-          <notebook>
-            <page name="lines" string="Lines">
-              <field name="line_ids"
-                     context="{'default_currency_id': currency_id, 'default_journal_id': journal_id, 'default_tuition_plan_id': id}"
-                     attrs="{'readonly': ['|', ('id', '=', False), ('state', '!=', 'draft')]}"
-                     options="{'no_open': True}" >
-                <tree editable="bottom">
-                  <field name="sequence" widget="handle"/>
-                  <field name="company_id" invisible="1"/>
-                  <field name="template_installment_ids" invisible="1"/>
-                  <field name="plan_installment_ids" invisible="1"/>
-                  <field name="plan_pricelist_option" invisible="1"/>
-                  <field name="plan_pricelist_id" invisible="1"/>
-                  <field name="student_families" invisible="1"/>
-                  <field name="product_id" optional="show"/>
-                  <field name="name" widget="section_and_note_text"/>
+            <notebook>
+              <page name="lines" string="Lines">
+                <field name="line_ids"
+                      context="{'default_currency_id': currency_id, 'default_journal_id': journal_id, 'default_tuition_plan_id': id}"
+                      attrs="{'readonly': ['|', ('id', '=', False), ('state', '!=', 'draft')]}"
+                      options="{'no_open': True}" >
+                  <tree editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="template_installment_ids" invisible="1"/>
+                    <field name="plan_installment_ids" invisible="1"/>
+                    <field name="plan_pricelist_option" invisible="1"/>
+                    <field name="plan_pricelist_id" invisible="1"/>
+                    <field name="student_families" invisible="1"/>
+                    <field name="product_id" optional="show"/>
+                    <field name="name" widget="section_and_note_text"/>
 
-                  <field name="installment_ids"
-                         context="{'default_tuition_plan_id': parent.id}"
-                         attrs="{'readonly': [('form_create_mode', '=', True)]}"
-                         widget="many2many_tags" optional="show"/>
+                    <field name="installment_ids"
+                          context="{'default_tuition_plan_id': parent.id}"
+                          attrs="{'readonly': [('form_create_mode', '=', True)]}"
+                          widget="many2many_tags" optional="show"/>
 
-                  <field name="account_id" groups="account.group_account_readonly"
-                         options="{'no_create': True}"
-                         domain="[('deprecated', '=', False), ('user_type_id.type', 'not in', ('receivable', 'payable')), ('company_id', '=', company_id), ('is_off_balance', '=', False)]"/>
-                  <field name="analytic_account_id"
-                         attrs="{'column_invisible': [('parent.invoice_method', 'not in', ['move'])]}"
-                         groups="analytic.group_analytic_accounting" optional="show"/>
-                  <field name="analytic_tag_ids" string="Analytic tags" widget="many2many_tags"
-                         groups="analytic.group_analytic_tags" optional="show"/>
-                  <field name="quantity"/>
-                  <field name="unit_price"
-                         widget="ol_school_account_family_prices" />
-                  <field name="journal_id" optional="hide"/>
-                  <field name="template_line_id" invisible="1"/>
-                  <field name="currency_id" groups="base.group_multi_currency" optional="hide"/>
-                  <field name="form_create_mode" invisible="1"/>
-                  <field name="tax_ids"
-                         domain="[('type_tax_use','=','sale'), ('company_id','=',parent.company_id), ('country_id', '=', parent.tax_country_id)]"
-                         widget="many2many_tags"/>
-                  <field name="discount" string="Disc.%" groups="product.group_discount_per_so_line"
-                         attrs="{'column_invisible': [('parent.pricelist_option', '=', 'invoice_address')]}"
-                         optional="show" widget="product_discount"/>
-                  <field name="price_subtotal" widget="monetary"
-                         groups="account.group_show_line_subtotals_tax_excluded" optional="show"/>
-                  <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included"
-                         optional="show"/>
-                </tree>
-              </field>
-              <group name="note_group" col="6" class="mt-2 mt-md-0">
-                  <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
-                      <field name="tax_totals_json" widget="account-tax-totals-field" nolabel="1" colspan="2"/>
+                    <field name="account_id" groups="account.group_account_readonly"
+                          options="{'no_create': True}"
+                          domain="[('deprecated', '=', False), ('user_type_id.type', 'not in', ('receivable', 'payable')), ('company_id', '=', company_id), ('is_off_balance', '=', False)]"/>
+                    <field name="analytic_account_id"
+                          attrs="{'column_invisible': [('parent.invoice_method', 'not in', ['move'])]}"
+                          groups="analytic.group_analytic_accounting" optional="show"/>
+                    <field name="analytic_tag_ids" string="Analytic tags" widget="many2many_tags"
+                          groups="analytic.group_analytic_tags" optional="show"/>
+                    <field name="quantity"/>
+                    <field name="unit_price"
+                          widget="ol_school_account_family_prices" />
+                    <field name="journal_id" optional="hide"/>
+                    <field name="template_line_id" invisible="1"/>
+                    <field name="currency_id" groups="base.group_multi_currency" optional="hide"/>
+                    <field name="form_create_mode" invisible="1"/>
+                    <field name="tax_ids"
+                          domain="[('type_tax_use','=','sale'), ('company_id','=',parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                          widget="many2many_tags"/>
+                    <field name="discount" string="Disc.%" groups="product.group_discount_per_so_line"
+                          attrs="{'column_invisible': [('parent.pricelist_option', '=', 'invoice_address')]}"
+                          optional="show" widget="product_discount"/>
+                    <field name="price_subtotal" widget="monetary"
+                          groups="account.group_show_line_subtotals_tax_excluded" optional="show"/>
+                    <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included"
+                          optional="show"/>
+                  </tree>
+                </field>
+                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                        <field name="tax_totals_json" widget="account-tax-totals-field" nolabel="1" colspan="2"/>
+                    </group>
+                    <div class="oe_clear"/>
+                </group>
+              </page>
+              <page name="installments" string="Applicable Period">
+                <field name="installment_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                  <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="month"/>
+                    <field name="day_type"/>
+                    <field name="day_of_the_month"/>
+                    <field name="real_date"/>
+                    <field name="template_installment_id" invisible="1" force_save="1"/>
+                  </tree>
+                </field>
+              </page>
+              <page name="recurring_options" string="Recurring options">
+                <group>
+                  <group string="Sales">
+                    <field name="invoice_method"/>
+                    <field name="post_action_option"/>
                   </group>
-                  <div class="oe_clear"/>
-              </group>
-            </page>
-            <page name="installments" string="Installments">
-              <field name="installment_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
-                <tree>
-                  <field name="sequence" widget="handle"/>
-                  <field name="name"/>
-                  <field name="type"/>
-                  <field name="month"/>
-                  <field name="day_type"/>
-                  <field name="day_of_the_month"/>
-                  <field name="real_date"/>
-                  <field name="template_installment_id" invisible="1" force_save="1"/>
-                </tree>
-              </field>
-            </page>
-            <page name="recurring_options" string="Recurring options">
-              <group>
-                <group string="Sales">
-                  <field name="invoice_method"/>
-                  <field name="post_action_option"/>
+                  <group string="Accounting">
+                    <field name="fiscal_position_id"/>
+                    <field name="tax_country_id"/>
+                    <field name="analytic_account_id"
+                          groups="analytic.group_analytic_accounting"
+                          attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('invoice_method', 'not in', ['sale'])]}"/>
+                  </group>
+                  <group string="Mailing">
+                    <field name="sale_mail_template_id"/>
+                    <field name="invoice_mail_template_id"/>
+                  </group>
+                  <group string="Student Fees Data">
+                    <field name="plan_year" />
+                  </group>
                 </group>
-                <group string="Accounting">
-                  <field name="fiscal_position_id"/>
-                  <field name="tax_country_id"/>
-                  <field name="analytic_account_id"
-                         groups="analytic.group_analytic_accounting"
-                         attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('invoice_method', 'not in', ['sale'])]}"/>
-                </group>
-                <group string="Mailing">
-                  <field name="sale_mail_template_id"/>
-                  <field name="invoice_mail_template_id"/>
-                </group>
-                <group string="Tuition plan">
-                  <field name="plan_year" />
-                </group>
-              </group>
-            </page>
-            <page name="discounts" string="Discounts" invisible="1">
-            </page>
-          </notebook>
+              </page>
+              <page name="discounts" string="Discounts" invisible="1">
+              </page>
+            </notebook>
+          </el>
         </sheet>
         <div class="oe_chatter">
           <field name="message_follower_ids" groups="base.group_user"/>
@@ -525,7 +562,7 @@
     <field name="name">tuition.plan.view.search</field>
     <field name="model">tuition.plan</field>
     <field name="arch" type="xml">
-      <search string="Search Tuition Plans">
+      <search string="Search Student Fees Data">
         <field name="name"/>
         <separator/>
         <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
@@ -540,7 +577,7 @@
   </record>
 
   <record id="tuition_plan_action" model="ir.actions.act_window">
-    <field name="name">Tuition Plans</field>
+    <field name="name">Student Fees Data</field>
     <field name="res_model">tuition.plan</field>
     <field name="view_mode">kanban,tree,form</field>
     <field name="target">current</field>
@@ -548,11 +585,11 @@
   </record>
 
   <menuitem
-          id="tuition_plan_menu"
-          name="Tuition Plans"
+          id="tuition_plan_menu_app"
+          name="Student Fees Data"
           action="tuition_plan_action"
           parent="tuition_management_menu"
-          sequence="10"
+          sequence="1"
   />
 
       <!-- Family prices -->
@@ -560,7 +597,7 @@
     <field name="name">tuition.plan.family.prices.view.tree</field>
     <field name="model">tuition.plan.family.prices</field>
     <field name="arch" type="xml">
-      <tree string="Tuition Plans" create="0" edit="0" >
+      <tree string="Student Fees Data" create="0" edit="0" >
         <field name="family_id" widget="many2one"/>
         <field name="price" />
         <field name="discount" string="Disc.%" groups="product.group_discount_per_so_line"/>
@@ -574,7 +611,7 @@
     <field name="name">tuition.template.view.tree</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <tree string="Tuition templates">
+      <tree string="Fee Structure">
         <field name="name"/>
       </tree>
     </field>
@@ -584,125 +621,128 @@
     <field name="name">tuition.template.view.form</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <form string="Tuition template">
+      <form string="Fee Structure">
         <header>
-          <button type="object"
-              name="button_new_tuition_plan"
-              class="btn btn-secondary" string="New tuition plan"
-              />
+          <button type="object" name="button_new_tuition_plan" class="btn oe_highlight" string="New Student Fees Data" states='posted'/>
+          <button type="object" name="send_for_approval" class="btn oe_highlight" string="Ask Approval" states='draft'/>
+          <button type="object" name="reset" class="btn btn-secondary" string="Reset" states='posted,in_approval'/>
+          <button type="object" name="confirm" class="btn oe_highlight" string="Confirm" states='in_approval'/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
             <button name="action_view_tuition_plans" type="object" class="oe_stat_button" icon="fa-refresh"
                     attrs="{'invisible': [('tuition_plan_count', '=', 0)]}">
-              <field name="tuition_plan_count" widget="statinfo" string="Tuition plans"/>
+              <field name="tuition_plan_count" widget="statinfo" string="Student Fees Data"/>
             </button>
           </div>
-
-          <div class="oe_title">
-            <label for="name" class="oe_edit_only"/>
-            <h1><field name="name"/></h1>
-          </div>
-          <group>
-            <group name="left_group">
-              <field name="company_id" invisible="1"/>
-              <field name="company_id" groups="base.group_multi_company"/>
-              <field name="currency_id" groups="base.group_multi_currency"/>
-              <field name="program_id" />
-              <field name="journal_id" />
-              <field name="payment_term_id" />
-            </group>
-            <group name="right_group">
-              <field name="pricelist_option" />
-              <field name="pricelist_id"
-                     attrs="{'invisible': [('pricelist_option', '!=', 'fixed_pricelist')], 'required': [('pricelist_option', '=', 'fixed_pricelist')]}" />
-            </group>
-          </group>
-          <notebook>
-            <page name="lines" string="Lines">
-              <field name="line_ids"
-                     context="{'default_currency_id': currency_id, 'default_journal_id': journal_id, 'default_tuition_plan_id': id}">
-                <tree editable="bottom" class="tuition_template_lines">
-                  <field name="sequence" widget="handle"/>
-                  <field name="company_id" invisible="1"/>
-                  <field name="product_id" optional="show"/>
-                  <field name="name" widget="section_and_note_text"/>
-
-                  <field name="installment_ids"
-                         context="{'default_tuition_plan_id': parent.id}"
-                         widget="many2many_tags"
-                         domain="[('id', 'in', template_installment_ids)]"
-                         optional="show"
-                         />
-
-                  <field name="account_id"
-                         groups="account.group_account_readonly"
-                         optional="show"
-                         options="{'no_create': True}" domain="[('deprecated', '=', False), ('user_type_id.type', 'not in', ('receivable', 'payable')), ('company_id', '=', parent.company_id), ('is_off_balance', '=', False)]"/>
-                  <field name="analytic_account_id"
-                         attrs="{'column_invisible': [('parent.invoice_method', 'not in', ['move'])]}"
-                         groups="analytic.group_analytic_accounting" optional="show"/>
-                  <field name="analytic_tag_ids" string="Analytic tags" widget="many2many_tags"
-                         groups="analytic.group_analytic_tags" optional="show"/>
-                  <field name="grade_level_ids" domain="[('program_id', '=', parent.program_id)]"
-                         widget="many2many_tags"
-                         optional="hide"/>
-                  <field name="domain" widget="domain"
-                         options="{'model': 'school.student', 'in_dialog': True}"
-                         optional="hide"/>
-                  <field name="quantity"/>
-                  <field name="unit_price" string="Default unit price"/>
-                  <field name="journal_id" optional="hide"/>
-                  <field name="currency_id" groups="base.group_multi_currency" optional="show"/>
-                  <field name="template_installment_ids" invisible="1" />
-                  <field name="tax_ids"
-                         domain="[('type_tax_use','=','sale'), ('company_id','=',parent.company_id), ('country_id', '=', parent.tax_country_id)]"
-                         widget="many2many_tags" optional="show"/>
-                  <field name="discount" optional="show" />
-                  <field name="price_subtotal" widget="monetary"
-                         groups="account.group_show_line_subtotals_tax_excluded" optional="show"/>
-                  <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included" optional="show"/>
-                </tree>
-              </field>
-            </page>
-            <page name="installments" string="Installments">
-              <group>
-                <field name="installment_template" />
+          <field name="program_id" />
+          <el attrs="{'invisible': [('program_id', '=', False)]}">
+            <div class="oe_title">
+              <label for="name" class="oe_edit_only"/>
+              <h1><field name="name"/></h1>
+            </div>
+            <group>
+              <group name="left_group">
+                <field name="company_id" invisible="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
               </group>
-              <field name="installment_ids">
-                <tree>
-                  <field name="sequence" widget="handle" />
-                  <field name="name" />
-                  <field name="type" />
-                  <field name="date" optional="hide" />
-                  <field name="day_type" optional="show" />
-                  <field name="day_of_the_month" optional="show" />
-                  <field name="month" optional="show" />
-                  <field name="quarter" invisible="1"/>
-                  <field name="real_date" />
-                </tree>
-              </field>
-            </page>
-            <page name="recurring_options" string="Recurring options">
-              <group>
-                <group name="sales" string="Sales">
-                  <field name="invoice_method"/>
-                  <field name="post_action_option" />
-                </group>
-                <group name="accounting" string="Accounting">
-                  <field name="fiscal_position_id" />
-                  <field name="tax_country_id" />
-                  <field name="analytic_account_id"
-                         groups="analytic.group_analytic_accounting"
-                         attrs="{'invisible': [('invoice_method', 'not in', ['sale'])]}"/>
-                </group>
-                <group name="mailing" string="Mailing">
-                  <field name="sale_mail_template_id" />
-                  <field name="invoice_mail_template_id" />
-                </group>
+              <group name="right_group">
+                
+                <field name="journal_id" />
+                <field name="payment_term_id" />
+                <field name="pricelist_option" invisible='1'/>
+                <field name="pricelist_id"
+                      attrs="{'invisible': [('pricelist_option', '!=', 'fixed_pricelist')], 'required': [('pricelist_option', '=', 'fixed_pricelist')]}" />
               </group>
-            </page>
-          </notebook>
+            </group>
+            <notebook>
+              <page name="lines" string="Lines">
+                <field name="line_ids"
+                      context="{'default_currency_id': currency_id, 'default_journal_id': journal_id, 'default_tuition_plan_id': id}">
+                  <tree editable="bottom" class="tuition_template_lines">
+                    <field name="sequence" widget="handle"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="product_id" optional="show" string='Fee Type'/>
+                    <field name="name" widget="section_and_note_text" string='Label'/>
+
+                    <field name="installment_ids"
+                          context="{'default_tuition_plan_id': parent.id}"
+                          widget="many2many_tags"
+                          domain="[('id', 'in', template_installment_ids)]"
+                          optional="show"
+                          />
+
+                    <field name="account_id" string="GL Head"
+                          groups="account.group_account_readonly"
+                          optional="show"
+                          options="{'no_create': True}" domain="[('deprecated', '=', False), ('user_type_id.type', 'not in', ('receivable', 'payable')), ('company_id', '=', parent.company_id), ('is_off_balance', '=', False)]"/>
+                    <field name="analytic_account_id"
+                          attrs="{'column_invisible': [('parent.invoice_method', 'not in', ['move'])]}"
+                          groups="analytic.group_analytic_accounting" optional="show"/>
+                    <field name="analytic_tag_ids" string="Analytic tags" widget="many2many_tags"
+                          groups="analytic.group_analytic_tags" optional="show"/>
+                    <field name="grade_level_ids" domain="[('program_id', '=', parent.program_id)]"
+                          widget="many2many_tags"
+                          optional="hide"/>
+                    <field name="domain" widget="domain"
+                          options="{'model': 'school.student', 'in_dialog': True}"
+                          optional="hide"/>
+                    <field name="quantity"/>
+                    <field name="unit_price" string="Chargeable Amount  "/>
+                    <field name="journal_id" optional="hide"/>
+                    <field name="currency_id" groups="base.group_multi_currency" optional="show"/>
+                    <field name="template_installment_ids" invisible="1" />
+                    <field name="tax_ids"
+                          domain="[('type_tax_use','=','sale'), ('company_id','=',parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                          widget="many2many_tags" optional="show"/>
+                    <field name="discount" optional="show" />
+                    <field name="price_subtotal" widget="monetary"
+                          groups="account.group_show_line_subtotals_tax_excluded" optional="show"/>
+                    <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included" optional="show"/>
+                  </tree>
+                </field>
+              </page>
+              <page name="installments" string="Installments">
+                <group>
+                  <field name="installment_template" />
+                </group>
+                <field name="installment_ids">
+                  <tree>
+                    <field name="sequence" widget="handle" />
+                    <field name="name" />
+                    <field name="type" />
+                    <field name="date" optional="hide" />
+                    <field name="day_type" optional="show" />
+                    <field name="day_of_the_month" optional="show" />
+                    <field name="month" optional="show" />
+                    <field name="quarter" invisible="1"/>
+                    <field name="real_date" />
+                  </tree>
+                </field>
+              </page>
+              <page name="recurring_options" string="Recurring options">
+                <group>
+                  <group name="sales" string="Sales">
+                    <field name="invoice_method"/>
+                    <field name="post_action_option" />
+                  </group>
+                  <group name="accounting" string="Accounting">
+                    <field name="fiscal_position_id" />
+                    <field name="tax_country_id" />
+                    <field name="analytic_account_id"
+                          groups="analytic.group_analytic_accounting"
+                          attrs="{'invisible': [('invoice_method', 'not in', ['sale'])]}"/>
+                  </group>
+                  <group name="mailing" string="Mailing">
+                    <field name="sale_mail_template_id" />
+                    <field name="invoice_mail_template_id" />
+                  </group>
+                </group>
+              </page>
+            </notebook>
+          </el>
         </sheet>
         <div class="oe_chatter">
             <field name="message_follower_ids" groups="base.group_user"/>
@@ -717,7 +757,7 @@
     <field name="name">tuition.template.view.kanban</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <kanban string="Tuition templates" class="oe_background_grey o_kanban_dashboard o_school_kanban_tuition_template">
+      <kanban string="Fee Structure" class="oe_background_grey o_kanban_dashboard o_school_kanban_tuition_template">
         <templates>
           <t t-name="kanban-box">
             <div>
@@ -751,7 +791,7 @@
           <t t-name="TuitionTemplateBody" id="school.TuitionTemplateBody">
             <div class="col-12 col-sm-5 mb-3 mb-sm-0 o_kanban_primary_left">
               <button type="object" class="mb-1 btn btn-primary" name="button_new_tuition_plan">
-                <span>New tuition plan</span>
+                <span>New Student Fees Data</span>
               </button>
               <a type="edit" class="d-inline-block btn btn-primary">
                 <span>Configuration</span>
@@ -776,7 +816,7 @@
     <field name="name">tuition.template.view.search</field>
     <field name="model">tuition.template</field>
     <field name="arch" type="xml">
-      <search string="Search Tuition templates">
+      <search string="Search Fee Structure">
         <field name="name"/>
         <separator/>
         <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
@@ -785,7 +825,7 @@
   </record>
 
   <record id="tuition_template_action" model="ir.actions.act_window">
-    <field name="name">Tuition Templates</field>
+    <field name="name">Fee Structure</field>
     <field name="res_model">tuition.template</field>
     <field name="view_mode">kanban,tree,form</field>
     <field name="target">current</field>
@@ -793,8 +833,8 @@
   </record>
 
   <menuitem
-          id="tuition_template_menu"
-          name="Tuition Templates"
+          id="tuition_template_menu_app"
+          name="Fee Structure"
           action="tuition_template_action"
           parent="tuition_management_menu"
           sequence="10"

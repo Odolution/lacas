@@ -195,6 +195,8 @@ class TuitionPlanInstallment(models.Model):
         column1='installment_id',
         column2='line_id',
         string="Lines")
+
+
     template_installment_id = fields.Many2one('tuition.template.installment', string="Template installment")
 
     def create_recurring_charge(self, origin_plan=False):
@@ -465,6 +467,48 @@ class TuitionPlanInstallment(models.Model):
 
 # tuition.plan.line 
 
+class ConcessionLine(models.Model):
+    _name = "concession.plan.line"
+
+    student_id = fields.Many2one('school.student', string="Student", ondelete='set null')
+
+    discount_name    = fields.Many2one('ol.discount.charges', string="Discount name")
+    discount_product = fields.Many2one('product.product', string="Discount Product")
+
+    #logic start
+    @api.onchange('discount_name')
+    def _onchange_discount(self):
+        for rec in self:
+            rec.discount_product = rec.discount_name.product_id
+    
+
+    def get_concession_values(self,installment_obj):
+        values = []
+
+        for line in self:
+            lst = []
+            
+            for j in installment_obj:
+                # raise UserError(j.ids)
+                lst.append(j.id)
+
+            values.append({
+                
+                'product_id'        : line.discount_product.id,
+                'name'              : line.discount_product.name,
+                'quantity'          : 1,
+                'unit_price'        : 0,
+                'currency_id'       : line.student_id.currency_id.id,
+                'installment_ids'   : [(6,0,lst)],
+                # 'discount_charges'  : True,
+
+            })
+        # raise UserError(str(values))
+        return values
+    #logic end
+
+
+
 class TuitionPlanLine(models.Model):
     _name = 'tuition.plan.line'
     _inherit = 'tuition.line.mixin'
@@ -495,6 +539,10 @@ class TuitionPlanLine(models.Model):
         help="Fiscal positions are used to adapt taxes and accounts for particular customers or sales orders/invoices. "
              "The default value comes from the customer.")
     company_id = fields.Many2one('res.company', related='plan_id.company_id')
+
+    # process end 
+    discount_charges = fields.Boolean('Discount Charges') 
+    # process start 
 
     # ==========================
     # Compute & onchange methods
@@ -779,6 +827,161 @@ class TuitionPlanLine(models.Model):
             self.discount = pricelist_data['discount']
 
 
+    #logic start
+
+    @api.onchange('installment_template')
+    def onchange_installment_template(self):
+        self.ensure_one()
+        self.line_ids.installment_ids = False
+        if self.installment_template == 'quarterly':
+            self.set_quarterly_installment()
+        elif self.installment_template == 'monthly':
+            self.set_monthly_installment()
+        elif self.installment_template == 'biannually':
+            self.set_biannually_installment()
+        elif self.installment_template == 'yearly':
+            self.set_yearly_installment()
+
+    def set_quarterly_installment(self):
+        self.ensure_one()
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q1',
+                    'month': '9',
+                    'day_type': 'first_day',
+                    'sequence': 1
+                    }),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q2',
+                    'month': '12',
+                    'day_type': 'first_day',
+                    'sequence': 2
+                    }),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q3',
+                    'month': '3',
+                    'day_type': 'first_day',
+                    'sequence': 3
+                    }),
+                Command.create({
+                    'type': 'quarterly',
+                    'quarter': 'Q4',
+                    'month': '6',
+                    'day_type': 'first_day',
+                    'sequence': 4
+                    }),
+                ]
+
+    def set_monthly_installment(self):
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '1',
+                    'day_type': 'first_day',
+                    'sequence': 1,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '2',
+                    'day_type': 'first_day',
+                    'sequence': 2,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '3',
+                    'day_type': 'first_day',
+                    'sequence': 3,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '4',
+                    'day_type': 'first_day',
+                    'sequence': 4,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '5',
+                    'day_type': 'first_day',
+                    'sequence': 5,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '6',
+                    'day_type': 'first_day',
+                    'sequence': 6,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '7',
+                    'day_type': 'first_day',
+                    'sequence': 7,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '8',
+                    'day_type': 'first_day',
+                    'sequence': 8,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '9',
+                    'day_type': 'first_day',
+                    'sequence': 9,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '10',
+                    'day_type': 'first_day',
+                    'sequence': 10,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '11',
+                    'day_type': 'first_day',
+                    'sequence': 11,
+                    }),
+                Command.create({
+                    'type': 'monthly',
+                    'month': '12',
+                    'day_type': 'first_day',
+                    'sequence': 12,
+                    }),
+                ]
+
+    def set_biannually_installment(self):
+        self.ensure_one()
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'biannually',
+                    'month': '9',
+                    'sequence': 1,
+                    }),
+                Command.create({
+                    'type': 'biannually',
+                    'month': '1',
+                    'sequence': 2,
+                    }),
+                ]
+
+    def set_yearly_installment(self):
+        self.ensure_one()
+        self.installment_ids = [
+                Command.clear(),
+                Command.create({
+                    'type': 'yearly',
+                    'month': '1',
+                    'day_type': 'first_day',
+                    'sequence': 1,
+                    }),
+                ]
+
+    #logic end
 class TuitionPlanFamilyPrices(models.TransientModel):
     _name = 'tuition.plan.family.prices'
     _rec_name = 'price'
@@ -887,6 +1090,8 @@ class TuitionPlan(models.Model):
             ('posted', "Posted"),
             ('cancel', "Cancelled"),
         ], string="State", default='draft', required=True, tracking=True, group_expand='_read_group_state',)
+
+
     student_grade_level_ids = fields.Many2many('school.grade.level', string="Student grade levels", store=True, compute='compute_student_grade_levels')
     posted_before = fields.Boolean(default=False)
     next_installment_id = fields.Many2one(
@@ -919,6 +1124,65 @@ class TuitionPlan(models.Model):
     amount_untaxed = fields.Monetary(string='Untaxed Amount', store=True, compute='_amount_all', tracking=5)
     amount_tax = fields.Monetary(string='Taxes', store=True, compute='_amount_all')
     amount_total = fields.Monetary(string='Total', store=True, compute='_amount_all', tracking=4)
+
+    # process start
+
+    # discount_ids = fields.Many2many('ol.discount.charges', string="Discount Charges", store=True) 
+
+    odl_state = fields.Selection(
+        selection=[
+            ('draft', "Draft"),
+            ('first', "First Approval"),
+            ('second', "Second Approval"),
+            ('done', "Confirm"),
+        ], string="ODL State", default='draft', required=True)
+
+    # def discount_addition(self):
+    #     for rec in self:
+    #         discount_to_add = []
+    #         product_in_line = [rec.line_ids.mapped('product_id.id')]
+    #         installment_obj = [rec.line_ids[-1].mapped('installment_ids')]
+
+    #         for discount in rec.discount_ids:
+    #             if discount.product_id.id not in product_in_line:
+    #                 discount_to_add.append(discount)
+
+    #         for dis in discount_to_add:
+    #             linedata={
+    #                     'plan_id':self.ids[0],
+    #                     'product_id':dis.product_id.id,
+    #                     'name':dis.product_id.name,
+    #                     'account_id':dis.product_id.property_account_income_id.id,
+    #                     'quantity':1,
+    #                     'installment_ids':[(6,0,[j.ids[0] for j in installment_obj])],
+    #                     'currency_id':rec.currency_id.id,
+    #                     'unit_price':0,
+    #                     'discount_charges':True
+    #                     }
+    #             new_plan_line_id=rec.env['tuition.plan.line'].sudo().create(linedata)
+
+    # def discount_remove(self):
+    #     for rec in self:
+    #         discount_to_remove = []
+    #         # raise UserError(rec.discount_ids.mapped('product_id'))
+    #         for line in rec.line_ids:
+
+    #             if line.discount_charges and line.product_id.id not in rec.discount_ids.mapped('product_id.id'):
+    #                 # raise UserError([line,"--",rec.discount_ids.mapped('product_id.id')])
+    #                 line.unlink()
+
+    def odl_first_approval(self):
+        self.write({'odl_state': 'first'})
+
+    def odl_second_approval(self):
+        self.write({'odl_state': 'second'})
+
+    def odl_confirm(self): 
+        self.write({'odl_state': 'done'})
+
+
+    
+    # process end 
 
     @api.depends('line_ids.tax_ids', 'line_ids.unit_price', 'amount_total', 'amount_untaxed')
     def _compute_tax_totals_json(self):
@@ -1122,7 +1386,30 @@ class TuitionPlan(models.Model):
         if self._context.get('take_tuition_template_values', False):
             plan.update_values_based_on_tuition_plan()
         plan.update_lines(overwrite=True)
+        #logic start
+        
+        if (plan.journal_id.name == 'Monthly Bills' or plan.journal_id.name == 'Bi Monthly') and len(plan.student_id.concession_line_ids) > 0:
+            
+            plan.update_line_concession()
+
+        
         return plan
+
+    def update_line_concession(self):
+        for plan in self:
+            installment_obj = plan.line_ids[-1].installment_ids
+            
+
+            line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
+            line_concession_list = [Command.create(vals) for vals in line_concession_list]
+
+            # raise UserError(str(line_concession_list))
+            
+            plan.write({'line_ids': line_concession_list})
+
+            # raise UserError(str(plan.line_ids))
+            
+    #logic end
 
     def update_lines(self, overwrite=False):
         for plan in self:
@@ -1479,7 +1766,11 @@ class TuitionTemplate(models.Model):
     installment_ids = fields.One2many('tuition.template.installment', 'tuition_template_id', string="Installments")
     tuition_plan_ids = fields.One2many('tuition.plan', 'tuition_template_id', string="Tuition plans")
     tuition_plan_count = fields.Integer(string="Tuition plan count", compute='compute_tuition_plan_count')
-
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('in_approval', 'In Approval'),
+        ('posted', 'Posted')
+    ], string='State')
     installment_template = fields.Selection(selection=[
         ('quarterly', "Quarterly"),
         ('biannually', "Bi-Annually"),
