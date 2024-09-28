@@ -175,6 +175,8 @@
       <xpath expr="//notebook[@name='nested_notebook']" position="inside">
 
         <page name="concession" string="Concession">
+
+              <button name="add_discount_plan" type="action" string="Add to Student Fee Data"/>
             
               <field name="concession_line_ids">
                 <tree editable="bottom">
