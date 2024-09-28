@@ -317,7 +317,7 @@ class TuitionPlanInstallment(models.Model):
 
     def _prepare_invoice_values(self, lines, journal, origin_plan=False):
 
-        raise UserError('hittt')
+        
 
         self._ensure_tuition_same_configuration()
         plan = origin_plan or self[0].tuition_plan_id
@@ -325,6 +325,7 @@ class TuitionPlanInstallment(models.Model):
         real_date = self[0].real_date
         move_vals_list = []
         value = origin_plan.student_id.relationship_ids
+        raise UserError([str(values),'hit'])
         # We build several sale move depending on
         for family in origin_plan.student_id.family_ids:
             if not family.invoice_address_id:
