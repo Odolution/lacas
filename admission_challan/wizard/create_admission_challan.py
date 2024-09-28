@@ -19,12 +19,14 @@ class AdmissionChallanWizard(models.TransientModel):
                     self.env['tuition.plan'].with_context(context).create({
                     'student_id': sid,
                     'tuition_template_id': self.template_id.id,
+                    'program_id': self.template_id.program_id.id,
                 })
             else:
                 context = {**self._context, 'take_tuition_template_values': True}
                 self.env['tuition.plan'].with_context(context).create({
                 'student_id': self.student_id.id,
                 'tuition_template_id': self.template_id.id,
+                'program_id': self.template_id.program_id.id,
             })
         return {'type': 'ir.actions.act_window_close'}
 
