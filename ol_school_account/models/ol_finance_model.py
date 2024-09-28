@@ -503,7 +503,7 @@ class ConcessionLine(models.Model):
                 'product_id'        : line.discount_product.id,
                 'name'              : line.discount_product.name,
                 'quantity'          : 1,
-                'unit_price'        : 0,
+                'unit_price'        : 1,
                 'currency_id'       : line.student_id.currency_id.id,
                 'installment_ids'   : [(6,0,lst)],
                 # 'discount_charges'  : True,
