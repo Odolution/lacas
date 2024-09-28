@@ -98,10 +98,13 @@ class ChallanPrinting(models.Model):
             sorted_bill_ids = self._get_sorted_bill_ids(bills)
 
             n = math.ceil(len(sorted_bill_ids) / 70)
-            count = 0
+            count = -70
 
             for number in range(1, n+1):
+                count += 70
                 i, j  = count, count+70
+
+                if i>len(sorted_bill_ids) and j>len(sorted_bill_ids): break
 
                 if j>len(sorted_bill_ids): j=len(sorted_bill_ids)
 
