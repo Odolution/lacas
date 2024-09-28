@@ -209,8 +209,17 @@ class Student(models.Model):
 
             installment_obj = plan.line_ids[-1].installment_ids
             line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
-            raise ValidationError([line_concession_list[0].get('product_id'), plan.line_ids.mapped('product_id')])
-            # for discount in line_concession_list:
+
+            final_concession_list = []
+
+            raise ValidationError([line_concession_list[0].get('product_id'), plan.line_ids.mapped('product_id.id')])
+
+            for discount in line_concession_list:
+
+                if discount.get('product_id') not in plan.line_ids.mapped('product_id.id'):
+                    final_concession_list.append(discount)
+
+            
                 
 
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
