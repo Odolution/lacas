@@ -205,10 +205,11 @@ class Student(models.Model):
 
         for plan in self.tuition_plan_ids:
 
-            raise ValidationError(str(plan.line_ids[-1].installment_ids))
+            
 
             installment_obj = plan.line_ids[-1].installment_ids
             line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
+            raise ValidationError(str(line_concession_list))
             line_concession_list = [Command.create(vals) for vals in line_concession_list]
 
             raise ValidationError(str(line_concession_list))
