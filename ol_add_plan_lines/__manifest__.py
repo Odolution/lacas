@@ -12,7 +12,7 @@
     'description': "Add Plan Line",
     'website': '',
     'images': [],
-    'depends': ['sale','ol_add_plan_lines'
+    'depends': ['sale','ol_custom_discount'
     ],
     'data': [
         
