@@ -1379,7 +1379,7 @@ class TuitionPlan(models.Model):
                 other_plans = plan._find_other_plans_in_same_group()
                 
                 next_installments = other_plans.mapped('next_installment_id')
-                raise UserError('hitt')
+                raise UserError(next_installments)
                 if next_installments:
                     next_installments.create_recurring_charge(origin_plan=plan)
 
