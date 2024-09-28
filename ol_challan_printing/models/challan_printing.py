@@ -1,6 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
-import datetime, base64
+import datetime, base64, math
 import threading
 
 class ChallanPrinting(models.Model):
@@ -21,6 +21,7 @@ class ChallanPrinting(models.Model):
 
     challan_generated = fields.Boolean(string='Challan Generated', default=False)
     challan_inprogress = fields.Boolean(string='Challan Inprogress', default=False)
+    challan_error = fields.Text(string='Challan Error', default=False)
 
 
     @api.depends('from_date', 'to_date')
@@ -79,39 +80,57 @@ class ChallanPrinting(models.Model):
         new_cr = self.pool.cursor()
         self = self.with_env(self.env(cr=new_cr))
 
-        # search and sort the bills
-        domain = [
-            ('move_type', '=', 'out_invoice'),
-            ('invoice_date', '>=', self.from_date ),
-            ('invoice_date', '<=', self.to_date ),
-            ('x_studio_previous_branch', 'in', self.branch_ids.mapped('name') ),
-            ('x_studio_previous_class', 'in', self.class_ids.mapped('name') ),
-            ('journal_id', '=', self.journal_id.id ),
-            ('x_studio_enrollment_statusbills', 'in', self.enrollment_status_ids.ids ),
-            ('state', '=', 'posted'),
-            ('payment_state', '=', 'not_paid')
-        ]
-        # bills = self.env['account.move'].browse([380071,380067,380061,380056,380050,380036,380031,380021,380010,379989,379986,379984,379978,379970,379969])
-        bills = self.env['account.move'].search(domain)
-        sorted_bill_ids = self._get_sorted_bill_ids(bills)
+        try:
+            # search and sort the bills
+            domain = [
+                ('move_type', '=', 'out_invoice'),
+                ('invoice_date', '>=', self.from_date ),
+                ('invoice_date', '<=', self.to_date ),
+                ('x_studio_previous_branch', 'in', self.branch_ids.mapped('name') ),
+                ('x_studio_previous_class', 'in', self.class_ids.mapped('name') ),
+                ('journal_id', '=', self.journal_id.id ),
+                ('x_studio_enrollment_statusbills', 'in', self.enrollment_status_ids.ids ),
+                ('state', '=', 'posted'),
+                ('payment_state', '=', 'not_paid')
+            ]
+            # bills = self.env['account.move'].browse([380071,380067,380061,380056,380050,380036,380031,380021,380010,379989,379986,379984,379978,379970,379969])
+            bills = self.env['account.move'].search(domain)
+            sorted_bill_ids = self._get_sorted_bill_ids(bills)
 
-        # render pdf data and encode in bytes
-        report = self.env.ref('cus_report.report_fee_challan_students_initiate')._render_qweb_pdf(sorted_bill_ids)[0]
-        pdf_attachment = base64.b64encode(report)
+            n = math.ceil(len(sorted_bill_ids) / 70)
+            count = -70
 
-        # create attachment for the PDF and attach in the record
-        attachment = self.env['ir.attachment'].create({
-            'name': f'Students Challan ({self.name}).pdf',
-            'type': 'binary',
-            'datas': pdf_attachment,
-            'store_fname': f'Students Challan ({self.name}).pdf',
-            'res_model': self._name,
-            'res_id': self.id,
-            'mimetype': 'application/pdf',
-        })
+            for number in range(1, n+1):
+                count += 70
+                i, j  = count, count+70
+
+                if i>len(sorted_bill_ids) and j>len(sorted_bill_ids): break
+
+                if j>len(sorted_bill_ids): j=len(sorted_bill_ids)
+
+                trimmed_sorted_bills = sorted_bill_ids[i:j]
+
+                # render pdf data and encode in bytes
+                report = self.env.ref('cus_report.report_fee_challan_students_initiate')._render_qweb_pdf(trimmed_sorted_bills)[0]
+                pdf_attachment = base64.b64encode(report)
+
+                # create attachment for the PDF and attach in the record
+                attachment = self.env['ir.attachment'].create({
+                    'name': f'Students Challan ({self.name})_{number}.pdf',
+                    'type': 'binary',
+                    'datas': pdf_attachment,
+                    'store_fname': f'Students Challan ({self.name}).pdf',
+                    'res_model': self._name,
+                    'res_id': self.id,
+                    'mimetype': 'application/pdf',
+                })
+        
+        except Exception as e:
+            self.challan_error = f'Error Generating Challan {e}'
+
+
         self.challan_generated = True
         self.challan_inprogress = False
-
         # commit the changes to the database
         new_cr.commit()
 
