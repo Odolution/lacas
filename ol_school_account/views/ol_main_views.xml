@@ -414,7 +414,7 @@
                     <field name="installment_ids"
                           context="{'default_tuition_plan_id': parent.id}"
                           attrs="{'readonly': [('form_create_mode', '=', True)]}"
-                          widget="many2many_tags" optional="show"/>
+                          widget="many2many_tags" optional="show" string="Applicable Period"/>
 
                     <field name="account_id" groups="account.group_account_readonly"
                           options="{'no_create': True}"
