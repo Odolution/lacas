@@ -1,0 +1,30 @@
+<odoo>
+
+    <record id="view_bulk_tuition_wizard_tuition_plan_form" model="ir.ui.view">
+            <field name="name">tuition.wizard_tuition_plan.form</field>
+            <field name="model">tuition.wizard_tuition_plan</field>
+            <field name="arch" type="xml">
+                <form string="Wizard Student Fees Data">
+
+                        <group>
+                            <field name="plan_ids"/>
+                            <field name="tuition_template_id" required="1"/>
+                            <!-- <field name="operation" widget="radio"/>
+                            <field name="installment_names" required="1" widget="many2many_tags"/>
+                            <field name="product_id" required="1" />
+                            <field name="unit_price" required="1"/>
+                            <field name="currency_id" required="1"/>
+                            <field name="quantity" required="1"/> -->
+
+                        </group>
+
+
+                    <footer>
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+</odoo>

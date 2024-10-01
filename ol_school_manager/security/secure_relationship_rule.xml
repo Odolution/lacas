@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <!-- relationship.rule  -->
+
+    <record id="filter_rule_by_individual_active" model="ir.rule">
+        <field name="name">filter.rule.by.individual.active</field>
+        <field name="model_id" ref="model_school_student_relationship"/>
+        <field name="global" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="domain_force">[('individual_id.active','=',True)]</field>
+    </record>
+
+    <record id="filter_rule_by_relation_active" model="ir.rule">
+        <field name="name">filter.rule.by.individual.relation</field>
+        <field name="model_id" ref="model_school_student_relationship"/>
+        <field name="global" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <!-- res.partner.rule  -->
+
+    <record id="school_partner_filter_rule" model="ir.rule">
+        <field name="name">school.partner.filter.rule</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="global" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="domain_force">[(1, '=', 1)]#['|', ('school_ids', 'in', school_ids), ('school_ids', '=', False)]</field>
+    </record>
+
+    <!-- school.structure.rule  -->
+
+    <record id="school_district_filter_rule" model="ir.rule">
+        <field name="name">school.district.filter.rule</field>
+        <field name="model_id" ref="ol_school_manager.model_school_district"/>
+        <field name="global" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="domain_force">['|', ('company_ids', 'in', company_ids), ('company_ids', '=', False)]</field>
+    </record>
+
+  <record id="school_school_filter_rule" model="ir.rule">
+    <field name="name">school.school.filter.rule</field>
+    <field name="model_id" ref="ol_school_manager.model_school_school"/>
+    <field name="global" eval="True"/>
+    <field name="perm_read" eval="True"/>
+    <field name="perm_write" eval="True"/>
+    <field name="perm_create" eval="True"/>
+    <field name="perm_unlink" eval="True"/>
+    <field name="domain_force">['|', ('company_ids', 'in', company_ids), ('company_ids', '=', False)]</field>
+  </record>
+
+    <!-- security.group  -->
+
+        <!-- School categories -->
+    <record id="model_category_school" model="ir.module.category">
+      <field name="name">School</field>
+    </record>
+
+    <record id="model_category_school_school" model="ir.module.category">
+      <field name="name">School</field>
+      <field name="parent_id" ref="ol_school_manager.model_category_school"/>
+    </record>
+    
+        <!-- School -->
+    <record id="group_school_view_only" model="res.groups">
+      <field name="name">View only</field>
+      <field name="category_id" ref="ol_school_manager.model_category_school_school"/>
+      <field name="implied_ids" eval="[Command.link(ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_school_user" model="res.groups">
+      <field name="name">User</field>
+      <field name="category_id" ref="ol_school_manager.model_category_school_school"/>
+      <field name="implied_ids" eval="[Command.link(ref('ol_school_manager.group_school_view_only'))]"/>
+    </record>
+
+    <record id="group_school_administrator" model="res.groups">
+      <field name="name">Administrator</field>
+      <field name="category_id" ref="ol_school_manager.model_category_school_school"/>
+      <field name="comment">Can create and delete districts, schools, programs, periods and grade levels</field>
+      <field name="implied_ids" eval="[Command.set([ref('ol_school_manager.group_school_user'),])]"/>
+    </record>
+
+    <record id="base.user_admin" model="res.users">
+      <field name="groups_id" eval="[Command.link(ref('ol_school_manager.group_school_administrator'))]"/>
+    </record>
+
+    <record id="base.group_system" model="res.groups">
+      <field name="implied_ids" eval="[Command.link(ref('ol_school_manager.group_school_administrator'))]"/>
+    </record>
+
+    
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+
+<record id="x_difference_view" model="ir.ui.view">
+    <field name="name">difference_view</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="arch" type="xml">
+        <data>
+            <xpath expr="//field[@name='tuition']" position="after">
+                <field name="x_difference" string="Difference"/>
+            </xpath>    
+        </data>
+    </field>
+</record>

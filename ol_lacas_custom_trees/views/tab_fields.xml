@@ -1,0 +1,102 @@
+<odoo>
+<record id="view_move_form_inherit_mnt_tab" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account_edi.view_move_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@id='edi_documents']" position="after">
+                    <page name="report fields" string="List view monthly" attrs="{'invisible': [('move_type', 'in', ['entry','out_refund','in_invoice','in_refund'])], 'required': [('move_type', '=', 'out_invoice')]}">
+                        <group>
+                            <group>
+                            <!-- <field name="campus"/> -->
+                            
+                            <field name="std_name"/>
+                            <field name="std_current_branch"/>
+                            <field name="student_ids_ol"/>
+                            <field name="student_ids_ol_new"/>
+
+                            <field name="std_fathername"/>
+                            <field name="computer"/>
+                            <field name="library"/>
+                            <field name="utility"/>
+                            <field name="utility_charges"/>
+                            <field name="oxford"/>
+                            <field name="art"/>
+                            <field name="biology"/>
+                            <field name="chemistry"/>
+                            <field name="physics"/>
+                            <field name="computing"/>
+                            <field name="classphoto"/>
+                            <field name="collegemagazine"/>
+                            <field name="dc"/>
+                            <field name="ec"/>
+                            <field name="farewell"/>
+                            <field name="gatepass"/>
+                            <field name="idcard"/>
+                            <field name="idcardfine"/>
+                            <field name="latecoming"/>
+                            <field name="latefee"/>
+                            <field name="libfine"/>
+                            <field name="mnf"/>
+                            </group>    
+                            <group>
+                            <field name="std_fathername"/>
+                            <field name="class_name"/>
+                            <field name="section_name"/>
+                            <field name="mobfine"/>
+                            <field name="news"/>
+                            <field name="paragon"/>
+                            <field name="books"/>
+                            <field name="pcopy"/>
+                            <field name="photo"/>
+                            <field name="scarf"/>
+                            <field name="sportd"/>
+                            <field name="stationary"/>
+                            <field name="welcome"/>
+                            <field name="workbook"/>
+                            <field name="orb"/>
+
+                            <field name="Holiday_homework"/>
+                            <field name="Technology_Charges"/>
+                            <field name="uniform"/>
+                            <field name="continuation"/>
+                            <!-- <field name="due_amount"/> -->
+                            <field name="net_amount"/>
+                            <field name="bill_amount"/>
+                            <field name="tuition"/>
+                            </group>
+                    </group>   
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_move_form_inherit_adm_tab" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account_edi.view_move_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@id='edi_documents']" position="after">
+                    <page name="report fields" string="List view admission" attrs="{'invisible': [('move_type', 'in', ['entry','out_refund','in_invoice','in_refund'])], 'required': [('move_type', '=', 'out_invoice')]}">
+                        <group>
+                            <group>
+                            <!-- <field name="campus"/> -->
+                            <!-- <field name="std_reason"/> -->
+                            <field name="std_tuition_plan"/>
+                            <field name="std_tuition_plan_state"/>
+                            <!-- <field name="std_discount"/> -->
+                           
+                            </group>    
+                            <group>
+
+                            <field name="adm_amount"/>
+                            <field name="security_amount"/>
+                            
+                            </group>
+                    </group>   
+                    </page>
+                </xpath>
+            </field>
+        </record>
+</odoo>

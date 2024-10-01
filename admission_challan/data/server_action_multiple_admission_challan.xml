@@ -1,0 +1,17 @@
+<odoo>
+    <record id="action_create_admission_challan" model="ir.actions.server">
+        <field name="name">Create Admission Challan</field>
+        <field name="model_id" ref="ol_school_manager.model_school_student"/>
+        <field name="binding_model_id" ref="ol_school_manager.model_school_student"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                'type' : 'ir.actions.act_window',
+                'res_model': 'admission.challan.wizard',
+                'target': 'new',
+                'views': [(env.ref('admission_challan.view_create_admission_challan_wizard_form').id, 'form')],
+                'context': {'student_ids': records.ids}
+            }
+        </field>
+    </record>
+</odoo>

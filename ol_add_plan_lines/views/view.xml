@@ -1,0 +1,88 @@
+<odoo>
+
+
+
+
+        <record id="view_bulk_set_next_installment_wiz_form" model="ir.ui.view">
+            <field name="name">tuition.set_next_installment_wiz.form</field>
+            <field name="model">tuition.set_next_installment_wiz</field>
+            <field name="arch" type="xml">
+                <form string="Set Next Installment">
+
+                        <group>
+                            <field name="installment_name" required="1"/>
+                            
+                        </group>
+
+                    <footer>
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="view_bulk_add_plan_line_wiz_form" model="ir.ui.view">
+            <field name="name">tuition.add_plan_line_wiz.form</field>
+            <field name="model">tuition.add_plan_line_wiz</field>
+            <field name="arch" type="xml">
+                <form string="Add Plan Line">
+
+                        <group>
+                            <field name="operation" widget="radio"/>
+                            <field name="installment_names" required="1" widget="many2many_tags"/>
+                            <field name="product_id" required="1" domain="[('is_discount_type','=',False)]"/>
+                            <field name="unit_price" required="1"/>
+                            <field name="currency_id" required="1"/>
+                            <field name="quantity" required="1"/>
+
+                        </group>
+
+                    <footer>
+                        <button string="Apply" name="apply" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+       <record model="ir.actions.server" id="server_action_Add_plan_lines_wiz">
+        <field name="name">Add Plan Lines</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="ol_school_account.model_tuition_plan"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                                'name': 'Add Plan Lines',
+                                'res_model': 'tuition.add_plan_line_wiz',
+                                'view_mode': 'form',
+                                'context': {
+                                    'active_model': 'tuition.plan',
+                                    'active_ids': records.ids,
+                                },
+                                'target': 'new',
+                                'type': 'ir.actions.act_window',
+                            }
+        </field>
+       </record>
+       <record model="ir.actions.server" id="server_action_Set_next_installment_wiz">
+        <field name="name">Set Next Installment</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="ol_school_account.model_tuition_plan"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+                                'name': 'Set Next Installment',
+                                'res_model': 'tuition.set_next_installment_wiz',
+                                'view_mode': 'form',
+                                'context': {
+                                    'active_model': 'tuition.plan',
+                                    'active_ids': records.ids,
+                                },
+                                'target': 'new',
+                                'type': 'ir.actions.act_window',
+                            }
+        </field>
+       </record>
+
+  </odoo>

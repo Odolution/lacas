@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- config.views  -->
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.ol_school_manager</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="School Data-String" string="School" data-key="ol_school_manager">
+                    <div id="school_setting">
+                        <h2>Contact</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="name_sorting_setting_ids"/>
+                                    <div class="text-muted">
+                                        This will set the pattern used for names <br/>
+                                        Spaces will be replaced to • only for better visualization
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="name_sorting_setting_ids" class="o_light_label"
+                                                   widget="many2many"
+                                                   style="width: 100%">
+                                                <tree editable="bottom" create="0">
+                                                    <field name="sequence" widget="handle"/>
+                                                    <field name="name"/>
+                                                    <field name="prefix" placeholder="Empty" style="font-family: robot_spaces; white-space: pre;"/>
+                                                    <field name="suffix" placeholder="Empty"
+                                                           style="font-family: robot_spaces; white-space: pre;"/>
+                                                </tree>
+                                            </field>
+                                            <button type="object" name="recompute_all_individuals_names"
+                                                    confirm="This action is not reversible"
+                                                    string="Recompute names" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="name_sorting_example"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="name_sorting_example" class="o_light_label"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Edit contact name -->
+                            <div class="col-xs-12 col-6 o_setting_box">
+                                <!--                                <div class="o_setting_left_pane">-->
+                                <!--                                </div>-->
+                                <div class="o_setting_right_pane">
+                                    <div class="o_form_label">Allow editing contact name</div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <div class="row">
+                                                <field name="allow_edit_person_name" class="col-lg-1 ml16"/>
+                                                <label for="allow_edit_person_name"/>
+                                            </div>
+
+                                            <div class="row">
+                                                <field name="allow_edit_student_name" class="col-lg-1 ml16"/>
+                                                <label for="allow_edit_student_name"/>
+                                            </div>
+
+                                            <div class="row">
+                                                <field name="allow_edit_parent_name" class="col-lg-1 ml16"/>
+                                                <label for="allow_edit_parent_name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ol_school_manager_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'ol_school_manager'}</field>
+    </record>
+
+    <!-- family.views  -->
+
+    <record model="ir.actions.act_window" id="action_school_families">
+        <field name="name">Families</field>
+        <field name="res_model">school.family</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+  <record id="school_family_view_form" model="ir.ui.view">
+    <field name="name">school.family.view.form</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="id" invisible="1"/>
+          <h1 style="font-size: xx-large; color: #875A7B; font-weight: bold;" class="mt0 mb0">
+            Family
+          </h1>
+          <field name="avatar_128" invisible="1"/>
+          <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "avatar_128"}'/>
+
+          <div class="oe_title">
+            <h1>
+              <field name="name" placeholder="Name" force_save="1"/>
+            </h1>
+          </div>
+          <group>
+            <field name="id" invisible="1"/>
+          </group>
+          <notebook name="main_notebook">
+            <page string="Individuals" name="individuals">
+              <field name="individual_ids" context="{'default_family_ids': [id]}">
+                <kanban>
+                  <field name="name"/>
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div class="o_kanban_card oe_kanban_global_click p-4 o_ol_school_manager_individual_image d-flex">
+                        <field name="avatar_128" widget="image"
+                               options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                        <div class="oe_kanban_content pl-3 pr-3">
+                          <strong><field name="name"/></strong>
+                        </div>
+                        <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                class="btn btn-primary"
+                                title="open" type="object" name="open_record">
+                          <i class="fa fa-share-square-o"/>
+                        </button>
+                      </div>
+                    </t>
+                  </templates>
+                </kanban>
+              </field>
+            </page>
+            <page string="Students" name="students">
+              <field name="student_ids"
+                     context="{'default_family_ids': [id]}"
+                     domain="[('student_ids', '!=', False)]">
+                <kanban>
+                  <field name="name"/>
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div class="o_kanban_card oe_kanban_global_click p-4 o_ol_school_manager_individual_image d-flex">
+                        <field name="avatar_128" widget="image"
+                               options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                        <div class="oe_kanban_content pl-3 pr-3">
+                          <strong><field name="name"/></strong>
+                        </div>
+                        <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                class="btn btn-primary"
+                                title="open" type="object" name="open_record">
+                          <i class="fa fa-share-square-o"/>
+                        </button>
+                      </div>
+                    </t>
+                  </templates>
+                </kanban>
+              </field>
+            </page>
+
+            <page string="Academics" name="academics">
+
+            </page>
+            <page string="Other" name="other">
+
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter" modifiers="{}">
+          <field name="message_follower_ids" />
+          <field name="activity_ids" />
+          <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record id="school_family_view_search" model="ir.ui.view">
+    <field name="name">school.family.view.search</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" string="Family"
+               filter_domain="[
+                    '|', '|',
+                    ('name', 'ilike', self), ('student_ids', 'ilike', self),
+                    ('individual_ids', 'ilike', self)]"/>
+        <field name="student_ids" />
+        <field name="individual_with_students_ids" />
+      </search>
+    </field>
+  </record>
+  
+  <record id="school_family_view_kanban" model="ir.ui.view">
+    <field name="name">school.family.view.kanban</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="id"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+              <field name="avatar_128" widget="image"
+                     class="o_kanban_image_fill_left"
+                     options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                    <ul>
+                      <li>
+                        <b>Individuals:</b>
+                        <field name="individual_ids" widget="many2many_tags_avatar"/>
+                      </li>
+                      <li>
+                        <b>Students:</b>
+                        <field name="student_ids" widget="many2many_tags_avatar"/>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="o_dropdown_kanban dropdown">
+                    <a role="button" class="dropdown-toogle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                       href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                      <span class="fa fa-ellipsis-v"/>
+                    </a>
+                    <div class="dropdown-menu" role="menu">
+                      <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                      <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="school_family_view_tree" model="ir.ui.view">
+    <field name="name">school.family.view.tree</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+        </tree>
+    </field>
+  </record>
+
+    <!-- individual.views  -->
+
+    <record model="ir.actions.act_window" id="action_school_individuals">
+        <field name="name">Individuals</field>
+        <field name="res_model">school.family.individual</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'lineal_name': True, 'search_default_non_student': 1}</field>
+    </record>
+
+  <record id="school_individual_view_form" model="ir.ui.view">
+    <field name="name">school.family.individual.view.form</field>
+    <field name="model">school.family.individual</field>
+    <field name="arch" type="xml">
+      <form>
+        <header></header>
+        <sheet>
+          <!-- Field -->
+          <field name="id" invisible="1"/>
+          <field name="partner_name" invisible="1" force_save="1"/>
+          <field name="family_individual_ids" invisible="1"/>
+
+          <h1 style="font-size: xx-large; color: #875A7B; font-weight: bold;" class="mt0 mb0">
+            Individual
+          </h1>
+          <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "avatar_128"}' />
+          <div class="oe_title">
+            <h1>
+              <field name="name" placeholder="Name" readonly="1" force_save="1"/>
+            </h1>
+          </div>
+          <group>
+            <group name="group_left">
+              <field name="first_name"/>
+              <field name="middle_name"/>
+              <field name="last_name"/>
+              <field name="partner_id" invisible="1"/>
+            </group>
+            <group name="group_right">
+              <field name="address_partner_link_id" />
+              <span class="o_form_label o_td_label" name="address_name">
+                <b>Address</b>
+              </span>
+              <div class="o_address_format">
+                <field name="street" placeholder="Street..." class="o_address_street"/>
+                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                <field name="city" placeholder="City" class="o_address_city"/>
+                <field name="state_id" class="o_address_state" placeholder="State"
+                       options="{'no_open': True, 'no_quick_create': True}"
+                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                <field name="country_id" placeholder="Country" class="o_address_country"
+                       options='{"no_open": True, "no_create": True}'/>
+              </div>
+            </group>
+          </group>
+          <notebook name="main_notebook">
+            <page name="families" string="Families">
+              <field name="family_ids" context="{'default_individual_ids': [id]}">
+                <kanban>
+                  <field name="name"/>
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div class="o_kanban_card oe_kanban_global_click p-4 o_ol_school_manager_individual_image d-flex">
+                        <field name="avatar_128" widget="image"
+                               options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                        <div class="oe_kanban_content pl-3 pr-3">
+                          <strong><field name="name"/></strong>
+                        </div>
+                        <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                class="btn btn-primary"
+                                title="open" type="object" name="open_family">
+                          <i class="fa fa-share-square-o"/>
+                        </button>
+                      </div>
+                    </t>
+                  </templates>
+                </kanban>
+              </field>
+            </page>
+            <page string="Students" name="students">
+              <field name="family_student_ids">
+                <kanban>
+                  <field name="name"/>
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div class="o_kanban_card oe_kanban_global_click p-4 o_ol_school_manager_individual_image d-flex">
+                        <field name="avatar_128" widget="image"
+                               options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                        <div class="oe_kanban_content pl-3 pr-3">
+                          <strong><field name="name"/></strong>
+                        </div>
+                        <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                class="btn btn-primary"
+                                title="open" type="object" name="open_record">
+                          <i class="fa fa-share-square-o"/>
+                        </button>
+                      </div>
+                    </t>
+                  </templates>
+                </kanban>
+              </field>
+            </page>
+
+            <page string="Relationships" name="relationships">
+              <field name="relationship_ids" context="{'default_individual_id': id}">
+                    <tree editable="bottom">
+                      <field name="student_id" />
+                      <field name="relationship_type_id" />
+                      <field name="custody"/>
+                      <field name="correspondence"/>
+                      <field name="grade_related"/>
+                      <field name="family_portal"/>
+                      <field name="is_emergency_contact"/>
+                    </tree>
+                  </field>
+            </page>
+            <page string="Academics" name="academics">
+
+            </page>
+            <page string="Other" name="other">
+
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter" modifiers="{}">
+          <field name="message_follower_ids" />
+          <field name="activity_ids" />
+          <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record id="school_family_individual_view_kanban" model="ir.ui.view">
+    <field name="name">school.family.individual.view.kanban</field>
+    <field name="model">school.family.individual</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="id"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+              <field name="avatar_128" widget="image" class="o_kanban_image_fill_left"
+                     options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                  </div>
+                  <div class="o_dropdown_kanban dropdown">
+                    <a role="button" class="dropdown-toogle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                       href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                      <span class="fa fa-ellipsis-v"/>
+                    </a>
+                    <div class="dropdown-menu" role="menu">
+                      <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                      <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="school_individual_view_search" model="ir.ui.view">
+    <field name="name">school.family.individual.view.search</field>
+    <field name="model">school.family.individual</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" />
+        <field name="family_ids" />
+
+        <filter name="non_student" string="Non student" domain="[('is_student', '=', False)]" />
+      </search>
+    </field>
+  </record>
+
+    <!-- portal.views  -->
+
+    <template id="portal_names_editables" inherit_id="portal.portal_my_details" name="Portal My Details Names">
+        <input name="name" position="attributes">
+            <attribute name="readonly">readonly</attribute>
+        </input>
+        <input name="name" position="inside">
+            <label class="col-form-label" for="name">First Name</label>
+            <input type="text" name="first_name" t-attf-class="form-control #{error.get('first_name') and 'is-invalid' or ''}" t-att-value="first_name or partner.first_name" />
+
+            <label class="col-form-label" for="name">Middle Name</label>
+            <input type="text" name="middle_name" t-attf-class="form-control #{error.get('middle_name') and 'is-invalid' or ''}" t-att-value="middle_name or partner.middle_name" />
+
+            <label class="col-form-label" for="name">Last Name</label>
+            <input type="text" name="last_name" t-attf-class="form-control #{error.get('middle_name') and 'is-invalid' or ''}" t-att-value="last_name or partner.last_name" />
+        </input>
+    </template>
+
+    <!-- res.company  -->
+
+    <record id="view_company_form_inherit_fields" model="ir.ui.view">
+        <field name="name">school.view.company.form.inherit.fields</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+
+            <notebook position="inside">
+                <page string="School information">
+                    <group>
+                        <field name="district_ids" widget="many2many_tags"/>
+                        <field name="district_school_ids" invisible="1"/>
+                        <field name="school_ids" widget="many2many_tags"
+                               domain="[('id', 'in', district_school_ids)]"/>
+                    </group>
+                </page>
+            </notebook>
+
+        </field>
+    </record>
+
+    <!-- student.views  -->
+
+    <record model="ir.actions.act_window" id="action_school_students">
+        <field name="name">Students</field>
+        <field name="res_model">school.student</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{
+        'lineal_name': True
+        }</field>
+    </record>
+
+  <record id="school_student_view_form" model="ir.ui.view">
+    <field name="name">school.student.view.form</field>
+    <field name="model">school.student</field>
+    <field name="arch" type="xml">
+      <form>
+        <field name="id" invisible="1"/>
+        <header></header>
+        <sheet>
+          <!-- Field -->
+          <field name="id" invisible="1"/>
+          <field name="partner_name" readonly="1" required="0" groups="base.group_no_one" invisible="1"/>
+
+          <field name="family_individual_ids" invisible="1"/>
+
+          <div class="oe_button_box" name="button_box"></div>
+
+          <field name="image_1920" widget='image' class="oe_avatar"
+                 options='{"preview_image": "avatar_128"}'/>
+          <div class="oe_title">
+            <h1>
+              <field name="name" placeholder="Name" readonly="1" force_save="1"/>
+            </h1>
+            <group>
+              <field name="individual_id" readonly="1" required="0" groups="base.group_no_one"
+                     attrs="{'invisible': [('id', '=', False)]}"/>
+            </group>
+          </div>
+          <group>
+            <group name="group_left">
+              <field name="first_name"/>
+              <field name="middle_name"/>
+              <field name="last_name"/>
+              <field name="x_roll_number"/>
+            </group>
+            <group name="group_right">
+              <field name="address_partner_link_id" />
+              <span class="o_form_label o_td_label" name="address_name">
+                <b>Address</b>
+              </span>
+              <div class="o_address_format">
+                <field name="street" placeholder="Street..." class="o_address_street"/>
+                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                <field name="city" placeholder="City" class="o_address_city"/>
+                <field name="state_id" class="o_address_state" placeholder="State"
+                       options="{'no_open': True, 'no_quick_create': True}"
+                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                <field name="country_id" placeholder="Country" class="o_address_country"
+                       options='{"no_open": True, "no_create": True}'/>
+              </div>
+            </group>
+          </group>
+          <notebook name="main_notebook">
+            <page name="setup" string="SETUP">
+              <notebook name="nested_notebook">
+                <!-- ubaid -->
+                <!-- <page name="families" string="Parents">
+                  <field name="family_ids" context="{'default_student_ids': [id]}">
+                    <kanban>
+                      <field name="name"/>
+                      <templates>
+                        <t t-name="kanban-box">
+                          <div class="o_kanban_card oe_kanban_global_click p-4 o_ol_school_manager_individual_image d-flex">
+                            <field name="avatar_128" widget="image"
+                                  options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                            <div class="oe_kanban_content pl-3 pr-3">
+                              <strong><field name="name"/></strong>
+                            </div>
+                            <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                    class="btn btn-primary"
+                                    title="open" type="object" name="open_family">
+                              <i class="fa fa-share-square-o"/>
+                            </button>
+                          </div>
+                        </t>
+                      </templates>
+                    </kanban>
+                  </field>
+                </page> -->
+
+                <page name="relationships" string="Contacts">
+                  <field name="relationship_ids"
+                        add-label="Add a Relationship" mode="tree"
+                        context="{'default_individual_id': id}">
+                    <tree editable="bottom">
+                      <field name="individual_id" />
+                      <field name="relationship_type_id"/>
+                      <!-- ubaid -->
+                      <!-- <field name="custody" optional="show"/>
+                      <field name="correspondence" optional="show"/>
+                      <field name="grade_related" optional="show"/>
+                      <field name="family_portal" optional="show"/>
+                      <field name="is_emergency_contact" optional="show"/> -->
+                    </tree>
+                  </field>
+                </page>
+                <!-- ubaid -->
+                <!-- <page name="healthcare" string="Medical Care">
+                  <group>
+                    <group name="group_left">
+                      <field name="doctor_name"/>
+                      <field name="doctor_phone"/>
+                      <field name="doctor_address"/>
+                      <separator colspan="2"/>
+                      <field name="permission_to_treat"/>
+                      <field name="blood_type"/>
+                    </group>
+                    <group name="group_right">
+                      <field name="hospital"/>
+                      <field name="hospital_address"/>
+                    </group>
+                    <separator colspan="2"/>
+                    <group colspan="2">
+                      <field name="conditions_ids"/>
+                      <field name="allergies_ids"/>
+                      <field name="medications_ids"/>
+                    </group>
+                  </group>
+                </page> -->
+
+                <page name="academics" string="Academic Affairs">
+                  <group col="4">
+                    <field name="program_ids" widget="many2many_tags"/>
+                    <field name="school_ids" widget="many2many_tags"/>
+                    <field name="grade_level_ids" widget="many2many_tags"/>
+                    <field name="district_ids" widget="many2many_tags"/>
+                    <field name="enrollment_status_ids" widget="many2many_tags"/>
+                  </group>
+
+                  <field name="enrollment_state_ids" context="{'default_student_id': id}">
+                    <tree editable="bottom">
+                      <field name="program_id"/>
+                      <field name="grade_level_id"/>
+                      <field name="enrollment_status_id"/>
+                      <field name="enrollment_sub_status_id"
+                            attrs="{'readonly': [('enrollment_status_id', '=', False)]}"/>
+
+
+                      <field name="next_program_id"/>
+                      <field name="next_grade_level_id"/>
+                      <field name="next_enrollment_status_id"/>
+                      <field name="next_enrollment_sub_status_id"
+                            attrs="{'readonly': [('next_enrollment_status_id', '=', False)]}"/>
+
+                      <field name="enrolled_date"/>
+                      <field name="graduation_date"/>
+                      <field name="withdraw_date"/>
+                    </tree>
+                  </field>
+
+                </page>
+                <page name="enrollment_history" string="Student Enrollment History">
+                  <field name="enrollment_history_ids">
+                    <tree editable="top">
+                      <field name="timestamp"/>
+                      <field name="note"/>
+
+                      <field name="program_id"/>
+                      <field name="grade_level_id"/>
+                      <field name="enrollment_status_id"/>
+                      <field name="enrollment_sub_status_id"
+                            attrs="{'readonly': [('enrollment_status_id', '=', False)]}"/>
+
+                      <field name="next_program_id"/>
+                      <field name="next_grade_level_id"/>
+                      <field name="next_enrollment_status_id"/>
+                      <field name="next_enrollment_sub_status_id"
+                            attrs="{'readonly': [('next_enrollment_status_id', '=', False)]}"/>
+
+                      <field name="enrolled_date"/>
+                      <field name="graduation_date"/>
+                      <field name="withdraw_date"/>
+                    </tree>
+                  </field>
+                </page>
+                
+                <page name="demographics" string="Demographics Information">
+                  <group>
+                    <group>
+                      <field name="vat"/>
+                      <field name="school_udid"/>
+                      <field name="email" widget="email"/>
+                      <field name="email2" widget="email"/>
+                      <field name="phone" widget="phone"/>
+                      <field name="mobile" widget="phone"/>
+                    </group>
+                    <group>
+                      <field name="date_of_birth"/>
+                      <field name="citizenship"/>
+                      <field name="ethnicity"/>
+                      <field name="race"/>
+                      <field name="gender"/>
+                    </group>
+                  </group>
+
+                </page>
+
+              </notebook>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids"/>
+          <field name="activity_ids"/>
+          <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record id="school_student_view_kanban" model="ir.ui.view">
+    <field name="name">school.student.view.kanban</field>
+    <field name="model">school.student</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="id"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+              <field name="avatar_128" widget="image" class="o_kanban_image_fill_left"
+                     options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                  </div>
+                  <div class="o_dropdown_kanban dropdown">
+                    <a role="button" class="dropdown-toogle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                       href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                      <span class="fa fa-ellipsis-v"/>
+                    </a>
+                    <div class="dropdown-menu" role="menu">
+                      <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                      <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="school_student_view_search" model="ir.ui.view">
+    <field name="name">school.student.view.search</field>
+    <field name="model">school.student</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="email"/>
+        <field name="grade_level_id"/>
+        <field name="family_ids"/>
+        <field name="enrollment_status_ids"/>
+
+        <filter string="All students" name="no_program_filter" context="{'no_program_filter': True}"/>
+
+        <separator/>
+
+        <filter string="Enrolled" name="enrolled_filter" domain="[('enrollment_status_ids.type', '=', 'enrolled')]"/>
+        <filter string="Pre-enrolled" name="pre_enrolled_filter"
+                domain="[('enrollment_status_ids.type', '=', 'pre-enrolled')]"/>
+        <filter string="Inactive" name="inactive_filter" domain="[('enrollment_status_ids.type', '=', 'inactive')]"/>
+        <filter string="Admission" name="admission_filter"
+                domain="[('enrollment_status_ids.type', '=', 'admissions')]"/>
+        <filter string="Graduate" name="graduate_filter" domain="[('enrollment_status_ids.type', '=', 'graduate')]"/>
+        <filter string="Withdrawn" name="withdrawn_filter"
+                domain="[('enrollment_status_ids.type', '=', 'withdrawn')]"/>
+      </search>
+    </field>
+  </record>
+
+  <record id="school_student_view_tree" model="ir.ui.view">
+    <field name="name">school.student.view.tree</field>
+    <field name="model">school.student</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="image_1920" optional="show" options="{&quot;size&quot;:[0,90]}" widget="image"/>
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+    <!-- views  -->
+
+    <!--<record model="ir.ui.view" id="view_school_tree">-->
+    <!--    <field name="name">School codes</field>-->
+    <!--    <field name="model">school.school</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="sequence" widget='handle'/>-->
+    <!--            <field name="name"/>-->
+    <!--            <field name="description"/>-->
+    <!--            <field name="district_id"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+    
+    <!--<record model="ir.ui.view" id="view_grade_level_tree">-->
+    <!--    <field name="name">Grade level</field>-->
+    <!--    <field name="model">school.grade.level</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="sequence" widget='handle'/>-->
+    <!--            <field name="name"/>-->
+    <!--            <field name="capacity"/>-->
+    <!--            <field name="school_id"/>-->
+    <!--            <field name="district_id" readonly="1"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+
+    <!--<record model="ir.ui.view" id="view_district_level_tree">-->
+    <!--    <field name="name">District Code</field>-->
+    <!--    <field name="model">school.district</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="sequence" widget='handle'/>-->
+    <!--            <field name="name"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+
+    <!--<record id="school_enrollment_status_view_tree" model="ir.ui.view">-->
+    <!--    <field name="name">school.enrollment.status.view.tree</field>-->
+    <!--    <field name="model">school.enrollment.status</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="id"/>-->
+    <!--            <field name="name"/>-->
+    <!--            <field name="key"/>-->
+    <!--            <field name="type"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+
+    <!--<record id="school_enrollment_sub_status_view_tree" model="ir.ui.view">-->
+    <!--    <field name="name">school.enrollment.sub.status.view.tree</field>-->
+    <!--    <field name="model">school.enrollment.sub.status</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="id"/>-->
+    <!--            <field name="status_id"/>-->
+    <!--            <field name="name"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+
+    <!--<record id="school_grade_level_type_view_tree" model="ir.ui.view">-->
+    <!--    <field name="name">school.grade.level.type.view.tree</field>-->
+    <!--    <field name="model">school.grade.level.type</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="type"/>-->
+    <!--            <field name="name"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+
+    <!--<record id="view_relationship_tree" model="ir.ui.view">-->
+    <!--    <field name="name">Relationship</field>-->
+    <!--    <field name="model">school.student.relationship</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="family_id"/>-->
+    <!--            <field name="individual_id"/>-->
+    <!--            <field name="individual_relation_id"/>-->
+    <!--            <field name="relationship_type_id"/>-->
+    <!--            <field name="is_emergency_contact"/>-->
+    <!--            <field name="custody"/>-->
+    <!--            <field name="correspondence"/>-->
+    <!--            <field name="grade_related"/>-->
+    <!--            <field name="family_portal"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+
+    <!--<record id="view_relationship_type_tree" model="ir.ui.view">-->
+    <!--    <field name="name">Relationship</field>-->
+    <!--    <field name="model">school.student.relationship.type</field>-->
+    <!--    <field name="arch" type="xml">-->
+    <!--        <tree editable="bottom">-->
+    <!--            <field name="sequence" widget="handle"/>-->
+    <!--            <field name="name"/>-->
+    <!--            <field name="key"/>-->
+    <!--            <field name="type"/>-->
+    <!--        </tree>-->
+    <!--    </field>-->
+    <!--</record>-->
+
+</odoo>

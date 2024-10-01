@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+
+  <t t-name="Enroll.button" owl="1">
+    <div/>
+    <button type="button" t-attf-class="btn {{props.btnStyleClass}}"
+            t-on-click="goToEnrollWizard"
+            title="Enroll new student" accesskey="c">
+      Enroll new student
+    </button>
+  </t>
+  <t t-inherit="web.KanbanView.buttons" t-inherit-mode="extension">
+      <xpath expr="div" position="inside">
+        <t t-if="isEnrollFormFamilyField">
+          <button type="button" class="btn btn-secondary o_ol_add_existing_family" title="Add new family"
+                  accesskey="a">
+            Add existing family
+          </button>
+        </t>
+        <t t-if="isEnrollFormIndividualField">
+          <button type="button" class="btn btn-secondary o_ol_add_existing_individual" title="Add new individual"
+                  accesskey="a">
+            Add existing individual
+          </button>
+          <button type="button" class="btn btn-secondary o_ol_add_individual_in_form"
+                  title="Add new individual" accesskey="f">
+            Add individual from other family in Form
+          </button>
+        </t>
+      </xpath>
+  </t>
+
+  <t t-name="ol_school_manager.SwitchSchoolMenu" owl="1">
+    <Dropdown class="o_switch_company_menu" position="'bottom-end'">
+      <t t-set-slot="toggler">
+        <span t-attf-class="{{env.isSmall ? 'fa fa-building-o' : 'oe_topbar_name'}}">
+          <t t-if="!env.isSmall">
+            <t t-esc="currentSchoolProgram.name"/>
+          </t>
+        </span>
+      </t>
+      <t t-component="SwitchSchoolTree"/>
+    </Dropdown>
+  </t>
+  <!--data-jstree='{"selected": true }'-->
+  <t t-name="ol_school_manager.SwitchSchoolTree" owl="1">
+    <div t-ref="jsTreeDiv"/>
+  </t>
+
+  <t t-name="ol_school_manager.nav_custom" t-inherit="web.NavBar" t-inherit-mode="primary">
+      <xpath expr="//div[@class='o_menu_systray']" position="before">
+        <div class="bottom_systray">
+          kasdnoisnfp
+              <t t-component="ol_school_manager.nav_custom"/>
+        </div>
+      </xpath>
+  </t>
+
+
+</templates>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- base.automation.data  -->
+    
+    <!-- <data noupdate="1">
+        <record id="base_automation_execute_installment" model="base.automation">
+            <field name="name">Tuition Plan Installment: Execute</field>
+            <field name="model_id" ref="model_tuition_plan_installment"/>
+            <field name="trigger">on_time</field>
+            <field name="trg_date_id" ref="tuition_plan.field_tuition_plan_installment__date"/>
+            <field name="state">code</field>
+            <field name="code">records.execute()</field>
+            <field name="last_run" eval="datetime.now().date()"/>
+        </record>
+    </data> -->
+
+    <!-- ir.action.server.data  -->
+
+        <!-- Tuition plan -->
+    <record id="tuition_plan_action_server_update_values" model="ir.actions.server">
+        <field name="name">Update values</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="state">code</field>
+        <field name="code">action = records.open_update_values_wizard()</field>
+    </record>
+
+    <record id="tuition_plan_action_server_post" model="ir.actions.server">
+        <field name="name">Confirm</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.button_confirm()</field>
+    </record>
+
+    <record id="tuition_plan_action_server_cancel" model="ir.actions.server">
+        <field name="name">Cancel</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.button_cancel()</field>
+    </record>
+
+    <record id="tuition_plan_action_server_draft" model="ir.actions.server">
+        <field name="name">Reset to draft</field>
+        <field name="model_id" ref="model_tuition_plan"/>
+        <field name="binding_model_id" ref="model_tuition_plan"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.button_draft()</field>
+    </record>
+
+    <!-- ir.cron.data  -->
+
+    <!-- <record id="res_partner_cron" model="ir.cron">
+        <field name="name">Contact: Send Statement Report by Email</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="state">code</field>
+        <field name="code">
+            template = env.ref("tuition_plan.res_partner_mail_template_statement", raise_if_not_found=True)
+            partners_to_email = model.search([("email_statement","=",True)])
+            for partner in partners_to_email:
+                partner.write({"email_statement": False})
+            for partner in partners_to_email:
+                template.sudo().send_mail(partner.id, force_send=True)
+        </field>
+    </record> -->
+
+    <!-- ir.sequence  -->
+
+    <data noupdate="1">
+        <record id="tuition_plan_sequence" model="ir.sequence">
+            <field name="name">Tuition plan sequence</field>
+            <field name="code">tuition.plan.sequence</field>
+            <field name="prefix">TP/%(year)s/</field>
+            <field name="padding" eval="6"/>
+            <field name="number_next" eval="1"/>
+        </record>
+    </data>
+
+    <!-- mail.template.data  -->
+
+    <record id="sale_mail_template_id" model="mail.template">
+        <field name="name">Tuition plan: Sale order/quotation</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="subject">Your sale order for the student/s: {{ ','.join(ctx.get('plans').mapped('student_id.name')) }}</field>
+        <field name="body_html" type="html">
+        <div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+            <table style="width:600px;margin:5px auto;">
+            <tbody>
+                <tr><td>
+                <a href="/"><img src="/web/binary/company_logo" style="vertical-align:baseline;max-width:100px;" /></a>
+                </td><td style="text-align:right;vertical-align:middle;">
+                Subscription Invoice
+                </td></tr>
+            </tbody>
+            </table>
+            <table style="width:600px;margin:0px auto;background:white;border:1px solid #e1e1e1;">
+            <tbody>
+                <tr><td style="padding:15px 20px 10px 20px;">
+                <p>Dear <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
+                    <t t-if="object.partner_id.parent_id">
+                    (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>)
+                    </t>
+                </p>
+                <p>
+                    Here is, in attachment, your
+                    <t t-if="object.name">
+                    sale order <strong t-out="object.name or ''">Office Cleaning Service"</strong>
+                    </t>
+                    <t t-else="">
+                    sale order
+                    </t>
+                    <t t-if="object.origin">
+                    (with reference: <t t-out="object.origin or ''">INVOICE_ORIGIN</t> )
+                    </t>
+                    amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">$ 10.00</strong>
+                    from <t t-out="object.company_id.name or ''">YourCompany</t>.
+        <!--                <t t-if="object.payment_state in ('paid', 'in_payment')">-->
+        <!--                  This sale order is already paid.-->
+        <!--                </t>-->
+                        Please remit payment at your earliest convenience.
+                    </p>
+                    <p>Do not hesitate to contact us if you have any questions.</p>
+                    </td></tr>
+        <!--            <tr><td style="padding:15px 20px 10px 20px;" t-out="object.invoice_user_id.signature or ''">&#45;&#45;<br/>Mitchell Admin</td></tr>-->
+                </tbody>
+                </table>
+            </div>
+        </field>
+    </record>
+
+    <record id="invoice_mail_template_id" model="mail.template">
+        <field name="name">Tuition plan: Invoice</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="subject">Your invoice for the student: {{ ','.join(ctx.get('plans').mapped('student_id.name')) }}</field>
+        <field name="body_html" type="html">
+        <div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+            <table style="width:600px;margin:5px auto;">
+            <tbody>
+                <tr><td>
+                <a href="/"><img src="/web/binary/company_logo" style="vertical-align:baseline;max-width:100px;" /></a>
+                </td><td style="text-align:right;vertical-align:middle;">
+                Subscription Invoice
+                </td></tr>
+            </tbody>
+            </table>
+            <table style="width:600px;margin:0px auto;background:white;border:1px solid #e1e1e1;">
+            <tbody>
+                <tr><td style="padding:15px 20px 10px 20px;">
+                <p>Dear <t t-out="object.partner_id.name or ''">Brandon Freeman</t>
+                    <t t-if="object.partner_id.parent_id">
+                    (<t t-out="object.partner_id.parent_id.name or ''">Azure Interior</t>)
+                    </t>
+                </p>
+                <p>
+                    Here is, in attachment, your
+                    <t t-if="object.name">
+                    invoice <strong t-out="object.name or ''">Office Cleaning Service"</strong>
+                    </t>
+                    <t t-else="">
+                    invoice
+                    </t>
+                    <t t-if="object.invoice_origin">
+                    (with reference: <t t-out="object.invoice_origin or ''">INVOICE_ORIGIN</t> )
+                    </t>
+                    amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">$ 10.00</strong>
+                    from <t t-out="object.company_id.name or ''">YourCompany</t>.
+                    <!--                <t t-if="object.payment_state in ('paid', 'in_payment')">-->
+                    <!--                  This sale order is already paid.-->
+                    <!--                </t>-->
+                    Please remit payment at your earliest convenience.
+                </p>
+                <p>Do not hesitate to contact us if you have any questions.</p>
+                </td></tr>
+                <!--            <tr><td style="padding:15px 20px 10px 20px;" t-out="object.invoice_user_id.signature or ''">&#45;&#45;<br/>Mitchell Admin</td></tr>-->
+            </tbody>
+            </table>
+        </div>
+        </field>
+    </record>
+
+    <!-- menuitems  -->
+        <!-- have nothing -->
+
+
+    <!-- school.finance.data  -->
+<!-- 
+    <record id="school_finance_responsibility_percentage" model="decimal.precision">
+        <field name="name">Finance responsibility percentage</field>
+        <field name="digits">6</field>
+    </record> -->
+</odoo>
