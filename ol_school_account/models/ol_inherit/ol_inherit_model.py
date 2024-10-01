@@ -222,7 +222,7 @@ class Student(models.Model):
 
             if plan.state == 'posted':
 
-                installment_obj = plan.line_ids[-1].installment_ids
+                installment_obj = plan.line_ids[0].installment_ids
                 line_concession_list = plan.student_id.concession_line_ids.get_concession_values(installment_obj)
 
                 final_concession_list = []
