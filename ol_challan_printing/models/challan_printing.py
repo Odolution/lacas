@@ -124,13 +124,13 @@ class ChallanPrinting(models.Model):
                     'res_id': self.id,
                     'mimetype': 'application/pdf',
                 })
+                self.challan_generated = True
+                self.challan_inprogress = False
         
         except Exception as e:
             self.challan_error = f'Error Generating Challan {e}'
 
 
-        self.challan_generated = True
-        self.challan_inprogress = False
         # commit the changes to the database
         new_cr.commit()
 
