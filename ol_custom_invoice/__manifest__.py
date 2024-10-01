@@ -7,6 +7,7 @@
     'sequence': 97,
     'description': "Add new fields in account.move",
     'website': '',
+    'depends': ["base","account"],
     'data': [
         
         "views/account_view.xml",
