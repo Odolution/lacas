@@ -506,6 +506,7 @@ class ConcessionLine(models.Model):
                 'unit_price'        : 1,
                 'currency_id'       : line.student_id.currency_id.id,
                 'installment_ids'   : [(6,0,lst)],
+                'account_id'        :   line.discount_product.property_account_income_id.id
                 # 'discount_charges'  : True,
 
             })
