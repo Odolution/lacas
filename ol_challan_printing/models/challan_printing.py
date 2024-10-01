@@ -95,39 +95,47 @@ class ChallanPrinting(models.Model):
             ]
             # bills = self.env['account.move'].browse([380071,380067,380061,380056,380050,380036,380031,380021,380010,379989,379986,379984,379978,379970,379969])
             bills = self.env['account.move'].search(domain)
-            sorted_bill_ids = self._get_sorted_bill_ids(bills)
 
-            n = math.ceil(len(sorted_bill_ids) / 70)
-            count = -70
+            if bills:
+                sorted_bill_ids = self._get_sorted_bill_ids(bills)
+                n = math.ceil(len(sorted_bill_ids) / 70)
+                count = -70
 
-            for number in range(1, n+1):
-                count += 70
-                i, j  = count, count+70
+                for number in range(1, n+1):
+                    count += 70
+                    i, j  = count, count+70
 
-                if i>len(sorted_bill_ids) and j>len(sorted_bill_ids): break
+                    if i>len(sorted_bill_ids) and j>len(sorted_bill_ids): break
 
-                if j>len(sorted_bill_ids): j=len(sorted_bill_ids)
+                    if j>len(sorted_bill_ids): j=len(sorted_bill_ids)
 
-                trimmed_sorted_bills = sorted_bill_ids[i:j]
+                    trimmed_sorted_bills = sorted_bill_ids[i:j]
 
-                # render pdf data and encode in bytes
-                report = self.env.ref('cus_report.report_fee_challan_students_initiate')._render_qweb_pdf(trimmed_sorted_bills)[0]
-                pdf_attachment = base64.b64encode(report)
+                    # render pdf data and encode in bytes
+                    report = self.env.ref('cus_report.report_fee_challan_students_initiate')._render_qweb_pdf(trimmed_sorted_bills)[0]
+                    pdf_attachment = base64.b64encode(report)
 
-                # create attachment for the PDF and attach in the record
-                attachment = self.env['ir.attachment'].create({
-                    'name': f'Students Challan ({self.name})_{number}.pdf',
-                    'type': 'binary',
-                    'datas': pdf_attachment,
-                    'store_fname': f'Students Challan ({self.name}).pdf',
-                    'res_model': self._name,
-                    'res_id': self.id,
-                    'mimetype': 'application/pdf',
-                })
+                    # create attachment for the PDF and attach in the record
+                    attachment = self.env['ir.attachment'].create({
+                        'name': f'Students Challan ({self.name})_{number}.pdf',
+                        'type': 'binary',
+                        'datas': pdf_attachment,
+                        'store_fname': f'Students Challan ({self.name}).pdf',
+                        'res_model': self._name,
+                        'res_id': self.id,
+                        'mimetype': 'application/pdf',
+                    })
                 self.challan_generated = True
                 self.challan_inprogress = False
+            
+            else:
+                self.challan_generated = False
+                self.challan_inprogress = False
+
         
         except Exception as e:
+            self.challan_generated = False
+            self.challan_inprogress = False
             self.challan_error = f'Error Generating Challan {e}'
 
 
