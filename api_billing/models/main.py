@@ -128,8 +128,8 @@ class Billing(http.Controller):
 
 
             if not move_ids:
-                return Response(json.dumps({'move_id':move_ids,'voucher_no':voucher_id}), content_type="application/json", status=200)
-            
+                # return Response(json.dumps({'move_id':move_ids,'voucher_no':voucher_id}), content_type="application/json", status=200)
+                return {'move_id':str(move_ids),'voucher_no':str(voucher_id)}
                 return Response(json.dumps({
                     "Status": {
                         "StatusCode": 5000,
