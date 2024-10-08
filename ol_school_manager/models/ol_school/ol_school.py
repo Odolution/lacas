@@ -481,7 +481,7 @@ class SchoolBaseIndividual(models.Model):
 
     first_name = fields.Char(required=True)
     middle_name = fields.Char()
-    last_name = fields.Char(required=True)
+    last_name = fields.Char()
 
     family_ids = fields.Many2many(
         'school.family',
