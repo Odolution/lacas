@@ -251,7 +251,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="x.bi_monthly_cycle"/>
+														<t t-esc="x.bill_date"/>
 													</strong>
 												</td>
 											</tr>
@@ -674,7 +674,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="x.bi_monthly_cycle"/>
+														<t t-esc="x.bill_date"/>
 													</strong>
 												</td>
 											</tr>
@@ -1099,7 +1099,7 @@
 												</td>
 												<td style="width: 70%; font-size:11px;">
 													<strong>
-														<t t-esc="x.bi_monthly_cycle"/>
+														<t t-esc="x.bill_date"/>
 													</strong>
 												</td>
 											</tr>
