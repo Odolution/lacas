@@ -54,6 +54,10 @@ class account_fields(models.Model):
               rec.class_name=splitted_name[0]
     @api.onchange('x_student_id_cred',"student_ids")
     def _student_onchange(self):
+      ##Huzaifa
+      if self.student_ids:
+        self.x_studio_udid_monthly_bills = self.student_ids[0].olf_udid
+      ##Huzaifa END
       self.class_name=""
       self.section_name=""
       self.father_name=""
