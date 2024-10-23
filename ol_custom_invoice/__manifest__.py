@@ -9,7 +9,7 @@
     'summary': 'Implementation of Custom charges of specific product  in Invoice.',
     'description': "Implementation of Custom charges of specific product  in Invoice.",
 
-    'depends': ["base","account"],
+    'depends': ["base","account","ol_lacas_custom_trees"],
     'data': [
         'view/custom_invoice_view.xml'
     ],
