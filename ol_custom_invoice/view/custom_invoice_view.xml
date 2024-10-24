@@ -7,6 +7,9 @@
             <xpath expr="//field[@name='tuition']" position="after">
                 <field name="robotic_charges"/>
             </xpath>
+            <xpath expr="//field[@name='robotic_charges']" position="after">
+                <field name="parent_day_charges"/>
+            </xpath>
         </field>
     </record>
 </odoo>
