@@ -64,6 +64,8 @@
                             <field name="net_amount"/>
                             <field name="bill_amount"/>
                             <field name="tuition"/>
+                            <field name="robotic_charges"/>
+                            <field name="parent_day_charges"/>
                             </group>
                     </group>   
                     </page>

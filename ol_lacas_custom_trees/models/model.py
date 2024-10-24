@@ -110,6 +110,10 @@ class ext(models.Model):
     Technology_Charges= fields.Integer(string="Technology Charges")
     orb=fields.Integer(string="Orb")
 
+    #omer
+    robotic_charges = fields.Integer('Robotic Charges')
+    parent_day_charges = fields.Integer('Parents Day Charges')
+    #omer
 
     # Added by Anas Bin Ateeq
     oxford=fields.Integer(string="Oxford E Mate Charges")
@@ -312,6 +316,8 @@ class ext(models.Model):
                 rec_inv.utility_charges=0
                 rec_inv.oxford=0
                 rec_inv.orb=0
+                rec_inv.robotic_charges = 0
+                rec_inv.parent_day_charges = 0
 
 
 
@@ -419,6 +425,10 @@ class ext(models.Model):
                         rec_inv.physics=line.price_subtotal
                     elif line.product_id.x_studio_code=='BIO':
                         rec_inv.biology=line.price_subtotal
+                    elif 'Robotics' in line.product_id.name:
+                        rec_inv.robotic_charges=line.price_subtotal
+                    elif 'Parents Day' in line.product_id.name:
+                        rec_inv.parent_day_charges=line.price_subtotal
                 
             wholename=""
             if rec_inv.student_ids.homeroom:
