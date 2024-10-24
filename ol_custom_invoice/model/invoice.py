@@ -4,8 +4,8 @@ from odoo.exceptions import UserError
 class InheritInvoice(models.Model):
     _inherit = 'account.move'
 
-    robotic_charges = fields.Float('Robotic Charges',compute='_compute_charges',store=True)
-    parent_day_charges = fields.Float('Parents Day Charges',compute='_compute_charges',store=True)
+    robotic_charges = fields.Float('Robotic Charges',compute='_compute_charges')
+    parent_day_charges = fields.Float('Parents Day Charges',compute='_compute_charges')
 
     def _compute_charges(self):
         robotic_charges = 0
